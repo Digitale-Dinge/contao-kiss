@@ -1,0 +1,611 @@
+// *
+// * 
+// * Contao KISS Website Framework
+// *
+// * _contao.scss
+// * Includes basic styles for all of Contao's default content elements
+// *
+
+// ––––––– Text elements –––––––
+
+.ce_headline {}
+
+.ce_text {}
+
+.ce_html {}
+
+.ce_list {}
+
+.ce_table {}
+
+.ce_code {
+  > pre {
+    > code.hljs {
+      background: $color-grey-light;
+    }
+  }
+}
+
+.ce_markdown {}
+
+// ––––––– Accordion –––––––
+
+.ce_accordion {
+  &.ce_accordionSingle,
+  &.ce_accordionStart {
+    .toggler {
+      background: $color-black;
+      color: $color-white;
+      cursor: pointer;
+    }
+    .accordion {
+      background: $color-grey-light;
+      > div {
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+// ––––––– Content slider –––––––
+
+.ce_sliderStart {
+	.slider-control {
+		a {
+			width: 2rem;
+			height: 2rem;
+			overflow: hidden;
+		}
+		.slider-prev,
+		.slider-next {
+			top: 0;
+			font-size: 0;
+			&:before {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 2rem;
+				height: 2rem;
+				display: block;
+				font-family: 'icons' !important;
+				speak: none;
+				font-style: normal;
+				font-weight: normal;
+				font-variant: normal;
+				text-transform: none;
+				line-height: 1;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				font-size: 2rem;
+				color: $color-black;
+				text-indent: 0;
+			}
+		}
+		
+		.slider-prev {
+		  left: .25rem;
+		  &:before {
+			content:'\e927';
+		  }
+		}
+		.slider-next {
+		  right: .25rem;
+		  &:before {
+			content:'\e928';
+		  }
+		}
+	}
+	.slider-menu {
+		b {
+			font-size: 2rem;
+			line-height: 1;
+			color: $color-grey;
+			&.active {
+				color: $color-brand;
+			}
+		}
+	}
+}
+
+// ––––––– Tiny slider extension –––––––
+
+.ce_tiny_slider_content_start,
+.tiny-slider {
+	.tns-nav {
+		text-align: center;
+		button {
+			display: inline-block;
+			border: 0;
+			border-radius: 50%;
+			margin: 0 .125rem;
+			height: .675rem;
+			width: .675rem;
+			padding: 0;
+			line-height: 1;
+			background-color: $color-grey;
+			&.tns-nav-active {
+				background-color: $color-brand;
+			}
+		}
+	}
+	.tns-outer { 
+		> [data-action] {
+			display: inline-block;
+			border: 0;
+			margin: 0;
+			width: 2rem;
+			height: 2rem;
+			padding: 0;
+			font-size: 0;
+			line-height: 1;
+			background: none;
+			&:before {
+				width: 2rem;
+				height: 2rem;
+				display: block;
+				font-family: 'icons' !important;
+				speak: none;
+				font-style: normal;
+				font-weight: normal;
+				font-variant: normal;
+				text-transform: none;
+				line-height: 1;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				font-size: 2rem;
+				color: $color-black;
+				text-indent: 0;
+				
+			}
+		}
+		> [data-action="start"] {
+			&:before {
+				content:'\e924';
+			}
+		}	
+		> [data-action="stop"] {
+			&:before {
+				content:'\e92d';
+			}
+		}
+	}
+	.tns-controls {
+		position: relative;
+		height: 2rem;
+		[data-controls="prev"],
+		[data-controls="next"] {
+			position: absolute;
+			top: 0;
+			display: inline-block;
+			border: 0;
+			margin: 0;
+			width: 2rem;
+			height: 2rem;
+			padding: 0;
+			font-size: 0;
+			line-height: 1;
+			background: none;
+			&:before {
+				width: 2rem;
+				height: 2rem;
+				display: block;
+				font-family: 'icons' !important;
+				speak: none;
+				font-style: normal;
+				font-weight: normal;
+				font-variant: normal;
+				text-transform: none;
+				line-height: 1;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				font-size: 2rem;
+				color: $color-black;
+				text-indent: 0;
+			}
+		}
+		[data-controls="prev"] {
+			left: 0;
+		  &:before {
+			content:'\e927';
+		  }
+		}
+		[data-controls="next"] {
+			right: 0;
+		  &:before {
+			content:'\e928';
+		  }
+		}
+	}
+	
+}
+
+// ––––––– Link elements –––––––
+
+.ce_hyperlink {}
+
+.ce_toplink {}
+
+// ––––––– Media elements –––––––
+
+.ce_image,
+.ce_gallery,
+.ce_player,
+.ce_text {
+  figure {
+    display: table;
+    > a {
+      display: block;
+    }
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+    figcaption {
+      display: table-caption;
+      caption-side: bottom;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+  }
+}
+.ce_gallery {
+  > ul {
+    display: grid;
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    list-style: none;
+    &.cols_2,
+    &.cols_3,
+    &.cols_4,
+    &.cols_5,
+    &.cols_6,
+    &.cols_7,
+    &.cols_8,
+    &.cols_9,
+    &.cols_10,
+    &.cols_11,
+    &.cols_12 {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: 1fr;
+    }
+	&.cols_2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	&.cols_3 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	&.cols_4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+	&.cols_5 {
+		grid-template-columns: repeat(5, 1fr);
+	}
+	&.cols_6 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	&.cols_7 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	&.cols_8 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+	&.cols_9 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	&.cols_10 {
+		grid-template-columns: repeat(5, 1fr);
+	}
+	&.cols_11 {
+		grid-template-columns: repeat(5, 1fr);
+	}
+	&.cols_12 {
+		grid-template-columns: repeat(3, 1fr);
+	}	
+
+    @include media('>=medium') {
+		&.cols_2 {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		&.cols_3 {
+			grid-template-columns: repeat(3, 1fr);
+		}
+		&.cols_4 {
+			grid-template-columns: repeat(4, 1fr);
+		}
+		&.cols_5 {
+			grid-template-columns: repeat(5, 1fr);
+		}
+		&.cols_6 {
+			grid-template-columns: repeat(6, 1fr);
+		}
+		&.cols_7 {
+			grid-template-columns: repeat(7, 1fr);
+		}
+		&.cols_8 {
+			grid-template-columns: repeat(8, 1fr);
+		}
+		&.cols_9 {
+			grid-template-columns: repeat(9, 1fr);
+		}
+		&.cols_10 {
+			grid-template-columns: repeat(10, 1fr);
+		}
+		&.cols_11 {
+			grid-template-columns: repeat(11, 1fr);
+		}
+		&.cols_12 {
+			grid-template-columns: repeat(12, 1fr);
+		}
+    }
+    li {
+      margin: 0;
+      padding: 0;
+      line-height: 0;
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+.ce_image{}
+
+.ce_gallery {}
+
+.ce_player {
+  .audio_container {
+	  audio {
+		  max-width: 100%;
+	  }
+  }
+  .video_container {
+	  video {
+		  max-width: 100%;
+		  height: auto;
+	  }
+  }
+}
+
+.ce_youtube {
+	.responsive {
+		&.ratio-169 {
+			position: relative;
+			padding-bottom: 56.25%;
+			height: 0;
+			iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				border: 0;
+			}
+		}
+	}
+}
+
+.ce_vimeo {
+	.video_container {
+		position: relative;
+		padding-bottom: 56.25%;
+		height: 0;
+		iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border: 0;
+		}
+	}
+}
+
+// ––––––– File elements –––––––
+
+.ce_download,
+.ce_downloads {
+	span.size {
+		color: $color-grey;
+	}
+}
+
+.ce_download {}
+
+.ce_downloads {
+	ul {
+		padding-left: 0;
+		li {
+			margin-left: 0;
+		}
+	}
+}
+
+
+// ––––––– Colorbox styling –––––––
+
+#cboxOverlay {
+  opacity: .7 !important;
+}
+
+#cboxContent {
+  padding: #{$gutter-height * 2};
+  background: $color-white;
+}
+
+#cboxLoadingGraphic {
+  background: url(../img/spinner-1s@2x.gif) center center no-repeat;
+  background-size: 40px 40px;
+}
+
+#cboxCurrent {
+  display: none !important;
+}
+
+#cboxLoadedContent {
+  border: none !important;
+  background: none !important;
+}
+
+#cboxClose,
+#cboxPrevious,
+#cboxNext {
+  width: 2rem;
+  height: 2rem;
+  box-shadow: none;
+  background: none !important;
+  &:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    display: block;
+    font-family: 'icons' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 2rem;
+    color: $color-black;
+    text-indent: 0;
+  }
+}
+
+#cboxClose {
+  top: .25rem;
+  right: .25rem;
+  box-shadow: none;
+  &:before {
+    content:'\e921';
+  }
+}
+
+#cboxPrevious,
+#cboxNext {
+  margin-top: calc(-2rem / 2); /* Half of the buttons height */
+  &:before {
+    content:'\e927';
+  }
+}
+
+#cboxPrevious {
+  left: .25rem;
+  &:before {
+    content:'\e927';
+  }
+}
+#cboxNext {
+  right: .25rem;
+  &:before {
+    content:'\e928';
+  }
+}
+
+
+// ––––––– Generic Contao classes –––––––
+
+.highlight {
+  color: $highlight-text-color;
+}
+
+.dimmed {
+  color: $dimmed-text-color;
+}
+
+.box {
+  border-radius: 0.3em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #888;
+  border-color: rgba(0,0,0,.3);
+  color: #444;
+  color: rgba(0,0,0,.8);
+  padding: $gutter-height;
+  margin: 0 0 $gutter-height 0;
+
+  & > *:last-child {
+  margin-bottom: 0;
+  }
+}
+
+.label {
+  font-family: Verdana, Geneva, sans-serif;
+  padding: 1px 6px 2px;
+  display: inline-block;
+  vertical-align: middle;
+  letter-spacing: normal;
+  white-space: nowrap;
+  border-radius: 3px;
+  background: #06C;
+  color: #fff;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.info {
+  background: $highlight-info-color;
+}
+
+.success {
+  background: $highlight-success-color;
+}
+
+.warning {
+  background: $highlight-warning-color;
+}
+
+.error {
+  background: $highlight-error-color;
+}
+
+.float_left {
+  float: left;
+  display: inline;
+  margin: 0 1em calc($line-height * 1rem) 0;
+}
+
+.float_right {
+  float: right;
+  display: inline;
+  margin: 0 0 calc($line-height * 1rem) 1em;
+}
+
+.center {
+  display: block;
+  text-align: center;
+  margin: 0 auto calc($line-height * 1rem) auto;
+}
+
+// ––––––– KISS custom elements –––––––
+
+.c-facts-figures {
+	display: inline-block;
+	padding: 3rem;
+	background-color: $color-grey;
+	&__number {
+		font-size: 300%;
+	}
+	&__unit {
+		font-size: 200%;
+	}
+	&__subline {
+		display: block;
+		font-weight: bold;
+	}
+}
+
+// ––––––– KISS custom modules –––––––
+
+.mod_logo {
+  &__content {}
+}
+

@@ -1,34 +1,52 @@
 {
-  "name": "digitaledinge/contao-kiss",
-  "description": "Digitale Dinge's super simple starterkit for Contao CMS",
-  "keywords": ["contao", "kiss", "contao kiss", "base framework"],
-  "type": "contao-module",
-  "homepage": "https://bitbucket.org/DigitaleDinge/contao_kiss/",
-  "license": "GPL-3.0-or-later",
-	"authors":[
-		{
-			"name":"Digitale Dinge GmbH",
-			"homepage":"http://digitaledin.ge",
-			"role":"Developer"
-		}
-	],
-	"support":{
-	  "email": "hallo@digitaledin.ge",
-		"issues":"https://bitbucket.org/DigitaleDinge/contao_kiss/issues",
-		"source":"https://bitbucket.org/DigitaleDinge/contao_kiss/"
-	},
-	"require": {
-	"php": ">=5.3",
-	"contao/core-bundle": "^3.5 || ^4.3",
-	"contao-community-alliance/composer-plugin":"^2.3.0 || 3.*"
-  },
-  "extra": {
-	"contao": {
-	  "sources": {
-		"files/contao-kiss": "files/contao-kiss",
-		"contao": "contao",
-		"src/Contao/Hooks/AddTopLineToPalette": "src/Contao/Hooks/AddTopLineToPalette",
-	  }
-	}
-  }
+    "name": "digitaledinge/contao-kiss",
+    "description": "Digitale Dinge's super simple starterkit for Contao CMS",
+    "keywords": [
+        "contao",
+        "kiss",
+        "contao kiss",
+        "base framework"
+    ],
+    "type": "contao-bundle",
+    "homepage": "https://bitbucket.org/DigitaleDinge/contao_kiss/",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Digitale Dinge GmbH",
+            "homepage": "https://digitaledin.ge",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "hallo@digitaledin.ge",
+        "issues": "https://bitbucket.org/DigitaleDinge/contao_kiss/issues",
+        "source": "https://bitbucket.org/DigitaleDinge/contao_kiss/"
+    },
+    "require": {
+        "php": "^8.1",
+        "contao/core-bundle": "^4.13 || ^5.3"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "DigitaleDinge\\ContaoKiss\\": "src/"
+        },
+        "exclude-from-classmap": [
+            "contao/dca/",
+            "contao/languages/",
+            "contao/templates/"
+        ]
+    },
+    "extra": {
+        "contao-manager-plugin": "DigitaleDinge\\ContaoKiss\\ContaoManager\\Plugin"
+    },
+    "config": {
+        "allow-plugins": {
+            "contao-components/installer": true,
+            "php-http/discovery": false,
+            "contao/manager-plugin": true
+        }
+    }
 }

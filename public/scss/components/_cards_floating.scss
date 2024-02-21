@@ -1,0 +1,57 @@
+// *
+// * 
+// * Contao KISS Website Framework
+// *
+// * _cards_floating.scss
+// * Styles for the Floaring Cards component
+// *
+
+.c-cards {
+	&_floating {
+		&--grid {
+			.c-cards__wrapper {
+				flex-wrap: wrap;
+				gap: $gutter-height;
+			}
+			.c-cards__item {
+				margin: 0;
+				@include media('>=medium') {
+					margin: 0;
+					width: calc(50% - ($gutter-height / 2));
+				}
+			}
+		}
+		&--offset {
+			.c-cards__item {
+				margin: $gutter-height 0;
+				
+			}
+		} 
+		&--align {
+			&-left {
+				text-align: left;
+			}
+			&-center {
+				text-align: center;
+			}
+			&-right {
+				text-align: right;
+			}
+		}
+		.c-cards__wrapper {
+			display: flex;
+			margin: 0 auto;
+		}
+		.c-cards__col {
+			flex: 0 0 50%;
+			max-width: 50%;
+			&--1 {
+				padding-right: calc($gutter-height / 2);
+			}
+			&--2 {
+				padding-left: calc($gutter-height / 2);
+				margin-top: 10rem;
+			}
+		}
+	}
+} 

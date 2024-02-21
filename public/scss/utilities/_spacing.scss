@@ -1,0 +1,248 @@
+/**
+* KISS Framework for Contao
+* Version 0.0.1
+* https://www.contau-kiss.de
+* Licensed under MIT Open Source
+*/
+
+@import "../_variables";
+
+.u-padding-vertical-top {
+  padding-top: $gutter-height-mobile;
+
+  @include media(">large") {
+    padding-top: $gutter-height;
+  }
+
+  &--half {
+    padding-top: calc($gutter-height-mobile / 2);
+
+    @include media(">large") {
+      padding-top: calc($gutter-height / 2);
+    }
+  }
+
+  &--2x {
+    padding-top: calc(2 * $gutter-height-mobile);
+
+    @include media(">large") {
+      padding-top: calc(2 * $gutter-height);
+    }
+  }
+
+  &--3x {
+    padding-top: calc(3 * $gutter-height-mobile);
+
+    @include media(">large") {
+      padding-top: calc(3 * $gutter-height);
+    }
+  }
+
+  &--4x {
+    padding-top: calc(4 * $gutter-height-mobile);
+
+    @include media(">large") {
+      padding-top: calc(4 * $gutter-height);
+    }
+  }
+
+  &--5x {
+    padding-top: calc(5 * $gutter-height-mobile);
+
+    @include media(">large") {
+      padding-top: calc(5 * $gutter-height);
+    }
+  }
+}
+
+.u-padding-vertical-bottom {
+  padding-bottom: $gutter-height-mobile;
+
+  @include media(">large") {
+    padding-bottom: $gutter-height;
+  }
+
+  &--half {
+    padding-bottom: calc($gutter-height-mobile / 2);
+
+    @include media(">large") {
+      padding-bottom: calc($gutter-height / 2);
+    }
+  }
+
+  &--2x {
+    padding-bottom: calc(2 * $gutter-height-mobile);
+
+    @include media(">large") {
+      padding-bottom: calc(2 * $gutter-height);
+    }
+  }
+
+  &--3x {
+    padding-bottom: calc(3 * $gutter-height-mobile);
+
+    @include media(">large") {
+      padding-bottom: calc(3 * $gutter-height);
+    }
+  }
+
+  &--4x {
+    padding-bottom: calc(4 * $gutter-height-mobile);
+
+    @include media(">large") {
+      padding-bottom: calc(4 * $gutter-height);
+    }
+  }
+
+  &--5x {
+    padding-bottom: calc(5 * $gutter-height-mobile);
+
+    @include media(">large") {
+      padding-bottom: calc(5 * $gutter-height);
+    }
+  }
+}
+
+.u-margin-vertical-top {
+  margin-top: $gutter-height-mobile;
+
+  @include media(">large") {
+    margin-top: $gutter-height;
+  }
+
+  &--half {
+    margin-top: calc($gutter-height-mobile / 2);
+
+    @include media(">large") {
+      margin-top: calc($gutter-height / 2);
+    }
+  }
+
+  &--2x {
+    margin-top: calc(2 * $gutter-height-mobile);
+
+    @include media(">large") {
+      margin-top: calc(2 * $gutter-height);
+    }
+  }
+
+  &--3x {
+    margin-top: calc(3 * $gutter-height-mobile);
+
+    @include media(">large") {
+      margin-top: calc(3 * $gutter-height);
+    }
+  }
+
+  &--4x {
+    margin-top: calc(4 * $gutter-height-mobile);
+
+    @include media(">large") {
+      margin-top: calc(4 * $gutter-height);
+    }
+  }
+
+  &--5x {
+    margin-top: calc(5 * $gutter-height-mobile);
+
+    @include media(">large") {
+      margin-top: calc(5 * $gutter-height);
+    }
+  }
+}
+
+.u-margin-vertical-bottom {
+  margin-bottom: $gutter-height-mobile;
+
+  @include media(">large") {
+    margin-bottom: $gutter-height;
+  }
+
+  &--half {
+    margin-bottom: calc($gutter-height-mobile / 2);
+
+    @include media(">large") {
+      margin-bottom: calc($gutter-height / 2);
+    }
+  }
+
+  &--2x {
+    margin-bottom: calc(2 * $gutter-height-mobile);
+
+    @include media(">large") {
+      margin-bottom: calc(2 * $gutter-height);
+    }
+  }
+
+  &--3x {
+    margin-bottom: calc(3 * $gutter-height-mobile);
+
+    @include media(">large") {
+      margin-bottom: calc(3 * $gutter-height);
+    }
+  }
+
+  &--4x {
+    margin-bottom: calc(4 * $gutter-height-mobile);
+
+    @include media(">large") {
+      margin-bottom: calc(4 * $gutter-height);
+    }
+  }
+
+  &--5x {
+    margin-bottom: calc(5 * $gutter-height-mobile);
+
+    @include media(">large") {
+      margin-bottom: calc(5 * $gutter-height);
+    }
+  }
+}
+
+.u-padding-horizontal-right {
+  padding-right: $gutter-height-mobile;
+
+  @include media(">large") {
+    padding-right: $gutter-height;
+  }
+}
+
+.u-padding-horizontal-left {
+  padding-left: $gutter-height-mobile;
+
+  @include media(">large") {
+    padding-left: $gutter-height;
+  }
+}
+
+.u-margin-horizontal-right {
+  margin-right: $gutter-height-mobile;
+
+  @include media(">large") {
+    margin-right: $gutter-height;
+  }
+
+  &--half {
+    margin-right: calc($gutter-height-mobile / 2);
+
+    @include media(">large") {
+      margin-right: calc($gutter-height / 2);
+    }
+  }
+}
+
+.u-margin-horizontal-left {
+  margin-left: $gutter-height-mobile;
+
+  @include media(">large") {
+    margin-left: $gutter-height;
+  }
+
+  &--half {
+    margin-left: calc($gutter-height-mobile / 2);
+
+    @include media(">large") {
+      margin-left: calc($gutter-height / 2);
+    }
+  }
+}
