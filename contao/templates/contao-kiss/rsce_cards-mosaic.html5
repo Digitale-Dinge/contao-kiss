@@ -1,0 +1,46 @@
+<?php $this->extend('block_searchable') ?>
+
+<?php $this->class = 'c-cards'?>
+<?php $this->block('addClass') ?><?= $this->class ?>_mosaic <?= $this->class ?>_mosaic--<?php echo $this->cardsLayout; ?> <?= $this->class ?>_mosaic--align-<?= $this->textAlign ?><?php if ( ! empty( $this->backgroundColor ) ): ?> u-background--<?= $this->backgroundColor ?><?php endif; ?><?php $this->endblock() ?>
+<?php $this->block('content') ?>
+
+<?php if ( ! empty( $this->text ) ): ?>
+	<?= $this->text ?>
+<?php endif; ?>
+
+	<div class="<?= $this->class ?>__wrapper">
+		<?php foreach ( $this->cards as $card ): ?>
+			<?php if ( ! empty($card->url)) {
+				$tag = 'a';
+				$attributes = '';
+			} 
+			else {
+				$tag = 'div';
+				$attributes = '';
+			}
+			?>
+			<<?= $tag ?> class="<?= $this->class ?>__item <?php if ( ! empty($card->image) ): ?><?= $this->class ?>__item--background-image<?php endif; ?> <?= $this->class ?>__item--<?= $card->cardSize ?> <?= $this->class ?>__item--height-<?= $card->cardHeight ?>" href="<?= $card->url ?>">
+				<?php if ( ! empty($card->image) ): ?>
+				<div class="<?= $this->class ?>__background">
+					{{image::<?= $card->image ?>}}
+				</div>
+				<?php endif; ?>
+				<div class="<?= $this->class ?>__content">
+				<?php if ( ! empty( $card->topline ) ): ?><p class="c-topline"><?= $card->topline ?></p><?php endif; ?>
+				<?php if ( ! empty( $card->headline['value'] ) ): ?><h3><?= $card->headline['value'] ?></h3><?php endif; ?>
+				<?= $card->text ?>
+				</div>
+			</<?= $tag ?>>
+		<?php endforeach ?>
+		<?php if ( $this->readMore ): ?>
+			<a class="<?= $this->class ?>__item <?= $this->class ?>__item--endcard <?= $this->class ?>__item--<?= $this->cardSize ?> <?= $this->class ?>__item--height-<?= $this->cardHeight ?>" href="<?= $this->readMoreUrl ?>">
+				<div class="<?= $this->class ?>__content <?= $this->class ?>__item--height-<?= $this->cardHeight ?>">
+					<div class="<?= $this->class ?>__text">
+						<?php if ( ! empty( $this->readMoreIcon ) ): ?><span aria-hidden="true" data-icon="&#x<?= $this->readMoreIcon ?>;"></span><?php endif; ?>
+						<?= $this->readMoreText ?>
+					</div>
+				</div>
+			</a>
+		<?php endif; ?>
+	</div>
+<?php $this->endblock() ?>

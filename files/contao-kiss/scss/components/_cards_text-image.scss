@@ -1,0 +1,39 @@
+// *
+// * 
+// * Contao KISS Website Framework
+// *
+// * _cards_text-image.scss
+// * Styles for the Card text & image component
+// *
+
+.c-cards {
+	&_text-image {
+		&--layout-1 {
+			// Styles for layout variant 1
+		}
+		&--layout-2 {
+			// Styles for layout variant 2
+		} 
+		&--align {
+			&-right {
+				.c-cards__item {
+					flex-direction: row;
+				}
+			}
+			&-left {
+				.c-cards__item {
+					flex-direction: row-reverse;
+				}
+				
+			}
+		}
+		.c-cards {
+			&__item {
+				display: flex;
+				> * {
+					width: 50%;
+				}
+			}
+		}
+	}
+} 

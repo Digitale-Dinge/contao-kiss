@@ -1,0 +1,43 @@
+<?php $this->extend('block_searchable') ?>
+
+<?php $this->class = 'c-cards'?>
+<?php $this->block('addClass') ?><?= $this->class ?>--team<?php $this->endblock() ?>
+<?php $this->block('content') ?>
+
+<?php foreach ($this->members as $member): ?>
+	<div class="<?= $this->class ?>__item">
+		<div class="<?= $this->class ?>__image">
+			<figure class="<?= $this->class ?>__figure-container">
+				{{picture::<?= $member->image ?>?size=3}}
+			</figure>
+		</div>
+		<div class="<?= $this->class ?>__content">
+			<div class="<?= $this->class ?>__name">
+				<h3><span><?php echo $member->firstname ?></span> <?php echo $member->lastname ?></h3>
+				<p><?php echo $member->occupation ?></p>
+			</div>
+			<?php if ( ! empty( $member->email ) OR ! empty( $member->phone ) ) : ?>
+			<div class="<?= $this->class ?>__contacts">
+				<?php if ( ! empty( $member->email ) ) : ?>
+				<div class="<?= $this->class ?>__contact-item">
+					<span aria-hidden="true" data-icon="&#xe95b;"></span>
+					<div>
+						<p>{{email::<?php echo $member->email ?>}}</p>
+					</div>
+				</div>
+				<?php endif; ?>
+				<?php if ( ! empty( $member->phone ) ) : ?>
+				<div class="<?= $this->class ?>__contact-item">
+					<span aria-hidden="true" data-icon="&#xe96a;"></span>
+					<div>
+						<p><a href="tel:<?php echo $member->phone ?>"><?php echo $member->phone ?></a></p>
+					</div>
+				</div>
+				<?php endif; ?>
+			</div>
+			<?php endif; ?>
+		</div>
+	</div>
+<?php endforeach ?>
+
+<?php $this->endblock() ?>

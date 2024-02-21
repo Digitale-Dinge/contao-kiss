@@ -1,0 +1,36 @@
+// *
+// * 
+// * Contao KISS Website Framework
+// *
+// * _cards_slider.scss
+// * Styles for the Slider Cards component
+// *
+
+.c-cards {
+	&_slider {
+		&--size-25 {
+			.c-cards__item {
+				width: 25%;
+			}
+		}
+		&--size-33 {
+			.c-cards__item {
+				width: 33.3%;
+			}
+		}
+		&--size-50 {
+			.c-cards__item {
+				width: 50%;
+			}
+		}
+		
+		.c-cards {
+			&__wrapper {
+				display: block;
+			}
+			&__item {
+				
+			}
+		}
+	}
+} 

@@ -1,0 +1,20 @@
+// *
+// * 
+// * Contao KISS Website Framework
+// * 
+// * _tools.scss
+// * Instructions for default Contao classes and several frontend tools
+// *
+
+@import '../variables';
+@import '../mixins/mixins';
+
+// TOOLS
+
+.text-hide {
+	@include text-hide();
+}
+
+.invisible {
+	display: none !important;
+}

@@ -1,0 +1,110 @@
+// *
+// * 
+// * Contao KISS Website Framework
+// *
+// * _teaser.scss
+// * Styles for all teaser elements
+// *
+
+.c-teaser {
+	&_hero {
+		position: relative;
+		&--homepage {
+				height: 100vh;
+			.c-teaser {
+				&__background {
+					height: 100vh;
+					figure {
+						width: 100vw;
+						height: 100vh;
+					}
+					img,
+					video {
+						height: 100vh;
+					}
+					&_overlay {
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 0;
+						height: 100vh;
+						opacity: .5;
+						&--color-1 {
+							background-color: $color-brand;
+						}
+						&--color-2 {
+							background-color: $color-secondary-1;
+						}
+						&--color-3 {
+							background-color: $color-secondary-2;
+						}
+						&--color-4 {
+							background-color: $color-secondary-3;
+						}
+					}
+				}
+				&__content {
+					height: 100vh;
+				}
+			}
+		}
+		&--subpage {
+			height: 50vh;
+			.c-teaser {
+				&__background {
+					height: 50vh;
+					figure {
+						width: 100vw;
+						height: 50vh;
+					}
+					img {
+						height: 50vh;
+					}
+				}
+				&__content {
+					height: 50vh;
+				}
+			}
+		}
+	}
+	&__background {
+		position: absolute;
+		width: 100vw;
+		z-index: 1;
+		overflow: hidden;
+		img {
+			width: 100vw;
+			object-fit: cover;
+		}
+		video {
+			width: 100vw;
+			object-fit: cover;
+		}
+	}
+	&__content {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: 0 auto;
+		max-width: 80%;
+		display: flex;
+		flex-direction: column;	
+		justify-content: center;
+		z-index: 2;
+	}
+	
+	&--align {
+		&-left {
+			text-align: left;
+		}
+		&-center {
+			text-align: center;
+		}
+		&-right {
+			text-align: right;
+		}
+	}
+} 

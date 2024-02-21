@@ -1,0 +1,76 @@
+<?php
+$GLOBALS['TL_CSS']['tiny-slider'] = 'bundles/contaotinyslider/tiny-slider.css';
+$GLOBALS['TL_CSS']['contao-tiny-slider-bundle'] = 'bundles/contaotinyslider/contao-tiny-slider-bundle-theme.css';
+$GLOBALS['TL_JAVASCRIPT']['tiny-slider'] = 'bundles/contaotinyslider/tiny-slider.js';
+$GLOBALS['TL_JAVASCRIPT']['contao-tiny-slider-bundle'] = 'bundles/contaotinyslider/contao-tiny-slider-bundle.js';
+
+if ($this->cardSize == 'size-25') {
+	$sliderItems = '4';
+	$cardWidth = '273';
+	$sliderBreakpoint = '320';
+	$imageSize = '6';
+} elseif ($this->cardSize == 'size-33') {
+	$sliderItems = '3';
+	$cardWidth = '369';
+	$sliderBreakpoint = '401';
+	$imageSize = '5';
+} elseif ($this->cardSize == 'size-50') {
+	$sliderItems = '2';
+	$cardWidth = '562';
+	$sliderBreakpoint = '594';
+	$imageSize = '4';
+};
+
+
+?>
+
+<?php $this->extend('block_searchable') ?>
+
+<?php $this->class = 'c-cards'?>
+<?php $this->block('addClass') ?><?= $this->class ?>_slider <?= $this->class ?>_slider--<?php echo $this->cardSize; ?> ce_tiny-slider-content-start tiny-slider-b448fd tiny-slider-uid-65c63f948861d tiny-slider<?php if ( ! empty( $this->backgroundColor ) ): ?> u-background--<?= $this->backgroundColor ?><?php endif; ?><?php $this->endblock() ?>
+<?php $this->block('content') ?>
+
+<?php if ( ! empty( $this->text ) ): ?>
+	<?= $this->text ?>
+<?php endif; ?>
+	<div class="tiny-slider-container" data-tiny-slider-config="{&quot;items&quot;:1,&quot;slideBy&quot;:1,&quot;speed&quot;:300,&quot;autoHeight&quot;:false,&quot;fixedWidth&quot;:0,&quot;edgePadding&quot;:0,&quot;gutter&quot;:0,&quot;center&quot;:false,&quot;controls&quot;:true,&quot;controlsText&quot;:[&quot;<span class=\&quot;title\&quot;>Zuru\u0308ckbl\u00e4ttern<\/span>&quot;,&quot;<span class=\&quot;title\&quot;>Vorbl\u00e4ttern<\/span>&quot;],&quot;nav&quot;:false,&quot;displayPageNumber&quot;:false,&quot;autoplay&quot;:false,&quot;autoplayHoverPause&quot;:false,&quot;autoplayResetOnVisibility&quot;:false,&quot;autoplayText&quot;:[&quot;<span class=\&quot;title\&quot;>Abspielen<\/span>&quot;,&quot;<span class=\&quot;title\&quot;>Anhalten<\/title>&quot;],&quot;autoplayTimeout&quot;:5000,&quot;touch&quot;:true,&quot;mouseDrag&quot;:false,&quot;arrowKeys&quot;:false,&quot;disable&quot;:false,&quot;skipInit&quot;:false,&quot;startIndex&quot;:0,&quot;enhanceAccessibility&quot;:true,&quot;mode&quot;:&quot;carousel&quot;,&quot;axis&quot;:&quot;horizontal&quot;,&quot;autoWidth&quot;:false,&quot;viewportMax&quot;:0,&quot;controlsPosition&quot;:&quot;bottom&quot;,&quot;navPosition&quot;:&quot;top&quot;,&quot;navAsThumbnails&quot;:false,&quot;autoplayPosition&quot;:&quot;top&quot;,&quot;autoplayDirection&quot;:&quot;forward&quot;,&quot;autoplayButtonOutput&quot;:false,&quot;animateIn&quot;:&quot;tns-fadeIn&quot;,&quot;animateOut&quot;:&quot;tns-fadeIn&quot;,&quot;animateNormal&quot;:&quot;tns-normal&quot;,&quot;animateDelay&quot;:0,&quot;loop&quot;:false,&quot;rewind&quot;:false,&quot;lazyload&quot;:true,&quot;lazyloadSelector&quot;:&quot;.tns-lazy-img&quot;,&quot;preventActionWhenRunning&quot;:false,&quot;preventScrollOnTouch&quot;:&quot;auto&quot;,&quot;swipeAngle&quot;:15,&quot;freezable&quot;:true,&quot;useLocalStorage&quot;:true,&quot;responsive&quot;:{&quot;<?= $sliderBreakpoint ?>&quot;:{&quot;items&quot;:<?= $sliderItems ?>,&quot;slideBy&quot;:1,&quot;speed&quot;:300,&quot;autoHeight&quot;:false,&quot;fixedWidth&quot;:<?= $cardWidth ?>,&quot;edgePadding&quot;:0,&quot;gutter&quot;:16,&quot;center&quot;:false,&quot;controls&quot;:true,&quot;controlsText&quot;:[&quot;<span class=\&quot;title\&quot;>Zuru\u0308ckbl\u00e4ttern<\/span>&quot;,&quot;<span class=\&quot;title\&quot;>Vorbl\u00e4ttern<\/span>&quot;],&quot;nav&quot;:false,&quot;displayPageNumber&quot;:false,&quot;autoplay&quot;:false,&quot;autoplayHoverPause&quot;:false,&quot;autoplayResetOnVisibility&quot;:false,&quot;autoplayText&quot;:[&quot;<span class=\&quot;title\&quot;>Abspielen<\/span>&quot;,&quot;<span class=\&quot;title\&quot;>Anhalten<\/title>&quot;],&quot;autoplayTimeout&quot;:5000,&quot;touch&quot;:true,&quot;mouseDrag&quot;:false,&quot;arrowKeys&quot;:false,&quot;disable&quot;:false,&quot;skipInit&quot;:false,&quot;startIndex&quot;:0,&quot;enhanceAccessibility&quot;:true}},&quot;container&quot;:&quot;.tiny-slider-container&quot;,&quot;language&quot;:&quot;de&quot;,&quot;navAriaLabel&quot;:&quot;Carousel Navigation&quot;,&quot;dotAriaLabel&quot;:&quot;Carousel Seite&quot;,&quot;dotCurrentAriaLabel&quot;:&quot;Aktiv&quot;}">
+		
+		<?php foreach ( $this->cards as $card ): ?>
+			<?php if ( ! empty($card->url)) {
+				$tag = 'a';
+				$attributes = '';
+			} 
+			else {
+				$tag = 'div';
+				$attributes = '';
+			}
+			?>
+			<div class="ce_tiny-slider-content-separator">
+				<<?= $tag ?> class="<?= $this->class ?>__item <?= $this->class ?>__item--height-<?= $this->cardHeight ?> <?php if ( ! empty($card->image) ) : ?><?= $this->class ?>__item--background-image<?php endif; ?>" href="<?= $card->url ?>">
+					<?php if ( ! empty($card->image) ): ?>
+					<div class="<?= $this->class ?>__background">
+						{{picture::<?= $card->image ?>?size=<?= $imageSize ?>}}
+					</div>
+					<?php endif; ?>
+					<div class="<?= $this->class ?>__content">
+					<?php if ( ! empty( $card->topline ) ): ?><p class="c-topline"><?= $card->topline ?></p><?php endif; ?>
+					<?php if ( ! empty( $card->headline['value'] ) ): ?><h3><?= $card->headline['value'] ?></h3><?php endif; ?>
+					<?= $card->text ?>
+					</div>
+				</<?= $tag ?>>
+			</div>
+		<?php endforeach ?>
+		<?php if ( $this->readMore ): ?>
+			<div class="ce_tiny-slider-content-separator">
+				<a class="<?= $this->class ?>__item <?= $this->class ?>__item--height-<?= $this->cardHeight ?> <?= $this->class ?>__item--endcard <?= $this->class ?>__item--<?= $this->cardSize ?> <?= $this->class ?>__item--height-<?= $this->cardHeight ?>" href="<?= $this->readMoreUrl ?>">
+					<div class="<?= $this->class ?>__content <?= $this->class ?>__item--height-<?= $this->cardHeight ?>">
+						<div class="<?= $this->class ?>__text">
+							<?php if ( ! empty( $this->readMoreIcon ) ): ?><span aria-hidden="true" data-icon="&#x<?= $this->readMoreIcon ?>;"></span><?php endif; ?>
+							<?= $this->readMoreText ?>
+						</div>
+					</div>
+				</a>
+			</div>
+		<?php endif; ?>
+	</div>
+<?php $this->endblock() ?>

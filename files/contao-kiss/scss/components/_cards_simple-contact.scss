@@ -1,0 +1,46 @@
+// *
+// * 
+// * Contao KISS Website Framework
+// *
+// * _cards_simplecontact.scss
+// * Styles for the Card simple contact component
+// *
+
+// --------------------------------------------------
+// VARIABLES 
+//
+
+$image-size: 100px;
+$image-border-radius: 50%;
+
+
+
+// --------------------------------------------------
+
+.c-cards {
+	&_simple-contact {
+		max-width: 100%;
+		overflow: hidden;
+		.c-cards {
+			&__contact-person {
+				display: flex;
+				figure {
+					width: $image-size;
+					height: $image-size;
+					img {
+						width: $image-size;
+						height: $image-size;
+						border-radius: $image-border-radius;
+					}
+				}
+			}
+			&__item {
+				display: flex;
+			}
+		}
+	}
+	&__sidebar {
+		background-color: $color-grey;
+	}
+	
+} 

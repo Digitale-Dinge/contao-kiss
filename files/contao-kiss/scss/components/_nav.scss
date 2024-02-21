@@ -1,0 +1,278 @@
+// *
+// * 
+// * Contao KISS Website Framework
+// *
+// * _nav.scss
+// * Basic styles for different kinds of navigation
+// *
+
+// ––––––– All navigations –––––––
+
+// Reset margin and padding and text-decorations for all kind of navigation
+nav {
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+		li {
+			margin: 0;
+			padding: 0;
+			a {
+				&:link,
+				&:visited {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}
+
+// ––––––– Horizontal navigations –––––––
+
+// Make the navigation horizontal
+.mod_breadcrumb,
+.mod_navigation--horizontal,
+.mod_customnav--horizontal {
+	> ul {
+		width: 100%;
+		white-space: nowrap;
+		> li {
+			display: inline-block;
+			vertical-align: middle;
+		}
+	}
+}
+
+// Styles for horizontal dropdown navigations
+.mod_navigation--dropdown {
+	.submenu {
+		position: relative;
+		> a {
+			&:after {
+				padding-left: 0.5em;
+				content: "\25BE";
+				font-size: small;
+			}
+		}
+		> ul {
+			display: none;
+			position: absolute;
+			left: 0;
+			top: auto;
+			width: inherit;
+			margin: 0;
+			padding: 0;
+			z-index: 3;
+			
+			> li {
+				display: block;
+				background: $color-grey;
+				&.submenu {
+					> a {
+						&:after {
+							content: "\25B8";
+						}
+					} 
+					> ul {
+						display: none;
+						position: absolute;
+						left: 100%;
+						top: 0;
+						width: inherit;
+						margin: 0;
+						padding: 0;
+						z-index: 3;
+						> li {
+							display: block;
+							background: $color-grey;
+						}
+					}
+					&:hover {
+						> ul {
+							display: block;
+							position: absolute;
+						}
+					}
+				}
+			}
+		}
+		&:hover {
+			> ul {
+				display: block;
+				position: absolute;
+			}
+		}
+	}
+}
+
+
+
+// ––––––– Navigation float direction –––––––
+
+// Styles for navigations floating to left or right
+.mod_navigation--right,
+.mod_customnav--right,
+.mod_navigation--left,
+.mod_customnav--left {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	> ul {
+		display: flex;
+		> li {
+			margin: 0 .5rem;
+			&.first {
+				margin-left: 0;
+			}
+			&.last {
+				margin-right: 0;
+			}
+		}
+	}
+}
+
+// Make the navigation float right
+.mod_navigation--right,
+.mod_customnav--right{
+	> ul {
+		justify-content: flex-end;
+	}
+}
+
+// Make the navigation float left
+.mod_navigation--left,
+.mod_customnav--left {
+	> ul {
+		justify-content: flex-start;
+	}
+}
+
+// ––––––– mod_breadcrumb –––––––
+
+.mod_breadcrumb {
+	margin: 0 auto;
+	max-width: $object-size-regular;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	overflow: hidden;
+	> ul {
+		> li {
+			margin-right: .5rem;
+			&:after {
+				position: relative;
+				right: -.25rem;
+				content: "\25B8";
+			}
+			&.first {
+				padding-left: .25rem;
+				&:before {
+					position: relative;
+					left: -.25rem;
+					content: "\2302";
+				}
+			}
+			&.last {
+				margin-right: 0;
+				&:after {
+					content: "";
+				}
+			}
+		}
+	}
+}
+
+// ––––––– Adjustments for #header navigations –––––––
+
+// Adjustments for navigations within #header--meta 
+#header--meta {
+	.inside {
+		> nav {
+			> ul {
+				> li {
+					a {
+						&:link,
+						&:visited {
+							color: $color-header-meta;
+						}	
+					}
+					strong {
+						color: $color-header-meta;
+					}
+				}
+			} 	
+		}
+	}
+}
+
+// Adjustments for navigations within #header--main 
+#header--main {
+	.inside {
+		> nav {
+			> ul {
+				> li {
+					a {
+						&:link,
+						&:visited {
+							color: $color-header;
+						}	
+					}
+					strong {
+						color: $color-header;
+					}
+				}
+			} 	
+		}
+	}
+}
+
+// ––––––– Adjustments for #footer navigations –––––––
+
+#footer {
+	color: $color-white;
+	a {
+		color: $color-white;
+	}
+	#footer--navigation {
+		.mod_navigation {
+			&--horizontal {
+				ul {
+					margin-left: 1rem;
+					list-style-type: none;
+					li {
+						margin: .25rem 0;
+						font-weight: normal;
+						strong {
+							color: $color-secondary-1;
+						}
+					}
+					&.level_1 {
+						display: flex;
+						justify-content: space-between;
+						margin-left: 0;
+						> li {
+							font-weight: bold;
+						}
+					}
+					.level_2 {
+						margin-top: 1rem;
+						margin-left: 0;
+						li {
+							strong {
+								font-weight: normal;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	#footer--social {
+		
+	}
+	#footer--copyright {
+		display: flex;
+		justify-content: space-between;
+		margin: 1rem 0 0 0;
+	}
+}
+

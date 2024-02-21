@@ -1,0 +1,125 @@
+// *
+// * 
+// * Contao KISS Website Framework
+// * 
+// *
+
+////////////////////////////////////////////////////////////////////
+//
+// Print Module
+//
+////////////////////////////////////////////////////////////////////
+
+// Default Print Settings
+// ---------------------------------
+$print-fontsize		: 10pt !default;
+$print-abbreviation	: false !default;
+$print-href			: false !default;
+
+////////////////////////////////////////////////////////////////////
+//
+// Typography Module
+//
+////////////////////////////////////////////////////////////////////
+
+// Font Settings
+// ---------------------------------
+$font-sans				: "Droid Sans", Arial, Helvetica, sans-serif !default;
+$font-serif				: "Droid Serif", Georgia, "Times New Roman", Times, serif !default;
+$font-monospace			: Consolas, "Lucida Console", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier !default;
+
+// Color Settings
+// ---------------------------------
+
+// define base 
+$color-black			: #000000 !default;
+$color-white			: #FFFFFF !default;
+$color-grey				: #E5E5E5 !default;
+$color-grey-light		: #f4f4f4 !default;
+
+$color-brand			: #071e51 !default;
+$color-secondary-1		: #39a0ed !default;
+$color-secondary-2		: #13c4a3 !default;
+$color-secondary-3		: #fca311 !default;
+
+
+// standard typography colors
+$text-color				: $color-black !default;
+$headings-color			: $color-brand !default;
+$blockquote-text-color	: #666 !default;
+$blockquote-bg-color	: transparent !default;
+$pre-text-color			: #800 !default;
+$kbd-text-color			: #666 !default;
+$mark-text-color		: #000 !default;
+$mark-bg-color			: #ff0 !default;
+
+// highlight colors
+$highlight-info-color	: $color-grey-light !default;
+$highlight-success-color: #8c8 !default;
+$highlight-warning-color: #cc8 !default;
+$highlight-error-color	: #c88 !default;
+
+// link colors
+$link-text-color		: $color-brand !default;
+$link-bg-color			: transparent !default;
+$link-focus-text-color	: $color-secondary-1 !default;
+$link-focus-bg-color	: transparent !default;
+
+// special colors
+$hr-color				: #eee !default;
+$highlight-text-color	: #c30 !default;
+$dimmed-text-color		: #888 !default;
+
+$color-page-background: $color-white !default;
+$color-page-content: $color-black !default;
+
+$color-header-background: $color-grey-light !default;
+$color-header: $color-black !default;
+
+$color-header-meta-background: $color-black !default;
+$color-header-meta: $color-white !default;
+
+// Vertical Rhythm
+// ---------------------------------------------------
+// font values have to be defined in [px] without unit
+$default-font-size		: 1rem !default;
+$base-font-size			: calc($default-font-size * 1) !default;
+$base-line-height		: 1.2 !default;
+
+$h1-font-size			: calc($base-font-size * 3) !default;
+$h2-font-size			: calc($base-font-size * 2) !default;
+$h3-font-size			: calc($base-font-size * 1.5) !default;
+$h4-font-size			: calc($base-font-size * 1.25) !default;
+$h5-font-size			: calc($base-font-size * 1.125) !default;
+$h6-font-size			: calc($base-font-size * 0.875) !default;
+$text-big-font-size		: calc($base-font-size * 1.25) !default;
+$text-small-font-size	: calc($base-font-size * .75) !default;
+
+// scale factors (don't change - unless you know what you do)
+$line-height			: $base-line-height !default;
+$h1-font-scale			: 3 !default;
+$h2-font-scale			: 2 !default;
+$h3-font-scale			: 1.5 !default;
+$h4-font-scale			: 1.25 !default;
+$h5-font-scale			: 1.125 !default;
+$h6-font-scale			: .875 !default;
+$text-font-scale		: 1 !default;
+$text-big-font-scale	: 1.25 !default;
+$text-small-font-scale	: .875 !default;
+
+
+// --------------------------------------------------
+
+// BASE
+$max-width-page			: 1140px !default;
+
+$object-size-regular	: $max-width-page !default;
+$object-size-small		: 960px !default;
+$object-size-smaller	: 720px !default;
+
+$logo-width				: 200px !default;
+$logo-margin			: 10px !default;
+
+// Gutter heights for spacings
+$gutter-height: 1rem !default;
+$gutter-height-mobile: calc($gutter-height * 0.75) !default;

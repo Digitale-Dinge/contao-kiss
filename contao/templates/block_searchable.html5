@@ -1,0 +1,21 @@
+<?php $this->block('before') ?>
+<div class="<?=$this->layoutCss?>">
+<?php $this->endblock() ?>
+<div class="<?= $this->class ?> <?php $this->block('addClass') ?><?php $this->endblock() ?>"<?= $this->cssID ?><?php if ( $this->style ): ?> style="<?= $this->style ?>"<?php endif; ?>>
+
+    <?php $this->block( 'headline' ); ?>
+        <?php if ( $this->topline ): ?>
+            <p class="c-topline"><?= $this->topline ?></p>
+        <?php endif ?>
+        <?php if ( $this->headline ): ?>
+            <<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>>
+        <?php endif; ?>
+    <?php $this->endblock(); ?>
+
+    <?php $this->block( 'content' ); ?>
+    <?php $this->endblock(); ?>
+
+</div>
+<?php $this->block('after') ?>
+</div>
+<?php $this->endblock() ?>

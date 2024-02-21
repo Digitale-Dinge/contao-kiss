@@ -1,0 +1,34 @@
+<?php $this->extend('block_unsearchable_no-headline') ?>
+
+<?php $this->class = 'c-teaser'?>
+<?php $this->block('addClass') ?><?= $this->class ?>_hero <?= $this->class ?>_hero--<?php echo $this->teaserLayout; ?> <?= $this->class ?>--align-<?= $this->textAlign ?><?php $this->endblock() ?>
+<?php $this->block('content') ?>
+<div class="<?= $this->class ?>__background <?= $this->class ?>__background--<?= $this->mediaType ?> <?php if ( $this->mediaType == 'color' ) : ?>u-background u-background--<?= $this->backgroundColor ?><?php endif; ?>">
+		<?php if ( $this->mediaType == 'image' ) : ?>
+			{{image::<?= $this->singleSRC ?>}}
+			<div class="<?= $this->class ?>__background_overlay <?= $this->class ?>__background_overlay--<?= $this->colorOverlay ?>" style="mix-blend-mode: <?= $this->overlayType ?>"></div>
+		<?php elseif ( $this->mediaType == 'video' ) : ?>
+			<figure class="video_container">
+				<video autoplay="" loop="" playsinline="" muted="">
+				  	<source type="video/mp4" src="{{file::<?= $this->video ?>}}">
+			  	</video>
+			</figure>
+			<div class="<?= $this->class ?>__background_overlay <?= $this->class ?>__background_overlay--<?= $this->colorOverlay ?>" style="mix-blend-mode: <?= $this->overlayType ?>"></div>
+		<?php endif; ?>
+    <div class="<?= $this->class ?>__content">
+		<div class="><?= $this->class ?>__text">
+			<<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>>
+			<p><?= $this->text ?></p>
+		</div>
+		<div class="><?= $this->class ?>__buttons">
+			<?php foreach ( $this->buttons as $button ): ?>
+				<a href="<?= $button->url ?>" class="c-button c-button--large c-link--icon-right c-button--<?= $button->type ?>">
+					<span aria-hidden="true" data-icon="&#xe92a;"></span>
+					<span class="c-link__text"><?= $button->linktext ?></span>
+				</a>
+			<?php endforeach ?>
+		</div>
+	</div>
+</div>
+
+<?php $this->endblock() ?>

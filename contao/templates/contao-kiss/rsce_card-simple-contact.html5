@@ -1,0 +1,52 @@
+<?php $this->extend('block_unsearchable_no-headline') ?>
+
+<?php $this->class = 'c-cards'?>
+<?php $this->block('addClass') ?><?= $this->class ?>_simple-contact<?php $this->endblock() ?>
+<?php $this->block('content') ?>
+
+	<div class="<?= $this->class ?>__item">
+		<div class="<?= $this->class ?>__content">
+			<?php if ( $this->topline ): ?>
+				<p class="c-topline"><?= $this->topline ?></p>
+			<?php endif ?>
+			<?php if ( $this->headline ): ?>
+				<<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>>
+			<?php endif; ?>
+			<p>Insert Text here</p>
+			<p>Could be an insert tag that includes text depending on the language or root page</p>
+		</div>
+		<div class="<?= $this->class ?>__sidebar">
+			<div class="<?= $this->class ?>__contact-person">
+				<figure>
+					{{picture::<?= $this->image ?>?size=7}}
+				</figure>
+				<div>
+					<h3><span><?php echo $this->firstname ?></span> <?php echo $this->lastname ?></h3>
+					<p><?php echo $this->occupation ?></p>
+				</div>
+			</div>
+			<div class="<?= $this->class ?>__contacts">
+				<div class="<?= $this->class ?>__contact-item">
+					<span aria-hidden="true" data-icon="&#xe94c;"></span>
+					<div>
+						<span>{{iflng::de}}E-Mail{{iflng}}{{ifnlng::de}}Email{{ifnlng}}</span>
+						<p>{{email::<?php echo $this->email ?>}}</p>
+					</div>
+				</div>
+				<div class="<?= $this->class ?>__contact-item">
+					<span aria-hidden="true" data-icon="&#xe94b;"></span>
+					<div>
+						<span>{{iflng::de}}Telefon{{iflng}}{{ifnlng::de}}Phone{{ifnlng}}</span>
+						<p><a href="tel:<?php echo $this->phone ?>"><?php echo $this->phone ?></a></p>
+					</div>
+				</div>
+			</div>
+			<div class="<?= $this->class ?>__form--simplecontact">
+				<p>Insert Text here</p>
+				<p>Could be an insert tag that includes text depending on the language or root page</p>
+			</div>
+		</div>
+	</div>
+		
+<?php $this->endblock() ?>
+
