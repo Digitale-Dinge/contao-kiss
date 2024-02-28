@@ -12,7 +12,7 @@ use Contao\CoreBundle\ServiceAnnotation\Hook;
 use Contao\DataContainer;
 
 
-class AddToplineToPalette
+class AddTextStyleToPalette
 {
 
     /**
@@ -34,7 +34,7 @@ class AddToplineToPalette
 
             PaletteManipulator::create()
                 // empty closure the prevent the fallback
-                ->addField('topline', 'headline', PaletteManipulator::POSITION_AFTER, fn()=>null)
+                ->addField(['multiColumns', 'textStyle'], 'text', PaletteManipulator::POSITION_BEFORE, fn()=>null)
                 ->applyToPalette($key, $dc->table)
             ;
         }
@@ -51,22 +51,20 @@ class AddToplineToPalette
             return;
         }
 
-        $GLOBALS['TL_DCA']['tl_content']['fields']['topline'] =
+        $GLOBALS['TL_DCA']['tl_content']['fields']['textStyle'] =
         [
             'exclude'   => true,
-            'inputType' => 'text',
-            'eval'      =>
-            [
-                'tl_class'  => 'w50',
-                'maxlength' => 255,
-                'allowHtml' => true
+            'inputType' => 'select',
+            'options'   => [
+                'intro'
             ],
-            'sql' =>
+            'reference' => &$GLOBALS['TL_LANG']['tl_content'],
+            'eval' =>
             [
-                'type'    => 'string',
-                'length'  => 255,
-                'default' => ''
-            ]
+                'tl_class'           => 'w50',
+                'includeBlankOption' => true
+            ],
+            'sql' => "varchar(32) NOT NULL default ''"
         ];
     }
 
