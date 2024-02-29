@@ -14,7 +14,7 @@ class AddTextStyleToPalette
 {
 
     #[AsCallback('tl_content', 'config.onload', priority: -1000)]
-    public function __invoke(DataContainer $dc = null): void
+    public function addTextStyleToPalette(DataContainer $dc = null): void
     {
         if ( null === $dc )
         {
