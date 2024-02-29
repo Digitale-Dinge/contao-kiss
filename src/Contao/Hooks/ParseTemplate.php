@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
-namespace App\Contao\Hooks;
-
+namespace DigitaleDinge\ContaoKiss\Contao\Hooks;
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Contao\CoreBundle\ServiceAnnotation\Callback;
@@ -12,14 +10,11 @@ use Contao\CoreBundle\ServiceAnnotation\Hook;
 use Contao\DataContainer;
 use Contao\Template;
 
-
 class ParseTemplate
 {
 
-    /**
-     * @Callback(table="tl_content", target="config.onload", priority=-1)
-     * @Callback(table="tl_article", target="config.onload", priority=-1)
-     */
+    #[AsCallback('tl_content', 'config.onload', priority: -1)]
+    #[AsCallback('tl_article', 'config.onload', priority: -1)]
     public function parseFieldsToContentDataContainer(DataContainer $dc = null): void
     {
         if ( null === $dc )
@@ -40,10 +35,8 @@ class ParseTemplate
         }
     }
 
-
-    /**
-     * @Hook("parseTemplate")
-     */
+    
+    #[AsHook('parseTemplate')]
     public function parseCssToTemplates(Template $template): void
     {
         if ($template->contentWidth)

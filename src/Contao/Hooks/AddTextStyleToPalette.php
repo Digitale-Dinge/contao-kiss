@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
-namespace App\Contao\Hooks;
-
+namespace DigitaleDinge\ContaoKiss\Contao\Hooks;
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Contao\CoreBundle\ServiceAnnotation\Callback;
@@ -15,9 +13,7 @@ use Contao\DataContainer;
 class AddTextStyleToPalette
 {
 
-    /**
-     * @Callback(table="tl_content", target="config.onload", priority=-1000)
-     */
+    #[AsCallback('tl_content', 'config.onload', priority: -1000)]
     public function __invoke(DataContainer $dc = null): void
     {
         if ( null === $dc )
@@ -40,10 +36,7 @@ class AddTextStyleToPalette
         }
     }
 
-
-    /**
-     * @Hook("loadDataContainer")
-     */
+    #[AsHook('loadDataContainer')]
     public function loadDataContainer(string $table): void
     {
         if ( 'tl_content' !== $table )
