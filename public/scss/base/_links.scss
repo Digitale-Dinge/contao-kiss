@@ -58,7 +58,7 @@ main {
 		transition: .25s;
 	}
 	[class^="icon-"], [class*=" icon-"], span[data-icon] {
-		display: inline-block;
+		display: inline-flex;
 		padding-right: .25rem;
 		font-size: 100%;
 		vertical-align: middle;
