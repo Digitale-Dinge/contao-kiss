@@ -354,8 +354,6 @@
 
 .ce_image{}
 
-.ce_gallery {}
-
 .ce_player {
   .audio_container {
 	  audio {
@@ -428,7 +426,7 @@
 // ––––––– Colorbox styling –––––––
 
 #cboxOverlay {
-  opacity: .7 !important;
+  opacity: .7;
 }
 
 #cboxContent {
@@ -442,12 +440,12 @@
 }
 
 #cboxCurrent {
-  display: none !important;
+  display: none;
 }
 
 #cboxLoadedContent {
-  border: none !important;
-  background: none !important;
+  border: none;
+  background: none;
 }
 
 #cboxClose,
@@ -456,7 +454,7 @@
   width: 2rem;
   height: 2rem;
   box-shadow: none;
-  background: none !important;
+  background: none;
   &:before {
     position: absolute;
     top: 0;
@@ -464,7 +462,7 @@
     width: 2rem;
     height: 2rem;
     display: block;
-    font-family: 'icons' !important;
+    font-family: 'icons';
     speak: none;
     font-style: normal;
     font-weight: normal;
