@@ -41,11 +41,7 @@ class ParseTemplate
     {
         if ($template->contentWidth)
         {
-            $template->layoutCss .= 'u-size '.$template->contentWidth;
-        }
-        else
-        {
-            $template->layoutCss .= 'u-size u-size--regular';
+            $template->layoutCss .= 'u-size '.$template->contentWidth.' ';
         }
 
         if ( $template->bgColor || $template->offsetUp || $template->offsetDown )

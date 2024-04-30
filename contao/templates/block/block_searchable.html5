@@ -1,5 +1,5 @@
 <?php $this->block('before') ?>
-<div class="<?=$this->layoutCss?>">
+<?php if($this->layoutCss): ?><div class="<?=$this->layoutCss?>"><?php endif; ?>
 <?php $this->endblock() ?>
 <div class="<?= $this->class ?> <?php $this->block('addClass') ?><?php $this->endblock() ?>"<?= $this->cssID ?><?php if ( $this->style ): ?> style="<?= $this->style ?>"<?php endif; ?>>
 
@@ -17,5 +17,5 @@
 
 </div>
 <?php $this->block('after') ?>
-</div>
+<?php if($this->layoutCss): ?></div><?php endif; ?>
 <?php $this->endblock() ?>
