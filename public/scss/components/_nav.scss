@@ -227,12 +227,15 @@ nav {
 
 // ––––––– Adjustments for #footer navigations –––––––
 
-#footer {
-	color: $color-white;
-	a {
-		color: $color-white;
-	}
-	#footer--navigation {
+
+.footer {
+
+	&__navigation {
+
+		a {
+			color: $color-white;
+		}
+
 		.mod_navigation {
 			&--horizontal {
 				ul {
@@ -266,13 +269,28 @@ nav {
 			}
 		}
 	}
-	#footer--social {
-		
-	}
-	#footer--copyright {
+
+	&__copyright {
 		display: flex;
 		justify-content: space-between;
 		margin: 1rem 0 0 0;
 	}
+
+	&__social {
+		margin: 2rem 0;
+
+		.mod_navigation {
+
+			> ul {
+				display: flex;
+				justify-content: center;
+
+				> li {
+					margin: 0 1rem;
+				}
+			}
+		}
+	}
 }
+
 

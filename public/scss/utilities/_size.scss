@@ -17,14 +17,10 @@
 	}
 	&--regular {
 		max-width: $object-size-regular;
-		padding-left: $gutter-height;
-		padding-right: $gutter-height;
 	}
 	
 	&--small {
 		max-width: $object-size-small;
-		padding-left: $gutter-height;
-		padding-right: $gutter-height;
 	}
 	
 	&--smaller {
@@ -43,7 +39,18 @@
 		margin-left: 0;
 		margin-right: 0;
 		min-width: 100vw;
-		padding: 0 $gutter-height;
 		box-sizing: border-box;
+	}
+
+	&--regular,
+	&--small,
+	&--full {
+		padding-left: calc($gutter-height/2);
+		padding-right: calc($gutter-height/2);
+
+		@include media('>=medium') {
+			padding-left: $gutter-height;
+			padding-right: $gutter-height;
+		}
 	}
 }

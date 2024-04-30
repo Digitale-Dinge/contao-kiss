@@ -34,8 +34,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $font-serif;
-  font-weight: 400;
+  font-family: $font-headline-family;
+  font-weight: $font-headline-weight;
   color: $headings-color;
   margin: 0;
 }

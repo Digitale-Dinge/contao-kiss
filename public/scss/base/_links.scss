@@ -8,21 +8,23 @@
 
 @import '../variables';
 
-#container {
+main {
 	a {
-  	color: $link-text-color;
-  	text-decoration: none;
+		color: $link-text-color;
+		text-decoration: none;
 	}
 	
-	a:active { outline: none; }
+	a:active {
+		outline: none;
+	}
 	
 	/* (en) maximum constrast for tab focus - change with great care */
 	/* (en) Maximaler Kontrast für Tab Focus - Ändern Sie diese Regel mit Bedacht */
 	a:hover,
 	a:focus {
-  	background-color: $link-focus-bg-color;
-  	color: $link-focus-text-color;
-  	text-decoration: none;
+		background-color: $link-focus-bg-color;
+		color: $link-focus-text-color;
+		text-decoration: none;
 	}
 }
 .ce_hyperlink .c-button,
@@ -48,8 +50,7 @@
 	}
 }
 
-.ce_hyperlink .c-button,
-#main .c-button {
+.c-button {
 	font-weight: 700;
 	color: var(--color-dark);
 	&:hover {
@@ -57,7 +58,7 @@
 		transition: .25s;
 	}
 	[class^="icon-"], [class*=" icon-"], span[data-icon] {
-		display: inline-block;
+		display: inline-flex;
 		padding-right: .25rem;
 		font-size: 100%;
 		vertical-align: middle;
