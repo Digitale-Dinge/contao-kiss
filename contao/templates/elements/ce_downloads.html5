@@ -1,0 +1,13 @@
+<?php $this->extend('block_searchable'); ?>
+
+<?php $this->block('content'); ?>
+
+  <ul class="ce_downloads__list">
+    <?php foreach ($this->files as $file): ?>
+      <li class="c-download ext-<?= $file['extension'] ?>">
+        <a href="<?= $this->href ?>" title="<?= $this->title ?>" type="<?= $this->mime ?>" class="<?php if ( ! empty( $this->hyperlinkAsButton ) ) : ?> c-button<?php if ( ! empty( $this->buttonSize ) ) : ?> c-button--<?= $this->buttonSize ?><?php endif; ?><?php if ( ! empty( $this->buttonType ) ) : ?> c-button--<?= $this->buttonType ?><?php endif; ?><?php endif; ?>"><span aria-hidden="true" data-icon=""></span> <?= $this->link ?> <span class="size">(<?= $this->filesize ?>)</span></a>
+      </li>
+    <?php endforeach; ?>
+  </ul>
+
+<?php $this->endblock(); ?>
