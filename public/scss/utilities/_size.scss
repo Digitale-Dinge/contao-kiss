@@ -32,13 +32,11 @@
 	&--nopad {
 		margin-left: 0;
 		margin-right: 0;
-		min-width: 100vw;
 	}
 	
 	&--full {
 		margin-left: 0;
 		margin-right: 0;
-		min-width: 100vw;
 		box-sizing: border-box;
 	}
 
@@ -52,5 +50,14 @@
 			padding-left: $gutter-height;
 			padding-right: $gutter-height;
 		}
+	}
+
+	&--regular,
+	&--small,
+	&--smaller,
+	&--full,
+	&--nopad {
+		width: 100%;
+		box-sizing: border-box;
 	}
 }
