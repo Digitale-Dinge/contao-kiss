@@ -76,12 +76,11 @@
 	&--single {
 		.c-tiles__item {
 			padding: calc($gutter-height / 2);
-			background-color: $color-grey-light;
 		}
 	}
 	&--grouped {
 		.c-tiles__cols {
-			background-color: $color-grey-light;
+			
 		}	
 	}
 	&__item {
