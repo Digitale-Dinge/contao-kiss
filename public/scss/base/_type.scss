@@ -16,7 +16,6 @@ body {
   color: $text-color;
 }
 
-textarea,
 pre,
 code,
 kbd,
@@ -91,26 +90,26 @@ dl {
 }
 
 ul {
-  list-style-type:disc;
+  list-style-type: disc;
 }
 
 ol {
-  list-style-type:decimal;
+  list-style-type: decimal;
 }
 
 ul ul {
-  list-style-type:circle;
-  margin-top:0;
+  list-style-type: circle;
+  margin-top: 0;
 }
 
 ol ol {
-  list-style-type:lower-latin;
-  margin-top:0;
+  list-style-type: lower-latin;
+  margin-top: 0;
 }
 
 ol ul {
-  list-style-type:circle;
-  margin-top:0;
+  list-style-type: circle;
+  margin-top: 0;
 }
 
 li {
@@ -120,7 +119,7 @@ li {
 }
 
 dt {
-  font-weight:bold;
+  font-weight: bold;
 }
 
 dd {
@@ -185,6 +184,7 @@ pre {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+
 pre,
 code {
   color: $pre-text-color;
@@ -219,8 +219,13 @@ sup {
   vertical-align: baseline;
 }
 
-sup { top: -0.5rem; }
-sub { bottom: -0.25rem; }
+sup {
+  top: -0.5rem;
+}
+
+sub {
+  bottom: -0.25rem;
+}
 
 mark {
   background: $mark-bg-color;
@@ -231,7 +236,7 @@ hr {
   color: #fff;
   background: transparent;
   margin: 0 0 calc($gutter-height / 2) 0;
-  padding: 0 0 calc($gutter-height / 2 ) 0;
+  padding: 0 0 calc($gutter-height / 2) 0;
   border: 0;
   border-bottom: 1px $hr-color solid;
 }
@@ -271,49 +276,44 @@ table {
 
   &.narrow {
     margin: calc($gutter-height / 2) 0;
-	th,
-	td {
-	  padding: 0 0.5rem;
-	  line-height: $line-height;
-	}
+
+    th,
+    td {
+      padding: 0 0.5rem;
+      line-height: $line-height;
+    }
   }
 
-  &.fixed {
-	table-layout: fixed;
+  thead th {
+    background: #e0e0e0;
+    border-right: 1px #ccc solid;
+    border-bottom: 1px #ccc solid;
   }
 
-  &.bordertable {
-	border: 1px #ccc solid;
+  tbody {
+    th[scope="row"] {
+      background: #f0f0f0;
+    }
 
-	thead th {
-	  background: #e0e0e0;
-	  border-right: 1px #ccc solid;
-	  border-bottom: 1px #ccc solid;
-	}
+    th {
+      border-right: 1px solid #ccc;
+    }
 
-	tbody {
-	  th[scope="row"] {
-		background: #f0f0f0;
-	  }
-	  th {
-		border-right: 1px solid #ccc;
-	  }
-	  td {
-		border-right: 1px solid #ccc;
-	  }
-	}
+    td {
+      border-right: 1px solid #ccc;
+    }
   }
 }
 
 caption {
-  font-variant:small-caps;
+  font-variant: small-caps;
 }
 
 th,
 td {
   line-height: $line-height;
   vertical-align: top;
-  padding: calc($gutter-height / 2 ) 0.5rem;
+  padding: calc($gutter-height / 2) 0.5rem;
 }
 
 th *:first-child,
@@ -334,18 +334,18 @@ thead th {
 
 tbody {
   th {
-	text-align: left;
-	border-top: 1px solid #ccc;
+    text-align: left;
+    border-top: 1px solid #ccc;
   }
 
   td {
-	text-align: left;
-	border-top: 1px solid #ccc;
+    text-align: left;
+    border-top: 1px solid #ccc;
   }
 
   /* highlight row on mouse over */
   tr:hover th,
   tr:hover td {
-	background:#f8f8f8;
+    background: #f8f8f8;
   }
 }
