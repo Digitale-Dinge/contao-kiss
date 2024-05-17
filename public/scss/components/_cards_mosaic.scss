@@ -30,13 +30,20 @@
 				font-size: 1rem;
 				line-height: 1;
 				&--size-25 {
-					width: calc(25% - 1rem);
+					width: calc(50% - 1rem);
+					@include media('>medium') {
+						width: calc(25% - 1rem);
+					}
 				}	
 				&--size-50 {
-					width: calc(50% - 1rem);
+					@include media('>medium') {
+						width: calc(50% - 1rem);
+					}
 				}
 				&--size-100 {
-					width: 100%;
+					@include media('>medium') {
+						width: 100%;
+					}
 				}
 				&--height-single {
 					height: 10rem;
