@@ -35,10 +35,6 @@ $class-push		: c-pushy__push !default;
     strong,
 	a {
         display: block;
-		width: calc($menu_width - 3rem);
-        padding: .5rem 1rem;
-		box-sizing: border-box;
-		color: $color-grey-light;
         text-decoration: none;
     }
 	strong {
@@ -160,42 +156,16 @@ $class-push		: c-pushy__push !default;
 							}
 						}
 					}
-					
-					> strong,
-					> a {
-						position: relative;
-						
-					}
-				}
-				&.submenu {
-					> strong,
-					> a {
-						&:after {
-							font-family: '#{$icomoon-font-family}' !important;
-							speak: never;
-							font-style: normal;
-							font-weight: normal;
-							font-variant: normal;
-							text-transform: none;
-							line-height: 1;
-							display: block;
-							position: absolute;
-							top: 50%;
-							right: -2rem;
-							content: '\e92a';
-							color: $color-white;
-							transition: transform 0.2s;
-							pointer-events: none;
-						}
+					position: relative;
+					&:after {
+						display: inline-block;
+						transition: transform .3s;
 					}
 				}
 				&.submenu--open,
 				&.trail {
-					strong,
-					a {
-						&:after {
-							transform: translateY(-50%) rotate(90deg);
-						}
+					&:after {
+						transform: rotate(270deg);
 					}
 					> ul{
 						max-height: 1000px;
@@ -210,11 +180,8 @@ $class-push		: c-pushy__push !default;
 					}				
 				}
 				&.submenu--closed{
-					strong,
-					a {
-						&:after {
-							transform: translateY(-50%) rotate(0deg);
-						}
+					&:after {
+						transform: rotate(0deg);
 					}
 					> ul{
 						max-height: 0;
