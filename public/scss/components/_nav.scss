@@ -44,16 +44,16 @@ nav {
 }
 
 // Styles for horizontal dropdown navigations
-.mod_navigation--dropdown {
+.mod_navigation {
 	.submenu {
 		position: relative;
-		> a {
+
 			&:after {
 				padding-left: 0.5em;
 				content: "\25BE";
 				font-size: small;
 			}
-		}
+		
 		> ul {
 			display: none;
 			position: absolute;
