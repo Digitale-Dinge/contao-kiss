@@ -29,6 +29,9 @@
 				// Set the font size that was set to 0 in the wrapper
 				font-size: 1rem;
 				line-height: 1;
+				> * {
+					box-sizing: border-box;
+				}
 				&--size-25 {
 					width: calc(50% - 1rem);
 					@include media('>medium') {
@@ -36,11 +39,13 @@
 					}
 				}	
 				&--size-50 {
+					width: calc(100% - 1rem);
 					@include media('>medium') {
 						width: calc(50% - 1rem);
 					}
 				}
 				&--size-100 {
+					width: auto;
 					@include media('>medium') {
 						width: 100%;
 					}
