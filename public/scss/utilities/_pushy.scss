@@ -3,7 +3,8 @@
 * https://github.com/christophery/pushy/
 * by Christopher Yee */
 
-$menu_width		: 300px !default;
+@import '../variables';
+
 $class-pushy	: c-pushy !default;
 $class-push		: c-pushy__push !default;
 
@@ -11,7 +12,7 @@ $class-push		: c-pushy__push !default;
 
 .#{$class-pushy} {
     position: fixed;
-    width: $menu_width;
+    width: $pushy_menu_width;
     height: 100%;
     top: 0;
     z-index: 9999;
@@ -51,32 +52,32 @@ $class-push		: c-pushy__push !default;
 
     &--left{
         left: 0;
-		-webkit-transform: translate3d( unquote('-' + $menu_width) ,0,0);
-		-ms-transform: translate3d( unquote('-' + $menu_width) ,0,0);
-		transform: translate3d( unquote('-' + $menu_width) ,0,0);
+		-webkit-transform: translate3d( unquote('-' + $pushy_menu_width) ,0,0);
+		-ms-transform: translate3d( unquote('-' + $pushy_menu_width) ,0,0);
+		transform: translate3d( unquote('-' + $pushy_menu_width) ,0,0);
     }
 	
 	&--open-left{
 		.#{$class-push},
 		#wrapper {
-			-webkit-transform: translate3d( $menu_width ,0,0);
-			-ms-transform: translate3d( $menu_width ,0,0);
-			transform: translate3d( $menu_width ,0,0);
+			-webkit-transform: translate3d( $pushy_menu_width ,0,0);
+			-ms-transform: translate3d( $pushy_menu_width ,0,0);
+			transform: translate3d( $pushy_menu_width ,0,0);
 		}
 	}
 
     &--right{
         right: 0;
-		-webkit-transform: translate3d( $menu_width ,0,0);
-		-ms-transform: translate3d( $menu_width ,0,0);
-		transform: translate3d( $menu_width ,0,0);
+		-webkit-transform: translate3d( $pushy_menu_width ,0,0);
+		-ms-transform: translate3d( $pushy_menu_width ,0,0);
+		transform: translate3d( $pushy_menu_width ,0,0);
     }
 	&--open-right{
 		.#{$class-push},
 		#wrapper {
-			-webkit-transform: translate3d( unquote('-' + $menu_width) ,0,0);
-			-ms-transform: translate3d( unquote('-' + $menu_width) ,0,0);
-			transform: translate3d( unquote('-' + $menu_width) ,0,0);
+			-webkit-transform: translate3d( unquote('-' + $pushy_menu_width) ,0,0);
+			-ms-transform: translate3d( unquote('-' + $pushy_menu_width) ,0,0);
+			transform: translate3d( unquote('-' + $pushy_menu_width) ,0,0);
 		}
 	}
 	&--open-left,
@@ -117,91 +118,4 @@ $class-push		: c-pushy__push !default;
 .#{$class-pushy},
 .#{$class-push} {
 	transition: transform .2s cubic-bezier(.16, .68, .43, .99);
-}
-
-@keyframes fade{
-	0%   { opacity: 0; }
-	100% { opacity: 1; }
-}
-
-@-webkit-keyframes fade{
-	0%   { opacity: 0; }
-	100% { opacity: 1; }
-}
-
-.mod_navigation {
-	&--vertical {
-		ul {
-			li {
-				position: relative;
-				&.submenu,
-				&.submenu--open,
-				&.trail {
-					> ul{
-						padding-left: 15px !important;
-						transition: max-height 0.2s ease-in-out,
-									visibility 0.2s ease-in-out;
-						li {
-							a,
-							strong {
-								width: calc($menu_width - 3rem - 15px);
-							}
-							> ul {
-								li {
-									a,
-									strong {
-										width: calc($menu_width - 3rem - 15px - 15px);
-									}
-								}
-							}
-						}
-					}
-					position: relative;
-					&:after {
-						display: inline-block;
-						transition: transform .3s;
-					}
-				}
-				&.submenu--open,
-				&.trail {
-					&:after {
-						transform: rotate(270deg);
-					}
-					> ul{
-						max-height: 1000px;
-						visibility: visible;
-						li {
-							position: relative;
-							
-						}
-					}				
-					.c-pushy__link{
-						opacity: 1;
-					}				
-				}
-				&.submenu--closed{
-					&:after {
-						transform: rotate(0deg);
-					}
-					> ul{
-						max-height: 0;
-						overflow: hidden;
-						visibility: hidden;
-					}
-				
-					.pushy-link{
-						opacity: 0;
-					}
-				}
-			}
-			&.level_1 {
-				> li {
-					> a,
-					> strong {
-						font-weight: 700;
-					}
-				}
-			}
-		}
-	}
 }

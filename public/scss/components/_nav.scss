@@ -44,15 +44,25 @@ nav {
 }
 
 // Styles for horizontal dropdown navigations
-.mod_navigation {
+.mod_navigation--horizontal.mod_navigation--dropdown {
 	.submenu {
 		position: relative;
-
+		&:after {
+			position: relative;
+			padding: .5rem; // padding to make the icon touchable
+			content: "\25BE";
+			font-size: small;
+		}
+		&--open {
 			&:after {
-				padding-left: 0.5em;
-				content: "\25BE";
-				font-size: small;
+				transform: rotate(270deg);
 			}
+		}
+		&--closed {
+			&:after {
+				transform: rotate(0deg);
+			}
+		}
 		
 		> ul {
 			display: none;
@@ -66,7 +76,6 @@ nav {
 			
 			> li {
 				display: block;
-				background: $color-grey;
 				&.submenu {
 					> a {
 						&:after {
@@ -84,7 +93,6 @@ nav {
 						z-index: 3;
 						> li {
 							display: block;
-							background: $color-grey;
 						}
 					}
 					&:hover {
@@ -104,6 +112,117 @@ nav {
 		}
 	}
 }
+
+// ––––––– Vertical navigations –––––––
+
+.mod_navigation--vertical {
+	ul {
+		li {
+			position: relative;
+			&.submenu,
+			&.submenu--open,
+			&.trail {
+				a,
+				strong {
+					&:after {
+						display: none;
+					}
+				}
+				> ul{
+					padding-left: 1rem;
+					transition: max-height 0.2s ease-in-out,
+								visibility 0.2s ease-in-out;
+					li {
+						a,
+						strong {
+							width: calc($pushy_menu_width - 3rem - 15px);
+						}
+						> ul {
+							li {
+								a,
+								strong {
+									width: calc($pushy_menu_width - 3rem - 15px - 15px);
+								}
+							}
+						}
+					}
+				}
+				position: relative;
+				&:after {
+					display: inline-block;
+					transition: transform .3s;
+				}
+			}
+			&.submenu--open,
+			&.trail {
+				> ul{
+					visibility: visible;
+					li {
+						position: relative;
+						
+					}
+				}						
+			}
+			&.submenu--closed{
+				> ul{
+					max-height: 0;
+					padding: 0;
+					overflow: hidden;
+					visibility: hidden;
+				}
+			}
+		}
+		&.level_1 {
+			> li {
+				> a,
+				> strong {
+					padding: .75rem 0;
+					font-weight: 700;
+				}
+			}
+		}
+	}
+}
+
+// Styles for vertical dropdown navigations 
+
+.mod_navigation--vertical.mod_navigation--dropdown {
+	.submenu {
+		&:after {
+			display: none;
+		}
+	}
+	ul > li.submenu {
+		display: inline-flex;
+		flex-direction: row-reverse;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		align-items: center;
+		&:before {
+			position: static;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 2rem;
+			height: 2rem; // padding to make the icon touchable
+			content: "\25BE";
+			font-size: 100%;
+			transition: transform .3s;
+		}
+		&--open,
+		&.active {
+			&:before {
+				transform: translateY(3px)rotate(180deg);
+			}
+		}
+		&--closed {
+			&:before {
+				transform: translateY(0) rotate(0deg) !important;
+			}
+		}
+	}
+}
+
 
 
 
