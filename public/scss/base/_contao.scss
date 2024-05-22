@@ -422,6 +422,16 @@
 	}
 }
 
+.enclosure {
+	display: flex;
+	flex-direction: column;
+	padding-left: 0;
+	li {
+		display: flex;
+		margin-left: 0;
+	}
+}
+
 
 // ––––––– Colorbox styling –––––––
 
