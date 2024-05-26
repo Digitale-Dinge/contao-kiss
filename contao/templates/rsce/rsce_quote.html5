@@ -17,7 +17,7 @@
             	<p class="<?= $this->class ?>__position"><?= $this->desc ?></p>
         	</div>
         	<div class="<?= $this->class ?>__image">
-            	{{picture::<?= $this->singleSRC ?>?size=1&template=picture_default}}
+            	<?= $this->figure($this->singleSRC, 24); ?>
         	</div>
         </div>
 <?php $this->endblock() ?>
