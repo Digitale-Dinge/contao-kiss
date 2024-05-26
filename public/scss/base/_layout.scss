@@ -10,6 +10,9 @@
 
 html {
 	background: $color-page-background;
+	* {
+		box-sizing: border-box;
+	}
 }
 
 body {
