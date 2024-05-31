@@ -47,7 +47,7 @@
 				&--size-100 {
 					width: auto;
 					@include media('>medium') {
-						width: 100%;
+						width: calc(100% - 1rem);
 					}
 				}
 				&--height-single {
