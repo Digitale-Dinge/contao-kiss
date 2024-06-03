@@ -45,7 +45,7 @@
 					}
 				}
 				&--size-100 {
-					width: auto;
+					width: calc(100% - 1rem);
 					@include media('>medium') {
 						width: calc(100% - 1rem);
 					}
