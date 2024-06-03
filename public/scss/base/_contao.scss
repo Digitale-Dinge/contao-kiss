@@ -559,19 +559,19 @@
   line-height: 12px;
 }
 
-.info {
+p.info {
   background: $highlight-info-color;
 }
 
-.success {
+p.success {
   background: $highlight-success-color;
 }
 
-.warning {
+p.warning {
   background: $highlight-warning-color;
 }
 
-.error {
+p.error {
   background: $highlight-error-color;
 }
 
