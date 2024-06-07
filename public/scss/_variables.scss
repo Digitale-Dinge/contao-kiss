@@ -101,11 +101,17 @@ $text-small-font-size	: calc($base-font-size * .75) !default;
 // scale factors (don't change - unless you know what you do)
 $line-height			: $base-line-height !default;
 $h1-font-scale			: 3 !default;
+$h1-font-scale-mobile	: 2 !default;
 $h2-font-scale			: 2 !default;
+$h2-font-scale-mobile	: 1.5 !default;
 $h3-font-scale			: 1.5 !default;
+$h3-font-scale-mobile	: 1.25 !default;
 $h4-font-scale			: 1.25 !default;
+$h4-font-scale-mobile	: 1.125 !default;
 $h5-font-scale			: 1.125 !default;
+$h5-font-scale-mobile	: .875 !default;
 $h6-font-scale			: .875 !default;
+$h6-font-scale-mobile	: .75 !default;
 $text-font-scale		: 1 !default;
 $text-big-font-scale	: 1.25 !default;
 $text-small-font-scale	: .875 !default;

@@ -50,33 +50,58 @@ h1 {
 }
 
 h2 {
-  font-size: #{$base-font-size * $h2-font-scale};
+  font-size: #{$base-font-size * $h2-font-scale-mobile};
   line-height: $base-line-height;
-  margin: math.div(($base-font-size * $h2-font-scale) * $base-line-height, 2) 0;
+  margin: math.div(($base-font-size * $h2-font-scale-mobile) * $base-line-height, 2) 0;
+  @include media('>medium') {
+    font-size: #{$base-font-size * $h2-font-scale};
+    line-height: $base-line-height;
+    margin: math.div(($base-font-size * $h2-font-scale) * $base-line-height, 2) 0;
+  }
 }
 
 h3 {
-  font-size: #{$base-font-size * $h3-font-scale};
+  font-size: #{$base-font-size * $h3-font-scale-mobile};
   line-height: $base-line-height;
-  margin: math.div(($base-font-size * $h3-font-scale) * $base-line-height, 2) 0;
+  margin: math.div(($base-font-size * $h3-font-scale-mobile) * $base-line-height, 2) 0;
+  @include media('>medium') {
+    font-size: #{$base-font-size * $h3-font-scale};
+    line-height: $base-line-height;
+    margin: math.div(($base-font-size * $h3-font-scale) * $base-line-height, 2) 0;
+  }
 }
 
 h4 {
-  font-size: #{$base-font-size * $h4-font-scale};
+  font-size: #{$base-font-size * $h4-font-scale-mobile};
   line-height: $base-line-height;
-  margin: math.div(($base-font-size * $h4-font-scale) * $base-line-height, 2) 0;
+  margin: math.div(($base-font-size * $h4-font-scale-mobile) * $base-line-height, 2) 0;
+  @include media('>medium') {
+    font-size: #{$base-font-size * $h4-font-scale};
+    line-height: $base-line-height;
+    margin: math.div(($base-font-size * $h4-font-scale) * $base-line-height, 2) 0;
+  }
 }
 
 h5 {
-  font-size: #{$base-font-size * $h5-font-scale};
+  font-size: #{$base-font-size * $h5-font-scale-mobile};
   line-height: $base-line-height;
-  margin: math.div(($base-font-size * $h5-font-scale) * $base-line-height, 2) 0;
+  margin: math.div(($base-font-size * $h5-font-scale-mobile) * $base-line-height, 2) 0;
+  @include media('>medium') {
+    font-size: #{$base-font-size * $h5-font-scale};
+    line-height: $base-line-height;
+    margin: math.div(($base-font-size * $h5-font-scale) * $base-line-height, 2) 0;
+  }
 }
 
 h6 {
-  font-size: #{$base-font-size * $h6-font-scale};
+  font-size: #{$base-font-size * $h6-font-scale-mobile};
   line-height: $base-line-height;
-  margin: math.div(($base-font-size * $h6-font-scale) * $base-line-height, 2) 0;
+  margin: math.div(($base-font-size * $h6-font-scale-mobile) * $base-line-height, 2) 0;
+  @include media('>medium') {
+    font-size: #{$base-font-size * $h6-font-scale};
+    line-height: $base-line-height;
+    margin: math.div(($base-font-size * $h6-font-scale) * $base-line-height, 2) 0;
+  }
 }
 
 /* --- Lists | Listen  -------------------------------------------------------------------------------- */
