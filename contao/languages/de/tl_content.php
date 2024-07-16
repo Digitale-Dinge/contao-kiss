@@ -95,6 +95,19 @@ $GLOBALS["TL_LANG"]["tl_content"]["primary"] = "Primär";
 $GLOBALS["TL_LANG"]["tl_content"]["secondary"] = "Sekundär";
 $GLOBALS["TL_LANG"]["tl_content"]["tertiary"] = "Tertiär";
 
+$GLOBALS["TL_LANG"]["tl_content"]["u-size--regular"] = "Satzspiegel";
+$GLOBALS["TL_LANG"]["tl_content"]["u-size--small"] = "Satzspiegel schmal";
+$GLOBALS["TL_LANG"]["tl_content"]["u-size--smaller"] = "Satzspiegel schmaler";
+$GLOBALS["TL_LANG"]["tl_content"]["u-size--nopad"] = "Volle Breite ohne Abstand links und rechts";
+$GLOBALS["TL_LANG"]["tl_content"]["u-size--full"] = "Volle Breite mit Abstand links und rechts";
+
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["half"] = "Halbe Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["1x"] = "1x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["2x"] = "2x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["3x"] = "3x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["4x"] = "4x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["5x"] = "5x Zeilenhöhe";
+
 /**
  * Legends
  */
