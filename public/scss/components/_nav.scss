@@ -45,69 +45,66 @@ nav {
 
 // Styles for horizontal dropdown navigations
 .mod_navigation--horizontal.mod_navigation--dropdown {
-	.submenu {
-		position: relative;
-		&:after {
+	ul li {
+		&.submenu {
 			position: relative;
-			padding: .5rem; // padding to make the icon touchable
-			content: "\25BE";
-			font-size: small;
-		}
-		&--open {
-			&:after {
-				transform: rotate(270deg);
+			&--open {
+				&:after {
+					transform: rotate(270deg);
+				}
 			}
-		}
-		&--closed {
-			&:after {
-				transform: rotate(0deg);
+			&--closed {
+				&:after {
+					transform: rotate(0deg);
+				}
 			}
-		}
-		
-		> ul {
-			display: none;
-			position: absolute;
-			left: 0;
-			top: auto;
-			width: inherit;
-			margin: 0;
-			padding: 0;
-			z-index: 3;
 			
-			> li {
-				display: block;
-				&.submenu {
-					> a {
-						&:after {
-							content: "\25B8";
-						}
-					} 
-					> ul {
-						display: none;
-						position: absolute;
-						left: 100%;
-						top: 0;
-						width: inherit;
-						margin: 0;
-						padding: 0;
-						z-index: 3;
-						> li {
-							display: block;
-						}
-					}
-					&:hover {
+			> ul {
+				display: none;
+				position: absolute;
+				left: 0;
+				top: auto;
+				width: inherit;
+				margin: 0;
+				padding: 0;
+				z-index: 3;
+				
+				> li {
+					display: block;
+					&.submenu {
 						> ul {
-							display: block;
+							display: none;
 							position: absolute;
+							left: 100%;
+							top: 0;
+							width: inherit;
+							margin: 0;
+							padding: 0;
+							z-index: 3;
+							> li {
+								display: block;
+							}
+						}
+						&:hover {
+							> ul {
+								display: block;
+								position: absolute;
+							}
 						}
 					}
 				}
 			}
-		}
-		&:hover {
-			> ul {
-				display: block;
-				position: absolute;
+			
+			&:hover {
+				> ul {
+					display: block;
+					position: absolute;
+				}
+			}
+			&:after {
+				position: relative;
+				padding: .5rem; // padding to make the icon touchable
+				content: "\25BE";
 			}
 		}
 	}
