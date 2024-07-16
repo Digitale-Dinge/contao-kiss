@@ -20,7 +20,7 @@ PaletteManipulator::create()
 
 //Downloads
 PaletteManipulator::create()
-  ->addField("downloadsAsCard", "download_legend", "append")
+  ->addField("hyperlinkAsButton", "download_legend", "append")
   ->applyToPalette("downloads", "tl_content");
 
 /**
