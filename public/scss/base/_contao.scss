@@ -407,6 +407,8 @@
 .ce_download,
 .ce_downloads {
 	span.size {
+		display: inline-block;
+		padding-left: .5rem;
 		color: $color-grey;
 	}
 }
