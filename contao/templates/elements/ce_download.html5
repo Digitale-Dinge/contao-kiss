@@ -3,7 +3,7 @@
 <?php $this->block('content'); ?>
 
   <div class="c-download">
-    <a href="<?= $this->href ?>" title="<?= $this->title ?>" type="<?= $this->mime ?>" class="c-download ext-<?= $this->extension ?><?php if ( ! empty( $this->hyperlinkAsButton ) ) : ?> c-button<?php if ( ! empty( $this->buttonSize ) ) : ?> c-button--<?= $this->buttonSize ?><?php endif; ?><?php if ( ! empty( $this->buttonType ) ) : ?> c-button--<?= $this->buttonType ?><?php endif; ?><?php endif; ?>" download><span aria-hidden="true" data-icon=""></span> <?= $this->link ?> <span class="size"> (<?= $this->filesize ?>)</span></a>
+    <a href="<?= $this->href ?>" title="<?= $this->title ?>" type="<?= $this->mime ?>" class="c-download ext-<?= $this->extension ?><?php if ( ! empty( $this->hyperlinkAsButton ) ) : ?> c-button<?php if ( ! empty( $this->buttonSize ) ) : ?> c-button--<?= $this->buttonSize ?><?php endif; ?><?php if ( ! empty( $this->buttonType ) ) : ?> c-button--<?= $this->buttonType ?><?php endif; ?><?php endif; ?>"><span aria-hidden="true" data-icon=""></span> <?= $this->link ?> <span class="size"> (<?= $this->filesize ?>)</span></a>
   </div>
 
 <?php $this->endblock(); ?>
