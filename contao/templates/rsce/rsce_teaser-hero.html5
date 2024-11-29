@@ -16,7 +16,7 @@
 			<div class="<?= $this->class ?>__background_overlay <?= $this->class ?>__background_overlay--<?= $this->colorOverlay ?>" style="mix-blend-mode: <?= $this->overlayType ?>"></div>
 		<?php endif; ?>
     <div class="<?= $this->class ?>__content">
-		<div class="><?= $this->class ?>__text">
+		<div class="<?= $this->class ?>__text">
 			<<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>>
 			<p><?= $this->text ?></p>
 		</div>
