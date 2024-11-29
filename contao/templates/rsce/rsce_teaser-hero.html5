@@ -16,11 +16,11 @@
 			<div class="<?= $this->class ?>__background_overlay <?= $this->class ?>__background_overlay--<?= $this->colorOverlay ?>" style="mix-blend-mode: <?= $this->overlayType ?>"></div>
 		<?php endif; ?>
     <div class="<?= $this->class ?>__content">
-		<div class="><?= $this->class ?>__text">
+		<div class="<?= $this->class ?>__text">
 			<<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>>
 			<p><?= $this->text ?></p>
 		</div>
-		<div class="><?= $this->class ?>__buttons">
+		<div class="<?= $this->class ?>__buttons">
 			<?php foreach ( $this->buttons as $button ): ?>
 				<a href="<?= $button->url ?>" class="c-button c-button--large c-link--icon-right c-button--<?= $button->type ?>">
 					<span aria-hidden="true" data-icon="&#xe92a;"></span>
