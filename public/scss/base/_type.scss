@@ -375,3 +375,17 @@ tbody {
     background: #f8f8f8;
   }
 }
+
+/**
+* ------------------------------------------------------------------------------------------------- #
+*
+* Custom classes | Eigene Klassen
+*
+* (en) Custom classes for text formatting within the TinyMCE RTE
+* (de) Eigene Klassen zur Textformatierung im TinyMCE Texteditor
+*
+*/
+
+span.text-highlight {
+  color: $color-brand;
+}

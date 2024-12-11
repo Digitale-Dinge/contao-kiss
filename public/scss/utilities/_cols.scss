@@ -23,43 +23,43 @@
 	&--cols_10,
 	&--cols_11,
 	&--cols_12 {
-	  grid-template-columns: repeat(1, 1fr);
+	  grid-template-columns: repeat(1, minmax(0, 1fr));
 	  grid-template-rows: 1fr;
 	}
 	
 	@include media('>=medium') {
 	  &--cols_2 {
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	  }
 	  &--cols_3 {
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 	  }
 	  &--cols_4 {
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 	  }
 	  &--cols_5 {
-		grid-template-columns: repeat(5, 1fr);
+		grid-template-columns: repeat(5, minmax(0, 1fr));
 	  }
 	  &--cols_6 {
-		grid-template-columns: repeat(6, 1fr);
+		grid-template-columns: repeat(6, minmax(0, 1fr));
 	  }
 	  &--cols_7 {
-		grid-template-columns: repeat(7, 1fr);
+		grid-template-columns: repeat(7, minmax(0, 1fr));
 	  }
 	  &--cols_8 {
-		grid-template-columns: repeat(8, 1fr);
+		grid-template-columns: repeat(8, minmax(0, 1fr));
 	  }
 	  &--cols_9 {
-		grid-template-columns: repeat(9, 1fr);
+		grid-template-columns: repeat(9, minmax(0, 1fr));
 	  }
 	  &--cols_10 {
-		grid-template-columns: repeat(10, 1fr);
+		grid-template-columns: repeat(10, minmax(0, 1fr));
 	  }
 	  &--cols_11 {
-		grid-template-columns: repeat(11, 1fr);
+		grid-template-columns: repeat(11, minmax(0, 1fr));
 	  }
 	  &--cols_12 {
-		grid-template-columns: repeat(12, 1fr);
+		grid-template-columns: repeat(12, minmax(0, 1fr));
 	  }
 	}
 	> .c-cards__item {

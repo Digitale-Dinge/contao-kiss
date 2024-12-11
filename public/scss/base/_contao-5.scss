@@ -1,0 +1,451 @@
+// *
+// * 
+// * Contao KISS Website Framework
+// *
+// * _contao.scss
+// * Includes basic styles for all of Contao's default content elements
+// *
+
+// ––––––– Text elements –––––––
+
+.content-headline {}
+
+.content-text {}
+
+.content-html {}
+
+.content-list {}
+
+.content-table {}
+
+.content-code {}
+
+.content-markdown {}
+
+// ––––––– Accordion –––––––
+
+
+// ––––––– Content slider –––––––
+
+
+
+// ––––––– Tiny slider extension –––––––
+
+
+
+// ––––––– Link elements –––––––
+
+a {
+	color: $link-text-color;
+	background: $link-bg-color;
+	&:focus {
+		color: $link-text-color;
+		background: $link-focus-bg-color;
+	}
+}
+
+.content-hyperlink {}
+
+.content-toplink {}
+
+// ––––––– Media elements –––––––
+
+.content-image,
+.content-gallery,
+.content-player,
+.content-text {
+  figure {
+	  display: table;
+	  > a {
+		display: block;
+	  }
+	  img {
+		  max-width: 100%;
+		  height: auto;
+	  }
+	  figcaption {
+		display: table-caption;
+		caption-side: bottom;
+		padding: 0.25rem 0.5rem;
+		font-size: 0.9rem;
+		line-height: 1.4;
+	  }
+	}
+}
+.content-gallery {
+	> ul {
+		display: grid;
+		grid-column-gap: 1rem;
+		grid-row-gap: 1rem;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		list-style: none;
+	}
+	&--cols-2,
+	&--cols-3,
+	&--cols-4,
+	&--cols-5,
+	&--cols-6,
+	&--cols-7,
+	&--cols-8,
+	&--cols-9,
+	&--cols-10,
+	&--cols-11,
+	&--cols-12 {
+		> ul {
+  			grid-template-columns: repeat(1, 1fr);
+  			grid-template-rows: 1fr;
+		}
+	}
+	&--cols-2 {
+		> ul {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	&--cols-3 {
+		> ul {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+	&--cols-4 {
+		> ul {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+	&--cols-5 {
+		> ul {
+			grid-template-columns: repeat(5, 1fr);
+		}
+	}
+	&--cols-6 {
+		> ul {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+	&--cols-7 {
+		> ul {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+	&--cols-8 {
+		> ul {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+	&--cols-9 {
+		> ul {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+	&--cols-10 {
+		> ul {
+			grid-template-columns: repeat(5, 1fr);
+		}
+	}
+	&--cols-11 {
+		> ul {
+			grid-template-columns: repeat(5, 1fr);
+		}
+	}
+	&--cols-12 {
+		> ul {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}	
+	
+	@include media('>=medium') {
+		&--cols-2 {
+			> ul {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+		&--cols-3 {
+			> ul {
+				grid-template-columns: repeat(3, 1fr);
+			}
+		}
+		&--cols-4 {
+			> ul {
+				grid-template-columns: repeat(4, 1fr);
+			}
+		}
+		&--cols-5 {
+			> ul {
+				grid-template-columns: repeat(5, 1fr);
+			}
+		}
+		&--cols-6 {
+			> ul {
+				grid-template-columns: repeat(6, 1fr);
+			}
+		}
+		&--cols-7 {
+			> ul {
+				grid-template-columns: repeat(7, 1fr);
+			}
+		}
+		&--cols-8 {
+			> ul {
+				grid-template-columns: repeat(8, 1fr);
+			}
+		}
+		&--cols-9 {
+			> ul {
+				grid-template-columns: repeat(9, 1fr);
+			}
+		}
+		&--cols-10 {
+			> ul {
+				grid-template-columns: repeat(10, 1fr);
+			}
+		}
+		&--cols-11 {
+			> ul {
+				grid-template-columns: repeat(11, 1fr);
+			}
+		}
+		&--cols-12 {
+			> ul {
+				grid-template-columns: repeat(12, 1fr);
+			}
+		}
+	}
+}
+
+.content-image{}
+
+.content-player {
+  .audio_container {
+	  
+  }
+  .video_container {
+	 
+  }
+}
+
+.content-youtube {
+	.responsive {
+		&.ratio-169 {
+			
+		}
+	}
+}
+
+.content-vimeo {
+	.video_container {
+		
+	}
+}
+
+// ––––––– File elements –––––––
+
+.content-download,
+.content-downloads {
+	
+}
+
+.content-download {}
+
+.content-downloads {
+	
+}
+
+.enclosure {
+	
+}
+
+
+// ––––––– Colorbox styling –––––––
+
+#cboxOverlay {
+  opacity: .7;
+}
+
+#cboxContent {
+  padding: #{$gutter-height * 2};
+  background: $color-white;
+}
+
+#cboxLoadingGraphic {
+  background: url(../img/spinner-1s@2x.gif) center center no-repeat;
+  background-size: 40px 40px;
+}
+
+#cboxCurrent {
+  display: none;
+}
+
+#cboxLoadedContent {
+  border: none;
+  background: none;
+}
+
+#cboxClose,
+#cboxPrevious,
+#cboxNext {
+  width: 2rem;
+  height: 2rem;
+  box-shadow: none;
+  background: none;
+  font-size: 0;
+  &:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    display: block;
+    font-family: 'icons';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 2rem;
+    color: $color-black;
+    text-indent: 0;
+  }
+}
+
+#cboxClose {
+  top: .25rem;
+  right: .25rem;
+  box-shadow: none;
+  &:before {
+    content:'\e921';
+  }
+}
+
+#cboxPrevious,
+#cboxNext {
+  margin-top: calc(-2rem / 2); /* Half of the buttons height */
+  &:before {
+    content:'\e927';
+  }
+}
+
+#cboxPrevious {
+  left: .25rem;
+  &:before {
+    content:'\e927';
+  }
+}
+#cboxNext {
+  right: .25rem;
+  &:before {
+    content:'\e928';
+  }
+}
+
+
+// ––––––– Generic Contao classes –––––––
+
+.highlight {
+  color: $highlight-text-color;
+}
+.cc-footer.highlight {
+	color: $text-color;
+}
+
+.dimmed {
+  color: $dimmed-text-color;
+}
+
+.box {
+  border-radius: 0.3em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #888;
+  border-color: rgba(0,0,0,.3);
+  color: #444;
+  color: rgba(0,0,0,.8);
+  padding: $gutter-height;
+  margin: 0 0 $gutter-height 0;
+
+  & > *:last-child {
+  margin-bottom: 0;
+  }
+}
+
+.label {
+  font-family: Verdana, Geneva, sans-serif;
+  padding: 1px 6px 2px;
+  display: inline-block;
+  vertical-align: middle;
+  letter-spacing: normal;
+  white-space: nowrap;
+  border-radius: 3px;
+  background: #06C;
+  color: #fff;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+p.info {
+  background: $highlight-info-color;
+}
+
+p.success {
+  background: $highlight-success-color;
+}
+
+p.warning {
+  background: $highlight-warning-color;
+}
+
+p.error {
+  background: $highlight-error-color;
+}
+
+.media {
+	&--left {
+		figure {
+			float: left;
+			  display: inline;
+			  margin: 0 1em calc($line-height * 1rem) 0;
+		}
+	}
+	
+	&--right {
+		figure {
+			float: right;
+			  display: inline;
+			  margin: 0 0 calc($line-height * 1rem) 1em;
+		}
+	}
+}
+
+.center {
+  display: block;
+  text-align: center;
+  margin: 0 auto calc($line-height * 1rem) auto;
+}
+
+// ––––––– KISS custom elements –––––––
+
+.c-facts-figures {
+	display: inline-block;
+	padding: 3rem;
+	background-color: $color-grey;
+	&__number {
+		font-size: 300%;
+	}
+	&__unit {
+		font-size: 200%;
+	}
+	&__subline {
+		display: block;
+		font-weight: bold;
+	}
+}
+
+// ––––––– KISS custom modules –––––––
+
+.mod_logo {
+  &__content {}
+}
+

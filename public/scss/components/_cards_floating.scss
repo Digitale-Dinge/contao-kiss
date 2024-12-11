@@ -39,18 +39,26 @@
 			}
 		}
 		.c-cards__wrapper {
-			display: flex;
+			display: block;
 			margin: 0 auto;
+			@include media('>medium') {
+				display: flex;	
+			}
 		}
-		.c-cards__col {
-			flex: 0 0 50%;
-			max-width: 50%;
-			&--1 {
+		.c-cards__cols {
+			width: 100%;
+			@include media('>medium') {
+				flex: 0 0 50%;
+				max-width: 50%
+			}
+			&--col-1 {
 				padding-right: calc($gutter-height / 2);
 			}
-			&--2 {
+			&--col-2 {
 				padding-left: calc($gutter-height / 2);
-				margin-top: 10rem;
+				@include media('>medium') {
+					margin-top: 10rem;
+				}
 			}
 		}
 	}

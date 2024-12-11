@@ -30,8 +30,10 @@
 		.c-cards {
 			&__item {
 				display: flex;
-				> * {
-					width: 50%;
+				@include media('>large') {
+					> * {
+						width: 50%;
+					}
 				}
 			}
 		}

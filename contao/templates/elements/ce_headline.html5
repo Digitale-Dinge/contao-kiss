@@ -1,7 +1,0 @@
-
-<?php if ( $this->topline ): ?>
-    <p class="c-topline"><?= $this->topline ?></p>
-<?php endif ?>
-<<?= $this->hl ?> class="c-headline <?= $this->class ?><?php if ($this->layoutCss): ?> <?= $this->layoutCss ?><?php endif; ?>"<?= $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif; ?>>
-  <?= $this->headline ?>
-</<?= $this->hl ?>>
