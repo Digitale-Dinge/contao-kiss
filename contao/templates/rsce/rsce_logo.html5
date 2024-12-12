@@ -5,18 +5,22 @@
             <?php if ($image = $this->getImageObject($this->singleSRC, $this->imgSize)): ?>
                 <?php $this->insert('picture_default', $image->picture) ?>
             <?php endif ?>
-            <h1 class="<?= empty( $this->imgReplace ) ? 'o-flex' : 'text-hide' ?>">
-                <?= $this->text ?>
-            </h1>
+            <?php if( $this->text ): ?>
+                <h1 class="<?= empty( $this->imgReplace ) ? 'o-flex' : 'text-hide' ?>">
+                    <?= $this->text ?>
+                </h1>
+            <?php endif; ?>
         </a>
     <?php else : ?>
         <div class="mod_logo__content">
             <?php if ($image = $this->getImageObject($this->singleSRC, $this->imgSize)): ?>
                 <?php $this->insert('picture_default', $image->picture) ?>
             <?php endif ?>
-            <h1 class="<?= empty( $this->imgReplace ) ? 'o-flex' : 'text-hide' ?>">
-                <?= $this->text ?>
-            </h1>
+            <?php if( $this->text ): ?>
+                <h1 class="<?= empty( $this->imgReplace ) ? 'o-flex' : 'text-hide' ?>">
+                    <?= $this->text ?>
+                </h1>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 </div>
