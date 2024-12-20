@@ -9,6 +9,7 @@
 .c-teaser {
 	&_hero {
 		position: relative;
+		/*
 		&--homepage {
 				height: 100vh;
 			.c-teaser {
@@ -30,18 +31,6 @@
 						bottom: 0;
 						height: 100vh;
 						opacity: .5;
-						&--color-1 {
-							background-color: $color-brand;
-						}
-						&--color-2 {
-							background-color: $color-secondary-1;
-						}
-						&--color-3 {
-							background-color: $color-secondary-2;
-						}
-						&--color-4 {
-							background-color: $color-secondary-3;
-						}
 					}
 				}
 				&__content {
@@ -67,8 +56,12 @@
 				}
 			}
 		}
+		*/
 	}
+	
 	&__background {
+		position: relative;
+		/*
 		position: absolute;
 		width: 100vw;
 		z-index: 1;
@@ -81,7 +74,23 @@
 			width: 100vw;
 			object-fit: cover;
 		}
+		*/
+		&_overlay {
+			&--color-1 {
+				background-color: $color-brand;
+			}
+			&--color-2 {
+				background-color: $color-secondary-1;
+			}
+			&--color-3 {
+				background-color: $color-secondary-2;
+			}
+			&--color-4 {
+				background-color: $color-secondary-3;
+			}
+		}
 	}
+	
 	&__content {
 		position: absolute;
 		top: 0;
@@ -89,7 +98,6 @@
 		right: 0;
 		bottom: 0;
 		margin: 0 auto;
-		max-width: 80%;
 		display: flex;
 		flex-direction: column;	
 		justify-content: center;
