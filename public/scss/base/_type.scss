@@ -40,7 +40,8 @@ h6 {
   margin: 0;
 }
 
-h1 {
+h1,
+.c-headline--h1 {
   // Take the base font size and multiply with scaling factor. Example: 1rem * 3 = 3rem
   font-size: #{$base-font-size * $h1-font-scale};
   // Take the base line-height. Example 1.2 – Resulting in 3rem * 1.2 = 3.6rem line-height
@@ -50,7 +51,8 @@ h1 {
   margin: math.div(($base-font-size * $h1-font-scale) * $base-line-height, 2) 0;
 }
 
-h2 {
+h2,
+.c-headline--h2 {
   font-size: #{$base-font-size * $h2-font-scale-mobile};
   line-height: $base-line-height;
   margin: math.div(($base-font-size * $h2-font-scale-mobile) * $base-line-height, 2) 0;
@@ -61,7 +63,8 @@ h2 {
   }
 }
 
-h3 {
+h3,
+.c-headline--h3 {
   font-size: #{$base-font-size * $h3-font-scale-mobile};
   line-height: $base-line-height;
   margin: math.div(($base-font-size * $h3-font-scale-mobile) * $base-line-height, 2) 0;
@@ -72,7 +75,8 @@ h3 {
   }
 }
 
-h4 {
+h4,
+.c-headline--h4 {
   font-size: #{$base-font-size * $h4-font-scale-mobile};
   line-height: $base-line-height;
   margin: math.div(($base-font-size * $h4-font-scale-mobile) * $base-line-height, 2) 0;
@@ -83,7 +87,8 @@ h4 {
   }
 }
 
-h5 {
+h5,
+.c-headline--h5 {
   font-size: #{$base-font-size * $h5-font-scale-mobile};
   line-height: $base-line-height;
   margin: math.div(($base-font-size * $h5-font-scale-mobile) * $base-line-height, 2) 0;
@@ -94,7 +99,8 @@ h5 {
   }
 }
 
-h6 {
+h6,
+.c-headline--h6 {
   font-size: #{$base-font-size * $h6-font-scale-mobile};
   line-height: $base-line-height;
   margin: math.div(($base-font-size * $h6-font-scale-mobile) * $base-line-height, 2) 0;
@@ -155,7 +161,7 @@ dd {
 /* --- general text formatting | Allgemeine Textauszeichnung ------------------------------------------ */
 
 p {
-  font-size: $base-font-size;
+  font-size: #{$base-font-size * $text-font-scale};
   line-height: $base-line-height;
   margin: calc($gutter-height / 2) 0;
 }
