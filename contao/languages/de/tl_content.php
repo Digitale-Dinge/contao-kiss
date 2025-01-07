@@ -55,6 +55,12 @@ $GLOBALS["TL_LANG"]["tl_content"]["textStyle"] = [
   "Wählen Sie die gewünschte Textdarstellung.",
 ];
 $GLOBALS['TL_LANG']['tl_content']['intro'] = 'Introtext';
+
+$GLOBALS["TL_LANG"]["tl_content"]["lightboxIframe"] = [
+  "Inhalt in iFrame öffnen",
+  "Öffnet den Link in einem iFrame und bettet so die externe Seite in die eigene Seite ein.",
+];
+
 $GLOBALS["TL_LANG"]["tl_content"]["hyperlinkAsButton"] = [
   "Als Button darstellen",
   "Verändert die Darstellung von einem Textlink in einen Button",

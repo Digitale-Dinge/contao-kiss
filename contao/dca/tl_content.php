@@ -8,7 +8,8 @@ $GLOBALS["TL_DCA"]["tl_content"]["palettes"]["__selector__"][] =
 
 // Hyperlinks
 PaletteManipulator::create()
-  ->addField("icon", "rel", "after")
+  ->addField("lightboxIframe", "rel", "after")
+  ->addField("icon", "lightboxIframe", "after")
   ->addField("iconPosition", "icon", "after")
   ->addField("hyperlinkAsButton", "iconPosition", "after")
   ->applyToPalette("hyperlink", "tl_content");
@@ -169,6 +170,19 @@ $GLOBALS["TL_DCA"]["tl_content"]["fields"]["hyperlinkAsButton"] = [
   ],
 ];
 
+$GLOBALS["TL_DCA"]["tl_content"]["fields"]["rel"]["eval"]["tl_class"] = "w25";
+
+$GLOBALS["TL_DCA"]["tl_content"]["fields"]["lightboxIframe"] = [
+  "label" => &$GLOBALS["TL_LANG"]["tl_content"]["lightboxIframe"],
+  "exclude" => true,
+  "inputType" => "checkbox",
+  "sql" => "char(1) NOT NULL default ''",
+  "eval" => [
+    "tl_class" => "w25 m12",
+    "submitOnChange" => true,
+  ],
+];
+
 $GLOBALS["TL_DCA"]["tl_content"]["fields"]["iconPosition"] = [
   "exclude" => true,
   "inputType" => "select",
@@ -223,12 +237,9 @@ $GLOBALS["TL_DCA"]["tl_content"]["fields"]["buttonSize"] = [
  */
 
 // text fields clearfix
-$GLOBALS["TL_DCA"]["tl_content"]["fields"]["text"]["eval"]["tl_class"] =
-  "long clr";
-$GLOBALS["TL_DCA"]["tl_content"]["fields"]["optionalText"]["eval"]["tl_class"] =
-  "long clr";
-$GLOBALS["TL_DCA"]["tl_content"]["fields"]["useImage"]["eval"]["tl_class"] =
-  "long clr";
+$GLOBALS["TL_DCA"]["tl_content"]["fields"]["text"]["eval"]["tl_class"] = "long clr";
+$GLOBALS["TL_DCA"]["tl_content"]["fields"]["optionalText"]["eval"]["tl_class"] = "long clr";
+$GLOBALS["TL_DCA"]["tl_content"]["fields"]["useImage"]["eval"]["tl_class"] = "long clr";
 
-  /* HTML in Überschriften */
-  $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['allowHtml'] = true;
+/* HTML in Überschriften */
+$GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['allowHtml'] = true;

@@ -63,6 +63,11 @@ $GLOBALS["TL_LANG"]["tl_content"]["hyperlinkAsButton"] = [
   "Display as button",
   "Changes the rendering from regular link to a button",
 ];
+$GLOBALS["TL_LANG"]["tl_content"]["lightboxIframe"] = [
+  "Open content in iFrame",
+  "Opens the link in an iFrame and embeds the external page in your own page.",
+];
+
 $GLOBALS["TL_LANG"]["tl_content"]["iconPosition"] = [
   "Position",
   "Choose position of the icon.",
