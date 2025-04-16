@@ -39,6 +39,14 @@
             "contao/templates/"
         ]
     },
+    "scripts": {
+        "post-install-cmd": [
+          "Digitaledinge\\ContaoKiss\\ComposerScripts::copyFiles"
+        ],
+        "post-update-cmd": [
+          "Digitaledinge\\ContaoKiss\\ComposerScripts::copyFiles"
+        ]
+    },
     "extra": {
         "contao-manager-plugin": "DigitaleDinge\\ContaoKiss\\ContaoManager\\Plugin"
     },
