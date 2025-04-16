@@ -1,0 +1,11 @@
+<?php $this->extend('block_searchable') ?>
+
+<?php $this->block('before')?>
+    <!-- indexer::stop -->
+    <?php $this->parent() ?>
+<?php $this->endblock() ?>
+
+<?php $this->block('after')?>
+    <?php $this->parent() ?>
+    <!-- indexer::continue -->
+<?php $this->endblock() ?>
