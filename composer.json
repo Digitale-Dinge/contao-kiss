@@ -1,5 +1,5 @@
 {
-    "name": "digitaledinge/contao-kiss",
+    "name": "digitaleinge/contao-kiss",
     "description": "Digitale Dinge's super simple starterkit for Contao CMS",
     "keywords": [
         "contao",
@@ -41,10 +41,10 @@
     },
     "scripts": {
         "post-install-cmd": [
-          "Digitaledinge\\ContaoKiss\\ComposerScripts::copyFiles"
+          "DigitaleDinge\\ContaoKiss\\ComposerScripts::copyFiles"
         ],
         "post-update-cmd": [
-          "Digitaledinge\\ContaoKiss\\ComposerScripts::copyFiles"
+          "DigitaleDinge\\ContaoKiss\\ComposerScripts::copyFiles"
         ]
     },
     "extra": {

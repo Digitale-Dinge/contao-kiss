@@ -1,6 +1,6 @@
 <?php 
 
-namespace Digitaledinge\ContaoKiss;
+namespace DigitaleDinge\ContaoKiss;
 
 use Composer\Script\Event;
 
