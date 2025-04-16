@@ -2,7 +2,7 @@
 
 // src/Twig/AppExtension.php
 
-namespace App\Twig;
+namespace DigitaleDinge\ContaoKiss\Twig;
 
 use Contao\FilesModel;
 use Twig\Extension\AbstractExtension;
