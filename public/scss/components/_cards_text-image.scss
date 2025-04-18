@@ -14,25 +14,29 @@
 		&--layout-2 {
 			// Styles for layout variant 2
 		} 
-		&--align {
-			&-right {
-				.c-cards__item {
-					flex-direction: row;
-				}
-			}
-			&-left {
-				.c-cards__item {
-					flex-direction: row-reverse;
-				}
-				
-			}
-		}
 		.c-cards {
 			&__item {
 				display: flex;
+				flex-direction: column;
 				@include media('>large') {
 					> * {
 						width: 50%;
+					}
+				}
+			}
+		}
+		&--align {
+			&-right {
+				@include media('>medium') {
+					.c-cards__item {
+						flex-direction: row;
+					}
+				}
+			}
+			&-left {
+				@include media('>medium') {
+					.c-cards__item {
+						flex-direction: row-reverse;
 					}
 				}
 			}
