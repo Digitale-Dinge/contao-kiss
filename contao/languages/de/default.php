@@ -20,10 +20,10 @@
 
 $GLOBALS['TL_LANG']['default']['background-color'] = [
    'transparent' => 'Transparent',
-   'color-1' => 'Farbe 1',
-   'color-2' => 'Farbe 2',
-   'color-3' => 'Farbe 3',
-   'color-4' => 'Farbe 4'
+   'background-primary' => 'Markenfarbe',
+   'background-secondary' => 'Sekundäre Farbe',
+   'background-additional-1' => 'Zusätzliche Farbe 1',
+   'background-additional-2' => 'Zusätzliche Farbe 2'
 ];
  
 $GLOBALS['TL_LANG']['default']['number-of-cols'] = [

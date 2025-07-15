@@ -15,6 +15,11 @@
 /**
  * Fields
  */
+ $GLOBALS["TL_LANG"]["tl_content"]["topline"] = [
+	 "Dachzeile",
+	 "Stellt eine optionale Dachzeile über der Headline dar",
+ ];
+ 
 $GLOBALS["TL_LANG"]["CTE"]["grid"] = "Spalten-Grid";
 $GLOBALS["TL_LANG"]["CTE"]["contentTeaser"] = "Teaser";
 $GLOBALS["TL_LANG"]["tl_content"]["icon"] = ["Icon", ""];
@@ -22,39 +27,26 @@ $GLOBALS["TL_LANG"]["tl_content"]["color"] = [
   "Farbe",
   "Bestimmen Sie die Farbe des Elements.",
 ];
+$GLOBALS["TL_LANG"]["tl_content"]["contentWidth"] = [
+	"<img src=\"./files/backend/img/icons/contentwidth.svg\" width=\"16\" height=\"16\"> Inhaltsbreite",
+	"Bestimmen Sie die Breite des Inhalts.",
+];
 $GLOBALS["TL_LANG"]["tl_content"]["paddingTop"] = [
-  "Innerer Abstand des Elements nach oben",
+  "<img src=\"./files/backend/img/icons/padding-top.svg\" width=\"16\" height=\"16\"> Innerer Abstand des Elements nach oben ",
   "Bestimmen Sie den Abstand des Elements nach oben.",
 ];
 $GLOBALS["TL_LANG"]["tl_content"]["paddingBottom"] = [
-  "Innerer Abstand des Elements nach unten",
+  "<img src=\"./files/backend/img/icons/padding-bottom.svg\" width=\"16\" height=\"16\"> Innerer Abstand des Elements nach unten",
   "Bestimmen Sie den Abstand des Elements nach unten.",
 ];
 $GLOBALS["TL_LANG"]["tl_content"]["marginTop"] = [
-  "Äußerer Abstand des Elements nach oben",
+  "<img src=\"./files/backend/img/icons/margin-top.svg\" width=\"16\" height=\"16\"> Äußerer Abstand des Elements nach oben ",
   "Bestimmen Sie den Abstand des Elements nach oben.",
 ];
 $GLOBALS["TL_LANG"]["tl_content"]["marginBottom"] = [
-  "Äußerer Abstand des Elements nach unten",
+  "<img src=\"./files/backend/img/icons/margin-bottom.svg\" width=\"16\" height=\"16\"> Äußerer Abstand des Elements nach unten ",
   "Bestimmen Sie den Abstand des Elements nach unten.",
 ];
-$GLOBALS['TL_LANG']['tl_content']['offsetUp']   = [
-    'Vertikaler Versatz nach oben',
-    'Legen Sie fest, wie weit das Element nach oben geschoben werden soll. Daraus ergeben sich optische Überlagerungen mit vorausgehenden Elementen.'
-];
-$GLOBALS['TL_LANG']['tl_content']['offsetDown'] = [
-    'Vertikaler Versatz nach unten',
-    'Legen Sie fest, wie weit das Element nach unten geschoben werden soll. Daraus ergeben sich optische Überlagerungen mit nachfolgenden Elementen.'
-];
-$GLOBALS["TL_LANG"]["tl_content"]["contentWidth"] = [
-  "Inhaltsbreite",
-  "Bestimmen Sie die Breite des Inhalts. Standard: 1260px.",
-];
-$GLOBALS["TL_LANG"]["tl_content"]["textStyle"] = [
-  "Textstil",
-  "Wählen Sie die gewünschte Textdarstellung.",
-];
-$GLOBALS['TL_LANG']['tl_content']['intro'] = 'Introtext';
 
 $GLOBALS["TL_LANG"]["tl_content"]["lightboxIframe"] = [
   "Inhalt in iFrame öffnen",
@@ -85,34 +77,54 @@ $GLOBALS["TL_LANG"]["tl_content"]["buttonSize"] = [
 /**
  * References
  */
-$GLOBALS["TL_LANG"]["tl_content"]["small"] = "Klein";
-$GLOBALS["TL_LANG"]["tl_content"]["medium"] = "Mittel";
-$GLOBALS["TL_LANG"]["tl_content"]["large"] = "Groß";
+$GLOBALS["TL_LANG"]["tl_content"]["sm"] = "Klein <img src=\"./files/backend/img/partials/button/small.png\">";
+$GLOBALS["TL_LANG"]["tl_content"]["lg"] = "Groß (Standard) <img src=\"./files/backend/img/partials/button/large.png\">";
 
- $GLOBALS["TL_LANG"]["tl_content"]["brand"] = "Markenfarbe";
- $GLOBALS["TL_LANG"]["tl_content"]["secondary-1"] = "Sekundär 1";
- $GLOBALS["TL_LANG"]["tl_content"]["secondary-2"] = "Sekundär 2";
- $GLOBALS["TL_LANG"]["tl_content"]["secondary-3"] = "Sekundär 3";
+ $GLOBALS["TL_LANG"]["tl_content"]["primary"] = "Markenfarbe";
+ $GLOBALS["TL_LANG"]["tl_content"]["secondary"] = "Sekundär 1";
+ $GLOBALS["TL_LANG"]["tl_content"]["additional-1"] = "Zusätzliche Farbe 1";
+ $GLOBALS["TL_LANG"]["tl_content"]["additional-2"] = "Zusätzliche Farbe 2";
 
-$GLOBALS["TL_LANG"]["tl_content"]["right"] = "rechts";
-$GLOBALS["TL_LANG"]["tl_content"]["left"] = "links";
+$GLOBALS["TL_LANG"]["tl_content"]["right"] = "Rechts <img src=\"./files/backend/img/partials/button/icon-right.png\">";
+$GLOBALS["TL_LANG"]["tl_content"]["left"] = "Links (Standard) <img src=\"./files/backend/img/partials/button/icon-left.png\">";
 
-$GLOBALS["TL_LANG"]["tl_content"]["primary"] = "Primär";
-$GLOBALS["TL_LANG"]["tl_content"]["secondary"] = "Sekundär";
-$GLOBALS["TL_LANG"]["tl_content"]["tertiary"] = "Tertiär";
+$GLOBALS["TL_LANG"]["tl_content"]["primary"] = "Primär (Standard) <img src=\"./files/backend/img/partials/button/primary.png\">";
+$GLOBALS["TL_LANG"]["tl_content"]["secondary"] = "Sekundär <img src=\"./files/backend/img/partials/button/secondary.png\">";
+$GLOBALS["TL_LANG"]["tl_content"]["outline"] = "Rahmen <img src=\"./files/backend/img/partials/button/outline.png\">";
 
-$GLOBALS["TL_LANG"]["tl_content"]["u-size--regular"] = "Satzspiegel";
-$GLOBALS["TL_LANG"]["tl_content"]["u-size--small"] = "Satzspiegel schmal";
-$GLOBALS["TL_LANG"]["tl_content"]["u-size--smaller"] = "Satzspiegel schmaler";
-$GLOBALS["TL_LANG"]["tl_content"]["u-size--nopad"] = "Volle Breite ohne Abstand links und rechts";
-$GLOBALS["TL_LANG"]["tl_content"]["u-size--full"] = "Volle Breite mit Abstand links und rechts";
+$GLOBALS["TL_LANG"]["tl_content"]["max-w-base"] = "Satzspiegel";
+$GLOBALS["TL_LANG"]["tl_content"]["max-w-small"] = "Satzspiegel schmal";
+$GLOBALS["TL_LANG"]["tl_content"]["max-w-narrow"] = "Satzspiegel schmaler";
+$GLOBALS["TL_LANG"]["tl_content"]["max-w-full-pad"] = "Volle Breite mit Abstand links und rechts";
+$GLOBALS["TL_LANG"]["tl_content"]["max-w-full"] = "Volle Breite ohne Abstand links und rechts";
 
-$GLOBALS["TL_LANG"]["tl_content"]["padding"]["half"] = "Halbe Zeilenhöhe";
-$GLOBALS["TL_LANG"]["tl_content"]["padding"]["1x"] = "1x Zeilenhöhe";
-$GLOBALS["TL_LANG"]["tl_content"]["padding"]["2x"] = "2x Zeilenhöhe";
-$GLOBALS["TL_LANG"]["tl_content"]["padding"]["3x"] = "3x Zeilenhöhe";
-$GLOBALS["TL_LANG"]["tl_content"]["padding"]["4x"] = "4x Zeilenhöhe";
-$GLOBALS["TL_LANG"]["tl_content"]["padding"]["5x"] = "5x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["pt-line-1/2"] = "Halbe Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["pt-line-1"] = "1x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["pt-line-line-1/2"] = "2x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["pt-line-3"] = "3x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["pt-line-line-1"] = "4x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["pt-line-5"] = "5x Zeilenhöhe";
+
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["pb-line-1/2"] = "Halbe Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["pb-line-1"] = "1x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["pb-line-line-1/2"] = "2x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["pb-line-3"] = "3x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["pb-line-line-1"] = "4x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["pb-line-5"] = "5x Zeilenhöhe";
+
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["mt-line-1/2"] = "Halbe Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["mt-line-1"] = "1x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["mt-line-line-1/2"] = "2x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["mt-line-3"] = "3x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["mt-line-line-1"] = "4x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["mt-line-5"] = "5x Zeilenhöhe";
+
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["mb-line-1/2"] = "Halbe Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["mb-line-1"] = "1x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["mb-line-line-1/2"] = "2x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["mb-line-3"] = "3x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["mb-line-line-1"] = "4x Zeilenhöhe";
+$GLOBALS["TL_LANG"]["tl_content"]["padding"]["mb-line-5"] = "5x Zeilenhöhe";
 
 /**
  * Legends

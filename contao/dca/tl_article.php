@@ -6,12 +6,13 @@
 $GLOBALS['TL_DCA']['tl_article']['fields']['bgColor'] =
 [
     'exclude'   => true,
+		"label" => &$GLOBALS["TL_LANG"]["tl_article"]["bgColor"],
     'inputType' => 'select',
-    'options' => ['transparent', 'color-1', 'color-2', 'color-3', 'color-4'],
-	'reference' => &$GLOBALS['TL_LANG']['default']['background-color'],
+    'options' => ['transparent', 'background-primary', 'background-secondary', 'background-additional-1', 'background-additional-2'],
+		'reference' => &$GLOBALS['TL_LANG']['default']['background-color'],
     'eval'      =>
     [
-        'tl_class'           => 'w50',
+        'tl_class'           => 'w25',
         'includeBlankOption' => true
     ],
     'sql' => "varchar(32) NOT NULL default ''"

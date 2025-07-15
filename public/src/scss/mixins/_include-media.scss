@@ -34,10 +34,12 @@
 ///  $breakpoints: ('phone': 320px);
 ///
 $breakpoints: (
-  'small':    320px,
-  'medium':   768px,
-  'large':    1024px,
-  'xlarge':   1280px,
+  xs: 20rem,
+  sm: 40rem,
+  md: 48rem,
+  lg: 64rem,
+  xl: 80rem,
+  xxl: 96rem
 ) !default;
 
 ///
@@ -52,15 +54,15 @@ $breakpoints: (
 ///  );
 ///
 $media-expressions: (
-  'screen': 'screen',
-  'print': 'print',
-  'handheld': 'handheld',
-  'landscape': '(orientation: landscape)',
-  'portrait': '(orientation: portrait)',
-  'retina2x':
-    '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)',
-  'retina3x':
-    '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi), (min-resolution: 3dppx)',
+	'screen': 'screen',
+	'print': 'print',
+	'handheld': 'handheld',
+	'landscape': '(orientation: landscape)',
+	'portrait': '(orientation: portrait)',
+	'retina2x':
+		'(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)',
+	'retina3x':
+		'(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi), (min-resolution: 3dppx)',
 ) !default;
 
 ///
@@ -85,10 +87,10 @@ $media-expressions: (
 ///  @media (min-width: 2.1rem) {}
 ///
 $unit-intervals: (
-  'px': 1,
-  'em': 0.01,
-  'rem': 0.1,
-  '': 0,
+	'px': 1,
+	'em': 0.01,
+	'rem': 0.1,
+	'': 0,
 ) !default;
 
 ///
@@ -175,48 +177,9 @@ $im-no-media-breakpoint: 'desktop' !default;
 $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 
 ////
-/// Cross-engine logging engine
-/// @author Kitty Giraudel
+/// Determines whether a list of conditions is intercepted by the static breakpoint.
 /// @access private
 ////
-
-///
-/// Log a message either with `@error` if supported
-/// else with `@warn`, using `feature-exists('at-error')`
-/// to detect support.
-///
-/// @param {String} $message - Message to log
-///
-@function im-log($message) {
-  @if meta.feature-exists('at-error') {
-    @error $message;
-  } @else {
-    @warn $message;
-    $_: noop();
-  }
-
-  @return $message;
-}
-
-///
-/// Wrapper mixin for the log function so it can be used with a more friendly
-/// API than `@if im-log('..') {}` or `$_: im-log('..')`. Basically, use the function
-/// within functions because it is not possible to include a mixin in a function
-/// and use the mixin everywhere else because it's much more elegant.
-///
-/// @param {String} $message - Message to log
-///
-@mixin log($message) {
-  @if im-log($message) {
-  }
-}
-
-///
-/// Function with no `@return` called next to `@warn` in Sass 3.3
-/// to trigger a compiling error and stop the process.
-///
-@function noop() {
-}
 
 ///
 /// Determines whether a list of conditions is intercepted by the static breakpoint.
@@ -226,30 +189,29 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// @return {Boolean} - Returns true if the conditions are intercepted by the static breakpoint
 ///
 @function im-intercepts-static-breakpoint($conditions...) {
-  $no-media-breakpoint-value: map.get($breakpoints, $im-no-media-breakpoint);
+	$no-media-breakpoint-value: map.get($breakpoints, $im-no-media-breakpoint);
 
-  @if not $no-media-breakpoint-value {
-    @if im-log('`#{$im-no-media-breakpoint}` is not a valid breakpoint.') {
-    }
-  }
+	@if not $no-media-breakpoint-value {
+		@error '#{$im-no-media-breakpoint}` is not a valid breakpoint.';
+	}
 
-  @each $condition in $conditions {
-    @if not map.has-key($media-expressions, $condition) {
-      $operator: get-expression-operator($condition);
-      $prefix: get-expression-prefix($operator);
-      $value: get-expression-value($condition, $operator);
+	@each $condition in $conditions {
+		@if not map.has-key($media-expressions, $condition) {
+			$operator: get-expression-operator($condition);
+			$prefix: get-expression-prefix($operator);
+			$value: get-expression-value($condition, $operator);
 
-      @if ($prefix == 'max' and $value <= $no-media-breakpoint-value) or
-        ($prefix == 'min' and $value > $no-media-breakpoint-value)
-      {
-        @return false;
-      }
-    } @else if not list.index($im-no-media-expressions, $condition) {
-      @return false;
-    }
-  }
+			@if ($prefix == 'max' and $value <= $no-media-breakpoint-value) or
+				($prefix == 'min' and $value > $no-media-breakpoint-value)
+			{
+				@return false;
+			}
+		} @else if not list.index($im-no-media-expressions, $condition) {
+			@return false;
+		}
+	}
 
-  @return true;
+	@return true;
 }
 
 ////
@@ -266,18 +228,13 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// @return {String} - Any of `>=`, `>`, `<=`, `<`, `≥`, `≤`
 ///
 @function get-expression-operator($expression) {
-  @each $operator in ('>=', '>', '<=', '<', '≥', '≤') {
-    @if string.index($expression, $operator) {
-      @return $operator;
-    }
-  }
+	@each $operator in ('>=', '>', '<=', '<', '≥', '≤') {
+		@if string.index($expression, $operator) {
+			@return $operator;
+		}
+	}
 
-  // It is not possible to include a mixin inside a function, so we have to
-  // rely on the `im-log(..)` function rather than the `log(..)` mixin. Because
-  // functions cannot be called anywhere in Sass, we need to hack the call in
-  // a dummy variable, such as `$_`. If anybody ever raise a scoping issue with
-  // Sass 3.3, change this line in `@if im-log(..) {}` instead.
-  $_: im-log('No operator found in `#{$expression}`.');
+	@error 'No operator found in `#{$expression}`.';
 }
 
 ///
@@ -289,16 +246,16 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// @return {String} - `width` or `height` (or potentially anything else)
 ///
 @function get-expression-dimension($expression, $operator) {
-  $operator-index: string.index($expression, $operator);
-  $parsed-dimension: string.slice($expression, 0, $operator-index - 1);
-  $parsed-dimension: str-trim($parsed-dimension);
-  $dimension: 'width';
+	$operator-index: string.index($expression, $operator);
+	$parsed-dimension: string.slice($expression, 0, $operator-index - 1);
+	$parsed-dimension: str-trim($parsed-dimension);
+	$dimension: 'width';
 
-  @if string.length($parsed-dimension) > 0 {
-    $dimension: $parsed-dimension;
-  }
+	@if string.length($parsed-dimension) > 0 {
+		$dimension: $parsed-dimension;
+	}
 
-  @return $dimension;
+	@return $dimension;
 }
 
 ///
@@ -309,7 +266,7 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// @return {String} - `min` or `max`
 ///
 @function get-expression-prefix($operator) {
-  @return if(list.index(('<', '<=', '≤'), $operator), 'max', 'min');
+	@return if(list.index(('<', '<=', '≤'), $operator), 'max', 'min');
 }
 
 ///
@@ -321,34 +278,29 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// @return {Number} - A numeric value
 ///
 @function get-expression-value($expression, $operator) {
-  $operator-index: string.index($expression, $operator);
-  $value: string.slice($expression, $operator-index + string.length($operator));
-  $trimmedValue: str-trim($value);
+	$operator-index: string.index($expression, $operator);
+	$value: string.slice($expression, $operator-index + string.length($operator));
+	$trimmedValue: str-trim($value);
 
-  @if map.has-key($breakpoints, $trimmedValue) {
-    $value: map.get($breakpoints, $trimmedValue);
-  } @else {
-    $value: to-number($trimmedValue);
-  }
+	@if map.has-key($breakpoints, $trimmedValue) {
+		$value: map.get($breakpoints, $trimmedValue);
+	} @else {
+		$value: to-number($trimmedValue);
+	}
 
-  $interval: map.get($unit-intervals, math.unit($value));
+	$interval: map.get($unit-intervals, math.unit($value));
 
-  @if not $interval {
-    // It is not possible to include a mixin inside a function, so we have to
-    // rely on the `im-log(..)` function rather than the `log(..)` mixin. Because
-    // functions cannot be called anywhere in Sass, we need to hack the call in
-    // a dummy variable, such as `$_`. If anybody ever raise a scoping issue with
-    // Sass 3.3, change this line in `@if im-log(..) {}` instead.
-    $_: im-log('Unknown unit `#{math.unit($value)}`.');
-  }
+	@if not $interval {
+		@error 'Unknown unit `#{math.unit($value)}`.';
+	}
 
-  @if $operator == '>' {
-    $value: $value + $interval;
-  } @else if $operator == '<' {
-    $value: $value - $interval;
-  }
+	@if $operator == '>' {
+		$value: $value + $interval;
+	} @else if $operator == '<' {
+		$value: $value - $interval;
+	}
 
-  @return $value;
+	@return $value;
 }
 
 ///
@@ -359,18 +311,18 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// @return {String} - Valid media query
 ///
 @function parse-expression($expression) {
-  // If it is part of $media-expressions, it has no operator
-  // then there is no need to go any further, just return the value
-  @if map.has-key($media-expressions, $expression) {
-    @return map.get($media-expressions, $expression);
-  }
+	// If it is part of $media-expressions, it has no operator
+	// then there is no need to go any further, just return the value
+	@if map.has-key($media-expressions, $expression) {
+		@return map.get($media-expressions, $expression);
+	}
 
-  $operator: get-expression-operator($expression);
-  $dimension: get-expression-dimension($expression, $operator);
-  $prefix: get-expression-prefix($operator);
-  $value: get-expression-value($expression, $operator);
+	$operator: get-expression-operator($expression);
+	$dimension: get-expression-dimension($expression, $operator);
+	$prefix: get-expression-prefix($operator);
+	$value: get-expression-value($expression, $operator);
 
-  @return '(#{$prefix}-#{$dimension}: #{$value})';
+	@return '(#{$prefix}-#{$dimension}: #{$value})';
 }
 
 ///
@@ -385,17 +337,17 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// @return {List} Sliced list
 ///
 @function slice($list, $start: 1, $end: list.length($list)) {
-  @if list.length($list) < 1 or $start > $end {
-    @return ();
-  }
+	@if list.length($list) < 1 or $start > $end {
+		@return ();
+	}
 
-  $result: ();
+	$result: ();
 
-  @for $i from $start through $end {
-    $result: list.append($result, list.nth($list, $i), comma);
-  }
+	@for $i from $start through $end {
+		$result: list.append($result, list.nth($list, $i), comma);
+	}
 
-  @return $result;
+	@return $result;
 }
 
 ////
@@ -413,52 +365,52 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 ///
 
 @function to-number($value) {
-  @if meta.type-of($value) == 'number' {
-    @return $value;
-  } @else if meta.type-of($value) != 'string' {
-    $_: im-log('Value for `to-number` should be a number or a string.');
-  }
+	@if meta.type-of($value) == 'number' {
+		@return $value;
+	} @else if meta.type-of($value) != 'string' {
+		@error 'Value for `to-number` should be a number or a string.';
+	}
 
-  $first-character: string.slice($value, 1, 1);
-  $result: 0;
-  $digits: 0;
-  $minus: ($first-character == '-');
-  $numbers: (
-    '0': 0,
-    '1': 1,
-    '2': 2,
-    '3': 3,
-    '4': 4,
-    '5': 5,
-    '6': 6,
-    '7': 7,
-    '8': 8,
-    '9': 9,
-  );
+	$first-character: string.slice($value, 1, 1);
+	$result: 0;
+	$digits: 0;
+	$minus: ($first-character == '-');
+	$numbers: (
+		'0': 0,
+		'1': 1,
+		'2': 2,
+		'3': 3,
+		'4': 4,
+		'5': 5,
+		'6': 6,
+		'7': 7,
+		'8': 8,
+		'9': 9,
+	);
 
-  // Remove +/- sign if present at first character
-  @if ($first-character == '+' or $first-character == '-') {
-    $value: string.slice($value, 2);
-  }
+	// Remove +/- sign if present at first character
+	@if ($first-character == '+' or $first-character == '-') {
+		$value: string.slice($value, 2);
+	}
 
-  @for $i from 1 through string.length($value) {
-    $character: string.slice($value, $i, $i);
+	@for $i from 1 through string.length($value) {
+		$character: string.slice($value, $i, $i);
 
-    @if not(list.index(map.keys($numbers), $character) or $character == '.') {
-      @return to-length(if($minus, -$result, $result), string.slice($value, $i));
-    }
+		@if not(list.index(map.keys($numbers), $character) or $character == '.') {
+			@return to-length(if($minus, -$result, $result), string.slice($value, $i));
+		}
 
-    @if $character == '.' {
-      $digits: 1;
-    } @else if $digits == 0 {
-      $result: $result * 10 + map.get($numbers, $character);
-    } @else {
-      $digits: $digits * 10;
-      $result: $result + math.div(map.get($numbers, $character), $digits);
-    }
-  }
+		@if $character == '.' {
+			$digits: 1;
+		} @else if $digits == 0 {
+			$result: $result * 10 + map.get($numbers, $character);
+		} @else {
+			$digits: $digits * 10;
+			$result: $result + math.div(map.get($numbers, $character), $digits);
+		}
+	}
 
-  @return if($minus, -$result, $result);
+	@return if($minus, -$result, $result);
 }
 
 ///
@@ -470,33 +422,33 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// @return {Number} - `$value` expressed in `$unit`
 ///
 @function to-length($value, $unit) {
-  $units: (
-    'px': 1px,
-    'cm': 1cm,
-    'mm': 1mm,
-    '%': 1%,
-    'ch': 1ch,
-    'pc': 1pc,
-    'in': 1in,
-    'em': 1em,
-    'rem': 1rem,
-    'pt': 1pt,
-    'ex': 1ex,
-    'vw': 1vw,
-    'vh': 1vh,
-    'vmin': 1vmin,
-    'vmax': 1vmax,
-  );
+	$units: (
+		'px': 1px,
+		'cm': 1cm,
+		'mm': 1mm,
+		'%': 1%,
+		'ch': 1ch,
+		'pc': 1pc,
+		'in': 1in,
+		'em': 1em,
+		'rem': 1rem,
+		'pt': 1pt,
+		'ex': 1ex,
+		'vw': 1vw,
+		'vh': 1vh,
+		'vmin': 1vmin,
+		'vmax': 1vmax,
+	);
 
-  @if not list.index(map.keys($units), $unit) {
-    $_: im-log('Invalid unit `#{$unit}`.');
-  }
+	@if not list.index(map.keys($units), $unit) {
+		@error 'Invalid unit `#{$unit}`.';
+	}
 
-  @return $value * map.get($units, $unit);
+	@return $value * map.get($units, $unit);
 }
 
 ////
-/// String to number converter
+/// String trim
 /// @author Jack McNicol
 /// @access private
 ////
@@ -510,13 +462,13 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 ///
 
 @function str-trim($string) {
-  @if (str-slice($string, 1, 1) == ' ') {
-    @return str-trim(str-slice($string, 2));
-  } @else if (str-slice($string, str-length($string), -1) == ' ') {
-    @return str-trim(str-slice($string, 1, -2));
-  } @else {
-    @return $string;
-  }
+	@if (string.slice($string, 1, 1) == ' ') {
+		@return str-trim(string.slice($string, 2));
+	} @else if (string.slice($string, string.length($string), -1) == ' ') {
+		@return str-trim(string.slice($string, 1, -2));
+	} @else {
+		@return $string;
+	}
 }
 
 ///
@@ -558,19 +510,19 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 ///  }
 ///
 @mixin media-context($tweakpoints: (), $tweak-media-expressions: ()) {
-  // Save global configuration
-  $global-breakpoints: $breakpoints;
-  $global-media-expressions: $media-expressions;
+	// Save global configuration
+	$global-breakpoints: $breakpoints;
+	$global-media-expressions: $media-expressions;
 
-  // Update global configuration
-  $breakpoints: map.merge($breakpoints, $tweakpoints) !global;
-  $media-expressions: map.merge($media-expressions, $tweak-media-expressions) !global;
+	// Update global configuration
+	$breakpoints: map.merge($breakpoints, $tweakpoints) !global;
+	$media-expressions: map.merge($media-expressions, $tweak-media-expressions) !global;
 
-  @content;
+	@content;
 
-  // Restore global configuration
-  $breakpoints: $global-breakpoints !global;
-  $media-expressions: $global-media-expressions !global;
+	// Restore global configuration
+	$breakpoints: $global-breakpoints !global;
+	$media-expressions: $global-media-expressions !global;
 }
 
 ////
@@ -603,17 +555,17 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 ///  @include media('>=350px', '<tablet', 'retina3x') { }
 ///
 @mixin media($conditions...) {
-  @if ($im-media-support and list.length($conditions) == 0) or
-    (not $im-media-support and im-intercepts-static-breakpoint($conditions...))
-  {
-    @content;
-  } @else if ($im-media-support and list.length($conditions) > 0) {
-    @media #{string.unquote(parse-expression(list.nth($conditions, 1)))} {
-      // Recursive call
-      $sliced-conditions: slice($conditions, 2);
-      @include media($sliced-conditions...) {
-        @content;
-      }
-    }
-  }
+	@if ($im-media-support and list.length($conditions) == 0) or
+		(not $im-media-support and im-intercepts-static-breakpoint($conditions...))
+	{
+		@content;
+	} @else if ($im-media-support and list.length($conditions) > 0) {
+		@media #{string.unquote(parse-expression(list.nth($conditions, 1)))} {
+			// Recursive call
+			$sliced-conditions: slice($conditions, 2);
+			@include media($sliced-conditions...) {
+				@content;
+			}
+		}
+	}
 }

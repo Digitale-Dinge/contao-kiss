@@ -7,9 +7,18 @@ namespace DigitaleDinge\ContaoKiss\Twig;
 use Contao\FilesModel;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
+   const CONTAINER_SIZES = [
+       'base'       => "max-w-base",
+       'small'      => "max-w-small",
+       'narrow'     => "max-w-narrow",
+       'full-pad'   => "max-w-full-pad",
+       'full' 			=> "max-w-full"
+   ];
+
    public function getFilters(): array
    {
 	   return [
@@ -33,4 +42,20 @@ class AppExtension extends AbstractExtension
 	   }
 	   return null;
    }
+
+    public function getFunctions(): array
+    {
+        return [
+            new TwigFunction('getContainerClass', [$this, 'getContainerClass']),
+        ];
+    }
+
+    public function getContainerClass(String $size = 'base'): String
+    {
+        if ( array_key_exists($size,self::CONTAINER_SIZES) ) {
+            return self::CONTAINER_SIZES[$size];
+        }
+
+        return '';
+    }
 }
