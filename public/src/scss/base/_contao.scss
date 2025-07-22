@@ -1,29 +1,10 @@
 @layer utilities {
-  // All Contao invisible classes
-  .invisible {
-    @apply hidden;
-  }
+	// All Contao invisible classes
+	.invisible {
+		@apply hidden;
+	}
 	span.mandatory {
 		@apply text-primary;
-	}
-	
-	/* Background colors */
-	.background-primary {
-		@apply bg-primary text-white;
-	}
-	.background-white {
-		@apply bg-white;
-	}
-	.background-additional-1,
-	.background-secondary {
-		@apply bg-secondary;
-	}
-	.background-additional-2,
-	.background-muted {
-		@apply bg-muted text-body;
-	}
-	.background-anthrazit {
-		@apply bg-anthrazit text-white;
 	}
 	
 	
@@ -110,7 +91,7 @@
 }
 
 @layer base {
-  p {
+	p {
 		&.topline {
 			@apply m-0 text-xs uppercase font-bold text-primary;
 			+ h1,
@@ -123,7 +104,7 @@
 			}
 		}
 		&.info {
-			@apply m-0 text-grey text-xs;
+			@apply m-0 text-xs;
 		}
 		&.more {
 			@apply m-0 px-6 pb-6;
@@ -145,13 +126,13 @@
 				}
 			}
 		}
-  }
+	}
 	
 }
 @layer components {
 	// Element groups and grids
 	.content-element-group {
-    
+		
 		&.grid {
 			h1, h2, h3, h4, h5, h6 {
 				&:first-child {
@@ -159,16 +140,16 @@
 				}
 			}
 		}
-    
-    &:has(> .md\:float-right),
-    &:has(> .md\:float-left) {
-      //overflow: hidden;
-      @apply flex flex-col md:block;
+		
+		&:has(> .md\:float-right),
+		&:has(> .md\:float-left) {
+			//overflow: hidden;
+			@apply flex flex-col md:block;
 			@extend .clearfix;
-    }
-    > .md\:float-right + * {
-      order: -1;
-    }
+		}
+		> .md\:float-right + * {
+			order: -1;
+		}
 	}
 	
 	// Texts and images
@@ -360,26 +341,26 @@
 	}
 	.swiper-button-prev,
 	.swiper-button-next {
-    @apply size-12! bg-white;
-    box-shadow: 0 .5rem 1.25rem rgba(0,0,0,.15);
+		@apply size-12! bg-white;
+		box-shadow: 0 .5rem 1.25rem rgba(0,0,0,.15);
 		&:after {
 			@apply font-icon! text-lg! text-primary;
 			content:"\e966" !important;
 		}
 	}
-  .swiper-button-prev {
-    @apply left-0;
-  }
+	.swiper-button-prev {
+		@apply left-0;
+	}
 	.swiper-button-next {
-    @apply right-0;
+		@apply right-0;
 		&:after {
 			@apply font-icon!;
 			content:"\e96b" !important;
 		}
 	}
-  .swiper-button-disabled {
-    @apply opacity-0! transition;
-  }
+	.swiper-button-disabled {
+		@apply opacity-0! transition;
+	}
 	.swiper-pagination {
 		&-bullet-active {
 			@apply bg-primary!;
