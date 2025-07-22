@@ -14,7 +14,6 @@
 	{% set link_attributes = attrs().mergeWith(link_attributes|default) %}
 	{% set text_before = ''|default %}
 	{% set text_after = ''|default %}
-	{% set font_bold = font_bold ?? true %}
 
 	{% if data.hyperlinkAsButton is defined and data.hyperlinkAsButton is not empty %}
 		{% set button_class = 'btn' %}
@@ -43,7 +42,7 @@
 			<span class="mr-1" aria-hidden="true" data-icon="&#x{{ data.icon }};"></span>
 		{% endif %}
 
-		<span class="hyperlink__text{% if font_bold %} font-bold{% endif %} block">
+		<span class="text">
 			{{ link_text|insert_tag|raw }}
 		</span>
 
