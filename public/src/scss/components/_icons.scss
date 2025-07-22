@@ -1,7 +1,4 @@
-@use "sass:meta";
 @layer base {
-	@include meta.load-css("../../fonts/icons/style");
-
 	[data-icon] {
 		/* use !important to prevent issues with browser extensions that change fonts */
 		font-family: "icons" !important;
