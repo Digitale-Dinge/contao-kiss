@@ -1,13 +1,13 @@
 {% extends "@Contao/content_element/hyperlink.html.twig" %}
 
 {% block content %}
-    {% set image = null|default %}
-    {{ parent() }}
+		{% set image = null|default %}
+		{{ parent() }}
 {% endblock %}
 
 {% block wrapper %}
-    {% set headline = {'text':''|default} %}
-    {{ parent() }}
+		{% set headline = {'text':''|default} %}
+		{{ parent() }}
 {% endblock %}
 
 {% block text_link %}
@@ -28,7 +28,7 @@
 			{% set button_class = 'btn' %}
 		{% endif %}
 
-		{% set link_attributes = link_attributes.addClass(button_class) %}
+		{% set link_attributes = link_attributes.addClass('btn ' ~ button_class) %}
 	{% endif %}
 
 	{% if data.lightboxIframe is defined and data.lightboxIframe is not empty %}
