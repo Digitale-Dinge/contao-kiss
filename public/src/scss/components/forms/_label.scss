@@ -1,0 +1,30 @@
+/* Label */
+@layer components {
+  .formbody label,
+  .label {
+    @apply text-sm leading-none font-bold select-none peer-disabled:pointer-events-none peer-disabled:opacity-50;
+
+    &:has(> *:disabled),
+    &:has(+ *:disabled) {
+      @apply opacity-50 pointer-events-none;
+    }
+  }
+  .formbody {
+    .radio_container,
+    .checkbox_container,
+		fieldset {
+      legend {
+        @apply mb-1 text-sm leading-none font-bold select-none peer-disabled:pointer-events-none peer-disabled:opacity-50;
+      }
+      label {
+        @apply font-normal;
+      }
+    }
+		> fieldset {
+			@apply p-8 border-solid border-1 border-foreground/40;
+			> legend {
+				@apply px-4;
+			}
+		}
+  }
+}
