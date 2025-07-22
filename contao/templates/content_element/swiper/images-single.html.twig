@@ -1,0 +1,18 @@
+{% extends "@Contao/content_element/swiper.html.twig" %}
+
+{% block content %}
+    {% set slider_settings = slider_settings|merge({
+        slidesPerView: 1,
+        navigation: {
+            enabled: false,
+            prevEl: '.swiper-button-prev',
+            nextEl: '.swiper-button-next',
+        },
+
+    }) %}
+    {% set slider_attributes = attrs()
+        .addClass('swiper--images')
+        .mergeWith(slider_attributes|default)
+    %}
+    {{ parent() }}
+{% endblock %}

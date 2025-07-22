@@ -1,0 +1,46 @@
+<?php
+
+//$GLOBALS['TL_CSS']['contao_dk_mmenu'] = 'bundles/contaommenu/mmenu/mmenu.css|static';
+$GLOBALS['TL_JAVASCRIPT']['contao_dk_mmenu'] = 'bundles/contaommenu/mmenu/mmenu.js|static';
+
+$mmenu_options = $this->options;
+//$mmenu_options['navbar'] = ['add' => false];
+//$mmenu_options['onClick'] = ['close' => true, 'preventDefault' => false];
+$mmenu_options['backButton'] = ['close' => true];
+
+$mmenu_options['slidingSubmenus'] = true;
+
+
+?>
+
+<script>
+		document.addEventListener(
+				"DOMContentLoaded", () => {
+						const menu = new Mmenu( '#<?= $this->elementId ?>', <?= json_encode($mmenu_options) ?>, <?= json_encode($this->configuration) ?> );
+						const api = menu.API;
+
+						document.querySelector( "#menu-toggle" )
+							.addEventListener(
+									"click", () => {
+											api.open();
+									}
+							);
+							const source = document.querySelector(".header-meta .mod_customnav .level_1");
+							if (source) {
+								const clone = source.cloneNode(true);
+							
+								// Alle Klassen vom geklonten Element entfernen
+								clone.className = "";
+							
+								// Optional: Mmenu-spezifische Klasse wieder hinzufügen
+								clone.classList.add("mm-meta");
+							
+								const target = document.querySelector("#mm-1");
+								if (target) {
+									target.appendChild(clone);
+								}
+							}
+				}
+		);
+		
+</script>

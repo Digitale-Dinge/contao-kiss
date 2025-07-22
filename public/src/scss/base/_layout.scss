@@ -1,0 +1,32 @@
+@use '../mixins/mixins' as *;
+@layer base {
+  html {
+    font-size: 12px;
+    @include media(">=md") {
+      font-size: 14px;
+    }
+    @include media(">=xl") {
+      font-size: 16px;
+    }
+  }
+  #container {
+    @apply pb-16;
+  }
+  #header {
+    a {
+      @apply border-0;
+      &:hover,
+      &:focus,
+      &:active {
+        @apply text-primary;
+      }
+    }
+  }
+}
+@layer components {
+  .mod_logo {
+    > a {
+        @apply border-0!;
+    }
+  }
+}

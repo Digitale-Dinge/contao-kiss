@@ -1,0 +1,42 @@
+/* Input */
+@layer components {
+  .formbody input[type="text"],
+  .formbody input[type="email"],
+  .formbody input[type="password"],
+  .formbody input[type="number"],
+  .formbody input[type="file"],
+  .formbody input[type="tel"],
+  .formbody input[type="url"],
+  .formbody input[type="search"],
+  .formbody input[type="date"],
+  .formbody input[type="datetime-local"],
+  .formbody input[type="month"],
+  .formbody input[type="week"],
+  .formbody input[type="time"],
+  .input[type="text"],
+  .input[type="email"],
+  .input[type="password"],
+  .input[type="number"],
+  .input[type="file"],
+  .input[type="tel"],
+  .input[type="url"],
+  .input[type="search"],
+  .input[type="date"],
+  .input[type="datetime-local"],
+  .input[type="month"],
+  .input[type="week"],
+  .input[type="time"] {
+    @apply appearance-none file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-colors transition-shadow outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
+    @apply focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px];
+    @apply aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+  }
+	.formbody input[type="range"],
+	.input[type="range"] {
+		@apply w-full;
+	}
+  .formbody .widget-upload {
+    > input {
+      @apply block w-full py-0 px-0 text-sm text-foreground/40 rounded-lg cursor-pointer file:h-9 file:bg-black file:text-white file:px-2 dark:text-foreground/40 focus:outline-none dark:bg-foreground/70 dark:border-foreground/60 dark:placeholder-foreground/40;
+    }
+  }
+}

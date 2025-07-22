@@ -1,0 +1,33 @@
+@use "sass:meta";
+@use "../../fonts/icons/variables" with (
+  $icomoon-font-path: "../fonts/icons/fonts"
+);
+@layer base {
+  @include meta.load-css("../../fonts/icons/style");
+
+  [data-icon] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: "icons" !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    &:before {
+      font-family: "icons" !important;
+      content: attr(data-icon);
+      speak: none; /* Not to be trusted, but hey. */
+    }
+  }
+}
+
+@layer utilities {
+  .font-icon {
+    font-family: var(--font-icon);
+  }
+}

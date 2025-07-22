@@ -1,0 +1,45 @@
+{% extends "@Contao/content_element/_base.html.twig" %}
+{% use "@Contao/component/_headline.html.twig" %}
+
+{# Attribut-Setup global #}
+{% set data_defaults = {
+	marginTop: '',
+	marginBottom: '',
+	contentWidth: '',
+	paddingTop: '',
+	paddingBottom: '',
+	topline: ''
+} %}
+
+{% set data = data_defaults|merge(data|default({})) %}
+
+{% set attributes = attrs()
+	.mergeWith(attributes|default) %}
+
+{% if data.marginTop is not empty %}
+	{% set attributes = attributes.addClass(data.marginTop) %}
+{% endif %}
+{% if data.marginBottom is not empty %}
+	{% set attributes = attributes.addClass(data.marginBottom) %}
+{% endif %}
+{% if data.contentWidth is not empty %}
+	{% set attributes = attributes.addClass(data.contentWidth) %}
+{% endif %}
+{% if data.paddingTop is not empty %}
+	{% set attributes = attributes.addClass(data.paddingTop) %}
+{% endif %}
+{% if data.paddingBottom is not empty %}
+	{% set attributes = attributes.addClass(data.paddingBottom) %}
+{% endif %}
+
+{% block wrapper %}
+	<div {{ attributes }}>
+		{% if data.topline is not empty %}
+			<p class="topline uppercase font-bold text-lg mb-2 text-primary">{{ data.topline }}</p>
+		{% endif %}
+		{% with {headline: headline|default(_context)} %}
+			{{ block('headline_component') }}
+		{% endwith %}
+
+	</div>
+{% endblock %}

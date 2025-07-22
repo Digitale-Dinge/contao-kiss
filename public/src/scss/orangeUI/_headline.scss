@@ -1,0 +1,24 @@
+.headline-gradient-top-bottom {
+
+    h2, h3 {
+        background: #eb8100;
+        background: linear-gradient(0deg, #c73600 0%, #eb8100 60%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        padding-bottom: .1em;
+    }
+
+    .topline {
+        color: var(--color-anthrazit);
+    }
+
+}
+
+.headline-section {
+
+    > * {
+        font-size: 7rem;
+        line-height: .5;
+    }
+}

@@ -1,0 +1,82 @@
+@use '../../fonts/icons/variables' as *;
+@use '../mixins/mixins' as *;
+
+.slider {
+
+	> div,
+	.swiper,
+	.swiper-wrapper {
+		height: 100%;
+	}
+
+	&--doubleslider-text {
+		--swiper-navigation-size: 20px;
+
+		.swiper-button-prev,
+		.swiper-button-next {
+			background-color: var(--primary-foreground);
+			height: 4rem;
+			width: 4rem;
+			top: auto;
+			bottom: -5rem;
+			opacity: .5;
+		}
+		.swiper-button-prev {
+			left: 0;
+		}
+		.swiper-button-next {
+			right: 0;
+		}
+
+		@include media(">=xl") {
+			.swiper-slide {
+				height: 100%;
+			}
+			.swiper-button-prev,
+			.swiper-button-next {
+				top:-4rem;
+				left: auto;
+				bottom: auto;
+				height: 3rem;
+				width: 3rem;
+				opacity: 1;
+			}
+			.swiper-button-prev {
+				right: 5rem;
+			}
+			.swiper-button-next {
+				right: 1.25rem;
+			}
+		}
+	}
+
+	&--no-nav {
+
+		.swiper-button-prev,
+		.swiper-button-next {
+			display: none;
+		}
+	}
+
+}
+
+.swiper {
+	
+	.doubleslider__one & {
+		overflow: visible;
+	}
+
+	&--images {
+		--swiper-pagination-bullet-height: 1rem;
+		--swiper-pagination-bullet-width: 1rem;
+		--swiper-pagination-bullet-horizontal-gap: .375rem;
+		--swiper-pagination-bottom: -3rem;
+		--swiper-pagination-bullet-border-radius: 0;
+
+		.swiper-pagination {
+			position: relative;
+			padding: 0 1rem;
+		}
+	}
+}
+

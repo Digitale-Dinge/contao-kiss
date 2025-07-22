@@ -1,0 +1,74 @@
+{% extends "@Contao/content_element/gallery.html.twig" %}
+
+{#
+  ** Add changes to the base template here. **
+
+  Hint: Try adjusting blocks and attributes instead of
+  overwriting the whole template. This way your version
+  can remain compatible with future changes to the base
+  template as well as adjustments made by extensions.
+
+  Currently available blocks:
+    "list_component", "list", "list_attributes",
+    "list_item_attributes", "list_item", "pagination",
+    "list_script", "pagination_script_show_element",
+    "pagination_script_activate_selector",
+    "picture_component", "image", "sources", "source",
+    "schema_org", "figure_component", "media",
+    "media_link", "caption", "caption_inner",
+    "content", "attributes", "headline_component",
+    "headline_attributes", "headline_inner",
+    "wrapper", "wrapper_tag", "inner", "metadata",
+    "style", "script"
+
+  Example:
+    {% block list_component %}
+       {{ parent() }}
+       My additional content for 'list_component'…
+    {% endblock %}
+#}
+
+{% block content %}
+		{% set items_per_row = items_per_row|default(4) %}
+
+		{# Responsive Grid-Klassen basierend auf items_per_row #}
+		{% set grid_class = '' %}
+		{% if items_per_row == 1 %}
+				{% set grid_class = 'grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1' %}
+		{% elseif items_per_row == 2 %}
+				{% set grid_class = 'grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2' %}
+		{% elseif items_per_row == 3 %}
+				{% set grid_class = 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3' %}
+		{% elseif items_per_row == 4 %}
+				{% set grid_class = 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4' %}
+		{% elseif items_per_row == 5 %}
+				{% set grid_class = 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5' %}
+		{% elseif items_per_row == 6 %}
+				{% set grid_class = 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6' %}
+		{% elseif items_per_row == 7 %}
+				{% set grid_class = 'grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-7' %}
+		{% elseif items_per_row == 8 %}
+				{% set grid_class = 'grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-8' %}
+		{% elseif items_per_row == 9 %}
+				{% set grid_class = 'grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 xl:grid-cols-9' %}
+		{% elseif items_per_row == 10 %}
+				{% set grid_class = 'grid-cols-2 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-10 xl:grid-cols-10' %}
+		{% elseif items_per_row == 11 %}
+				{% set grid_class = 'grid-cols-2 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-11 xl:grid-cols-11' %}
+		{% elseif items_per_row == 12 %}
+				{% set grid_class = 'grid-cols-2 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12 xl:grid-cols-12' %}
+		{% else %}
+				{# Fallback #}
+				{% set grid_class = 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4' %}
+		{% endif %}
+
+		{% with {
+				items: images,
+				list_attributes: {
+						class: 'grid gap-x-4 gap-y-8 ' ~ grid_class
+				}
+		} %}
+				{{ block('list_component') }}
+		{% endwith %}
+{% endblock %}
+

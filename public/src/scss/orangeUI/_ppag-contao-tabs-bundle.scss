@@ -1,0 +1,70 @@
+/* ppag/contao-tabs-bundle Tabs */
+@layer components {
+  .ce_tabs {
+    @apply flex flex-col gap-2;
+    [role="tablist"] {
+      @apply inline-flex 
+				items-center 
+				justify-center 
+				rounded-lg p-[3px]
+      	h-9 
+				w-fit 
+				bg-muted 
+				text-muted-foreground;
+      li {
+        @apply m-0 
+					w-fit 
+					indent-0;
+      }
+      [role="tab"] {
+        @apply flex-1 
+					items-center 
+					justify-center 
+					gap-1.5 
+					border 
+					border-transparent 
+					rounded-md
+					w-fit 
+					h-[calc(100%-1px)] 
+					px-2 
+					py-1 
+					text-muted-foreground  
+					text-center 
+					text-sm 
+					font-medium 
+					whitespace-nowrap 
+					focus-visible:border-ring 
+					focus-visible:ring-ring/50 
+					focus-visible:outline-ring 
+					dark:text-muted-foreground 
+					transition-all
+					focus-visible:ring-[3px] 
+					focus-visible:outline-1 
+					disabled:pointer-events-none 
+					disabled:opacity-50;
+        &[aria-selected="true"] {
+          @apply bg-primary 
+						text-white 
+						dark:text-foreground 
+						dark:border-input 
+						dark:bg-input/30 
+						shadow-sm;
+        }
+      }
+    }
+
+    .nav-item {
+      @apply inline-block;
+    }
+
+    > .tab-content {
+      > .tab-pane {
+        @apply hidden;
+
+        &.active-tab {
+          @apply block;
+        }
+      }
+    }
+  }
+}

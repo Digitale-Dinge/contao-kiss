@@ -1,0 +1,339 @@
+@use '../mixins/mixins' as *;
+
+@layer base {
+  html {
+    @apply text-body font-sans text-base box-border;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
+    @apply font-sans font-bold leading-snug;
+		@include media("<=md") {
+			hyphens: auto;
+		}
+  }
+
+  h1,
+  .h1 {
+    font-size: 4rem;
+    @apply my-5;
+    @include media(">xs") {
+      @apply text-4xl;
+    }
+  }
+
+  h2,
+  .h2 {
+    font-size: 3.5rem;
+    @apply my-4;
+    @include media(">xs") {
+      @apply text-3xl;
+    }
+  }
+
+  h3,
+  .h3 {
+    @apply text-2xl my-4;
+  }
+
+  h4,
+  .h4 {
+    @apply text-xl my-3;
+  }
+
+  h5,
+  .h5 {
+    @apply text-lg my-3;
+  }
+
+  h6,
+  .h6 {
+    @apply text-base my-2;
+  }
+
+  p {
+    @apply my-3;
+  }
+
+  hr {
+    @apply text-primary/50 border border-solid border-primary/40 my-6 mx-2;
+  }
+
+  blockquote {
+    @apply pl-4 border-l-4 border-primary/30 bg-primary/10 my-6 mx-2 relative;
+  }
+
+  blockquote::before {
+    @apply text-primary/40 align-top text-4xl leading-none mr-2;
+  }
+
+  q {
+    quotes: "\201C""\201D""\2018""\2019";
+  }
+
+  q::before {
+    content: open-quote;
+  }
+
+  q::after {
+    content: close-quote;
+  }
+
+  ul,
+  ol,
+  dl,
+  menu {
+    @apply px-2 py-1;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  li {
+    @apply ml-4 py-2 leading-normal;
+    text-indent: 0;
+  }
+
+  nav li,
+  menu li {
+    @apply list-none ml-0;
+    text-indent: 0;
+  }
+
+  dt {
+    text-indent: -0.618rem;
+  }
+
+  dd {
+    @apply px-2;
+  }
+
+  em,
+  i,
+  cite {
+    @apply italic;
+  }
+
+  strong,
+  b {
+    @apply font-bold;
+  }
+
+  cite {
+    @apply block text-right;
+  }
+
+  small,
+  sub,
+  sup {
+		font-size: .75em;
+    @apply leading-none;
+  }
+
+  sub {
+    @apply align-sub bottom-0;
+  }
+  sup {
+    @apply align-super;
+  }
+
+  s,
+  strike,
+  del {
+    @apply line-through text-primary/600;
+  }
+
+  ins {
+    @apply bg-primary/200;
+    text-decoration: none;
+  }
+
+  del {
+    @apply bg-primary/200;
+  }
+
+  u {
+    text-decoration: dotted underline 2px red;
+  }
+
+  mark,
+	::selection,
+	mark::selection {
+    background-color: var(--color-primary);
+		color: var(--color-white);
+		.bg-primary & {
+			background-color: var(--color-secondary);
+			color: var(--color-body);
+		}
+  }
+
+  dfn,
+  dt {
+    @apply font-bold italic capitalize;
+  }
+
+  abbr {
+    @apply uppercase;
+    text-decoration: none;
+  }
+
+  abbr[title] {
+    text-decoration: dotted underline 2px red;
+  }
+
+  pre,
+  code,
+  var,
+  samp,
+  data {
+    @apply font-mono;
+  }
+
+  code {
+    @apply bg-muted text-xs px-1 py-1 rounded;
+  }
+  pre code {
+    @apply leading-snug py-0;
+  }
+
+  kbd,
+  samp,
+  data {
+    background-color: rgba(155, 155, 155, 0.2);
+  }
+
+  kbd {
+    @apply text-xs px-2 py-1 border border-primary/300 rounded;
+  }
+
+  samp,
+  data {
+    @apply px-2;
+  }
+
+  var,
+  data {
+    @apply italic;
+  }
+
+  samp {
+    border-left: 5px solid #bababa;
+  }
+
+  ruby {
+    display: ruby;
+    @apply relative mx-[0.5ex];
+    ruby-position: over;
+  }
+
+  rtc,
+  rbc {
+    font-size: inherit;
+    line-height: 1;
+    ruby-align: start;
+  }
+
+  rt {
+    display: ruby-text;
+    font-size: 0.7em;
+  }
+
+  rt + rt {
+    margin-left: 0.5ex;
+  }
+
+  rtc > bdo {
+    display: ruby-base-container;
+  }
+
+  @supports (ruby-align: left) or (not (display: ruby-base-container)) {
+    ruby {
+      @apply inline-flex flex-col align-top leading-none;
+    }
+
+    rtc,
+    rt {
+      @apply order-[-1] grow-0 shrink-0;
+    }
+
+    rtc {
+      @apply inline-flex justify-between;
+    }
+    rt {
+      @apply inline-flex;
+    }
+  }
+
+  a {
+    @apply inline-flex items-center gap-1 text-primary no-underline border-b-2 border-solid border-transparent transition-all duration-300;
+  }
+
+  a:hover,
+  a:focus {
+    &:not(.btn) {
+      @apply text-primary border-b-2 border-primary border-solid outline-none;
+    }
+  }
+
+  a:active {
+    @apply border-solid;
+  }
+
+  table {
+    @apply text-sm;
+  }
+
+  caption {
+    @apply italic capitalize text-base;
+  }
+
+  th,
+  td {
+    @apply text-left align-middle leading-snug px-2;
+  }
+
+  th {
+    @apply font-sans font-bold text-lg;
+  }
+
+  thead th,
+  tfoot th {
+    @apply text-xl;
+  }
+
+	figure {
+		@apply block m-0 max-w-full;
+		> a {
+			@apply block w-fit border-0!;
+			&:hover,
+			&:focus,
+			&:active {
+				@apply border-0!;
+			}
+		}
+	}
+  img {
+    @apply block;
+    @apply m-0;
+    @apply w-full;
+  }
+
+  figcaption {
+    @apply block font-semibold text-xs leading-snug max-w-full break-words whitespace-normal;
+  }
+}

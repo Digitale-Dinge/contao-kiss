@@ -1,0 +1,128 @@
+/* Button */
+@layer components {
+  .btn,
+  .btn-primary,
+  .btn-secondary,
+  .btn-outline,
+  .btn-ghost,
+  .btn-link,
+  .btn-destructive,
+  .btn-sm,
+  .btn-sm-primary,
+  .btn-sm-secondary,
+  .btn-sm-outline,
+  .btn-sm-ghost,
+  .btn-sm-link,
+  .btn-sm-destructive,
+  .btn-lg,
+  .btn-lg-primary,
+  .btn-lg-secondary,
+  .btn-lg-outline,
+  .btn-lg-ghost,
+  .btn-lg-link,
+  .btn-lg-destructive,
+	button.submit {
+    @apply border-none inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer rounded-md;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-secondary,
+  .btn-outline,
+  .btn-ghost,
+  .btn-link,
+  .btn-destructive {
+    @apply gap-2 px-4 py-2;
+  }
+
+  .btn-sm,
+  .btn-sm-primary,
+  .btn-sm-secondary,
+  .btn-sm-outline,
+  .btn-sm-ghost,
+  .btn-sm-link,
+  .btn-sm-destructive {
+    @apply gap-1.5 px-3;
+  }
+
+  .btn-lg,
+  .btn-lg-primary,
+  .btn-lg-secondary,
+  .btn-lg-outline,
+  .btn-lg-ghost,
+  .btn-lg-link,
+  .btn-lg-destructive,
+	button.submit {
+    @apply gap-2 py-3 px-4 text-base;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-sm,
+  .btn-sm-primary,
+  .btn-lg,
+  .btn-lg-primary,
+	button.submit {
+    &[aria-pressed='true'] {
+      @apply bg-primary/80;
+    }
+  }
+  .btn-primary,
+  .btn-sm-primary,
+  .btn-lg-primary,
+	button.submit {
+    @apply bg-radial-[76.95%_1782.13%_at_11.36%_64.06%] from-[#d83e24] from-0% to-[var(--primary)] to-100% text-primary-foreground shadow-md hover:bg-radial-[0%_0%_at_100%_100%] hover:from-primary/80 hover:to-primary/80 hover:border-none;
+  }
+
+  .btn-secondary,
+  .btn-sm-secondary,
+  .btn-lg-secondary {
+    @apply bg-secondary text-secondary-foreground shadow-md hover:bg-tertiary;
+
+    &[aria-pressed='true'] {
+      @apply bg-tertiary;
+    }
+  }
+
+  .btn-outline,
+  .btn-sm-outline,
+  .btn-lg-outline {
+    @apply border bg-background shadow-xs dark:bg-input/30 dark:border-input;
+
+    &:hover,
+    &[aria-pressed='true'] {
+      @apply bg-accent text-accent-foreground dark:bg-accent/50;
+    }
+  }
+
+  .btn-ghost,
+  .btn-sm-ghost,
+  .btn-lg-ghost {
+    &:hover,
+    &[aria-pressed='true'] {
+      @apply bg-accent text-accent-foreground dark:bg-accent/50;
+    }
+  }
+
+  .btn-link,
+  .btn-sm-link,
+  .btn-lg-link {
+    @apply text-primary underline-offset-4;
+
+    &:hover,
+    &[aria-pressed='true'] {
+      @apply hover:underline;
+    }
+  }
+
+  .btn-destructive,
+  .btn-sm-destructive,
+  .btn-lg-destructive {
+    @apply bg-destructive text-white shadow-xs focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60;
+
+    &:hover,
+    &[aria-pressed='true'] {
+      @apply bg-destructive/90 dark:bg-destructive/50;
+    }
+  }
+}

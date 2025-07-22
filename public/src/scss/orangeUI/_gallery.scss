@@ -1,0 +1,13 @@
+/* Collapsible */
+@layer components {
+
+	.content-gallery {
+
+		li {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+	}
+}
