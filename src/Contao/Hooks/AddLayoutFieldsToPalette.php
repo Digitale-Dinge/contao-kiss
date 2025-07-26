@@ -56,7 +56,7 @@ final class AddLayoutFieldsToPalette
         $blacklist = StringUtil::deserialize(Config::get('kiss_dontShowFieldsOnContentElement'), true);
 
         // skip if the content type is in the blacklist
-        if (in_array($currentRecord['type'], $blacklist, true)) {
+        if ( array_key_exists('type',$currentRecord) && in_array($currentRecord['type'], $blacklist, true) ) {
             return $palette;
         }
 

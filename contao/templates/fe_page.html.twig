@@ -1,0 +1,19 @@
+{# Erweitert das Legacy-Template fe_page.html5 #}
+{% extends "@Contao/fe_page.html5" %}
+{% set class = 'text-base' %}
+
+
+{% block head %}
+  {{ parent() }}
+  <link rel="stylesheet" href="/files/frontend/dist/css/styles.css">
+{% endblock %}
+
+{% block header %}
+  {% include 'partials/page/_header.html.twig' %}
+  {{ parent() }}
+{% endblock %}
+
+{% block footer %}
+	{% include 'partials/page/_footer.html.twig' %}
+	{{ parent() }}
+{% endblock %}

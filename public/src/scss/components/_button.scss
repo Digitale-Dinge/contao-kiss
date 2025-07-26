@@ -1,0 +1,12 @@
+@layer utilities {
+
+	.btn-loading {
+		display: flex;
+		align-items: center;
+		gap: .5em;
+
+		span {
+			display: inline-block;
+		}
+	}
+}
