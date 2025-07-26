@@ -26,11 +26,11 @@ $GLOBALS['TL_LANG']['tl_content']['marginBottom'] = [
     'Bestimmen Sie den Abstand des Elements nach unten.',
 ];
 
-$GLOBALS['TL_LANG']['tl_content']['max-w-base'] = 'Satzspiegel';
-$GLOBALS['TL_LANG']['tl_content']['max-w-small'] = 'Satzspiegel schmal';
-$GLOBALS['TL_LANG']['tl_content']['max-w-narrow'] = 'Satzspiegel schmaler';
-$GLOBALS['TL_LANG']['tl_content']['max-w-full-pad'] = 'Volle Breite mit Abstand links und rechts';
-$GLOBALS['TL_LANG']['tl_content']['max-w-full'] = 'Volle Breite ohne Abstand links und rechts';
+$GLOBALS['TL_LANG']['tl_content']['container-base'] = 'Satzspiegel';
+$GLOBALS['TL_LANG']['tl_content']['container-small'] = 'Satzspiegel schmal';
+$GLOBALS['TL_LANG']['tl_content']['container-narrow'] = 'Satzspiegel schmaler';
+$GLOBALS['TL_LANG']['tl_content']['container-full-pad'] = 'Volle Breite mit Abstand links und rechts';
+$GLOBALS['TL_LANG']['tl_content']['container-full'] = 'Volle Breite ohne Abstand links und rechts';
 
 $GLOBALS['TL_LANG']['tl_content']['padding']['pt-line-1/2'] = 'Halbe Zeilenhöhe';
 $GLOBALS['TL_LANG']['tl_content']['padding']['pt-line-1'] = '1x Zeilenhöhe';

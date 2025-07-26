@@ -12,11 +12,11 @@ use Twig\TwigFunction;
 class AppExtension extends AbstractExtension
 {
    const CONTAINER_SIZES = [
-       'base'       => "max-w-base",
-       'small'      => "max-w-small",
-       'narrow'     => "max-w-narrow",
-       'full-pad'   => "max-w-full-pad",
-       'full' 			=> "max-w-full"
+       'base'       => "container-base",
+       'small'      => "container-small",
+       'narrow'     => "container-narrow",
+       'full-pad'   => "container-full-pad",
+       'full'       => "container-full"
    ];
 
    public function getFilters(): array
