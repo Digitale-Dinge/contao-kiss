@@ -1,4 +1,11 @@
+@use '../mixins/mixins' as *;
+
 @layer utilities {
+
+	:root {
+		--base-line-height: 2em;
+	}
+
 	// All Contao invisible classes
 	.invisible {
 		@apply hidden;
@@ -9,64 +16,72 @@
 	
 	
 	/* Margin Bottom */
-	.mb-line-1\/2 { margin-bottom: calc(0.5em * var(--base-line-height)); }
-	.mb-line-1 { margin-bottom: calc(1em * var(--base-line-height)); }
-	.mb-line-2 { margin-bottom: calc(2em * var(--base-line-height)); }
-	.mb-line-3 { margin-bottom: calc(3em * var(--base-line-height)); }
-	.mb-line-4 { margin-bottom: calc(4em * var(--base-line-height)); }
-	.mb-line-5 { margin-bottom: calc(5em * var(--base-line-height)); }
+	.mb-line-1\/2 { margin-bottom: calc(.5 * var(--base-line-height)); }
+	.mb-line-1 { margin-bottom: var(--base-line-height); }
+	.mb-line-2 { margin-bottom: calc(2 * var(--base-line-height)); }
+	.mb-line-3 { margin-bottom: calc(3 * var(--base-line-height)); }
+	.mb-line-4 { margin-bottom: calc(4 * var(--base-line-height)); }
+	.mb-line-5 { margin-bottom: calc(5 * var(--base-line-height)); }
 	
 	/* Margin Top */
-	.mt-line-1\/2 { margin-top: calc(0.5em * var(--base-line-height)); }
-	.mt-line-1 { margin-top: calc(1em * var(--base-line-height)); }
-	.mt-line-2 { margin-top: calc(2em * var(--base-line-height)); }
-	.mt-line-3 { margin-top: calc(3em * var(--base-line-height)); }
-	.mt-line-4 { margin-top: calc(4em * var(--base-line-height)); }
-	.mt-line-5 { margin-top: calc(5em * var(--base-line-height)); }
+	.mt-line-1\/2 { margin-top: calc(.5 * var(--base-line-height)); }
+	.mt-line-1 { margin-top: var(--base-line-height); }
+	.mt-line-2 { margin-top: calc(2 * var(--base-line-height)); }
+	.mt-line-3 { margin-top: calc(3 * var(--base-line-height)); }
+	.mt-line-4 { margin-top: calc(4 * var(--base-line-height)); }
+	.mt-line-5 { margin-top: calc(5 * var(--base-line-height)); }
 	
 	/* Padding Bottom */
-	.pb-line-1\/2 { padding-bottom: calc(0.5em * var(--base-line-height)); }
-	.pb-line-1 { padding-bottom: calc(1em * var(--base-line-height)); }
-	.pb-line-2 { padding-bottom: calc(2em * var(--base-line-height)); }
-	.pb-line-3 { padding-bottom: calc(3em * var(--base-line-height)); }
-	.pb-line-4 { padding-bottom: calc(4em * var(--base-line-height)); }
-	.pb-line-5 { padding-bottom: calc(5em * var(--base-line-height)); }
+	.pb-line-1\/2 { padding-bottom: calc(.5 * var(--base-line-height)); }
+	.pb-line-1 { padding-bottom: var(--base-line-height); }
+	.pb-line-2 { padding-bottom: calc(2 * var(--base-line-height)); }
+	.pb-line-3 { padding-bottom: calc(3 * var(--base-line-height)); }
+	.pb-line-4 { padding-bottom: calc(4 * var(--base-line-height)); }
+	.pb-line-5 { padding-bottom: calc(5 * var(--base-line-height)); }
 	
 	/* Padding Top */
-	.pt-line-1\/2 { padding-top: calc(0.5em * var(--base-line-height)); }
-	.pt-line-1 { padding-top: calc(1em * var(--base-line-height)); }
-	.pt-line-2 { padding-top: calc(2em * var(--base-line-height)); }
-	.pt-line-3 { padding-top: calc(3em * var(--base-line-height)); }
-	.pt-line-4 { padding-top: calc(4em * var(--base-line-height)); }
-	.pt-line-5 { padding-top: calc(5em * var(--base-line-height)); }
+	.pt-line-1\/2 { padding-top: calc(.5 * var(--base-line-height)); }
+	.pt-line-1 { padding-top: var(--base-line-height); }
+	.pt-line-2 { padding-top: calc(2 * var(--base-line-height)); }
+	.pt-line-3 { padding-top: calc(3 * var(--base-line-height)); }
+	.pt-line-4 { padding-top: calc(4 * var(--base-line-height)); }
+	.pt-line-5 { padding-top: calc(5 * var(--base-line-height)); }
 
 	/* Satzspiegel */
-	.max-w-base {
-		@apply max-w-5xl mx-auto px-4;
-		> .max-w-base {
+	.container-base {
+		@apply max-w-7xl;
+		> .container-base {
 			@apply px-0;
 		}
 	}
-	.max-w-small {
-		@apply max-w-3xl mx-auto px-4;
-		> .max-w-base,
-		> .max-w-small {
+	.container-small {
+		@apply max-w-5xl;
+		> .container-base,
+		> .container-small {
 			@apply px-0;
 		}
 	}
-	.max-w-narrow {
-		@apply max-w-xl mx-auto px-4;
-		> .max-w-base,
-		> .max-w-small,
-		> .max-w-narrow {
+	.container-narrow {
+		@apply max-w-2xl;
+		> .container-base,
+		> .container-small,
+		> .container-narrow {
 			@apply px-0;
 		}
 	}
-	.max-w-full-pad {
-		@apply max-w-full mx-auto px-4;
-	}
-	.max-w-full {
-		@apply max-w-full;
+
+	.container-base,
+	.container-small,
+	.container-narrow,
+	.container-full-pad {
+		@apply mx-auto px-4;
+
+		@include media(">=md") {
+			@apply px-6;
+		}
+		@include media(">=lg") {
+			@apply px-8;
+		}
 	}
 	
 	/* Clearfix */
