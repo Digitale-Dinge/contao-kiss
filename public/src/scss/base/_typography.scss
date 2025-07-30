@@ -184,7 +184,7 @@
 
   dfn,
   dt {
-    @apply font-bold italic capitalize;
+    @apply font-bold italic;
   }
 
   abbr {
@@ -299,7 +299,7 @@
   }
 
   caption {
-    @apply italic capitalize text-base;
+    @apply italic text-base;
   }
 
   th,
