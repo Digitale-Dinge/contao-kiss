@@ -374,7 +374,7 @@
 		}
 	}
 	.swiper-button-disabled {
-		@apply opacity-0! transition;
+		@apply opacity-0 transition;
 	}
 	.swiper-pagination {
 		&-bullet-active {
