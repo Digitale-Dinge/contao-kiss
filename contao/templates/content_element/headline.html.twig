@@ -35,7 +35,7 @@
 {% block wrapper %}
 	<div {{ attributes }}>
 		{% if data.topline is not empty %}
-			<p class="topline uppercase font-bold text-lg mb-2 text-primary">{{ data.topline }}</p>
+			<p class="topline">{{ data.topline }}</p>
 		{% endif %}
 		{% with {headline: headline|default(_context)} %}
 			{{ block('headline_component') }}
