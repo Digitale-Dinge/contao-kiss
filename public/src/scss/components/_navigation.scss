@@ -1,27 +1,22 @@
 @use '../mixins/mixins' as *;
-
-.mod_breadcrumb {
-  ul {
-    margin: 0 0 2rem 0;
-    padding: 0;
-    list-style-type: none;
-    li {
-      display: inline-block;
-      margin: 0 1rem 0 0;
-      padding: 0;
-    }
-  }
-}
-
-.pagination {
-
-  ul {
-    display: flex;
-    list-style: none;
-    padding: 0;
-
-    li {
-      margin: 0 .5rem;
-    }
-  }
+@layer components {
+	.mod_breadcrumb {
+		ul {
+			margin: 0 0 2rem 0;
+			padding: 0;
+			list-style-type: none;
+			li {
+				display: inline-block;
+				margin: 0 1rem 0 0;
+				padding: 0;
+			}
+		}
+	}
+	
+	.pagination {
+	
+		ul {
+			@apply flex flex-wrap p-0 list-none gap-2;
+		}
+	}
 }
