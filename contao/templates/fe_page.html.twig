@@ -9,11 +9,19 @@
 {% endblock %}
 
 {% block header %}
-  {% include 'partials/page/_header.html.twig' %}
-  {{ parent() }}
+	<header id="header">
+	{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/headaer/_meta.html.twig' %}
+	{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/headaer/_main.html.twig' %}
+	{{ parent() }}
+	</header>
 {% endblock %}
 
 {% block footer %}
-	{% include 'partials/page/_footer.html.twig' %}
+	<footer id="footer">
+		<div id="footer-wrapper">
+			{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_main.html.twig' %}
+		</div>
+		{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_meta.html.twig' %}
+	</footer>
 	{{ parent() }}
 {% endblock %}

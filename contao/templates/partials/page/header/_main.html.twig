@@ -1,0 +1,25 @@
+<div class="header-main z-0 relative py-8 text-sm">
+	<div class="inside flex gap-4 items-center justify-between {{ getContainerClass() }}">
+		{# Logo #}
+		{{ frontend_module(1) }}
+		<div class="hidden md:block">
+			{# Main navigation #}
+			{{ frontend_module(2) }}
+		</div>
+		<div class="block md:hidden leading-none">				
+			<button class="hamburger hamburger--spin" type="button" aria-label="Menu" aria-controls="menu" id="menu-toggle">
+				<span class="hamburger-box">
+					<span class="hamburger-inner"></span>
+				</span>
+			</button>
+			{# Mobile navigation #}
+			{{ frontend_module(7) }}
+			<script>
+				var hamburger = document.querySelector(".hamburger");
+				hamburger.addEventListener("click", function() {
+					hamburger.classList.toggle("is-active");
+				});
+			</script>
+		</div>
+	</div>
+</div>
