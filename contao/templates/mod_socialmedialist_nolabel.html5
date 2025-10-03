@@ -14,8 +14,5 @@
 	</ul>
 </nav>
 <span id="skipSocial<?= $this->id ?>" class="invisible"></span>
-<pre>
-	<?php $this->dumpTemplateVars(); ?>
-</pre>
 <?php $this->endblock(); ?>
 
