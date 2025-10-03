@@ -3,7 +3,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_article']['bgColor'] = ['<img src="public/bundles/digitaledingecontaokiss/icons/bgcolor.svg" width="16" height="16"> Hintergrundfarbe', 'Wählen Sie die Hintergrundfarbe für den Artikel'];
+$GLOBALS['TL_LANG']['tl_article']['bgColor'] = ['<img src="bundles/digitaledingecontaokiss/icons/bgcolor.svg" width="16" height="16"> Hintergrundfarbe', 'Wählen Sie die Hintergrundfarbe für den Artikel'];
 
 $GLOBALS['TL_LANG']['tl_content']['contentWidth'] = [
     '<img src="bundles/digitaledingecontaokiss/icons/contentwidth.svg" width="16" height="16"> Inhaltsbreite',

@@ -5,10 +5,10 @@
   </desc>
   <title>keyboard-return-1</title>
   <g style="transform-origin: 13.5px 11.997px;" transform="matrix(0, 1, -1, 0, -1.597999, 0.54118)">
-    <path d="m9 11.997 9 0" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
-    <path d="M12.75 8.247 9 11.997l3.75 3.75" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path d="m9 11.997 9 0" fill="none" stroke="#1a70a2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path d="M12.75 8.247 9 11.997l3.75 3.75" fill="none" stroke="#1a70a2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
   </g>
-  <path d="M 11.902 2.046 L 11.902 11.046" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="transform-box: fill-box; transform-origin: 50% 50%;" transform="matrix(0, 1, -1, 0, 0.000001, 0)"/>
-  <path d="M 22.402 0.083 L 22.402 1.659 C 22.402 1.659 22.402 4.659 19.402 4.659 L 4.402 4.659 C 4.402 4.659 1.402 4.659 1.402 1.659 L 1.402 0.177" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="stroke-width: 1.5;"/>
-  <path d="M 22.402 18.852 L 22.402 20.428 C 22.402 20.428 22.402 23.428 19.402 23.428 L 4.402 23.428 C 4.402 23.428 1.402 23.428 1.402 20.428 L 1.402 18.946" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="stroke-width: 1.5; transform-box: fill-box; transform-origin: 50% 50%;" transform="matrix(-1, 0, 0, -1, 0.000001, -0.000002)"/>
+  <path d="M 11.902 2.046 L 11.902 11.046" fill="none" stroke="#1a70a2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="transform-box: fill-box; transform-origin: 50% 50%;" transform="matrix(0, 1, -1, 0, 0.000001, 0)"/>
+  <path d="M 22.402 0.083 L 22.402 1.659 C 22.402 1.659 22.402 4.659 19.402 4.659 L 4.402 4.659 C 4.402 4.659 1.402 4.659 1.402 1.659 L 1.402 0.177" fill="none" stroke="#1a70a2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="stroke-width: 1.5;"/>
+  <path d="M 22.402 18.852 L 22.402 20.428 C 22.402 20.428 22.402 23.428 19.402 23.428 L 4.402 23.428 C 4.402 23.428 1.402 23.428 1.402 20.428 L 1.402 18.946" fill="none" stroke="#1a70a2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" style="stroke-width: 1.5; transform-box: fill-box; transform-origin: 50% 50%;" transform="matrix(-1, 0, 0, -1, 0.000001, -0.000002)"/>
 </svg>
