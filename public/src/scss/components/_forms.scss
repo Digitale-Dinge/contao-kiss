@@ -8,3 +8,14 @@
 @include meta.load-css("forms/_switch");
 @include meta.load-css("forms/_textarea");
 
+@layer components {
+	/* Error handling */
+	p.error {
+		@apply p-4;
+	}
+	
+	/* Success handling */
+	p.success {
+		@apply p-4;
+	}
+}
