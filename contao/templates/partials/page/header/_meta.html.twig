@@ -5,24 +5,8 @@
 			<div class="hidden min-[480px]:block">
 				{{ frontend_module(4) }}
 			</div>
-			{# START Language switcher #}
-				{# START Display current language #}
-				<div class="mod_changelanguage__wrapper ml-4 pl-4 cursor-pointer group relative min-[480px]:border-l-1 border-solid border-muted-foreground/20">
-					<div class="flex items-center align-center gap-2">
-						<span class="icon icon-earth-language"></span>
-						{% if contao.page.language =="de" %}
-							<span class="mod_changelanguage--active lang-de">Deutsch</span>
-						{% elseif contao.page.language =="en" %}
-							<span class="mod_changelanguage--active lang-en">English</span>
-						{% endif %}
-					</div>
-					{# END Display current language #}
-					{# START Dropdown language list #}
-					<div class="hidden group-hover:block group-hover:pointer-events-auto absolute left-1/2 -translate-x-1/2 pointer-events-none transition-opacity duration-300">
-						{{ frontend_module(6) }}
-					</div>
-					{# END Dropdown language list #}
-				{# END Language switcher #}
+			<div>
+				{{ frontend_module(6) }}
 			</div>
 		</div>
 	</div>

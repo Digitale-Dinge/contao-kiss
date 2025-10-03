@@ -3,7 +3,7 @@
 
 {% if has_footer_meta_left or has_footer_meta_right %}
 	<div class="footer-meta bg-footer-meta">
-		<div class="flex flex-col min-[880px]:flex-row max-[880px]:gap-8 align-center min-[880px]:items-center max-w-5xl mx-auto py-8 px-4">
+		<div class="container-base flex flex-col min-[880px]:flex-row max-[880px]:gap-8 align-center min-[880px]:items-center">
 			{% if sections['footer-meta-left'] is defined and sections['footer-meta-left'] is not empty %}
 			<div>	
 				{{ sections['footer-meta-left']|raw }}
