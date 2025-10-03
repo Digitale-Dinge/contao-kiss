@@ -205,7 +205,7 @@
   }
 
   code {
-    @apply bg-muted text-xs px-1 py-1 rounded;
+    @apply bg-muted text-sm px-1 py-1 rounded;
   }
   pre code {
     @apply leading-snug py-0;
@@ -218,7 +218,7 @@
   }
 
   kbd {
-    @apply text-xs px-2 py-1 border border-primary/300 rounded;
+    @apply text-sm px-2 py-1 border border-primary/300 rounded;
   }
 
   samp,
@@ -334,6 +334,6 @@
   }
 
   figcaption {
-    @apply block font-semibold text-xs leading-snug max-w-full break-words whitespace-normal;
+    @apply block font-semibold text-sm leading-snug max-w-full break-words whitespace-normal;
   }
 }

@@ -108,7 +108,7 @@
 @layer base {
 	p {
 		&.topline {
-			@apply m-0 text-xs uppercase font-bold text-primary;
+			@apply m-0 text-sm uppercase font-bold text-primary;
 			+ h1,
 			+ h2,
 			+ h3,
@@ -119,7 +119,7 @@
 			}
 		}
 		&.info {
-			@apply m-0 text-xs;
+			@apply m-0 text-sm;
 		}
 		&.more {
 			@apply m-0 px-6 pb-6;
@@ -391,7 +391,7 @@
 			&__button {
 				@apply flex! flex-row justify-between bg-muted! border-0! mb-3!;
 				&:after {
-					@apply font-icon inline-flex items-center transform transition-transform duration-300 text-xs;
+					@apply font-icon inline-flex items-center transform transition-transform duration-300 text-sm;
 					content:"\f107";
 				}
 			}
