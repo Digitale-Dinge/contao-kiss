@@ -1,20 +1,19 @@
+{% set has_footer_meta_left  = sections['footer-meta-left']  is defined and sections['footer-meta-left']  is not empty %}
+{% set has_footer_meta_right = sections['footer-meta-right'] is defined and sections['footer-meta-right'] is not empty %}
 
-<div class="footer-meta flex flex-col min-[880px]:flex-row max-[880px]:gap-8 align-center min-[880px]:items-center max-w-5xl mx-auto py-8 px-4 bg-white">
-	{{ frontend_module(1) }}
-	<div class="grow min-[880px]:text-right text-xs">
-		{#{{ frontend_module(8) }}#}
-	</div>
-	<div class="mod_changelanguage__wrapper min-[880px]:ml-4 min-[880px]:pl-4 cursor-pointer group relative min-[880px]:border-l-1 border-solid border-muted-foreground/20 text-xs leading-none">
-		<div class="flex items-center align-center gap-2 -mt-6 pt-6">
-			<span class="icon icon-earth-language"></span>
-			{% if contao.page.language =="de" %}
-				<span class="mod_changelanguage--active lang-de">Deutsch</span>
-			{% elseif contao.page.language =="en" %}
-				<span class="mod_changelanguage--active lang-en">English</span>
+{% if has_footer_meta_left or has_footer_meta_right %}
+	<div class="footer-meta bg-footer-meta">
+		<div class="flex flex-col min-[880px]:flex-row max-[880px]:gap-8 align-center min-[880px]:items-center max-w-5xl mx-auto py-8 px-4">
+			{% if sections['footer-meta-left'] is defined and sections['footer-meta-left'] is not empty %}
+			<div>	
+				{{ sections['footer-meta-left']|raw }}
+			</div>
+			{% endif %}
+			{% if sections['footer-meta-right'] is defined and sections['footer-meta-right'] is not empty %}
+				<div>
+					{{ sections['footer-meta-right']|raw }}
+				</div>
 			{% endif %}
 		</div>
-		<div class="hidden group-focus:block group-hover:block group-focus:pointer-events-auto group-hover:pointer-events-auto absolute	left-1/2 -translate-x-1/2 pointer-events-none transition-opacity duration-300 bottom-4">
-			{{ frontend_module(5) }}
-		</div>
 	</div>
-</div>
+{% endif %}

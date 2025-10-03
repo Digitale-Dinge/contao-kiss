@@ -8,20 +8,19 @@
 {% endblock %}
 
 {% block header %}
-	<header id="header">
+	<header id="header" class="bg-header">
 	{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_meta.html.twig' %}
 	{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_main.html.twig' %}
 	</header>
 {% endblock %}
 
 {% block footer %}
-	<footer id="footer">
+	<footer id="footer" class="bg-footer">
 		<div id="footer-wrapper">
 			{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_main.html.twig' %}
 		</div>
-		{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_meta.html.twig' %}
 	</footer>
-	{{ parent() }}
+	{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_meta.html.twig' %}
 {% endblock %}
 
 {% block body %}
