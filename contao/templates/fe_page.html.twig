@@ -4,15 +4,13 @@
 
 
 {% block head %}
-  {{ parent() }}
-  <link rel="stylesheet" href="/files/frontend/dist/css/styles.css">
+	{{ parent() }}
 {% endblock %}
 
 {% block header %}
 	<header id="header">
 	{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_meta.html.twig' %}
 	{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_main.html.twig' %}
-	{{ parent() }}
 	</header>
 {% endblock %}
 
@@ -24,4 +22,9 @@
 		{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_meta.html.twig' %}
 	</footer>
 	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	{{ parent() }}
+	<link rel="stylesheet" href="/files/frontend/dist/css/styles.css">
 {% endblock %}
