@@ -2,7 +2,7 @@
 <div class="footer-meta flex flex-col min-[880px]:flex-row max-[880px]:gap-8 align-center min-[880px]:items-center max-w-5xl mx-auto py-8 px-4 bg-white">
 	{{ frontend_module(1) }}
 	<div class="grow min-[880px]:text-right text-xs">
-		{{ frontend_module(8) }}
+		{#{{ frontend_module(8) }}#}
 	</div>
 	<div class="mod_changelanguage__wrapper min-[880px]:ml-4 min-[880px]:pl-4 cursor-pointer group relative min-[880px]:border-l-1 border-solid border-muted-foreground/20 text-xs leading-none">
 		<div class="flex items-center align-center gap-2 -mt-6 pt-6">
@@ -13,6 +13,8 @@
 				<span class="mod_changelanguage--active lang-en">English</span>
 			{% endif %}
 		</div>
-		<div class="hidden group-focus:block group-hover:block group-focus:pointer-events-auto group-hover:pointer-events-auto absolute	left-1/2 -translate-x-1/2 pointer-events-none transition-opacity duration-300 bottom-4">{{ frontend_module(6) }}</div>
+		<div class="hidden group-focus:block group-hover:block group-focus:pointer-events-auto group-hover:pointer-events-auto absolute	left-1/2 -translate-x-1/2 pointer-events-none transition-opacity duration-300 bottom-4">
+			{{ frontend_module(5) }}
+		</div>
 	</div>
 </div>
