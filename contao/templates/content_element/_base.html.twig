@@ -25,7 +25,7 @@
 
 {% block headline_component %}
   {% if data.topline is not empty %}
-    <p class="topline uppercase font-bold text-lg mb-2 text-prim">{{ data.topline }}</p>
+    <p class="topline m-0">{{ data.topline }}</p>
   {% endif %}
   {{ parent() }}
 {% endblock %}
