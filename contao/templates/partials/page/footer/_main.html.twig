@@ -1,27 +1,7 @@
 
 <div class="inside container-base">
-	<div class="footer-contact bg-primary mx-auto px-8 py-12 flex flex-col md:flex-row gap-4 -translate-y-1/2">
-		<div class="item item-email w-full flex flex-[0_1_36%] gap-4 items-center justify-left ml-auto text-white">
-			<div class="flex items-center justify-center size-16">
-				<span class="icon icon-email block text-secondary size-12 text-[3rem] md:size-16 md:text-[4rem] leading-none"></span>
-			</div>
-			<div>
-				<span class="block pb-2 text-white/60 text-sm leading-none">E-Mail</span>
-				{{ insert_tag('company::mailto')|raw }}
-			</div>
-		</div>
-		<div class="item item-email w-full flex flex-[0_1_36%] gap-4 items-center justify-left mr-auto text-white">
-			<div class="flex items-center justify-center size-16">
-				<span class="icon icon-phone block text-secondary size-12 text-[3rem] md:size-16 md:text-[4rem] leading-none"></span>
-			</div>
-			<div>
-				<span class="block pb-2 text-white/60 text-sm leading-none">Telefon</span>
-				{{ insert_tag('company::tel')|raw }}
-			</div>
-		</div>
-	</div>
 	<div class="footer-social max-w-5xl mx-auto px-4">
-		{#{{ frontend_module(15) }}#}
+		{{ frontend_module(7) }}
 	</div>
 	<div class="footer-content flex flex-col min-[500px]:flex-row gap-16 min-[880px]:gap-4 min-[880px]:justify-between pb-16">
 		<div class="footer-address text-grey">
