@@ -1,0 +1,8 @@
+/* Fieldsets */
+@layer components {
+	fieldset {
+		legend {
+			@apply font-bold text-primary;
+		}
+	}
+}
