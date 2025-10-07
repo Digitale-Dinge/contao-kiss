@@ -18,23 +18,23 @@
   <?php endif; ?>
 
   <input type="<?= $this->type ?>" name="<?= $this->name ?>" id="ctrl_<?= $this->id ?>" class="range<?php if ($this->class): ?> <?= $this->class ?><?php endif; ?>"<?php if ('' !== (string) $this->value): ?> value="<?= (float) $this->value ?>"<?php endif; ?><?= $this->getAttributes() ?>>
-<script>
-		function updatePercent(el) {
-			const min = parseFloat(el.min || 0);
-			const max = parseFloat(el.max || 100);
-			const value = parseFloat(el.value);
-			const percent = (max === min) ? 0 : ((value - min) / (max - min)) * 100;
-			el.style.setProperty('--slider-value', `${percent}%`);
-		}
-	
-		const slider = document.getElementById('ctrl_<?= $this->id ?>');
-	
-		// Initialisieren
-		updatePercent(slider);
-	
-		// Event Listener für Eingaben
-		slider.addEventListener('input', function () {
-			updatePercent(slider);
-		});
-	</script>
+		<script>
+			(() => {
+				const sliders = document.querySelectorAll('input[type="range"].range');
+				if (!sliders) return;
+		
+				const updateSlider = (el) => {
+					const min = parseFloat(el.min || 0);
+					const max = parseFloat(el.max || 100);
+					const value = parseFloat(el.value);
+					const percent = (max === min) ? 0 : ((value - min) / (max - min)) * 100;
+					el.style.setProperty('--slider-value', `${percent}%`);
+				};
+		
+				sliders.forEach(slider => {
+					updateSlider(slider);
+					slider.addEventListener('input', (event) => updateSlider(event.target));
+				});
+			})();
+		</script>
 <?php $this->endblock(); ?>

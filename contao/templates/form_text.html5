@@ -1,0 +1,51 @@
+<?php $this->extend('form_row'); ?>
+<?php
+// Vor den Blöcken: Wrapper-Attribute erweitern
+$this->wrapperAttributes = $this
+		->attr()
+		->set('data-input-number', '', $this->type === 'number')
+		->mergeWith($this->wrapperAttributes)
+;
+?>
+
+<?php $this->block('label'); ?>
+  <?php if ($this->label): ?>
+    <label for="ctrl_<?= $this->id ?>"<?php if ($this->class): ?> class="<?= $this->class ?>"<?php endif; ?>>
+      <?php if ($this->mandatory): ?>
+        <span class="invisible"><?= $this->mandatoryField ?> </span><?= $this->label ?><span class="mandatory">*</span>
+      <?php else: ?>
+        <?= $this->label ?>
+      <?php endif; ?>
+    </label>
+  <?php endif; ?>
+<?php $this->endblock(); ?>
+
+<?php $this->block('field'); ?>
+	<?php if ($this->type != 'number'): ?>
+		<?php if ($this->hasErrors()): ?>
+			<p class="error"><?= $this->getErrorAsString() ?></p>
+		<?php endif; ?>
+	
+		<input type="<?= $this->type ?>" name="<?= $this->name ?>" id="ctrl_<?= $this->id ?>" class="input text<?php if ($this->hideInput): ?> password<?php endif; ?><?php if ($this->class): ?> <?= $this->class ?><?php endif; ?>" value="<?= Contao\StringUtil::specialchars($this->convertDate($this->value)) ?>"<?php if ($this->help): ?> aria-describedby="help_ctrl_<?= $this->id ?>"<?php endif; ?><?= $this->getAttributes() ?>>
+	
+		<?php if ($this->help): ?>
+			<p class="help" id="help_ctrl_<?= $this->id ?>"><?= $this->help ?></p>
+		<?php endif; ?>
+	<?php endif; ?>
+	
+	<?php if ($this->type == 'number'): ?>
+		<div class="input">
+			<input type="text" value="1" aria-label="Label input number" data-input-number-input id="number-input-label" />
+			<span class="my-auto flex gap-3">
+				<button type="button" class="btn btn-primary btn-soft size-5.5 min-h-0 rounded-sm p-0" aria-label="Decrement button" data-input-number-decrement >
+					<span class="icon-chevron-down size-3.5 shrink-0"></span>
+				</button>
+				<button type="button" class="btn btn-primary btn-soft size-5.5 min-h-0 rounded-sm p-0" aria-label="Increment button" data-input-number-increment >
+					<span class="icon-chevron-up size-3.5 shrink-0"></span>
+				</button>
+			</span>
+		</div>
+	<?php endif; ?>
+<?php $this->endblock(); ?>
+
+
