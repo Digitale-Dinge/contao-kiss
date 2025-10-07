@@ -1,0 +1,71 @@
+<?php
+$blnHasActive = false;
+$intLevel = (int) substr((string) $this->level, 6);
+if ($intLevel < 1) {
+		$intLevel = 1;
+}
+
+// Sprachen laden (wie im Original)
+$arrLanguages = Contao\System::getContainer()->get('contao.intl.locales')->getLocales(null, true);
+
+// Aktives Element finden (inkl. aktivem Subitem)
+$activeItem = null;
+foreach ($this->items as $it) {
+		if ($it['isActive'] || str_contains($it['subitems'] ?? '', 'class="active')) {
+				$activeItem = $it;
+				$blnHasActive = true;
+				break;
+		}
+}
+
+// Button-Label bestimmen (aktiv oder Platzhalter)
+$buttonLabel = $activeItem
+		? ($arrLanguages[$activeItem['item']->getLocaleId()] ?? $activeItem['link'])
+		: '-';
+?>
+<div class="dropdown relative inline-flex">
+		<button
+				id="dropdown-default"
+				type="button"
+				class="dropdown-toggle flex flex-row gap-x-2 items-center"
+				aria-haspopup="menu"
+				aria-expanded="false"
+				aria-label="Dropdown"
+		>
+				<?= $buttonLabel ?>
+				<span class="icon icon-chevron-down dropdown-open:rotate-180 text-[80%]"></span>
+		</button>
+
+		<ul
+				class="dropdown-menu dropdown-open:opacity-100 hidden min-w-60"
+				role="menu"
+				aria-orientation="vertical"
+				aria-labelledby="dropdown-default"
+		>
+				<?php foreach ($this->items as $item): ?>
+						<?php
+								$label   = $arrLanguages[$item['item']->getLocaleId()] ?? $item['link'];
+								$classes = trim('dropdown-item ' . ($item['class'] ?? '') . ($item['isActive'] ? ' active' : ''));
+								$indent  = str_repeat('&nbsp;&nbsp;&nbsp;', $intLevel - 1);
+								// Fallback für href bei aktivem, nicht verlinktem Eintrag:
+								$href    = $item['href'] ?: '#';
+						?>
+						<li role="none">
+								<a
+										href="<?= $href ?>"
+										class="<?= $classes ?>"
+										role="menuitem"
+										<?= $item['isActive'] ? 'aria-current="page"' : '' ?>
+								>
+										<?= $indent . $label ?>
+								</a>
+
+								<?php
+								// Bereits gerenderte Subitems (z. B. <ul>…</ul>) anhängen, falls vorhanden
+								// Achtung: Nur ausgeben, wenn erwartet, dass Subnavigation innerhalb des Dropdowns erscheinen soll.
+								echo $item['subitems'] ?? '';
+								?>
+						</li>
+				<?php endforeach; ?>
+		</ul>
+</div>
