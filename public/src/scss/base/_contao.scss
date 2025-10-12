@@ -46,43 +46,6 @@
 	.pt-line-3 { padding-top: calc(3 * var(--base-line-height)); }
 	.pt-line-4 { padding-top: calc(4 * var(--base-line-height)); }
 	.pt-line-5 { padding-top: calc(5 * var(--base-line-height)); }
-
-	/* Satzspiegel */
-	.container-base {
-		@apply max-w-7xl;
-		> .container-base {
-			@apply px-0;
-		}
-	}
-	.container-small {
-		@apply max-w-5xl;
-		> .container-base,
-		> .container-small {
-			@apply px-0;
-		}
-	}
-	.container-narrow {
-		@apply max-w-2xl;
-		> .container-base,
-		> .container-small,
-		> .container-narrow {
-			@apply px-0;
-		}
-	}
-
-	.container-base,
-	.container-small,
-	.container-narrow,
-	.container-full-pad {
-		@apply mx-auto px-4;
-
-		@include media(">=md") {
-			@apply px-6;
-		}
-		@include media(">=lg") {
-			@apply px-8;
-		}
-	}
 	
 	/* Clearfix */
 	.clearfix {
