@@ -8,7 +8,7 @@ $GLOBALS['TL_DCA']['tl_article']['fields']['bgColor'] =
     'exclude'   => true,
 		"label" => &$GLOBALS["TL_LANG"]["tl_article"]["bgColor"],
     'inputType' => 'select',
-    'options' => ['transparent', 'background-primary', 'background-secondary', 'background-additional-1', 'background-additional-2'],
+    'options' => ['transparent', 'background-white', 'background-primary', 'background-secondary', 'background-additional-1', 'background-additional-2'],
 		'reference' => &$GLOBALS['TL_LANG']['default']['background-color'],
     'eval'      =>
     [

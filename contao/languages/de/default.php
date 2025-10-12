@@ -20,7 +20,8 @@
 
 $GLOBALS['TL_LANG']['default']['background-color'] = [
    'transparent' => 'Transparent',
-   'background-primary' => 'Markenfarbe',
+   'background-white' => 'Weiß',
+	 'background-primary' => 'Markenfarbe',
    'background-secondary' => 'Sekundäre Farbe',
    'background-additional-1' => 'Zusätzliche Farbe 1',
    'background-additional-2' => 'Zusätzliche Farbe 2'
