@@ -168,7 +168,7 @@
 	}
 
 	u {
-		text-decoration: dotted underline 2px red;
+		@apply decoration-secondary;
 	}
 
 	mark,
