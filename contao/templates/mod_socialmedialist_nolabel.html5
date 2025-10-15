@@ -7,7 +7,7 @@
 	<?php foreach ($this->items as $item): ?>
 			<li>
 				<a href="<?= $item['url'] ?>" target="_blank" rel="noopener" class="<?= $item['class'] ?>" title="{{company::name}} <?= $this->trans('socialmedialist_on', [], 'default') ?> <?= $item['title'] ?>">
-				<span class="icon-<?= $item['class'] ?>"></span>
+				<span class="icon-logo-<?= $item['class'] ?>"></span>
 				</a>
 			</li>
 	<?php endforeach; ?>
