@@ -61,8 +61,7 @@
 	}
 	.background-white {
 		@apply bg-white text-base-content;
-		.text-primary,
-		.topline {
+		.text-primary {
 			@apply text-primary;
 		}
 	}
