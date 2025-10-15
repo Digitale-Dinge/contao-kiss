@@ -9,18 +9,31 @@
 
 {% block header %}
 	<header id="header" class="bg-header">
-	{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_meta.html.twig' %}
-	{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_main.html.twig' %}
+		{% include [
+			'@Contao/partials/page/header/_meta.html.twig',
+			'@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_meta.html.twig'
+			
+		] ignore missing %}
+		{% include [
+			'@Contao/partials/page/header/_main.html.twig',
+			'@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_main.html.twig'
+		] ignore missing %}
 	</header>
 {% endblock %}
 
 {% block footer %}
 	<footer id="footer" class="bg-footer">
 		<div id="footer-wrapper">
-			{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_main.html.twig' %}
+			{% include [
+				'@Contao/partials/page/footer/_main.html.twig',
+				'@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_main.html.twig'
+			] ignore missing %}
 		</div>
 	</footer>
-	{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_meta.html.twig' %}
+	{% include [
+		'@Contao/partials/page/footer/_meta.html.twig',
+		'@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_meta.html.twig'
+	] ignore missing %}
 {% endblock %}
 
 {% block body %}
