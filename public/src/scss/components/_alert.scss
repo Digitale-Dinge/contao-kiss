@@ -1,0 +1,185 @@
+/**
+ * KISS Alert Component (V1.0)
+ * 
+ * Base: .alert
+ * Styles: alert-{soft|outline|dashed}
+ * Colors: alert-{primary|secondary|accent|info|success|warning|error}
+ * 
+ * Example: <div class="alert alert-success alert-soft">Success message</div>
+ */
+
+@layer components {
+  .alert {
+    // Base alert styles
+    @apply flex items-start gap-3;
+    @apply p-4 text-base;
+    @apply transition-all duration-200;
+    
+    // Unified theme variables
+    border-width: var(--border);
+    border-style: solid;
+    border-color: transparent;
+    border-radius: var(--radius-box);
+    box-shadow: var(--shadow);
+    
+    // Default (neutral) alert - solid style
+    @apply bg-base-200 text-base-content border-base-300;
+    
+    // Color variants - Solid (default)
+    &-primary {
+      @apply bg-primary text-primary-content border-primary;
+    }
+    
+    &-secondary {
+      @apply bg-secondary text-secondary-content border-secondary;
+    }
+    
+    &-accent {
+      @apply bg-accent text-accent-content border-accent;
+    }
+    
+    &-info {
+      @apply bg-info text-info-content border-info;
+    }
+    
+    &-success {
+      @apply bg-success text-success-content border-success;
+    }
+    
+    &-warning {
+      @apply bg-warning text-warning-content border-warning;
+    }
+    
+    &-error {
+      @apply bg-error text-error-content border-error;
+    }
+    
+    // Style variants - Soft
+    &-soft {
+      @apply bg-base-200/50 text-base-content border-base-content;
+      
+      &.alert-primary {
+        @apply bg-primary/10 text-primary border-primary;
+      }
+      
+      &.alert-secondary {
+        @apply bg-secondary/10 text-secondary border-secondary;
+      }
+      
+      &.alert-accent {
+        @apply bg-accent/10 text-accent border-accent;
+      }
+      
+      &.alert-info {
+        @apply bg-info/10 text-info border-info;
+      }
+      
+      &.alert-success {
+        @apply bg-success/10 text-success border-success;
+      }
+      
+      &.alert-warning {
+        @apply bg-warning/10 text-warning border-warning;
+      }
+      
+      &.alert-error {
+        @apply bg-error/10 text-error border-error;
+      }
+    }
+    
+    // Style variants - Outline
+    &-outline {
+      @apply bg-transparent text-base-content border-base-300;
+      
+      &.alert-primary {
+        @apply bg-transparent border-primary text-primary;
+      }
+      
+      &.alert-secondary {
+        @apply bg-transparent border-secondary text-secondary;
+      }
+      
+      &.alert-accent {
+        @apply bg-transparent border-accent text-accent;
+      }
+      
+      &.alert-info {
+        @apply bg-transparent border-info text-info;
+      }
+      
+      &.alert-success {
+        @apply bg-transparent border-success text-success;
+      }
+      
+      &.alert-warning {
+        @apply bg-transparent border-warning text-warning;
+      }
+      
+      &.alert-error {
+        @apply bg-transparent border-error text-error;
+      }
+    }
+    
+    // Style variants - Dashed
+    &-dashed {
+      @apply bg-transparent text-base-content;
+      border-style: dashed;
+      border-color: currentColor;
+      
+      &.alert-primary {
+        @apply text-primary;
+        border-color: currentColor;
+      }
+      
+      &.alert-secondary {
+        @apply text-secondary;
+        border-color: currentColor;
+      }
+      
+      &.alert-accent {
+        @apply text-accent;
+        border-color: currentColor;
+      }
+      
+      &.alert-info {
+        @apply text-info;
+        border-color: currentColor;
+      }
+      
+      &.alert-success {
+        @apply text-success;
+        border-color: currentColor;
+      }
+      
+      &.alert-warning {
+        @apply text-warning;
+        border-color: currentColor;
+      }
+      
+      &.alert-error {
+        @apply text-error;
+        border-color: currentColor;
+      }
+    }
+    
+    // Alert icon
+    &-icon {
+      @apply shrink-0 w-5 h-5 mt-0.5;
+    }
+    
+    // Alert content
+    &-content {
+      @apply flex-1 min-w-0;
+    }
+    
+    // Alert title
+    &-title {
+      @apply font-semibold mb-1;
+    }
+    
+    // Alert description
+    &-description {
+      @apply text-sm opacity-90;
+    }
+  }
+}

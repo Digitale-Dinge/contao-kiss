@@ -1,0 +1,200 @@
+/**
+ * KISS Badge Component (V1.0)
+ * 
+ * Base: .badge
+ * Styles: badge-{soft|outline|dashed}
+ * Colors: badge-{primary|secondary|accent|info|success|warning|error}
+ * Sizes: badge-{xs|sm|lg|xl}
+ * Shapes: badge-{pill|square}
+ * 
+ * Example: <span class="badge badge-success badge-soft badge-lg">Active</span>
+ */
+
+@layer components {
+  .badge {
+    // Base badge styles
+    @apply inline-flex items-center justify-center gap-1;
+    @apply px-2.5 py-1;
+    @apply text-sm font-medium leading-tight;
+    @apply transition-all duration-200;
+    @apply whitespace-nowrap;
+
+    
+    // Unified theme variables
+    border-width: var(--border);
+    border-style: solid;
+    border-color: transparent;
+    border-radius: var(--radius-selector);
+    box-shadow: var(--shadow);
+    
+    // Default (neutral) badge
+    @apply bg-base-200 text-base-content;
+    
+    // Color variants - Solid
+    &-primary {
+      @apply bg-primary text-primary-content border-primary;
+    }
+    
+    &-secondary {
+      @apply bg-secondary text-secondary-content border-secondary;
+    }
+    
+    &-accent {
+      @apply bg-accent text-accent-content border-accent;
+    }
+    
+    &-info {
+      @apply bg-info text-info-content border-info;
+    }
+    
+    &-success {
+      @apply bg-success text-success-content border-success;
+    }
+    
+    &-warning {
+      @apply bg-warning text-warning-content border-warning;
+    }
+    
+    &-error {
+      @apply bg-error text-error-content border-error;
+    }
+    
+    // Style variants - Soft
+    &-soft {
+      @apply bg-base-200/50 text-base-content border-transparent;
+      
+      &.badge-primary {
+        @apply bg-primary/10 text-primary border-transparent;
+      }
+      
+      &.badge-secondary {
+        @apply bg-secondary/10 text-secondary border-transparent;
+      }
+      
+      &.badge-accent {
+        @apply bg-accent/10 text-accent border-transparent;
+      }
+      
+      &.badge-info {
+        @apply bg-info/10 text-info border-transparent;
+      }
+      
+      &.badge-success {
+        @apply bg-success/10 text-success border-transparent;
+      }
+      
+      &.badge-warning {
+        @apply bg-warning/10 text-warning border-transparent;
+      }
+      
+      &.badge-error {
+        @apply bg-error/10 text-error border-transparent;
+      }
+    }
+    
+    // Style variants - Outline
+    &-outline {
+      @apply bg-transparent text-base-content border-base-300;
+      
+      &.badge-primary {
+        @apply bg-transparent border-primary text-primary;
+      }
+      
+      &.badge-secondary {
+        @apply bg-transparent border-secondary text-secondary;
+      }
+      
+      &.badge-accent {
+        @apply bg-transparent border-accent text-accent;
+      }
+      
+      &.badge-info {
+        @apply bg-transparent border-info text-info;
+      }
+      
+      &.badge-success {
+        @apply bg-transparent border-success text-success;
+      }
+      
+      &.badge-warning {
+        @apply bg-transparent border-warning text-warning;
+      }
+      
+      &.badge-error {
+        @apply bg-transparent border-error text-error;
+      }
+    }
+    
+    // Style variants - Dashed
+    &-dashed {
+      @apply bg-transparent text-base-content;
+      border-style: dashed;
+      border-color: currentColor;
+      
+      &.badge-primary {
+        @apply text-primary;
+        border-color: currentColor;
+      }
+      
+      &.badge-secondary {
+        @apply text-secondary;
+        border-color: currentColor;
+      }
+      
+      &.badge-accent {
+        @apply text-accent;
+        border-color: currentColor;
+      }
+      
+      &.badge-info {
+        @apply text-info;
+        border-color: currentColor;
+      }
+      
+      &.badge-success {
+        @apply text-success;
+        border-color: currentColor;
+      }
+      
+      &.badge-warning {
+        @apply text-warning;
+        border-color: currentColor;
+      }
+      
+      &.badge-error {
+        @apply text-error;
+        border-color: currentColor;
+      }
+    }
+    
+    // Size variants
+    &-xs {
+      @apply px-1.5 py-0.5 gap-0.5;
+      font-size: 0.625rem; // c.a 10px 
+    }
+    
+    &-sm {
+      @apply px-2 py-0.5 gap-1 text-xs; // 0.75rem/12px
+    }
+    
+    // Default (no modifier) uses text-sm - 0.875rem/14px
+    
+    &-lg {
+      @apply px-3 py-1.5 gap-2 text-base; // 1rem/16px
+    }
+
+    &-xl {
+      @apply px-4 py-2 gap-2.5 text-lg; // 1.125rem/18px
+    }
+
+    
+    // Shape variants
+    &-pill {
+      @apply rounded-full;
+    }
+    
+    &-square {
+      @apply rounded-none;
+    }
+  }
+}

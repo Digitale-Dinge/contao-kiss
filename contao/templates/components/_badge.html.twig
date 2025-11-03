@@ -1,0 +1,42 @@
+{#
+  KISS Badge Component Template
+  
+  @param {string} text - Badge text content (required)
+  @param {string} color - Badge color variant: primary|secondary|accent|info|success|warning|error
+  @param {string} style - Badge style: soft|outline|dashed (default: solid)
+  @param {string} size - Badge size: xs|sm|lg|xl
+  @param {string} shape - Badge shape: pill|square (default: radius-selector from tailwind.theme.css)
+  @param {string} icon - Icon class name
+  @param {string} iconPosition - Icon position: left|right (default: left)
+  @param {string} class - Additional CSS classes
+  
+  Usage:
+  {% include 'components/_badge.html.twig' with {
+    text: 'New',
+    color: 'primary',
+    style: 'soft',
+    size: 'lg',
+    shape: 'pill'
+  } only %}
+#}
+
+{% set badgeClasses = [
+  'badge',
+  color ? 'badge-' ~ color : '',
+  style ? 'badge-' ~ style : '',
+  size ? 'badge-' ~ size : '',
+  shape ? 'badge-' ~ shape : '',
+  class ?? ''
+]|filter(v => v)|join(' ') %}
+
+<span class="{{ badgeClasses }}">
+  {% if icon and iconPosition|default('left') == 'left' %}
+    <i class="{{ icon }}"></i>
+  {% endif %}
+  
+  {{ text }}
+  
+  {% if icon and iconPosition == 'right' %}
+    <i class="{{ icon }}"></i>
+  {% endif %}
+</span>
