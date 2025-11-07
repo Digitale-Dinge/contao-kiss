@@ -216,8 +216,12 @@
       @apply text-xl px-6 py-4 gap-3;
     }
     
-       // Shadow variant - adds depth with hover lift effect
-    &-shadow {
+    // Shadow variant - adds depth with hover lift effect
+    &-shadow-none {
+      @apply shadow-none;
+    }
+    
+    &-shadow-sm {
       @apply shadow-sm;
       
       &:hover {
