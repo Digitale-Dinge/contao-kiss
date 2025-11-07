@@ -1,0 +1,183 @@
+/**
+ * KISS Link Component (V1.0)
+ TODO: Change SVG in external link
+ * 
+ * Base: .link
+ * Colors: link-{primary|secondary|accent|info|success|warning|error} (base-content is default)
+ * Sizes: link-{xs|sm|lg|xl} (text-base is default)
+ * Styles: link-{underline-hover|underline-animate|underline-none}
+ * Special: link-external
+ * 
+ * Example: <a class="link link-primary link-lg link-underline-animate">Link Text</a>
+ */
+
+@layer components {
+  .link {
+    // Base link styles - always underlined by default, less intense until hover
+    @apply inline-flex items-center gap-1;
+    @apply text-base leading-normal;
+    @apply text-base-content/80 underline decoration-2;
+    @apply transition-all duration-200;
+    @apply cursor-pointer;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-base-content/20;
+    
+    // Base hover - full intensity
+    &:hover {
+      @apply text-base-content;
+    }
+    
+    // Color variants - less intense by default, full on hover (FlyonUI style)
+    &-primary {
+      @apply text-primary/80;
+      @apply focus-visible:ring-primary/30;
+      
+      &:hover {
+        @apply text-primary;
+      }
+    }
+    
+    &-secondary {
+      @apply text-secondary/80;
+      @apply focus-visible:ring-secondary/30;
+      
+      &:hover {
+        @apply text-secondary;
+      }
+    }
+    
+    &-accent {
+      @apply text-accent/80;
+      @apply focus-visible:ring-accent/30;
+      
+      &:hover {
+        @apply text-accent;
+      }
+    }
+    
+    &-info {
+      @apply text-info/80;
+      @apply focus-visible:ring-info/30;
+      
+      &:hover {
+        @apply text-info;
+      }
+    }
+    
+    &-success {
+      @apply text-success/80;
+      @apply focus-visible:ring-success/30;
+      
+      &:hover {
+        @apply text-success;
+      }
+    }
+    
+    &-warning {
+      @apply text-warning/80;
+      @apply focus-visible:ring-warning/30;
+      
+      &:hover {
+        @apply text-warning;
+      }
+    }
+    
+    &-error {
+      @apply text-error/80;
+      @apply focus-visible:ring-error/30;
+      
+      &:hover {
+        @apply text-error;
+      }
+    }
+    
+    /* ============================================ */
+    /* SIZE VARIANTS                               */
+    /* ============================================ */
+    
+    &-xs {
+      @apply text-xs gap-0.5;
+    }
+    
+    &-sm {
+      @apply text-sm gap-1;
+    }
+    
+    // Default is text-base (no modifier needed)
+    
+    &-lg {
+      @apply text-lg gap-1.5;
+    }
+    
+    &-xl {
+      @apply text-xl gap-2;
+    }
+    
+    /* ============================================ */
+    /* STYLE VARIANTS                              */
+    /* ============================================ */
+    
+    // Show underline only on hover (remove default underline)
+    &-underline-hover {
+      @apply no-underline;
+      
+      &:hover {
+        @apply underline;
+      }
+    }
+    
+    // Animated underline on hover (from center outward)
+    &-underline-animate {
+      @apply relative no-underline;
+      
+      &::after {
+        content: '';
+        @apply absolute bottom-0 left-1/2 w-0 h-0.5;
+        @apply bg-current transition-all duration-300 ease-out;
+        @apply -translate-x-1/2;
+      }
+      
+      &:hover::after {
+        @apply w-full;
+      }
+    }
+    
+    // Remove underline completely
+    &-underline-none {
+      @apply no-underline;
+    }
+    
+    /* ============================================ */
+    /* SPECIAL VARIANTS                            */
+    /* ============================================ */
+    
+    // External link (with icon)
+    &-external {
+      &::after {
+        content: '';
+        @apply inline-block w-3.5 h-3.5 ml-1;
+        @apply bg-current transition-opacity duration-200;
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'%3E%3C/path%3E%3C/svg%3E");
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        mask-position: center;
+      }
+      
+      &:hover::after {
+        @apply opacity-80;
+      }
+    }
+    
+    // Disabled state
+    &-disabled,
+    &:disabled {
+      @apply opacity-50 cursor-not-allowed pointer-events-none;
+    }
+    
+    // Icon inside link
+    .icon,
+    [class^="icon-"],
+    [class*=" icon-"] {
+      @apply shrink-0 w-4 h-4;
+    }
+  }
+}

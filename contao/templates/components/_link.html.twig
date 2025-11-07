@@ -1,0 +1,63 @@
+{#
+  KISS Link Component Template (V1.0)
+  
+  @param {string} text - Link text content
+  @param {string} href - Link URL/destination
+  @param {string} color - Color variant: primary|secondary|accent|info|success|warning|error
+  @param {string} size - Size variant: xs|sm|lg|xl (default is base)
+  @param {string} style - Style variant: underline-hover|underline-animate|underline-none
+  @param {boolean} external - Add external link icon and attributes
+  @param {boolean} disabled - Disable the link
+  @param {string} icon - Icon class (optional)
+  @param {string} iconPosition - Icon position: left|right (default: left)
+  @param {string} class - Additional CSS classes
+  @param {object} attributes - Additional HTML attributes
+  
+  Usage: {% include 'components/_link.html.twig' with {
+    text: 'Download PDF',
+    href: '/document.pdf',
+    color: 'primary',
+    size: 'lg',
+    style: 'underline-animate',
+    external: true
+  } only %}
+#}
+{% set linkClasses = [
+  'link',
+  color ? 'link-' ~ color : '',
+  size ? 'link-' ~ size : '',
+  style ? 'link-' ~ style : '',
+  external ? 'link-external' : '',
+  disabled ? 'link-disabled' : '',
+  class ?? ''
+]|filter(v => v)|join(' ') %}
+
+{% set linkAttrs = attributes|default({}) %}
+
+{# External link attributes #}
+{% if external %}
+  {% set linkAttrs = linkAttrs|merge({
+    'target': '_blank',
+    'rel': 'noopener noreferrer'
+  }) %}
+{% endif %}
+
+{# Disabled link attributes #}
+{% if disabled %}
+  {% set linkAttrs = linkAttrs|merge({
+    'aria-disabled': 'true',
+    'tabindex': '-1'
+  }) %}
+{% endif %}
+
+<a href="{{ disabled ? '#' : href }}" class="{{ linkClasses }}"{% for attr, value in linkAttrs %} {{ attr }}="{{ value }}"{% endfor %}>
+  {% if icon and iconPosition|default('left') == 'left' %}
+    <span class="{{ icon }} icon"></span>
+  {% endif %}
+  
+  {{ text }}
+  
+  {% if icon and iconPosition == 'right' %}
+    <span class="{{ icon }} icon"></span>
+  {% endif %}
+</a>
