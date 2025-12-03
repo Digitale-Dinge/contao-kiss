@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use function dirname;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
-
-class DigitaleDingeContaoKissBundle extends Bundle
+class DigitaleDingeContaoKissBundle extends AbstractBundle
 {
-
-    public function getPath(): string
+    public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
-        return dirname(__DIR__);
+        $container->import('../config/services.php');
     }
-
 }
