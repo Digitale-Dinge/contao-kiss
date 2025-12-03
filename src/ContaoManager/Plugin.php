@@ -10,18 +10,13 @@ use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use DigitaleDinge\ContaoKiss\DigitaleDingeContaoKissBundle;
 
-
 class Plugin implements BundlePluginInterface
 {
-
     public function getBundles(ParserInterface $parser): array
     {
         return [
-            BundleConfig::create(DigitaleDingeContaoKissBundle::class)
-                ->setLoadAfter([
-                    ContaoCoreBundle::class
-                ])
+            (new BundleConfig(DigitaleDingeContaoKissBundle::class))
+                ->setLoadAfter([ContaoCoreBundle::class]),
         ];
     }
-
 }
