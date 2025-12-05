@@ -1,6 +1,6 @@
 {#
   KISS Link Component Template (V1.0)
-  
+
   @param {string} text - Link text content
   @param {string} href - Link URL/destination
   @param {string} color - Color variant: primary|secondary|accent|info|success|warning|error
@@ -12,7 +12,7 @@
   @param {string} iconPosition - Icon position: left|right (default: left)
   @param {string} class - Additional CSS classes
   @param {object} attributes - Additional HTML attributes
-  
+
   Usage: {% include 'components/_link.html.twig' with {
     text: 'Download PDF',
     href: '/document.pdf',
@@ -29,7 +29,7 @@
   style ? 'link-' ~ style : '',
   external ? 'link-external' : '',
   disabled ? 'link-disabled' : '',
-  class ?? ''
+  class ?? '',
 ]|filter(v => v)|join(' ') %}
 
 {% set linkAttrs = attributes|default({}) %}
@@ -37,8 +37,8 @@
 {# External link attributes #}
 {% if external %}
   {% set linkAttrs = linkAttrs|merge({
-    'target': '_blank',
-    'rel': 'noopener noreferrer'
+    target: '_blank',
+    rel: 'noopener noreferrer',
   }) %}
 {% endif %}
 
@@ -46,7 +46,7 @@
 {% if disabled %}
   {% set linkAttrs = linkAttrs|merge({
     'aria-disabled': 'true',
-    'tabindex': '-1'
+    tabindex: '-1',
   }) %}
 {% endif %}
 
@@ -54,9 +54,9 @@
   {% if icon and iconPosition|default('left') == 'left' %}
     <span class="{{ icon }} icon"></span>
   {% endif %}
-  
+
   {{ text }}
-  
+
   {% if icon and iconPosition == 'right' %}
     <span class="{{ icon }} icon"></span>
   {% endif %}

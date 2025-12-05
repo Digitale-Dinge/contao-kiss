@@ -1,25 +1,25 @@
 
 <div class="inside container-base">
-	<div class="footer-content flex flex-col min-[500px]:flex-row gap-16 min-[880px]:gap-4 min-[880px]:justify-between pb-16">
-		<div class="footer-address">
-			<p class="text-sm">
-				{{ insert_tag('company::name')|raw }}<br>
-				{{ insert_tag('company::info')|raw }}<br>
-				{{ insert_tag('company::street')|raw }}<br>
-				{{ insert_tag('company::postal')|raw }}&nbsp;{{ insert_tag('company::city')|raw }}
-			</p>
-			<p class="text-sm">
-				{{ insert_tag('company::mailto')|raw }}<br>
-				{{ insert_tag('company::tel')|raw }}
-			</p>
-			<p>
-				{# Social Media Nav #}
-				{{ frontend_module(7) }}
-			</p>
-		</div>
-		<div class="footer-nav">
-				{# Footer Main Nav – Horizontal Nav #}
-				{{ frontend_module(8) }}
-		</div>
-	</div>
+    <div class="footer-content flex flex-col min-[500px]:flex-row gap-16 min-[880px]:gap-4 min-[880px]:justify-between pb-16">
+        <div class="footer-address">
+            <p class="text-sm">
+                {{ insert_tag('company::name')|raw }}<br>
+                {{ insert_tag('company::info')|raw }}<br>
+                {{ insert_tag('company::street')|raw }}<br>
+                {{ insert_tag('company::postal')|raw }}&nbsp;{{ insert_tag('company::city')|raw }}
+            </p>
+            <p class="text-sm">
+                {{ insert_tag('company::mailto')|raw }}<br>
+                {{ insert_tag('company::tel')|raw }}
+            </p>
+            <p>
+                {# Social Media Nav #}
+                {{ frontend_module(7) }}
+            </p>
+        </div>
+        <div class="footer-nav">
+                {# Footer Main Nav – Horizontal Nav #}
+                {{ frontend_module(8) }}
+        </div>
+    </div>
 </div>

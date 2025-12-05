@@ -1,17 +1,17 @@
 {% set button_data = {} %}
 {% if button.showIcon %}
-    {% set button_data = button_data|merge({'icon':button.icon}) %}
+    {% set button_data = button_data|merge({icon: button.icon}) %}
     {% if button.iconPosition == 'after' %}
-        {% set button_data = button_data|merge({'iconPosition':'right'}) %}
+        {% set button_data = button_data|merge({iconPosition: 'right'}) %}
     {% endif %}
 {% endif %}
-{% set button_data = button_data|merge({'buttonType':button.type}) %}
+{% set button_data = button_data|merge({buttonType: button.type}) %}
 {% set button_extra_class = button.class|default('') %}
-{% include '/content_element/hyperlink.html.twig' with {
+{{ include('/content_element/hyperlink.html.twig', {
     link_text: button.linktext,
     link_attributes: {
-        'href': button.url|insert_tag,
-        'class': 'btn btn-'~button.type~' '~button_extra_class
+        href: button.url|insert_tag,
+        class: 'btn btn-' ~ button.type ~ ' ' ~ button_extra_class,
     },
-    data: button_data
-} %}
+    data: button_data,
+}) }}

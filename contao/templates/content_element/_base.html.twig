@@ -1,6 +1,6 @@
-{% extends "@Contao/content_element/_base.html.twig" %}
+{% extends '@Contao/content_element/_base.html.twig' %}
 
-{% block attributes %}    
+{% block attributes %}
     {% set attributes = attrs()
         .mergeWith(attributes|default)
     %}
@@ -19,9 +19,9 @@
     {% if data.paddingBottom is defined and data.paddingBottom is not empty %}
         {% set attributes = attributes.addClass(data.paddingBottom) %}
     {% endif %}
-    
+
     {{ parent() }}
-{% endblock %} 
+{% endblock %}
 
 {% block headline_component %}
   {% if data.topline is not empty %}
@@ -32,4 +32,3 @@
 
 {% block content %}
 {% endblock %}
-

@@ -1,5 +1,5 @@
-{% extends "@Contao/content_element/_base.html.twig" %}
-{% use "@Contao/component/_stylesheet.html.twig" %}
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% use '@Contao/component/_stylesheet.html.twig' %}
 
 {#
     The "slider_settings" variable contains the settings for the content slider.
@@ -20,13 +20,12 @@
 {% set slider_settings = slider_settings|merge({
     speed: data.sliderSpeed,
     offset: data.sliderStartSlide,
-    loop: data.sliderContinuous
+    loop: data.sliderContinuous,
 }) %}
 
 {% if data.sliderDelay %}
-    {% set slider_settings = slider_settings|merge({ autoplay: { delay: data.sliderDelay } }) %}
+    {% set slider_settings = slider_settings|merge({autoplay: {delay: data.sliderDelay}}) %}
 {% endif %}
-
 
 {% block content %}
     {% set slider_attributes = attrs()
@@ -79,7 +78,7 @@
 {% endblock %}
 
 {% block script %}
-    {% add "swiper_js" to body %}
+    {% add 'swiper_js' to body %}
         {% set script_attributes = attrs()
             .setIfExists('nonce', csp_nonce('script-src'))
             .mergeWith(script_attributes|default)
@@ -111,7 +110,7 @@
 {% endblock %}
 
 {% block style %}
-    {% add "swiper_css" to stylesheets %}
+    {% add 'swiper_css' to stylesheets %}
         {% with {file: swiper_css_file|default(asset('css/swiper-bundle.min.css', 'contao-components/swiper'))} %}
             {{ block('stylesheet_component') }}
         {% endwith %}

@@ -1,32 +1,31 @@
-{% extends "@Contao/content_element/swiper.html.twig" %}
+{% extends '@Contao/content_element/swiper.html.twig' %}
 
 {% block content %}
-  {% set slider_settings = slider_settings|merge({
-      delay: data.sliderDelay,
-      speed: data.sliderSpeed,
-      offset: data.sliderStartSlide,
-      loop: data.sliderContinuous,
-      slidesPerView: 2,
-      spaceBetween: 32,
-      draggable: false,
-      navigation: {
-        enabled: false
-      },
-      pagination: {
-        enabled: false,
-        clickable: false
-      },
-			breakpoints: {
-				768: {
-					slidesPerView: 4
-				},
-				1024: {
-					slidesPerView: 6
-				}
-			}
-  }) 
-  %}
-  {% set slider_attributes = attrs()
+    {% set slider_settings = slider_settings|merge({
+        delay: data.sliderDelay,
+        speed: data.sliderSpeed,
+        offset: data.sliderStartSlide,
+        loop: data.sliderContinuous,
+        slidesPerView: 2,
+        spaceBetween: 32,
+        draggable: false,
+        navigation: {
+            enabled: false,
+        },
+        pagination: {
+            enabled: false,
+            clickable: false,
+        },
+        breakpoints: {
+            768: {
+                slidesPerView: 4,
+            },
+            1024: {
+                slidesPerView: 6,
+            },
+        },
+    }) %}
+    {% set slider_attributes = attrs()
         .addClass('swiper-logos text-center')
         .mergeWith(slider_attributes|default)
     %}

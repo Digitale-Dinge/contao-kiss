@@ -1,30 +1,29 @@
 {# Erweitert das Legacy-Template fe_page.html5 #}
-{% extends "@Contao/fe_page.html5" %}
+{% extends '@Contao/fe_page.html5' %}
 {% set class = class ~ ' text-base' %}
 
-
 {% block head %}
-	{{ parent() }}
+    {{ parent() }}
 {% endblock %}
 
 {% block header %}
-	<header id="header" class="bg-header">
-	{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_meta.html.twig' %}
-	{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_main.html.twig' %}
-	</header>
+    <header id="header" class="bg-header">
+    {{ include('@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_meta.html.twig') }}
+    {{ include('@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_main.html.twig') }}
+    </header>
 {% endblock %}
 
 {% block footer %}
-	<footer id="footer" class="bg-footer">
-		<div id="footer-wrapper">
-			{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_main.html.twig' %}
-		</div>
-	</footer>
-	{% include '@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_meta.html.twig' %}
+    <footer id="footer" class="bg-footer">
+        <div id="footer-wrapper">
+            {{ include('@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_main.html.twig') }}
+        </div>
+    </footer>
+    {{ include('@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_meta.html.twig') }}
 {% endblock %}
 
 {% block body %}
-	{{ parent() }}
-	<link rel="stylesheet" href="/files/frontend/dist/css/styles.css">
-	<script src="/files/frontend/dist/js/scripts.js"></script>
+    {{ parent() }}
+    <link rel="stylesheet" href="/files/frontend/dist/css/styles.css">
+    <script src="/files/frontend/dist/js/scripts.js"></script>
 {% endblock %}

@@ -10,21 +10,18 @@ use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Path;
 
-
+// ToDo: Do not symlink / maybe remove / client shouldn't use it
 #[AsEventListener('contao.generate_symlinks')]
 class SymlinkListener
 {
-
     private readonly string $bundleDir;
-
 
     public function __construct(
         private readonly string $projectDir,
         private readonly string $webDir,
         private readonly Filesystem $filesystem,
         PathPackage $pathPackage
-    )
-    {
+    ) {
         $this->bundleDir = $pathPackage->getBasePath();
     }
 
@@ -35,5 +32,4 @@ class SymlinkListener
 
         $event->addSymlink($bundleDir, 'files/contao-kiss');
     }
-
 }
