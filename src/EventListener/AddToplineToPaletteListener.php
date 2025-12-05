@@ -2,17 +2,15 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Contao\Hooks;
+namespace DigitaleDinge\ContaoKiss\EventListener;
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Contao\DataContainer;
 
-
-class AddToplineToPalette
+class AddToplineToPaletteListener
 {
-
     #[AsCallback('tl_content', 'config.onload', priority: -1000)]
     public function __invoke(DataContainer $dc = null): void
     {
@@ -29,23 +27,22 @@ class AddToplineToPalette
             }
 
             PaletteManipulator::create()
-                // empty closure the prevent the fallback
+                // empty closure to prevent the fallback
                 ->addField('topline', 'headline', PaletteManipulator::POSITION_AFTER, fn()=>null)
                 ->applyToPalette($key, $dc->table)
             ;
         }
     }
 
+    // ToDo: Check other data containers
     #[AsHook('loadDataContainer')]
     public function loadDataContainer(string $table): void
     {
-        if ( 'tl_content' !== $table )
-        {
+        if ('tl_content' !== $table) {
             return;
         }
 
-        $GLOBALS['TL_DCA']['tl_content']['fields']['topline'] =
-        [
+        $GLOBALS['TL_DCA']['tl_content']['fields']['topline'] = [
             'exclude'   => true,
             'inputType' => 'text',
             'eval'      =>
@@ -62,5 +59,4 @@ class AddToplineToPalette
             ]
         ];
     }
-
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Contao\Hooks;
+namespace DigitaleDinge\ContaoKiss\EventListener;
 
 use Contao\Config;
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
@@ -11,9 +11,8 @@ use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Contao\DataContainer;
 use Contao\StringUtil;
 
-final class AddLayoutFieldsToPalette
+final class AddLayoutFieldsToPaletteListener
 {
-
     #[AsHook('loadDataContainer')]
     public function addBlacklistFieldToSettings(string $table): void
     {

@@ -16,6 +16,7 @@ return static function(ContainerConfigurator $container)
             ->autowire()
 
         ->load('DigitaleDinge\\ContaoKiss\\', '../src/*')
+            ->exclude('../src/{DigitaleDingeKissBundle.php}')
 
         ->set(SymlinkListener::class)
             ->args([
