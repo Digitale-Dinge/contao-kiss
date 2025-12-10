@@ -1,0 +1,23 @@
+{
+	"devDependencies": {
+		"@biomejs/biome": "^2.3",
+		"@stylistic/stylelint-config": "^3.0",
+		"@stylistic/stylelint-plugin": "^4.0",
+		"npm-run-all": "^4.1",
+		"postcss": "^8.5.3",
+		"postcss-loader": "^8.1",
+		"postcss-preset-env": "^10.3",
+		"sass": "^1.89",
+		"sass-loader": "^16.0",
+		"stylelint": "^16.23",
+		"stylelint-config-standard": "^39.0"
+	},
+	"browserslist": [
+		"defaults"
+	],
+	"scripts": {
+		"lint:js": "biome check --write --unsafe assets/js",
+		"lint:css": "stylelint --fix assets/scss",
+		"lint": "run-s lint:css"
+	}
+}

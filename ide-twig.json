@@ -1,0 +1,12 @@
+{
+  "namespaces": [
+    {
+      "namespace": "Contao_DigitaleDingeContaoKissBundle",
+      "path": "contao/templates"
+    },
+    {
+      "namespace": "Contao",
+      "path": "contao/templates"
+    }
+  ]
+}
