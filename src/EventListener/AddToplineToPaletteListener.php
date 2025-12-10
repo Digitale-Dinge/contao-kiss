@@ -12,7 +12,7 @@ use Contao\DataContainer;
 class AddToplineToPaletteListener
 {
     #[AsCallback('tl_content', 'config.onload', priority: -1000)]
-    public function __invoke(DataContainer $dc = null): void
+    public function __invoke(DataContainer|null $dc = null): void
     {
         if ( null === $dc )
         {
@@ -21,8 +21,7 @@ class AddToplineToPaletteListener
 
         foreach ($GLOBALS['TL_DCA'][$dc->table]['palettes'] as $key => $palette)
         {
-            if ( '__selector__' === $key )
-            {
+            if ( '__selector__' === $key ) {
                 continue;
             }
 
@@ -45,14 +44,12 @@ class AddToplineToPaletteListener
         $GLOBALS['TL_DCA']['tl_content']['fields']['topline'] = [
             'exclude'   => true,
             'inputType' => 'text',
-            'eval'      =>
-            [
+            'eval'      => [
                 'tl_class'  => 'w50',
                 'maxlength' => 255,
                 'allowHtml' => true
             ],
-            'sql' =>
-            [
+            'sql' => [
                 'type'    => 'string',
                 'length'  => 255,
                 'default' => ''

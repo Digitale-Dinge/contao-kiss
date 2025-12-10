@@ -64,5 +64,4 @@ final class AddLayoutFieldsToPaletteListener
             ->addField(['contentWidth', 'bgColor', 'paddingTop', 'paddingBottom', 'marginTop', 'marginBottom'], 'layout_legend', 'append')
             ->applyToString($palette);
     }
-
 }
