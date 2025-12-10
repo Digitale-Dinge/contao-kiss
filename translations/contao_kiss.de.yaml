@@ -1,0 +1,5 @@
+contao_kiss:
+    widget:
+        day:            Tag
+        open_from:      Offen von
+        open_to:        Offen bis

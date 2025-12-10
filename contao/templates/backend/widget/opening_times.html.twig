@@ -1,0 +1,43 @@
+{% trans_default_domain 'contao_default' %}
+
+{% set table_attributes = attrs()
+    .set('id', 'ctrl_' ~ id)
+    .addClass('kiss_opening_times')
+%}
+
+<table{{ table_attributes }}>
+    <thead>
+        <tr>
+            <th>{{ 'contao_kiss.widget.day'|trans([], 'contao_kiss') }}</th>
+            <th>{{ 'contao_kiss.widget.open_from'|trans([], 'contao_kiss') }}</th>
+            <th>{{ 'contao_kiss.widget.open_to'|trans([], 'contao_kiss') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+            <tr>
+                <th scope="row">{{ ('DAYS.' ~ (loop.index % 7))|trans }}</th>
+                <td>
+                    {% set time_from_attributes = attrs()
+                        .set('type', 'time')
+                        .set('name', "#{id}[#{loop.index0}][time_from]")
+                        .set('id', "#{id}_time_from_#{loop.index0}")
+                        .set('value', row.time_from)
+                        .addClass('tl_text')
+                    %}
+                    <input{{ time_from_attributes }}>
+                </td>
+                <td>
+                    {% set time_to_attributes = attrs()
+                        .set('type', 'time')
+                        .set('name', "#{id}[#{loop.index0}][time_to]")
+                        .set('id', "#{id}_time_to_#{loop.index0}")
+                        .set('value', row.time_to)
+                        .addClass('tl_text')
+                    %}
+                    <input{{ time_to_attributes }}>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
