@@ -1,52 +1,52 @@
-{% extends "@Contao/content_element/hyperlink.html.twig" %}
+{% extends '@Contao/content_element/hyperlink.html.twig' %}
 
 {% block content %}
-		{% set image = null|default %}
-		{{ parent() }}
+        {% set image = null|default %}
+        {{ parent() }}
 {% endblock %}
 
 {% block wrapper %}
-		{% set headline = {'text':''|default} %}
-		{{ parent() }}
+        {% set headline = {text: ''|default} %}
+        {{ parent() }}
 {% endblock %}
 
 {% block text_link %}
-		{% set link_attributes = attrs().mergeWith(link_attributes|default) %}
-		{% set text_before = ''|default %}
-		{% set text_after = ''|default %}
+        {% set link_attributes = attrs().mergeWith(link_attributes|default) %}
+        {% set text_before = ''|default %}
+        {% set text_after = ''|default %}
 
-		{% if data.hyperlinkAsButton is defined and data.hyperlinkAsButton is not empty %}
-				{# Basis-Klasse #}
-				{% set link_attributes = link_attributes.addClass('btn') %}
+        {% if data.hyperlinkAsButton is defined and data.hyperlinkAsButton is not empty %}
+                {# Basis-Klasse #}
+                {% set link_attributes = link_attributes.addClass('btn') %}
 
-				{# Klassengröße hinzufügen, z.B. btn-lg #}
-				{% if data.buttonSize is not empty %}
-						{% set link_attributes = link_attributes.addClass('btn-' ~ data.buttonSize) %}
-				{% endif %}
+                {# Klassengröße hinzufügen, z.B. btn-lg #}
+                {% if data.buttonSize is not empty %}
+                        {% set link_attributes = link_attributes.addClass('btn-' ~ data.buttonSize) %}
+                {% endif %}
 
-				{# Farb- oder Typklasse hinzufügen, z.B. btn-primary #}
-				{% if data.buttonType is not empty %}
-						{% set link_attributes = link_attributes.addClass('btn-' ~ data.buttonType) %}
-				{% endif %}
-		{% endif %}
+                {# Farb- oder Typklasse hinzufügen, z.B. btn-primary #}
+                {% if data.buttonType is not empty %}
+                        {% set link_attributes = link_attributes.addClass('btn-' ~ data.buttonType) %}
+                {% endif %}
+        {% endif %}
 
-		{% if data.lightboxIframe is defined and data.lightboxIframe is not empty %}
-				{% set link_attributes = link_attributes.addClass('colorbox_iframe') %}
-		{% endif %}
+        {% if data.lightboxIframe is defined and data.lightboxIframe is not empty %}
+                {% set link_attributes = link_attributes.addClass('colorbox_iframe') %}
+        {% endif %}
 
-		{{- text_before -}}
-		<a{{ attrs(link_attributes|default) }}>
-				{% if (data.icon is defined and data.icon is not empty) and (data.iconPosition is not defined or data.iconPosition == 'left') %}
-						<span class="mr-1" aria-hidden="true" data-icon="&#x{{ data.icon }};"></span>
-				{% endif %}
+        {{- text_before -}}
+        <a{{ attrs(link_attributes|default) }}>
+                {% if (data.icon is defined and data.icon is not empty) and (data.iconPosition is not defined or data.iconPosition == 'left') %}
+                        <span class="mr-1" aria-hidden="true" data-icon="&#x{{ data.icon }};"></span>
+                {% endif %}
 
-				<span class="text leading-none">
-						{{ link_text|insert_tag|raw }}
-				</span>
+                <span class="text leading-none">
+                        {{ link_text|insert_tag|raw }}
+                </span>
 
-				{% if (data.icon is defined and data.icon is not empty) and data.iconPosition == 'right' %}
-						<span class="ml-1" aria-hidden="true" data-icon="&#x{{ data.icon }};"></span>
-				{% endif %}
-		</a>
-		{{- text_after -}}
+                {% if (data.icon is defined and data.icon is not empty) and data.iconPosition == 'right' %}
+                        <span class="ml-1" aria-hidden="true" data-icon="&#x{{ data.icon }};"></span>
+                {% endif %}
+        </a>
+        {{- text_after -}}
 {% endblock %}

@@ -19,7 +19,7 @@
 
     <input type="hidden" name="<?= $this->name ?>" value="">
 		<div class="field-content">
-			<?php if (preg_match('/\s*row\s*/', $this->class)): ?>
+			<?php if (preg_match('/\s*row\s*/', (string) $this->class)): ?>
 			<div class="legend-col"></div>
 			<div class="options">
 			<?php endif; ?>
@@ -37,7 +37,7 @@
 						</fieldset>
 					<?php endif; ?>
 				<?php endforeach; ?>
-			<?php if (preg_match('/\s*row\s*/', $this->class)): ?>
+			<?php if (preg_match('/\s*row\s*/', (string) $this->class)): ?>
 			</div>
 			<?php endif; ?>
 		</div>

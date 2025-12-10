@@ -1,5 +1,14 @@
-<div class="header-main relative py-8 text-sm">
-    <div class="inside flex gap-x-4 items-center justify-between {{ getContainerClass() }}">
+{% set header_main_attributes = attrs()
+    .addClass(['header-main','relative','py-8','text-sm'])
+%}
+
+{% set header_inside_attributes = attrs()
+    .addClass(['inside', 'flex', 'gap-x-4', 'items-center', 'justify-between'])
+    .addClass(getContainerClass())
+%}
+
+<div{{ header_main_attributes }}>
+    <div{{ header_inside_attributes }}>
         {{ header|raw }}
     </div>
 </div>
