@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DigitaleDinge\ContaoKiss\Twig;
 
 use Contao\FilesModel;
+use DigitaleDinge\ContaoKiss\Twig\Options\ClassOptionsInterface;
 use DigitaleDinge\ContaoKiss\Twig\Options\ContainerSizes;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -47,6 +48,21 @@ class ContaoKissExtension extends AbstractExtension
 
     public function getContainerClass(string $size = 'base'): string|null
     {
-        return ContainerSizes::fromCase($size)?->value;
+        return $this->getClassOptionValue(ContainerSizes::class, $size);
+    }
+
+    private function getClassOptionValue(string $class, string $key): string|null
+    {
+        if (!is_a($class, ClassOptionsInterface::class, \true)) {
+            return null;
+        }
+
+        try {
+            $value = $class::{mb_strtoupper($key)}?->value;
+        } catch (\Error) {
+            $value = null;
+        }
+
+        return $value;
     }
 }
