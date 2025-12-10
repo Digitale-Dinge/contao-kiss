@@ -1,0 +1,6 @@
+/.editorconfig export-ignore
+/.gitignore export-ignore
+/biome.json export-ignore
+/ide-twig.json export-ignore
+/stylelint.config.js export-ignore
+/webpack.config.js export-ignore
