@@ -71,8 +71,9 @@
 				button.submit {
 					@apply w-fit font-bold;
 
-					&:after {
+					&::after {
 						@apply font-icon;
+
 						content: "\e96b";
 					}
 				}
@@ -92,8 +93,9 @@
 	p.error {
 		@apply flex items-center m-0 p-4 rounded-md bg-error/10 border-1 border-solid border-error text-error text-sm;
 
-		&:before {
+		&::before {
 			@apply inline-block mr-2 p-0 text-lg leading-none font-icon!;
+
 			content: '\e909';
 		}
 	}
@@ -109,8 +111,9 @@
 	p.success {
 		@apply flex items-center p-4 rounded-md bg-success/10 border-1 border-solid border-success text-success text-sm;
 
-		&:before {
+		&::before {
 			@apply inline-block mr-2 p-0 text-lg leading-none font-icon!;
+
 			content: '\e91f';
 		}
 	}
@@ -121,7 +124,7 @@
 			@apply grid grid-cols-12 gap-4;
 
 			.widget {
-				@apply m-0 col-span-12 md:col-span-6; // Standard: 2 Spalten
+				@apply m-0 col-span-12 md:col-span-6;
 			}
 
 			.widget--full {
@@ -178,6 +181,7 @@
 		}
 	}
 }
+
 @layer utilities {
 	.formbody {
 		.widget {
@@ -185,14 +189,17 @@
 				.input[type='range'],
 				.range {
 					--slider-value: 20%;
+
 					&:hover,
 					&:focus-visible {
 						&::-webkit-slider-thumb {
 							@apply ring-4 cursor-grab;
 						}
+
 						&::-moz-range-thumb {
 							@apply ring-4 cursor-grab;
 						}
+
 						&::-ms-thumb {
 							@apply ring-4 cursor-grab;
 						}
@@ -201,26 +208,35 @@
 					&::-webkit-slider-thumb {
 						@apply appearance-none border-primary bg-base-100 ring-ring block size-6 shrink-0 rounded-full border shadow-sm -mt-3;
 					}
+
 					&::-webkit-slider-runnable-track {
 						@apply appearance-none rounded-full h-1.5 w-full;
+
 						background: linear-gradient(to right, var(--color-primary) var(--slider-value), var(--color-base-300) var(--slider-value));
 					}    
+
 					&::-moz-range-thumb {
 						@apply appearance-none border-primary bg-base-content ring-ring/50 block size-4 shrink-0 rounded-full border shadow-sm -mt-1.25;
 					}
+
 					&::-moz-range-track {
 						@apply appearance-none rounded-full h-1.5 w-full;
+
 						background: linear-gradient(to right, var(--color-primary) var(--slider-value), var(--color-base-100) var(--slider-value));
 					}
+
 					&::-ms-thumb {
 						@apply appearance-none border-primary bg-base-content ring-ring/50 block size-4 shrink-0 rounded-full border shadow-sm -mt-1.25;
 					}
+
 					&::-ms-track {
 						@apply appearance-none rounded-full h-1.5 w-full;
 					}
+
 					&::-ms-fill-lower {
 						@apply bg-primary rounded-full;
 					}
+
 					&::-ms-fill-upper {
 						@apply bg-base-100 rounded-full;
 					}

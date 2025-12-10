@@ -1,5 +1,6 @@
 @use "sass:math";
 @charset "UTF-8";
+
 /*!
  * Hamburgers
  * @description Tasty CSS-animated hamburgers
@@ -8,8 +9,6 @@
  * @link https://github.com/jonsuh/hamburgers
  */
 
-// Settings
-// ==================================================
 $hamburger-padding-x           : 1rem !default;
 $hamburger-padding-y           : 1rem !default;
 $hamburger-layer-width         : 2.5rem !default;
@@ -21,9 +20,6 @@ $hamburger-hover-opacity       : 0.7 !default;
 $hamburger-active-layer-color  : $hamburger-layer-color !default;
 $hamburger-active-hover-opacity: $hamburger-hover-opacity !default;
 
-// To use CSS filters as the hover effect instead of opacity,
-// set $hamburger-hover-use-filter as true and
-// change the value of $hamburger-hover-filter accordingly.
 $hamburger-hover-use-filter   : false !default;
 $hamburger-hover-filter       : opacity(50%) !default;
 $hamburger-active-hover-filter: $hamburger-hover-filter !default;
@@ -37,12 +33,9 @@ $hamburger-active-hover-filter: $hamburger-hover-filter !default;
   padding: $hamburger-padding-y $hamburger-padding-x;
   display: inline-block;
   cursor: pointer;
-
   transition-property: opacity, filter;
   transition-duration: 15s;
   transition-timing-function: linear;
-
-  // Normalize (<button>)
   font: inherit;
   color: inherit;
   text-transform: none;
@@ -55,6 +48,7 @@ $hamburger-active-hover-filter: $hamburger-hover-filter !default;
     @if $hamburger-hover-use-filter == true {
       filter: $hamburger-hover-filter;
     }
+
     @else {
       opacity: $hamburger-hover-opacity;
     }
@@ -65,6 +59,7 @@ $hamburger-active-hover-filter: $hamburger-hover-filter !default;
       @if $hamburger-hover-use-filter == true {
         filter: $hamburger-active-hover-filter;
       }
+
       @else {
         opacity: $hamburger-active-hover-opacity;
       }

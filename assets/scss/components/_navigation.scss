@@ -1,10 +1,12 @@
 @use '../mixins/mixins' as *;
+
 @layer components {
 	.mod_breadcrumb {
 		ul {
-			margin: 0 0 2rem 0;
+			margin: 0 0 2rem;
 			padding: 0;
 			list-style-type: none;
+
 			li {
 				display: inline-block;
 				margin: 0 1rem 0 0;
@@ -14,7 +16,6 @@
 	}
 	
 	.pagination {
-	
 		ul {
 			@apply flex flex-wrap p-0 list-none gap-2;
 		}

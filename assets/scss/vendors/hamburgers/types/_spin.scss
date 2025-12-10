@@ -1,4 +1,5 @@
 $hamburger-types: () !default;
+
 @if index($hamburger-types, spin) {
   /*
    * Spin

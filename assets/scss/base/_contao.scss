@@ -1,7 +1,6 @@
 @use '../mixins/mixins' as *;
 
 @layer utilities {
-
 	:root {
 		--base-line-height: 2em;
 	}
@@ -10,6 +9,7 @@
 	.invisible {
 		@apply hidden;
 	}
+
 	span.mandatory {
 		@apply text-primary;
 	}
@@ -61,7 +61,6 @@
 		h1, h2, h3, h4, h5, h6 {
 			background: #eb8100;
 			background: linear-gradient(0deg, #c73600 0%, #eb8100 60%);
-			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
 			background-clip: text
 		}
@@ -72,6 +71,7 @@
 	p {
 		&.topline {
 			@apply m-0 text-xs uppercase font-bold text-primary;
+
 			+ h1,
 			+ h2,
 			+ h3,
@@ -81,25 +81,34 @@
 				@apply mt-0;
 			}
 		}
+
 		&.info {
 			@apply m-0 text-xs;
 		}
+
 		&.more {
 			@apply m-0 px-6 pb-6;
+
 			a {
 				@apply font-bold;
-				&:after {
+
+				&::after {
 					@apply block font-icon leading-none;
+
 					content: '\e96b';
 				}
 			}
 		}
+
 		&.back {
 			@apply m-0 px-6 pb-6;
+
 			a {
 				@apply font-bold;
-				&:before {
+
+				&::before {
 					@apply block font-icon leading-none;
+
 					content: '\e966';
 				}
 			}
@@ -107,10 +116,10 @@
 	}
 	
 }
+
 @layer components {
 	// Element groups and grids
 	.content-element-group {
-		
 		&.grid {
 			h1, h2, h3, h4, h5, h6 {
 				&:first-child {
@@ -122,9 +131,12 @@
 		&:has(> .md\:float-right),
 		&:has(> .md\:float-left) {
 			//overflow: hidden;
+
 			@apply flex flex-col md:block;
+
 			@extend .clearfix;
 		}
+
 		> .md\:float-right + * {
 			order: -1;
 		}
@@ -134,21 +146,25 @@
 	.content-text {
 		&.media {
 			@apply overflow-hidden;
+
 			&--left {
 				> figure {
 					@apply float-left mr-4;
 				}
 			}
+
 			&--right {
 				> figure {
 					@apply float-right ml-4;
 				}
 			}
+
 			&--above {
 				> figure {
 						@apply mb-4!;
 				}
 			}
+
 			&--below {
 				> figure {
 						@apply mt-4!;
@@ -161,11 +177,13 @@
 	.content-downloads {
 		ul {
 			@apply list-none m-0 p-0;
+
 			li {
 				@apply p-0 m-0;
 			}
 		}
 	}
+
 	.content-element-group {
 		.content-downloads:last-child {
 			> ul > li:last-child > a {
@@ -173,20 +191,24 @@
 			}
 		}
 	}
+
 	.download-element {
 		&[class^="ext-"],
 		&[class*=" ext-"] {
 			> a {
 				@apply flex flex-row items-center;
-				&:before {
+
+				&::before {
 					/* use !important to prevent issues with browser extensions that change fonts */
 					@apply block mr-2 font-icon;
+
 					speak: never;
 					font-style: normal;
 					font-weight: normal;
 					font-variant: normal;
 					text-transform: none;
 					line-height: 1;
+
 					/* Better Font Rendering =========== */
 					-webkit-font-smoothing: antialiased;
 					-moz-osx-font-smoothing: grayscale;
@@ -195,6 +217,7 @@
 			}
 			
 		}
+
 		&.ext-pdf {
 			> a {
 				&::before {
@@ -202,6 +225,7 @@
 				}
 			}
 		}
+
 		&.ext-jpg {
 			> a {
 				&::before {
@@ -209,6 +233,7 @@
 				}
 			}
 		}
+
 		&.ext-zip {
 			> a {
 				&::before {
@@ -216,6 +241,7 @@
 				}
 			}
 		}
+
 		&.ext-exe {
 			> a {
 				&::before {
@@ -223,6 +249,7 @@
 				}
 			}
 		}
+
 		&.ext-png {
 			> a {
 				&::before {
@@ -230,6 +257,7 @@
 				}
 			}
 		}
+
 		&.ext-gif {
 			> a {
 				&::before {
@@ -237,6 +265,7 @@
 				}
 			}
 		}
+
 		&.ext-doc,
 		&.ext-docx {
 			> a {
@@ -245,6 +274,7 @@
 				}
 			}
 		}
+
 		&.ext-xls,
 		&.ext-xlsx {
 			> a {
@@ -253,6 +283,7 @@
 				}
 			}
 		}
+
 		&.ext-ppt,
 		&.ext-pptx {
 			> a {
@@ -261,6 +292,7 @@
 				}
 			}
 		}
+
 		&.ext-mp4 {
 			> a {
 				&::before {
@@ -268,6 +300,7 @@
 				}
 			}
 		}
+
 		&.ext-mp3 {
 			> a {
 				&::before {
@@ -281,6 +314,7 @@
 	.content-gallery {
 		ul {
 			@apply list-none m-0 p-0;
+
 			> li {
 				@apply m-0 p-0;
 			}
@@ -296,12 +330,14 @@
 			}
 		}
 	}
+
 	.content-player {
 		&.aspect--16\:9 {
 			video {
 				@apply aspect-video w-full;
 			}
 		}
+
 		audio {
 			@apply w-full;
 		}
@@ -317,55 +353,70 @@
 			}
 		}
 	}
+
 	.swiper-button-prev,
 	.swiper-button-next {
 		@apply size-12! bg-white;
-		box-shadow: 0 .5rem 1.25rem rgba(0,0,0,.15);
-		&:after {
+
+		box-shadow: 0 .5rem 1.25rem rgb(0 0 0 / 15%);
+
+		&::after {
 			@apply font-icon! text-lg! text-primary;
+
 			content:"\e966" !important;
 		}
 	}
+
 	.swiper-button-prev {
 		@apply left-0;
 	}
+
 	.swiper-button-next {
 		@apply right-0;
-		&:after {
+
+		&::after {
 			@apply font-icon!;
+
 			content:"\e96b" !important;
 		}
 	}
+
 	.swiper-button-disabled {
 		@apply opacity-0 transition;
 	}
+
 	.swiper-pagination {
 		&-bullet-active {
 			@apply bg-primary!;
 		}
 	}
 	
-	// Accordeon
+	// Accordion
 	.content-accordion {
 		@apply border-0!;
 	}
+
 	.handorgel {
 		&__header {
 			&__button {
 				@apply flex! flex-row justify-between bg-base-100! border-0! mb-3!;
-				&:after {
+
+				&::after {
 					@apply font-icon inline-flex items-center transform transition-transform duration-300 text-xs;
+
 					content:"\f107";
 				}
 			}
+
 			&--opened {
 				.handorgel__header__button {
-					&:after {
+					&::after {
 						@apply rotate-180;
 					}
 				}
 			}
 		}
+
 		&__content {
 			@apply border-0! bg-white! shadow-md -mt-3 mb-3;
 
@@ -374,6 +425,7 @@
 
 				&::before {
 					content:'';
+
 					@apply absolute -top-1 w-5 h-5 rotate-45 bg-white;
 				}
 			}

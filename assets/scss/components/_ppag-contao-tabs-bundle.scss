@@ -23,8 +23,8 @@
 			@apply inline-block;
 		}
 
-		>.tab-content {
-			>.tab-pane {
+		> .tab-content {
+			> .tab-pane {
 				@apply hidden;
 
 				&.active-tab {

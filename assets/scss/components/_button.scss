@@ -21,16 +21,12 @@
     @apply cursor-pointer select-none;
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
     @apply disabled:opacity-50 disabled:cursor-not-allowed;
-    
-    // Border variables from tailwind.theme.css
+
     border-width: var(--border);
     border-style: solid;
-    border-color: transparent; 
-    
-    // Default radius and shadow from tailwind.theme.css
+    border-color: transparent;
     border-radius: var(--radius-field);
     box-shadow: var(--shadow);
-    
 
     // Default (neutral) button
     @apply bg-base-200 text-base-content;
@@ -226,11 +222,13 @@
       
       &:hover {
         @apply shadow-md;
+
         transform: translateY(-1px);
       }
       
       &:active {
         @apply shadow-none;
+
         transform: translateY(0);
       }
     }
@@ -241,11 +239,13 @@
       
       &:hover {
         @apply shadow-lg;
+
         transform: translateY(-1px);
       }
       
       &:active {
         @apply shadow-sm;
+
         transform: translateY(0);
       }
     }
@@ -255,11 +255,13 @@
       
       &:hover {
         @apply shadow-xl;
+
         transform: translateY(-2px);
       }
       
       &:active {
         @apply shadow-md;
+
         transform: translateY(0);
       }
     }
@@ -267,11 +269,13 @@
     // Shape variants
     &-circle {
       @apply p-2 aspect-square;
+
       border-radius: 50%;
     }
     
     &-square {
       @apply p-2 aspect-square;
+
       border-radius: 0%;
     }
     

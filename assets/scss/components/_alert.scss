@@ -10,12 +10,10 @@
 
 @layer components {
   .alert {
-    // Base alert styles
     @apply flex items-start gap-3;
     @apply p-4 text-base;
     @apply transition-all duration-200;
-    
-    // Unified theme variables
+
     border-width: var(--border);
     border-style: solid;
     border-color: transparent;
@@ -123,42 +121,50 @@
     // Style variants - Dashed
     &-dashed {
       @apply bg-transparent text-base-content;
+
       border-style: dashed;
-      border-color: currentColor;
+      border-color: currentcolor;
       
       &.alert-primary {
         @apply text-primary;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
       
       &.alert-secondary {
         @apply text-secondary;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
       
       &.alert-accent {
         @apply text-accent;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
       
       &.alert-info {
         @apply text-info;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
       
       &.alert-success {
         @apply text-success;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
       
       &.alert-warning {
         @apply text-warning;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
       
       &.alert-error {
         @apply text-error;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
     }
     

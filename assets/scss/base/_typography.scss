@@ -18,6 +18,7 @@
 	.h5,
 	.h6 {
 		@apply font-sans font-bold leading-snug;
+
 		@include media("<=md") {
 			hyphens: auto;
 		}
@@ -26,7 +27,9 @@
 	h1,
 	.h1 {
 		font-size: 4rem;
+
 		@apply my-5;
+
 		@include media(">xs") {
 			@apply text-4xl;
 		}
@@ -35,7 +38,9 @@
 	h2,
 	.h2 {
 		font-size: 3.5rem;
+
 		@apply my-4;
+
 		@include media(">xs") {
 			@apply text-3xl;
 		}
@@ -106,12 +111,14 @@
 
 	li {
 		@apply ml-4 py-2 leading-normal;
+
 		text-indent: 0;
 	}
 
 	nav li,
 	menu li {
 		@apply list-none ml-0;
+
 		text-indent: 0;
 	}
 
@@ -142,12 +149,14 @@
 	sub,
 	sup {
 		font-size: .75em;
+
 		@apply leading-none;
 	}
 
 	sub {
 		@apply align-sub bottom-0;
 	}
+
 	sup {
 		@apply align-super;
 	}
@@ -160,6 +169,7 @@
 
 	ins {
 		@apply bg-primary/200;
+
 		text-decoration: none;
 	}
 
@@ -176,6 +186,7 @@
 	mark::selection {
 		background-color: var(--color-primary);
 		color: var(--color-white);
+
 		.bg-primary & {
 			background-color: var(--color-secondary);
 			color: var(--color-body);
@@ -189,6 +200,7 @@
 
 	abbr {
 		@apply uppercase;
+
 		text-decoration: none;
 	}
 
@@ -207,6 +219,7 @@
 	code {
 		@apply bg-base-100 text-xs px-1 py-1 rounded;
 	}
+
 	pre code {
 		@apply leading-snug py-0;
 	}
@@ -214,7 +227,7 @@
 	kbd,
 	samp,
 	data {
-		background-color: rgba(155, 155, 155, 0.2);
+		background-color: rgb(155 155 155 / 20%);
 	}
 
 	kbd {
@@ -237,7 +250,9 @@
 
 	ruby {
 		display: ruby;
+
 		@apply relative mx-[0.5ex];
+
 		ruby-position: over;
 	}
 
@@ -274,6 +289,7 @@
 		rtc {
 			@apply inline-flex justify-between;
 		}
+
 		rt {
 			@apply inline-flex;
 		}
@@ -318,8 +334,10 @@
 
 	figure {
 		@apply block m-0 max-w-full;
+
 		> a {
 			@apply block w-fit border-0!;
+
 			&:hover,
 			&:focus,
 			&:active {
@@ -327,6 +345,7 @@
 			}
 		}
 	}
+
 	img {
 		@apply block;
 		@apply m-0;

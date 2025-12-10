@@ -12,15 +12,12 @@
 
 @layer components {
   .badge {
-    // Base badge styles
     @apply inline-flex items-center justify-center gap-1;
     @apply px-2.5 py-1;
     @apply text-sm font-medium leading-tight;
     @apply transition-all duration-200;
     @apply whitespace-nowrap;
 
-    
-    // Unified theme variables
     border-width: var(--border);
     border-style: solid;
     border-color: transparent;
@@ -128,48 +125,57 @@
     // Style variants - Dashed
     &-dashed {
       @apply bg-transparent text-base-content;
+
       border-style: dashed;
-      border-color: currentColor;
+      border-color: currentcolor;
       
       &.badge-primary {
         @apply text-primary;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
       
       &.badge-secondary {
         @apply text-secondary;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
       
       &.badge-accent {
         @apply text-accent;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
       
       &.badge-info {
         @apply text-info;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
       
       &.badge-success {
         @apply text-success;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
       
       &.badge-warning {
         @apply text-warning;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
       
       &.badge-error {
         @apply text-error;
-        border-color: currentColor;
+
+        border-color: currentcolor;
       }
     }
     
     // Size variants
     &-xs {
       @apply px-1.5 py-0.5 gap-0.5;
+
       font-size: 0.625rem; // c.a 10px 
     }
     
