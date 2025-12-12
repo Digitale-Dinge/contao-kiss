@@ -6,7 +6,7 @@ use Contao\CoreBundle\DataContainer\PaletteManipulator;
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['opening_times'] = [
     'inputType' => 'openingTimesTable',
-    'eval' => ['tl_class' => 'w66 clr'],
+    'eval' => ['tl_class' => 'w50 clr'],
     'sql' => "text NULL",
 ];
 

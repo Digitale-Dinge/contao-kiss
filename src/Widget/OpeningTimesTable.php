@@ -23,12 +23,6 @@ class OpeningTimesTable extends Widget
 
     public function generate()
     {
-        // Make sure there is at least an empty array
-        if (!\is_array($this->varValue) || !$this->varValue[0])
-        {
-            $this->varValue = array(array(''));
-        }
-
         $rows = [];
 
         $rowCount = \count($this->varValue);
@@ -39,10 +33,9 @@ class OpeningTimesTable extends Widget
         }
 
         for ($i=0, $c=\count($this->varValue); $i<$c; $i++) {
-            $rows[] = [
-                'time_from' => self::specialcharsValue($this->varValue[$i]['time_from'] ?? ''),
-                'time_to' => self::specialcharsValue($this->varValue[$i]['time_to'] ?? ''),
-            ];
+            for ($j=0; $j<=3; $j++) {
+                $rows[$i][$j] = self::specialcharsValue($this->varValue[$i][$j] ?? '');
+            }
         }
 
         return System::getContainer()->get('twig')->render('@Contao/backend/widget/opening_times.html.twig', [

@@ -11,32 +11,27 @@
             <th>{{ 'contao_kiss.widget.day'|trans([], 'contao_kiss') }}</th>
             <th>{{ 'contao_kiss.widget.open_from'|trans([], 'contao_kiss') }}</th>
             <th>{{ 'contao_kiss.widget.open_to'|trans([], 'contao_kiss') }}</th>
+            <th>{{ 'contao_kiss.widget.open_from'|trans([], 'contao_kiss') }}</th>
+            <th>{{ 'contao_kiss.widget.open_to'|trans([], 'contao_kiss') }}</th>
         </tr>
     </thead>
     <tbody>
         {% for row in rows %}
+            {% set row_index = loop.index0 %}
             <tr>
                 <th scope="row">{{ ('DAYS.' ~ (loop.index % 7))|trans }}</th>
+                {% for item in row %}
                 <td>
-                    {% set time_from_attributes = attrs()
+                    {% set time_attrs = attrs()
                         .set('type', 'time')
-                        .set('name', "#{id}[#{loop.index0}][time_from]")
-                        .set('id', "#{id}_time_from_#{loop.index0}")
-                        .set('value', row.time_from)
+                        .set('name', "#{id}[#{row_index}][#{loop.index0}]")
+                        .set('id', "#{id}_#{loop.index0}_#{row_index}")
+                        .set('value', item)
                         .addClass('tl_text')
                     %}
-                    <input{{ time_from_attributes }}>
+                    <input{{ time_attrs }}>
                 </td>
-                <td>
-                    {% set time_to_attributes = attrs()
-                        .set('type', 'time')
-                        .set('name', "#{id}[#{loop.index0}][time_to]")
-                        .set('id', "#{id}_time_to_#{loop.index0}")
-                        .set('value', row.time_to)
-                        .addClass('tl_text')
-                    %}
-                    <input{{ time_to_attributes }}>
-                </td>
+                {% endfor %}
             </tr>
         {% endfor %}
     </tbody>
