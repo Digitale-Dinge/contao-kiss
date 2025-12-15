@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\EventListener;
+namespace DigitaleDinge\ContaoKiss\EventListener\DataContainer;
 
 use Contao\Config;
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
@@ -41,7 +41,8 @@ final class AddLayoutFieldsToPaletteListener
 
         PaletteManipulator::create()
             ->addField('kiss_dontShowFieldsOnContentElement', 'backend_legend', PaletteManipulator::POSITION_APPEND)
-            ->applyToPalette('default', $table);
+            ->applyToPalette('default', $table)
+        ;
     }
 
     #[AsCallback('tl_content', 'config.onpalette')]
@@ -55,13 +56,13 @@ final class AddLayoutFieldsToPaletteListener
         $blacklist = StringUtil::deserialize(Config::get('kiss_dontShowFieldsOnContentElement'), true);
 
         // skip if the content type is in the blacklist
-        if ( array_key_exists('type',$currentRecord) && in_array($currentRecord['type'], $blacklist, true) ) {
+        if (array_key_exists('type', $currentRecord) && in_array($currentRecord['type'], $blacklist, true) ) {
             return $palette;
         }
 
         return PaletteManipulator::create()
             ->addLegend('layout_legend', 'template_legend', PaletteManipulator::POSITION_BEFORE)
-            ->addField(['contentWidth', 'bgColor', 'paddingTop', 'paddingBottom', 'marginTop', 'marginBottom'], 'layout_legend', 'append')
+            ->addField(['contentWidth', 'backgroundColor', 'paddingTop', 'paddingBottom', 'marginTop', 'marginBottom'], 'layout_legend', 'append')
             ->applyToString($palette);
     }
 }
