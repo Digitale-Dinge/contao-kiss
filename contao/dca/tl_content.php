@@ -4,101 +4,82 @@ declare(strict_types=1);
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use DigitaleDinge\ContaoKiss\Twig\Options\ContainerSizes;
+use DigitaleDinge\ContaoKiss\Twig\Options\Margin;
+use DigitaleDinge\ContaoKiss\Twig\Options\Padding;
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'hyperlinkAsButton';
 
-// Hyperlinks
-PaletteManipulator::create()
-    ->addField('lightboxIframe', 'rel', 'after')
-    ->addField('icon', 'lightboxIframe', 'after')
-    ->addField('iconPosition', 'icon', 'after')
-    ->addField('hyperlinkAsButton', 'iconPosition', 'after')
-    ->applyToPalette('hyperlink', 'tl_content')
-;
-
-// Download
-PaletteManipulator::create()
-    ->addField('hyperlinkAsButton', 'download_legend', 'append')
-    ->applyToPalette('download', 'tl_content')
-;
-
-// Downloads
-PaletteManipulator::create()
-    ->addField('hyperlinkAsButton', 'download_legend', 'append')
-    ->applyToPalette('downloads', 'tl_content')
-;
-
-/*
- * Customize subpalettes
- */
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['hyperlinkAsButton'] = 'buttonType,buttonColor,buttonSize';
 
-/*
- * Add fields configuration
- */
 $GLOBALS['TL_DCA']['tl_content']['fields']['contentWidth'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['contentWidth'],
     'exclude' => true,
     'inputType' => 'select',
     'options' => array_column(ContainerSizes::cases(), 'value'),
-    'reference' => &$GLOBALS['TL_LANG']['tl_content'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['contentWidthOptions'],
     'eval' => [
         'tl_class' => 'w25 clr',
+        'class' => 'widget-icon icon-width',
+        'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(32) NOT NULL default ''",
+    'sql' => "varchar(12) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['paddingTop'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['paddingTop'],
     'exclude' => true,
     'inputType' => 'select',
-    'options' => ['pt-line-1/2', 'pt-line-1', 'pt-line-2', 'pt-line-3', 'pt-line-4', 'pt-line-5'],
-    'reference' => &$GLOBALS['TL_LANG']['tl_content']['padding'],
+    'options' => array_column(Padding\Top::cases(), 'value'),
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['paddingTopOptions'],
     'eval' => [
         'tl_class' => 'clr w25',
+        'class' => 'widget-icon icon-pt',
+        'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(32) NOT NULL default ''",
+    'sql' => "varchar(12) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['paddingBottom'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['paddingBottom'],
     'exclude' => true,
     'inputType' => 'select',
-    'options' => ['pb-line-1/2', 'pb-line-1', 'pb-line-2', 'pb-line-3', 'pb-line-4', 'pb-line-5'],
-    'reference' => &$GLOBALS['TL_LANG']['tl_content']['padding'],
+    'options' => array_column(Padding\Bottom::cases(), 'value'),
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['paddingBottomOptions'],
     'eval' => [
         'tl_class' => 'w25',
+        'class' => 'widget-icon icon-pb',
+        'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(32) NOT NULL default ''",
+    'sql' => "varchar(12) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['marginTop'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['marginTop'],
     'exclude' => true,
     'inputType' => 'select',
-    'options' => ['mt-line-1/2', 'mt-line-1', 'mt-line-2', 'mt-line-3', 'mt-line-4', 'mt-line-5'],
-    'reference' => &$GLOBALS['TL_LANG']['tl_content']['padding'],
+    'options' => array_column(Margin\Top::cases(), 'value'),
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['marginTopOptions'],
     'eval' => [
-        'tl_class' => 'w25',
+        'tl_class' => 'w25 clr',
+        'class' => 'widget-icon icon-mt',
+        'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(32) NOT NULL default ''",
+    'sql' => "varchar(12) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['marginBottom'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_content']['marginBottom'],
     'exclude' => true,
     'inputType' => 'select',
-    'options' => ['mb-line-1/2', 'mb-line-1', 'mb-line-2', 'mb-line-3', 'mb-line-4', 'mb-line-5'],
-    'reference' => &$GLOBALS['TL_LANG']['tl_content']['padding'],
+    'options' => array_column(Margin\Bottom::cases(), 'value'),
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['marginBottomOptions'],
     'eval' => [
         'tl_class' => 'w25',
+        'class' => 'widget-icon icon-mb',
+        'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(32) NOT NULL default ''",
+    'sql' => "varchar(12) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
@@ -111,18 +92,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
     'sql' => "char(4) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['downloadsAsCard'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['downloadsAsCard'],
-    'exclude' => true,
-    'inputType' => 'checkbox',
-    'sql' => "char(1) NOT NULL default ''",
-    'eval' => [
-        'tl_class' => 'm12 clr',
-    ],
-];
-
 $GLOBALS['TL_DCA']['tl_content']['fields']['hyperlinkAsButton'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['hyperlinkAsButton'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'sql' => "char(1) NOT NULL default ''",
@@ -135,7 +105,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['hyperlinkAsButton'] = [
 $GLOBALS['TL_DCA']['tl_content']['fields']['rel']['eval']['tl_class'] = 'w25';
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['lightboxIframe'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['lightboxIframe'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'sql' => "char(1) NOT NULL default ''",
@@ -195,3 +164,19 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['allowHtml'] = tr
 
 /* HTML in Linktexten */
 $GLOBALS['TL_DCA']['tl_content']['fields']['linktext']['eval']['allowHtml'] = true;
+
+
+PaletteManipulator::create()
+    // Hyperlinks
+    ->addField('lightboxIframe', 'rel', 'after')
+    ->addField('icon', 'lightboxIframe', 'after')
+    ->addField('iconPosition', 'icon', 'after')
+    ->addField('hyperlinkAsButton', 'iconPosition', 'after')
+    ->applyToPalette('hyperlink', 'tl_content')
+    // Download
+    ->addField('hyperlinkAsButton', 'download_legend', 'append')
+    ->applyToPalette('download', 'tl_content')
+    // Downloads
+    ->addField('hyperlinkAsButton', 'download_legend', 'append')
+    ->applyToPalette('downloads', 'tl_content')
+;

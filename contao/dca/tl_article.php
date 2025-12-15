@@ -2,23 +2,59 @@
 
 declare(strict_types=1);
 
-use Contao\DcaLoader;
+use DigitaleDinge\ContaoKiss\Twig\Options\ContainerSizes;
+use DigitaleDinge\ContaoKiss\Twig\Options\Padding;
 
-DcaLoader::loadDataContainer('tl_content');
-
-$GLOBALS['TL_DCA']['tl_article']['fields']['bgColor'] = [
+$GLOBALS['TL_DCA']['tl_article']['fields']['backgroundColor'] = [
     'exclude' => true,
-    'label' => &$GLOBALS['TL_LANG']['tl_article']['bgColor'],
     'inputType' => 'select',
-    'options' => ['transparent', 'background-white', 'background-primary', 'background-secondary', 'background-additional-1', 'background-additional-2'],
-    'reference' => &$GLOBALS['TL_LANG']['default']['background-color'],
     'eval' => [
         'tl_class' => 'w25',
+        'class' => 'widget-icon icon-background',
         'includeBlankOption' => true,
+        'chosen' => true,
     ],
     'sql' => "varchar(32) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_article']['fields']['contentWidth'] = $GLOBALS['TL_DCA']['tl_content']['fields']['contentWidth'];
-$GLOBALS['TL_DCA']['tl_article']['fields']['paddingTop'] = $GLOBALS['TL_DCA']['tl_content']['fields']['paddingTop'];
-$GLOBALS['TL_DCA']['tl_article']['fields']['paddingBottom'] = $GLOBALS['TL_DCA']['tl_content']['fields']['paddingBottom'];
+$GLOBALS['TL_DCA']['tl_article']['fields']['contentWidth'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'options' => array_column(ContainerSizes::cases(), 'value'),
+    'reference' => &$GLOBALS['TL_LANG']['tl_article']['contentWidthOptions'],
+    'eval' => [
+        'tl_class' => 'w25 clr',
+        'class' => 'widget-icon icon-width',
+        'includeBlankOption' => true,
+        'chosen' => true,
+    ],
+    'sql' => "varchar(12) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_article']['fields']['paddingTop'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'options' => array_column(Padding\Top::cases(), 'value'),
+    'reference' => &$GLOBALS['TL_LANG']['tl_article']['paddingTopOptions'],
+    'eval' => [
+        'tl_class' => 'clr w25',
+        'class' => 'widget-icon icon-pt',
+        'includeBlankOption' => true,
+        'chosen' => true,
+    ],
+    'sql' => "varchar(12) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_article']['fields']['paddingBottom'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'options' => array_column(Padding\Bottom::cases(), 'value'),
+    'reference' => &$GLOBALS['TL_LANG']['tl_article']['paddingBottomOptions'],
+    'eval' => [
+        'tl_class' => 'w25',
+        'class' => 'widget-icon icon-pb',
+        'includeBlankOption' => true,
+        'chosen' => true,
+    ],
+    'sql' => "varchar(12) NOT NULL default ''",
+];

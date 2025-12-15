@@ -20,16 +20,16 @@
   } only %}
 #}
 
-{% set badgeClasses = [
-  'badge',
-  color ? 'badge-' ~ color : '',
-  style ? 'badge-' ~ style : '',
-  size ? 'badge-' ~ size : '',
-  shape ? 'badge-' ~ shape : '',
-  class ?? '',
-]|filter(v => v)|join(' ') %}
+{% set badge_attrs = attrs()
+  .addClass(['badge')
+  .addClass('badge-' ~ color, color|default)
+  .addClass('badge-' ~ style, style|default)
+  .addClass('badge-' ~ size, size|default)
+  .addClass('badge-' ~ shape, shape|default)
+  .addClass('badge-' ~ class, class|default)
+%}
 
-<span class="{{ badgeClasses }}">
+<span{{ badge_attrs }}>
   {% if icon and iconPosition|default('left') == 'left' %}
     <i class="{{ icon }}"></i>
   {% endif %}

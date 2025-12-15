@@ -1,5 +1,5 @@
 
-<div{{ attrs().addClass(['inside', 'container-base'])}}>
+<div{{ attrs().addClass(['inside', 'container-base']) }}>
     <div{{ attrs().addClass([
         'footer-content',
         'flex',
@@ -8,10 +8,10 @@
         'gap-16',
         'min-[880px]:gap-4',
         'min-[880px]:justify-between',
-        'pb-16'
-    ])}}>
-        <div{{ attrs().addClass(['footer-address'])}}>
-            <p{{ attrs().addClass(['text-sm'])}}>
+        'pb-16',
+    ]) }}>
+        <div{{ attrs().addClass(['footer-address']) }}>
+            <p{{ attrs().addClass(['text-sm']) }}>
                 {{ insert_tag('company::name')|raw }}<br>
                 {{ insert_tag('company::info')|raw }}<br>
                 {{ insert_tag('company::street')|raw }}<br>
