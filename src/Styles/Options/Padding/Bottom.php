@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Twig\Options\Padding;
+namespace DigitaleDinge\ContaoKiss\Styles\Options\Padding;
 
-use DigitaleDinge\ContaoKiss\Twig\Options\ClassOptionsInterface;
+use DigitaleDinge\ContaoKiss\Styles\ClassOptionsInterface;
 
 enum Bottom: string implements ClassOptionsInterface
 {

@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Twig\Options;
+namespace DigitaleDinge\ContaoKiss\Styles\Options\Layout;
+
+use DigitaleDinge\ContaoKiss\Styles\ClassOptionsInterface;
 
 enum Columns: string implements ClassOptionsInterface
 {

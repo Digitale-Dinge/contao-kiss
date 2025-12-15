@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-use DigitaleDinge\ContaoKiss\Twig\Options\ContainerSizes;
-use DigitaleDinge\ContaoKiss\Twig\Options\Padding;
+use DigitaleDinge\ContaoKiss\Styles\Options\Layout;
+use DigitaleDinge\ContaoKiss\Styles\Options\Padding;
 
+// Options are added dynamically via AddBackgroundColorsListener
 $GLOBALS['TL_DCA']['tl_article']['fields']['backgroundColor'] = [
     'exclude' => true,
     'inputType' => 'select',
@@ -20,7 +21,7 @@ $GLOBALS['TL_DCA']['tl_article']['fields']['backgroundColor'] = [
 $GLOBALS['TL_DCA']['tl_article']['fields']['contentWidth'] = [
     'exclude' => true,
     'inputType' => 'select',
-    'options' => array_column(ContainerSizes::cases(), 'value'),
+    'options' => array_column(Layout\ContainerSizes::cases(), 'value'),
     'reference' => &$GLOBALS['TL_LANG']['tl_article']['contentWidthOptions'],
     'eval' => [
         'tl_class' => 'w25 clr',

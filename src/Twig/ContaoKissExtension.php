@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace DigitaleDinge\ContaoKiss\Twig;
 
 use Contao\FilesModel;
-use DigitaleDinge\ContaoKiss\Twig\Options\ClassOptionsInterface;
-use DigitaleDinge\ContaoKiss\Twig\Options\ContainerSizes;
+use DigitaleDinge\ContaoKiss\Styles\ClassOptionsInterface;
+use DigitaleDinge\ContaoKiss\Styles\Options\Layout\ContainerSizes;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;

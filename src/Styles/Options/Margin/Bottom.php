@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Twig\Options\Margin;
+namespace DigitaleDinge\ContaoKiss\Styles\Options\Margin;
 
-use DigitaleDinge\ContaoKiss\Twig\Options\ClassOptionsInterface;
+use DigitaleDinge\ContaoKiss\Styles\ClassOptionsInterface;
 
 enum Bottom: string implements ClassOptionsInterface
 {

@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
-use DigitaleDinge\ContaoKiss\Twig\Options\ContainerSizes;
-use DigitaleDinge\ContaoKiss\Twig\Options\Margin;
-use DigitaleDinge\ContaoKiss\Twig\Options\Padding;
+use DigitaleDinge\ContaoKiss\Styles\Options\Layout;
+use DigitaleDinge\ContaoKiss\Styles\Options\Margin;
+use DigitaleDinge\ContaoKiss\Styles\Options\Padding;
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'hyperlinkAsButton';
 
@@ -14,7 +14,7 @@ $GLOBALS['TL_DCA']['tl_content']['subpalettes']['hyperlinkAsButton'] = 'buttonTy
 $GLOBALS['TL_DCA']['tl_content']['fields']['contentWidth'] = [
     'exclude' => true,
     'inputType' => 'select',
-    'options' => array_column(ContainerSizes::cases(), 'value'),
+    'options' => array_column(Layout\ContainerSizes::cases(), 'value'),
     'reference' => &$GLOBALS['TL_LANG']['tl_content']['contentWidthOptions'],
     'eval' => [
         'tl_class' => 'w25 clr',
