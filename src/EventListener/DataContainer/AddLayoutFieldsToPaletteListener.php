@@ -40,7 +40,8 @@ final class AddLayoutFieldsToPaletteListener
         ];
 
         PaletteManipulator::create()
-            ->addField('kiss_dontShowFieldsOnContentElement', 'backend_legend', PaletteManipulator::POSITION_APPEND)
+            ->addLegend('kiss_settings_legend', 'backend_legend', PaletteManipulator::POSITION_AFTER, true)
+            ->addField(['kiss_dontShowFieldsOnContentElement'], 'kiss_settings_legend', PaletteManipulator::POSITION_APPEND)
             ->applyToPalette('default', $table)
         ;
     }
