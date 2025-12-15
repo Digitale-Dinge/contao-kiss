@@ -1,1 +1,14 @@
 socialmedialist_on: auf
+
+number_cols:
+    two:            2 pro Reihe
+    three:          3 pro Reihe
+    four:           4 pro Reihe
+    five:           5 pro Reihe
+    six:            6 pro Reihe
+    seven:          7 pro Reihe
+    eight:          8 pro Reihe
+    nine:           9 pro Reihe
+    ten:            10 pro Reihe
+    eleven:         11 pro Reihe
+    twelve:         12 pro Reihe

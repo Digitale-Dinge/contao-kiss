@@ -1,0 +1,71 @@
+tl_article:
+    contentWidth:
+        - Inhaltsbreite
+        - Bestimmen Sie die Breite des Inhalts.
+
+    contentWidthOptions:
+        container-base:         Satzspiegel
+        container-small:        Satzspiegel schmal
+        container-narrow:       Satzspiegel schmaler
+        container-full-pad:     Volle Breite mit Abstand links und rechts
+        container-full:         Volle Breite ohne Abstand links und rechts
+
+    paddingTop:
+        - Innerer Abstand des Elements nach oben
+        - Bestimmen Sie den Abstand des Elements nach oben.
+
+    paddingBottom:
+        - Innerer Abstand des Elements nach unten
+        - Bestimmen Sie den Abstand des Elements nach unten.
+
+    marginTop:
+        -  Äußerer Abstand des Elements nach oben
+        - Bestimmen Sie den Abstand des Elements nach oben.
+
+    marginBottom:
+        - Äußerer Abstand des Elements nach unten
+        - Bestimmen Sie den Abstand des Elements nach unten.
+
+    paddingTopOptions:
+        pt-line-1/2:            Halbe Zeilenhöhe
+        pt-line-1:              1x Zeilenhöhe
+        pt-line-2:              2x Zeilenhöhe
+        pt-line-3:              3x Zeilenhöhe
+        pt-line-4:              4x Zeilenhöhe
+        pt-line-5:              5x Zeilenhöhe
+
+    paddingBottomOptions:
+        pb-line-1/2:            Halbe Zeilenhöhe
+        pb-line-1:              1x Zeilenhöhe
+        pb-line-2:              2x Zeilenhöhe
+        pb-line-3:              3x Zeilenhöhe
+        pb-line-4:              4x Zeilenhöhe
+        pb-line-5:              5x Zeilenhöhe
+
+    marginTopOptions:
+        mt-line-1/2:            Halbe Zeilenhöhe
+        mt-line-1:              1x Zeilenhöhe
+        mt-line-2:              2x Zeilenhöhe
+        mt-line-3:              3x Zeilenhöhe
+        mt-line-4:              4x Zeilenhöhe
+        mt-line-5:              5x Zeilenhöhe
+
+    marginBottomOptions:
+        mb-line-1/2:            Halbe Zeilenhöhe
+        mb-line-1:              1x Zeilenhöhe
+        mb-line-2:              2x Zeilenhöhe
+        mb-line-3:              3x Zeilenhöhe
+        mb-line-4:              4x Zeilenhöhe
+        mb-line-5:              5x Zeilenhöhe
+
+    backgroundColor:
+        - Hintergrundfarbe
+        - Wählen Sie die Hintergrundfarbe für den Artikel
+
+    backgroundColorOptions:
+        transparent:                Transparent
+        background-white:           Weiß
+        background-primary:         Markenfarbe
+        background-secondary:       Sekundäre Farbe
+        background-additional-1:    Zusätzliche Farbe 1
+        background-additional-2:    Zusätzliche Farbe 2

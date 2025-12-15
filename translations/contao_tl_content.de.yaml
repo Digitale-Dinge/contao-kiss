@@ -1,0 +1,116 @@
+tl_content:
+    layout_legend:              Layout-Einstellungen
+
+    grid:                       Spalten-Grid
+    contentTeaser:              Teaser
+
+    lightboxIframe:
+        - 'Inhalt in iFrame öffnen'
+        - 'Öffnet den Link in einem iFrame und bettet so die externe Seite in die eigene Seite ein.'
+
+    contentWidth:
+        - Inhaltsbreite
+        - Bestimmen Sie die Breite des Inhalts.
+
+    contentWidthOptions:
+        container-base:         Satzspiegel
+        container-small:        Satzspiegel schmal
+        container-narrow:       Satzspiegel schmaler
+        container-full-pad:     Volle Breite mit Abstand links und rechts
+        container-full:         Volle Breite ohne Abstand links und rechts
+
+    topline:
+        - 'Dachzeile'
+        - 'Stellt eine optionale Dachzeile über der Headline dar'
+
+    color:
+        - 'Farbe'
+        - 'Bestimmen Sie die Farbe des Elements.'
+
+    icon:
+        - 'Icon'
+
+    iconColor:
+        primary: 'Primär (Standard) <img src="bundles/digitaledingecontaokiss/icons/primary.png">'
+        secondary: 'Sekundär <img src="bundles/digitaledingecontaokiss/icons/secondary.png">'
+        outline: 'Rahmen <img src="bundles/digitaledingecontaokiss/icons/outline.png">'
+
+    iconPosition:
+        - 'Position'
+        - 'Wählen Sie die gewünschte Position des Icons.'
+
+    iconPositionOptions:
+        right: 'Rechts <img src="bundles/digitaledingecontaokiss/icons/icon-right.png">'
+        left: 'Links (Standard) <img src="bundles/digitaledingecontaokiss/icons/icon-left.png">'
+    
+    hyperlinkAsButton:
+        - 'Als Button darstellen'
+        - 'Verändert die Darstellung von einem Textlink in einen Button'
+
+    buttonType:
+        - 'Button-Typ'
+        - 'Bestimmen Sie die den Typ des Buttons.'
+
+    buttonColor:
+        - 'Buttonfarbe'
+        - 'Bestimmen Sie die die Farbe des Buttons.'
+
+    buttonSize:
+        - 'Buttongröße'
+        - 'Bestimmen Sie die Größe des Buttons.'
+
+    buttonSizeOptions:
+        sm: 'Klein <img src="bundles/digitaledingecontaokiss/icons/small.png">'
+        lg: 'Groß (Standard) <img src="bundles/digitaledingecontaokiss/icons/large.png">'
+
+    paddingTop:
+        - Innerer Abstand des Elements nach oben
+        - Bestimmen Sie den Abstand des Elements nach oben.
+
+    paddingBottom:
+        - Innerer Abstand des Elements nach unten
+        - Bestimmen Sie den Abstand des Elements nach unten.
+
+    marginTop:
+        - Äußerer Abstand des Elements nach oben
+        - Bestimmen Sie den Abstand des Elements nach oben.
+
+    marginBottom:
+        - Äußerer Abstand des Elements nach unten
+        - Bestimmen Sie den Abstand des Elements nach unten.
+
+    backgroundColor:
+        - Hintergrundfarbe
+        - Wählen Sie die Hintergrundfarbe für das Inhaltselement
+
+    paddingTopOptions:
+        pt-line-1/2:            Halbe Zeilenhöhe
+        pt-line-1:              1x Zeilenhöhe
+        pt-line-2:              2x Zeilenhöhe
+        pt-line-3:              3x Zeilenhöhe
+        pt-line-4:              4x Zeilenhöhe
+        pt-line-5:              5x Zeilenhöhe
+
+    paddingBottomOptions:
+        pb-line-1/2:            Halbe Zeilenhöhe
+        pb-line-1:              1x Zeilenhöhe
+        pb-line-2:              2x Zeilenhöhe
+        pb-line-3:              3x Zeilenhöhe
+        pb-line-4:              4x Zeilenhöhe
+        pb-line-5:              5x Zeilenhöhe
+
+    marginTopOptions:
+        mt-line-1/2:            Halbe Zeilenhöhe
+        mt-line-1:              1x Zeilenhöhe
+        mt-line-2:              2x Zeilenhöhe
+        mt-line-3:              3x Zeilenhöhe
+        mt-line-4:              4x Zeilenhöhe
+        mt-line-5:              5x Zeilenhöhe
+
+    marginBottomOptions:
+        mb-line-1/2:            Halbe Zeilenhöhe
+        mb-line-1:              1x Zeilenhöhe
+        mb-line-2:              2x Zeilenhöhe
+        mb-line-3:              3x Zeilenhöhe
+        mb-line-4:              4x Zeilenhöhe
+        mb-line-5:              5x Zeilenhöhe
