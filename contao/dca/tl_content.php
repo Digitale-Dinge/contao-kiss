@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['contentWidth'] = [
         'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(16) NOT NULL default ''",
+    'sql' => "varchar(32) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['paddingTop'] = [
