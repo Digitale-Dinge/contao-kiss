@@ -1,0 +1,630 @@
+/**
+ * KISS Card Component (V1.0)
+ * 
+ * Base: .card
+ * Sections: card-{body|header|footer|title|actions|alert}
+ * Sizes: card-{xs|sm|lg|xl}
+ * Styles: card-{side|soft|outline|glass}
+ * Colors: card-{primary|secondary|accent|info|success|warning|error}
+ * Interactive: card-{hover|grow|link}
+ * Effects: image-full
+ * 
+ * Example: <div class="card card-soft card-primary card-lg">
+ *            <div class="card-header"><h5 class="card-title">Title</h5></div>
+ *            <div class="card-body">Content here</div>
+ *            <div class="card-footer">Footer content</div>
+ *          </div>
+ */
+
+@layer components {
+  .card {
+    // Base card styles
+    @apply relative flex flex-col;
+    @apply bg-base-100 text-base-content;
+    @apply w-full;
+    @apply overflow-hidden;
+
+    border-width: var(--border);
+    border-style: solid;
+    @apply border-base-content/20;
+    border-radius: var(--radius-box);
+    box-shadow: var(--shadow);
+
+    // Figure/Image handling
+    > figure,
+    > .card-figure {
+      @apply relative overflow-hidden;
+      @apply w-full;
+
+      > img {
+        @apply w-full h-auto object-cover;
+      }
+    }
+
+    // Card Header
+    &-header {
+      @apply flex items-center gap-4;
+      @apply px-6 py-4;
+      @apply border-b border-base-content/10;
+    }
+
+    // Card Body
+    &-body {
+      @apply flex flex-col flex-1;
+      @apply px-6 py-5;
+      @apply gap-2;
+    }
+
+    // Card Footer
+    &-footer {
+      @apply px-6 py-4;
+      @apply border-t border-base-content/10;
+    }
+
+    // Card Title
+    &-title {
+      @apply text-lg font-semibold leading-tight;
+      @apply text-base-content;
+    }
+
+    // Card Actions
+    &-actions {
+      @apply flex flex-wrap items-center gap-2;
+    }
+
+    // Card Alert
+    &-alert {
+      @apply w-full;
+    }
+
+    // =========================================
+    // SIZE VARIANTS
+    // =========================================
+
+    // Extra Small
+    &-xs {
+      > .card-header {
+        @apply px-3 py-2;
+      }
+
+      > .card-body {
+        @apply px-3 py-2.5;
+        @apply gap-1;
+      }
+
+      > .card-footer {
+        @apply px-3 py-2;
+      }
+
+      .card-title {
+        @apply text-sm;
+      }
+    }
+
+    // Small
+    &-sm {
+      > .card-header {
+        @apply px-4 py-3;
+      }
+
+      > .card-body {
+        @apply px-4 py-3;
+        @apply gap-1.5;
+      }
+
+      > .card-footer {
+        @apply px-4 py-3;
+      }
+
+      .card-title {
+        @apply text-base;
+      }
+    }
+
+    // Medium (default) - no modifier needed
+
+    // Large
+    &-lg {
+      > .card-header {
+        @apply px-8 py-5;
+      }
+
+      > .card-body {
+        @apply px-8 py-6;
+        @apply gap-3;
+      }
+
+      > .card-footer {
+        @apply px-8 py-5;
+      }
+
+      .card-title {
+        @apply text-xl;
+      }
+    }
+
+    // Extra Large
+    &-xl {
+      > .card-header {
+        @apply px-10 py-6;
+      }
+
+      > .card-body {
+        @apply px-10 py-8;
+        @apply gap-4;
+      }
+
+      > .card-footer {
+        @apply px-10 py-6;
+      }
+
+      .card-title {
+        @apply text-2xl;
+      }
+    }
+
+    // =========================================
+    // STYLE VARIANTS
+    // =========================================
+
+    // Side layout (horizontal card with image on side)
+    &-side {
+      @apply flex-row;
+
+      > figure,
+      > .card-figure {
+        @apply w-auto max-w-[40%] flex-shrink-0;
+
+        > img {
+          @apply h-full object-cover;
+        }
+      }
+
+      > .card-body {
+        @apply justify-center;
+      }
+    }
+
+    // =========================================
+    // SPECIAL EFFECTS
+    // =========================================
+
+    // Image full overlay
+    &.image-full {
+      @apply relative;
+
+      > figure,
+      > .card-figure {
+        @apply absolute inset-0 z-0;
+
+        > img {
+          @apply w-full h-full object-cover;
+        }
+
+        &::after {
+          @apply absolute inset-0;
+          @apply bg-black/50;
+
+          content: "";
+        }
+      }
+
+      > .card-body,
+      > .card-header,
+      > .card-footer {
+        @apply relative z-10;
+        @apply text-white;
+      }
+
+      .card-title {
+        @apply text-white;
+      }
+    }
+
+    // Glass effect (can combine with colors)
+    &-glass {
+      @apply backdrop-blur-md text-white;
+
+      background-color: color-mix(in oklch, var(--color-base-100) 15%, transparent);
+      border: 1px solid color-mix(in oklch, var(--color-base-100) 20%, transparent);
+      box-shadow: 0 8px 32px 0 rgb(0 0 0 / 0.15);
+
+      .card-title {
+        @apply text-white;
+      }
+
+      &.card-primary {
+        background-color: color-mix(in oklch, var(--color-primary) 15%, transparent);
+        border-color: color-mix(in oklch, var(--color-primary) 30%, transparent);
+      }
+
+      &.card-secondary {
+        background-color: color-mix(in oklch, var(--color-secondary) 15%, transparent);
+        border-color: color-mix(in oklch, var(--color-secondary) 30%, transparent);
+      }
+
+      &.card-accent {
+        background-color: color-mix(in oklch, var(--color-accent) 15%, transparent);
+        border-color: color-mix(in oklch, var(--color-accent) 30%, transparent);
+      }
+
+      &.card-info {
+        background-color: color-mix(in oklch, var(--color-info) 15%, transparent);
+        border-color: color-mix(in oklch, var(--color-info) 30%, transparent);
+      }
+
+      &.card-success {
+        background-color: color-mix(in oklch, var(--color-success) 15%, transparent);
+        border-color: color-mix(in oklch, var(--color-success) 30%, transparent);
+      }
+
+      &.card-warning {
+        background-color: color-mix(in oklch, var(--color-warning) 15%, transparent);
+        border-color: color-mix(in oklch, var(--color-warning) 30%, transparent);
+      }
+
+      &.card-error {
+        background-color: color-mix(in oklch, var(--color-error) 15%, transparent);
+        border-color: color-mix(in oklch, var(--color-error) 30%, transparent);
+      }
+    }
+
+    // =========================================
+    // INTERACTIVE STATES
+    // =========================================
+
+    // Hover shadow effect
+    &-hover {
+      @apply transition-all duration-300 ease-in-out;
+      @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-base-content/20 focus-visible:ring-offset-2;
+
+      &:hover,
+      &:focus-visible {
+        @apply shadow-lg;
+      }
+    }
+
+    // Grow effect
+    &-grow {
+      @apply transition-all duration-300 ease-in-out;
+      @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-base-content/20 focus-visible:ring-offset-2;
+
+      &:hover,
+      &:focus-visible {
+        transform: scale(1.02);
+      }
+    }
+
+    // Clickable card (makes entire card a link target)
+    &-link {
+      @apply cursor-pointer;
+      @apply transition-all duration-200 ease-in-out;
+      @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-base-content/20 focus-visible:ring-offset-2;
+
+      // Stretch link pattern - allows nested link to cover entire card
+      > a.stretched-link::after {
+        @apply absolute inset-0 z-10;
+
+        content: "";
+      }
+    }
+
+    // Dismissible card animation
+    &.removing {
+      @apply translate-x-5 opacity-0;
+    }
+
+    // =========================================
+    // COLOR VARIANTS
+    // =========================================
+
+    &-primary {
+      @apply bg-primary text-primary-content;
+
+      .card-title {
+        @apply text-primary-content;
+      }
+
+      > .card-header,
+      > .card-footer {
+        @apply border-primary-content/20;
+      }
+    }
+
+    &-secondary {
+      @apply bg-secondary text-secondary-content;
+
+      .card-title {
+        @apply text-secondary-content;
+      }
+
+      > .card-header,
+      > .card-footer {
+        @apply border-secondary-content/20;
+      }
+    }
+
+    &-accent {
+      @apply bg-accent text-accent-content;
+
+      .card-title {
+        @apply text-accent-content;
+      }
+
+      > .card-header,
+      > .card-footer {
+        @apply border-accent-content/20;
+      }
+    }
+
+    &-info {
+      @apply bg-info text-info-content;
+
+      .card-title {
+        @apply text-info-content;
+      }
+
+      > .card-header,
+      > .card-footer {
+        @apply border-info-content/20;
+      }
+    }
+
+    &-success {
+      @apply bg-success text-success-content;
+
+      .card-title {
+        @apply text-success-content;
+      }
+
+      > .card-header,
+      > .card-footer {
+        @apply border-success-content/20;
+      }
+    }
+
+    &-warning {
+      @apply bg-warning text-warning-content;
+
+      .card-title {
+        @apply text-warning-content;
+      }
+
+      > .card-header,
+      > .card-footer {
+        @apply border-warning-content/20;
+      }
+    }
+
+    &-error {
+      @apply bg-error text-error-content;
+
+      .card-title {
+        @apply text-error-content;
+      }
+
+      > .card-header,
+      > .card-footer {
+        @apply border-error-content/20;
+      }
+    }
+
+    // Style variants - Soft
+    &-soft {
+      @apply bg-base-200/50 text-base-content;
+
+      box-shadow: none;
+
+      .card-title {
+        @apply text-base-content;
+      }
+
+      > .card-header,
+      > .card-footer {
+        @apply border-base-content/10;
+      }
+
+      &.card-primary {
+        @apply bg-primary/10 text-primary;
+
+        .card-title {
+          @apply text-primary;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-primary/20;
+        }
+      }
+
+      &.card-secondary {
+        @apply bg-secondary/10 text-secondary;
+
+        .card-title {
+          @apply text-secondary;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-secondary/20;
+        }
+      }
+
+      &.card-accent {
+        @apply bg-accent/10 text-accent;
+
+        .card-title {
+          @apply text-accent;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-accent/20;
+        }
+      }
+
+      &.card-info {
+        @apply bg-info/10 text-info;
+
+        .card-title {
+          @apply text-info;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-info/20;
+        }
+      }
+
+      &.card-success {
+        @apply bg-success/10 text-success;
+
+        .card-title {
+          @apply text-success;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-success/20;
+        }
+      }
+
+      &.card-warning {
+        @apply bg-warning/10 text-warning;
+
+        .card-title {
+          @apply text-warning;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-warning/20;
+        }
+      }
+
+      &.card-error {
+        @apply bg-error/10 text-error;
+
+        .card-title {
+          @apply text-error;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-error/20;
+        }
+      }
+    }
+
+    // Style variants - Outline
+    &-outline {
+      @apply bg-transparent text-base-content;
+
+      border-width: var(--border);
+      border-style: solid;
+      @apply border-base-content/30;
+      box-shadow: none;
+
+      .card-title {
+        @apply text-base-content;
+      }
+
+      > .card-header,
+      > .card-footer {
+        @apply border-base-content/20;
+      }
+
+      &.card-primary {
+        @apply bg-transparent border-primary text-primary;
+
+        .card-title {
+          @apply text-primary;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-primary/30;
+        }
+      }
+
+      &.card-secondary {
+        @apply bg-transparent border-secondary text-secondary;
+
+        .card-title {
+          @apply text-secondary;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-secondary/30;
+        }
+      }
+
+      &.card-accent {
+        @apply bg-transparent border-accent text-accent;
+
+        .card-title {
+          @apply text-accent;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-accent/30;
+        }
+      }
+
+      &.card-info {
+        @apply bg-transparent border-info text-info;
+
+        .card-title {
+          @apply text-info;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-info/30;
+        }
+      }
+
+      &.card-success {
+        @apply bg-transparent border-success text-success;
+
+        .card-title {
+          @apply text-success;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-success/30;
+        }
+      }
+
+      &.card-warning {
+        @apply bg-transparent border-warning text-warning;
+
+        .card-title {
+          @apply text-warning;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-warning/30;
+        }
+      }
+
+      &.card-error {
+        @apply bg-transparent border-error text-error;
+
+        .card-title {
+          @apply text-error;
+        }
+
+        > .card-header,
+        > .card-footer {
+          @apply border-error/30;
+        }
+      }
+    }
+  }
+
+}

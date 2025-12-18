@@ -212,7 +212,7 @@
       @apply text-xl px-6 py-4 gap-3;
     }
     
-    // Shadow variant - adds depth with hover lift effect
+    // Shadow variants - shadow changes on hover, no color change
     &-shadow-none {
       @apply shadow-none;
     }
@@ -222,31 +222,88 @@
       
       &:hover {
         @apply shadow-md;
-
-        transform: translateY(-1px);
       }
       
       &:active {
         @apply shadow-none;
+      }
 
-        transform: translateY(0);
+      // Override hover color changes
+      &:hover {
+        @apply bg-base-200;
+      }
+
+      &.btn-primary:hover {
+        @apply bg-primary;
+      }
+
+      &.btn-secondary:hover {
+        @apply bg-secondary;
+      }
+
+      &.btn-accent:hover {
+        @apply bg-accent;
+      }
+
+      &.btn-info:hover {
+        @apply bg-info;
+      }
+
+      &.btn-success:hover {
+        @apply bg-success;
+      }
+
+      &.btn-warning:hover {
+        @apply bg-warning;
+      }
+
+      &.btn-error:hover {
+        @apply bg-error;
       }
     }
     
-    // Additional shadow variants
     &-shadow-md {
       @apply shadow-md;
       
       &:hover {
         @apply shadow-lg;
-
-        transform: translateY(-1px);
       }
       
       &:active {
         @apply shadow-sm;
+      }
 
-        transform: translateY(0);
+      // Override hover color changes
+      &:hover {
+        @apply bg-base-200;
+      }
+
+      &.btn-primary:hover {
+        @apply bg-primary;
+      }
+
+      &.btn-secondary:hover {
+        @apply bg-secondary;
+      }
+
+      &.btn-accent:hover {
+        @apply bg-accent;
+      }
+
+      &.btn-info:hover {
+        @apply bg-info;
+      }
+
+      &.btn-success:hover {
+        @apply bg-success;
+      }
+
+      &.btn-warning:hover {
+        @apply bg-warning;
+      }
+
+      &.btn-error:hover {
+        @apply bg-error;
       }
     }
     
@@ -255,14 +312,43 @@
       
       &:hover {
         @apply shadow-xl;
-
-        transform: translateY(-2px);
       }
       
       &:active {
         @apply shadow-md;
+      }
 
-        transform: translateY(0);
+      // Override hover color changes
+      &:hover {
+        @apply bg-base-200;
+      }
+
+      &.btn-primary:hover {
+        @apply bg-primary;
+      }
+
+      &.btn-secondary:hover {
+        @apply bg-secondary;
+      }
+
+      &.btn-accent:hover {
+        @apply bg-accent;
+      }
+
+      &.btn-info:hover {
+        @apply bg-info;
+      }
+
+      &.btn-success:hover {
+        @apply bg-success;
+      }
+
+      &.btn-warning:hover {
+        @apply bg-warning;
+      }
+
+      &.btn-error:hover {
+        @apply bg-error;
       }
     }
 
