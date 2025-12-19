@@ -83,13 +83,13 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['marginBottom'] = [
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['icon'],
-    'inputType' => 'rocksolid_icon_picker',
+    'inputType' => 'svgIconPicker',
     'eval' => [
-        'iconFont' => 'files/frontend/dist/fonts/icons/fonts/icons.svg',
-        'tl_class' => 'w50 clr',
+        'sourceDirectory' => 'public/kiss_icons/svg',
+        'metadataDirectory' => 'public/kiss_icons',
+        'tl_class' => 'w 50 clr'
     ],
-    'sql' => "char(4) NOT NULL default ''",
+    'sql' => 'blob NULL',
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['hyperlinkAsButton'] = [
