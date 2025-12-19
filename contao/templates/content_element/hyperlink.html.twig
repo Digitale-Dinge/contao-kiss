@@ -10,17 +10,17 @@
 %}
 
 {% block content %}
-    {% block text_link %}
+    {%- block text_link %}
         <a{{ attrs(link_attributes|default) }}>
             {% if data.icon|default and data.iconPosition|default == 'left' %}
                 <span class="mr-1">{{ svg_icon(data.icon|default) }}</span>
             {% endif %}
             <span class="text leading-none">
-                {{ link_text|insert_tag }}´
+                {{ link_text|insert_tag }}
             </span>
             {% if data.icon|default and data.iconPosition|default == 'right' %}
                 <span class="ml-1">{{ svg_icon(data.icon|default) }}</span>
             {% endif %}
         </a>
-    {% endblock %}
+    {% endblock -%}
 {% endblock %}
