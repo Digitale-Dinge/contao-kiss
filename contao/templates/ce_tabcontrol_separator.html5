@@ -1,2 +1,0 @@
-	</div>
-	<div class="tab-pane fade <?php if ($this->active): ?>show active-tab<?php endif; ?>" id="<?= $this->tabId ?>" role="tabpanel" aria-labelledby="<?= $this->tabId ?>-tab">
