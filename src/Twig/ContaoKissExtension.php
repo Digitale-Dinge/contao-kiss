@@ -7,6 +7,7 @@ namespace DigitaleDinge\ContaoKiss\Twig;
 use Contao\FilesModel;
 use DigitaleDinge\ContaoKiss\Styles\ClassOptionsInterface;
 use DigitaleDinge\ContaoKiss\Styles\Options\Layout\ContainerSizes;
+use DigitaleDinge\ContaoKiss\Twig\Runtime\CompanyDataRuntime;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -24,7 +25,14 @@ class ContaoKissExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('getContainerClass', [$this, 'getContainerClass']),
+            new TwigFunction(
+                'getContainerClass',
+                [$this, 'getContainerClass']
+            ),
+            new TwigFunction(
+                'kiss_company',
+                [CompanyDataRuntime::class, 'getCompanyDetails']
+            ),
         ];
     }
 
