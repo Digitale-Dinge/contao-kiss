@@ -25,6 +25,7 @@ class OpeningTimesTable extends Widget
     {
         $rows = [];
 
+        $this->varValue = \is_array($this->varValue) ? $this->varValue : [];
         $rowCount = \count($this->varValue);
 
         while ($rowCount < 7) {

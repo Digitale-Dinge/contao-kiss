@@ -2,6 +2,16 @@
 
 declare(strict_types=1);
 
-use DigitaleDinge\ContaoKiss\Widget\OpeningTimesTable;
+use DigitaleDinge\ContaoKiss\Model;
+use DigitaleDinge\ContaoKiss\Widget;
 
-$GLOBALS['BE_FFL']['openingTimesTable'] = OpeningTimesTable::class;
+$GLOBALS['BE_MOD']['content']['kiss_company'] = [
+    'tables' => [
+        'tl_kiss_company',
+    ]
+];
+
+$GLOBALS['TL_MODELS']['tl_kiss_company'] = Model\CompanyModel::class;
+
+$GLOBALS['BE_FFL']['openingTimesTable'] = Widget\OpeningTimesTable::class;
+$GLOBALS['BE_FFL']['date'] = Widget\DateField::class;

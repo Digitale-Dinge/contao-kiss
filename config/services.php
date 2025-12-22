@@ -11,8 +11,9 @@ return static function(ContainerConfigurator $container)
         ->defaults()
             ->autoconfigure()
             ->autowire()
+            ->public()
 
         ->load('DigitaleDinge\\ContaoKiss\\', '../src/*')
-            ->exclude('../src/{Event,DigitaleDingeKissBundle.php}')
+            ->exclude('../src/{Event,Model,Util,DigitaleDingeKissBundle.php}')
     ;
 };
