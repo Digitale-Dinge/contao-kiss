@@ -1,14 +1,22 @@
-{% set header_main_attributes = attrs()
-    .addClass(['header-main', 'relative', 'py-8', 'text-sm'])
-%}
+<div{{ attrs(header_main_attributes|default).addClass(['header-main', 'relative', 'py-8', 'text-sm']) }}>
+    <div{{ attrs(header_main_inside_attributes|default).addClass(['inside', 'flex', 'gap-x-4', 'items-center', 'justify-between', styles.container]) }}>
+        {% if kiss.company.logo|default %}
+            {{ include('@Contao/component/_figure.html.twig', {
+                figure: figure(kiss.company.logo, null),
+                linkHref: app.request.baseUrl,
+                img_attributes: {
+                    class: 'logo',
+                    alt: kiss.company.title,
+                },
+            }) }}
+        {% endif %}
 
-{% set header_inside_attributes = attrs()
-    .addClass(['inside', 'flex', 'gap-x-4', 'items-center', 'justify-between'])
-    .addClass(getContainerClass())
-%}
-
-<div{{ header_main_attributes }}>
-    <div{{ header_inside_attributes }}>
-        {{ header|raw }}
+        {{ frontend_module('navigation', {
+            levelOffset: 0,
+            showLevel: 0,
+            hardLimit: true,
+            cssID: { 1: 'main-navigation' },
+            customTpl: 'mod_navigation_accessible'
+        }) }}
     </div>
 </div>

@@ -3,17 +3,17 @@
 {% set bodyAttributes = attrs(bodyAttributes|default).addClass('text-base') %}
 
 {% block header %}
-    <header id="header" class="bg-header">
-        {{ include('@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_meta.html.twig') }}
-        {{ include('@Contao_DigitaleDingeContaoKissBundle/partials/page/header/_main.html.twig') }}
+    <header{{ attrs(header_attributes|default).set('id', 'header').addClass('bg-header') }}>
+        {# include('@Contao/partials/page/header/_meta.html.twig') ToDo: Use slots instead #}
+        {{ include('@Contao/partials/page/header/_main.html.twig') }}
     </header>
 {% endblock %}
 
 {% block footer %}
-    <footer id="footer" class="bg-footer">
+    <footer{{ attrs(footer_attributes|default).set('id', 'footer').addClass('bg-footer') }}>
         <div id="footer-wrapper">
-            {{ include('@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_main.html.twig') }}
+            {{ include('@Contao/partials/page/footer/_main.html.twig') }}
         </div>
+        {{ include('@Contao/partials/page/footer/_meta.html.twig') }}
     </footer>
-    {{ include('@Contao_DigitaleDingeContaoKissBundle/partials/page/footer/_meta.html.twig') }}
 {% endblock %}
