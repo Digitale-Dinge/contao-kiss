@@ -8,10 +8,10 @@ use DigitaleDinge\ContaoKiss\Styles\ClassOptionsInterface;
 
 enum Top: string implements ClassOptionsInterface
 {
-    case HALF = 'mt-line-1/2';
-    case ONE = 'mt-line-1';
-    case TWO = 'mt-line-2';
-    case THREE = 'mt-line-3';
-    case FOUR = 'mt-line-4';
-    case FIVE = 'mt-line-5';
+    case half = 'mt-line-1/2';
+    case one = 'mt-line-1';
+    case two = 'mt-line-2';
+    case three = 'mt-line-3';
+    case four = 'mt-line-4';
+    case five = 'mt-line-5';
 }

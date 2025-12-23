@@ -8,10 +8,10 @@ use DigitaleDinge\ContaoKiss\Styles\ClassOptionsInterface;
 
 enum Bottom: string implements ClassOptionsInterface
 {
-    case HALF = 'pb-line-1/2';
-    case ONE = 'pb-line-1';
-    case TWO = 'pb-line-2';
-    case THREE = 'pb-line-3';
-    case FOUR = 'pb-line-4';
-    case FIVE = 'pb-line-5';
+    case half = 'pb-line-1/2';
+    case one = 'pb-line-1';
+    case two = 'pb-line-2';
+    case three = 'pb-line-3';
+    case four = 'pb-line-4';
+    case five = 'pb-line-5';
 }

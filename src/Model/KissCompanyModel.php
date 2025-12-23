@@ -11,7 +11,7 @@ use Contao\Model\Collection;
  * @property integer $id
  * @property integer $tstamp
  * @property string  $title
- * @property string  $singleSRC
+ * @property string  $logo
  * @property string  $street
  * @property string  $postal
  * @property string  $city
@@ -31,7 +31,7 @@ use Contao\Model\Collection;
  * @method static KissCompanyModel|null findOneBy($col, $val, array $opt=[])
  * @method static KissCompanyModel|null findOneByTstamp($val, array $opt=[])
  * @method static KissCompanyModel|null findOneByTitle($val, array $opt=[])
- * @method static KissCompanyModel|null findOneBySingleSRC($val, array $opt=[])
+ * @method static KissCompanyModel|null findOneByLogo($val, array $opt=[])
  * @method static KissCompanyModel|null findOneByStreet($val, array $opt=[])
  * @method static KissCompanyModel|null findOneByPostal($val, array $opt=[])
  * @method static KissCompanyModel|null findOneByCity($val, array $opt=[])
@@ -48,7 +48,7 @@ use Contao\Model\Collection;
  *
  * @method static Collection|KissCompanyModel[]|KissCompanyModel|null findByTstamp($val, array $opt=[])
  * @method static Collection|KissCompanyModel[]|KissCompanyModel|null findByTitle($val, array $opt=[])
- * @method static Collection|KissCompanyModel[]|KissCompanyModel|null findBySingleSRC($val, array $opt=[])
+ * @method static Collection|KissCompanyModel[]|KissCompanyModel|null findByLogo($val, array $opt=[])
  * @method static Collection|KissCompanyModel[]|KissCompanyModel|null findByStreet($val, array $opt=[])
  * @method static Collection|KissCompanyModel[]|KissCompanyModel|null findByPostal($val, array $opt=[])
  * @method static Collection|KissCompanyModel[]|KissCompanyModel|null findByCity($val, array $opt=[])
@@ -69,7 +69,7 @@ use Contao\Model\Collection;
  * @method static integer countById($id, array $opt=[])
  * @method static integer countByTstamp($val, array $opt=[])
  * @method static integer countByTitle($val, array $opt=[])
- * @method static integer countBySingleSRC($val, array $opt=[])
+ * @method static integer countByLogo($val, array $opt=[])
  * @method static integer countByStreet($val, array $opt=[])
  * @method static integer countByPostal($val, array $opt=[])
  * @method static integer countByCity($val, array $opt=[])

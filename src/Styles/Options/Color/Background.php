@@ -8,10 +8,10 @@ use DigitaleDinge\ContaoKiss\Styles\ClassOptionsInterface;
 
 enum Background: string implements ClassOptionsInterface
 {
-    case TRANSPARENT = 'transparent';
-    case WHITE = 'background-white';
-    case PRIMARY = 'background-primary';
-    case SECONDARY = 'background-secondary';
-    case ADDITIONAL_ONE = 'background-additional-1';
-    case ADDITIONAL_TWO = 'background-additional-2';
+    case transparent = 'transparent';
+    case white = 'background-white';
+    case primary = 'background-primary';
+    case secondary = 'background-secondary';
+    case additional_one = 'background-additional-1';
+    case additional_two = 'background-additional-2';
 }
