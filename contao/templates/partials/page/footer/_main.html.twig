@@ -1,4 +1,7 @@
+{% use '@Contao/company/info.html.twig' %}
+{% use '@Contao/company/contact.html.twig' %}
 
+{% block footer_main %}
 <div{{ attrs().addClass(['inside', 'container-base']) }}>
     <div{{ attrs().addClass([
         'footer-content',
@@ -12,14 +15,10 @@
     ]) }}>
         <div{{ attrs().addClass(['footer-address']) }}>
             <p{{ attrs().addClass(['text-sm']) }}>
-                {{ insert_tag('company::name')|raw }}<br>
-                {{ insert_tag('company::info')|raw }}<br>
-                {{ insert_tag('company::street')|raw }}<br>
-                {{ insert_tag('company::postal')|raw }}&nbsp;{{ insert_tag('company::city')|raw }}
+                {{ block('company_info') }}
             </p>
-            <p class="text-sm">
-                {{ insert_tag('company::mailto')|raw }}<br>
-                {{ insert_tag('company::tel')|raw }}
+            <p{{ attrs().addClass(['text-sm']) }}>
+                {{ block('company_contact') }}
             </p>
             <p>
                 {# Social Media Nav #}
@@ -32,3 +31,4 @@
         </div>
     </div>
 </div>
+{% endblock %}

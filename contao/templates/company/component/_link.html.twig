@@ -1,0 +1,9 @@
+{% block link_component %}
+    {% set tag_name = href|default ? 'a' : 'span' %}
+    {% set mail_attributes = attrs(mail_attributes|default)
+        .addClass('company_phone')
+        .set('href', href_prefix|default ~ href|default|encode_email, href|default)
+        .setIfExists('title', title)
+    %}
+    <{{ tag_name }}{{ mail_attributes }}>{{ link|encode_email }}</{{ tag_name }}>
+{% endblock %}

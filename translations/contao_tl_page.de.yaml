@@ -1,5 +1,5 @@
 tl_page:
-    company_data_legend:    Unternehmensdaten
-    opening_times:
-        - Öffnungszeiten
-        - Hier können Sie Ihre Öffnungszeiten eintragen. Bei Pausen können zwei Zeiten eingetragen werden.
+    kiss_company_legend: Unternehmens-Einstellungen
+    kiss_company:
+        - Unternehmen
+        - Hier können Sie ein Unternehmen auswählen, für welches die Website-Daten bereitgestellt werden sollen.

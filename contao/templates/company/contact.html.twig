@@ -1,0 +1,52 @@
+{% block company_contact %}
+    {% block company_mail %}
+        {% for row in kiss.company.emails|deserialize|default %}
+            {% if row.email|default %}
+                {{ include('@Contao/company/component/_link.html.twig', {
+                    link: row.email,
+                    href: row.email,
+                    href_prefix: 'mailto:',
+                }) }}
+                <br>
+            {% endif %}
+        {% endfor %}
+    {% endblock %}
+
+    {% block company_phone_numbers %}
+        {% for row in kiss.company.phone_numbers|deserialize|default %}
+            {% if row.phone|default %}
+                {{ include('@Contao/company/component/_link.html.twig', {
+                    link: row.phone,
+                    href: row.phone,
+                    href_prefix: 'tel:',
+                }) }}
+                <br>
+            {% endif %}
+        {% endfor %}
+    {% endblock %}
+
+    {% block company_socials %}
+        {% for row in kiss.company.websites|deserialize|default %}
+            {% if row.website|default %}
+                {{ include('@Contao/company/component/_link.html.twig', {
+                    link: row.website,
+                    href: row.website,
+                }) }}
+                <br>
+            {% endif %}
+        {% endfor %}
+    {% endblock %}
+
+    {% block company_fax_numbers %}
+        {% for row in kiss.company.fax_numbers|deserialize %}
+            {% if row.fax|default %}
+                {{ include('@Contao/company/component/_link.html.twig', {
+                    link: row.fax,
+                    href: row.fax,
+                    href_prefix: 'tel:',
+                }) }}
+                <br>
+            {% endif %}
+        {% endfor %}
+    {% endblock %}
+{% endblock %}

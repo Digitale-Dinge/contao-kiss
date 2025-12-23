@@ -11,7 +11,7 @@ $GLOBALS['BE_MOD']['content']['kiss_company'] = [
     ]
 ];
 
-$GLOBALS['TL_MODELS']['tl_kiss_company'] = Model\CompanyModel::class;
+$GLOBALS['TL_MODELS']['tl_kiss_company'] = Model\KissCompanyModel::class;
 
 $GLOBALS['BE_FFL']['openingTimesTable'] = Widget\OpeningTimesTable::class;
 $GLOBALS['BE_FFL']['date'] = Widget\DateField::class;
