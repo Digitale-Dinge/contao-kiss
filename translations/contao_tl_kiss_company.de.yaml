@@ -1,0 +1,26 @@
+tl_kiss_company:
+    general_legend:     Allgemein
+    address_legend:     Adresse
+    times_legend:       Öffnungs- und Schließzeiten
+    contact_legend:     Kontakt
+    misc_legend:        Sonstiges
+
+    logo:
+        - Logo
+        - Hier können sie ein Logo auswählen, welches auf der Website ausgegeben werden kann.
+
+    opening_times:
+        - Öffnungszeiten
+        - Hier können Sie Ihre Öffnungszeiten eintragen. Bei Pausen können zwei Zeiten eingetragen werden.
+
+    closing_times:
+        - Schließzeiten
+        - Hier können Sie Daten von - bis eingeben, zu welchen das Unternehmen geschlossen ist.
+
+    socials:
+        - Social-Media
+        - Hier können Sie Ihre Social-Media-Plattformen hinzufügen.
+
+    additional:
+        - Zusätzliche Informationen
+        - Hier können Sie zusätzliche Informationen im Key/Value Format eintragen.

@@ -32,11 +32,12 @@ $GLOBALS['TL_DCA']['tl_kiss_company'] = [
         ],
     ],
     'palettes' => [
-        'default' => 'title,singleSRC;' .
+        'default' =>
+            '{general_legend},title,logo;' .
             '{address_legend},street,postal,city,state,country;' .
-            '{opening_legend},opening_times,closing_times;' .
+            '{times_legend},opening_times,closing_times;' .
             '{contact_legend},phone_numbers,emails,websites,fax_numbers;' .
-            '{misc_legend},socials,additional;',
+            '{misc_legend:hide},socials,additional;',
     ],
     'fields' => [
         'id' => [
@@ -55,7 +56,7 @@ $GLOBALS['TL_DCA']['tl_kiss_company'] = [
             ],
             'sql' => ['type' => 'string', 'length' => 255, 'default' => ''],
         ],
-        'singleSRC' => [
+        'logo' => [
             'inputType' => 'fileTree',
             'eval' => [
                 'fieldType' => 'radio',
