@@ -1,0 +1,16 @@
+{% extends '@Contao/block_searchable' %}
+
+{% set layout_classes = [contentWidth|default, paddingTop,|default paddingBottom|default, marginTop|default, marginBottom|default] %}
+{% set has_layout_classes = layout_classes|filter(v => v)|length > 0 %}
+
+{%- block wrapper_before %}
+    {% if has_layout_classes %}
+        <div{{ attrs().addClass(layout_classes) }}>
+    {% endif %}
+{% endblock -%}
+{{ block('wrapper') }}
+{%- block wrapper_after %}
+    {% if has_layout_classes %}
+        </div>
+    {% endif %}
+{% endblock -%}
