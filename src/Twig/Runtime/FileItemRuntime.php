@@ -24,15 +24,8 @@ final class FileItemRuntime implements RuntimeExtensionInterface
     ) {
     }
 
-    public function getFileItem(string $uuid): array|null
+    public function getFile(string $uuid): array|null
     {
-        if (!Validator::isBinaryUuid($uuid))
-        {
-            return null;
-        }
-
-        $uuid = StringUtil::binToUuid($uuid);
-
         try
         {
             $uuidObject = Uuid::isValid($uuid) ? Uuid::fromString($uuid) : Uuid::fromBinary($uuid);
