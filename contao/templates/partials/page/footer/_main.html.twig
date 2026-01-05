@@ -1,34 +1,34 @@
 {% use '@Contao/company/info.html.twig' %}
 {% use '@Contao/company/contact.html.twig' %}
+{% use '@Contao/company/social_media.html.twig' %}
 
 {% block footer_main %}
-<div{{ attrs().addClass(['inside', 'container-base']) }}>
-    <div{{ attrs().addClass([
-        'footer-content',
-        'flex',
-        'flex-col',
-        'min-[500px]:flex-row',
-        'gap-16',
-        'min-[880px]:gap-4',
-        'min-[880px]:justify-between',
-        'pb-16',
-    ]) }}>
-        <div{{ attrs().addClass(['footer-address']) }}>
-            <p{{ attrs().addClass(['text-sm']) }}>
-                {{ block('company_info') }}
-            </p>
-            <p{{ attrs().addClass(['text-sm']) }}>
-                {{ block('company_contact') }}
-            </p>
-            <p>
-                {# Social Media Nav #}
-                {{ frontend_module(7) }}
-            </p>
-        </div>
-        <div class="footer-nav">
-                {# Footer Main Nav – Horizontal Nav #}
-                {{ frontend_module(8) }}
+    <div{{ attrs().addClass(['inside', 'container-base']) }}>
+        <div{{ attrs().addClass([
+            'footer-content', 'flex', 'flex-col', 'min-[500px]:flex-row', 'gap-16', 'min-[880px]:gap-4', 'min-[880px]:justify-between', 'pb-16',
+        ]) }}>
+            <div{{ attrs().addClass(['footer-address', 'text-sm']) }}>
+                <div{{ attrs().addClass(['company_phone']) }}>
+                    {{ block('company_info') }}
+                </div>
+                <div{{ attrs().addClass(['company_address']) }}>
+                    {{ block('company_contact') }}
+                </div>
+                <div{{ attrs().addClass(['company_social_media']) }}>
+                    {{ block('company_social_media') }}
+                </div>
+            </div>
+            <div class="footer-nav">
+                {% block footer_main_navigation %}
+                    {{ frontend_module('navigation', {
+                        levelOffset: 0,
+                        showLevel: 0,
+                        hardLimit: true,
+                        ariaLabel: 'footer-main-sitemap',
+                        cssID: { 1: 'mod_navigation--horizontal' },
+                    }) }}
+                {% endblock %}
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

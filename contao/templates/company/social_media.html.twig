@@ -1,0 +1,11 @@
+{% block company_social_media %}
+    {% for row in kiss.company.socials|deserialize %}
+        {% if row.social|default %}
+            {{ include('@Contao/company/component/_link.html.twig', {
+                link: row.social,
+                href: row.url,
+            }) }}
+            <br>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
