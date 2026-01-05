@@ -1,0 +1,6 @@
+{% extends '@Contao/mod_navigation' %}
+
+{% set wrapperAttributes = attrs(cssID)
+    .addClass(['mod_navigation--vertical', breakpoint|default('md') ~':mod_navigation--horizontal'])
+    .mergeWith(wrapperAttributes|default)
+%}
