@@ -1,4 +1,17 @@
-/* Select */
+/**
+ * KISS Select Component (V1.0)
+ * 
+ * TODO: Implement select dropdown styling
+ * 
+ * Base: .select
+ * Styles: select-{solid} (outline is default)
+ * Colors: select-{primary|secondary|accent|info|success|warning|error}
+ * Sizes: select-{xs|sm|lg|xl}
+ * States: is-valid, is-invalid, disabled
+ */
+
 @layer components {
- 
+  .select {
+    // Placeholder - to be implemented
+  }
 }

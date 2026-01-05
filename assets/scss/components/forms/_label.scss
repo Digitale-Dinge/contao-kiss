@@ -1,16 +1,44 @@
-/* Label */
+/**
+ * KISS Form Label Component (V1.0)
+ * 
+ * Parts:
+ *   .label-text    - Main label above input
+ *   .helper-text   - Helper text below input
+ *   .error-text    - Error message below input
+ * 
+ * Modifiers:
+ *   .label-required - Adds required asterisk
+ * 
+ * Example: 
+ *   <label class="label-text">Email</label>
+ *   <input class="input">
+ *   <span class="helper-text">We'll never share your email</span>
+ */
+
 @layer components {
-	.formbody label,
-	.label {
-		@apply text-sm leading-none font-bold select-none peer-disabled:pointer-events-none peer-disabled:opacity-50;
-
-		 &:has(>*:disabled),
-		 &:has(+*:disabled) {
-			 @apply opacity-50 pointer-events-none;
-		 }
-
-		 .error {
-			 @apply text-error;
-		 }
-	}
+  // Label text (above input)
+  .label-text {
+    @apply block text-sm font-medium text-base-content mb-1.5;
+    
+    // Required indicator
+    &.label-required::after {
+      content: " *";
+      @apply text-error;
+    }
+  }
+  
+  // Helper text (below input)
+  .helper-text {
+    @apply block text-xs text-base-content/60 mt-1.5;
+  }
+  
+  // Error text (below input)
+  .error-text {
+    @apply block text-xs text-error mt-1.5;
+  }
+  
+  // Success text (below input)
+  .success-text {
+    @apply block text-xs text-success mt-1.5;
+  }
 }

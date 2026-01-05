@@ -1,12 +1,15 @@
-/* Radio */
+/**
+ * KISS Radio Component (V1.0)
+ * 
+ * TODO: Implement radio button styling
+ * 
+ * Base: .radio
+ * Colors: radio-{primary|secondary|accent|info|success|warning|error}
+ * Sizes: radio-{xs|sm|lg|xl}
+ */
+
 @layer components {
- input.radio {
-	 &:focus-visible {
-			outline-offset: 1px;
-			outline: 2px solid var(--color-primary) !important;
-		}
-
-	 @apply focus-visible:border-primary;
- }
+  .radio {
+    // Placeholder - to be implemented
+  }
 }
-

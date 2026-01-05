@@ -1,8 +1,13 @@
-/* Fieldsets */
+/**
+ * KISS Fieldset Component (V1.0)
+ * 
+ * TODO: Implement fieldset styling
+ * 
+ * Base: .fieldset
+ */
+
 @layer components {
-	fieldset {
-		legend {
-			@apply font-bold text-primary;
-		}
-	}
+  .fieldset {
+    // Placeholder - to be implemented
+  }
 }
