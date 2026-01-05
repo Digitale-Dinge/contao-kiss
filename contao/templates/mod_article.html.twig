@@ -1,0 +1,6 @@
+{% extends '@Contao/mod_article' %}
+
+{% set wrapperAttributes = attrs(cssID)
+    .addClass([bgColor|default, contentWidth|default, paddingTop|default, paddingBottom|default])
+    .mergeWith(wrapperAttributes|default)
+%}
