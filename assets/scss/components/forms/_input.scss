@@ -2,7 +2,7 @@
  * KISS Input Component (V1.0)
  * 
  * Base: .input
- * Styles: input-{solid} (outline is default)
+ * Styles: input-{soft} (outline is default)
  * Colors: input-{primary|secondary|accent|info|success|warning|error}
  * Sizes: input-{xs|sm|lg|xl}
  * States: is-valid, is-invalid, disabled, readonly
@@ -65,9 +65,9 @@
     }
 
     // ============================================
-    // STYLE: SOLID (filled background with border)
+    // STYLE: SOFT (tinted background with border)
     // ============================================
-    &-solid {
+    &-soft {
       @apply bg-base-content/10;
       border-color: oklch(from var(--color-base-300) l c h / 0.5);
       
@@ -97,7 +97,7 @@
         box-shadow: inset 0 0 0 1px var(--color-primary);
       }
       
-      &.input-solid {
+      &.input-soft {
         @apply bg-primary/10;
         border-color: oklch(from var(--color-primary) l c h / 0.5);
         
@@ -125,7 +125,7 @@
         box-shadow: inset 0 0 0 1px var(--color-secondary);
       }
       
-      &.input-solid {
+      &.input-soft {
         @apply bg-secondary/10;
         border-color: oklch(from var(--color-secondary) l c h / 0.5);
         
@@ -153,7 +153,7 @@
         box-shadow: inset 0 0 0 1px var(--color-accent);
       }
       
-      &.input-solid {
+      &.input-soft {
         @apply bg-accent/10;
         border-color: oklch(from var(--color-accent) l c h / 0.5);
         
@@ -181,7 +181,7 @@
         box-shadow: inset 0 0 0 1px var(--color-info);
       }
       
-      &.input-solid {
+      &.input-soft {
         @apply bg-info/10;
         border-color: oklch(from var(--color-info) l c h / 0.5);
         
@@ -209,7 +209,7 @@
         box-shadow: inset 0 0 0 1px var(--color-success);
       }
       
-      &.input-solid {
+      &.input-soft {
         @apply bg-success/10;
         border-color: oklch(from var(--color-success) l c h / 0.5);
         
@@ -237,7 +237,7 @@
         box-shadow: inset 0 0 0 1px var(--color-warning);
       }
       
-      &.input-solid {
+      &.input-soft {
         @apply bg-warning/10;
         border-color: oklch(from var(--color-warning) l c h / 0.5);
         
@@ -265,7 +265,7 @@
         box-shadow: inset 0 0 0 1px var(--color-error);
       }
       
-      &.input-solid {
+      &.input-soft {
         @apply bg-error/10;
         border-color: oklch(from var(--color-error) l c h / 0.5);
         
@@ -383,78 +383,162 @@
   // ============================================
   // FLOATING LABEL
   // ============================================
+  .input-floating-label {
+    @apply absolute left-3 top-1/2;
+    @apply text-base text-base-content/50;
+    @apply pointer-events-none;
+    @apply origin-left;
+    @apply bg-transparent px-0;
+    @apply overflow-hidden text-ellipsis whitespace-nowrap;
+    max-width: calc(100% - 1.5rem);
+    translate: 0 -50%;
+    transition: top 0.15s ease-out, translate 0.15s ease-out, scale 0.15s ease-out, background-color 0.15s ease-out, padding 0.15s ease-out;
+  }
+
   .input-floating {
     @apply relative;
 
     .input {
+      // Hide placeholder by default so label can sit in center
       @apply placeholder-transparent;
       
-      // When input has value or is focused, move label up
-      &:focus ~ .input-floating-label,
-      &:not(:placeholder-shown) ~ .input-floating-label {
-        @apply -translate-y-4 scale-90;
-        @apply text-xs;
-        @apply bg-base-100 px-1;
-      }
-
-      &:focus ~ .input-floating-label {
-        @apply text-base-content;
+      // Show placeholder when focused (label will be floated up)
+      &:focus {
+        @apply placeholder:text-base-content/40;
       }
     }
 
-    // Color variants for floating label focus
-    .input-primary:focus ~ .input-floating-label {
-      @apply text-primary;
+    // When input has value or is focused, move label to border
+    &:focus-within,
+    &:has(.input:not(:placeholder-shown)) {
+      .input-floating-label {
+        @apply top-0 px-1 font-medium;
+        @apply bg-base-100 text-base-content;
+        @apply pointer-events-auto;
+        translate: 0 calc(-50% - 0.0625em);
+        scale: 0.75;
+      }
     }
-    .input-secondary:focus ~ .input-floating-label {
-      @apply text-secondary;
+
+    // Color variants for floating label (apply when floated - focused or has value)
+    &:has(.input-primary):focus-within,
+    &:has(.input-primary .input:not(:placeholder-shown)),
+    &:has(.input-primary:not(:placeholder-shown)) {
+      .input-floating-label {
+        @apply text-primary;
+      }
     }
-    .input-accent:focus ~ .input-floating-label {
-      @apply text-accent;
+    &:has(.input-secondary):focus-within,
+    &:has(.input-secondary .input:not(:placeholder-shown)),
+    &:has(.input-secondary:not(:placeholder-shown)) {
+      .input-floating-label {
+        @apply text-secondary;
+      }
     }
-    .input-info:focus ~ .input-floating-label {
-      @apply text-info;
+    &:has(.input-accent):focus-within,
+    &:has(.input-accent .input:not(:placeholder-shown)),
+    &:has(.input-accent:not(:placeholder-shown)) {
+      .input-floating-label {
+        @apply text-accent;
+      }
     }
-    .input-success:focus ~ .input-floating-label {
+    &:has(.input-info):focus-within,
+    &:has(.input-info .input:not(:placeholder-shown)),
+    &:has(.input-info:not(:placeholder-shown)) {
+      .input-floating-label {
+        @apply text-info;
+      }
+    }
+    &:has(.input-success):focus-within,
+    &:has(.input-success .input:not(:placeholder-shown)),
+    &:has(.input-success:not(:placeholder-shown)) {
+      .input-floating-label {
+        @apply text-success;
+      }
+    }
+    &:has(.input-warning):focus-within,
+    &:has(.input-warning .input:not(:placeholder-shown)),
+    &:has(.input-warning:not(:placeholder-shown)) {
+      .input-floating-label {
+        @apply text-warning;
+      }
+    }
+    &:has(.input-error):focus-within,
+    &:has(.input-error .input:not(:placeholder-shown)),
+    &:has(.input-error:not(:placeholder-shown)) {
+      .input-floating-label {
+        @apply text-error;
+      }
+    }
+
+    // Validation states for floating label (always show color)
+    &:has(.input.is-valid) .input-floating-label {
       @apply text-success;
     }
-    .input-warning:focus ~ .input-floating-label {
-      @apply text-warning;
-    }
-    .input-error:focus ~ .input-floating-label {
+    &:has(.input.is-invalid) .input-floating-label {
       @apply text-error;
     }
 
-    // Validation states for floating label
-    .input.is-valid ~ .input-floating-label {
-      @apply text-success;
-    }
-    .input.is-invalid ~ .input-floating-label {
-      @apply text-error;
-    }
-  }
-
-  .input-floating-label {
-    @apply absolute left-3 top-1/2 -translate-y-1/2;
-    @apply text-base-content/50;
-    @apply transition-all duration-200;
-    @apply pointer-events-none;
-    @apply origin-left;
-  }
-
-  // Floating label size variants
-  .input-floating {
-    .input-xs ~ .input-floating-label {
+    // Size variants - adjust left position and font size
+    &:has(.input-xs) .input-floating-label {
       @apply left-2 text-xs;
     }
-    .input-sm ~ .input-floating-label {
+    &:has(.input-sm) .input-floating-label {
       @apply left-2.5 text-sm;
     }
-    .input-lg ~ .input-floating-label {
+    &:has(.input-lg) .input-floating-label {
       @apply left-4 text-lg;
     }
-    .input-xl ~ .input-floating-label {
+    &:has(.input-xl) .input-floating-label {
       @apply left-5 text-xl;
+    }
+
+    // Auto-detect background when bg-base-* is on the wrapper
+    &.bg-base-100:focus-within .input-floating-label,
+    &.bg-base-100:has(.input:not(:placeholder-shown)) .input-floating-label {
+      @apply bg-base-100;
+    }
+    &.bg-base-200:focus-within .input-floating-label,
+    &.bg-base-200:has(.input:not(:placeholder-shown)) .input-floating-label {
+      @apply bg-base-200;
+    }
+    &.bg-base-300:focus-within .input-floating-label,
+    &.bg-base-300:has(.input:not(:placeholder-shown)) .input-floating-label {
+      @apply bg-base-300;
+    }
+
+    // Semantic colors
+    &.bg-primary:focus-within .input-floating-label,
+    &.bg-primary:has(.input:not(:placeholder-shown)) .input-floating-label {
+      @apply bg-primary;
+    }
+    &.bg-secondary:focus-within .input-floating-label,
+    &.bg-secondary:has(.input:not(:placeholder-shown)) .input-floating-label {
+      @apply bg-secondary;
+    }
+    &.bg-accent:focus-within .input-floating-label,
+    &.bg-accent:has(.input:not(:placeholder-shown)) .input-floating-label {
+      @apply bg-accent;
+    }
+    &.bg-neutral:focus-within .input-floating-label,
+    &.bg-neutral:has(.input:not(:placeholder-shown)) .input-floating-label {
+      @apply bg-neutral;
+    }
+    &.bg-info:focus-within .input-floating-label,
+    &.bg-info:has(.input:not(:placeholder-shown)) .input-floating-label {
+      @apply bg-info;
+    }
+    &.bg-success:focus-within .input-floating-label,
+    &.bg-success:has(.input:not(:placeholder-shown)) .input-floating-label {
+      @apply bg-success;
+    }
+    &.bg-warning:focus-within .input-floating-label,
+    &.bg-warning:has(.input:not(:placeholder-shown)) .input-floating-label {
+      @apply bg-warning;
+    }
+    &.bg-error:focus-within .input-floating-label,
+    &.bg-error:has(.input:not(:placeholder-shown)) .input-floating-label {
+      @apply bg-error;
     }
   }
 }
