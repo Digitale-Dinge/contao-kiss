@@ -1,6 +1,11 @@
 {% extends '@Contao/mod_article' %}
 
 {% set wrapperAttributes = attrs(cssID)
-    .addClass([bgColor|default, contentWidth|default, paddingTop|default, paddingBottom|default])
+    .addClass([
+        styles.container(contentWidth|default),
+        styles.background(bgColor|default),
+        styles.padding_top(paddingTop|default),
+        styles.padding_bottom(paddingBottom|default),
+    ])
     .mergeWith(wrapperAttributes|default)
 %}

@@ -1,6 +1,13 @@
 {% extends '@Contao/block_searchable' %}
 
-{% set layout_classes = [contentWidth|default, paddingTop,|default paddingBottom|default, marginTop|default, marginBottom|default] %}
+{% set layout_classes = [
+    styles.container(contentWidth|default),
+    styles.padding_top(paddingTop,|default),
+    styles.padding_bottom(paddingBottom|default),
+    styles.margin_top(marginTop|default),
+    styles.margin_bottom(marginBottom|default)
+] %}
+
 {% set has_layout_classes = layout_classes|filter(v => v)|length > 0 %}
 
 {%- block wrapper_before %}

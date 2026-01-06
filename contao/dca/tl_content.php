@@ -3,9 +3,6 @@
 declare(strict_types=1);
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
-use DigitaleDinge\ContaoKiss\Styles\Options\Layout;
-use DigitaleDinge\ContaoKiss\Styles\Options\Margin;
-use DigitaleDinge\ContaoKiss\Styles\Options\Padding;
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'hyperlinkAsButton';
 
@@ -14,8 +11,6 @@ $GLOBALS['TL_DCA']['tl_content']['subpalettes']['hyperlinkAsButton'] = 'buttonTy
 $GLOBALS['TL_DCA']['tl_content']['fields']['contentWidth'] = [
     'exclude' => true,
     'inputType' => 'select',
-    'options' => array_column(Layout\Container::cases(), 'value'),
-    'reference' => &$GLOBALS['TL_LANG']['tl_content']['contentWidthOptions'],
     'eval' => [
         'tl_class' => 'w25 clr',
         'class' => 'widget-icon icon-width',
@@ -28,8 +23,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['contentWidth'] = [
 $GLOBALS['TL_DCA']['tl_content']['fields']['paddingTop'] = [
     'exclude' => true,
     'inputType' => 'select',
-    'options' => array_column(Padding\Top::cases(), 'value'),
-    'reference' => &$GLOBALS['TL_LANG']['tl_content']['paddingTopOptions'],
     'eval' => [
         'tl_class' => 'clr w25',
         'class' => 'widget-icon icon-pt',
@@ -42,8 +35,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['paddingTop'] = [
 $GLOBALS['TL_DCA']['tl_content']['fields']['paddingBottom'] = [
     'exclude' => true,
     'inputType' => 'select',
-    'options' => array_column(Padding\Bottom::cases(), 'value'),
-    'reference' => &$GLOBALS['TL_LANG']['tl_content']['paddingBottomOptions'],
     'eval' => [
         'tl_class' => 'w25',
         'class' => 'widget-icon icon-pb',
@@ -56,8 +47,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['paddingBottom'] = [
 $GLOBALS['TL_DCA']['tl_content']['fields']['marginTop'] = [
     'exclude' => true,
     'inputType' => 'select',
-    'options' => array_column(Margin\Top::cases(), 'value'),
-    'reference' => &$GLOBALS['TL_LANG']['tl_content']['marginTopOptions'],
     'eval' => [
         'tl_class' => 'w25 clr',
         'class' => 'widget-icon icon-mt',
@@ -71,8 +60,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['marginBottom'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_content']['marginBottom'],
     'exclude' => true,
     'inputType' => 'select',
-    'options' => array_column(Margin\Bottom::cases(), 'value'),
-    'reference' => &$GLOBALS['TL_LANG']['tl_content']['marginBottomOptions'],
     'eval' => [
         'tl_class' => 'w25',
         'class' => 'widget-icon icon-mb',

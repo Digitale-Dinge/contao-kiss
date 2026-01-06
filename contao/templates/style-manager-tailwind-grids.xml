@@ -2,7 +2,6 @@
 <archives>
   <archive identifier="grid">
     <field title="id">5</field>
-    <field title="tstamp">1749219017</field>
     <field title="title">Spaltensets</field>
     <field title="desc">Die Inhaltselemente innerhalb dieser Elementgruppe teilen sich in das hier definierte Spaltenset auf. Es können unterschiedliche Spaltensets für verschiedene Bildschirmgrößen definiert werden. Möchtest du mehrere Inhalte in einer Spalte haben, kannst du diese in einer weiteren Elementgruppe zusammenfassen.</field>
     <field title="identifier">grid</field>
@@ -13,7 +12,6 @@
         <field title="id">15</field>
         <field title="pid">5</field>
         <field title="sorting">64</field>
-        <field title="tstamp">1749218788</field>
         <field title="alias">no-breakpoints</field>
         <field title="title">Alle Bildschirmgrößen</field>
         <field title="description">Spalten greifen auf alle Bildschirmgrößen</field>
@@ -21,25 +19,13 @@
         <field title="cssClass">w25</field>
         <field title="chosen">1</field>
         <field title="blankOption">1</field>
-        <field title="passToTemplate"></field>
-        <field title="extendLayout"></field>
-        <field title="extendPage"></field>
-        <field title="extendArticle"></field>
-        <field title="extendForm"></field>
-        <field title="extendFormFields"></field>
-        <field title="formFields">NULL</field>
         <field title="extendContentElement">1</field>
         <field title="contentElements">a:1:{i:0;s:13:"element_group";}</field>
-        <field title="extendModule"></field>
-        <field title="modules">NULL</field>
-        <field title="extendNews"></field>
-        <field title="extendEvents"></field>
       </child>
       <child alias="breakpoint-sm">
         <field title="id">16</field>
         <field title="pid">5</field>
         <field title="sorting">192</field>
-        <field title="tstamp">1749219906</field>
         <field title="alias">breakpoint-sm</field>
         <field title="title">480px und größer</field>
         <field title="description">Spalten greifen auf alle Bildschirme größer 640px.</field>
@@ -47,25 +33,13 @@
         <field title="cssClass">w25</field>
         <field title="chosen">1</field>
         <field title="blankOption">1</field>
-        <field title="passToTemplate"></field>
-        <field title="extendLayout"></field>
-        <field title="extendPage"></field>
-        <field title="extendArticle"></field>
-        <field title="extendForm"></field>
-        <field title="extendFormFields"></field>
-        <field title="formFields">NULL</field>
         <field title="extendContentElement">1</field>
         <field title="contentElements">a:1:{i:0;s:13:"element_group";}</field>
-        <field title="extendModule"></field>
-        <field title="modules">NULL</field>
-        <field title="extendNews"></field>
-        <field title="extendEvents"></field>
       </child>
       <child alias="breakpoint-md">
         <field title="id">17</field>
         <field title="pid">5</field>
         <field title="sorting">320</field>
-        <field title="tstamp">1749219931</field>
         <field title="alias">breakpoint-md</field>
         <field title="title">768px und größer</field>
         <field title="description">Spalten greifen auf alle Bildschirme größer 768px.</field>
@@ -73,25 +47,13 @@
         <field title="cssClass">w25</field>
         <field title="chosen">1</field>
         <field title="blankOption">1</field>
-        <field title="passToTemplate"></field>
-        <field title="extendLayout"></field>
-        <field title="extendPage"></field>
-        <field title="extendArticle"></field>
-        <field title="extendForm"></field>
-        <field title="extendFormFields"></field>
-        <field title="formFields">NULL</field>
         <field title="extendContentElement">1</field>
         <field title="contentElements">a:1:{i:0;s:13:"element_group";}</field>
-        <field title="extendModule"></field>
-        <field title="modules">NULL</field>
-        <field title="extendNews"></field>
-        <field title="extendEvents"></field>
       </child>
       <child alias="breakpoint-lg">
         <field title="id">18</field>
         <field title="pid">5</field>
         <field title="sorting">448</field>
-        <field title="tstamp">1749220025</field>
         <field title="alias">breakpoint-lg</field>
         <field title="title">1024px und größer</field>
         <field title="description">Spalten greifen auf alle Bildschirme größer 1024px.</field>
@@ -99,19 +61,8 @@
         <field title="cssClass">w25</field>
         <field title="chosen">1</field>
         <field title="blankOption">1</field>
-        <field title="passToTemplate"></field>
-        <field title="extendLayout"></field>
-        <field title="extendPage"></field>
-        <field title="extendArticle"></field>
-        <field title="extendForm"></field>
-        <field title="extendFormFields"></field>
-        <field title="formFields">NULL</field>
         <field title="extendContentElement">1</field>
         <field title="contentElements">a:1:{i:0;s:13:"element_group";}</field>
-        <field title="extendModule"></field>
-        <field title="modules">NULL</field>
-        <field title="extendNews"></field>
-        <field title="extendEvents"></field>
       </child>
     </children>
   </archive>

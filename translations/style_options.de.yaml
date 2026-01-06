@@ -1,0 +1,46 @@
+style_options:
+
+    container_width:
+        - Inhaltsbreite
+        - Bestimmen Sie die Breite des Inhalts.
+
+    container_options:
+        small:                  Satzspiegel schmal
+        base:                   Satzspiegel
+        narrow:                 Satzspiegel schmaler
+        full_pad:               Volle Breite mit Abstand links und rechts
+        full:                   Volle Breite ohne Abstand links und rechts
+
+    column_options:
+        one:                    Elementbreite 1/12
+        two:                    Elementbreite 2/12
+        three:                  Elementbreite 3/12
+        four:                   Elementbreite 4/12
+        five:                   Elementbreite 5/12
+        six:                    Elementbreite 6/12
+        seven:                  Elementbreite 7/12
+        eight:                  Elementbreite 8/12
+        nine:                   Elementbreite 9/12
+        ten:                    Elementbreite 10/12
+        eleven:                 Elementbreite 11/12
+        twelve:                 Elementbreite 12/12
+
+    background_color:
+        - Hintergrundfarbe
+        - Wählen Sie die Hintergrundfarbe für dieses Element
+
+    background_color_options:
+        transparent:            Transparent
+        white:                  Weiß
+        primary:                Markenfarbe
+        secondary:              Sekundäre Farbe
+        additional_one:         Zusätzliche Farbe 1
+        additional_two:         Zusätzliche Farbe 2
+
+    spacing_options:
+        half:                   Halbe Zeilenhöhe
+        one:                    1x Zeilenhöhe
+        two:                    2x Zeilenhöhe
+        three:                  3x Zeilenhöhe
+        four:                   4x Zeilenhöhe
+        five:                   5x Zeilenhöhe

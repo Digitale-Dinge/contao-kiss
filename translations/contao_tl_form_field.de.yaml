@@ -1,0 +1,6 @@
+tl_form_field:
+    layout_legend:  Layout-Einstellungen
+
+    gridColumns:
+        - Spaltenverhalten
+        - Verhalten der Formularelemente in einem zweispaltigen Layout

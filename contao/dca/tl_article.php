@@ -2,10 +2,6 @@
 
 declare(strict_types=1);
 
-use DigitaleDinge\ContaoKiss\Styles\Options\Layout;
-use DigitaleDinge\ContaoKiss\Styles\Options\Padding;
-
-// Options are added dynamically via AddBackgroundColorsListener
 $GLOBALS['TL_DCA']['tl_article']['fields']['backgroundColor'] = [
     'exclude' => true,
     'inputType' => 'select',
@@ -21,8 +17,6 @@ $GLOBALS['TL_DCA']['tl_article']['fields']['backgroundColor'] = [
 $GLOBALS['TL_DCA']['tl_article']['fields']['contentWidth'] = [
     'exclude' => true,
     'inputType' => 'select',
-    'options' => array_column(Layout\Container::cases(), 'value'),
-    'reference' => &$GLOBALS['TL_LANG']['tl_article']['contentWidthOptions'],
     'eval' => [
         'tl_class' => 'w25 clr',
         'class' => 'widget-icon icon-width',
@@ -35,8 +29,6 @@ $GLOBALS['TL_DCA']['tl_article']['fields']['contentWidth'] = [
 $GLOBALS['TL_DCA']['tl_article']['fields']['paddingTop'] = [
     'exclude' => true,
     'inputType' => 'select',
-    'options' => array_column(Padding\Top::cases(), 'value'),
-    'reference' => &$GLOBALS['TL_LANG']['tl_article']['paddingTopOptions'],
     'eval' => [
         'tl_class' => 'clr w25',
         'class' => 'widget-icon icon-pt',
@@ -49,8 +41,6 @@ $GLOBALS['TL_DCA']['tl_article']['fields']['paddingTop'] = [
 $GLOBALS['TL_DCA']['tl_article']['fields']['paddingBottom'] = [
     'exclude' => true,
     'inputType' => 'select',
-    'options' => array_column(Padding\Bottom::cases(), 'value'),
-    'reference' => &$GLOBALS['TL_LANG']['tl_article']['paddingBottomOptions'],
     'eval' => [
         'tl_class' => 'w25',
         'class' => 'widget-icon icon-pb',

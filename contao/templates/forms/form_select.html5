@@ -1,0 +1,5 @@
+<?php
+
+$this->class = mb_ltrim($this->class .= ' label-text');
+// ToDo (surrogate not possible <5.7)
+//$this->extend('form_select');

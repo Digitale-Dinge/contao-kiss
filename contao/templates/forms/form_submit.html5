@@ -1,0 +1,5 @@
+<?php
+
+$this->class .= ' btn btn-primary';
+// ToDo (surrogate not possible <5.7)
+//$this->extend('form_submit');

@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Styles\Options\Layout;
 
+use Contao\CoreBundle\Translation\TranslatableLabelInterface;
 use DigitaleDinge\ContaoKiss\Styles\ClassOptionsInterface;
+use Symfony\Component\Translation\TranslatableMessage;
 
-enum Column: string implements ClassOptionsInterface
+enum Column: string implements ClassOptionsInterface, TranslatableLabelInterface
 {
     case one = 'cols_1';
     case two = 'cols_2';
@@ -20,4 +22,9 @@ enum Column: string implements ClassOptionsInterface
     case ten = 'cols_10';
     case eleven = 'cols_11';
     case twelve = 'cols_12';
+
+    public function label(): TranslatableMessage
+    {
+        return new TranslatableMessage('style_options.column_options.' . $this->name, [], 'style_options');
+    }
 }
