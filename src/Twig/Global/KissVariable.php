@@ -15,7 +15,16 @@ class KissVariable
     ) {
     }
 
-    public function getCompany(): KissCompanyModel|null
+    public function getCompany(int|null $id = null): KissCompanyModel|null
+    {
+        if (null === $id) {
+            return $this->getCompanyByPageModel();
+        }
+
+        return KissCompanyModel::findById($id);
+    }
+
+    private function getCompanyByPageModel(): KissCompanyModel|null
     {
         $pageModel = $this->requestStack->getCurrentRequest()?->attributes->get('pageModel');
 
