@@ -1,0 +1,12 @@
+{% use '@Contao/component/_headline.html.twig' %}
+
+{%- block headline_attributes %}
+    {{ attrs(headline.attributes|default).addClass('headline') }}
+{% endblock -%}
+
+{% block headline_component %}
+    {% if data.topline|default %}
+        <p{{ attrs(topline_attributes|default).addClass('topline') }}>{{ data.topline }}</p>
+    {% endif %}
+   {{ parent() }}
+{% endblock %}
