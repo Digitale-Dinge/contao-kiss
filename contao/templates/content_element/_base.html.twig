@@ -1,34 +1,14 @@
 {% extends '@Contao/content_element/_base.html.twig' %}
 
 {% block attributes %}
-    {% set attributes = attrs()
-        .mergeWith(attributes|default)
+    {% set attributes = attrs(attributes|default)
+        .addClass([
+            styles.container(data.contentWidth|default),
+            styles.padding_top(data.paddingTop|default),
+            styles.padding_bottom(data.paddingBottom|default),
+            styles.margin_top(data.paddingTop|default),
+            styles.margin_bottom(data.paddingBottom|default),
+        ])
     %}
-    {% if data.marginTop is defined and data.marginTop is not empty %}
-        {% set attributes = attributes.addClass(data.marginTop) %}
-    {% endif %}
-    {% if data.marginBottom is defined and data.marginBottom is not empty %}
-        {% set attributes = attributes.addClass(data.marginBottom) %}
-    {% endif %}
-    {% if data.contentWidth is defined and data.contentWidth is not empty %}
-        {% set attributes = attributes.addClass(data.contentWidth) %}
-    {% endif %}
-    {% if data.paddingTop is defined and data.paddingTop is not empty %}
-        {% set attributes = attributes.addClass(data.paddingTop) %}
-    {% endif %}
-    {% if data.paddingBottom is defined and data.paddingBottom is not empty %}
-        {% set attributes = attributes.addClass(data.paddingBottom) %}
-    {% endif %}
-
     {{ parent() }}
-{% endblock %}
-
-{% block headline_component %}
-  {% if data.topline is not empty %}
-    <p class="topline m-0">{{ data.topline }}</p>
-  {% endif %}
-  {{ parent() }}
-{% endblock %}
-
-{% block content %}
 {% endblock %}
