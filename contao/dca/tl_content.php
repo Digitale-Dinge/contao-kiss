@@ -2,11 +2,22 @@
 
 declare(strict_types=1);
 
-use Contao\CoreBundle\DataContainer\PaletteManipulator;
+//use Contao\CoreBundle\DataContainer\PaletteManipulator;
 
-$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'hyperlinkAsButton';
-
-$GLOBALS['TL_DCA']['tl_content']['subpalettes']['hyperlinkAsButton'] = 'buttonType,buttonColor,buttonSize';
+$GLOBALS['TL_DCA']['tl_content']['fields']['topline'] = [
+    'exclude'   => true,
+    'inputType' => 'text',
+    'eval'      => [
+        'tl_class'  => 'w50',
+        'maxlength' => 255,
+        'allowHtml' => true,
+    ],
+    'sql' => [
+        'type' => 'string',
+        'length' => 255,
+        'default' => '',
+    ]
+];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['contentWidth'] = [
     'exclude' => true,
@@ -17,7 +28,11 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['contentWidth'] = [
         'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(32) NOT NULL default ''",
+    'sql' => [
+        'type' => 'string',
+        'length' => 32,
+        'default' => '',
+    ]
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['paddingTop'] = [
@@ -29,7 +44,11 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['paddingTop'] = [
         'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(12) NOT NULL default ''",
+    'sql' => [
+        'type' => 'string',
+        'length' => 12,
+        'default' => '',
+    ]
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['paddingBottom'] = [
@@ -41,7 +60,11 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['paddingBottom'] = [
         'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(12) NOT NULL default ''",
+    'sql' => [
+        'type' => 'string',
+        'length' => 12,
+        'default' => '',
+    ]
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['marginTop'] = [
@@ -53,7 +76,11 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['marginTop'] = [
         'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(12) NOT NULL default ''",
+    'sql' => [
+        'type' => 'string',
+        'length' => 12,
+        'default' => '',
+    ]
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['marginBottom'] = [
@@ -66,7 +93,11 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['marginBottom'] = [
         'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(12) NOT NULL default ''",
+    'sql' => [
+        'type' => 'string',
+        'length' => 12,
+        'default' => '',
+    ]
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
@@ -77,16 +108,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
         'tl_class' => 'w 50 clr'
     ],
     'sql' => 'blob NULL',
-];
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['hyperlinkAsButton'] = [
-    'exclude' => true,
-    'inputType' => 'checkbox',
-    'sql' => "char(1) NOT NULL default ''",
-    'eval' => [
-        'tl_class' => 'm12 clr',
-        'submitOnChange' => true,
-    ],
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['rel']['eval']['tl_class'] = 'w25';
@@ -113,6 +134,37 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['iconPosition'] = [
     'sql' => "varchar(32) NOT NULL default ''",
 ];
 
+
+/*
+ * Customize existing fields
+ */
+
+// text fields clearfix
+$GLOBALS['TL_DCA']['tl_content']['fields']['text']['eval']['tl_class'] = 'long clr';
+$GLOBALS['TL_DCA']['tl_content']['fields']['optionalText']['eval']['tl_class'] = 'long clr';
+$GLOBALS['TL_DCA']['tl_content']['fields']['useImage']['eval']['tl_class'] = 'long clr';
+
+/* HTML in Überschriften */
+$GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['allowHtml'] = true;
+
+/* HTML in Linktexten */
+$GLOBALS['TL_DCA']['tl_content']['fields']['linktext']['eval']['allowHtml'] = true;
+
+
+/*$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'hyperlinkAsButton';
+
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['hyperlinkAsButton'] = 'buttonType,buttonColor,buttonSize';
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['hyperlinkAsButton'] = [
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'sql' => "char(1) NOT NULL default ''",
+    'eval' => [
+        'tl_class' => 'm12 clr',
+        'submitOnChange' => true,
+    ],
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['buttonType'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_content']['buttonType'],
     'exclude' => true,
@@ -135,25 +187,9 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['buttonSize'] = [
         'tl_class' => 'w50 image-grid image-grid--highdpi',
     ],
     'sql' => "varchar(32) NOT NULL default ''",
-];
+];*/
 
-/*
- * Customize existing fields
- */
-
-// text fields clearfix
-$GLOBALS['TL_DCA']['tl_content']['fields']['text']['eval']['tl_class'] = 'long clr';
-$GLOBALS['TL_DCA']['tl_content']['fields']['optionalText']['eval']['tl_class'] = 'long clr';
-$GLOBALS['TL_DCA']['tl_content']['fields']['useImage']['eval']['tl_class'] = 'long clr';
-
-/* HTML in Überschriften */
-$GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['allowHtml'] = true;
-
-/* HTML in Linktexten */
-$GLOBALS['TL_DCA']['tl_content']['fields']['linktext']['eval']['allowHtml'] = true;
-
-
-PaletteManipulator::create()
+/*PaletteManipulator::create()
     // Hyperlinks
     ->addField('lightboxIframe', 'rel', 'after')
     ->addField('icon', 'lightboxIframe', 'after')
@@ -166,4 +202,4 @@ PaletteManipulator::create()
     // Downloads
     ->addField('hyperlinkAsButton', 'download_legend', 'append')
     ->applyToPalette('downloads', 'tl_content')
-;
+;*/

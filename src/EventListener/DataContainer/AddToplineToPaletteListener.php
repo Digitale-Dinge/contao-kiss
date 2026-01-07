@@ -6,7 +6,6 @@ namespace DigitaleDinge\ContaoKiss\EventListener\DataContainer;
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
-use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Contao\DataContainer;
 use DigitaleDinge\ContaoKiss\Event\ExcludeToplineEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -27,13 +26,12 @@ class AddToplineToPaletteListener
         $this->eventDispatcher->dispatch($event);
         $skip = $event->getTypes();
 
-
         foreach ($GLOBALS['TL_DCA'][$dc->table]['palettes'] as $key => $palette) {
             if (\is_array($palette)) {
                 continue;
             }
 
-            if (!\in_array($key, $skip, true)) {
+            if (\in_array($key, $skip, true)) {
                 continue;
             }
 
@@ -43,28 +41,5 @@ class AddToplineToPaletteListener
                 ->applyToPalette($key, $dc->table)
             ;
         }
-    }
-
-    #[AsHook('loadDataContainer')]
-    public function loadDataContainer(string $table): void
-    {
-        if (!\in_array($table, ['tl_content', 'tl_module'], true)) {
-            return;
-        }
-
-        $GLOBALS['TL_DCA'][$table]['fields']['topline'] = [
-            'exclude'   => true,
-            'inputType' => 'text',
-            'eval'      => [
-                'tl_class'  => 'w50',
-                'maxlength' => 255,
-                'allowHtml' => true
-            ],
-            'sql' => [
-                'type'    => 'string',
-                'length'  => 255,
-                'default' => ''
-            ]
-        ];
     }
 }

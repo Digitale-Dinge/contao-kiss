@@ -11,7 +11,11 @@ $GLOBALS['TL_DCA']['tl_article']['fields']['backgroundColor'] = [
         'includeBlankOption' => true,
         'chosen' => true,
     ],
-    'sql' => "varchar(32) NOT NULL default ''",
+    'sql' => [
+        'type' => 'string',
+        'length' => 12,
+        'default' => ''
+    ],
 ];
 
 $GLOBALS['TL_DCA']['tl_article']['fields']['contentWidth'] = [
@@ -23,7 +27,11 @@ $GLOBALS['TL_DCA']['tl_article']['fields']['contentWidth'] = [
         'includeBlankOption' => true,
         'chosen' => true,
     ],
-    'sql' => "varchar(32) NOT NULL default ''",
+    'sql' => [
+        'type' => 'string',
+        'length' => 32,
+        'default' => ''
+    ],
 ];
 
 $GLOBALS['TL_DCA']['tl_article']['fields']['paddingTop'] = [
@@ -35,7 +43,11 @@ $GLOBALS['TL_DCA']['tl_article']['fields']['paddingTop'] = [
         'includeBlankOption' => true,
         'chosen' => true,
     ],
-    'sql' => "varchar(12) NOT NULL default ''",
+    'sql' => [
+        'type' => 'string',
+        'length' => 12,
+        'default' => ''
+    ],
 ];
 
 $GLOBALS['TL_DCA']['tl_article']['fields']['paddingBottom'] = [
@@ -47,5 +59,9 @@ $GLOBALS['TL_DCA']['tl_article']['fields']['paddingBottom'] = [
         'includeBlankOption' => true,
         'chosen' => true,
     ],
-    'sql' => "varchar(12) NOT NULL default ''",
+    'sql' => [
+        'type' => 'string',
+        'length' => 12,
+        'default' => ''
+    ],
 ];
