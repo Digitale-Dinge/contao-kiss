@@ -7,7 +7,7 @@ use Contao\CoreBundle\DataContainer\PaletteManipulator;
 $GLOBALS['TL_DCA']['tl_page']['fields']['kiss_company'] = [
     'inputType' => 'select',
     'exclude' => true,
-    'foreignKey' => 'tl_kiss_company.title',
+    'foreignKey' => 'tl_kiss_company.name',
     'eval' => ['includeBlankOption' => true, 'tl_class' => 'w50 clr'],
     'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
     'relation' => ['type' => 'hasOne', 'load' => 'lazy'],

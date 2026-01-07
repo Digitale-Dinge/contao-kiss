@@ -10,17 +10,17 @@ use Contao\CoreBundle\InsertTag\InsertTagResult;
 use Contao\CoreBundle\InsertTag\OutputType;
 use Contao\CoreBundle\InsertTag\ResolvedInsertTag;
 use Contao\CoreBundle\InsertTag\Resolver\InsertTagResolverNestedResolvedInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\RouterInterface;
+use Contao\StringUtil;
+use DigitaleDinge\ContaoKiss\Company\Company;
 
 #[AsInsertTag('kiss_company')]
-readonly class KissCompanyInsertTag implements InsertTagResolverNestedResolvedInterface
+#[AsInsertTag('kiss_company_id')]
+class KissCompanyInsertTag implements InsertTagResolverNestedResolvedInterface
 {
-    public function __construct(
-        private RouterInterface $router,
-        private RequestStack $requestStack,
-    ) {
-    }
+    private int|null $companyId = null;
+
+    public function __construct(private readonly Company $company)
+    {}
 
     public function __invoke(ResolvedInsertTag $insertTag): InsertTagResult
     {
@@ -28,15 +28,41 @@ readonly class KissCompanyInsertTag implements InsertTagResolverNestedResolvedIn
             throw new InvalidInsertTagException('Missing parameters for insert tag.');
         }
 
-        $parameter = $insertTag->getParameters()->get(0);
+        $parameters = $insertTag->getParameters()->all();
 
-        $result = $this->replaceCompanyInsertTags($parameter);
+        if ('kiss_company_id' === $insertTag->getName()) {
+            $this->companyId = (int) array_shift($parameters);
+        }
+
+        $result = $this->replaceInsertTag($parameters);
 
         return new InsertTagResult($result, OutputType::html);
     }
 
-    private function replaceCompanyInsertTags(string $parameter): string
+    private function replaceInsertTag(array $parameters): string
     {
-        return $parameter;
+        $company = $this->company->get($this->companyId);
+
+        if (null === $company) {
+            return '';
+        }
+
+        $name = $parameters[0] ?? null;
+        $position = (int) $parameters[1] ?? 1;
+        $modifier = $parameters[2] ?? null;
+
+        return match ($name) {
+            'phone' => $this->getFromSerialized($company->phone_numbers, $position, $modifier),
+            default => $company->{$name} ?? '',
+        };
+    }
+
+    private function getFromSerialized(string|null $string, int $position, string|null $modifier = null): string
+    {
+        $values = StringUtil::deserialize($string, true);
+
+        $value = $values[$position - 1] ?? [];
+
+        return (string) reset($value);
     }
 }

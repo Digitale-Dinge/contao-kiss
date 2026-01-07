@@ -1,5 +1,5 @@
 {% block company_info %}
-    {{ kiss.company.title|default }}<br>
+    {{ kiss.company.name|default }}<br>
     {{ kiss.company.street|default }}<br>
     {{ (kiss.company.postal|default ~ ' ' ~ kiss.company.city|default)|trim(side: 'left') }}<br>
     {{ kiss.company.country|default|country_name }}

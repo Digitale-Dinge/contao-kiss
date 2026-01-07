@@ -2,40 +2,18 @@
 
 namespace DigitaleDinge\ContaoKiss\Twig\Global;
 
-use Contao\PageModel;
+use DigitaleDinge\ContaoKiss\Company\Company;
 use DigitaleDinge\ContaoKiss\Model\KissCompanyModel;
-use Doctrine\DBAL\Connection;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class KissVariable
 {
     public function __construct(
-        private readonly RequestStack $requestStack,
-        private readonly Connection $connection,
+        private readonly Company $company,
     ) {
     }
 
     public function getCompany(int|null $id = null): KissCompanyModel|null
     {
-        if (null === $id) {
-            return $this->getCompanyByPageModel();
-        }
-
-        return KissCompanyModel::findById($id);
-    }
-
-    private function getCompanyByPageModel(): KissCompanyModel|null
-    {
-        $pageModel = $this->requestStack->getCurrentRequest()?->attributes->get('pageModel');
-
-        if (!($pageModel instanceof PageModel)) {
-            return null;
-        }
-
-        if (0 === ($kiss_company = $this->connection->fetchOne('SELECT kiss_company FROM tl_page WHERE id=?', [$pageModel->rootId]))) {
-            return null;
-        }
-
-        return KissCompanyModel::findById($kiss_company);
+        return $this->company->get($id);
     }
 }

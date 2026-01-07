@@ -22,18 +22,18 @@ $GLOBALS['TL_DCA']['tl_kiss_company'] = [
     'list' => [
         'sorting' => [
             'mode' => DataContainer::MODE_SORTED,
-            'fields' => ['title'],
+            'fields' => ['name'],
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'panelLayout' => 'filter;search,limit',
         ],
         'label' => [
-            'fields' => ['title'],
+            'fields' => ['name'],
             'showColumns' => true,
         ],
     ],
     'palettes' => [
         'default' =>
-            '{general_legend},title,logo;' .
+            '{general_legend},name,logo;' .
             '{address_legend},street,postal,city,state,country;' .
             '{times_legend},opening_times,closing_times;' .
             '{contact_legend},phone_numbers,emails,websites,fax_numbers;' .
@@ -46,7 +46,7 @@ $GLOBALS['TL_DCA']['tl_kiss_company'] = [
         'tstamp' => [
             'sql' => ['type' => 'integer', 'unsigned' => true, 'default' => 0],
         ],
-        'title' => [
+        'name' => [
             'label' => &$GLOBALS['TL_LANG']['tl_member']['company'],
             'inputType' => 'text',
             'eval' => [
