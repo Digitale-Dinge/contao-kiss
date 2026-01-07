@@ -1,16 +1,8 @@
 <div{{ attrs(header_main_attributes|default).addClass(['header-main', 'relative', 'py-8', 'text-sm']) }}>
     <div{{ attrs(header_main_inside_attributes|default).addClass(['inside', 'flex', 'gap-x-4', 'items-center', 'justify-between', styles.container]) }}>
-        {% if kiss.company.logo|default %}
-            {{ include('@Contao/component/_figure.html.twig', {
-                figure: figure(kiss.company.logo, null),
-                linkHref: app.request.baseUrl,
-                img_attributes: {
-                    class: 'logo',
-                    alt: kiss.company.title,
-                },
-            }) }}
-        {% endif %}
-
+        {{ include('@Contao/company/logo.html.twig', {
+            logo_classes: 'header-logo',
+        }) }}
         {{ frontend_module('navigation', {
             levelOffset: 0,
             showLevel: 0,
