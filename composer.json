@@ -19,12 +19,11 @@
     },
     "require": {
         "php": "^8.3",
-        "contao/core-bundle": "^5.6",
+        "contao/core-bundle": "^5.7",
         "madeyourday/contao-rocksolid-custom-elements": "^2.4.10",
         "lukasbableck/contao-svg-icon-picker-bundle": "^1.0",
         "oveleon/contao-component-style-manager": "^3.9.6",
-        "twig/intl-extra": "^3.18",
-        "zoglo/contao-row-wizard": "^0.1"
+        "twig/intl-extra": "^3.18"
     },
     "require-dev": {
         "contao/manager-plugin": "^2.0",
