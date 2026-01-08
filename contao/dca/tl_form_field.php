@@ -7,7 +7,7 @@ use Contao\CoreBundle\DataContainer\PaletteManipulator;
 $GLOBALS['TL_DCA']['tl_form_field']['fields']['gridColumns'] = [
     'exclude' => true,
     'inputType' => 'select',
-    'saveTo' => 'kiss_styles',
+    'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25 clr',
         'class' => 'widget-icon icon-width',
