@@ -7,97 +7,73 @@ declare(strict_types=1);
 $GLOBALS['TL_DCA']['tl_content']['fields']['topline'] = [
     'exclude'   => true,
     'inputType' => 'text',
+    'saveTo' => 'kiss_styles',
     'eval'      => [
         'tl_class'  => 'w50',
         'maxlength' => 255,
         'allowHtml' => true,
     ],
-    'sql' => [
-        'type' => 'string',
-        'length' => 255,
-        'default' => '',
-    ]
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['contentWidth'] = [
     'exclude' => true,
     'inputType' => 'select',
+    'saveTo' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25 clr',
         'class' => 'widget-icon icon-width',
         'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => [
-        'type' => 'string',
-        'length' => 32,
-        'default' => '',
-    ]
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['paddingTop'] = [
     'exclude' => true,
     'inputType' => 'select',
+    'saveTo' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'clr w25',
         'class' => 'widget-icon icon-pt',
         'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => [
-        'type' => 'string',
-        'length' => 12,
-        'default' => '',
-    ]
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['paddingBottom'] = [
     'exclude' => true,
     'inputType' => 'select',
+    'saveTo' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25',
         'class' => 'widget-icon icon-pb',
         'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => [
-        'type' => 'string',
-        'length' => 12,
-        'default' => '',
-    ]
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['marginTop'] = [
     'exclude' => true,
     'inputType' => 'select',
+    'saveTo' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25 clr',
         'class' => 'widget-icon icon-mt',
         'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => [
-        'type' => 'string',
-        'length' => 12,
-        'default' => '',
-    ]
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['marginBottom'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_content']['marginBottom'],
     'exclude' => true,
     'inputType' => 'select',
+    'saveTo' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25',
         'class' => 'widget-icon icon-mb',
         'chosen' => true,
         'includeBlankOption' => true,
     ],
-    'sql' => [
-        'type' => 'string',
-        'length' => 12,
-        'default' => '',
-    ]
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
