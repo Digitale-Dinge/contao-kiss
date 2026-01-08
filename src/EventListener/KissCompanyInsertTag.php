@@ -12,6 +12,7 @@ use Contao\CoreBundle\InsertTag\ResolvedInsertTag;
 use Contao\CoreBundle\InsertTag\Resolver\InsertTagResolverNestedResolvedInterface;
 use Contao\StringUtil;
 use DigitaleDinge\ContaoKiss\Company\Company;
+use DigitaleDinge\ContaoKiss\Model\KissCompanyModel;
 
 #[AsInsertTag('kiss_company')]
 #[AsInsertTag('kiss_company_id')]
@@ -54,7 +55,10 @@ class KissCompanyInsertTag implements InsertTagResolverNestedResolvedInterface
         return match ($name) {
             'phone' => $this->getFromSerialized($company->phone_numbers, $position, $modifier),
             'mail' => $this->getFromSerialized($company->emails, $position, $modifier),
-
+            'website' => $this->getFromSerialized($company->websites, $position, $modifier),
+            'fax' => $this->getFromSerialized($company->fax_numbers, $position, $modifier),
+            'additional' => $this->getFromSerialized($company->additional, $position, $modifier),
+            'address' => $this->getAddress($company),
             default => $company->{$name} ?? '',
         };
     }
@@ -66,5 +70,10 @@ class KissCompanyInsertTag implements InsertTagResolverNestedResolvedInterface
         $value = $values[$position - 1] ?? [];
 
         return (string) reset($value);
+    }
+
+    private function getAddress(KissCompanyModel $company): string
+    {
+        return '';
     }
 }
