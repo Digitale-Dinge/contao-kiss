@@ -14,6 +14,6 @@ return static function(ContainerConfigurator $container)
             ->public()
 
         ->load('DigitaleDinge\\ContaoKiss\\', '../src/*')
-            ->exclude('../src/{Event,Model,Util,DigitaleDingeKissBundle.php}')
+            ->exclude('../src/{Event,Model,Util,Styles,DigitaleDingeKissBundle.php}')
     ;
 };

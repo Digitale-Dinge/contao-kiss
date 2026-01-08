@@ -53,6 +53,8 @@ class KissCompanyInsertTag implements InsertTagResolverNestedResolvedInterface
 
         return match ($name) {
             'phone' => $this->getFromSerialized($company->phone_numbers, $position, $modifier),
+            'mail' => $this->getFromSerialized($company->emails, $position, $modifier),
+
             default => $company->{$name} ?? '',
         };
     }
