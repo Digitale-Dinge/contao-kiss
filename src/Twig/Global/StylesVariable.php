@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DigitaleDinge\ContaoKiss\Twig\Global;
 
-use DigitaleDinge\ContaoKiss\Styles\ClassOptionsInterface;
 use DigitaleDinge\ContaoKiss\Styles\Options\Color;
 use DigitaleDinge\ContaoKiss\Styles\Options\Layout;
 use DigitaleDinge\ContaoKiss\Styles\Options\Margin;
@@ -10,53 +11,38 @@ use DigitaleDinge\ContaoKiss\Styles\Options\Padding;
 
 class StylesVariable
 {
-    public function getContainer(string $key = 'base'): string|null
+    public function getContainer(string|null $key = null): Layout\ContainerStyle
     {
-        return $this->getClassOptionValue(Layout\Container::class, $key);
+        return new Layout\ContainerStyle($key);
     }
 
-    public function getColumn(string $key): string|null
+    public function getColumn(string $key): Layout\ColumnStyle
     {
-        return $this->getClassOptionValue(Layout\Column::class, $key);
+        return new Layout\ColumnStyle($key);
     }
 
-    public function getBackground(string $key): string|null
+    public function getBackground(string $key): Color\BackgroundStyle
     {
-        return $this->getClassOptionValue(Color\Background::class, $key);
+        return new Color\BackgroundStyle($key);
     }
 
-    public function getMargin_top(string $key): string|null
+    public function getMargin_top(string $key): Margin\TopStyle
     {
-        return $this->getClassOptionValue(Margin\Top::class, $key);
+        return new Margin\TopStyle($key);
     }
 
-    public function getMargin_bottom(string $key): string|null
+    public function getMargin_bottom(string $key): Margin\BottomStyle
     {
-        return $this->getClassOptionValue(Margin\Bottom::class, $key);
+        return new Margin\BottomStyle($key);
     }
 
-    public function getPadding_top(string $key): string|null
+    public function getPadding_top(string $key): Padding\TopStyle
     {
-        return $this->getClassOptionValue(Padding\Top::class, $key);
+        return new Padding\TopStyle($key);
     }
 
-    public function getPadding_bottom(string $key): string|null
+    public function getPadding_bottom(string $key): Padding\BottomStyle
     {
-        return $this->getClassOptionValue(Padding\Bottom::class, $key);
-    }
-
-    private function getClassOptionValue(string $class, string $key): string|null
-    {
-        if (!is_a($class, ClassOptionsInterface::class, \true)) {
-            return null;
-        }
-
-        try {
-            $value = $class::{$key}?->value;
-        } catch (\Error) {
-            $value = null;
-        }
-
-        return $value;
+        return new Padding\BottomStyle($key);
     }
 }

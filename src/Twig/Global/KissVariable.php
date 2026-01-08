@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DigitaleDinge\ContaoKiss\Twig\Global;
 
 use DigitaleDinge\ContaoKiss\Company\Company;
