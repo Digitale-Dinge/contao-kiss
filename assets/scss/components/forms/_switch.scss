@@ -1,15 +1,174 @@
 /**
  * KISS Switch Component (V1.0)
  * 
- * TODO: Implement toggle switch styling
+ * A toggle switch styled as a sliding button.
  * 
  * Base: .switch
  * Colors: switch-{primary|secondary|accent|info|success|warning|error}
  * Sizes: switch-{xs|sm|lg|xl}
+ * Variants: switch-outline
+ * States: disabled
+ * 
+ * Example:
+ *   <input type="checkbox" class="switch switch-primary">
+ * 
+ * With Label:
+ *   <label class="flex items-center gap-2 cursor-pointer">
+ *     <input type="checkbox" class="switch">
+ *     <span>Toggle me</span>
+ *   </label>
  */
 
 @layer components {
+  // ============================================
+  // BASE SWITCH
+  // ============================================
   .switch {
-    // Placeholder - to be implemented
+    @apply relative shrink-0 cursor-pointer appearance-none;
+    
+    // Size using CSS variables for easy adjustment
+    --switch-width: 2.75rem;
+    --switch-height: 1.5rem;
+    --thumb-size: 1.25rem;
+    --thumb-offset: 0.125rem;
+    --input-color: oklch(from var(--color-base-content) l c h / 0.4);
+    
+    width: var(--switch-width);
+    height: var(--switch-height);
+    border-radius: var(--switch-height);
+    
+    // Track background - off state
+    background-color: var(--color-base-300);
+    border: 1px solid var(--color-base-300);
+    
+    transition: background-color 0.2s, border-color 0.2s;
+    
+    // Thumb via ::before pseudo-element
+    &::before {
+      content: "";
+      @apply absolute block rounded-full;
+      width: var(--thumb-size);
+      height: var(--thumb-size);
+      top: 50%;
+      left: var(--thumb-offset);
+      transform: translateY(-50%);
+      background-color: var(--color-base-100);
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      transition: transform 0.2s ease-out, background-color 0.2s;
+    }
+    
+    // Focus state
+    &:focus-visible {
+      outline: 2px solid oklch(from var(--input-color) l c h / 0.3);
+      outline-offset: 2px;
+    }
+    
+    // ============================================
+    // CHECKED STATE
+    // ============================================
+    &:checked,
+    &[aria-checked="true"] {
+      background-color: var(--input-color);
+      border-color: transparent;
+      
+      &::before {
+        // Move thumb to the right while maintaining vertical centering
+        transform: translateY(-50%) translateX(calc(var(--switch-width) - var(--thumb-size) - var(--thumb-offset) * 2 - 2px));
+      }
+    }
+    
+    // ============================================
+    // DISABLED STATE
+    // ============================================
+    &:disabled {
+      @apply cursor-not-allowed opacity-50;
+    }
+    
+    // ============================================
+    // OUTLINE VARIANT
+    // ============================================
+    &-outline {
+      background-color: transparent;
+      border: 1px solid oklch(from var(--color-base-content) l c h / 0.3);
+      
+      &::before {
+        background-color: oklch(from var(--color-base-content) l c h / 0.3);
+        box-shadow: none;
+      }
+      
+      &:checked,
+      &[aria-checked="true"] {
+        background-color: transparent;
+        border-color: var(--input-color);
+        
+        &::before {
+          background-color: var(--input-color);
+        }
+      }
+    }
+
+    // ============================================
+    // COLORS
+    // ============================================
+    &-primary {
+      --input-color: var(--color-primary);
+    }
+    
+    &-secondary {
+      --input-color: var(--color-secondary);
+    }
+    
+    &-accent {
+      --input-color: var(--color-accent);
+    }
+    
+    &-info {
+      --input-color: var(--color-info);
+    }
+    
+    &-success {
+      --input-color: var(--color-success);
+    }
+    
+    &-warning {
+      --input-color: var(--color-warning);
+    }
+    
+    &-error {
+      --input-color: var(--color-error);
+    }
+    
+    // ============================================
+    // SIZES
+    // ============================================
+    &-xs {
+      --switch-width: 1.75rem;
+      --switch-height: 1rem;
+      --thumb-size: 0.75rem;
+      --thumb-offset: 0.125rem;
+    }
+    
+    &-sm {
+      --switch-width: 2.25rem;
+      --switch-height: 1.25rem;
+      --thumb-size: 1rem;
+      --thumb-offset: 0.125rem;
+    }
+    
+    // Default is defined in base
+    
+    &-lg {
+      --switch-width: 3.25rem;
+      --switch-height: 1.75rem;
+      --thumb-size: 1.5rem;
+      --thumb-offset: 0.125rem;
+    }
+    
+    &-xl {
+      --switch-width: 4rem;
+      --switch-height: 2.25rem;
+      --thumb-size: 1.875rem;
+      --thumb-offset: 0.1875rem;
+    }
   }
 }
