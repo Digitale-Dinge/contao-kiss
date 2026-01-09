@@ -8,5 +8,5 @@
     {% if data.topline|default %}
         <p{{ attrs(topline_attributes|default).addClass('topline') }}>{{ data.topline }}</p>
     {% endif %}
-   {{ parent() }}
+    {{ parent() }}
 {% endblock %}
