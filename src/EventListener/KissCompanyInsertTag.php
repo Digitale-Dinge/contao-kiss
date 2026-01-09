@@ -49,7 +49,7 @@ class KissCompanyInsertTag implements InsertTagResolverNestedResolvedInterface
         }
 
         $name = $parameters[0] ?? null;
-        $position = (int) $parameters[1] ?? 1;
+        $position = (int) ($parameters[1] ?? 1);
         $modifier = $parameters[2] ?? null;
 
         return match ($name) {

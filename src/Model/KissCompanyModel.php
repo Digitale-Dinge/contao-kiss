@@ -10,7 +10,7 @@ use Contao\Model\Collection;
 /**
  * @property integer $id
  * @property integer $tstamp
- * @property string  $title
+ * @property string  $name
  * @property string  $logo
  * @property string  $street
  * @property string  $postal
@@ -30,7 +30,7 @@ use Contao\Model\Collection;
  * @method static KissCompanyModel|null findByPk($id, array $opt=[])
  * @method static KissCompanyModel|null findOneBy($col, $val, array $opt=[])
  * @method static KissCompanyModel|null findOneByTstamp($val, array $opt=[])
- * @method static KissCompanyModel|null findOneByTitle($val, array $opt=[])
+ * @method static KissCompanyModel|null findOneByName($val, array $opt=[])
  * @method static KissCompanyModel|null findOneByLogo($val, array $opt=[])
  * @method static KissCompanyModel|null findOneByStreet($val, array $opt=[])
  * @method static KissCompanyModel|null findOneByPostal($val, array $opt=[])
@@ -47,7 +47,7 @@ use Contao\Model\Collection;
  * @method static KissCompanyModel|null findOneByAdditional($val, array $opt=[])
  *
  * @method static Collection|KissCompanyModel[]|KissCompanyModel|null findByTstamp($val, array $opt=[])
- * @method static Collection|KissCompanyModel[]|KissCompanyModel|null findByTitle($val, array $opt=[])
+ * @method static Collection|KissCompanyModel[]|KissCompanyModel|null findByName($val, array $opt=[])
  * @method static Collection|KissCompanyModel[]|KissCompanyModel|null findByLogo($val, array $opt=[])
  * @method static Collection|KissCompanyModel[]|KissCompanyModel|null findByStreet($val, array $opt=[])
  * @method static Collection|KissCompanyModel[]|KissCompanyModel|null findByPostal($val, array $opt=[])
@@ -68,7 +68,7 @@ use Contao\Model\Collection;
  *
  * @method static integer countById($id, array $opt=[])
  * @method static integer countByTstamp($val, array $opt=[])
- * @method static integer countByTitle($val, array $opt=[])
+ * @method static integer countByName($val, array $opt=[])
  * @method static integer countByLogo($val, array $opt=[])
  * @method static integer countByStreet($val, array $opt=[])
  * @method static integer countByPostal($val, array $opt=[])
