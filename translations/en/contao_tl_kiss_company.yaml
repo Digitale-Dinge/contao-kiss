@@ -1,0 +1,26 @@
+tl_kiss_company:
+    general_legend:     General
+    address_legend:     Address
+    times_legend:       Opening and closing times
+    contact_legend:     Contact
+    misc_legend:        Miscellaneous
+
+    logo:
+        - Logo
+        - Here you can select a logo that can be displayed on the website.
+
+    opening_times:
+        - Opening times
+        - Here you can enter your opening hours. If there are breaks, two time ranges can be entered.
+
+    closing_times:
+        - Closing times
+        - Here you can enter date ranges during which the company is closed.
+
+    socials:
+        - Social media
+        - Here you can add your social media platforms.
+
+    additional:
+        - Additional information
+        - Here you can enter additional information in key/value format.

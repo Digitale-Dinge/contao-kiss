@@ -1,0 +1,25 @@
+tl_article:
+
+    contentWidth:
+        - Content width
+        - Define the width of the content.
+
+    paddingTop:
+        - Inner spacing at the top
+        - Define the spacing at the top of the element.
+
+    paddingBottom:
+        - Inner spacing at the bottom
+        - Define the spacing at the bottom of the element.
+
+    marginTop:
+        - Outer spacing at the top
+        - Define the spacing above the element.
+
+    marginBottom:
+        - Outer spacing at the bottom
+        - Define the spacing below the element.
+
+    backgroundColor:
+        - Background color
+        - Choose the background color for the article.

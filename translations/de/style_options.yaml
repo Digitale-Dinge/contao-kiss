@@ -44,3 +44,12 @@ style_options:
         three:                  3x Zeilenhöhe
         four:                   4x Zeilenhöhe
         five:                   5x Zeilenhöhe
+
+    typography_size_options:
+        x_small:                Sehr klein
+        small:                  Klein
+        medium:                 Normal
+        large:                  Groß
+        x_large:                Größer
+        xx_large:               Sehr groß
+        xxx_large:              Riesig

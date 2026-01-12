@@ -1,8 +1,12 @@
 tl_content:
-    layout_legend:              Layoutbereich
+    layout_legend:              Layout-Einstellungen
 
     grid:                       Spalten-Grid
     contentTeaser:              Teaser
+
+    headline:
+        unit:                   Einheit
+        size:                   Größe
 
     lightboxIframe:
         - 'Inhalt in iFrame öffnen'

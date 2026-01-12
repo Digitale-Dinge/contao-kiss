@@ -1,0 +1,55 @@
+style_options:
+
+    container_width:
+        - Content width
+        - Define the width of the content.
+
+    container_options:
+        small:                  Narrow text width
+        base:                   Default text width
+        narrow:                 Extra narrow text width
+        full_pad:               Full width with left and right padding
+        full:                   Full width without left and right padding
+
+    column_options:
+        one:                    Element width 1/12
+        two:                    Element width 2/12
+        three:                  Element width 3/12
+        four:                   Element width 4/12
+        five:                   Element width 5/12
+        six:                    Element width 6/12
+        seven:                  Element width 7/12
+        eight:                  Element width 8/12
+        nine:                   Element width 9/12
+        ten:                    Element width 10/12
+        eleven:                 Element width 11/12
+        twelve:                 Element width 12/12
+
+    background_color:
+        - Background color
+        - Choose the background color for this element.
+
+    background_color_options:
+        transparent:            Transparent
+        white:                  White
+        primary:                Brand color
+        secondary:              Secondary color
+        additional_one:         Additional color 1
+        additional_two:         Additional color 2
+
+    spacing_options:
+        half:                   Half line height
+        one:                    1× line height
+        two:                    2× line height
+        three:                  3× line height
+        four:                   4× line height
+        five:                   5× line height
+
+    typography_size_options:
+        x_small:                Tiny
+        small:                  Small
+        medium:                 Normal
+        large:                  Large
+        x_large:                Larger
+        xx_large:               Very large
+        xxx_large:              Huge

@@ -1,0 +1,81 @@
+tl_content:
+    layout_legend:              Layout settings
+
+    grid:                       Column grid
+    contentTeaser:              Teaser
+
+    headline:
+        unit:                   Unit
+        size:                   Size
+
+    lightboxIframe:
+        - 'Open content in iFrame'
+        - 'Opens the link in an iFrame and embeds the external page into the current page.'
+
+    topline:
+        - 'Topline'
+        - 'Displays an optional topline above the headline.'
+
+    color:
+        - 'Color'
+        - 'Define the color of the element.'
+
+    icon:
+        - 'Icon'
+
+    iconColor:
+        primary: 'Primary (default) <img src="bundles/digitaledingecontaokiss/icons/primary.png">'
+        secondary: 'Secondary <img src="bundles/digitaledingecontaokiss/icons/secondary.png">'
+        outline: 'Outline <img src="bundles/digitaledingecontaokiss/icons/outline.png">'
+
+    iconPosition:
+        - 'Position'
+        - 'Select the desired position of the icon.'
+
+    iconPositionOptions:
+        right: 'Right <img src="bundles/digitaledingecontaokiss/icons/icon-right.png">'
+        left: 'Left (default) <img src="bundles/digitaledingecontaokiss/icons/icon-left.png">'
+
+    hyperlinkAsButton:
+        - 'Display as button'
+        - 'Changes the appearance from a text link to a button.'
+
+    buttonType:
+        - 'Button type'
+        - 'Define the type of the button.'
+
+    buttonColor:
+        - 'Button color'
+        - 'Define the color of the button.'
+
+    buttonSize:
+        - 'Button size'
+        - 'Define the size of the button.'
+
+    buttonSizeOptions:
+        sm: 'Small <img src="bundles/digitaledingecontaokiss/icons/small.png">'
+        lg: 'Large (default) <img src="bundles/digitaledingecontaokiss/icons/large.png">'
+
+    contentWidth:
+        - Content width
+        - Define the width of the content.
+
+    paddingTop:
+        - Inner spacing at the top
+        - Define the spacing at the top of the element.
+
+    paddingBottom:
+        - Inner spacing at the bottom
+        - Define the spacing at the bottom of the element.
+
+    marginTop:
+        - Outer spacing at the top
+        - Define the spacing above the element.
+
+    marginBottom:
+        - Outer spacing at the bottom
+        - Define the spacing below the element.
+
+    backgroundColor:
+        - Background color
+        - Choose the background color for the content element.
