@@ -28,51 +28,56 @@
     border-radius: var(--radius-field);
     box-shadow: var(--shadow);
 
+    // Active state - shrink on click (applies to all buttons)
+    &:active:not(:disabled) {
+      @apply scale-[0.97];
+    }
+
     // Default (neutral) button
-    @apply bg-base-200 text-base-content;
-    @apply hover:bg-base-300;
+    @apply bg-base-200 text-base-content border-base-300;
+    @apply hover:bg-base-300 hover:border-base-300;
     @apply focus-visible:ring-base-content/20;
     
     // Color variants - Solid
     &-primary {
       @apply bg-primary text-primary-content border-primary;
-      @apply hover:bg-primary/90;
+      @apply hover:bg-primary/85 hover:border-primary/85;
       @apply focus-visible:ring-primary/30;
     }
     
     &-secondary {
       @apply bg-secondary text-secondary-content border-secondary;
-      @apply hover:bg-secondary/90;
+      @apply hover:bg-secondary/90 hover:border-secondary/90;
       @apply focus-visible:ring-secondary/30;
     }
     
     &-accent {
       @apply bg-accent text-accent-content border-accent;
-      @apply hover:bg-accent/90;
+      @apply hover:bg-accent/90 hover:border-accent/90;
       @apply focus-visible:ring-accent/30;
     }
     
     &-info {
       @apply bg-info text-info-content border-info;
-      @apply hover:bg-info/90;
+      @apply hover:bg-info/90 hover:border-info/90;
       @apply focus-visible:ring-info/30;
     }
     
     &-success {
       @apply bg-success text-success-content border-success;
-      @apply hover:bg-success/90;
+      @apply hover:bg-success/90 hover:border-success/90;
       @apply focus-visible:ring-success/30;
     }
     
     &-warning {
       @apply bg-warning text-warning-content border-warning;
-      @apply hover:bg-warning/90;
+      @apply hover:bg-warning/90 hover:border-warning/90;
       @apply focus-visible:ring-warning/30;
     }
     
     &-error {
       @apply bg-error text-error-content border-error;
-      @apply hover:bg-error/90;
+      @apply hover:bg-error/90 hover:border-error/90;
       @apply focus-visible:ring-error/30;
     }
     
@@ -120,7 +125,7 @@
     // Style variants - Outline
     &-outline {
       @apply bg-transparent text-base-content border-base-content;
-      @apply hover:bg-base-200;
+      @apply hover:bg-base-content hover:text-base-100;
       
       &.btn-primary {
         @apply bg-transparent border-primary text-primary;
