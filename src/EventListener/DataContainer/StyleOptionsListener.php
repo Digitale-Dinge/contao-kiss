@@ -11,10 +11,18 @@ use DigitaleDinge\ContaoKiss\Styles\Options\Color;
 use DigitaleDinge\ContaoKiss\Styles\Options\Layout;
 use DigitaleDinge\ContaoKiss\Styles\Options\Margin;
 use DigitaleDinge\ContaoKiss\Styles\Options\Padding;
+use DigitaleDinge\ContaoKiss\Styles\Options\Typography;
 
 final class StyleOptionsListener
 {
     use TranslatableEnumTrait;
+
+    #[AsCallback('tl_content', 'fields.headline.fields.size.options')]
+    #[AsCallback('tl_module', 'fields.headline.fields.size.options')]
+    public function addHeadlineSizeOptions(): array
+    {
+        return $this->getTranslatedOptions(Typography\Size::class);
+    }
 
     #[AsCallback('tl_article', 'fields.backgroundColor.options')]
     public function addColorBackgroundOptions(): array

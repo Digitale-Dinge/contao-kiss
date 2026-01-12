@@ -8,6 +8,7 @@ use DigitaleDinge\ContaoKiss\Styles\Options\Color;
 use DigitaleDinge\ContaoKiss\Styles\Options\Layout;
 use DigitaleDinge\ContaoKiss\Styles\Options\Margin;
 use DigitaleDinge\ContaoKiss\Styles\Options\Padding;
+use DigitaleDinge\ContaoKiss\Styles\Options\Typography;
 
 class StylesVariable
 {
@@ -19,6 +20,11 @@ class StylesVariable
     public function getColumn(string $key): Layout\ColumnStyle
     {
         return new Layout\ColumnStyle($key);
+    }
+
+    public function getSize(string $key): Typography\SizeStyle
+    {
+        return new Typography\SizeStyle($key);
     }
 
     public function getBackground(string $key): Color\BackgroundStyle
