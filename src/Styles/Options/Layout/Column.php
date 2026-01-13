@@ -25,6 +25,6 @@ enum Column: string implements ClassOptionsInterface, TranslatableLabelInterface
 
     public function label(): TranslatableMessage
     {
-        return new TranslatableMessage('style_options.column_options.' . $this->name, [], 'style_options');
+        return new TranslatableMessage('style_options.layout.column.' . $this->name, [], 'style_options');
     }
 }

@@ -14,7 +14,7 @@ use DigitaleDinge\ContaoKiss\Styles\StyleOption;
  * @method string four
  * @method string five
  */
-class TopStyle extends StyleOption
+final class TopOption extends StyleOption
 {
     protected string $enumClass = Top::class;
 }

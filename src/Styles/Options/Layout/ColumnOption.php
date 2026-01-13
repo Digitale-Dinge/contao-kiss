@@ -20,7 +20,7 @@ use DigitaleDinge\ContaoKiss\Styles\StyleOption;
  * @method string eleven
  * @method string twelve
  */
-class ColumnStyle extends StyleOption
+final class ColumnOption extends StyleOption
 {
     protected string $enumClass = Column::class;
 }

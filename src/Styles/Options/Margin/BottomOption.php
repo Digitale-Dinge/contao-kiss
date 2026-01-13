@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Styles\Options\Padding;
+namespace DigitaleDinge\ContaoKiss\Styles\Options\Margin;
 
 use DigitaleDinge\ContaoKiss\Styles\StyleOption;
 
@@ -14,7 +14,7 @@ use DigitaleDinge\ContaoKiss\Styles\StyleOption;
  * @method string four
  * @method string five
  */
-class TopStyle extends StyleOption
+final class BottomOption extends StyleOption
 {
-    protected string $enumClass = Top::class;
+    protected string $enumClass = Bottom::class;
 }

@@ -13,7 +13,7 @@ use DigitaleDinge\ContaoKiss\Styles\StyleOption;
  * @method string full_pad
  * @method string full
  */
-class ContainerStyle extends StyleOption
+final class ContainerOption extends StyleOption
 {
     protected string $default = Container::base->name;
 

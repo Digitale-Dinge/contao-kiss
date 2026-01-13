@@ -14,7 +14,7 @@ use DigitaleDinge\ContaoKiss\Styles\StyleOption;
  * @method string additional_one
  * @method string additional_two
  */
-class BackgroundStyle extends StyleOption
+final class BackgroundOption extends StyleOption
 {
     public string $enumClass = Background::class;
 }
