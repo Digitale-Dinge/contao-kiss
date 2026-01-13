@@ -6,7 +6,7 @@ tl_content:
 
     headline:
         unit:                   Einheit
-        size:                   Größe
+        appearance:             Aussehen
 
     lightboxIframe:
         - 'Inhalt in iFrame öffnen'

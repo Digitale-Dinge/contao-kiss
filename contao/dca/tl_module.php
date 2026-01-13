@@ -18,9 +18,9 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['headline']['fields'] = [
         'inputType'       => 'select',
         'options'         => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
     ],
-    'size' => [
+    'appearance' => [
         'label'           => [
-            &$GLOBALS['TL_LANG']['tl_module']['headline']['size'], null
+            &$GLOBALS['TL_LANG']['tl_module']['headline']['appearance'], null
         ],
         'inputType'       => 'select',
         'eval'            => ['includeBlankOption' => true]

@@ -12,16 +12,24 @@ use DigitaleDinge\ContaoKiss\Styles\Options\Layout;
 use DigitaleDinge\ContaoKiss\Styles\Options\Margin;
 use DigitaleDinge\ContaoKiss\Styles\Options\Padding;
 use DigitaleDinge\ContaoKiss\Styles\Options\Typography;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class StyleOptionsListener
 {
     use TranslatableEnumTrait;
 
-    #[AsCallback('tl_content', 'fields.headline.fields.size.options')]
-    #[AsCallback('tl_module', 'fields.headline.fields.size.options')]
-    public function addHeadlineSizeOptions(): array
+    public function __construct(private readonly TranslatorInterface $translator)
     {
-        return $this->getTranslatedOptions(Typography\Size::class);
+    }
+
+    #[AsCallback('tl_content', 'fields.headline.fields.appearance.options')]
+    #[AsCallback('tl_module', 'fields.headline.fields.appearance.options')]
+    public function addHeadlineAppearanceOptions(): array
+    {
+        return [
+            $this->translator->trans('style_options.size', [], 'style_options') => $this->getTranslatedOptions(Typography\Size::class),
+            $this->translator->trans('style_options.heading', [], 'style_options') => $this->getTranslatedOptions(Typography\Heading::class),
+        ];
     }
 
     #[AsCallback('tl_article', 'fields.backgroundColor.options')]

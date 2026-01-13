@@ -600,6 +600,10 @@
         vertical-align: bottom;
         padding-bottom: 2px;
     }
+
+    #ctrl_headline[appearance] {
+        max-width: 80px;
+    }
 }
 
 @media (min-width: 769px) {
