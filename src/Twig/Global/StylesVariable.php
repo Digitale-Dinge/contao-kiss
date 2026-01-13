@@ -12,43 +12,48 @@ use DigitaleDinge\ContaoKiss\Styles\Options\Typography;
 
 class StylesVariable
 {
-    public function getContainer(string|null $key = null): Layout\ContainerStyle
+    public function getContainer(string|null $key = null): Layout\ContainerOption
     {
-        return new Layout\ContainerStyle($key);
+        return new Layout\ContainerOption($key);
     }
 
-    public function getColumn(string $key): Layout\ColumnStyle
+    public function getColumn(string $key): Layout\ColumnOption
     {
-        return new Layout\ColumnStyle($key);
+        return new Layout\ColumnOption($key);
     }
 
-    public function getSize(string $key): Typography\SizeStyle
+    public function getSize(string $key): Typography\SizeOption
     {
-        return new Typography\SizeStyle($key);
+        return new Typography\SizeOption($key);
     }
 
-    public function getBackground(string $key): Color\BackgroundStyle
+    public function getHeading(string $key): Typography\HeadingOption
     {
-        return new Color\BackgroundStyle($key);
+        return new Typography\HeadingOption($key);
     }
 
-    public function getMargin_top(string $key): Margin\TopStyle
+    public function getBackground(string $key): Color\BackgroundOption
     {
-        return new Margin\TopStyle($key);
+        return new Color\BackgroundOption($key);
     }
 
-    public function getMargin_bottom(string $key): Margin\BottomStyle
+    public function getMargin_top(string $key): Margin\TopOption
     {
-        return new Margin\BottomStyle($key);
+        return new Margin\TopOption($key);
     }
 
-    public function getPadding_top(string $key): Padding\TopStyle
+    public function getMargin_bottom(string $key): Margin\BottomOption
     {
-        return new Padding\TopStyle($key);
+        return new Margin\BottomOption($key);
     }
 
-    public function getPadding_bottom(string $key): Padding\BottomStyle
+    public function getPadding_top(string $key): Padding\TopOption
     {
-        return new Padding\BottomStyle($key);
+        return new Padding\TopOption($key);
+    }
+
+    public function getPadding_bottom(string $key): Padding\BottomOption
+    {
+        return new Padding\BottomOption($key);
     }
 }
