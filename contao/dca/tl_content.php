@@ -3,6 +3,30 @@
 declare(strict_types=1);
 
 //use Contao\CoreBundle\DataContainer\PaletteManipulator;
+$GLOBALS['TL_DCA']['tl_content']['fields']['headline']['inputType'] = 'collection';
+$GLOBALS['TL_DCA']['tl_content']['fields']['headline']['fields'] = [
+    'value' => [
+        'label'           => [
+            &$GLOBALS['TL_LANG']['tl_content']['headline'][0], null
+        ],
+        'inputType'       => 'text',
+        'eval'            => ['maxlength'=>200, 'basicEntities'=>true],
+    ],
+    'unit' => [
+        'label'           => [
+            &$GLOBALS['TL_LANG']['tl_content']['headline']['unit'], null
+        ],
+        'inputType'       => 'select',
+        'options'         => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+    ],
+    'size' => [
+        'label'           => [
+            &$GLOBALS['TL_LANG']['tl_content']['headline']['size'], null
+        ],
+        'inputType'       => 'select',
+        'eval'            => ['includeBlankOption' => true]
+    ]
+];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['topline'] = [
     'exclude'   => true,
