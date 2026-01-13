@@ -1,0 +1,8 @@
+tl_module:
+    headline:
+        unit: Unit
+        size: Size
+
+    topline:
+        - 'Topline'
+        - 'Displays an optional topline above the headline.'

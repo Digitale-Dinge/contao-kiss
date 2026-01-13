@@ -1,0 +1,8 @@
+tl_module:
+    headline:
+        unit: Einheit
+        size: Größe
+
+    topline:
+        - 'Dachzeile'
+        - 'Stellt eine optionale Dachzeile über der Headline dar'
