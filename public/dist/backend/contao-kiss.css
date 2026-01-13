@@ -583,6 +583,25 @@
 	}
 }
 
+.hl_collection {
+    > h3 {
+        display: none;
+    }
+
+    th:first-of-type {
+        font-size: .875rem;
+        height: 16px;
+        margin: 0;
+        padding-top: 13px;
+        font-weight: 600;
+    }
+
+    th:not(:first-of-type) {
+        vertical-align: bottom;
+        padding-bottom: 2px;
+    }
+}
+
 @media (min-width: 769px) {
 	.image-grid {
 		fieldset {

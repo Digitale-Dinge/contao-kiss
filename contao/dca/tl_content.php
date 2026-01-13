@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 //use Contao\CoreBundle\DataContainer\PaletteManipulator;
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['inputType'] = 'collection';
+$GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['tl_class'] = 'w50 clr hl_collection';
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['fields'] = [
     'value' => [
         'label'           => [
@@ -25,7 +26,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['fields'] = [
         ],
         'inputType'       => 'select',
         'eval'            => ['includeBlankOption' => true]
-    ]
+    ],
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['topline'] = [
