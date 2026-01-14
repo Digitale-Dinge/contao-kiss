@@ -20,6 +20,7 @@
     "require": {
         "php": "^8.3",
         "contao/core-bundle": "^5.7",
+        "digitaledinge/contao-company": "@dev",
         "madeyourday/contao-rocksolid-custom-elements": "^2.4.10",
         "lukasbableck/contao-svg-icon-picker-bundle": "^1.0",
         "oveleon/contao-component-style-manager": "^3.9.6",

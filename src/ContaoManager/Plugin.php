@@ -8,8 +8,8 @@ use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
+use DigitaleDinge\CompanyBundle\DigitaleDingeCompanyBundle;
 use DigitaleDinge\ContaoKiss\DigitaleDingeContaoKissBundle;
-use Oveleon\ContaoCompanyBundle\ContaoCompanyBundle;
 
 class Plugin implements BundlePluginInterface
 {
@@ -19,7 +19,7 @@ class Plugin implements BundlePluginInterface
             (new BundleConfig(DigitaleDingeContaoKissBundle::class))
                 ->setLoadAfter([
                     ContaoCoreBundle::class,
-                    ContaoCompanyBundle::class,
+                    DigitaleDingeCompanyBundle::class,
                 ]),
         ];
     }

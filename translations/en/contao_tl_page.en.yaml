@@ -1,5 +1,0 @@
-tl_page:
-    kiss_company_legend: Company settings
-    kiss_company:
-        - Company
-        - Here you can select the company for which the website data should be provided.

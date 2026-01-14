@@ -493,51 +493,6 @@
 	zoom: 0.5;
 }
 
-/** KISS opening times widget */
-.kiss_opening_times {
-	margin: .5rem 0;
-
-	.tl_text {
-		text-align: center;
-		height: 26px;
-		padding: 2px 6px;
-		margin: 1px 0;
-	}
-
-	thead {
-		th:first-child {
-			opacity: .5;
-		}
-	}
-
-	tbody {
-		th {
-			vertical-align: bottom;
-			line-height: 30px;
-		}
-
-		tr:first-child,
-		tr:nth-child(6) {
-			.tl_text {
-				margin-top: .5rem;
-			}
-		}
-	}
-
-	th:nth-child(4),
-	td:nth-child(4) {
-		padding-left: .5rem;
-	}
-
-	th:first-child {
-		padding-right: .5rem;
-	}
-
-	th:not(:first-child) {
-		text-align: center;
-	}
-}
-
 .tl_select {
 
 	&.widget-icon {
