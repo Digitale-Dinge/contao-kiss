@@ -1,7 +1,7 @@
 <div{{ attrs(header_main_attributes|default).addClass(['header-main', 'relative', 'py-8', 'text-sm']) }}>
     <div{{ attrs(header_main_inside_attributes|default).addClass(['inside', 'flex', 'gap-x-4', 'items-center', 'justify-between', styles.container]) }}>
         {{ include('@Contao/company/logo.html.twig', {
-            logo_classes: 'header-logo',
+            logo_class: 'header-logo',
         }) }}
         {{ frontend_module('navigation', {
             levelOffset: 0,
