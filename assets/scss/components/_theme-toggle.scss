@@ -1,0 +1,158 @@
+/**
+ * Animated Sun/Moon Theme Toggle
+ * 
+ * Custom SCSS for the theme toggle component.
+ * Use with the Twig template: @Contao/partials/components/_theme-toggle.html.twig
+ * 
+ * Features:
+ * - Sun to moon morphing animation
+ * - Spring-like easing curves
+ * - Wiggle hover effect
+ * - Respects light/dark mode
+ */
+
+// Spring-like easing curves
+$spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$spring-smooth: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+.theme-toggle {
+  // Reset button styles
+  appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: currentColor;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible; // Don't clip spring animation overshoot
+  
+  // Light mode: wiggle from 0deg
+  &:hover .theme-toggle__icon {
+    animation: wiggle-sun 0.4s ease-out;
+  }
+  
+  // Dark mode: wiggle from -45deg base
+  .dark &:hover .theme-toggle__icon {
+    animation: wiggle-moon 0.4s ease-out;
+  }
+  
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+}
+
+// Wiggle for sun (base rotation: 0deg)
+@keyframes wiggle-sun {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-5deg); }
+  40% { transform: rotate(5deg); }
+  60% { transform: rotate(-3deg); }
+  80% { transform: rotate(3deg); }
+}
+
+// Wiggle for moon (base rotation: -45deg) - more extreme
+@keyframes wiggle-moon {
+  0%, 100% { transform: rotate(-45deg); }
+  20% { transform: rotate(-57deg); }
+  40% { transform: rotate(-33deg); }
+  60% { transform: rotate(-53deg); }
+  80% { transform: rotate(-37deg); }
+}
+
+.theme-toggle__icon {
+  display: block;
+  transform-origin: center;
+  transition: transform 0.5s $spring-bounce;
+  overflow: visible; // Allow rays to extend beyond viewBox during spring animation
+  
+  // Slight rotation on dark mode
+  .dark & {
+    transform: rotate(-45deg);
+  }
+}
+
+.theme-toggle__rays {
+  transform-origin: center;
+  transition: 
+    transform 0.4s $spring-smooth,
+    opacity 0.3s ease;
+  
+  line {
+    stroke: currentColor;
+  }
+  
+  // Light mode: rays visible
+  transform: scale(1);
+  opacity: 1;
+  
+  // Dark mode: rays hidden and scaled down
+  .dark & {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.theme-toggle__circle {
+  transform-origin: center;
+  transition: transform 0.5s $spring-bounce;
+  
+  // Light mode: normal sun size
+  transform: scale(1);
+  
+  // Dark mode: slightly larger moon (scale affects mask alignment, keep subtle)
+  .dark & {
+    transform: scale(1.1);
+  }
+}
+
+.theme-toggle__mask {
+  transition: transform 0.5s $spring-bounce;
+  
+  // Light mode: mask pushed off to the right (full sun visible)
+  transform: translateX(20px);
+  
+  // Dark mode: mask slides in from right to cut right side of circle
+  .dark & {
+    transform: translateX(0);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Alternative: Simple sun/moon icon swap (if you prefer separate icons)
+// ─────────────────────────────────────────────────────────────────────────────
+
+.theme-toggle--simple {
+  .theme-toggle__sun,
+  .theme-toggle__moon {
+    transition: 
+      transform 0.3s $spring-bounce,
+      opacity 0.2s ease;
+  }
+  
+  .theme-toggle__sun {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  
+  .theme-toggle__moon {
+    position: absolute;
+    transform: scale(0.5) rotate(-90deg);
+    opacity: 0;
+  }
+  
+  .dark & {
+    .theme-toggle__sun {
+      transform: scale(0.5) rotate(90deg);
+      opacity: 0;
+    }
+    
+    .theme-toggle__moon {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+    }
+  }
+}
