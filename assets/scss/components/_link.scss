@@ -147,8 +147,45 @@
     }
     
     // Remove underline completely
+    // When combined with color variants: base text → color on hover
     &-underline-none {
       @apply no-underline;
+      
+      // Color variants with underline-none: base text → color on hover
+      &.link-primary {
+        @apply text-base-content;
+        &:hover { @apply text-primary; }
+      }
+      
+      &.link-secondary {
+        @apply text-base-content;
+        &:hover { @apply text-secondary; }
+      }
+      
+      &.link-accent {
+        @apply text-base-content;
+        &:hover { @apply text-accent; }
+      }
+      
+      &.link-info {
+        @apply text-base-content;
+        &:hover { @apply text-info; }
+      }
+      
+      &.link-success {
+        @apply text-base-content;
+        &:hover { @apply text-success; }
+      }
+      
+      &.link-warning {
+        @apply text-base-content;
+        &:hover { @apply text-warning; }
+      }
+      
+      &.link-error {
+        @apply text-base-content;
+        &:hover { @apply text-error; }
+      }
     }
     
     /* ============================================ */
