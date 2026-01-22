@@ -1,0 +1,168 @@
+/**
+ * KISS Breadcrumb Component (V5.0)
+ * 
+ * A responsive breadcrumb navigation with threshold-based collapsing.
+ * Uses popover component for the dropdown menu.
+ * 
+ * Base: .breadcrumb or .mod_breadcrumb
+ * Sizes: breadcrumb-{xs|sm|lg|xl}
+ * Colors: breadcrumb-{primary|secondary|accent|info|success|warning|error}
+ * 
+ * Collapsible: Add data-controller="breadcrumb" and mark items with data-breadcrumb-target="item"
+ * Configuration:
+ *   data-breadcrumb-max-items-value="5" - Collapse if more than N collapsible items
+ * 
+ * Responsive: CSS variable --breadcrumb-force-collapse: 1 forces collapse at <640px
+ */
+
+@layer components {
+  // ============================================
+  // BASE BREADCRUMB
+  // ============================================
+  .breadcrumb,
+  .mod_breadcrumb {
+    @apply flex items-center flex-wrap;
+    @apply text-sm;
+    
+    // CSS variable for responsive force-collapse (read by JS)
+    --breadcrumb-force-collapse: 0;
+    
+    // Force collapse on small screens
+    @media (max-width: theme('screens.sm')) {
+      --breadcrumb-force-collapse: 1;
+    }
+
+    ol, ul {
+      @apply flex items-center flex-wrap;
+      @apply m-0 p-0 list-none;
+    }
+
+    li {
+      @apply flex items-center;
+      @apply m-0 p-0;
+    }
+
+    a {
+      @apply text-base-content/70 no-underline transition-colors;
+      
+      &:hover {
+        @apply text-primary;
+      }
+    }
+
+    .breadcrumb-separator {
+      @apply text-base-content/40 mx-2 select-none flex items-center;
+      
+      svg {
+        @apply size-3;
+      }
+    }
+
+    li[aria-current="page"] a,
+    li.active a {
+      @apply text-base-content;
+    }
+
+    // ============================================
+    // ELLIPSIS (uses popover for dropdown)
+    // ============================================
+    .breadcrumb-ellipsis {
+      @apply relative flex items-center;
+    }
+
+    .breadcrumb-ellipsis-btn {
+      @apply inline-flex items-center justify-center;
+      @apply px-1;
+      @apply text-base-content/70;
+      @apply bg-transparent;
+      @apply transition-colors duration-200;
+      @apply cursor-pointer border-0;
+      @apply leading-none;
+      @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:rounded;
+
+      svg {
+        @apply size-4;
+      }
+
+      &:hover {
+        @apply text-primary;
+      }
+    }
+
+    .breadcrumb-dropdown {
+      @apply min-w-40;
+    }
+
+    // ============================================
+    // COLOR VARIANTS (override default primary hover)
+    // ============================================
+    &-secondary a:hover,
+    &-secondary .breadcrumb-ellipsis-btn:hover { @apply text-secondary; }
+    
+    &-accent a:hover,
+    &-accent .breadcrumb-ellipsis-btn:hover { @apply text-accent; }
+    
+    &-info a:hover,
+    &-info .breadcrumb-ellipsis-btn:hover { @apply text-info; }
+    
+    &-success a:hover,
+    &-success .breadcrumb-ellipsis-btn:hover { @apply text-success; }
+    
+    &-warning a:hover,
+    &-warning .breadcrumb-ellipsis-btn:hover { @apply text-warning; }
+    
+    &-error a:hover,
+    &-error .breadcrumb-ellipsis-btn:hover { @apply text-error; }
+
+    // ============================================
+    // SIZE VARIANTS
+    // ============================================
+    &-xs {
+      @apply text-xs;
+      .breadcrumb-separator { @apply mx-1; svg { @apply size-2.5; } }
+      .breadcrumb-ellipsis-btn svg { @apply size-3; }
+      .breadcrumb-dropdown .dropdown-item { @apply text-xs py-1 px-2; }
+    }
+
+    &-sm {
+      @apply text-sm;
+      .breadcrumb-separator { @apply mx-1.5; svg { @apply size-2.5; } }
+      .breadcrumb-ellipsis-btn svg { @apply size-3.5; }
+      .breadcrumb-dropdown .dropdown-item { @apply text-sm py-1.5 px-2.5; }
+    }
+
+    &-lg {
+      @apply text-base;
+      .breadcrumb-separator { @apply mx-2.5; svg { @apply size-4; } }
+      .breadcrumb-ellipsis-btn svg { @apply size-5; }
+      .breadcrumb-dropdown .dropdown-item { @apply text-base py-2.5 px-4; }
+    }
+
+    &-xl {
+      @apply text-lg;
+      .breadcrumb-separator { @apply mx-3; svg { @apply size-5; } }
+      .breadcrumb-ellipsis-btn svg { @apply size-6; }
+      .breadcrumb-dropdown .dropdown-item { @apply text-lg py-3 px-5; }
+    }
+  }
+
+  // ============================================
+  // HOME ICON VARIANT
+  // ============================================
+  .breadcrumb-home-icon,
+  .mod_breadcrumb.breadcrumb-home-icon {
+    li:first-child a {
+      @apply flex items-center gap-1;
+
+      @media (max-width: 639px) {
+        span:not(.breadcrumb-icon) {
+          @apply sr-only;
+        }
+      }
+    }
+  }
+
+  .breadcrumb-icon {
+    @apply size-4 shrink-0;
+  }
+}

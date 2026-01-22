@@ -1,0 +1,188 @@
+/**
+ * KISS Popover Component (V1.2)
+ * 
+ * A simple popover component for dropdowns, tooltips, and menus.
+ * Uses absolute positioning to stick to trigger on scroll.
+ * Works with the popover Stimulus controller.
+ * 
+ * Base: .popover-content
+ * Sizes: popover-{sm|lg}
+ * Presets: popover-dropdown, popover-tooltip
+ * 
+ * Example:
+ *   <div data-controller="popover" class="relative">
+ *     <button data-popover-target="trigger" data-action="click->popover#toggle">Open</button>
+ *     <div data-popover-target="content" class="popover-content">
+ *       Content here...
+ *     </div>
+ *   </div>
+ */
+
+@layer components {
+  // ============================================
+  // BASE POPOVER
+  // ============================================
+  .popover-content {
+    // Hidden state (default) - absolute so it sticks to parent
+    @apply absolute z-50;
+    @apply opacity-0 invisible;
+    @apply scale-95;
+    @apply transition-all duration-150 ease-out;
+    @apply pointer-events-none;
+    
+    // Container styling
+    @apply min-w-[8rem] max-w-[calc(100vw-2rem)];
+    @apply p-4;
+    @apply bg-base-100 text-base-content;
+    @apply rounded-lg;
+    @apply shadow-xl;
+    @apply border border-base-300;
+    
+    // Transform origin (updated by JS based on placement)
+    transform-origin: center top;
+    
+    // Open state
+    &.popover-open,
+    &[data-state="open"] {
+      @apply opacity-100 visible;
+      @apply scale-100;
+      @apply pointer-events-auto;
+    }
+    
+    // ============================================
+    // PLACEMENT (transform-origin for animation)
+    // ============================================
+    &.popover-top { transform-origin: center bottom; }
+    &.popover-bottom { transform-origin: center top; }
+    &.popover-left { transform-origin: right center; }
+    &.popover-right { transform-origin: left center; }
+    
+    // ============================================
+    // SIZE VARIANTS
+    // ============================================
+    &.popover-xs {
+      @apply min-w-[6rem] p-2 text-xs rounded;
+    }
+    
+    &.popover-sm {
+      @apply min-w-[7rem] p-3 text-sm rounded-md;
+    }
+    
+    &.popover-lg {
+      @apply min-w-[10rem] p-5 text-base rounded-xl;
+    }
+    
+    &.popover-xl {
+      @apply min-w-[12rem] p-6 text-lg rounded-2xl;
+    }
+  }
+  
+  // ============================================
+  // ARROW (optional)
+  // JS positions the arrow dynamically via left/top
+  // ============================================
+  .popover-arrow {
+    @apply absolute pointer-events-none;
+    width: 12px;
+    height: 12px;
+    
+    &::before {
+      content: '';
+      @apply absolute inset-0;
+      @apply bg-base-100 border border-base-300;
+      @apply rotate-45;
+    }
+  }
+  
+  // Arrow positioning based on placement
+  .popover-content {
+    // Bottom: arrow at top edge, pointing up
+    &.popover-bottom .popover-arrow {
+      top: -7px;
+      &::before { @apply border-b-0 border-r-0; }
+    }
+    
+    // Top: arrow at bottom edge, pointing down
+    &.popover-top .popover-arrow {
+      bottom: -7px;
+      &::before { @apply border-t-0 border-l-0; }
+    }
+    
+    // Left: arrow at right edge, pointing right
+    &.popover-left .popover-arrow {
+      right: -7px;
+      &::before { @apply border-b-0 border-l-0; }
+    }
+    
+    // Right: arrow at left edge, pointing left
+    &.popover-right .popover-arrow {
+      left: -7px;
+      &::before { @apply border-t-0 border-r-0; }
+    }
+  }
+  
+  // ============================================
+  // DROPDOWN PRESET
+  // ============================================
+  .popover-content.popover-dropdown {
+    @apply p-1.5 min-w-[10rem];
+  }
+  
+  // ============================================
+  // TOOLTIP PRESET
+  // ============================================
+  .popover-content.popover-tooltip {
+    @apply p-2 px-3 min-w-0 text-xs rounded;
+    @apply bg-base-200 text-base-content border-base-200;
+    
+    .popover-arrow::before {
+      @apply bg-base-200 border-base-200;
+    }
+  }
+  
+  // ============================================
+  // DROPDOWN MENU ITEMS
+  // ============================================
+  .dropdown-menu {
+    @apply flex flex-col list-none m-0 p-0;
+  }
+  
+  .dropdown-item {
+    @apply flex items-center gap-2;
+    @apply w-full px-3 py-2;
+    @apply text-sm text-base-content;
+    @apply hover:bg-base-200;
+    @apply rounded cursor-pointer select-none;
+    @apply transition-colors duration-150;
+    @apply no-underline border-0 bg-transparent;
+    @apply focus-visible:outline-none focus-visible:bg-base-200;
+    
+    // Active state
+    &.active,
+    &[aria-selected="true"] {
+      @apply bg-primary/10 text-primary;
+    }
+    
+    // Disabled state
+    &[disabled],
+    &[aria-disabled="true"] {
+      @apply opacity-50 cursor-not-allowed pointer-events-none;
+    }
+    
+    // Icon
+    svg { @apply size-4 opacity-70; }
+    
+    // Shortcut hint
+    .dropdown-item-shortcut {
+      @apply ml-auto text-xs text-base-content/50;
+    }
+  }
+  
+  .dropdown-separator {
+    @apply my-1.5 -mx-1.5 h-px bg-base-300;
+  }
+  
+  .dropdown-label {
+    @apply px-3 py-1.5 text-xs font-medium text-base-content/50 uppercase tracking-wider;
+  }
+}
