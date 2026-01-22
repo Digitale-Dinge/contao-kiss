@@ -1,14 +1,14 @@
 import { Controller } from '@hotwired/stimulus';
 
 /**
- * Breadcrumb Controller (V1.0)
+ * Breadcrumb Controller (V1.1)
  * 
  * Simple threshold-based collapsing. When collapsed, ALL items marked with
  * data-breadcrumb-target="item" are hidden and shown in a dropdown.
  * 
- * Collapse triggers:
- * 1. Marked item count > maxItems (configurable via data attribute)
- * 2. Viewport width < breakpoint (configurable, default 640px)
+ * Collapse triggers (checked once on page load):
+ * 1. Viewport width < breakpoint (default 640px)
+ * 2. Marked item count > maxItems (default 4)
  * 
  * HTML Structure:
  *   - Items WITHOUT data-breadcrumb-target: Always visible (Home, Current Page, etc.)
@@ -17,19 +17,17 @@ import { Controller } from '@hotwired/stimulus';
  * Usage:
  *   <nav class="breadcrumb" data-controller="breadcrumb" aria-label="Breadcrumb">
  *     <ol data-breadcrumb-target="list">
- *       <li><a href="/">Home</a></li>                              <!-- Always visible -->
+ *       <li><a href="/">Home</a></li>
  *       <li class="breadcrumb-separator">...</li>
- *       <li data-breadcrumb-target="item"><a href="/a">A</a></li>  <!-- Collapsible -->
+ *       <li data-breadcrumb-target="item"><a href="/a">A</a></li>
  *       <li class="breadcrumb-separator">...</li>
- *       <li data-breadcrumb-target="item"><a href="/b">B</a></li>  <!-- Collapsible -->
- *       <li class="breadcrumb-separator">...</li>
- *       <li aria-current="page"><a href="/c">Current</a></li>      <!-- Always visible -->
+ *       <li aria-current="page"><a href="/c">Current</a></li>
  *     </ol>
  *   </nav>
  * 
  * Configuration:
- *   data-breadcrumb-max-items-value="4"   - Collapse when MORE than N marked items (default: 4)
- *   data-breadcrumb-breakpoint-value="640" - Force collapse below this width in px (default: 640)
+ *   data-breadcrumb-max-items-value="4"    - Collapse when MORE than N items (default: 4)
+ *   data-breadcrumb-breakpoint-value="640" - Force collapse below this width (default: 640)
  */
 export default class extends Controller {
     static targets = ['list', 'item'];
@@ -39,85 +37,61 @@ export default class extends Controller {
     };
 
     connect() {
-        this.isCollapsed = false;
-        this.ellipsisElement = null;
-        this.ellipsisSeparator = null;
+        // Early exit if no list or no collapsible items
+        if (!this.hasListTarget || this.itemTargets.length === 0) return;
         
-        // Check once on page load (no resize listener - refresh to update)
-        this.update();
-    }
-
-    disconnect() {
-        this.removeEllipsis();
-    }
-
-    update() {
-        if (!this.hasListTarget) return;
+        // Check once on page load - collapse if below breakpoint OR too many items
+        const shouldCollapse = 
+            window.innerWidth < this.breakpointValue || 
+            this.itemTargets.length > this.maxItemsValue;
         
-        const items = this.itemTargets;
-        if (items.length === 0) return;
-        
-        const shouldCollapse = this.shouldCollapse(items.length);
-        
-        if (shouldCollapse && !this.isCollapsed) {
+        if (shouldCollapse) {
             this.collapse();
-        } else if (!shouldCollapse && this.isCollapsed) {
-            this.expand();
         }
     }
 
-    shouldCollapse(itemCount) {
-        // Check viewport width against breakpoint (pure JS, no CSS dependency)
-        if (window.innerWidth < this.breakpointValue) return true;
-        
-        // Check item count threshold
-        return itemCount > this.maxItemsValue;
+    disconnect() {
+        this.ellipsisElement?.remove();
+        this.ellipsisSeparator?.remove();
     }
 
     collapse() {
         const items = this.itemTargets;
-        if (items.length === 0) return;
+        const dropdownLinks = [];
         
-        this.isCollapsed = true;
-        
-        // Hide ALL marked items and their preceding separators
+        // Hide items and collect links for dropdown (single loop)
         items.forEach(item => {
             item.style.display = 'none';
+            
+            // Hide preceding separator
             const prev = item.previousElementSibling;
-            if (prev?.classList.contains('breadcrumb-separator') &&
-                !prev.classList.contains('breadcrumb-ellipsis-separator')) {
+            if (prev?.classList.contains('breadcrumb-separator')) {
                 prev.style.display = 'none';
             }
+            
+            // Collect link for dropdown
+            const link = item.querySelector('a');
+            if (link) dropdownLinks.push(link);
         });
         
-        this.createEllipsis();
-        this.populateDropdown();
+        // Create and insert ellipsis
+        this.createEllipsis(dropdownLinks);
     }
 
-    expand() {
-        this.isCollapsed = false;
-        
-        // Show all items and their preceding separators
-        this.itemTargets.forEach(item => {
-            item.style.display = '';
-            const prev = item.previousElementSibling;
-            if (prev?.classList.contains('breadcrumb-separator') &&
-                !prev.classList.contains('breadcrumb-ellipsis-separator')) {
-                prev.style.display = '';
-            }
-        });
-        
-        this.removeEllipsis();
-    }
-
-    createEllipsis() {
-        if (this.ellipsisElement) return;
-        
+    createEllipsis(links) {
         // Create separator
         this.ellipsisSeparator = document.createElement('li');
         this.ellipsisSeparator.className = 'breadcrumb-separator breadcrumb-ellipsis-separator';
         this.ellipsisSeparator.setAttribute('aria-hidden', 'true');
         this.ellipsisSeparator.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>`;
+        
+        // Build dropdown menu HTML
+        const menuItems = links.map(link => {
+            const clone = link.cloneNode(true);
+            clone.className = 'dropdown-item';
+            clone.setAttribute('role', 'menuitem');
+            return clone.outerHTML;
+        }).join('');
         
         // Create ellipsis with popover
         this.ellipsisElement = document.createElement('li');
@@ -134,21 +108,15 @@ export default class extends Controller {
                 </svg>
             </button>
             <div data-popover-target="content" class="popover-content popover-dropdown breadcrumb-dropdown">
-                <nav class="dropdown-menu" role="menu"></nav>
+                <nav class="dropdown-menu" role="menu">${menuItems}</nav>
             </div>
         `;
         
-        this.dropdownMenu = this.ellipsisElement.querySelector('.dropdown-menu');
-        
-        // Insert after the first non-separator item (typically Home)
-        let insertAfter = this.listTarget.querySelector('li:not(.breadcrumb-separator)');
-        
-        // Skip past separator if present
-        const next = insertAfter?.nextElementSibling;
-        if (next?.classList.contains('breadcrumb-separator') &&
-            !next.classList.contains('breadcrumb-ellipsis-separator')) {
-            insertAfter = next;
-        }
+        // Insert after first visible item (Home) and its separator
+        const firstItem = this.listTarget.querySelector('li:not(.breadcrumb-separator)');
+        const insertAfter = firstItem?.nextElementSibling?.classList.contains('breadcrumb-separator')
+            ? firstItem.nextElementSibling
+            : firstItem;
         
         if (insertAfter?.nextSibling) {
             this.listTarget.insertBefore(this.ellipsisSeparator, insertAfter.nextSibling);
@@ -157,29 +125,5 @@ export default class extends Controller {
             this.listTarget.appendChild(this.ellipsisSeparator);
             this.listTarget.appendChild(this.ellipsisElement);
         }
-    }
-
-    removeEllipsis() {
-        this.ellipsisElement?.remove();
-        this.ellipsisSeparator?.remove();
-        this.ellipsisElement = null;
-        this.ellipsisSeparator = null;
-        this.dropdownMenu = null;
-    }
-
-    populateDropdown() {
-        if (!this.dropdownMenu) return;
-        this.dropdownMenu.innerHTML = '';
-        
-        // Clone links from all hidden items
-        this.itemTargets.forEach(item => {
-            const link = item.querySelector('a');
-            if (link) {
-                const clone = link.cloneNode(true);
-                clone.className = 'dropdown-item';
-                clone.setAttribute('role', 'menuitem');
-                this.dropdownMenu.appendChild(clone);
-            }
-        });
     }
 }
