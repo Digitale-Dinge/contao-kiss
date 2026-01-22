@@ -8,7 +8,7 @@ import { Controller } from '@hotwired/stimulus';
  * 
  * Collapse triggers:
  * 1. Marked item count > maxItems (configurable via data attribute)
- * 2. CSS variable --breadcrumb-force-collapse: 1 (responsive, set via CSS)
+ * 2. Viewport width < breakpoint (configurable, default 640px)
  * 
  * HTML Structure:
  *   - Items WITHOUT data-breadcrumb-target: Always visible (Home, Current Page, etc.)
@@ -28,12 +28,14 @@ import { Controller } from '@hotwired/stimulus';
  *   </nav>
  * 
  * Configuration:
- *   data-breadcrumb-max-items-value="5" - Collapse when MORE than N marked items
+ *   data-breadcrumb-max-items-value="4"   - Collapse when MORE than N marked items (default: 4)
+ *   data-breadcrumb-breakpoint-value="640" - Force collapse below this width in px (default: 640)
  */
 export default class extends Controller {
     static targets = ['list', 'item'];
     static values = {
-        maxItems: { type: Number, default: 5 }
+        maxItems: { type: Number, default: 4 },
+        breakpoint: { type: Number, default: 640 }
     };
 
     connect() {
@@ -65,11 +67,8 @@ export default class extends Controller {
     }
 
     shouldCollapse(itemCount) {
-        // Check CSS variable for responsive force-collapse
-        const cssForce = getComputedStyle(this.element)
-            .getPropertyValue('--breadcrumb-force-collapse').trim();
-        
-        if (cssForce === '1') return true;
+        // Check viewport width against breakpoint (pure JS, no CSS dependency)
+        if (window.innerWidth < this.breakpointValue) return true;
         
         // Check item count threshold
         return itemCount > this.maxItemsValue;
