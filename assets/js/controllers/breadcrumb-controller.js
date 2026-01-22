@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 /**
- * Breadcrumb Controller (V5.0)
+ * Breadcrumb Controller (V1.0)
  * 
  * Simple threshold-based collapsing. When collapsed, ALL items marked with
  * data-breadcrumb-target="item" are hidden and shown in a dropdown.

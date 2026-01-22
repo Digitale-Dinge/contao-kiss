@@ -1,5 +1,5 @@
 {#
-  KISS Breadcrumb Component v5.0
+  KISS Breadcrumb Component v1.0
   ==============================
   A configurable breadcrumb component with size, color, and separator options.
   
@@ -28,10 +28,10 @@
 {# ============================================================================
    CONFIGURATION DEFAULTS
    ============================================================================ #}
-{% set breadcrumb_size = breadcrumb_size|default(null) %}
-{% set breadcrumb_color = breadcrumb_color|default(null) %}
+{% set breadcrumb_size = breadcrumb_size|default %}
+{% set breadcrumb_color = breadcrumb_color|default %}
 {% set separator_type = separator_type|default('chevron') %}
-{% set separator_custom = separator_custom|default(null) %}
+{% set separator_custom = separator_custom|default %}
 {% set max_items = max_items|default(4) %}
 {% set collapsible = collapsible|default(true) %}
 

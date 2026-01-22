@@ -1,12 +1,12 @@
 /**
- * KISS Popover Component (V1.2)
+ * KISS Popover Component (V1.0)
  * 
  * A simple popover component for dropdowns, tooltips, and menus.
  * Uses absolute positioning to stick to trigger on scroll.
  * Works with the popover Stimulus controller.
  * 
  * Base: .popover-content
- * Sizes: popover-{sm|lg}
+ * Sizes: popover-{xs|sm|lg|xl} (text-base is default)
  * Presets: popover-dropdown, popover-tooltip
  * 
  * Example:
