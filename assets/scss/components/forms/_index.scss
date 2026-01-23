@@ -4,15 +4,13 @@
  * Import this single file to get all form components.
  */
 
-// Core form parts
+
 @use "label";
 @use "input";
 @use "textarea";
-
-// Additional form components (placeholders for now)
 @use "select";
 @use "checkbox";
 @use "radio";
 @use "switch";
 @use "range";
-@use "fieldset";
+@use "input-number";
