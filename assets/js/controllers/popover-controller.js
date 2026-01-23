@@ -69,6 +69,7 @@ export default class extends Controller {
     }
 
     disconnect() {
+        this.cancelClose();
         this.removeListeners();
         
         // Clean up hover listeners
@@ -128,9 +129,12 @@ export default class extends Controller {
         // Reset positioning
         Object.assign(content.style, { position: 'absolute', top: '', bottom: '', left: '', right: '' });
 
-        // Get measurements
+        // Get trigger measurements
         const triggerRect = trigger.getBoundingClientRect();
-        const { offsetWidth: tW, offsetHeight: tH, offsetLeft: tL, offsetTop: tT } = trigger;
+        const triggerWidth = trigger.offsetWidth;
+        const triggerHeight = trigger.offsetHeight;
+        const triggerLeft = trigger.offsetLeft;
+        const triggerTop = trigger.offsetTop;
         
         // Measure content
         const wasOpen = content.classList.contains('popover-open');
@@ -138,7 +142,8 @@ export default class extends Controller {
             Object.assign(content.style, { visibility: 'hidden', opacity: '0' });
             content.classList.add('popover-open');
         }
-        const { offsetWidth: cW, offsetHeight: cH } = content;
+        const contentWidth = content.offsetWidth;
+        const contentHeight = content.offsetHeight;
         if (!wasOpen) {
             content.classList.remove('popover-open');
             Object.assign(content.style, { visibility: '', opacity: '' });
@@ -147,7 +152,7 @@ export default class extends Controller {
         // Determine placement (with flip)
         let placement = this.placementValue;
         if (flip) {
-            placement = this.getFlippedPlacement(placement, triggerRect, cW, cH, offset);
+            placement = this.getFlippedPlacement(placement, triggerRect, contentWidth, contentHeight, offset);
         }
 
         // Calculate position
@@ -157,24 +162,34 @@ export default class extends Controller {
         if (isVertical) {
             // Vertical: set top/bottom, align horizontally
             if (placement === 'top') {
-                content.style.bottom = `${tH + offset}px`;
+                content.style.bottom = `${triggerHeight + offset}px`;
                 content.style.top = 'auto';
             } else {
-                top = tT + tH + offset;
+                top = triggerTop + triggerHeight + offset;
                 content.style.top = `${top}px`;
             }
-            left = this.clampToViewport(this.getAlignedPos(alignment, tL, tW, cW), cW, triggerRect.left - tL, true);
+            left = this.clampToViewport(
+                this.getAlignedPos(alignment, triggerLeft, triggerWidth, contentWidth),
+                contentWidth,
+                triggerRect.left - triggerLeft,
+                true
+            );
             content.style.left = `${left}px`;
         } else {
             // Horizontal: set left/right, align vertically
             if (placement === 'left') {
-                content.style.right = `${tW + offset}px`;
+                content.style.right = `${triggerWidth + offset}px`;
                 content.style.left = 'auto';
             } else {
-                left = tL + tW + offset;
+                left = triggerLeft + triggerWidth + offset;
                 content.style.left = `${left}px`;
             }
-            top = this.clampToViewport(this.getAlignedPos(alignment, tT, tH, cH), cH, triggerRect.top - tT, false);
+            top = this.clampToViewport(
+                this.getAlignedPos(alignment, triggerTop, triggerHeight, contentHeight),
+                contentHeight,
+                triggerRect.top - triggerTop,
+                false
+            );
             content.style.top = `${top}px`;
         }
 
@@ -184,7 +199,7 @@ export default class extends Controller {
 
         // Position arrow
         if (this.hasArrowTarget) {
-            this.positionArrow(placement, tL, tT, tW, tH, cW, cH, left, top);
+            this.positionArrow(placement, triggerLeft, triggerTop, triggerWidth, triggerHeight, contentWidth, contentHeight, left, top);
         }
     }
 
@@ -228,7 +243,7 @@ export default class extends Controller {
         return flip[placement] || placement;
     }
 
-    positionArrow(placement, tL, tT, tW, tH, cW, cH, contentLeft, contentTop) {
+    positionArrow(placement, triggerLeft, triggerTop, triggerWidth, triggerHeight, contentWidth, contentHeight, contentLeft, contentTop) {
         const arrow = this.arrowTarget;
         const size = 12;
         const min = 12;
@@ -236,11 +251,11 @@ export default class extends Controller {
         Object.assign(arrow.style, { left: '', right: '', top: '', bottom: '' });
 
         if (placement === 'top' || placement === 'bottom') {
-            const center = tL + tW / 2 - (contentLeft ?? 0) - size / 2;
-            arrow.style.left = `${Math.max(min, Math.min(center, cW - size - min))}px`;
+            const center = triggerLeft + triggerWidth / 2 - (contentLeft ?? 0) - size / 2;
+            arrow.style.left = `${Math.max(min, Math.min(center, contentWidth - size - min))}px`;
         } else {
-            const center = tT + tH / 2 - (contentTop ?? 0) - size / 2;
-            arrow.style.top = `${Math.max(min, Math.min(center, cH - size - min))}px`;
+            const center = triggerTop + triggerHeight / 2 - (contentTop ?? 0) - size / 2;
+            arrow.style.top = `${Math.max(min, Math.min(center, contentHeight - size - min))}px`;
         }
     }
 

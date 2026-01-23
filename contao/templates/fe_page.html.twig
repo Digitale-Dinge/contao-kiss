@@ -3,39 +3,7 @@
 {% set bodyAttributes = attrs(bodyAttributes|default).addClass(['text-base', 'bg-base-100', 'text-base-content', 'min-h-screen']) %}
 
 {% block head %}
-    {# Theme initialization - runs before CSS to prevent flash of wrong theme #}
-    <script>
-    (function() {
-        var STORAGE_KEY = 'theme';
-        var ROOT = document.documentElement;
-        
-        // All available themes (add more here: 'high-contrast', 'sepia', etc.)
-        var THEMES = ['light', 'dark'];
-        
-        // Get stored mode: could be a theme name or 'system'
-        var mode = localStorage.getItem(STORAGE_KEY) || 'system';
-        
-        // Resolve the actual theme to apply
-        var theme;
-        if (mode === 'system') {
-            // Use OS preference
-            theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        } else if (THEMES.includes(mode)) {
-            // Direct theme selection
-            theme = mode;
-        } else {
-            // Invalid mode - reset to system
-            localStorage.setItem(STORAGE_KEY, 'system');
-            theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-        
-        // Remove all theme classes, then apply the current one
-        THEMES.forEach(function(t) { ROOT.classList.remove(t); });
-        if (theme !== 'light') {
-            ROOT.classList.add(theme);
-        }
-    })();
-    </script>
+    {{ include('@Contao/partials/_theme-init-script.html.twig') }}
     {{ parent() }}
 {% endblock %}
 

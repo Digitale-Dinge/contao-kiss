@@ -9,18 +9,24 @@
  #
  # With custom classes:
  #   {{ include('@Contao/partials/components/_theme-toggle.html.twig', {class: 'my-custom-class'}) }}
+ #
+ # With custom attributes:
+ #   {{ include('@Contao/partials/components/_theme-toggle.html.twig', {attributes: {'data-tooltip': 'Toggle theme'}}) }}
  #}
 
 {% set size = size|default(24) %}
-{% set class = class|default('') %}
 {% set id = 'moon-mask-' ~ random() %}
 
-<button 
-    data-controller="theme" 
-    data-action="click->theme#toggle" 
-    class="theme-toggle {{ class }}"
-    type="button"
-    aria-label="Toggle dark mode">
+{% set buttonAttributes = attrs()
+    .set('data-controller', 'theme')
+    .set('data-action', 'theme#toggle')
+    .addClass(['theme-toggle', class|default])
+    .set('type', 'button')
+    .set('aria-label', 'Toggle dark mode')
+    .mergeWith(attributes|default)
+%}
+
+<button{{ buttonAttributes }}>
     <svg 
         class="theme-toggle__icon" 
         viewBox="0 0 24 24" 
@@ -47,11 +53,9 @@
         <defs>
             <mask id="{{ id }}">
                 <rect x="0" y="0" width="100%" height="100%" fill="white"/>
-                {# Cuts right side of sun to create left-facing crescent moon #}
                 <circle class="theme-toggle__mask" cx="18" cy="12" r="8" fill="black"/>
             </mask>
         </defs>
-        </mask>
         {# Sun/Moon circle #}
         <circle 
             class="theme-toggle__circle" 

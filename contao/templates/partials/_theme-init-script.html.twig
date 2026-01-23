@@ -1,0 +1,31 @@
+{#
+ # Theme Initialization Script
+ #
+ # Prevents flash of wrong theme by applying the correct theme class
+ # before CSS loads. Include this in the <head> block of page templates.
+ #
+ # Usage:
+ #   {% block head %}
+ #       {{ include('@Contao/partials/_theme-init.html.twig') }}
+ #       {{ parent() }}
+ #   {% endblock %}
+ #}
+<script>
+(function() {
+    var themes = ['light', 'dark']; // Add more: 'high-contrast', 'sepia', etc.
+    var mode = localStorage.getItem('theme') || 'system';
+    var theme;
+    
+    if (mode === 'system') {
+        theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    } else if (themes.indexOf(mode) !== -1) {
+        theme = mode;
+    } else {
+        localStorage.setItem('theme', 'system');
+        theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    
+    themes.forEach(function(t) { document.documentElement.classList.remove(t); });
+    if (theme !== 'light') document.documentElement.classList.add(theme);
+})();
+</script>
