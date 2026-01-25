@@ -28,7 +28,7 @@
     
     // Size using CSS variable for easy adjustment
     --size: 1.5rem;
-    --input-color: var(--color-neutral);
+    --input-color: var(--color-base-300);
     width: var(--size);
     height: var(--size);
     
@@ -36,7 +36,7 @@
     padding: 0.1875rem;
     
     // Border and background
-    border: 1px solid oklch(from var(--color-base-content) l c h / 0.4);
+    @apply border border-base-content/40;
     border-radius: var(--radius-selector, 0.25rem);
     background-color: transparent;
     
@@ -55,7 +55,7 @@
     
     // Focus state
     &:focus-visible {
-      outline: 2px solid oklch(from var(--input-color) l c h / 0.3);
+      outline: 2px solid color-mix(in oklab, var(--input-color) 30%, transparent);
       outline-offset: 0;
     }
     

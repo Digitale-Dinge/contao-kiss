@@ -53,7 +53,7 @@
 
     &:active:not(:disabled)::-webkit-slider-thumb {
       transform: scale(0.95);
-      box-shadow: 0 0 0 4px oklch(from var(--range-thumb-color) l c h / 0.2);
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--range-thumb-color) 20%, transparent);
     }
 
     // ============================================
@@ -83,7 +83,7 @@
 
     &:active:not(:disabled)::-moz-range-thumb {
       transform: scale(0.95);
-      box-shadow: 0 0 0 4px oklch(from var(--range-thumb-color) l c h / 0.2);
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--range-thumb-color) 20%, transparent);
     }
 
     // ============================================

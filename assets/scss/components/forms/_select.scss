@@ -53,7 +53,7 @@
     box-sizing: border-box;
     
     // Use fixed border width with fallback, NEVER changes
-    border: 1px solid oklch(from var(--color-base-300) l c h / 0.5);
+    @apply border border-base-300/50;
     border-radius: var(--radius-field);
     outline: none;
 
@@ -86,8 +86,7 @@
     // STYLE: SOFT (tinted background with border)
     // ============================================
     &-soft {
-      @apply bg-base-content/10;
-      border-color: oklch(from var(--color-base-300) l c h / 0.5);
+      @apply bg-base-content/10 border-base-300/50;
       
       &:hover:not(:focus):not(:disabled) {
         border-color: var(--color-base-300);
@@ -104,7 +103,7 @@
     // COLORS (border shows selected color)
     // ============================================
     &-primary {
-      border-color: oklch(from var(--color-primary) l c h / 0.5);
+      @apply border-primary/50;
       
       &:hover:not(:focus):not(:disabled) {
         border-color: var(--color-primary);
@@ -116,8 +115,7 @@
       }
       
       &.select-soft {
-        @apply bg-primary/10;
-        border-color: oklch(from var(--color-primary) l c h / 0.5);
+        @apply bg-primary/10 border-primary/50;
         
         &:hover:not(:focus):not(:disabled) {
           border-color: var(--color-primary);
@@ -132,7 +130,7 @@
     }
 
     &-secondary {
-      border-color: oklch(from var(--color-secondary) l c h / 0.5);
+      @apply border-secondary/50;
       
       &:hover:not(:focus):not(:disabled) {
         border-color: var(--color-secondary);
@@ -144,8 +142,7 @@
       }
       
       &.select-soft {
-        @apply bg-secondary/10;
-        border-color: oklch(from var(--color-secondary) l c h / 0.5);
+        @apply bg-secondary/10 border-secondary/50;
         
         &:hover:not(:focus):not(:disabled) {
           border-color: var(--color-secondary);
@@ -160,7 +157,7 @@
     }
 
     &-accent {
-      border-color: oklch(from var(--color-accent) l c h / 0.5);
+      @apply border-accent/50;
       
       &:hover:not(:focus):not(:disabled) {
         border-color: var(--color-accent);
@@ -172,8 +169,7 @@
       }
       
       &.select-soft {
-        @apply bg-accent/10;
-        border-color: oklch(from var(--color-accent) l c h / 0.5);
+        @apply bg-accent/10 border-accent/50;
         
         &:hover:not(:focus):not(:disabled) {
           border-color: var(--color-accent);
@@ -188,7 +184,7 @@
     }
 
     &-info {
-      border-color: oklch(from var(--color-info) l c h / 0.5);
+      @apply border-info/50;
       
       &:hover:not(:focus):not(:disabled) {
         border-color: var(--color-info);
@@ -200,8 +196,7 @@
       }
       
       &.select-soft {
-        @apply bg-info/10;
-        border-color: oklch(from var(--color-info) l c h / 0.5);
+        @apply bg-info/10 border-info/50;
         
         &:hover:not(:focus):not(:disabled) {
           border-color: var(--color-info);
@@ -216,7 +211,7 @@
     }
 
     &-success {
-      border-color: oklch(from var(--color-success) l c h / 0.5);
+      @apply border-success/50;
       
       &:hover:not(:focus):not(:disabled) {
         border-color: var(--color-success);
@@ -228,8 +223,7 @@
       }
       
       &.select-soft {
-        @apply bg-success/10;
-        border-color: oklch(from var(--color-success) l c h / 0.5);
+        @apply bg-success/10 border-success/50;
         
         &:hover:not(:focus):not(:disabled) {
           border-color: var(--color-success);
@@ -244,7 +238,7 @@
     }
 
     &-warning {
-      border-color: oklch(from var(--color-warning) l c h / 0.5);
+      @apply border-warning/50;
       
       &:hover:not(:focus):not(:disabled) {
         border-color: var(--color-warning);
@@ -256,8 +250,7 @@
       }
       
       &.select-soft {
-        @apply bg-warning/10;
-        border-color: oklch(from var(--color-warning) l c h / 0.5);
+        @apply bg-warning/10 border-warning/50;
         
         &:hover:not(:focus):not(:disabled) {
           border-color: var(--color-warning);
@@ -272,7 +265,7 @@
     }
 
     &-error {
-      border-color: oklch(from var(--color-error) l c h / 0.5);
+      @apply border-error/50;
       
       &:hover:not(:focus):not(:disabled) {
         border-color: var(--color-error);
@@ -284,8 +277,7 @@
       }
       
       &.select-soft {
-        @apply bg-error/10;
-        border-color: oklch(from var(--color-error) l c h / 0.5);
+        @apply bg-error/10 border-error/50;
         
         &:hover:not(:focus):not(:disabled) {
           border-color: var(--color-error);
@@ -303,7 +295,7 @@
     // VALIDATION STATES
     // ============================================
     &.is-valid {
-      border-color: oklch(from var(--color-success) l c h / 0.5);
+      @apply border-success/50;
       
       &:hover:not(:focus):not(:disabled) {
         border-color: var(--color-success);
@@ -316,7 +308,7 @@
     }
 
     &.is-invalid {
-      border-color: oklch(from var(--color-error) l c h / 0.5);
+      @apply border-error/50;
       
       &:hover:not(:focus):not(:disabled) {
         border-color: var(--color-error);

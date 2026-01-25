@@ -34,9 +34,9 @@
     @apply min-w-[8rem] max-w-[calc(100vw-2rem)];
     @apply p-4;
     @apply bg-base-100 text-base-content;
-    @apply rounded-lg;
     @apply shadow-xl;
     @apply border border-base-300;
+    border-radius: var(--radius-box);
     
     // Transform origin (updated by JS based on placement)
     transform-origin: center top;
@@ -61,19 +61,19 @@
     // SIZE VARIANTS
     // ============================================
     &.popover-xs {
-      @apply min-w-[6rem] p-2 text-xs rounded;
+      @apply min-w-[6rem] p-2 text-xs;
     }
     
     &.popover-sm {
-      @apply min-w-[7rem] p-3 text-sm rounded-md;
+      @apply min-w-[7rem] p-3 text-sm;
     }
     
     &.popover-lg {
-      @apply min-w-[10rem] p-5 text-base rounded-xl;
+      @apply min-w-[10rem] p-5 text-base;
     }
     
     &.popover-xl {
-      @apply min-w-[12rem] p-6 text-lg rounded-2xl;
+      @apply min-w-[12rem] p-6 text-lg;
     }
   }
   
@@ -132,11 +132,29 @@
   // TOOLTIP PRESET
   // ============================================
   .popover-content.popover-tooltip {
-    @apply p-2 px-3 min-w-0 text-xs rounded;
+    @apply p-2 px-3 min-w-0 text-xs;
+    border-radius: var(--radius-box);
     @apply bg-base-200 text-base-content border-base-200;
     
     .popover-arrow::before {
       @apply bg-base-200 border-base-200;
+    }
+    
+    // Size variants override base
+    &.popover-xs {
+      @apply p-1.5 px-2 text-xs;
+    }
+    
+    &.popover-sm {
+      @apply p-2 px-3 text-xs;
+    }
+    
+    &.popover-lg {
+      @apply p-3 px-4 text-sm;
+    }
+    
+    &.popover-xl {
+      @apply p-4 px-5 text-base;
     }
   }
   
@@ -152,7 +170,8 @@
     @apply w-full px-3 py-2;
     @apply text-sm text-base-content;
     @apply hover:bg-base-200;
-    @apply rounded cursor-pointer select-none;
+    @apply cursor-pointer select-none;
+    border-radius: var(--radius-box);
     @apply transition-colors duration-150;
     @apply no-underline border-0 bg-transparent;
     @apply focus-visible:outline-none focus-visible:bg-base-200;

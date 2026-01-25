@@ -31,7 +31,7 @@
     --switch-height: 1.5rem;
     --thumb-size: 1.25rem;
     --thumb-offset: 0.125rem;
-    --input-color: oklch(from var(--color-base-content) l c h / 0.4);
+    --input-color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
     
     width: var(--switch-width);
     height: var(--switch-height);
@@ -59,7 +59,7 @@
     
     // Focus state
     &:focus-visible {
-      outline: 2px solid oklch(from var(--input-color) l c h / 0.3);
+      outline: 2px solid color-mix(in oklab, var(--input-color) 30%, transparent);
       outline-offset: 2px;
     }
     
@@ -89,10 +89,10 @@
     // ============================================
     &-outline {
       background-color: transparent;
-      border: 1px solid oklch(from var(--color-base-content) l c h / 0.3);
+      @apply border border-base-content/30;
       
       &::before {
-        background-color: oklch(from var(--color-base-content) l c h / 0.3);
+        @apply bg-base-content/30;
         box-shadow: none;
       }
       
