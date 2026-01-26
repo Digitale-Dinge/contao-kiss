@@ -1,0 +1,45 @@
+/**
+ * KISS Layout Utilities (V1.0)
+ * 
+ * Container classes for content-width settings in Articles and Content Elements
+ * Matches PHP enum: DigitaleDinge\ContaoKiss\Styles\Options\Layout\Container
+ * 
+ * Usage: container-{small|narrow|base|full-pad|full}
+ */
+
+@layer components {
+  // ============================================
+  // CONTAINER WIDTHS
+  // ============================================
+
+  .container-small {
+    @apply max-w-4xl mx-auto px-4 md:px-6;
+  }
+
+  .container-narrow {
+    @apply max-w-5xl mx-auto px-4 md:px-6;
+  }
+
+  .container-base {
+    @apply max-w-7xl mx-auto px-4 md:px-6 lg:px-8;
+  }
+
+  .container-full-pad {
+    @apply w-full px-4 md:px-6 lg:px-8;
+  }
+
+  .container-full {
+    @apply w-full;
+  }
+
+  // ============================================
+  // NESTED CONTAINER HANDLING
+  // ============================================
+  // Prevent double padding when containers are nested
+
+  [class*="container-"] {
+    [class*="container-"] {
+      @apply px-0;
+    }
+  }
+}
