@@ -10,12 +10,17 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 enum Background: string implements ClassOptionsInterface, TranslatableLabelInterface
 {
-    case transparent = 'transparent';
-    case white = 'background-white';
-    case primary = 'background-primary';
-    case secondary = 'background-secondary';
-    case additional_one = 'background-additional-1';
-    case additional_two = 'background-additional-2';
+    case transparent = 'bg-transparent';
+    case base_100 = 'bg-base-100';
+    case base_200 = 'bg-base-200';
+    case base_300 = 'bg-base-300';
+    case primary = 'bg-primary';
+    case secondary = 'bg-secondary';
+    case accent = 'bg-accent';
+    case info = 'bg-info';
+    case success = 'bg-success';
+    case warning = 'bg-warning';
+    case error = 'bg-error';
 
     public function label(): TranslatableMessage
     {

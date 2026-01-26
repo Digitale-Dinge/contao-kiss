@@ -32,11 +32,16 @@ style_options:
     color:
         background:
             transparent:            Transparent
-            white:                  Weiß
-            primary:                Markenfarbe
-            secondary:              Sekundäre Farbe
-            additional_one:         Zusätzliche Farbe 1
-            additional_two:         Zusätzliche Farbe 2
+            base_100:               Hintergrund (hell)
+            base_200:               Hintergrund (mittel)
+            base_300:               Hintergrund (dunkel)
+            primary:                Primär
+            secondary:              Sekundär
+            accent:                 Akzent
+            info:                   Info
+            success:                Erfolg
+            warning:                Warnung
+            error:                  Fehler
 
     spacing_option:
         half:                       Halbe Zeilenhöhe
