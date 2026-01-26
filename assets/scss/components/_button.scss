@@ -357,17 +357,47 @@
       }
     }
 
-    // Shape variants
-    &-circle {
-      @apply p-2 aspect-square;
+    // Shape variants - 1:1 aspect ratio buttons
+    &-circle,
+    &-square {
+      @apply p-0;
+      // Default size (matches md button height ~44px)
+      width: 2.75rem;
+      height: 2.75rem;
+      flex-shrink: 0;
+    }
 
+    &-circle {
       border-radius: 50%;
     }
-    
-    &-square {
-      @apply p-2 aspect-square;
 
-      border-radius: 0%;
+    &-square {
+      border-radius: var(--radius-field);
+    }
+
+    // Size variants for circle/square
+    &-xs#{&}-circle,
+    &-xs#{&}-square {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+
+    &-sm#{&}-circle,
+    &-sm#{&}-square {
+      width: 2.25rem;
+      height: 2.25rem;
+    }
+
+    &-lg#{&}-circle,
+    &-lg#{&}-square {
+      width: 3.25rem;
+      height: 3.25rem;
+    }
+
+    &-xl#{&}-circle,
+    &-xl#{&}-square {
+      width: 4rem;
+      height: 4rem;
     }
     
     &-wide {
