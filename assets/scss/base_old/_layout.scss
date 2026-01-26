@@ -1,45 +1,144 @@
-/**
- * KISS Layout Utilities (V1.0)
- * 
- * Container classes for content-width settings in Articles and Content Elements
- * Matches PHP enum: DigitaleDinge\ContaoKiss\Styles\Options\Layout\Container
- * 
- * Usage: container-{small|narrow|base|full-pad|full}
+// NOTE: This file is archived for documentation purposes only.
+// The new layout is in /layout/_layout.scss
+
+@use '../mixins/mixins' as *;
+
+/*
+ * Bet utility classes for content-width Settings in Articles and Content Elements
  */
+@utility container-base {
+	@apply max-w-7xl mx-auto px-4 md:px-6 lg:px-8;
+}
+
+@utility container-small {
+	@apply max-w-5xl mx-auto px-4 md:px-6 lg:px-8;
+}
+
+@utility container-narrow {
+	@apply max-w-2xl mx-auto px-4 md:px-6 lg:px-8;
+}
+
+@utility container-full-pad {
+	@apply mx-auto px-4 md:px-6 lg:px-8;
+}
+
+@layer utilities {
+	// Prevent double paddings for nested content-width containers
+	.container-base {
+		.container-base {
+			@apply px-0;
+		}
+	}
+
+	.container-small {
+		.container-base,
+		.container-small {
+			@apply px-0;
+		}
+	}
+
+	.container-narrow {
+		.container-base,
+		.container-small,
+		.container-narrow {
+			@apply px-0;
+		}
+	}
+	
+	
+	.background-primary {
+		@apply bg-primary text-primary-content;
+
+		.text-primary,
+		.topline {
+			@apply text-primary-content;
+		}
+
+		.btn-primary {
+			--btn-bg: var(--color-primary-content);
+			--btn-fg: var(--color-primary);
+		}
+	}
+
+	.background-secondary {
+		@apply bg-secondary text-secondary-content;
+
+		.text-secondary {
+			@apply text-secondary-content;
+		}
+
+		.btn-secondary {
+			--btn-bg: var(--color-secondary-content);
+			--btn-fg: var(--color-secondary);
+		}
+	}
+
+	.background-white {
+		@apply bg-white text-base-content;
+
+		.text-primary,
+		.topline {
+			@apply text-primary;
+		}
+	}
+}
+
+@layer base {
+  html {
+    font-size: var(--font-size-sm);
+
+    @include media(">=md") {
+      font-size: var(--font-size-md);
+    }
+
+    @include media(">=xl") {
+      font-size: var(--font-size-lg);
+    }
+  }
+	
+  #container {
+    @apply pb-16;
+
+		/*
+		 * Build a column set for :md-screens and bigger. Collapses to flex-col on smaller sizes.
+		 */
+		$width-main: 3; // Flex-width ('3' means 3 * size of sidebar)
+		&:has(main#main) {
+			&:has(aside#right) {
+				@apply flex flex-col md:flex-row;
+			}
+
+			&:has(aside#left) {
+				@apply flex flex-col md:flex-row-reverse;
+			}
+
+			&:has(aside#right),
+			&:has(aside#left) {
+				@apply container-base md:gap-6
+				md:[&>*]:min-w-0 md:[&>*]:basis-0 md:[&>*]:shrink
+				md:[&>*:first-child]:flex-[#{$width-main}_1_0%]
+				md:[&>*:last-child]:flex-[1_1_0%];
+			}
+		}
+  }
+
+  #header {
+    a {
+      @apply border-0;
+
+      &:hover,
+      &:focus,
+      &:active {
+        @apply text-primary;
+      }
+    }
+  }
+}
 
 @layer components {
-  // ============================================
-  // CONTAINER WIDTHS
-  // ============================================
-
-  .container-small {
-    @apply max-w-4xl mx-auto px-4 md:px-6;
-  }
-
-  .container-narrow {
-    @apply max-w-5xl mx-auto px-4 md:px-6;
-  }
-
-  .container-base {
-    @apply max-w-7xl mx-auto px-4 md:px-6 lg:px-8;
-  }
-
-  .container-full-pad {
-    @apply w-full px-4 md:px-6 lg:px-8;
-  }
-
-  .container-full {
-    @apply w-full;
-  }
-
-  // ============================================
-  // NESTED CONTAINER HANDLING
-  // ============================================
-  // Prevent double padding when containers are nested
-
-  [class*="container-"] {
-    [class*="container-"] {
-      @apply px-0;
+  .mod_logo {
+    > a {
+        @apply border-0!;
     }
   }
 }

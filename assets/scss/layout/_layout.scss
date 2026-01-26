@@ -42,4 +42,68 @@
       @apply px-0;
     }
   }
+
+  // ============================================
+  // COLUMN GRID SYSTEM
+  // ============================================
+  // Used for: Forms, Galleries, Content Element Groups
+  // Matches PHP enum: DigitaleDinge\ContaoKiss\Styles\Options\Layout\Column
+  //
+  // How it works:
+  // - Editor picks "3 columns" in backend
+  // - Class "cols_3" is added to the element
+  // - Children are arranged in a 3-column grid
+  //
+  // Responsive behavior:
+  // - Mobile: 1 column (stacked)
+  // - Tablet: 2 columns
+  // - Desktop: Full columns
+
+  .cols_1 {
+    @apply grid grid-cols-1 gap-4;
+  }
+
+  .cols_2 {
+    @apply grid grid-cols-1 sm:grid-cols-2 gap-4;
+  }
+
+  .cols_3 {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  .cols_4 {
+    @apply grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4;
+  }
+
+  .cols_5 {
+    @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4;
+  }
+
+  .cols_6 {
+    @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4;
+  }
+
+  .cols_7 {
+    @apply grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3;
+  }
+
+  .cols_8 {
+    @apply grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3;
+  }
+
+  .cols_9 {
+    @apply grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-3;
+  }
+
+  .cols_10 {
+    @apply grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-10 gap-2;
+  }
+
+  .cols_11 {
+    @apply grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-11 gap-2;
+  }
+
+  .cols_12 {
+    @apply grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-12 gap-2;
+  }
 }
