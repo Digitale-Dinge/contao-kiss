@@ -482,10 +482,6 @@
     &.bg-accent:has(.textarea:not(:placeholder-shown)) .textarea-floating-label {
       @apply bg-accent;
     }
-    &.bg-neutral:focus-within .textarea-floating-label,
-    &.bg-neutral:has(.textarea:not(:placeholder-shown)) .textarea-floating-label {
-      @apply bg-neutral;
-    }
     &.bg-info:focus-within .textarea-floating-label,
     &.bg-info:has(.textarea:not(:placeholder-shown)) .textarea-floating-label {
       @apply bg-info;

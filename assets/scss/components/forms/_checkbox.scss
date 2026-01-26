@@ -24,7 +24,7 @@
   // ============================================
   .checkbox {
     @apply relative shrink-0 cursor-pointer appearance-none align-middle;
-    @apply text-neutral-content;
+    @apply text-base-content;
     
     // Size using CSS variable for easy adjustment
     --size: 1.5rem;

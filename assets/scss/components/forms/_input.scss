@@ -512,10 +512,6 @@
     &.bg-accent:has(.input:not(:placeholder-shown)) .input-floating-label {
       @apply bg-accent;
     }
-    &.bg-neutral:focus-within .input-floating-label,
-    &.bg-neutral:has(.input:not(:placeholder-shown)) .input-floating-label {
-      @apply bg-neutral;
-    }
     &.bg-info:focus-within .input-floating-label,
     &.bg-info:has(.input:not(:placeholder-shown)) .input-floating-label {
       @apply bg-info;
