@@ -10,12 +10,12 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 enum Bottom: string implements ClassOptionsInterface, TranslatableLabelInterface
 {
-    case half = 'pb-[0.5rem]';
-    case one = 'pb-[1rem]';
-    case two = 'pb-[2rem]';
-    case three = 'pb-[3rem]';
-    case four = 'pb-[4rem]';
-    case five = 'pb-[5rem]';
+    case half = 'pb-2';
+    case one = 'pb-4';
+    case two = 'pb-8';
+    case three = 'pb-12';
+    case four = 'pb-16';
+    case five = 'pb-20';
 
     public function label(): TranslatableMessage
     {
