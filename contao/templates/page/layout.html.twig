@@ -1,0 +1,9 @@
+{% extends '@Contao/page/layout.html.twig' %}
+
+{# Add KISS base classes to body #}
+{% set body_attributes = attrs(body_attributes|default).addClass(['text-base', 'bg-base-100', 'text-base-content', 'min-h-screen']) %}
+
+{% block head %}
+    {{ include('@Contao/partials/_theme-init-script.html.twig') }}
+    {{ parent() }}
+{% endblock %}
