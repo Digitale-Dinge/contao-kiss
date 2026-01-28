@@ -54,7 +54,7 @@
     
     // Use fixed border width with fallback, NEVER changes
     @apply border border-base-300/50;
-    border-radius: var(--radius-field);
+    border-radius: var(--radius-field, 0.5rem);
     outline: none;
 
     // Custom dropdown arrow - neutral gray works in both light/dark modes

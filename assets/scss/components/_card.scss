@@ -24,11 +24,11 @@
     @apply w-full;
     @apply overflow-hidden;
 
-    border-width: var(--border);
+    border-width: var(--border, 1px);
     border-style: solid;
     @apply border-base-content/20;
-    border-radius: var(--radius-box);
-    box-shadow: var(--shadow);
+    border-radius: var(--radius-box, 0.5rem);
+    box-shadow: var(--shadow, none);
 
     // Figure/Image handling
     > figure,

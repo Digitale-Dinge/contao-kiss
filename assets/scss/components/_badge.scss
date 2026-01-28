@@ -18,11 +18,11 @@
     @apply transition-all duration-200;
     @apply whitespace-nowrap;
 
-    border-width: var(--border);
+    border-width: var(--border, 1px);
     border-style: solid;
     border-color: transparent;
-    border-radius: var(--radius-selector);
-    box-shadow: var(--shadow);
+    border-radius: var(--radius-selector, 0.25rem);
+    box-shadow: var(--shadow, none);
     
     // Default (neutral) badge
     @apply bg-base-200 text-base-content;

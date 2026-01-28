@@ -14,11 +14,11 @@
     @apply p-4 text-base;
     @apply transition-all duration-200;
 
-    border-width: var(--border);
+    border-width: var(--border, 1px);
     border-style: solid;
     border-color: transparent;
-    border-radius: var(--radius-box);
-    box-shadow: var(--shadow);
+    border-radius: var(--radius-box, 0.5rem);
+    box-shadow: var(--shadow, none);
     
     // Default (neutral) alert - solid style
     @apply bg-base-200 text-base-content border-base-300;

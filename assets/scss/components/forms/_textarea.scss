@@ -43,7 +43,7 @@
     
     // Use fixed border width, NEVER changes
     @apply border border-base-300/50;
-    border-radius: var(--radius-box);
+    border-radius: var(--radius-box, 0.5rem);
     outline: none;
 
     // Hover state - full opacity border

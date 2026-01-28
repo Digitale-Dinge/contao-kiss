@@ -36,7 +36,7 @@
     @apply bg-base-100 text-base-content;
     @apply shadow-xl;
     @apply border border-base-300;
-    border-radius: var(--radius-box);
+    border-radius: var(--radius-box, 0.5rem);
     
     // Transform origin (updated by JS based on placement)
     transform-origin: center top;

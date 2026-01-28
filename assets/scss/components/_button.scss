@@ -22,11 +22,11 @@
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
     @apply disabled:opacity-50 disabled:cursor-not-allowed;
 
-    border-width: var(--border);
+    border-width: var(--border, 1px);
     border-style: solid;
     border-color: transparent;
-    border-radius: var(--radius-field);
-    box-shadow: var(--shadow);
+    border-radius: var(--radius-field, 0.5rem);
+    box-shadow: var(--shadow, none);
 
     // Active state - shrink on click (applies to all buttons)
     &:active:not(:disabled) {
