@@ -1,0 +1,45 @@
+// KISS Navigation Overrides
+// Override Contao navigation CSS variables with theme colors
+
+@layer base {
+    :root {
+        /* === NAVIGATION COLORS === */
+        --nav-color: var(--color-base-content);
+        --nav-active-color: var(--color-primary);
+        --nav-submenu-background: var(--color-base-100);
+
+        /* === MOBILE NAVIGATION === */
+        --nav-mobile-background: var(--color-base-300);
+        --nav-mobile-color: var(--color-base-content);
+        --nav-mobile-active-background: var(--color-base-300);
+        --nav-mobile-active-color: var(--color-primary);
+        --nav-mobile-active-border-color: var(--color-primary);
+        --nav-mobile-btn-clr: var(--color-primary);
+        --nav-mobile-separator-color: hsl(0deg 0% 100% / 10%);
+        --nav-burger-line-color: var(--color-primary);
+
+        /* === ACCESSIBILITY (Skip Links) === */
+        --skip-background: var(--color-base-300);
+        --skip-color: var(--color-base-content);
+        --skip-focus-border-color: var(--color-primary);
+
+        /* === NAVIGATION ICONS === */
+        --nav-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>');
+        --nav-icon-background: transparent;
+        --nav-mobile-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>');
+
+        /* === NAVIGATION LAYOUT === */
+        --nav-breakpoint: 1024;
+        --nav-item-line-height: 1.5;
+        --nav-font-size: 20px;
+        --nav-font-weight: 600;
+        --nav-mobile-padding: 120px 20px 20px;
+        --nav-mobile-font-size: 18px;
+        --nav-mobile-backdrop-height: 80px;
+    }
+
+    /* Dark mode adjustments */
+    .dark {
+        --nav-mobile-separator-color: hsl(0deg 0% 0% / 10%);
+    }
+}
