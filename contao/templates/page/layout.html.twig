@@ -48,10 +48,9 @@
         {% endblock %}
 
         {% block footer_meta %}
-            {% slot footer %}
+            {% slot footer_meta %}
                 {{ slot() }}
             {% endslot %}
-            {{ include('@Contao/partials/page/footer/_meta.html.twig') }}
         {% endblock %}
     </footer>
 {% endblock %}
