@@ -1,14 +1,15 @@
-<div{{ attrs(header_main_attributes|default).addClass(['header-main', 'relative', 'py-8', 'text-sm']) }}>
-    <div{{ attrs(header_main_inside_attributes|default).addClass(['inside', 'flex', 'gap-x-4', 'items-center', 'justify-between', styles.container]) }}>
-        {{ include('@Contao/company/logo.html.twig', {
-            logo_class: 'header-logo',
-        }) }}
+ {% block header_inner %}
+    {{ include('@Contao/company/logo.html.twig', {
+        logo_class: 'header-logo',
+    }) }}
+    {% block header_elements %}
         {{ frontend_module('navigation', {
             levelOffset: 0,
-            showLevel: 0,
+            showLevel: header_navigation_level|default(0),
             hardLimit: true,
+            ariaLabel: 'aria_label.header'|trans([], 'contao_kiss'),
             cssID: { 1: 'main-navigation' },
             customTpl: 'mod_navigation_accessible'
         }) }}
-    </div>
-</div>
+    {% endblock %}
+{% endblock %}

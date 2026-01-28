@@ -3,19 +3,18 @@
 {% set bodyAttributes = attrs(bodyAttributes|default).addClass(['text-base', 'bg-base-100', 'text-base-content', 'min-h-screen']) %}
 
 {% block head %}
-    {{ include('@Contao/partials/_theme-init-script.html.twig') }}
     {{ parent() }}
+    {{ include('@Contao/partials/_theme-init-script.html.twig') }}
 {% endblock %}
 
 {% block header %}
-    <header{{ attrs(header_attributes|default).set('id', 'header').addClass('bg-header') }}>
-        {# include('@Contao/partials/page/header/_meta.html.twig') ToDo: Use slots instead #}
+    <header{{ attrs(header_attributes|default).set('id', 'header')}}>
         {{ include('@Contao/partials/page/header/_main.html.twig') }}
     </header>
 {% endblock %}
 
 {% block footer %}
-    <footer{{ attrs(footer_attributes|default).set('id', 'footer').addClass('bg-footer') }}>
+    <footer{{ attrs(footer_attributes|default).set('id', 'footer') }}>
         <div id="footer-wrapper">
             {{ include('@Contao/partials/page/footer/_main.html.twig') }}
         </div>

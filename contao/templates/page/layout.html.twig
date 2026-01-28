@@ -4,6 +4,52 @@
 {% set body_attributes = attrs(body_attributes|default).addClass(['text-base', 'bg-base-100', 'text-base-content', 'min-h-screen']) %}
 
 {% block head %}
-    {{ include('@Contao/partials/_theme-init-script.html.twig') }}
     {{ parent() }}
+    {{ include('@Contao/partials/_theme-init-script.html.twig') }}
+{% endblock %}
+
+{% block body_content %}
+    <header{{ attrs(header_attributes|default).set('id', 'header')}}>
+        {% slot header_meta %}
+            <div{{ attrs().addClass(['header-meta']).mergeWith(header_meta_attributes|default) }}>
+                <div{{ attrs().addClass(['inside', styles.container]).mergeWith(header_meta_inside_attribute|default) }}>
+                    {{ slot() }}
+                </div>
+            </div>
+        {% endslot %}
+        <div{{ attrs().addClass(['header-main']).mergeWith(header_main_attributes|default) }}>
+            <div{{ attrs().addClass(['inside', styles.container]).mergeWith(header_main_inside_attributes|default) }}>
+                {{ include('@Contao/partials/page/header/_main.html.twig') }}
+                {% slot header %}
+                    {{ slot() }}
+                {% endslot %}
+            </div>
+        </div>
+    </header>
+
+    {% slot main %}
+        <main>{{ slot() }}</main>
+    {% endslot %}
+
+    <footer{{ attrs().set('id', 'footer').mergeWith(footer_attributes|default) }}>
+        {% block footer_wrapper %}
+            {{ include('@Contao/partials/page/footer/_main.html.twig') }}
+            {% slot footer_wrapper %}
+                {{ slot() }}
+            {% endslot %}
+        {% endblock %}
+
+        {% block footer %}
+            {% slot footer %}
+                {{ slot() }}
+            {% endslot %}
+        {% endblock %}
+
+        {% block footer_meta %}
+            {% slot footer %}
+                {{ slot() }}
+            {% endslot %}
+            {{ include('@Contao/partials/page/footer/_meta.html.twig') }}
+        {% endblock %}
+    </footer>
 {% endblock %}

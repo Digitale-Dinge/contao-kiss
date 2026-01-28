@@ -3,3 +3,7 @@ contao_kiss:
         day:            Tag
         open_from:      Von
         open_to:        Bis
+
+aria_label:
+    header:             Hauptmenü
+    footer:             Footer Navigation
