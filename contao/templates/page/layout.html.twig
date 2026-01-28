@@ -28,7 +28,9 @@
     </header>
 
     {% slot main %}
-        <main>{{ slot() }}</main>
+        <main{{ attrs().set('id', 'main').mergeWith(main_attributes|default) }}>
+            {{ slot() }}
+        </main>
     {% endslot %}
 
     <footer{{ attrs().set('id', 'footer').mergeWith(footer_attributes|default) }}>
