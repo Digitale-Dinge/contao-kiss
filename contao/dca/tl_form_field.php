@@ -21,6 +21,6 @@ $pm = PaletteManipulator::create()
     ->addField('gridColumns', 'layout_legend', PaletteManipulator::POSITION_APPEND)
 ;
 
-foreach (['explanation', 'fieldsetStart', 'fieldsetStop', 'text', 'password', 'textarea', 'select', 'radio', 'checkbox', 'upload', 'range', 'captcha', 'altcha', 'submit', 'countryselect'] as $field) {
+foreach (array_keys($GLOBALS['TL_FFL'] ?? []) as $field) {
     $pm->applyToPalette($field, 'tl_form_field');
 }
