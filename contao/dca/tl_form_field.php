@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
+use Contao\CoreBundle\DataContainer\PaletteNotFoundException;
 
 $GLOBALS['TL_DCA']['tl_form_field']['fields']['gridColumns'] = [
     'exclude' => true,
@@ -21,6 +22,11 @@ $pm = PaletteManipulator::create()
     ->addField('gridColumns', 'layout_legend', PaletteManipulator::POSITION_APPEND)
 ;
 
+// ToDo: Should use a listener instead
 foreach (array_keys($GLOBALS['TL_FFL'] ?? []) as $field) {
-    $pm->applyToPalette($field, 'tl_form_field');
+    try {
+        $pm->applyToPalette($field, 'tl_form_field');
+    } catch (PaletteNotFoundException) {
+        // Noop
+    }
 }
