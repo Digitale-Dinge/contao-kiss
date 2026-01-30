@@ -19,6 +19,6 @@ enum Bottom: string implements ClassOptionsInterface, TranslatableLabelInterface
 
     public function label(): TranslatableMessage
     {
-        return new TranslatableMessage('style_options.spacing_option.' . $this->name, [], 'style_options');
+        return new TranslatableMessage('style_options.spacing_option.'.$this->name, [], 'style_options');
     }
 }

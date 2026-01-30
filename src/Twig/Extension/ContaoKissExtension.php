@@ -13,18 +13,19 @@ use Twig\TwigFilter;
 class ContaoKissExtension extends AbstractExtension implements GlobalsInterface
 {
     public function __construct(
-        private readonly StylesVariable  $stylesVariable,
+        private readonly StylesVariable $stylesVariable,
     ) {
     }
 
-   public function getFilters(): array
-   {
-	   return [
-           new TwigFilter('file',
-               [FileItemRuntime::class, 'getFile']
-           ),
-	   ];
-   }
+    #[\Override]
+    public function getFilters(): array
+    {
+        return [
+            new TwigFilter('file',
+                [FileItemRuntime::class, 'getFile'],
+            ),
+        ];
+    }
 
     public function getGlobals(): array
     {

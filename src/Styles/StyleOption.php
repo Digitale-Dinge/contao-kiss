@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Styles;
 
-abstract class StyleOption
+abstract class StyleOption implements \Stringable
 {
     protected string $default = '';
 
@@ -13,14 +13,17 @@ abstract class StyleOption
      */
     protected string $enumClass;
 
-    public function __construct(private readonly string|null $key = null)
-    {}
+    public function __construct(
+        private readonly string|null $key = null,
+    ) {
+    }
 
     public function __toString(): string
     {
         try {
-            return $this->enumClass::{$this->key ?? $this->default}?->value;
-        } catch (\Throwable) {
+            return (string) $this->enumClass::{$this->key ?? $this->default}?->value;
+        }
+        catch (\Throwable) {
             return '';
         }
     }
@@ -29,7 +32,8 @@ abstract class StyleOption
     {
         try {
             return $this->enumClass::{$name}?->value;
-        } catch (\Throwable) {
+        }
+        catch (\Throwable) {
             return null;
         }
     }

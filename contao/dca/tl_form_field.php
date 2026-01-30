@@ -26,7 +26,8 @@ $pm = PaletteManipulator::create()
 foreach (array_keys($GLOBALS['TL_FFL'] ?? []) as $field) {
     try {
         $pm->applyToPalette($field, 'tl_form_field');
-    } catch (PaletteNotFoundException) {
+    }
+    catch (PaletteNotFoundException) {
         // Noop
     }
 }

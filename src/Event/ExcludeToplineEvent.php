@@ -29,7 +29,7 @@ class ExcludeToplineEvent extends Event
     {
         return [
             ...$this->defaults,
-            ...$this->types
+            ...$this->types,
         ];
     }
 }

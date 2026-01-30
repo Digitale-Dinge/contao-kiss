@@ -2,39 +2,44 @@
 
 declare(strict_types=1);
 
-//use Contao\CoreBundle\DataContainer\PaletteManipulator;
+// use Contao\CoreBundle\DataContainer\PaletteManipulator;
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['inputType'] = 'collection';
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['tl_class'] = 'w50 clr hl_collection';
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['fields'] = [
     'value' => [
-        'label'           => [
-            &$GLOBALS['TL_LANG']['tl_content']['headline'][0], null
+        'label' => [
+            &$GLOBALS['TL_LANG']['tl_content']['headline'][0], null,
         ],
-        'inputType'       => 'text',
-        'eval'            => ['maxlength'=>200, 'basicEntities'=>true],
+        'inputType' => 'text',
+        'eval' => [
+            'maxlength' => 200,
+            'basicEntities' => true,
+        ],
     ],
     'unit' => [
-        'label'           => [
-            &$GLOBALS['TL_LANG']['tl_content']['headline']['unit'], null
+        'label' => [
+            &$GLOBALS['TL_LANG']['tl_content']['headline']['unit'], null,
         ],
-        'inputType'       => 'select',
-        'options'         => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+        'inputType' => 'select',
+        'options' => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
     ],
     'appearance' => [
-        'label'           => [
-            &$GLOBALS['TL_LANG']['tl_content']['headline']['appearance'], null
+        'label' => [
+            &$GLOBALS['TL_LANG']['tl_content']['headline']['appearance'], null,
         ],
-        'inputType'       => 'select',
-        'eval'            => ['includeBlankOption' => true]
+        'inputType' => 'select',
+        'eval' => [
+            'includeBlankOption' => true,
+        ],
     ],
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['topline'] = [
-    'exclude'   => true,
+    'exclude' => true,
     'inputType' => 'text',
     'targetColumn' => 'kiss_styles',
-    'eval'      => [
-        'tl_class'  => 'w50',
+    'eval' => [
+        'tl_class' => 'w50',
         'maxlength' => 255,
         'allowHtml' => true,
     ],
@@ -106,7 +111,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
     'eval' => [
         'sourceDirectory' => 'public/kiss_icons/svg',
         'metadataDirectory' => 'public/kiss_icons',
-        'tl_class' => 'w 50 clr'
+        'tl_class' => 'w 50 clr',
     ],
     'sql' => 'blob NULL',
 ];
@@ -135,7 +140,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['iconPosition'] = [
     'sql' => "varchar(32) NOT NULL default ''",
 ];
 
-
 /*
  * Customize existing fields
  */
@@ -151,44 +155,39 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['allowHtml'] = tr
 /* HTML in Linktexten */
 $GLOBALS['TL_DCA']['tl_content']['fields']['linktext']['eval']['allowHtml'] = true;
 
-
 /*$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'hyperlinkAsButton';
-
-$GLOBALS['TL_DCA']['tl_content']['subpalettes']['hyperlinkAsButton'] = 'buttonType,buttonColor,buttonSize';
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['hyperlinkAsButton'] = [
-    'exclude' => true,
-    'inputType' => 'checkbox',
-    'sql' => "char(1) NOT NULL default ''",
-    'eval' => [
-        'tl_class' => 'm12 clr',
-        'submitOnChange' => true,
-    ],
-];
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['buttonType'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['buttonType'],
-    'exclude' => true,
-    'inputType' => 'radio',
-    'options' => ['primary', 'secondary', 'outline'],
-    'reference' => &$GLOBALS['TL_LANG']['tl_content'],
-    'eval' => [
-        'tl_class' => 'w50 image-grid image-grid--cols-3 image-grid--highdpi',
-    ],
-    'sql' => "varchar(32) NOT NULL default ''",
-];
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['buttonSize'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['buttonSize'],
-    'exclude' => true,
-    'inputType' => 'radio',
-    'options' => ['lg', 'sm'],
-    'reference' => &$GLOBALS['TL_LANG']['tl_content'],
-    'eval' => [
-        'tl_class' => 'w50 image-grid image-grid--highdpi',
-    ],
-    'sql' => "varchar(32) NOT NULL default ''",
-];*/
+ * $GLOBALS['TL_DCA']['tl_content']['subpalettes']['hyperlinkAsButton'] = 'buttonType,buttonColor,buttonSize';
+ * $GLOBALS['TL_DCA']['tl_content']['fields']['hyperlinkAsButton'] = [
+ * 'exclude' => true,
+ * 'inputType' => 'checkbox',
+ * 'sql' => "char(1) NOT NULL default ''",
+ * 'eval' => [
+ * 'tl_class' => 'm12 clr',
+ * 'submitOnChange' => true,
+ * ],
+ * ];
+ * $GLOBALS['TL_DCA']['tl_content']['fields']['buttonType'] = [
+ * 'label' => &$GLOBALS['TL_LANG']['tl_content']['buttonType'],
+ * 'exclude' => true,
+ * 'inputType' => 'radio',
+ * 'options' => ['primary', 'secondary', 'outline'],
+ * 'reference' => &$GLOBALS['TL_LANG']['tl_content'],
+ * 'eval' => [
+ * 'tl_class' => 'w50 image-grid image-grid--cols-3 image-grid--highdpi',
+ * ],
+ * 'sql' => "varchar(32) NOT NULL default ''",
+ * ];
+ * $GLOBALS['TL_DCA']['tl_content']['fields']['buttonSize'] = [
+ * 'label' => &$GLOBALS['TL_LANG']['tl_content']['buttonSize'],
+ * 'exclude' => true,
+ * 'inputType' => 'radio',
+ * 'options' => ['lg', 'sm'],
+ * 'reference' => &$GLOBALS['TL_LANG']['tl_content'],
+ * 'eval' => [
+ * 'tl_class' => 'w50 image-grid image-grid--highdpi',
+ * ],
+ * 'sql' => "varchar(32) NOT NULL default ''",
+ * ];*/
 
 /*PaletteManipulator::create()
     // Hyperlinks

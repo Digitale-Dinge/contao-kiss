@@ -18,6 +18,6 @@ enum Container: string implements ClassOptionsInterface, TranslatableLabelInterf
 
     public function label(): TranslatableMessage
     {
-        return new TranslatableMessage('style_options.layout.container.' . $this->name, [], 'style_options');
+        return new TranslatableMessage('style_options.layout.container.'.$this->name, [], 'style_options');
     }
 }

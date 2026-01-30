@@ -20,6 +20,6 @@ enum Size: string implements ClassOptionsInterface, TranslatableLabelInterface
 
     public function label(): TranslatableMessage
     {
-        return new TranslatableMessage('style_options.typography.size.' . $this->name, [], 'style_options');
+        return new TranslatableMessage('style_options.typography.size.'.$this->name, [], 'style_options');
     }
 }

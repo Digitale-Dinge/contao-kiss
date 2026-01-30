@@ -16,7 +16,7 @@ final class AddLayoutFieldsToPaletteListener
     #[AsHook('loadDataContainer')]
     public function addBlacklistFieldToSettings(string $table): void
     {
-        if ($table !== 'tl_settings') {
+        if ('tl_settings' !== $table) {
             return;
         }
 
@@ -24,10 +24,11 @@ final class AddLayoutFieldsToPaletteListener
             'inputType' => 'checkbox',
             'options_callback' => static function (): array {
                 $options = [];
+
                 // remove the categories from the content element list
                 foreach ($GLOBALS['TL_CTE'] as $cte) {
                     foreach ($cte as $key => $class) {
-                        $options[$key] = ($GLOBALS['TL_LANG']['CTE'][$key][0] ?? $key) . ' <span style="color:var(--gray)">[' . $key . ']</span>';
+                        $options[$key] = ($GLOBALS['TL_LANG']['CTE'][$key][0] ?? $key).' <span style="color:var(--gray)">['.$key.']</span>';
                     }
                 }
 
@@ -36,7 +37,7 @@ final class AddLayoutFieldsToPaletteListener
             'eval' => [
                 'multiple' => true,
                 'tl_class' => 'm12 w50 clr',
-            ]
+            ],
         ];
 
         PaletteManipulator::create()
@@ -57,13 +58,14 @@ final class AddLayoutFieldsToPaletteListener
         $blacklist = StringUtil::deserialize(Config::get('kiss_dontShowFieldsOnContentElement'), true);
 
         // skip if the content type is in the blacklist
-        if (array_key_exists('type', $currentRecord) && in_array($currentRecord['type'], $blacklist, true) ) {
+        if (\array_key_exists('type', $currentRecord) && \in_array($currentRecord['type'], $blacklist, true)) {
             return $palette;
         }
 
         return PaletteManipulator::create()
             ->addLegend('layout_legend', 'template_legend', PaletteManipulator::POSITION_BEFORE)
             ->addField(['contentWidth', 'backgroundColor', 'paddingTop', 'paddingBottom', 'marginTop', 'marginBottom'], 'layout_legend', 'append')
-            ->applyToString($palette);
+            ->applyToString($palette)
+        ;
     }
 }

@@ -19,6 +19,6 @@ enum Heading: string implements ClassOptionsInterface, TranslatableLabelInterfac
 
     public function label(): TranslatableMessage
     {
-        return new TranslatableMessage('style_options.typography.heading.' . $this->name, [], 'style_options');
+        return new TranslatableMessage('style_options.typography.heading.'.$this->name, [], 'style_options');
     }
 }
