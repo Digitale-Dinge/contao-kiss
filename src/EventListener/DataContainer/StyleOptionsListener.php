@@ -18,10 +18,8 @@ final class StyleOptionsListener
 {
     use TranslatableEnumTrait;
 
-    public function __construct(
-        private TranslatorInterface $translator,
-    ) {
-    }
+    public function __construct(private readonly TranslatorInterface $translator)
+    {}
 
     #[AsCallback('tl_content', 'fields.headline.fields.appearance.options')]
     #[AsCallback('tl_module', 'fields.headline.fields.appearance.options')]
