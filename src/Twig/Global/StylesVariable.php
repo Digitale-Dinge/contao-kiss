@@ -4,50 +4,47 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Twig\Global;
 
-use DigitaleDinge\ContaoKiss\Styles\Options\Color\BackgroundOption;
-use DigitaleDinge\ContaoKiss\Styles\Options\Layout\ColumnOption;
-use DigitaleDinge\ContaoKiss\Styles\Options\Layout\ContainerOption;
-use DigitaleDinge\ContaoKiss\Styles\Options\Margin\BottomOption;
-use DigitaleDinge\ContaoKiss\Styles\Options\Margin\TopOption;
+use DigitaleDinge\ContaoKiss\Styles\Options\Color;
+use DigitaleDinge\ContaoKiss\Styles\Options\Layout;
+use DigitaleDinge\ContaoKiss\Styles\Options\Margin;
 use DigitaleDinge\ContaoKiss\Styles\Options\Padding;
-use DigitaleDinge\ContaoKiss\Styles\Options\Typography\HeadingOption;
-use DigitaleDinge\ContaoKiss\Styles\Options\Typography\SizeOption;
+use DigitaleDinge\ContaoKiss\Styles\Options\Typography;
 
 class StylesVariable
 {
-    public function getContainer(string|null $key = null): ContainerOption
+    public function getContainer(string|null $key = null): Layout\ContainerOption
     {
-        return new ContainerOption($key);
+        return new Layout\ContainerOption($key);
     }
 
-    public function getColumn(string $key): ColumnOption
+    public function getColumn(string $key): Layout\ColumnOption
     {
-        return new ColumnOption($key);
+        return new Layout\ColumnOption($key);
     }
 
-    public function getSize(string $key): SizeOption
+    public function getSize(string $key): Typography\SizeOption
     {
-        return new SizeOption($key);
+        return new Typography\SizeOption($key);
     }
 
-    public function getHeading(string $key): HeadingOption
+    public function getHeading(string $key): Typography\HeadingOption
     {
-        return new HeadingOption($key);
+        return new Typography\HeadingOption($key);
     }
 
-    public function getBackground(string $key): BackgroundOption
+    public function getBackground(string $key): Color\BackgroundOption
     {
-        return new BackgroundOption($key);
+        return new Color\BackgroundOption($key);
     }
 
-    public function getMargin_top(string $key): TopOption
+    public function getMargin_top(string $key): Margin\TopOption
     {
-        return new TopOption($key);
+        return new Margin\TopOption($key);
     }
 
-    public function getMargin_bottom(string $key): BottomOption
+    public function getMargin_bottom(string $key): Margin\BottomOption
     {
-        return new BottomOption($key);
+        return new Margin\BottomOption($key);
     }
 
     public function getPadding_top(string $key): Padding\TopOption
