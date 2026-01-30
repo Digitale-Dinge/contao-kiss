@@ -1,0 +1,6 @@
+services:
+    DigitaleDinge\ContaoKiss\Migration\ArticleContentKissStylesMigration:
+        arguments:
+            - '@database_connection'
+        tags:
+            - { name: contao.migration, priority: 0 }

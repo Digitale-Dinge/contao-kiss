@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    DigitaleDinge\ContaoKiss\:
+        resource: '../src/'
+        exclude: '../src/{Event,Model,Util,Styles,DigitaleDingeKissBundle.php}'
