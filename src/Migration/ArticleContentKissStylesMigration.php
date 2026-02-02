@@ -6,11 +6,14 @@ namespace DigitaleDinge\ContaoKiss\Migration;
 
 use Contao\CoreBundle\Migration\AbstractMigration;
 use Contao\CoreBundle\Migration\MigrationResult;
-use Contao\StringUtil;
+use Contao\DcaExtractor;
 use Doctrine\DBAL\Connection;
 
 class ArticleContentKissStylesMigration extends AbstractMigration
 {
+    private static array $kissContentColumns = [];
+    private static array $kissArticleColumns = [];
+
     private const array SPACING_MAP = [
         'half' => 'half',
         '1x' => 'one',
@@ -26,6 +29,22 @@ class ArticleContentKissStylesMigration extends AbstractMigration
         'u-size--smaller' => 'narrow',
         'u-size--nopad' => 'full_pad',
         'u-size--full' => 'full',
+    ];
+
+    private const array TABLE_MAP = [
+        'tl_content' => [
+            ['topline' => []],
+            ['marginTop' => self::SPACING_MAP],
+            ['marginBottom' => self::SPACING_MAP],
+            ['paddingTop' => self::SPACING_MAP],
+            ['paddingBottom' => self::SPACING_MAP],
+            ['contentWidth' => self::LAYOUT_COLUMN_MAP],
+        ],
+        'tl_article' => [
+            ['paddingTop'=> self::SPACING_MAP],
+            ['paddingBottom' => self::SPACING_MAP],
+            ['contentWidth' => self::LAYOUT_COLUMN_MAP],
+        ],
     ];
 
     public function __construct(
@@ -46,81 +65,144 @@ class ArticleContentKissStylesMigration extends AbstractMigration
         $contentColumns = $schema->listTableColumns('tl_content');
         $articleColumns = $schema->listTableColumns('tl_article');
 
-        if (!isset($contentColumns['contentwidth'], $articleColumns['contentwidth'])) {
+        if (!isset($contentColumns['kiss_styles'], $articleColumns['kiss_styles'])) {
             return false;
         }
 
-        $test = $this->connection->fetchOne("SELECT TRUE FROM tl_content WHERE NOT `contentWidth` = ''  LIMIT 1");
+        self::$kissContentColumns = array_filter($this->getDefaultKissStyles('tl_content'), fn($col) => isset($contentColumns[strtolower($col)]));
+        self::$kissArticleColumns = array_filter($this->getDefaultKissStyles('tl_article'), fn($col) => isset($articleColumns[strtolower($col)]));
 
-        return false !== $test;
+        return
+            $this->tableHasRemainingStyleMigrations('tl_content', self::$kissContentColumns)
+            || $this->tableHasRemainingStyleMigrations('tl_article', self::$kissArticleColumns);
     }
 
     public function run(): MigrationResult
     {
-        $this->migrateContentTable();
-        $this->migrateArticleTable();
+        $this->migrateTable('tl_content');
+        $this->migrateTable('tl_article');
 
         return $this->createResult(true);
     }
 
-    private function migrateContentTable(): void
+    private function tableHasRemainingStyleMigrations(string $table, array $cols): bool
     {
-        $rows = $this->connection->fetchAllAssociative('SELECT id, kiss_styles, paddingTop, paddingBottom, marginTop, marginBottom, contentWidth FROM tl_content');
-
-        foreach ($rows as $row) {
-            // ToDo: Check JSON Fields
-            $styles = StringUtil::deserialize($row['kiss_styles'], true);
-
-            $this->updateStyleValue(self::SPACING_MAP, $styles, 'margin_top', $row['marginTop']);
-            $this->updateStyleValue(self::SPACING_MAP, $styles, 'margin_bottom', $row['marginBottom']);
-            $this->updateStyleValue(self::SPACING_MAP, $styles, 'padding_top', $row['paddingTop']);
-            $this->updateStyleValue(self::SPACING_MAP, $styles, 'padding_bottom', $row['paddingBottom']);
-            $this->updateStyleValue(self::LAYOUT_COLUMN_MAP, $styles, $row['contentWidth']);
-
-            $this->persist('tl_content', (int) $row['id'], $styles);
+        if ($cols === []) {
+            return false;
         }
+
+        $condition = array_map(static fn (string $col) => sprintf('`%s` <> :empty', $col), $cols);
+
+        $query = sprintf(
+            'SELECT TRUE FROM %s WHERE %s LIMIT 1',
+            $table,
+            implode(' OR ', $condition)
+        );
+
+        return $this->connection->fetchOne($query, ['empty' => '']) !== false;
     }
 
-    private function migrateArticleTable(): void
+    private function getDefaultKissStyles(string $table): array
     {
-        $rows = $this->connection->fetchAllAssociative('SELECT id, kiss_styles, bgColor, paddingTop, paddingBottom, contentWidth FROM tl_article');
+        $extractor = DcaExtractor::getInstance($table);
+        $fields = $extractor->getVirtualFields();
 
-        foreach ($rows as $row) {
-            $styles = StringUtil::deserialize($row['kiss_styles'], true);
+        return array_keys($fields, 'kiss_styles');
+    }
 
-            if (!empty($row['bgColor']) && !isset($styles['backgroundColor'])) {
-                $styles['backgroundColor'] = $row['bgColor'];
-            }
+    private function getOldColumnsForTable(string $table): array
+    {
+        return match($table) {
+            'tl_article' => self::$kissArticleColumns,
+            'tl_content' => self::$kissContentColumns,
+            default => [],
+        };
+    }
 
-            $this->updateStyleValue(self::SPACING_MAP, $styles, 'padding_top', $row['paddingTop']);
-            $this->updateStyleValue(self::SPACING_MAP, $styles, 'padding_bottom', $row['paddingBottom']);
-            $this->updateStyleValue(self::LAYOUT_COLUMN_MAP, $styles, $row['contentWidth']);
+    private function getStyleRowsForTable(string $table): array
+    {
+        $styleCols = $this->getOldColumnsForTable($table);
 
-            $this->persist('tl_article', (int) $row['id'], $styles);
+        if (empty($styleCols)) {
+            return [];
         }
+
+        $columns = array_merge(['id', 'kiss_styles'], $styleCols);
+
+        $query = sprintf('SELECT %s FROM %s', implode(', ', array_map(static fn ($c) => "`$c`", $columns)), $table);
+
+        return $this->connection->fetchAllAssociative($query);
     }
 
     private function updateStyleValue(array $map, array &$styles, string $key, string|null $value = null): void
     {
-        if (!$value || isset($styles[$key])) {
+        // Do not overwrite existing values
+        if (isset($styles[$key])) {
             return;
         }
 
         if (isset($map[$value])) {
             $styles[$key] = $map[$value];
+        } else {
+            $styles[$key] = $value;
         }
     }
 
-    private function persist(string $table, int $id, array $styles): void
+    private function migrateTable(string $table): void
     {
-        $this->connection->update(
-            $table,
-            [
-                'kiss_styles' => json_encode($styles),
-            ],
-            [
-                'id' => $id,
-            ],
-        );
+        if ([] === ($rows = $this->getStyleRowsForTable($table))) {
+            return;
+        }
+
+        $updates = [];
+
+        // Reset the old value
+        $resetCols = array_fill_keys($this->getOldColumnsForTable($table), '');
+
+        foreach ($rows as $row) {
+            $styles = $row['kiss_styles'] ? json_decode($row['kiss_styles'], true) : [];
+
+            // Migrate the backgroundColor
+            if (
+                $table === 'tl_article'
+                && !empty($row['bgColor'])
+                && !isset($styles['backgroundColor'])
+            ) {
+                $styles['backgroundColor'] = $row['bgColor'];
+            }
+
+            foreach (self::TABLE_MAP[$table] ?? [] as $mapping) {
+                foreach ($mapping as $key => $map) {
+                    $this->updateStyleValue($map, $styles, $key, $row[$key] ?? null);
+                }
+            }
+
+            // Do not update if we have no styles or values
+            if (empty($styles) || empty(array_filter($styles))) {
+                continue;
+            }
+
+            $updates[(int) $row['id']] = [...$resetCols, ...['kiss_styles' => json_encode($styles)]];
+        }
+
+        if ([] === $updates) {
+            return;
+        }
+
+        $this->connection->beginTransaction();
+
+        try {
+            foreach ($updates as $id => $columns) {
+                $this->connection->update(
+                    $table,
+                    $columns,
+                    ['id' => $id]
+                );
+            }
+
+            $this->connection->commit();
+        } catch (\Throwable) {
+            $this->connection->rollback();
+        }
     }
 }
