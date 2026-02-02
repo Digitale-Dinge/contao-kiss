@@ -1,11 +1,22 @@
 {% extends '@Contao/mod_article' %}
 
-{% set wrapperAttributes = attrs(cssID)
+{% set inside_attributes = attrs()
     .addClass([
+        'inside',
         styles.container(contentWidth|default),
         styles.background(bgColor|default),
         styles.padding_top(paddingTop|default),
         styles.padding_bottom(paddingBottom|default),
     ])
-    .mergeWith(wrapperAttributes|default)
+    .mergeWith(inside_attributes|default)
 %}
+
+{% block content %}
+    {% if not noMarkup %}
+        <div{{ inside_attributes }}>
+            {{ parent() }}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
