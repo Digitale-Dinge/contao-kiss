@@ -12,13 +12,13 @@
     <header{{ attrs(header_attributes|default).set('id', 'header')}}>
         {% slot header_meta %}
             <div{{ attrs().addClass(['header-meta']).mergeWith(header_meta_attributes|default) }}>
-                <div{{ attrs().addClass(['inside', styles.container, 'flex', 'justify-between', 'items-center']).mergeWith(header_meta_inside_attribute|default) }}>
+                <div{{ attrs().addClass(['inside', styles.container]).mergeWith(header_meta_inside_attribute|default) }}>
                     {{ slot() }}
                 </div>
             </div>
         {% endslot %}
         <div{{ attrs().addClass(['header-main']).mergeWith(header_main_attributes|default) }}>
-            <div{{ attrs().addClass(['inside', styles.container]).mergeWith(header_main_inside_attributes|default) }}>
+            <div{{ attrs().addClass(['inside', 'flex', 'justify-between', 'items-center', styles.container]).mergeWith(header_main_inside_attributes|default) }}>
                 {{ include('@Contao/partials/page/header/_main.html.twig') }}
                 {% slot header %}
                     {{ slot() }}
