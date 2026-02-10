@@ -15,9 +15,9 @@
 
 {% block text_link %}
     {% if icon|default %}
-        {{- text_before -}}
+        {{- text_before|default -}}
         {{ include('@Contao/component/_icon_link.html.twig') }}
-        {{- text_after -}}
+        {{- text_after|default -}}
     {% else %}
         {{ parent() }}
     {% endif %}

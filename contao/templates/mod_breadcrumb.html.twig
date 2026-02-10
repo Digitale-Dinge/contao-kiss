@@ -2,12 +2,12 @@
   KISS Breadcrumb Component v1.0
   ==============================
   A configurable breadcrumb component with size, color, and separator options.
-  
+
   Configuration Options:
   ----------------------
   All options can be set via Twig variables before including/extending this template,
   or later via DCA/RSCE configuration.
-  
+
   @var string|null breadcrumb_size     Size variant: 'xs', 'sm', 'lg', 'xl' (default: null = medium)
   @var string|null breadcrumb_color    Color variant: 'primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error'
   @var string|null separator_type      Separator type: 'chevron' (default), 'slash', 'dot', 'arrow', 'custom'
@@ -15,7 +15,7 @@
   @var int|null    max_items           Max visible items before collapsing (JS default: 4, 0 = disable controller)
   @var int|null    breakpoint          Force collapse below this viewport width in px (JS default: 640)
   @var bool        collapsible         Enable/disable collapse behavior (default: true)
-  
+
   CSS Classes Applied:
   --------------------
   - Base: .breadcrumb (from Contao wrapper)
@@ -89,7 +89,7 @@
 {# Add Stimulus controller attributes if collapsible #}
 {% if collapsible %}
     {% set wrapperAttributes = wrapperAttributes.set('data-controller', 'breadcrumb') %}
-    
+
     {# Only add data attributes if explicitly set (JS has its own defaults) #}
     {% if max_items is not empty %}
         {% set wrapperAttributes = wrapperAttributes.set('data-breadcrumb-max-items-value', max_items) %}
@@ -109,10 +109,10 @@
             {% if not loop.first %}
                 <li class="breadcrumb-separator" aria-hidden="true">{{ separator_content|raw }}</li>
             {% endif %}
-            
+
             {# Determine if this item should be collapsible (middle items) #}
             {% set is_collapsible = collapsible and not loop.first and not loop.last %}
-            
+
             {% if item.isActive %}
                 <li aria-current="page"{{ is_collapsible ? ' data-breadcrumb-target="item"' : '' }}>
                     <a href="{{ item.href }}">{{ item.link }}</a>
