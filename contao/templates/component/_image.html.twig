@@ -1,0 +1,9 @@
+{% use "@Contao/component/_figure.html.twig" %}
+
+{% block image %}
+    {% set item = item|default(_context) %}
+
+    {% with {figure: figure(item.singleSRC, size, configuration|default({}))} %}
+        {{ block('figure_component') }}
+    {% endwith %}
+{% endblock %}

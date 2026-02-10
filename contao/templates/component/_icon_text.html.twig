@@ -1,0 +1,21 @@
+{% block icon_text %}
+    {% set item = icon|default(_context) %}
+
+    <{{ tag_name|default('span') }}{{ attrs(icon_text_wrapper_attributes|default) }}>
+        {% if item.position|default('left') == 'left' %}
+            {{ _self.span_icon(item.position|default, item) }}
+        {% endif %}
+        <span{{ attrs(icon_text_attributes|default).addClass(['text', 'leading-none']) }}>
+            {{ text|insert_tag }}
+        </span>
+        {% if item.position|default == 'right' %}
+            {{ _self.span_icon(item.position|default, item.icon) }}
+        {% endif %}
+    </{{ tag_name|default('span') }}>
+{% endblock %}
+
+{% macro span_icon(direction, icon) %}
+    <span{{ attrs().addClass(direction == 'right' ? 'ml-1' : 'mr-1') }}>
+        {{ include('@Contao/component/_icon.html.twig') }}
+    </span>
+{% endmacro -%}
