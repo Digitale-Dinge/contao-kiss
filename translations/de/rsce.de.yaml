@@ -1,0 +1,13 @@
+rsce:
+    group:
+        settings:           Element-Einstellungen
+        media:              Bild/Icon/Text
+
+    field:
+        type:
+            label:          Typ
+            description:    Hier können Sie einen Element-Typen auswählen.
+            options:
+                image:      Bild
+                icon:       Icon
+                separated:  Separiert

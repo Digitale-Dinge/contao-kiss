@@ -7,3 +7,11 @@ services:
     DigitaleDinge\ContaoKiss\:
         resource: '../src/'
         exclude: '../src/{Event,Model,Util,Styles,DigitaleDingeKissBundle.php}'
+
+    kiss.rsce_config.builder:
+        class: DigitaleDinge\ContaoKiss\CustomElementsConfigurationBuilder
+        public: true
+        arguments:
+            - '@translator'
+
+    DigitaleDinge\ContaoKiss\CustomElementsConfigurationBuilder: '@kiss.rsce_config.builder'
