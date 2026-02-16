@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss;
 
+use Contao\Controller;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -11,42 +12,119 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class CustomElementsConfigurationBuilder
 {
-    public array $fields = [];
+    private array $config = [];
 
-    public array $listFields = [];
+    private array $listStack = [];
+
+    private array $fields = [];
+
+    private array $pendingFields = [];
 
     public function __construct(private TranslatorInterface $translator)
-    {}
-
-    public function create(string|null $type = null): self|array
     {
-        $this->fields = [];
+        Controller::loadDataContainer('tl_content');
+        Controller::loadDataContainer('tl_module');
+    }
 
-        if (null === $type) {
+    public function create(array $labels, string $contentCategory = 'texts', array|null $extra = []): self
+    {
+        $this->config['label'] = $labels;
+        $this->config['contentCategory'] = $contentCategory;
+
+        $this->config = [...$this->config, ...$extra];
+
+        return $this;
+    }
+
+    public function startList(string $key, array $label, array|null $elementLabel = null, int $min = 1, int|null $max = null): self
+    {
+        $this->applyPendingFields();
+
+        $listConfig = [
+            'label' => $label,
+            'inputType' => 'list',
+            'elementLabel' => $elementLabel ?? $this->translator->trans("rsce.label.element", [], 'rsce'),
+            'fields' => [],
+            'minItems' => $min,
+        ];
+
+        if (null !== $max) {
+            $listConfig['maxItems'] = $max;
+        }
+
+        $this->listStack[] = [
+            'key' => $key,
+            'config' => $listConfig,
+        ];
+
+        return $this;
+    }
+
+    public function endList(): self
+    {
+        $this->applyPendingFields();
+
+        if ([] === $this->listStack) {
+            throw new \LogicException('No list to close');
+        }
+
+        $current = array_pop($this->listStack);
+
+        if ([] === $this->listStack) {
+            $this->fields[$current['key']] = $current['config'];
+        } else {
+            $index = array_key_last($this->listStack);
+            $this->listStack[$index]['config']['fields'][$current['key']] = $current['config'];
+        }
+
+        return $this;
+    }
+
+    public function applyPendingFields(): self
+    {
+        if ([] === $this->pendingFields) {
             return $this;
         }
 
-        return match ($type) {
-            'media_text' => self::getMediaTextConfig(),
-            'media_text_list' => self::getMediaTextConfig(),
-            default => throw new \RuntimeException('Unsupported rock solid custom elements type: ' . $type),
-        };
+        if ([] === $this->listStack) {
+            $this->fields = [
+                ...$this->fields,
+                ...$this->pendingFields,
+            ];
+        } else {
+            $index = array_key_last($this->listStack);
+
+            $this->listStack[$index]['config']['fields'] = [
+                ...$this->listStack[$index]['config']['fields'],
+                ...$this->pendingFields,
+            ];
+        }
+
+        $this->pendingFields = [];
+
+        return $this;
+    }
+
+    public function addField(string $key, array $options): self
+    {
+        $this->pendingFields[$key] = $options;
+
+        return $this;
     }
 
     public function addGroup(string $key, array $translations = []): self
     {
-        $this->fields[$key] = [
+        return $this->addField($key, [
             'inputType' => 'group',
             'label' => $translations,
-        ];
-
-        return $this;
+        ]);
     }
 
     public function addDependsOnField(string $key, array $options): self
     {
         $blankOption = false;
 
+        // ToDo: Could allow translated options directly
         if ($options[array_key_first($options)] === '') {
             $blankOption = true;
             unset($options[array_key_first($options)]);
@@ -58,7 +136,7 @@ final class CustomElementsConfigurationBuilder
             $translatedOptions[$option] = $this->translator->trans("rsce.field.$key.options.$option", [], 'rsce') ?? $option;
         }
 
-        $this->fields[$key] = [
+        return $this->addField($key, [
             'label' => [
                 $this->translator->trans("rsce.field.$key.label", [], 'rsce'),
                 $this->translator->trans("rsce.field.$key.description", [], 'rsce'),
@@ -69,41 +147,39 @@ final class CustomElementsConfigurationBuilder
                 'includeBlankOption' => $blankOption,
                 'tl_class' => 'w50 clr',
             ],
-        ];
-
-        return $this;
+        ]);
     }
 
     public function addHeadlineField(): self
     {
-        $this->fields['headline'] = [
+        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['headline'] : [
             'inputType' => 'standardField',
         ];
 
-        return $this;
+        return $this->addField('headline', $options);
     }
 
     public function addToplineField(): self
     {
-        $this->fields['topline'] = [
+        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['topline'] : [
             'inputType' => 'standardField',
         ];
 
-        return $this;
+        return $this->addField('topline', $options);
     }
 
     public function addTextField(): self
     {
-        $this->fields['text'] = [
+        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['text'] : [
             'inputType' => 'standardField',
         ];
 
-        return $this;
+        return $this->addField('text', $options);
     }
 
     public function addImageField(string|null $dependsOn = null, bool $includeImageSizeField = false): self
     {
-        $this->fields['singleSRC'] = [
+        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['singleSRC'] : [
             'inputType' => 'standardField',
             'eval' => [
                 'tl_class' => 'w50 clr',
@@ -111,11 +187,13 @@ final class CustomElementsConfigurationBuilder
         ];
 
         if (null !== $dependsOn) {
-            $this->fields['singleSRC']['dependsOn'] = [
+            $options['dependsOn'] = [
                 'field' => $dependsOn,
                 'value' => 'image',
             ];
         }
+
+        $this->addField('singleSRC', $options);
 
         if ($includeImageSizeField) {
             $this->addImageSizeField($dependsOn);
@@ -126,23 +204,27 @@ final class CustomElementsConfigurationBuilder
 
     public function addImageSizeField(string|null $dependsOn = null): self
     {
-        $this->fields['size'] = [
+        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['size'] : [
             'inputType' => 'standardField',
         ];
 
+        $options['eval']['tl_class'] = 'w50';
+
         if (null !== $dependsOn) {
-            $this->fields['size']['dependsOn'] = [
+            $options['dependsOn'] = [
                 'field' => $dependsOn,
                 'value' => 'image',
             ];
         }
+
+        $this->addField('size', $options);
 
         return $this;
     }
 
     public function addIconField(string|null $dependsOn = null): self
     {
-        $this->fields['icon'] = [
+        $options = [
             'label' => [
                 'de' => ['Icon', 'Hier können Sie ein Icon auswählen.'],
                 'en' => ['Icon', 'Here you can choose an icon.'],
@@ -156,33 +238,29 @@ final class CustomElementsConfigurationBuilder
         ];
 
         if (null !== $dependsOn) {
-            $this->fields['icon']['dependsOn'] = [
+            $options['dependsOn'] = [
                 'field' => $dependsOn,
                 'value' => 'icon',
             ];
         }
 
+        $this->addField('icon', $options);
+
         return $this;
     }
 
-    private function getMediaTextConfig(): array
+    public function build(): array
     {
-        $this
-            ->addGroup('settings', [
-                $this->translator->trans('rsce.group.settings', [], 'rsce'),
-            ])
-            ->addDependsOnField('type', ['image', 'icon', 'separated'])
-            ->addImageSizeField('type')
-            ->addIconField('type')
-            ->addGroup('media', [
-                $this->translator->trans('rsce.group.media', [], 'rsce'),
-            ])
-            ->addImageField('type')
-            ->addHeadlineField()
-            ->addToplineField()
-            ->addTextField()
-        ;
+        $this->applyPendingFields();
 
-        return $this->fields;
+        $this->config['fields'] = $this->fields;
+        $this->fields = [];
+
+        return $this->config;
+    }
+
+    private function isListField(): bool
+    {
+        return [] !== $this->listStack;
     }
 }
