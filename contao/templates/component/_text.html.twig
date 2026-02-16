@@ -1,0 +1,5 @@
+{% block text %}
+    {{ include('@Contao/component/_rich_text.html.twig', {
+        attributes: text_inner_attrs|default
+    }) }}
+{% endblock %}

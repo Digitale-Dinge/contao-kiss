@@ -1,2 +1,24 @@
 {% extends '@Contao/content_element/_base.html.twig' %}
+{% use '@Contao/component/_media_text.html.twig' %}
 
+{% set attributes = attrs(attributes|default).addClass('media_text') %}
+
+{% block media %}
+    {% if type|default in ['image', 'icon'] %}
+        <div{{ attrs(media_attributes|default).addClass('media') }}>
+            {{ include("@Contao/component/_#{type}.html.twig") }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block headline %}
+    {% if headline.text %}
+        {{ block('headline_component') }}
+    {% endif %}
+{% endblock %}
+
+{%- block inner %}
+    {% block content %}
+        {{ block('media_text') }}
+    {% endblock %}
+{% endblock -%}

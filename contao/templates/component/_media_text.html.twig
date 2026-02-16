@@ -1,0 +1,14 @@
+{% block media_text %}
+    {% set item = item|default(_context) %}
+
+    {% block media %}{% endblock %}
+
+    {% if item.text|default %}
+        <div{{ attrs(text_attributes|default).addClass('text') }}>
+            {% block headline %}{% endblock %}
+            {{ include('@Contao/component/_text.html.twig', {
+                text: item.text|default
+            }) }}
+        </div>
+    {% endif %}
+{% endblock %}
