@@ -1,0 +1,20 @@
+{% block media_text %}
+    {% set item = item|default(_context) %}
+
+    {% block media %}
+        {% if type|default in ['image', 'icon'] %}
+            <div{{ attrs(media_attributes|default).addClass('media') }}>
+                {{ include("@Contao/kiss_component/_#{type}.html.twig") }}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {% if item.text|default %}
+        <div{{ attrs(text_attributes|default).addClass('text') }}>
+            {% block headline %}{% endblock %}
+            {{ include('@Contao/kiss_component/_text.html.twig', {
+                text: item.text|default
+            }) }}
+        </div>
+    {% endif %}
+{% endblock %}

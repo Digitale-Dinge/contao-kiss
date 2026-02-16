@@ -22,7 +22,6 @@ return $configBuilder
     ->addGroup('settings', [$translator->trans('rsce.group.settings', [], 'rsce')])
     ->addDependsOnField('type', ['image', 'icon', 'separated'])
     ->addImageSizeField('type')
-    ->addIconField('type')
     ->startList('list', ['de' => 'Elemente', 'en' => 'Elemente',])
         ->addIconField('../type')
         ->addImageField('../type')

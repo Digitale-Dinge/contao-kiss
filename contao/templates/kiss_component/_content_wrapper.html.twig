@@ -1,0 +1,12 @@
+{% block content_wrapper %}
+    {% set list_mode = list|default is iterable and list|length %}
+    {% set list_tag_name = list_tag_name|default('div') %}
+
+    {% if list_mode %}
+        <{{ list_tag_name }}{{ attrs(list_wrapper_attributes|default).addClass('list') }}>
+    {% endif %}
+    {% block content %}{% endblock %}
+    {% if list_mode %}
+        </{{ list_tag_name }}>
+    {% endif %}
+{% endblock %}

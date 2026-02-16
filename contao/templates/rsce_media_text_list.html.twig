@@ -1,2 +1,22 @@
 {% extends '@Contao/content_element/_base.html.twig' %}
+{% use '@Contao/kiss_component/_media_text.html.twig' %}
 
+{% set attributes = attrs(attributes|default).addClass('media_text_list') %}
+
+{% block headline %}
+    {% if item.headline.value|default or item.topline|default %}
+        {{ include('@Contao/component/_headline.html.twig') }}
+    {% endif %}
+{% endblock %}
+
+{% block media_text %}
+    <div{{ attrs(media_text_item_attributes|default).addClass('media_text') }}>
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% for item in list %}
+        {{ block('media_text') }}
+    {% endfor %}
+{% endblock %}

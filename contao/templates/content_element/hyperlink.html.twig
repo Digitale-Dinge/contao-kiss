@@ -16,7 +16,7 @@
 {% block text_link %}
     {% if icon|default %}
         {{- text_before|default -}}
-        {{ include('@Contao/component/_icon_text.html.twig') }}
+        {{ include('@Contao/kiss_component/_icon_text.html.twig') }}
         {{- text_after|default -}}
     {% else %}
         {{ parent() }}

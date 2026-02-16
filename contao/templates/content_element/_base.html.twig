@@ -1,4 +1,8 @@
 {% extends '@Contao/content_element/_base.html.twig' %}
+{% use '@Contao/kiss_component/_content_wrapper.html.twig' %}
+
+{% set list_mode = list|default is iterable and list|length %}
+{% set list_tag_name = list_tag_name|default('div') %}
 
 {% block attributes %}
     {% set attributes = attrs(attributes|default)
@@ -12,3 +16,11 @@
     %}
     {{ parent() }}
 {% endblock %}
+
+{%- block inner %}
+    {% if headline.text %}
+        {{ block('headline_component') }}
+    {% endif %}
+
+    {{ block('content_wrapper') }}
+{% endblock -%}
