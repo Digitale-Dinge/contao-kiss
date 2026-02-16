@@ -3,6 +3,9 @@ rsce:
         settings:           Element settings
         media:              Image/Icon/Text
 
+    label:
+        element:            'Element %s'
+
     field:
         type:
             label:          Type
@@ -11,3 +14,11 @@ rsce:
                 image:      Image
                 icon:       Icon
                 separated:  Separated
+
+    media_text:
+        label:              Media text
+        description:        A media text element
+
+    media_text_list:
+        label:              Media text list
+        description:        A media text list element
