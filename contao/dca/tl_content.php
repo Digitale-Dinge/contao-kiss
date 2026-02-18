@@ -163,7 +163,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
     'eval' => [
         'sourceDirectory' => 'public/kiss_icons/svg',
         'metadataDirectory' => 'public/kiss_icons',
-        'tl_class' => 'w 50 clr',
+        'tl_class' => 'w50 clr',
     ],
     'sql' => 'blob NULL',
 ];
