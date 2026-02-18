@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 // use Contao\CoreBundle\DataContainer\PaletteManipulator;
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['inputType'] = 'collection';
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['tl_class'] = 'w50 clr hl_collection';
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['fields'] = [
@@ -105,6 +108,55 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['marginBottom'] = [
         'includeBlankOption' => true,
     ],
 ];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['callToAction'] = [
+    'exclude' => true,
+    'inputType' => 'rowWizard',
+    'targetColumn' => 'kiss_styles',
+    'fields' => [
+        'url' => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['url'] ?? [],
+        [
+            'label' => &$GLOBALS['TL_LANG']['MSC']['url'][0],
+            'eval' => [
+                'mandatory' => false,
+            ],
+        ]),
+        'type' => [
+            'label' => &$GLOBALS['TL_LANG']['tl_content']['callToAction']['type'],
+            'inputType' => 'select',
+            'eval' => [
+                'includeBlankOption' => true,
+            ],
+        ],
+        'color' => [
+            'label' => &$GLOBALS['TL_LANG']['tl_content']['callToAction']['color'],
+            'inputType' => 'select',
+            'eval' => [
+                'includeBlankOption' => true,
+            ],
+        ],
+        'size' => [
+            'label' => &$GLOBALS['TL_LANG']['tl_content']['callToAction']['size'],
+            'inputType' => 'select',
+            'eval' => [
+                'includeBlankOption' => true,
+            ],
+        ],
+    ],
+    'eval' => [
+        'tl_class' => 'w100 clr',
+        'max' => 2,
+        'style' => 'max-width: 1000px',
+        'sortable' => false,
+    ],
+    'sql' => ['type' => 'blob', 'length' => MySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false]
+];
+
+PaletteManipulator::create()
+    ->addField('callToAction', 'text_legend', PaletteManipulator::POSITION_APPEND)
+    ->applyToPalette('text', 'tl_content')
+;
+
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
     'inputType' => 'svgIconPicker',

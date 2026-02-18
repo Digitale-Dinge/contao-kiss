@@ -8,9 +8,11 @@ use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 
 use DigitaleDinge\ContaoKiss\EventListener\TranslatableEnumTrait;
 use DigitaleDinge\ContaoKiss\Styles\Options\Color;
+use DigitaleDinge\ContaoKiss\Styles\Options\Component;
 use DigitaleDinge\ContaoKiss\Styles\Options\Layout;
 use DigitaleDinge\ContaoKiss\Styles\Options\Margin;
 use DigitaleDinge\ContaoKiss\Styles\Options\Padding;
+use DigitaleDinge\ContaoKiss\Styles\Options\Size;
 use DigitaleDinge\ContaoKiss\Styles\Options\Typography;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -62,6 +64,24 @@ final class StyleOptionsListener
     public function addPaddingBottomOptions(): array
     {
         return $this->getTranslatedOptions(Padding\Bottom::class);
+    }
+
+    #[AsCallback('tl_content', 'fields.callToAction.fields.type.options')]
+    public function addCtaTypeOptions(): array
+    {
+        return $this->getTranslatedOptions(Component\Button\Type::class);
+    }
+
+    #[AsCallback('tl_content', 'fields.callToAction.fields.color.options')]
+    public function addColorOptions(): array
+    {
+        return $this->getTranslatedOptions(Color\Color::class);
+    }
+
+    #[AsCallback('tl_content', 'fields.callToAction.fields.size.options')]
+    public function addSizeOptions(): array
+    {
+        return $this->getTranslatedOptions(Size\Size::class);
     }
 
     #[AsCallback('tl_content', 'fields.marginTop.options')]

@@ -20,6 +20,13 @@ tl_content:
         - 'Color'
         - 'Define the color of the element.'
 
+    callToAction:
+        0:                      Call-To-Action
+        1:                      Here you can enter one or more call-to-actions which will be displayed on the website.
+        type:                   Type/Style
+        color:                  Color
+        size:                   Size
+
     icon:
         - 'Icon'
 

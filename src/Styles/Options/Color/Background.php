@@ -24,6 +24,6 @@ enum Background: string implements ClassOptionsInterface, TranslatableLabelInter
 
     public function label(): TranslatableMessage
     {
-        return new TranslatableMessage('style_options.color.background.'.$this->name, [], 'style_options');
+        return new TranslatableMessage('style_options.color.'.$this->name, [], 'style_options');
     }
 }

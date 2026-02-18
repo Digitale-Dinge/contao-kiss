@@ -30,18 +30,17 @@ style_options:
         - Choose the background color for this element.
 
     color:
-        background:
-            transparent:            Transparent
-            base_100:               Background (light)
-            base_200:               Background (medium)
-            base_300:               Background (dark)
-            primary:                Primary
-            secondary:              Secondary
-            accent:                 Accent
-            info:                   Info
-            success:                Success
-            warning:                Warning
-            error:                  Error
+        transparent:                Transparent
+        base_100:                   Background (light)
+        base_200:                   Background (medium)
+        base_300:                   Background (dark)
+        primary:                    Primary
+        secondary:                  Secondary
+        accent:                     Accent
+        info:                       Info
+        success:                    Success
+        warning:                    Warning
+        error:                      Error
 
     spacing_option:
         half:                       Half line height
@@ -50,6 +49,12 @@ style_options:
         three:                      3× line height
         four:                       4× line height
         five:                       5× line height
+
+    size_option:
+        x_small:                    Tiny
+        small:                      Small
+        large:                      Large
+        x_large:                    Extra large
 
     typography:
         size:
@@ -68,6 +73,14 @@ style_options:
             h4:                     h4
             h5:                     h5
             h6:                     h6
+
+    component:
+        button:
+            type:
+                solid:              Standard
+                soft:               Soft
+                outline:            Outlined
+                text:               Text
 
     size:                           Size
     heading:                        Heading

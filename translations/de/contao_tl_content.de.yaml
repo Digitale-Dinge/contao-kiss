@@ -20,6 +20,13 @@ tl_content:
         - 'Farbe'
         - 'Bestimmen Sie die Farbe des Elements.'
 
+    callToAction:
+        0:                      Call-To-Action
+        1:                      Hier können Sie eine oder mehrere Call-To-Action angeben, welche auf der Website angezeigt werden sollen.
+        type:                   Typ/Stil
+        color:                  Farbe
+        size:                   Größe
+
     icon:
         - 'Icon'
 
