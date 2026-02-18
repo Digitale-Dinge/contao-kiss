@@ -114,6 +114,13 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['callToAction'] = [
     'inputType' => 'rowWizard',
     'targetColumn' => 'kiss_styles',
     'fields' => [
+        'jumpTo' => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['jumpTo'] ?? [],
+        [
+            'label' => &$GLOBALS['TL_LANG']['tl_content']['jumpTo'][0],
+            'eval' => [
+                'mandatory' => false,
+            ],
+        ]),
         'url' => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['url'] ?? [],
         [
             'label' => &$GLOBALS['TL_LANG']['MSC']['url'][0],
