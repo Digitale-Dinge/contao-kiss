@@ -3,7 +3,9 @@ rsce:
         settings:           Element settings
         media:              Image/Icon/Text
 
-    label:
+    list:
+        label:              Elements
+        description:        'Insert any number of elements.'
         element:            'Element %s'
 
     field:

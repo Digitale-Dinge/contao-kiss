@@ -36,14 +36,17 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
-    public function startList(string $key, array $label, array|null $elementLabel = null, int $min = 1, int|null $max = null): self
+    public function startList(string $key = 'list', array|null $translations = null, array|null $elementLabel = null, int $min = 1, int|null $max = null): self
     {
         $this->applyPendingFields();
 
         $listConfig = [
-            'label' => $label,
+            'label' => $translations ?? [
+                    $this->translator->trans('rsce.list.label', [], 'rsce'),
+                    $this->translator->trans('rsce.list.description', [], 'rsce')
+            ],
             'inputType' => 'list',
-            'elementLabel' => $elementLabel ?? $this->translator->trans("rsce.label.element", [], 'rsce'),
+            'elementLabel' => $elementLabel ?? $this->translator->trans('rsce.list.element', [], 'rsce'),
             'fields' => [],
             'minItems' => $min,
         ];
