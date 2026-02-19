@@ -118,19 +118,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['callToAction'] = [
             'label' => &$GLOBALS['TL_LANG']['tl_content']['text'][0],
             'inputType' => 'text',
         ],
-        'jumpTo' => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['jumpTo'] ?? [], [
-            'label' => &$GLOBALS['TL_LANG']['tl_content']['jumpTo'][0],
-            'eval' => [
-                'mandatory' => false,
-            ],
-        ]),
-        'url' => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['url'] ?? [],
-        [
-            'label' => &$GLOBALS['TL_LANG']['MSC']['url'][0],
-            'eval' => [
-                'mandatory' => false,
-            ],
-        ]),
         'type' => [
             'label' => &$GLOBALS['TL_LANG']['tl_content']['callToAction']['type'],
             'inputType' => 'select',
@@ -152,9 +139,27 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['callToAction'] = [
                 'includeBlankOption' => true,
             ],
         ],
+        'jumpTo' => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['jumpTo'] ?? [], [
+            'label' => &$GLOBALS['TL_LANG']['tl_content']['jumpTo'][0],
+            'eval' => [
+                'mandatory' => false,
+            ],
+        ]),
+        'url' => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['url'] ?? [], [
+            'label' => &$GLOBALS['TL_LANG']['MSC']['url'][0],
+            'eval' => [
+                'mandatory' => false,
+            ],
+        ]),
+        'target' => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['target'] ?? [], [
+            'label' => &$GLOBALS['TL_LANG']['MSC']['target'][0],
+            'eval' => [
+                'mandatory' => false,
+            ],
+        ]),
     ],
     'eval' => [
-        'tl_class' => 'w100 clr',
+        'tl_class' => 'w100 clr call_to_action_widget',
         'max' => 2,
         'style' => 'max-width: 1000px',
         'sortable' => false,
