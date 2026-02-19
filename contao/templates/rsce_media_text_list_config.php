@@ -27,7 +27,7 @@ return $configBuilder
         ->addImageField('../type')
         ->addHeadlineField()
         ->addToplineField()
-        ->addTextField()
+        ->addRichTextField()
     ->endList()
     ->build()
 ;

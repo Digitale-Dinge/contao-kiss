@@ -22,8 +22,11 @@ final class CustomElementsConfigurationBuilder
 
     public function __construct(private TranslatorInterface $translator)
     {
+        // ToDo: Think about a better solution in the future
         Controller::loadDataContainer('tl_content');
         Controller::loadDataContainer('tl_module');
+        Controller::loadDataContainer('tl_company');
+        Controller::loadDataContainer('tl_member');
     }
 
     public function create(array $labels, string $contentCategory = 'texts', array|null $extra = []): self
@@ -171,11 +174,13 @@ final class CustomElementsConfigurationBuilder
         return $this->addField('topline', $options);
     }
 
-    public function addTextField(): self
+    public function addRichTextField(bool $mandatory = true): self
     {
         $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['text'] : [
             'inputType' => 'standardField',
         ];
+
+        $options['eval']['mandatory'] = $mandatory;
 
         return $this->addField('text', $options);
     }
@@ -248,6 +253,35 @@ final class CustomElementsConfigurationBuilder
         }
 
         $this->addField('icon', $options);
+
+        return $this;
+    }
+
+    public function addPhoneField(): self
+    {
+        $options = $GLOBALS['TL_DCA']['tl_member']['fields']['phone'];
+        $options['eval']['mandatory'] = false;
+
+        $this->addField('phone', $options);
+
+        return $this;
+    }
+
+    public function addEmailField(): self
+    {
+        $options = $GLOBALS['TL_DCA']['tl_member']['fields']['email'];
+        $options['eval']['mandatory'] = false;
+
+        $this->addField('email', $options);
+
+        return $this;
+    }
+
+    public function addSocialsField(): self
+    {
+        $options = $GLOBALS['TL_DCA']['tl_company']['fields']['socials'];
+
+        $this->addField('socials', $options);
 
         return $this;
     }

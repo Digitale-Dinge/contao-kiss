@@ -30,6 +30,6 @@ return $configBuilder
     ])
     ->addImageField('type')
     ->addHeadlineField() // Topline is appended automatically outside of lists
-    ->addTextField()
+    ->addRichTextField()
     ->build()
 ;
