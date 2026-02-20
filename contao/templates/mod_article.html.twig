@@ -3,7 +3,7 @@
 {% set inside_attributes = attrs()
     .addClass([
         'inside',
-        styles.container(contentWidth|default),
+        styles.container(contentWidth|default ?: null),
         styles.background(bgColor|default),
         styles.padding_top(paddingTop|default),
         styles.padding_bottom(paddingBottom|default),
@@ -12,6 +12,7 @@
 %}
 
 {% block content %}
+    {% dump(contentWidth|default) %}
     {% if not noMarkup %}
         <div{{ inside_attributes }}>
             {{ parent() }}
