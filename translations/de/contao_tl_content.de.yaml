@@ -86,3 +86,7 @@ tl_content:
     backgroundColor:
         - Hintergrundfarbe
         - Wählen Sie die Hintergrundfarbe für das Inhaltselement
+
+    textAppearance:
+        - Text-Aussehen
+        - Hier können Sie ein Auswählen für den Textinhalt auswählen.
