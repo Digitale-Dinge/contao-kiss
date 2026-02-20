@@ -2,7 +2,7 @@
 
 {% block rich_text_attributes %}
     {% set rich_text_attributes = attrs(rich_text_attributes|default)
-        .addClass(data.textAppearance|default)
+        .addClass(styles.size(data.textAppearance|default))
     %}
     {{ parent() }}
 {% endblock %}
