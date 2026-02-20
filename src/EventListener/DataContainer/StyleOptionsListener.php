@@ -24,6 +24,7 @@ final class StyleOptionsListener
     {}
 
     #[AsCallback('tl_content', 'fields.headline.fields.appearance.options')]
+    #[AsCallback('tl_content', 'fields.textAppearance.options')]
     #[AsCallback('tl_module', 'fields.headline.fields.appearance.options')]
     public function addHeadlineAppearanceOptions(): array
     {

@@ -97,7 +97,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['marginTop'] = [
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['marginBottom'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['marginBottom'],
     'exclude' => true,
     'inputType' => 'select',
     'targetColumn' => 'kiss_styles',
@@ -109,6 +108,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['marginBottom'] = [
     ],
 ];
 
+// Call to actions that can be appended to text or custom elements
 $GLOBALS['TL_DCA']['tl_content']['fields']['callToAction'] = [
     'exclude' => true,
     'inputType' => 'rowWizard',
@@ -167,11 +167,20 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['callToAction'] = [
     'sql' => ['type' => 'blob', 'length' => MySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false]
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['textAppearance'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w50 clr',
+        'includeBlankOption' => true,
+    ],
+];
+
 PaletteManipulator::create()
     ->addField('callToAction', 'text_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('text', 'tl_content')
 ;
-
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
     'inputType' => 'svgIconPicker',
