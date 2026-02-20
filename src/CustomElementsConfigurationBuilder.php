@@ -185,6 +185,15 @@ final class CustomElementsConfigurationBuilder
         return $this->addField('text', $options);
     }
 
+    public function addTextAppearanceField(): self
+    {
+        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['textAppearance'] : [
+            'inputType' => 'standardField',
+        ];
+
+        return $this->addField('textAppearance', $options);
+    }
+
     public function addImageField(string|null $dependsOn = null, bool $includeImageSizeField = false): self
     {
         $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['singleSRC'] : [
