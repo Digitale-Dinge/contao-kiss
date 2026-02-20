@@ -1,6 +1,6 @@
 {% use '@Contao/component/_rich_text.html.twig' %}
 
-{% block rich_text_attributes %}
+{% block rich_text_component %}
     {% set rich_text_attributes = attrs(rich_text_attributes|default)
         .addClass(styles.size(data.textAppearance|default))
     %}
