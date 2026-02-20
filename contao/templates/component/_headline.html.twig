@@ -1,7 +1,10 @@
 {% use '@Contao/component/_headline.html.twig' %}
 
 {% block headline_component %}
-    {% set topline = item.topline|default(data.topline|default) %}
+    {% if item is defined %}
+        {% set topline = item.topline|default %}
+    {% endif %}
+
     {% if topline|default %}
         <p{{ attrs(topline_attributes|default).addClass('topline') }}>{{ topline }}</p>
     {% endif %}
