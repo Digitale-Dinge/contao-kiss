@@ -1,7 +1,6 @@
 {% use '@Contao/component/_rich_text.html.twig' %}
 
 {% block rich_text_component %}
-    {% dump(item.textAppearance|default) %}
     {% set text_appearance = item is defined
         ? (item.textAppearance|default)
         : (data.textAppearance|default)
