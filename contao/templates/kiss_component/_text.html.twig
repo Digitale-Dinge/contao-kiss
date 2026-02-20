@@ -1,5 +1,9 @@
 {% block text %}
-    {{ include('@Contao/component/_rich_text.html.twig', {
-        attributes: text_inner_attrs|default
-    }) }}
+    {% set item = item|default(_context) %}
+
+    {% if item.text|default %}
+        {{ include('@Contao/component/_rich_text.html.twig', {
+            attributes: text_inner_attrs|default
+        }) }}
+    {% endif %}
 {% endblock %}

@@ -9,7 +9,7 @@
         {% endif %}
     {% endblock %}
 
-    {% if item.text|default %}
+    {% if item.text|default or headline.text %}
         <div{{ attrs(text_attributes|default).addClass('text') }}>
             {% block headline %}{% endblock %}
             {{ include('@Contao/kiss_component/_text.html.twig', {
