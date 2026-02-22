@@ -11,10 +11,11 @@
 
     {# RSCE list wrapper #}
     {% if item.headline|default is iterable %}
+        {% set appearance = item.headline.appearance|default %}
         {% set headline = {
             text: item.headline.value,
             tag_name: item.headline.unit|default,
-            appearance: item.headline.appearance|default
+            attributes: attrs(item.headline.attributes|default).addClass(['headline', styles.size(appearance)|default(styles.heading(appearance))])
         } %}
     {% else %}
         {% set appearance = (data.headline|default|deserialize).appearance|default %}
