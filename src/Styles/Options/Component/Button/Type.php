@@ -10,7 +10,6 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 enum Type: string implements ClassOptionsInterface, TranslatableLabelInterface
 {
-    case solid = 'btn-solid';
     case soft = 'btn-soft';
     case outline = 'btn-outline';
     case text = 'btn-text';

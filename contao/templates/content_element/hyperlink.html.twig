@@ -3,7 +3,7 @@
 {% if data.hyperlinkAsButton|default %}
     {% set link_attributes = attrs(link_attributes|default)
         .addClass('btn')
-        .addClass(data.buttonStyle, data.buttonStyle|default and data.buttonStyle != 'btn-solid')
+        .addClass(data.buttonStyle, data.buttonStyle|default)
         .addClass(data.buttonColor, data.buttonColor|default)
         .addClass(data.buttonSize, data.buttonSize|default)
         .addClass(data.buttonShape, data.buttonShape|default)

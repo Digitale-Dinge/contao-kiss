@@ -77,7 +77,6 @@ style_options:
     component:
         button:
             type:
-                solid:              Standard
                 soft:               Soft
                 outline:            Outlined
                 text:               Text
