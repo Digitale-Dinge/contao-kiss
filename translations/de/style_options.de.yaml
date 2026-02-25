@@ -81,6 +81,22 @@ style_options:
                 soft:               Weich
                 outline:            Umrandet
                 text:               Text
+            color:
+                primary:            Primär
+                secondary:          Sekundär
+                accent:             Akzent
+                info:               Info
+                success:            Erfolg
+                warning:            Warnung
+                error:              Fehler
+            size:
+                x_small:            Sehr klein
+                small:              Klein
+                large:              Groß
+                x_large:            Sehr groß
+            shape:
+                wide:               Breit
+                block:              Volle Breite
 
     size:                           Größe
     heading:                        Überschrift

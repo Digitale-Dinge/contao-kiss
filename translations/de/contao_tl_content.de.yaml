@@ -63,6 +63,14 @@ tl_content:
         sm: 'Klein <img src="bundles/digitaledingecontaokiss/icons/small.png">'
         lg: 'Groß (Standard) <img src="bundles/digitaledingecontaokiss/icons/large.png">'
 
+    buttonStyle:
+        - 'Buttonstil'
+        - 'Bestimmen Sie den Stil des Buttons.'
+
+    buttonShape:
+        - 'Buttonform'
+        - 'Bestimmen Sie die Form des Buttons.'
+
     contentWidth:
         - Inhaltsbreite
         - Bestimmen Sie die Breite des Inhalts.

@@ -231,51 +231,76 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['allowHtml'] = tr
 /* HTML in Linktexten */
 $GLOBALS['TL_DCA']['tl_content']['fields']['linktext']['eval']['allowHtml'] = true;
 
-/*$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'hyperlinkAsButton';
- * $GLOBALS['TL_DCA']['tl_content']['subpalettes']['hyperlinkAsButton'] = 'buttonType,buttonColor,buttonSize';
- * $GLOBALS['TL_DCA']['tl_content']['fields']['hyperlinkAsButton'] = [
- * 'exclude' => true,
- * 'inputType' => 'checkbox',
- * 'sql' => "char(1) NOT NULL default ''",
- * 'eval' => [
- * 'tl_class' => 'm12 clr',
- * 'submitOnChange' => true,
- * ],
- * ];
- * $GLOBALS['TL_DCA']['tl_content']['fields']['buttonType'] = [
- * 'label' => &$GLOBALS['TL_LANG']['tl_content']['buttonType'],
- * 'exclude' => true,
- * 'inputType' => 'radio',
- * 'options' => ['primary', 'secondary', 'outline'],
- * 'reference' => &$GLOBALS['TL_LANG']['tl_content'],
- * 'eval' => [
- * 'tl_class' => 'w50 image-grid image-grid--cols-3 image-grid--highdpi',
- * ],
- * 'sql' => "varchar(32) NOT NULL default ''",
- * ];
- * $GLOBALS['TL_DCA']['tl_content']['fields']['buttonSize'] = [
- * 'label' => &$GLOBALS['TL_LANG']['tl_content']['buttonSize'],
- * 'exclude' => true,
- * 'inputType' => 'radio',
- * 'options' => ['lg', 'sm'],
- * 'reference' => &$GLOBALS['TL_LANG']['tl_content'],
- * 'eval' => [
- * 'tl_class' => 'w50 image-grid image-grid--highdpi',
- * ],
- * 'sql' => "varchar(32) NOT NULL default ''",
- * ];*/
+/*
+ * Hyperlink as Button
+ */
+$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'hyperlinkAsButton';
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['hyperlinkAsButton'] = 'buttonStyle,buttonColor,buttonSize,buttonShape';
 
-/*PaletteManipulator::create()
-    // Hyperlinks
-    ->addField('lightboxIframe', 'rel', 'after')
-    ->addField('icon', 'lightboxIframe', 'after')
-    ->addField('iconPosition', 'icon', 'after')
-    ->addField('hyperlinkAsButton', 'iconPosition', 'after')
+$GLOBALS['TL_DCA']['tl_content']['fields']['hyperlinkAsButton'] = [
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'eval' => [
+        'tl_class' => 'm12 clr',
+        'submitOnChange' => true,
+    ],
+    'sql' => "char(1) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['buttonStyle'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'eval' => [
+        'tl_class' => 'w50',
+        'includeBlankOption' => true,
+    ],
+    'sql' => "varchar(32) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['buttonColor'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'eval' => [
+        'tl_class' => 'w50',
+        'includeBlankOption' => true,
+    ],
+    'sql' => "varchar(32) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['buttonSize'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'eval' => [
+        'tl_class' => 'w50',
+        'includeBlankOption' => true,
+    ],
+    'sql' => "varchar(32) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['buttonShape'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'eval' => [
+        'tl_class' => 'w50',
+        'includeBlankOption' => true,
+    ],
+    'sql' => "varchar(32) NOT NULL default ''",
+];
+
+PaletteManipulator::create()
+    ->addField('lightboxIframe', 'rel', PaletteManipulator::POSITION_AFTER)
+    ->addField('icon', 'lightboxIframe', PaletteManipulator::POSITION_AFTER)
+    ->addField('iconPosition', 'icon', PaletteManipulator::POSITION_AFTER)
+    ->addField('hyperlinkAsButton', 'iconPosition', PaletteManipulator::POSITION_AFTER)
     ->applyToPalette('hyperlink', 'tl_content')
-    // Download
-    ->addField('hyperlinkAsButton', 'download_legend', 'append')
+;
+
+PaletteManipulator::create()
+    ->addField('hyperlinkAsButton', 'download_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('download', 'tl_content')
-    // Downloads
-    ->addField('hyperlinkAsButton', 'download_legend', 'append')
+;
+
+PaletteManipulator::create()
+    ->addField('hyperlinkAsButton', 'download_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('downloads', 'tl_content')
-;*/
+;
