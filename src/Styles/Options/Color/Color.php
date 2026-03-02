@@ -17,9 +17,11 @@ enum Color: string implements ClassOptionsInterface, TranslatableLabelInterface
     case success = 'success';
     case warning = 'warning';
     case error = 'error';
+    /*
     case base_100 = 'base-100';
     case base_200 = 'base-200';
     case base_300 = 'base-300';
+    */
 
     public function label(): TranslatableMessage
     {

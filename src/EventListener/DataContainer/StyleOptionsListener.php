@@ -29,7 +29,7 @@ final class StyleOptionsListener
     public function addHeadlineAppearanceOptions(): array
     {
         return [
-            $this->translator->trans('style_options.size', [], 'style_options') => $this->getTranslatedOptions(Typography\Size::class),
+            $this->translator->trans('style_options.size', [], 'style_options') => $this->getTranslatedOptions(Typography\FontSize::class),
             $this->translator->trans('style_options.heading', [], 'style_options') => $this->getTranslatedOptions(Typography\Heading::class),
         ];
     }
@@ -67,18 +67,21 @@ final class StyleOptionsListener
         return $this->getTranslatedOptions(Padding\Bottom::class);
     }
 
+    #[AsCallback('tl_content', 'fields.buttonType.options')]
     #[AsCallback('tl_content', 'fields.callToAction.fields.type.options')]
     public function addCtaTypeOptions(): array
     {
         return $this->getTranslatedOptions(Component\Button\Type::class);
     }
 
+    #[AsCallback('tl_content', 'fields.buttonColor.options')]
     #[AsCallback('tl_content', 'fields.callToAction.fields.color.options')]
     public function addColorOptions(): array
     {
         return $this->getTranslatedOptions(Color\Color::class);
     }
 
+    #[AsCallback('tl_content', 'fields.buttonSize.options')]
     #[AsCallback('tl_content', 'fields.callToAction.fields.size.options')]
     public function addSizeOptions(): array
     {
@@ -95,24 +98,6 @@ final class StyleOptionsListener
     public function addMarginBottomOptions(): array
     {
         return $this->getTranslatedOptions(Margin\Bottom::class);
-    }
-
-    #[AsCallback('tl_content', 'fields.buttonStyle.options')]
-    public function addButtonStyleOptions(): array
-    {
-        return $this->getTranslatedOptions(Component\Button\Type::class);
-    }
-
-    #[AsCallback('tl_content', 'fields.buttonColor.options')]
-    public function addButtonColorOptions(): array
-    {
-        return $this->getTranslatedOptions(Component\Button\Color::class);
-    }
-
-    #[AsCallback('tl_content', 'fields.buttonSize.options')]
-    public function addButtonSizeOptions(): array
-    {
-        return $this->getTranslatedOptions(Component\Button\Size::class);
     }
 
     #[AsCallback('tl_content', 'fields.buttonShape.options')]

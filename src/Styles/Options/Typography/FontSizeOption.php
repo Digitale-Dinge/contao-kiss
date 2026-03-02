@@ -15,7 +15,7 @@ use DigitaleDinge\ContaoKiss\Styles\StyleOption;
  * @method string xx_large
  * @method string xxx_large
  */
-final class SizeOption extends StyleOption
+final class FontSizeOption extends StyleOption
 {
-    public string $enumClass = Size::class;
+    public string $enumClass = FontSize::class;
 }

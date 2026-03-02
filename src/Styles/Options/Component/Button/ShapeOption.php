@@ -7,11 +7,10 @@ namespace DigitaleDinge\ContaoKiss\Styles\Options\Component\Button;
 use DigitaleDinge\ContaoKiss\Styles\StyleOption;
 
 /**
- * @method string soft
- * @method string outline
- * @method string text
+ * @method string wide
+ * @method string block
  */
-final class TypeOption extends StyleOption
+final class ShapeOption extends StyleOption
 {
-    public string $enumClass = Type::class;
+    public string $enumClass = Shape::class;
 }

@@ -8,7 +8,7 @@ use Contao\CoreBundle\Translation\TranslatableLabelInterface;
 use DigitaleDinge\ContaoKiss\Styles\ClassOptionsInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 
-enum Size: string implements ClassOptionsInterface, TranslatableLabelInterface
+enum FontSize: string implements ClassOptionsInterface, TranslatableLabelInterface
 {
     case x_small = 'text-xs';
     case small = 'text-sm';
