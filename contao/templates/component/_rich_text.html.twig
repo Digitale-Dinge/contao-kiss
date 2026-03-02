@@ -8,7 +8,7 @@
 
     {% if text_appearance %}
         {% set rich_text_attributes = attrs(rich_text_attributes|default)
-            .addClass(styles.size(text_appearance)|default(styles.heading(text_appearance)))
+            .addClass(styles.font_size(text_appearance)|default(styles.heading(text_appearance)))
         %}
     {% endif %}
     {{ parent() }}

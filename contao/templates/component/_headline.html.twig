@@ -15,14 +15,14 @@
         {% set headline = {
             text: item.headline.value,
             tag_name: item.headline.unit|default,
-            attributes: attrs(item.headline.attributes|default).addClass(['headline', styles.size(appearance)|default(styles.heading(appearance))])
+            attributes: attrs(item.headline.attributes|default).addClass(['headline', styles.font_size(appearance)|default(styles.heading(appearance))])
         } %}
     {% else %}
         {% set appearance = (data.headline|default|deserialize).appearance|default %}
         {% set headline = {
             text: headline.text|default(headline),
             tag_name: headline.tag_name|default,
-            attributes: attrs(headline.attributes|default).addClass(['headline', styles.size(appearance)|default(styles.heading(appearance))])
+            attributes: attrs(headline.attributes|default).addClass(['headline', styles.font_size(appearance)|default(styles.heading(appearance))])
         } %}
     {% endif %}
 
