@@ -3,10 +3,10 @@
 {% if data.hyperlinkAsButton|default %}
     {% set link_attributes = attrs(link_attributes|default)
         .addClass('btn')
-        .addClass(data.buttonStyle, data.buttonStyle|default)
-        .addClass(data.buttonColor, data.buttonColor|default)
-        .addClass(data.buttonSize, data.buttonSize|default)
-        .addClass(data.buttonShape, data.buttonShape|default)
+        .addClass('btn-' ~ styles.size(data.buttonSize), data.buttonSize|default)
+        .addClass('btn-' ~ styles.color(data.buttonColor), data.buttonColor|default)
+        .addClass(styles.button_type(data.buttonType|default))
+        .addClass(styles.button_shape(data.buttonShape|default))
         .addClass('colorbox_iframe', data.lightboxIframe|default)
     %}
 {% endif %}
