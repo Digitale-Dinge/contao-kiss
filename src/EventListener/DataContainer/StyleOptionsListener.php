@@ -100,35 +100,24 @@ final class StyleOptionsListener
     #[AsCallback('tl_content', 'fields.buttonStyle.options')]
     public function addButtonStyleOptions(): array
     {
-        return $this->getTranslatedOptionsByValue(Component\Button\Type::class);
+        return $this->getTranslatedOptions(Component\Button\Type::class);
     }
 
     #[AsCallback('tl_content', 'fields.buttonColor.options')]
     public function addButtonColorOptions(): array
     {
-        return $this->getTranslatedOptionsByValue(Component\Button\Color::class);
+        return $this->getTranslatedOptions(Component\Button\Color::class);
     }
 
     #[AsCallback('tl_content', 'fields.buttonSize.options')]
     public function addButtonSizeOptions(): array
     {
-        return $this->getTranslatedOptionsByValue(Component\Button\Size::class);
+        return $this->getTranslatedOptions(Component\Button\Size::class);
     }
 
     #[AsCallback('tl_content', 'fields.buttonShape.options')]
     public function addButtonShapeOptions(): array
     {
-        return $this->getTranslatedOptionsByValue(Component\Button\Shape::class);
-    }
-
-    private function getTranslatedOptionsByValue(string $enum): array
-    {
-        $options = [];
-
-        foreach ($enum::cases() as $case) {
-            $options[$case->value] = $case->label()->trans($this->translator);
-        }
-
-        return $options;
+        return $this->getTranslatedOptions(Component\Button\Shape::class);
     }
 }
