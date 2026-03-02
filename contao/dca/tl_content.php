@@ -235,56 +235,56 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['linktext']['eval']['allowHtml'] = tr
  * Hyperlink as Button
  */
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'hyperlinkAsButton';
-$GLOBALS['TL_DCA']['tl_content']['subpalettes']['hyperlinkAsButton'] = 'buttonStyle,buttonColor,buttonSize,buttonShape';
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['hyperlinkAsButton'] = 'buttonType,buttonColor,buttonSize,buttonShape';
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['hyperlinkAsButton'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
+    'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'm12 clr',
         'submitOnChange' => true,
     ],
-    'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['buttonStyle'] = [
+$GLOBALS['TL_DCA']['tl_content']['fields']['buttonType'] = [
     'exclude' => true,
     'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w50',
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(32) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['buttonColor'] = [
     'exclude' => true,
     'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w50',
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(32) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['buttonSize'] = [
     'exclude' => true,
     'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w50',
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(32) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['buttonShape'] = [
     'exclude' => true,
     'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w50',
         'includeBlankOption' => true,
     ],
-    'sql' => "varchar(32) NOT NULL default ''",
 ];
 
 PaletteManipulator::create()
