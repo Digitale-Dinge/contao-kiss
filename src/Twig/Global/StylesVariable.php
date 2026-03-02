@@ -5,13 +5,18 @@ declare(strict_types=1);
 namespace DigitaleDinge\ContaoKiss\Twig\Global;
 
 use DigitaleDinge\ContaoKiss\Styles\Options\Color;
+use DigitaleDinge\ContaoKiss\Styles\Options\Component;
 use DigitaleDinge\ContaoKiss\Styles\Options\Layout;
 use DigitaleDinge\ContaoKiss\Styles\Options\Margin;
 use DigitaleDinge\ContaoKiss\Styles\Options\Padding;
+use DigitaleDinge\ContaoKiss\Styles\Options\Size;
 use DigitaleDinge\ContaoKiss\Styles\Options\Typography;
 
 class StylesVariable
 {
+    /**
+     * Layout
+     */
     public function getContainer(string|null $key = null): Layout\ContainerOption
     {
         return new Layout\ContainerOption($key);
@@ -22,9 +27,12 @@ class StylesVariable
         return new Layout\ColumnOption($key);
     }
 
-    public function getSize(string $key): Typography\SizeOption
+    /**
+     * Typography
+     */
+    public function getFont_size(string $key): Typography\FontSizeOption
     {
-        return new Typography\SizeOption($key);
+        return new Typography\FontSizeOption($key);
     }
 
     public function getHeading(string $key): Typography\HeadingOption
@@ -32,11 +40,22 @@ class StylesVariable
         return new Typography\HeadingOption($key);
     }
 
+    /**
+     * Color
+     */
     public function getBackground(string $key): Color\BackgroundOption
     {
         return new Color\BackgroundOption($key);
     }
 
+    public function getColor(string $key): Color\ColorOption
+    {
+        return new Color\ColorOption($key);
+    }
+
+    /**
+     * Margin
+     */
     public function getMargin_top(string $key): Margin\TopOption
     {
         return new Margin\TopOption($key);
@@ -47,6 +66,9 @@ class StylesVariable
         return new Margin\BottomOption($key);
     }
 
+    /**
+     * Padding
+     */
     public function getPadding_top(string $key): Padding\TopOption
     {
         return new Padding\TopOption($key);
@@ -55,5 +77,23 @@ class StylesVariable
     public function getPadding_bottom(string $key): Padding\BottomOption
     {
         return new Padding\BottomOption($key);
+    }
+
+    public function getSize(string $key): Size\SizeOption
+    {
+        return new Size\SizeOption($key);
+    }
+
+    /**
+     * Button shape
+     */
+    public function getButton_shape(string $key): Component\Button\ShapeOption
+    {
+        return new Component\Button\ShapeOption($key);
+    }
+
+    public function getButton_type(string $key): Component\Button\TypeOption
+    {
+        return new Component\Button\TypeOption($key);
     }
 }
