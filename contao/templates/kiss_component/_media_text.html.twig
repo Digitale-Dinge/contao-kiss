@@ -1,3 +1,5 @@
+{% use '@Contao/kiss_component/_text.html.twig' %}
+
 {% block media_text %}
     {% set item = item|default(_context) %}
 
@@ -12,9 +14,9 @@
     {% if item.text|default or headline.text %}
         <div{{ attrs(text_attributes|default).addClass('text') }}>
             {% block headline %}{% endblock %}
-            {{ include('@Contao/kiss_component/_text.html.twig', {
-                text: item.text|default
-            }) }}
+            {% with {text: item.text|default} %}
+                {{ block('text') }}
+            {% endwith %}
         </div>
     {% endif %}
 {% endblock %}
