@@ -63,7 +63,7 @@ final class AddLayoutFieldsToPaletteListener
         }
 
         return PaletteManipulator::create()
-            ->addLegend('layout_legend', 'template_legend', PaletteManipulator::POSITION_BEFORE)
+            ->addLegend('layout_legend', ['template_legend', 'protected_legend'], PaletteManipulator::POSITION_BEFORE)
             ->addField(['contentWidth', 'backgroundColor', 'paddingTop', 'paddingBottom', 'marginTop', 'marginBottom'], 'layout_legend', 'append')
             ->applyToString($palette)
         ;
