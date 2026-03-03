@@ -1,0 +1,22 @@
+{% extends '@Contao/kiss_component/_media_text_wrapper.html.twig' %}
+
+{% set text = teaser|default %}
+{% set show_as_card = true %}
+{% set attributes = attrs(attributes|default).addClass(['arc_' ~ archive.id, class]) %}
+
+{% block headline %}
+    {% block info %}
+        <p class="info"><time datetime="{{ datetime }}">{{ date }}</time> {{ author }}</p>
+    {% endblock %}
+    <{{ headline_unit|default('h2') }}>{{ linkHeadline|sanitize_html('contao') }}</{{ headline_unit|default('h2') }}>
+{% endblock %}
+
+{% block text_additional %}
+    {% if hasText.invoke() or hasTeaser %}
+        <p class="more">{{ more|default|sanitize_html('contao') }}</p>
+    {% endif %}
+{% endblock %}
+
+{% if not hasReader %}
+    {% do add_schema_org(getSchemaOrgData.invoke()) %}
+{% endif %}
