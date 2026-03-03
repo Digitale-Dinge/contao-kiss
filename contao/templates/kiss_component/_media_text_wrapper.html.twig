@@ -1,0 +1,15 @@
+{% extends '@Contao/kiss_component/_media_text.html.twig' %}
+
+{% set type = addImage ? 'image' : null %}
+
+{% block headline %}
+    {% if headline.text %}
+        {{ block('headline_component') }}
+    {% endif %}
+{% endblock %}
+
+{% block media_text %}
+    <{{ tag_name|default('div') }}{% block attributes %}{{ attrs(attributes|default).addClass('media_text') }}{% endblock %}>
+        {{ parent() }}
+    </{{ tag_name|default('div') }}>
+{% endblock %}
