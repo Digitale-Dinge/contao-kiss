@@ -1,7 +1,7 @@
 tl_module:
     headline:
-        unit: Einheit
-        size: Größe
+        unit:                   Einheit
+        appearance:             Aussehen
 
     topline:
         - 'Dachzeile'

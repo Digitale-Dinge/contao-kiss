@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['headline']['inputType'] = 'collection';
+$GLOBALS['TL_DCA']['tl_module']['fields']['headline']['eval']['tl_class'] = 'w50 clr hl_collection';
 $GLOBALS['TL_DCA']['tl_module']['fields']['headline']['fields'] = [
     'value' => [
         'label' => [
