@@ -1,6 +1,14 @@
 {% extends '@Contao/kiss_component/_media_text.html.twig' %}
 
-{% set type = addImage ? 'image' : null %}
+{% if addImage|default %}
+    {% set type = addImage ? 'image' : null %}
+    {% set img_class = 'w-full' %}
+{% endif %}
+
+{% if show_as_card|default %}
+    {% set attributes = attrs(attributes|default).addClass('card') %}
+    {% set text_attributes = attrs(media_attributes|default).addClass('card-body') %}
+{% endif %}
 
 {% block headline %}
     {% if headline.text %}
