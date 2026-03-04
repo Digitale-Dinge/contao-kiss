@@ -1,4 +1,5 @@
 /*! tailwindcss v4.1.7 | MIT License | https://tailwindcss.com */
+/*
 @layer properties;
 @layer utilities;
 @layer utilities {
@@ -419,7 +420,9 @@
 		}
 	}
 }
+*/
 
+/*
 .content-element-group {
 	&.grid {
 		:is(h1,h2,h3,h4,h5,h6):first-child {
@@ -431,7 +434,9 @@
 .grid-cols-\[25\%_75\%\] {
 	grid-template-columns: 25% 75%;
 }
+*/
 
+/*
 .swiper-wrapper {
 	display: flex;
 	flex-direction: row;
@@ -441,7 +446,9 @@
 		display: inline-block;
 	}
 }
+*/
 
+/*
 .image-grid {
 	fieldset {
 		display: grid;
@@ -492,6 +499,7 @@
 .image-grid--highdpi label img {
 	zoom: 0.5;
 }
+*/
 
 .tl_select {
 
@@ -561,6 +569,14 @@
     }
 }
 
+.call_to_action_widget {
+
+    [data-contao--row-wizard-target=row] {
+
+    }
+}
+
+/*
 @media (min-width: 769px) {
 	.image-grid {
 		fieldset {
@@ -578,7 +594,7 @@
 		}
 	}
 
-	/* === 3 Columns === */
+	!* === 3 Columns === *!
 	.image-grid--cols-3 {
 		fieldset {
 			grid-template-columns: repeat(3, 1fr);
@@ -600,7 +616,7 @@
 		}
 	}
 
-	/* === 4 Columns === */
+	!* === 4 Columns === *!
 	.image-grid--cols-4 {
 		fieldset {
 			grid-template-columns: repeat(4, 1fr);
@@ -627,3 +643,4 @@
 		}
 	}
 }
+*/
