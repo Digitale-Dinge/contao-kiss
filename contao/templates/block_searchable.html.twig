@@ -1,25 +1,27 @@
 {% extends '@Contao/block_searchable' %}
+{% use '@Contao/kiss_component/_content_wrapper.html.twig' %}
 
-{% set layout_classes = [
-    styles.container(contentWidth|default),
-    styles.padding_top(paddingTop|default),
-    styles.padding_bottom(paddingBottom|default),
-    styles.margin_top(marginTop|default),
-    styles.margin_bottom(marginBottom|default)
-] %}
+{% set list_mode = list|default is iterable and list|length %}
+{% set list_tag_name = list_tag_name|default('div') %}
 
-{% set has_layout_classes = layout_classes|filter(v => v)|length > 0 %}
+{% set wrapperAttributes = attrs(cssID)
+    .addClass([
+        styles.container(data.contentWidth|default),
+        styles.padding_top(data.paddingTop|default),
+        styles.padding_bottom(data.paddingBottom|default),
+        styles.margin_top(data.marginTop|default),
+        styles.margin_bottom(data.marginBottom|default),
+    ])
+    .mergeWith(wrapperAttributes|default)
+%}
 
-{%- block wrapper %}
-    {%- block wrapper_before %}
-        {% if has_layout_classes %}
-            <div{{ attrs().addClass(layout_classes) }}>
-        {% endif %}
-    {% endblock -%}
-    {{ parent() }}
-    {%- block wrapper_after %}
-        {% if has_layout_classes %}
-            </div>
-        {% endif %}
-    {% endblock -%}
-{% endblock -%}
+{% block wrapper %}
+    <div{{ wrapperAttributes }}>
+        {% block headline %}
+            {% if headline|default %}
+                <{{ hl }}>{{ headline|insert_tag_raw }}</{{ hl }}>
+            {% endif %}
+        {% endblock %}
+        {{ block('content_wrapper') }}
+    </div>
+{% endblock %}

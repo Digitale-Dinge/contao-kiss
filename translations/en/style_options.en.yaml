@@ -12,18 +12,26 @@ style_options:
             full:                   Full width without left and right padding
 
         column:
-            one:                    Element width 1/12
-            two:                    Element width 2/12
-            three:                  Element width 3/12
-            four:                   Element width 4/12
-            five:                   Element width 5/12
-            six:                    Element width 6/12
-            seven:                  Element width 7/12
-            eight:                  Element width 8/12
-            nine:                   Element width 9/12
-            ten:                    Element width 10/12
-            eleven:                 Element width 11/12
-            twelve:                 Element width 12/12
+            one:                    1 Column
+            two:                    2 Columns
+            three:                  3 Columns
+            four:                   4 Columns
+            five:                   5 Columns
+            six:                    6 Columns
+            seven:                  7 Columns
+            eight:                  8 Columns
+            nine:                   9 Columns
+            ten:                    10 Columns
+            eleven:                 11 Columns
+            twelve:                 12 Columns
+
+        gap:
+            x_small:                Tiny
+            small:                  Small
+            medium:                 Normal
+            large:                  Large
+            x_large:                Larger
+            xx_large:               Very large
 
     background_color:
         - Background color

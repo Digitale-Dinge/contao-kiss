@@ -2,5 +2,5 @@
 {% import '@Contao/kiss_component/_grid_macro.html.twig' as grid %}
 
 {% block list_attributes %}
-    {{ attrs(list_attributes|default).addClass('grid gap-x-4 gap-y-8' ~ grid.get_class(items_per_row|default(4))) }}
+    {{ attrs(list_attributes|default).addClass('grid gap-x-4 gap-y-8' ~ grid.cols_class(items_per_row|default(4))) }}
 {% endblock %}

@@ -1,0 +1,16 @@
+{% extends '@Contao/mod_newslist.html.twig' %}
+
+{% set list = articles %}
+
+{% block content %}
+    {% if not articles %}
+        <p class="empty">{{ empty }}</p>
+    {% else %}
+        {{ articles|join|raw }}
+    {% endif %}
+{% endblock %}
+
+{% block content_wrapper %}
+    {{ parent() }}
+    {{ pagination|default|raw }}
+{% endblock %}

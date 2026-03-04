@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
+
 $GLOBALS['TL_DCA']['tl_module']['fields']['headline']['inputType'] = 'collection';
 $GLOBALS['TL_DCA']['tl_module']['fields']['headline']['eval']['tl_class'] = 'w50 clr hl_collection';
 $GLOBALS['TL_DCA']['tl_module']['fields']['headline']['fields'] = [
@@ -43,3 +45,37 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['topline'] = [
         'allowHtml' => true,
     ],
 ];
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['gridColumns'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25 clr',
+        //'class' => 'widget-icon icon-width',
+        'chosen' => true,
+        'includeBlankOption' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['gridGap'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+        //'class' => 'widget-icon icon-width',
+        'chosen' => true,
+        'includeBlankOption' => true,
+    ],
+];
+
+PaletteManipulator::create()
+    ->addLegend('layout_legend', ['template_legend', 'protected_legend'], PaletteManipulator::POSITION_BEFORE)
+    ->addField(['gridColumns', 'gridGap'], 'layout_legend', PaletteManipulator::POSITION_APPEND)
+    ->applyToPalette('newslist', 'tl_module')
+    ->applyToPalette('eventlist', 'tl_module')
+    ->applyToPalette('faqlist', 'tl_module')
+    ->applyToPalette('newsletterlist', 'tl_module')
+    ->applyToPalette('newsletterlist', 'tl_module')
+;

@@ -40,10 +40,16 @@ final class StyleOptionsListener
         return $this->getTranslatedOptions(Color\Background::class);
     }
 
-    #[AsCallback('tl_form_field', 'fields.gridColumns.options')]
+    #[AsCallback('tl_module', 'fields.gridColumns.options')]
     public function addLayoutColumnOptions(): array
     {
         return $this->getTranslatedOptions(Layout\Column::class);
+    }
+
+    #[AsCallback('tl_module', 'fields.gridGap.options')]
+    public function addLayoutGapOptions(): array
+    {
+        return $this->getTranslatedOptions(Layout\Gap::class);
     }
 
     #[AsCallback('tl_content', 'fields.contentWidth.options')]

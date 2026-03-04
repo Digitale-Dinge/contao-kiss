@@ -27,6 +27,11 @@ class StylesVariable
         return new Layout\ColumnOption($key);
     }
 
+    public function getGap(string $key): Layout\GapOption
+    {
+        return new Layout\GapOption($key);
+    }
+
     /**
      * Typography
      */
