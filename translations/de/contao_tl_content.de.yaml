@@ -9,67 +9,44 @@ tl_content:
         appearance:             Aussehen
 
     lightboxIframe:
-        - 'Inhalt in iFrame öffnen'
-        - 'Öffnet den Link in einem iFrame und bettet so die externe Seite in die eigene Seite ein.'
+        - Inhalt in iFrame öffnen
+        - Öffnet den Link in einem iFrame und bettet so die externe Seite in die eigene Seite ein.
 
     topline:
-        - 'Dachzeile'
-        - 'Stellt eine optionale Dachzeile über der Headline dar'
+        - Dachzeile
+        - Stellt eine optionale Dachzeile über der Headline dar
 
     color:
-        - 'Farbe'
-        - 'Bestimmen Sie die Farbe des Elements.'
+        - Farbe
+        - Bestimmen Sie die Farbe des Elements.
 
     callToAction:
-        0:                      Call-To-Action
-        1:                      Hier können Sie eine oder mehrere Call-To-Action angeben, welche auf der Website angezeigt werden sollen.
-        type:                   Typ/Stil
-        color:                  Farbe
-        size:                   Größe
+        - Call-To-Action
+        - Hier können Sie eine oder mehrere Call-To-Action angeben, welche auf der Website angezeigt werden sollen.
 
-    icon:
-        - 'Icon'
+    ctaAsButton:
+        - Als Button darstellen
+        - Verändert die Darstellung von einem Textlink in einen Button
 
-    iconColor:
-        primary: 'Primär (Standard) <img src="bundles/digitaledingecontaokiss/icons/primary.png">'
-        secondary: 'Sekundär <img src="bundles/digitaledingecontaokiss/icons/secondary.png">'
-        outline: 'Rahmen <img src="bundles/digitaledingecontaokiss/icons/outline.png">'
+    ctaText:
+        - Text
+        - Hier können Sie einen Text eingeben.
 
-    iconPosition:
-        - 'Position'
-        - 'Wählen Sie die gewünschte Position des Icons.'
+    ctaType:
+        - Typ
+        - Bestimmen Sie die den Typ der Aktion.
 
-    iconPositionOptions:
-        right: 'Rechts <img src="bundles/digitaledingecontaokiss/icons/icon-right.png">'
-        left: 'Links (Standard) <img src="bundles/digitaledingecontaokiss/icons/icon-left.png">'
+    ctaColor:
+        - Color
+        - Bestimmen Sie die die Farbe der Aktion.
 
-    hyperlinkAsButton:
-        - 'Als Button darstellen'
-        - 'Verändert die Darstellung von einem Textlink in einen Button'
+    ctaSize:
+        - Größe
+        - Bestimmen Sie die Größe der Aktion.
 
-    buttonType:
-        - 'Button-Typ'
-        - 'Bestimmen Sie die den Typ des Buttons.'
-
-    buttonColor:
-        - 'Buttonfarbe'
-        - 'Bestimmen Sie die die Farbe des Buttons.'
-
-    buttonSize:
-        - 'Buttongröße'
-        - 'Bestimmen Sie die Größe des Buttons.'
-
-    buttonSizeOptions:
-        sm: 'Klein <img src="bundles/digitaledingecontaokiss/icons/small.png">'
-        lg: 'Groß (Standard) <img src="bundles/digitaledingecontaokiss/icons/large.png">'
-
-    buttonStyle:
-        - 'Buttonstil'
-        - 'Bestimmen Sie den Stil des Buttons.'
-
-    buttonShape:
-        - 'Buttonform'
-        - 'Bestimmen Sie die Form des Buttons.'
+    ctaShape:
+        - Form
+        - Bestimmen Sie die Form der Aktion.
 
     contentWidth:
         - Inhaltsbreite
@@ -98,3 +75,19 @@ tl_content:
     textAppearance:
         - Text-Aussehen
         - Hier können Sie ein Auswählen für den Textinhalt auswählen.
+
+    icon:
+        - Icon
+
+    iconColor:
+        primary: Primär (Standard) <img src="bundles/digitaledingecontaokiss/icons/primary.png">
+        secondary: Sekundär <img src="bundles/digitaledingecontaokiss/icons/secondary.png">
+        outline: Rahmen <img src="bundles/digitaledingecontaokiss/icons/outline.png">
+
+    iconPosition:
+        - Position
+        - Wählen Sie die gewünschte Position des Icons.
+
+    iconPositionOptions:
+        right: Rechts <img src="bundles/digitaledingecontaokiss/icons/icon-right.png">
+        left: Links (Standard) <img src="bundles/digitaledingecontaokiss/icons/icon-left.png">

@@ -9,67 +9,44 @@ tl_content:
         appearance:             Appearance
 
     lightboxIframe:
-        - 'Open content in iFrame'
-        - 'Opens the link in an iFrame and embeds the external page into the current page.'
+        - Open content in iFrame
+        - Opens the link in an iFrame and embeds the external page into the current page.
 
     topline:
-        - 'Topline'
-        - 'Displays an optional topline above the headline.'
+        - Topline
+        - Displays an optional topline above the headline.
 
     color:
-        - 'Color'
-        - 'Define the color of the element.'
+        - Color
+        - Define the color of the element.
 
     callToAction:
-        0:                      Call-To-Action
-        1:                      Here you can enter one or more call-to-actions which will be displayed on the website.
-        type:                   Type/Style
-        color:                  Color
-        size:                   Size
+        - Call-To-Action
+        - Here you can enter one or more call-to-actions which will be displayed on the website.
 
-    icon:
-        - 'Icon'
+    ctaAsButton:
+        - Als Button darstellen
+        - Verändert die Darstellung von einem Textlink in einen Button
 
-    iconColor:
-        primary: 'Primary (default) <img src="bundles/digitaledingecontaokiss/icons/primary.png">'
-        secondary: 'Secondary <img src="bundles/digitaledingecontaokiss/icons/secondary.png">'
-        outline: 'Outline <img src="bundles/digitaledingecontaokiss/icons/outline.png">'
+    ctaText:
+        - Text
+        - Hier können Sie einen Text eingeben.
 
-    iconPosition:
-        - 'Position'
-        - 'Select the desired position of the icon.'
+    ctaType:
+        - Type
+        - Define the type of the action.
 
-    iconPositionOptions:
-        right: 'Right <img src="bundles/digitaledingecontaokiss/icons/icon-right.png">'
-        left: 'Left (default) <img src="bundles/digitaledingecontaokiss/icons/icon-left.png">'
+    ctaColor:
+        - Color
+        - Define the color of the action.
 
-    hyperlinkAsButton:
-        - 'Display as button'
-        - 'Changes the appearance from a text link to a button.'
+    ctaSize:
+        - Size
+        - Define the size of the action.
 
-    buttonType:
-        - 'Button type'
-        - 'Define the type of the button.'
-
-    buttonColor:
-        - 'Button color'
-        - 'Define the color of the button.'
-
-    buttonSize:
-        - 'Button size'
-        - 'Define the size of the button.'
-
-    buttonSizeOptions:
-        sm: 'Small <img src="bundles/digitaledingecontaokiss/icons/small.png">'
-        lg: 'Large (default) <img src="bundles/digitaledingecontaokiss/icons/large.png">'
-
-    buttonStyle:
-        - 'Button style'
-        - 'Define the style of the button.'
-
-    buttonShape:
-        - 'Button shape'
-        - 'Define the shape of the button.'
+    ctaShape:
+        - Form
+        - Bestimmen Sie die Form der Aktion.
 
     contentWidth:
         - Content width
@@ -98,3 +75,19 @@ tl_content:
     textAppearance:
         - Text appearance
         - Here you can choose an appearance for the text content.
+
+    icon:
+        - Icon
+
+    iconColor:
+        primary: Primary
+        secondary: Secondary
+        outline: Outline
+
+    iconPosition:
+        - Position
+        - Select the desired position of the icon.
+
+    iconPositionOptions:
+        right: Right
+        left: Left

@@ -1,0 +1,13 @@
+{% block action %}
+    {% if text|default %}
+        {% set cta_attributes = attrs(cta_attributes|default)
+            .set('href', url|default|insert_tag|encode_email)
+            .addClass('btn', ctaType|default !== 'text')
+            .addClass('btn-' ~ styles.size(ctaSize), ctaSize|default)
+            .addClass('btn-' ~ styles.color(ctaColor), ctaColor|default)
+            .addClass(styles.cta_type(ctaType|default))
+            .addClass(styles.cta_shape(ctaShape|default))
+        %}
+        <a{{ cta_attributes }}>{{ text|insert_tag|encode_email }}</a>
+    {% endif %}
+{% endblock %}

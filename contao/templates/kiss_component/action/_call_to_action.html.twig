@@ -1,0 +1,18 @@
+{% use '@Contao/kiss_component/action/_action.html.twig' %}
+
+{% block call_to_action %}
+    {% set call_to_action = item is defined
+        ? (item.callToAction|default)
+        : (data.callToAction|default)
+    %}
+    {% set actions = call_to_action|deserialize %}
+    {% if actions|length %}
+        <div{{ attrs(cta_wrapper_attributes|default).addClass('cta-outer') }}>
+            {% for action in actions %}
+                {% with action only %}
+                    {{ block('action') }}
+                {% endwith %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

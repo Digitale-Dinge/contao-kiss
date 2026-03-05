@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-// use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
+
+$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'ctaAsButton';
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['ctaAsButton'] = 'ctaType,ctaColor,ctaSize,ctaShape';
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['inputType'] = 'collection';
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['tl_class'] = 'w50 clr hl_collection';
@@ -108,60 +110,98 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['marginBottom'] = [
     ],
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['ctaAsButton'] = [
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'm12 clr',
+        'submitOnChange' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['ctaType'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w50',
+        'includeBlankOption' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['ctaColor'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w50',
+        'includeBlankOption' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['ctaSize'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w50',
+        'includeBlankOption' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['ctaShape'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w50',
+        'includeBlankOption' => true,
+    ],
+];
+
 // Call to actions that can be appended to text or custom elements
 $GLOBALS['TL_DCA']['tl_content']['fields']['callToAction'] = [
     'exclude' => true,
-    'inputType' => 'rowWizard',
-    'targetColumn' => 'kiss_styles',
+    'inputType' => 'group',
+    'palette' => ['text', 'ctaType', 'ctaColor', 'ctaSize', 'url', 'target'],
     'fields' => [
         'text' => [
-            'label' => &$GLOBALS['TL_LANG']['tl_content']['text'][0],
+            'label' => &$GLOBALS['TL_LANG']['tl_content']['ctaText'],
             'inputType' => 'text',
-        ],
-        'type' => [
-            'label' => &$GLOBALS['TL_LANG']['tl_content']['callToAction']['type'],
-            'inputType' => 'select',
             'eval' => [
-                'includeBlankOption' => true,
+                'tl_class' => 'w25',
+            ]
+        ],
+        '&ctaType' => [
+            'eval' => [
+                'tl_class' => 'w25',
             ],
         ],
-        'color' => [
-            'label' => &$GLOBALS['TL_LANG']['tl_content']['callToAction']['color'],
-            'inputType' => 'select',
+        '&ctaColor' => [
             'eval' => [
-                'includeBlankOption' => true,
+                'tl_class' => 'w25',
             ],
         ],
-        'size' => [
-            'label' => &$GLOBALS['TL_LANG']['tl_content']['callToAction']['size'],
-            'inputType' => 'select',
+        '&ctaSize' => [
             'eval' => [
-                'includeBlankOption' => true,
+                'tl_class' => 'w25',
             ],
         ],
-        'jumpTo' => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['jumpTo'] ?? [], [
-            'label' => &$GLOBALS['TL_LANG']['tl_content']['jumpTo'][0],
+        '&url' => [
             'eval' => [
                 'mandatory' => false,
             ],
-        ]),
-        'url' => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['url'] ?? [], [
-            'label' => &$GLOBALS['TL_LANG']['MSC']['url'][0],
+        ],
+        '&target' => [
             'eval' => [
                 'mandatory' => false,
             ],
-        ]),
-        'target' => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['target'] ?? [], [
-            'label' => &$GLOBALS['TL_LANG']['MSC']['target'][0],
-            'eval' => [
-                'mandatory' => false,
-            ],
-        ]),
+        ],
     ],
+    'max' => 2,
     'eval' => [
         'tl_class' => 'w100 clr call_to_action_widget',
-        'max' => 2,
-        'style' => 'max-width: 1000px',
         'sortable' => false,
     ],
     'sql' => ['type' => 'blob', 'length' => MySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false]
@@ -177,22 +217,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['textAppearance'] = [
     ],
 ];
 
-PaletteManipulator::create()
-    ->addField('callToAction', 'text_legend', PaletteManipulator::POSITION_APPEND)
-    ->applyToPalette('text', 'tl_content')
-;
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
-    'inputType' => 'svgIconPicker',
-    'eval' => [
-        'sourceDirectory' => 'public/kiss_icons/svg',
-        'metadataDirectory' => 'public/kiss_icons',
-        'tl_class' => 'w50 clr',
-    ],
-    'sql' => 'blob NULL',
-];
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['rel']['eval']['tl_class'] = 'w25';
+//$GLOBALS['TL_DCA']['tl_content']['fields']['rel']['eval']['tl_class'] = 'w25';
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['lightboxIframe'] = [
     'exclude' => true,
@@ -202,6 +227,16 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['lightboxIframe'] = [
         'tl_class' => 'w25 m12',
         'submitOnChange' => true,
     ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
+    'inputType' => 'svgIconPicker',
+    'eval' => [
+        'sourceDirectory' => 'public/kiss_icons/svg',
+        'metadataDirectory' => 'public/kiss_icons',
+        'tl_class' => 'w50 clr',
+    ],
+    'sql' => 'blob NULL',
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['iconPosition'] = [
@@ -229,78 +264,19 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['useImage']['eval']['tl_class'] = 'lo
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['allowHtml'] = true;
 
 /* HTML in Linktexten */
-$GLOBALS['TL_DCA']['tl_content']['fields']['linktext']['eval']['allowHtml'] = true;
+//$GLOBALS['TL_DCA']['tl_content']['fields']['linktext']['eval']['allowHtml'] = true;
 
-/*
- * Hyperlink as Button
- */
-$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'hyperlinkAsButton';
-$GLOBALS['TL_DCA']['tl_content']['subpalettes']['hyperlinkAsButton'] = 'buttonType,buttonColor,buttonSize,buttonShape';
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['hyperlinkAsButton'] = [
-    'exclude' => true,
-    'inputType' => 'checkbox',
-    'targetColumn' => 'kiss_styles',
-    'eval' => [
-        'tl_class' => 'm12 clr',
-        'submitOnChange' => true,
-    ],
-];
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['buttonType'] = [
-    'exclude' => true,
-    'inputType' => 'select',
-    'targetColumn' => 'kiss_styles',
-    'eval' => [
-        'tl_class' => 'w50',
-        'includeBlankOption' => true,
-    ],
-];
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['buttonColor'] = [
-    'exclude' => true,
-    'inputType' => 'select',
-    'targetColumn' => 'kiss_styles',
-    'eval' => [
-        'tl_class' => 'w50',
-        'includeBlankOption' => true,
-    ],
-];
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['buttonSize'] = [
-    'exclude' => true,
-    'inputType' => 'select',
-    'targetColumn' => 'kiss_styles',
-    'eval' => [
-        'tl_class' => 'w50',
-        'includeBlankOption' => true,
-    ],
-];
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['buttonShape'] = [
-    'exclude' => true,
-    'inputType' => 'select',
-    'targetColumn' => 'kiss_styles',
-    'eval' => [
-        'tl_class' => 'w50',
-        'includeBlankOption' => true,
-    ],
-];
 
 PaletteManipulator::create()
-    ->addField('lightboxIframe', 'rel', PaletteManipulator::POSITION_AFTER)
-    ->addField('icon', 'lightboxIframe', PaletteManipulator::POSITION_AFTER)
-    ->addField('iconPosition', 'icon', PaletteManipulator::POSITION_AFTER)
-    ->addField('hyperlinkAsButton', 'iconPosition', PaletteManipulator::POSITION_AFTER)
+    ->addField('callToAction', 'text_legend', PaletteManipulator::POSITION_APPEND)
+    ->applyToPalette('text', 'tl_content')
+
+    ->addField(['lightboxIframe', 'icon', 'iconPosition', 'ctaAsButton'], 'rel', PaletteManipulator::POSITION_AFTER)
     ->applyToPalette('hyperlink', 'tl_content')
-;
 
-PaletteManipulator::create()
-    ->addField('hyperlinkAsButton', 'download_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('ctaAsButton', 'download_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('download', 'tl_content')
-;
 
-PaletteManipulator::create()
-    ->addField('hyperlinkAsButton', 'download_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('ctaAsButton', 'download_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('downloads', 'tl_content')
 ;
