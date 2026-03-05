@@ -3,11 +3,10 @@
 {% if data.hyperlinkAsButton|default %}
     {% set link_attributes = attrs(link_attributes|default)
         .addClass('btn')
-        .addClass('btn-' ~ styles.size(data.buttonSize), data.buttonSize|default)
-        .addClass('btn-' ~ styles.color(data.buttonColor), data.buttonColor|default)
-        .addClass(styles.button_type(data.buttonType|default))
-        .addClass(styles.button_shape(data.buttonShape|default))
-        .addClass('colorbox_iframe', data.lightboxIframe|default)
+        .addClass('btn-' ~ styles.size(data.ctaSize), data.ctaSize|default)
+        .addClass('btn-' ~ styles.color(data.ctaColor), data.ctaColor|default)
+        .addClass(styles.cta_type(data.ctaType|default))
+        .addClass(styles.cta_shape(data.ctaShape|default))
     %}
 {% endif %}
 
@@ -18,7 +17,7 @@
 {% block text_link %}
     {% if icon|default %}
         {{- text_before|default -}}
-        {{ include('@Contao/kiss_component/_icon_text.html.twig') }}
+        {{ include('@Contao/kiss_component/media/_icon_text.html.twig') }}
         {{- text_after|default -}}
     {% else %}
         {{ parent() }}

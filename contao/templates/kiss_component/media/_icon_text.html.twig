@@ -16,6 +16,6 @@
 
 {% macro span_icon(direction, icon) %}
     <span{{ attrs().addClass(direction == 'right' ? 'ml-1' : 'mr-1') }}>
-        {{ include('@Contao/kiss_component/_icon.html.twig') }}
+        {{ include('@Contao/kiss_component/media/_icon.html.twig') }}
     </span>
 {% endmacro -%}

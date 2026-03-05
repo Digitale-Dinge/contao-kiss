@@ -4,7 +4,7 @@
     {% set list_tag_name = list_tag_name|default('div') %}
 
     {% if list_mode %}
-        {% import '@Contao/kiss_component/_grid_macro.html.twig' as grid %}
+        {% import '@Contao/kiss_component/grid/_macro.html.twig' as grid %}
         {% set cols_key = styles.column(gridColumns|default)  %}
         {% set list_wrapper_attributes = attrs(list_wrapper_attributes|default)
             .addClass(['grid', grid.get_cols_class(cols_key), styles.gap(gridGap|default)])

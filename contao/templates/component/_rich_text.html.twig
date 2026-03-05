@@ -1,4 +1,5 @@
 {% use '@Contao/component/_rich_text.html.twig' %}
+{% use '@Contao/kiss_component/action/_call_to_action.html.twig' %}
 
 {% block rich_text_component %}
     {% set text_appearance = item is defined
@@ -12,4 +13,5 @@
         %}
     {% endif %}
     {{ parent() }}
+    {{ block('call_to_action') }}
 {% endblock %}

@@ -1,4 +1,4 @@
-{% use '@Contao/kiss_component/_text.html.twig' %}
+{% use '@Contao/kiss_component/media/_text.html.twig' %}
 
 {% block media_text %}
     {% set item = item|default(_context) %}
@@ -6,7 +6,7 @@
     {% block media %}
         {% if type|default in ['image', 'icon'] %}
             <div{{ attrs(media_attributes|default).addClass('media') }}>
-                {{ include("@Contao/kiss_component/_#{type}.html.twig") }}
+                {{ include("@Contao/kiss_component/media/_#{type}.html.twig") }}
             </div>
         {% endif %}
     {% endblock %}
