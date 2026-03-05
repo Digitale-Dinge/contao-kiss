@@ -52,7 +52,7 @@ class AddKissFieldsToPaletteListener
         $palette = new Palette($palette);
 
         if ($palette->hasField('text')) {
-            $palette->addField('textAppearance', 'text');
+            $palette->addField('textAppearance', 'text', PaletteManipulator::POSITION_BEFORE);
         }
 
         return $palette->toString();
