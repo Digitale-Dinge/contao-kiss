@@ -90,15 +90,15 @@ class StylesVariable
     }
 
     /**
-     * Button shape
+     * Call to action design
      */
-    public function getButton_shape(string $key): Component\Button\ShapeOption
+    public function getCta_shape(string $key): Component\CallToAction\ShapeOption
     {
-        return new Component\Button\ShapeOption($key);
+        return new Component\CallToAction\ShapeOption($key);
     }
 
-    public function getButton_type(string $key): Component\Button\TypeOption
+    public function getCta_type(string $key): Component\CallToAction\TypeOption
     {
-        return new Component\Button\TypeOption($key);
+        return new Component\CallToAction\TypeOption($key);
     }
 }

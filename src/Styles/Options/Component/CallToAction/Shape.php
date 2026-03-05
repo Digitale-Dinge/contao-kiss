@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Styles\Options\Component\Button;
+namespace DigitaleDinge\ContaoKiss\Styles\Options\Component\CallToAction;
 
 use Contao\CoreBundle\Translation\TranslatableLabelInterface;
 use DigitaleDinge\ContaoKiss\Styles\ClassOptionsInterface;

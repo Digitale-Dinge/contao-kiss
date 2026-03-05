@@ -570,77 +570,27 @@
 }
 
 .call_to_action_widget {
+    .controls {
+        padding: 0 26px;
+    }
 
-    [data-contao--row-wizard-target=row] {
+    .controls--add {
+        background-color: #f9f9f9 !important;
+        border: 1px solid #d0d0d2 !important;
+        width: 100% !important;
+        border-radius: var(--border-radius) !important;
 
+        &[disabled=true] {
+            display: none;
+        }
     }
 }
 
-/*
-@media (min-width: 769px) {
-	.image-grid {
-		fieldset {
-			grid-template-columns: 1fr 1fr;
-		}
-
-		input:nth-of-type(odd),
-		label:nth-of-type(odd) {
-			grid-column: 1;
-		}
-
-		input:nth-of-type(even),
-		label:nth-of-type(even) {
-			grid-column: 2;
-		}
-	}
-
-	!* === 3 Columns === *!
-	.image-grid--cols-3 {
-		fieldset {
-			grid-template-columns: repeat(3, 1fr);
-		}
-
-		input:nth-of-type(3n+1),
-		label:nth-of-type(3n+1) {
-			grid-column: 1;
-		}
-
-		input:nth-of-type(3n+2),
-		label:nth-of-type(3n+2) {
-			grid-column: 2;
-		}
-
-		input:nth-of-type(3n),
-		label:nth-of-type(3n) {
-			grid-column: 3;
-		}
-	}
-
-	!* === 4 Columns === *!
-	.image-grid--cols-4 {
-		fieldset {
-			grid-template-columns: repeat(4, 1fr);
-		}
-
-		input:nth-of-type(4n+1),
-		label:nth-of-type(4n+1) {
-			grid-column: 1;
-		}
-
-		input:nth-of-type(4n+2),
-		label:nth-of-type(4n+2) {
-			grid-column: 2;
-		}
-
-		input:nth-of-type(4n+1),
-		label:nth-of-type(4n+1) {
-			grid-column: 3;
-		}
-
-		input:nth-of-type(4n),
-		label:nth-of-type(4n) {
-			grid-column: 4;
-		}
-	}
+html[data-color-scheme="dark"] {
+    .call_to_action_widget {
+        .controls--add {
+            background-color: #292c32 !important;
+            border-color: #4e5156 !important;
+        }
+    }
 }
-*/

@@ -295,6 +295,18 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function addCallToActionField(): self
+    {
+        if ($this->isListField()) {
+            throw new \Exception('Using addCallToActionField() is not allowed inside lists.');
+        }
+
+        return $this->addField('callToAction', ['inputType' => 'standardField']);
+    }
+
     public function build(): array
     {
         $this->applyPendingFields();

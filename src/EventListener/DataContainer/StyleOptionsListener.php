@@ -73,27 +73,6 @@ final class StyleOptionsListener
         return $this->getTranslatedOptions(Padding\Bottom::class);
     }
 
-    #[AsCallback('tl_content', 'fields.buttonType.options')]
-    #[AsCallback('tl_content', 'fields.callToAction.fields.type.options')]
-    public function addCtaTypeOptions(): array
-    {
-        return $this->getTranslatedOptions(Component\Button\Type::class);
-    }
-
-    #[AsCallback('tl_content', 'fields.buttonColor.options')]
-    #[AsCallback('tl_content', 'fields.callToAction.fields.color.options')]
-    public function addColorOptions(): array
-    {
-        return $this->getTranslatedOptions(Color\Color::class);
-    }
-
-    #[AsCallback('tl_content', 'fields.buttonSize.options')]
-    #[AsCallback('tl_content', 'fields.callToAction.fields.size.options')]
-    public function addSizeOptions(): array
-    {
-        return $this->getTranslatedOptions(Size\Size::class);
-    }
-
     #[AsCallback('tl_content', 'fields.marginTop.options')]
     public function addMarginTopOptions(): array
     {
@@ -106,9 +85,30 @@ final class StyleOptionsListener
         return $this->getTranslatedOptions(Margin\Bottom::class);
     }
 
-    #[AsCallback('tl_content', 'fields.buttonShape.options')]
-    public function addButtonShapeOptions(): array
+    #[AsCallback('tl_content', 'fields.ctaType.options')]
+    #[AsCallback('tl_content', 'fields.callToAction.fields.type.options')]
+    public function addCtaTypeOptions(): array
     {
-        return $this->getTranslatedOptions(Component\Button\Shape::class);
+        return $this->getTranslatedOptions(Component\CallToAction\Type::class);
+    }
+
+    #[AsCallback('tl_content', 'fields.ctaShape.options')]
+    public function addCtaShapeOptions(): array
+    {
+        return $this->getTranslatedOptions(Component\CallToAction\Shape::class);
+    }
+
+    #[AsCallback('tl_content', 'fields.ctaColor.options')]
+    #[AsCallback('tl_content', 'fields.callToAction.fields.color.options')]
+    public function addColorOptions(): array
+    {
+        return $this->getTranslatedOptions(Color\Color::class);
+    }
+
+    #[AsCallback('tl_content', 'fields.ctaSize.options')]
+    #[AsCallback('tl_content', 'fields.callToAction.fields.size.options')]
+    public function addSizeOptions(): array
+    {
+        return $this->getTranslatedOptions(Size\Size::class);
     }
 }
