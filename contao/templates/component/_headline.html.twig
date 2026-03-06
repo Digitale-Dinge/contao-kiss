@@ -1,6 +1,8 @@
 {% use '@Contao/component/_headline.html.twig' %}
 
 {% block headline_component %}
+    {% set is_from_iterable = item.headline|default is iterable %}
+
     {% if item is defined %}
         {% set topline = item.topline|default %}
     {% endif %}
@@ -9,22 +11,14 @@
         <p{{ attrs(topline_attributes|default).addClass('topline') }}>{{ topline }}</p>
     {% endif %}
 
-    {# RSCE list wrapper #}
-    {% if item.headline|default is iterable %}
-        {% set appearance = item.headline.appearance|default %}
-        {% set headline = {
-            text: item.headline.value,
-            tag_name: item.headline.unit|default,
-            attributes: attrs(item.headline.attributes|default).addClass(['headline', styles.font_size(appearance)|default(styles.heading(appearance))])
-        } %}
-    {% else %}
-        {% set appearance = (data.headline|default|deserialize).appearance|default %}
-        {% set headline = {
-            text: headline.text|default(headline),
-            tag_name: headline.tag_name|default,
-            attributes: attrs(headline.attributes|default).addClass(['headline', styles.font_size(appearance)|default(styles.heading(appearance))])
-        } %}
-    {% endif %}
+    {% set headline_source = is_from_iterable ? item.headline|default : data.headline|default|deserialize %}
+    {% set appearance = headline_source.appearance|default %}
+    {% set attributes = headline_source.attributes|default %}
 
+    {% set headline = {
+        text: is_from_iterable ? item.headline.value : headline.text|default(headline),
+        tag_name: is_from_iterable ? item.headline.unit|default : headline.tag_name|default,
+        attributes: attrs(attributes).addClass(['headline', styles.font_size(appearance)|default(styles.heading(appearance))]).mergeWith(headline_classes|default)
+    } %}
     {{ parent() }}
 {% endblock %}
