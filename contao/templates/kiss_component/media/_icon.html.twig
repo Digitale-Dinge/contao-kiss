@@ -1,3 +1,7 @@
 {% block icon %}
-    {{ svg_icon(icon|default) }}
+    {% set item = item|default(_context) %}
+
+    {% if item.icon|default %}
+        {{ svg_icon(item.icon) }}
+    {% endif %}
 {% endblock %}
