@@ -185,11 +185,15 @@ final class CustomElementsConfigurationBuilder
         return $this->addField('text', $options);
     }
 
-    public function addTextAppearanceField(): self
+    public function addTextAppearanceField(array $eval = []): self
     {
         $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['textAppearance'] : [
             'inputType' => 'standardField',
         ];
+
+        if ([] !== $eval) {
+            $options['eval'] = array_merge($options['eval'] ?? [], $eval);
+        }
 
         return $this->addField('textAppearance', $options);
     }
