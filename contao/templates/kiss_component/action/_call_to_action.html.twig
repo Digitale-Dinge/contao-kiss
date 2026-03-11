@@ -7,7 +7,7 @@
     %}
     {% set actions = call_to_action|deserialize %}
     {% if actions|length %}
-        <div{{ attrs().addClass(['cta-outer', 'flex', 'flex-wrap', 'gap-2', 'md:gap-4']).mergeWith(cta_wrapper_attributes|default) }}>
+        <div{{ attrs().addClass(['cta-outer', 'flex', 'flex-wrap', 'gap-2', 'md:gap-4', 'mt-3']).mergeWith(cta_wrapper_attributes|default) }}>
             {% for action in actions %}
                 {% with action only %}
                     {{ block('action') }}
