@@ -2,7 +2,12 @@
 
 {% block headline_component %}
     {% set is_from_iterable = item.headline|default is iterable %}
-    {% set topline = item.topline|default(data.topline|default) %}
+
+    {% if item is defined %}
+        {% set topline = item.topline|default %}
+    {% elseif data.topline|default %}
+        {% set topline = data.topline|default %}
+    {% endif %}
 
     {% if topline|default %}
         <p{{ attrs(topline_attributes|default).addClass('topline') }}>{{ topline }}</p>
