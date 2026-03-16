@@ -29,8 +29,8 @@ final class StyleOptionsListener
     public function addHeadlineAppearanceOptions(): array
     {
         return [
-            $this->translator->trans('style_options.size', [], 'style_options') => $this->getTranslatedOptions(Typography\FontSize::class),
             $this->translator->trans('style_options.heading', [], 'style_options') => $this->getTranslatedOptions(Typography\Heading::class),
+            $this->translator->trans('style_options.size', [], 'style_options') => $this->getTranslatedOptions(Typography\FontSize::class),
         ];
     }
 
