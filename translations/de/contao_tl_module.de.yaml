@@ -1,8 +1,18 @@
 tl_module:
+    grid_legend:                Grid-Einstellungen
+
     headline:
         unit:                   Einheit
         appearance:             Aussehen
 
     topline:
-        - 'Dachzeile'
-        - 'Stellt eine optionale Dachzeile über der Headline dar'
+        - Dachzeile
+        - Stellt eine optionale Dachzeile über der Headline dar
+
+    gridColumns:
+        - Spalten
+        - Legt fest, wie viele Elemente an den jeweiligen Brechpunkten angezeigt werden sollen.
+
+    gridGap:
+        - Abstand
+        - Legt den Abstand zwischen den einzelnen Elementen fest.

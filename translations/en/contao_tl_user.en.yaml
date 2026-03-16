@@ -1,0 +1,4 @@
+tl_user:
+    show_kiss_grid:
+        - Show backend grid
+        - Display content elements in a grid in the backend preview.

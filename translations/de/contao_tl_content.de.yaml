@@ -1,5 +1,6 @@
 tl_content:
     layout_legend:              Layout-Einstellungen
+    grid_legend:                Grid-Einstellungen
 
     grid:                       Spalten-Grid
     contentTeaser:              Teaser
@@ -67,6 +68,14 @@ tl_content:
     marginBottom:
         - Äußerer Abstand des Elements nach unten
         - Bestimmen Sie den Abstand des Elements nach unten.
+
+    gridColumns:
+        - Spalten
+        - Legt fest, wie viele Elemente an den jeweiligen Brechpunkten angezeigt werden sollen.
+
+    gridGap:
+        - Abstand
+        - Legt den Abstand zwischen den einzelnen Elementen fest.
 
     backgroundColor:
         - Hintergrundfarbe

@@ -1,5 +1,6 @@
 tl_content:
     layout_legend:              Layout settings
+    grid_legend:                Grid settings
 
     grid:                       Column grid
     contentTeaser:              Teaser
@@ -67,6 +68,14 @@ tl_content:
     marginBottom:
         - Outer spacing at the bottom
         - Define the spacing below the element.
+
+    gridColumns:
+        - Columns
+        - Defines how many items should be shown over the respective breakpoints.
+
+    gridGap:
+        - Gap
+        - Defines the spacing between each item.
 
     backgroundColor:
         - Background color

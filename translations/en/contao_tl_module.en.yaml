@@ -1,8 +1,18 @@
 tl_module:
+    grid_legend:                Grid settings
+
     headline:
-        unit: Unit
-        size: Appearance
+        unit:                   Unit
+        size:                   Appearance
 
     topline:
-        - 'Topline'
-        - 'Displays an optional topline above the headline.'
+        - Topline
+        - Displays an optional topline above the headline.
+
+    gridColumns:
+        - Columns
+        - Defines how many items should be shown over the respective breakpoints.
+
+    gridGap:
+        - Gap
+        - Defines the spacing between each item.

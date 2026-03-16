@@ -1,13 +1,13 @@
 {% block content_wrapper %}
-
-    {% set list_mode = list|default is iterable and list|length %}
+    {% set list_mode = list|default is iterable and list|length or data.gridColumns|default %}
     {% set list_tag_name = list_tag_name|default('div') %}
 
     {% if list_mode %}
         {% import '@Contao/kiss_component/grid/_macro.html.twig' as grid %}
-        {% set cols_key = styles.column(gridColumns|default)  %}
+        {% set cols_key = styles.column(gridColumns|default(data.gridColumns|default))  %}
+        {% set gap = styles.gap(gridGap|default(data.gridGap|default)) %}
         {% set list_wrapper_attributes = attrs(list_wrapper_attributes|default)
-            .addClass(['grid', grid.get_cols_class(cols_key), styles.gap(gridGap|default)])
+            .addClass(['grid', grid.get_cols_class(cols_key), gap])
         %}
         <{{ list_tag_name }}{{ attrs(list_wrapper_attributes).addClass('list') }}>
     {% endif %}

@@ -71,8 +71,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['gridGap'] = [
 ];
 
 PaletteManipulator::create()
-    ->addLegend('layout_legend', ['template_legend', 'protected_legend'], PaletteManipulator::POSITION_BEFORE)
-    ->addField(['gridColumns', 'gridGap'], 'layout_legend', PaletteManipulator::POSITION_APPEND)
+    ->addLegend('grid_legend', ['layout_legend', 'template_legend', 'protected_legend'], PaletteManipulator::POSITION_BEFORE)
+    ->addField(['gridColumns', 'gridGap'], 'grid_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('newslist', 'tl_module')
     ->applyToPalette('eventlist', 'tl_module')
     ->applyToPalette('faqlist', 'tl_module')

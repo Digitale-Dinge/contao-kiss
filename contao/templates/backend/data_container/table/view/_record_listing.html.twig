@@ -1,0 +1,25 @@
+{% extends '@Contao/backend/data_container/table/view/_record_listing.html.twig' %}
+
+{% set show_grid_classes = app.user.show_kiss_grid|default(false) %}
+
+{# If renderAsGrid is used, check for parent grid styles and apply them #}
+{% if display_grid|default %}
+    {% for i, record in records %}
+        {% set grid_label = getGridLabel(record.id) %}
+        {% if grid_label %}
+            {% set record = record|merge({
+                label: '<span class="tl_blue">(' ~ grid_label ~ ')</span> ' ~ record.label,
+                class: show_grid_classes ? getGridClasses(record.id) : null
+            }) %}
+            {# Slices the elements and merges the modified record into it #}
+            {% set records = records[:i]|merge([record])|merge(records[i+1:]) %}
+        {% endif %}
+    {% endfor %}
+
+    {% if show_grid_classes %}
+        {% set listing_attributes = attrs()
+            .addClass(getGridClasses(pid))
+            .mergeWith(listing_attributes)
+        %}
+    {% endif %}
+{% endif %}

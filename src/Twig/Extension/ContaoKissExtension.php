@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace DigitaleDinge\ContaoKiss\Twig\Extension;
 
 use DigitaleDinge\ContaoKiss\Twig\Global\StylesVariable;
+use DigitaleDinge\ContaoKiss\Twig\Runtime\BackendStylesRuntime;
 use DigitaleDinge\ContaoKiss\Twig\Runtime\FileItemRuntime;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 class ContaoKissExtension extends AbstractExtension implements GlobalsInterface
 {
@@ -23,6 +25,19 @@ class ContaoKissExtension extends AbstractExtension implements GlobalsInterface
         return [
             new TwigFilter('file',
                 [FileItemRuntime::class, 'getFile'],
+            ),
+        ];
+    }
+
+    #[\Override]
+    public function getFunctions(): array
+    {
+        return [
+            new TwigFunction('getGridClasses',
+                [BackendStylesRuntime::class, 'getGridClasses'],
+            ),
+            new TwigFunction('getGridLabel',
+                [BackendStylesRuntime::class, 'getGridLabel'],
             ),
         ];
     }

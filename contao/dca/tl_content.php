@@ -110,6 +110,28 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['marginBottom'] = [
     ],
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['gridColumns'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w50 clr',
+        'chosen' => true,
+        'includeBlankOption' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['gridGap'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w50',
+        'chosen' => true,
+        'includeBlankOption' => true,
+    ],
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['ctaAsButton'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
@@ -279,4 +301,8 @@ PaletteManipulator::create()
 
     ->addField('ctaAsButton', 'download_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('downloads', 'tl_content')
+
+    ->addLegend('grid_legend', ['layout_legend', 'template_legend', 'protected_legend'], PaletteManipulator::POSITION_BEFORE)
+    ->addField(['gridColumns', 'gridGap'], 'grid_legend', PaletteManipulator::POSITION_APPEND)
+    ->applyToPalette('element_group', 'tl_content')
 ;

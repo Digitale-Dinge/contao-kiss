@@ -1,0 +1,4 @@
+tl_user:
+    show_kiss_grid:
+        - Backend-Grid anzeigen
+        - Inhaltselemente in der Backend-Vorschau im Raster anzeigen
