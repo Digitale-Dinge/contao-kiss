@@ -1,11 +1,12 @@
-{% extends '@Contao/content_element/_base.html.twig' %}
+{% use '@Contao/component/_headline.html.twig' %}
 {% use '@Contao/kiss_component/media/_media_text.html.twig' %}
+{% extends '@Contao/content_element/_base.html.twig' %}
 
 {% set attributes = attrs(attributes|default).addClass('media_text_list') %}
 
 {% block headline %}
     {% if item.headline.value|default or item.topline|default %}
-        {{ include('@Contao/component/_headline.html.twig') }}
+        {{ block('headline_component') }}
     {% endif %}
 {% endblock %}
 
