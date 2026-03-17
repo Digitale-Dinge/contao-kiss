@@ -1,7 +1,10 @@
 {% extends '@Contao/mod_article' %}
 
 {% set wrapperAttributes = attrs(wrapperAttributes|default)
-    .addClass(styles.background(backgroundColor|default))
+    .addClass([
+        styles.background(backgroundColor|default),
+        styles.text_alignment(textAlignment|default),
+    ])
 %}
 
 {% set inside_attributes = attrs()

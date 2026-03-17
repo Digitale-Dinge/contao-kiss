@@ -1,25 +1,30 @@
 tl_article:
+    appearance_legend:          Appearance settings
 
     contentWidth:
         - Content width
         - Define the width of the content.
 
-    paddingTop:
-        - Inner spacing at the top
-        - Define the spacing at the top of the element.
-
-    paddingBottom:
-        - Inner spacing at the bottom
-        - Define the spacing at the bottom of the element.
-
     marginTop:
         - Outer spacing at the top
         - Define the spacing above the element.
+
+    paddingTop:
+        - Inner spacing at the top
+        - Define the spacing at the top of the element.
 
     marginBottom:
         - Outer spacing at the bottom
         - Define the spacing below the element.
 
+    paddingBottom:
+        - Inner spacing at the bottom
+        - Define the spacing at the bottom of the element.
+
     backgroundColor:
         - Background color
         - Choose the background color for the article.
+
+    textAlignment:
+        - Text alignment
+        - Here you can set up the text alignment for the article.

@@ -1,25 +1,30 @@
 tl_article:
+    appearance_legend:          Darstellungs-Einstellungen
 
     contentWidth:
         - Inhaltsbreite
         - Bestimmen Sie die Breite des Inhalts.
 
-    paddingTop:
-        - Innerer Abstand des Elements nach oben
-        - Bestimmen Sie den Abstand des Elements nach oben.
-
-    paddingBottom:
-        - Innerer Abstand des Elements nach unten
-        - Bestimmen Sie den Abstand des Elements nach unten.
-
     marginTop:
         - Äußerer Abstand des Elements nach oben
+        - Bestimmen Sie den Abstand des Elements nach oben.
+
+    paddingTop:
+        - Innerer Abstand des Elements nach oben
         - Bestimmen Sie den Abstand des Elements nach oben.
 
     marginBottom:
         - Äußerer Abstand des Elements nach unten
         - Bestimmen Sie den Abstand des Elements nach unten.
 
+    paddingBottom:
+        - Innerer Abstand des Elements nach unten
+        - Bestimmen Sie den Abstand des Elements nach unten.
+
     backgroundColor:
         - Hintergrundfarbe
-        - Wählen Sie die Hintergrundfarbe für den Artikel
+        - Wählen Sie die Hintergrundfarbe für den Artikel.
+
+    textAlignment:
+        - Text-Ausrichtung
+        - Hier können Sie die Textausrichtung für den Artikel einstellen.

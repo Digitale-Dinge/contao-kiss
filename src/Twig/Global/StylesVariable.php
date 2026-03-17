@@ -45,6 +45,11 @@ class StylesVariable
         return new Typography\HeadingOption($key);
     }
 
+    public function getText_alignment(string $key): Typography\AlignmentOption
+    {
+        return new Typography\AlignmentOption($key);
+    }
+
     /**
      * Color
      */

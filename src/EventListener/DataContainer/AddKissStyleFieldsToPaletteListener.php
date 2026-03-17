@@ -11,7 +11,7 @@ use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Contao\DataContainer;
 use Contao\StringUtil;
 
-final class AddLayoutFieldsToPaletteListener
+final class AddKissStyleFieldsToPaletteListener
 {
     #[AsHook('loadDataContainer')]
     public function addBlacklistFieldToSettings(string $table): void
@@ -21,7 +21,7 @@ final class AddLayoutFieldsToPaletteListener
         }
 
         $GLOBALS['TL_DCA'][$table]['fields']['kiss_dontShowFieldsOnContentElement'] = [
-            'inputType' => 'checkbox',
+            'inputType' => 'select',
             'options_callback' => static function (): array {
                 $options = [];
 
@@ -35,6 +35,7 @@ final class AddLayoutFieldsToPaletteListener
                 return $options;
             },
             'eval' => [
+                'chosen' => true,
                 'multiple' => true,
                 'tl_class' => 'm12 w50 clr',
             ],
@@ -62,10 +63,20 @@ final class AddLayoutFieldsToPaletteListener
             return $palette;
         }
 
-        return PaletteManipulator::create()
+        $paletteManipulator = PaletteManipulator::create();
+
+        $paletteManipulator
             ->addLegend('layout_legend', ['template_legend', 'protected_legend'], PaletteManipulator::POSITION_BEFORE)
-            ->addField(['contentWidth', 'backgroundColor', 'paddingTop', 'paddingBottom', 'marginTop', 'marginBottom'], 'layout_legend', 'append')
-            ->applyToString($palette)
+            ->addField(['contentWidth', 'marginTop', 'paddingTop', 'marginBottom', 'paddingBottom'], 'layout_legend', PaletteManipulator::POSITION_APPEND)
         ;
+
+        if ($dc->table === 'tl_article') {
+            $paletteManipulator
+                ->addLegend('appearance_legend', ['layout_legend'])
+                ->addField(['backgroundColor', 'textAlignment'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
+            ;
+        }
+
+        return $paletteManipulator->applyToString($palette);
     }
 }

@@ -1,5 +1,5 @@
 tl_settings:
     kiss_settings_legend:                   KISS settings
     kiss_dontShowFieldsOnContentElement:
-        - Hide layout fields
-        - Does not display layout fields for these elements.
+        - Hide fields
+        - Do not display the advanced fields for these elements (e.g. layout).

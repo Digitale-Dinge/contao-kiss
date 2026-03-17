@@ -40,6 +40,12 @@ final class StyleOptionsListener
         return $this->getTranslatedOptions(Color\Background::class);
     }
 
+    #[AsCallback('tl_article', 'fields.textAlignment.options')]
+    public function addTextAlignmentOptions(): array
+    {
+        return $this->getTranslatedOptions(Typography\Alignment::class);
+    }
+
     #[AsCallback('tl_content', 'fields.gridColumns.options')]
     #[AsCallback('tl_module', 'fields.gridColumns.options')]
     public function addLayoutColumnOptions(): array

@@ -62,30 +62,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['contentWidth'] = [
     ],
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['paddingTop'] = [
-    'exclude' => true,
-    'inputType' => 'select',
-    'targetColumn' => 'kiss_styles',
-    'eval' => [
-        'tl_class' => 'clr w25',
-        'class' => 'widget-icon icon-pt',
-        'chosen' => true,
-        'includeBlankOption' => true,
-    ],
-];
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['paddingBottom'] = [
-    'exclude' => true,
-    'inputType' => 'select',
-    'targetColumn' => 'kiss_styles',
-    'eval' => [
-        'tl_class' => 'w25',
-        'class' => 'widget-icon icon-pb',
-        'chosen' => true,
-        'includeBlankOption' => true,
-    ],
-];
-
 $GLOBALS['TL_DCA']['tl_content']['fields']['marginTop'] = [
     'exclude' => true,
     'inputType' => 'select',
@@ -98,13 +74,37 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['marginTop'] = [
     ],
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['marginBottom'] = [
+$GLOBALS['TL_DCA']['tl_content']['fields']['paddingTop'] = [
     'exclude' => true,
     'inputType' => 'select',
     'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25',
+        'class' => 'widget-icon icon-pt',
+        'chosen' => true,
+        'includeBlankOption' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['marginBottom'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25 clr',
         'class' => 'widget-icon icon-mb',
+        'chosen' => true,
+        'includeBlankOption' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['paddingBottom'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+        'class' => 'widget-icon icon-pb',
         'chosen' => true,
         'includeBlankOption' => true,
     ],

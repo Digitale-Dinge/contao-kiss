@@ -82,6 +82,11 @@ style_options:
             h5:                     h5
             h6:                     h6
 
+        alignment:
+            start:                  Start
+            center:                 Center
+            end:                    End
+
     component:
         button:
             type:
