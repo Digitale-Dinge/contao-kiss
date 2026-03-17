@@ -13,10 +13,10 @@ enum FontSize: string implements ClassOptionsInterface, TranslatableLabelInterfa
     case x_small = 'text-xs';
     case small = 'text-sm';
     case medium = 'text-base';
-    case large = 'text-lg';
-    case x_large = 'text-xl';
-    case xx_large = 'text-2xl';
-    case xxx_large = 'text-3xl';
+    case large = 'md:text-lg';
+    case x_large = 'text-lg md:text-xl';
+    case xx_large = 'text-xl md:text-2xl';
+    case xxx_large = 'text-2xl md:text-3xl';
 
     public function label(): TranslatableMessage
     {
