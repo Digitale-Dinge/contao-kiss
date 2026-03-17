@@ -126,6 +126,19 @@ final class CustomElementsConfigurationBuilder
         ]);
     }
 
+    public function addGridGroup(): self
+    {
+        if ($this->isListField()) {
+            throw new \Exception('Using addGridGroup() is not allowed inside lists.');
+        }
+
+        $this->addGroup('grid', [$this->translator->trans('rsce.group.grid', [], 'rsce')]);
+        $this->addField('gridColumns', ['inputType' => 'standardField']);
+        $this->addField('gridGap', ['inputType' => 'standardField']);
+
+        return $this;
+    }
+
     public function addDependsOnField(string $key, array $options): self
     {
         $blankOption = false;

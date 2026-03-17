@@ -2,6 +2,7 @@ rsce:
     group:
         settings:           Element settings
         media:              Image/Icon/Text
+        grid:               Grid settings
 
     list:
         label:              Elements
