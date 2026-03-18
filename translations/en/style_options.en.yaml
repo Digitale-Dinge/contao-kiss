@@ -52,11 +52,12 @@ style_options:
 
     spacing_option:
         half:                       Half line height
-        one:                        1× line height
-        two:                        2× line height
-        three:                      3× line height
-        four:                       4× line height
-        five:                       5× line height
+        one:                        1x line height
+        two:                        2x line height
+        three:                      3x line height
+        four:                       4x line height
+        five:                       5x line height
+        six:                        6x line height
 
     size_option:
         x_small:                    Tiny

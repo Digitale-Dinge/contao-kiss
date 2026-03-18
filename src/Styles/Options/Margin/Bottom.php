@@ -16,6 +16,7 @@ enum Bottom: string implements ClassOptionsInterface, TranslatableLabelInterface
     case three = 'mb-12';
     case four = 'mb-16';
     case five = 'mb-20';
+    case six = 'mb-24';
 
     public function label(): TranslatableMessage
     {

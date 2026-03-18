@@ -13,6 +13,7 @@ use DigitaleDinge\ContaoKiss\Styles\StyleOption;
  * @method string three
  * @method string four
  * @method string five
+ * @method string six
  */
 final class BottomOption extends StyleOption
 {

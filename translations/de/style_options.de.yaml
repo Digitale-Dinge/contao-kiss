@@ -57,6 +57,7 @@ style_options:
         three:                      3x Zeilenhöhe
         four:                       4x Zeilenhöhe
         five:                       5x Zeilenhöhe
+        six:                        6x Zeilenhöhe
 
     size_option:
         x_small:                    Sehr klein
