@@ -1,9 +1,14 @@
 {% block image %}
-    {% set item = item|default(_context) %}
+    {% if figure|default %}
+        {% set figure_object = figure %}
+    {% elseif item.singleSRC|default %}
+        {% set item = item|default(_context) %}
+        {% set figure_object = figure(item.singleSRC, size|default, configuration|default({})) %}
+    {% endif %}
 
-    {% if item.singleSRC|default %}
+    {% if figure_object|default %}
         {{ include('@Contao/component/_figure.html.twig', {
-            figure: figure(item.singleSRC, size|default, configuration|default({})),
+            figure: figure_object,
             img_attributes: { class: img_class|default }
         }, false) }}
     {% endif %}
