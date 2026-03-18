@@ -5,14 +5,14 @@
 
     {% block media %}
         {% if type|default in ['image', 'icon'] %}
-            <div{{ attrs(media_attributes|default).addClass('media') }}>
+            <div{{ attrs().addClass('media').mergeWith(media_attributes|default) }}>
                 {{ include("@Contao/kiss_component/media/_#{type}.html.twig") }}
             </div>
         {% endif %}
     {% endblock %}
 
     {% if item.text|default or headline.text %}
-        <div{{ attrs(text_attributes|default).addClass('text') }}>
+        <div{{ attrs().addClass('text').mergeWith(text_attributes|default) }}>
             {% block headline %}{% endblock %}
             {% with {text: item.text|default} %}
                 {{ block('text') }}
