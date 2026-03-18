@@ -7,8 +7,9 @@
     %}
     {% set actions = call_to_action|deserialize %}
     {% if actions|length and actions|first.text|default %}
-        {% set cta_wrapper_attributes = attrs(cta_wrapper_attributes|default)
+        {% set cta_wrapper_attributes = attrs()
             .addClass(['cta-outer', 'inline-flex', 'flex-wrap', 'gap-2', 'md:gap-4', 'mt-3'])
+            .mergeWith(cta_wrapper_attributes|default)
         %}
         <div{{ cta_wrapper_attributes }}>
             {% for action in actions %}
