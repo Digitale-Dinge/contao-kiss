@@ -4,106 +4,149 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Twig\Global;
 
-use DigitaleDinge\ContaoKiss\Styles\Options\Color;
-use DigitaleDinge\ContaoKiss\Styles\Options\Component;
-use DigitaleDinge\ContaoKiss\Styles\Options\Layout;
-use DigitaleDinge\ContaoKiss\Styles\Options\Margin;
-use DigitaleDinge\ContaoKiss\Styles\Options\Padding;
-use DigitaleDinge\ContaoKiss\Styles\Options\Size;
-use DigitaleDinge\ContaoKiss\Styles\Options\Typography;
+use DigitaleDinge\ContaoKiss\Event\ContaoKissEvents;
+use DigitaleDinge\ContaoKiss\Event\Styles\StyleOptionEvent;
+use DigitaleDinge\ContaoKiss\Styles\Option\Color;
+use DigitaleDinge\ContaoKiss\Styles\Option\Component;
+use DigitaleDinge\ContaoKiss\Styles\Option\Layout;
+use DigitaleDinge\ContaoKiss\Styles\Option\Margin;
+use DigitaleDinge\ContaoKiss\Styles\Option\Padding;
+use DigitaleDinge\ContaoKiss\Styles\Option\Size;
+use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
+use DigitaleDinge\ContaoKiss\Styles\Option\Typography;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class StylesVariable
 {
+    public function __construct(
+        private readonly EventDispatcherInterface $eventDispatcher,
+        #[Autowire('%contao_kiss.style_definition_override%')]
+        private readonly bool $enableStyleOverride,
+    ) {}
+
     /**
      * Layout
      */
-    public function getContainer(string|null $key = null): Layout\ContainerOption
+    public function getContainer(string|null $key = null): StyleOption|Layout\ContainerOption
     {
-        return new Layout\ContainerOption($key);
+        return $this->getStyleOption(Layout\ContainerOption::class, $key);
     }
 
-    public function getColumn(string $key): Layout\ColumnOption
+    public function getColumn(string $key): StyleOption|Layout\ColumnOption
     {
-        return new Layout\ColumnOption($key);
+        return $this->getStyleOption(Layout\ColumnOption::class, $key);
     }
 
-    public function getGap(string $key): Layout\GapOption
+    public function getGap(string $key): StyleOption|Layout\GapOption
     {
-        return new Layout\GapOption($key);
+        return $this->getStyleOption(Layout\GapOption::class, $key);
     }
 
     /**
      * Typography
      */
-    public function getFont_size(string $key): Typography\FontSizeOption
+    public function getFont_size(string $key): StyleOption|Typography\FontSizeOption
     {
-        return new Typography\FontSizeOption($key);
+        return $this->getStyleOption(Typography\FontSizeOption::class, $key);
     }
 
-    public function getHeading(string $key): Typography\HeadingOption
+    public function getHeading(string $key): StyleOption|Typography\HeadingOption
     {
-        return new Typography\HeadingOption($key);
+        return $this->getStyleOption(Typography\HeadingOption::class, $key);
     }
 
-    public function getText_alignment(string $key): Typography\AlignmentOption
+    public function getText_alignment(string $key): StyleOption|Typography\AlignmentOption
     {
-        return new Typography\AlignmentOption($key);
+        return $this->getStyleOption(Typography\AlignmentOption::class, $key);
     }
 
     /**
      * Color
      */
-    public function getBackground(string $key): Color\BackgroundOption
+    public function getBackground(string $key): StyleOption|Color\BackgroundOption
     {
-        return new Color\BackgroundOption($key);
+        return $this->getStyleOption(Color\BackgroundOption::class, $key);
     }
 
-    public function getColor(string $key): Color\ColorOption
+    public function getColor(string $key): StyleOption|Color\ColorOption
     {
-        return new Color\ColorOption($key);
+        return $this->getStyleOption(Color\ColorOption::class, $key);
     }
 
     /**
      * Margin
      */
-    public function getMargin_top(string $key): Margin\TopOption
+    public function getMargin_top(string $key): StyleOption|Margin\TopOption
     {
-        return new Margin\TopOption($key);
+        return $this->getStyleOption(Margin\TopOption::class, $key);
     }
 
-    public function getMargin_bottom(string $key): Margin\BottomOption
+    public function getMargin_bottom(string $key): StyleOption|Margin\BottomOption
     {
-        return new Margin\BottomOption($key);
+        return $this->getStyleOption(Margin\BottomOption::class, $key);
     }
 
     /**
      * Padding
      */
-    public function getPadding_top(string $key): Padding\TopOption
+    public function getPadding_top(string $key): StyleOption|Padding\TopOption
     {
-        return new Padding\TopOption($key);
+        return $this->getStyleOption(Padding\TopOption::class, $key);
     }
 
-    public function getPadding_bottom(string $key): Padding\BottomOption
+    public function getPadding_bottom(string $key): StyleOption|Padding\BottomOption
     {
-        return new Padding\BottomOption($key);
+        return $this->getStyleOption(Padding\BottomOption::class, $key);
     }
 
-    public function getSize(string $key): Size\SizeOption
+    public function getSize(string $key): StyleOption|Size\SizeOption
     {
-        return new Size\SizeOption($key);
+        return $this->getStyleOption(Size\SizeOption::class, $key);
     }
 
     /**
      * Call to action design
      */
-    public function getCta_shape(string $key): Component\CallToAction\ShapeOption
+    public function getCta_shape(string $key): StyleOption|Component\CallToAction\ShapeOption
     {
-        return new Component\CallToAction\ShapeOption($key);
+        return $this->getStyleOption(Component\CallToAction\ShapeOption::class, $key);
     }
 
-    public function getCta_type(string $key): Component\CallToAction\TypeOption
+    public function getCta_type(string $key): StyleOption|Component\CallToAction\TypeOption
     {
-        return new Component\CallToAction\TypeOption($key);
+        return $this->getStyleOption(Component\CallToAction\TypeOption::class, $key);
+    }
+
+    protected function getStyleOption(string $styleOption, string|null $key): StyleOption
+    {
+        if (!is_subclass_of($styleOption, StyleOption::class)) {
+            throw new \LogicException(\sprintf('Invalid usage. Class "%s" must extend StyleOption.', $styleOption));
+        }
+
+        if (!$this->enableStyleOverride) {
+            return new $styleOption($key);
+        }
+
+        $event = new StyleOptionEvent($styleOption, $key);
+
+        $this->eventDispatcher->dispatch(
+            $event,
+            $this->getStyleEventForClass($styleOption)
+        );
+
+        return $event->getOption();
+    }
+
+    private function getStyleEventForClass(string $type): string
+    {
+        return match ($type) {
+            Layout\ContainerOption::class => ContaoKissEvents::STYLE_LAYOUT_CONTAINER,
+            Layout\ColumnOption::class    => ContaoKissEvents::STYLE_LAYOUT_COLUMN,
+            Layout\GapOption::class       => ContaoKissEvents::STYLE_LAYOUT_GAP,
+            Color\BackgroundOption::class => ContaoKissEvents::STYLE_COLOR_BACKGROUND,
+            Color\ColorOption::class      => ContaoKissEvents::STYLE_COLOR,
+            default                       => ContaoKissEvents::STYLE_DEFAULT,
+        };
     }
 }
