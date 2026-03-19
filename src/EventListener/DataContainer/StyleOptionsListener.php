@@ -7,13 +7,13 @@ namespace DigitaleDinge\ContaoKiss\EventListener\DataContainer;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 
 use DigitaleDinge\ContaoKiss\EventListener\TranslatableEnumTrait;
-use DigitaleDinge\ContaoKiss\Styles\Options\Color;
-use DigitaleDinge\ContaoKiss\Styles\Options\Component;
-use DigitaleDinge\ContaoKiss\Styles\Options\Layout;
-use DigitaleDinge\ContaoKiss\Styles\Options\Margin;
-use DigitaleDinge\ContaoKiss\Styles\Options\Padding;
-use DigitaleDinge\ContaoKiss\Styles\Options\Size;
-use DigitaleDinge\ContaoKiss\Styles\Options\Typography;
+use DigitaleDinge\ContaoKiss\Styles\Option\Color;
+use DigitaleDinge\ContaoKiss\Styles\Option\Component;
+use DigitaleDinge\ContaoKiss\Styles\Option\Layout;
+use DigitaleDinge\ContaoKiss\Styles\Option\Margin;
+use DigitaleDinge\ContaoKiss\Styles\Option\Padding;
+use DigitaleDinge\ContaoKiss\Styles\Option\Size;
+use DigitaleDinge\ContaoKiss\Styles\Option\Typography;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class StyleOptionsListener

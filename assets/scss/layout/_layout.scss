@@ -2,7 +2,7 @@
  * KISS Layout Utilities (V1.0)
  *
  * Container classes for content-width settings in Articles and Content Elements
- * Matches PHP enum: DigitaleDinge\ContaoKiss\Styles\Options\Layout\Container
+ * Matches PHP enum: DigitaleDinge\ContaoKiss\Styles\Option\Layout\Container
  *
  * Usage: container-{small|narrow|base|full-pad|full}
  */
@@ -47,7 +47,7 @@
   // COLUMN GRID SYSTEM
   // ============================================
   // Used for: Forms, Galleries, Content Element Groups
-  // Matches PHP enum: DigitaleDinge\ContaoKiss\Styles\Options\Layout\Column
+  // Matches PHP enum: DigitaleDinge\ContaoKiss\Styles\Option\Layout\Column
   //
   // How it works:
   // - Editor picks "3 columns" in backend

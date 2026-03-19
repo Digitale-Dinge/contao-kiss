@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DigitaleDinge\ContaoKiss\Twig\Runtime;
 
 use DigitaleDinge\ContaoKiss\EventListener\TranslatableEnumTrait;
-use DigitaleDinge\ContaoKiss\Styles\Options\Layout\Column;
+use DigitaleDinge\ContaoKiss\Styles\Option\Layout\Column;
 use DigitaleDinge\ContaoKiss\Twig\Global\StylesVariable;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
