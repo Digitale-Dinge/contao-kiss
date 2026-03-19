@@ -1,0 +1,18 @@
+{% extends '@Contao/content_element/headline.html.twig' %}
+
+{% set attributes = attrs(attributes|default)
+    .addClass([
+        styles.container(data.contentWidth|default),
+        styles.padding_top(data.paddingTop|default),
+        styles.padding_bottom(data.paddingBottom|default),
+        styles.margin_top(data.marginTop|default),
+        styles.margin_bottom(data.marginBottom|default),
+    ])
+%}
+
+{# Append the wrapper element again #}
+{% block wrapper %}
+    <div{% block attributes %}{{ attributes }}{% endblock %}>
+        {{ parent() }}
+    </div>
+{% endblock %}
