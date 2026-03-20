@@ -1,6 +1,6 @@
 /**
  * KISS Card Component (V1.0)
- * 
+ *
  * Base: .card
  * Sections: card-{body|header|footer|title|actions|alert}
  * Sizes: card-{xs|sm|lg|xl}
@@ -8,7 +8,7 @@
  * Colors: card-{primary|secondary|accent|info|success|warning|error}
  * Interactive: card-{hover|grow|link}
  * Effects: image-full
- * 
+ *
  * Example: <div class="card card-soft card-primary card-lg">
  *            <div class="card-header"><h5 class="card-title">Title</h5></div>
  *            <div class="card-body">Content here</div>
@@ -169,7 +169,7 @@
 
     // Side layout (horizontal card with image on side)
     &-side {
-      @apply flex-row;
+      @apply sm:flex-row;
 
       > figure,
       > .card-figure {

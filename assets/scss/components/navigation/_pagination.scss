@@ -18,7 +18,7 @@
 
 @layer components {
     .pagination {
-        @apply flex flex-wrap gap-6 items-center justify-between;
+        @apply flex! flex-wrap gap-6 items-center justify-between;
 
         p:first-child {
             @apply m-0!
