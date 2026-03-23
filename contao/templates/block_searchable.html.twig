@@ -4,6 +4,9 @@
 {% set list_mode = list|default is iterable and list|length %}
 {% set list_tag_name = list_tag_name|default('div') %}
 
+{# cssID may not be set for specific extensions #}
+{% set cssID = cssID|default %}
+
 {% set wrapperAttributes = attrs(cssID)
     .addClass([
         styles.container(data.contentWidth|default),
