@@ -12,7 +12,7 @@ use Contao\FilesModel;
 use Symfony\Component\Uid\Uuid;
 use Twig\Extension\RuntimeExtensionInterface;
 
-final readonly class FileItemRuntime implements RuntimeExtensionInterface
+final readonly class FilesRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
         private ContaoFramework $framework,

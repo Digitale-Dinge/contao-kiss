@@ -6,7 +6,7 @@ namespace DigitaleDinge\ContaoKiss\Twig\Extension;
 
 use DigitaleDinge\ContaoKiss\Twig\Global\StylesVariable;
 use DigitaleDinge\ContaoKiss\Twig\Runtime\BackendStylesRuntime;
-use DigitaleDinge\ContaoKiss\Twig\Runtime\FileItemRuntime;
+use DigitaleDinge\ContaoKiss\Twig\Runtime\FilesRuntime;
 use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 use Twig\TwigFilter;
@@ -24,7 +24,7 @@ class ContaoKissExtension extends AbstractExtension implements GlobalsInterface
     {
         return [
             new TwigFilter('file',
-                [FileItemRuntime::class, 'getFile'],
+                [FilesRuntime::class, 'getFile'],
             ),
         ];
     }
