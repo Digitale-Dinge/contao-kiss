@@ -65,7 +65,7 @@ final readonly class BackendStylesRuntime implements RuntimeExtensionInterface
     {
         $styles = $this->connection->fetchOne('SELECT kiss_styles FROM tl_content WHERE id = :id', ['id' => $id]);
 
-        if (false === $styles) {
+        if (false === $styles || null === $styles) {
             return [];
         }
 
