@@ -7,9 +7,11 @@
     {% endif %}
 
     {% if figure_object|default %}
-        {{ include('@Contao/component/_figure.html.twig', {
-            figure: figure_object,
-            img_attributes: { class: img_class|default }
-        }, false) }}
+        <div{{ media_attributes|default }}>
+            {{ include('@Contao/component/_figure.html.twig', {
+                figure: figure_object,
+                img_attributes: { class: img_class|default }
+            }, false) }}
+        </div>
     {% endif %}
 {% endblock %}

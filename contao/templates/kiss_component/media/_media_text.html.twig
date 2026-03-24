@@ -5,9 +5,9 @@
 
     {% block media %}
         {% if type|default in ['image', 'icon'] %}
-            <div{{ attrs().addClass('media').mergeWith(media_attributes|default) }}>
-                {{ include("@Contao/kiss_component/media/_#{type}.html.twig") }}
-            </div>
+            {{ include("@Contao/kiss_component/media/_#{type}.html.twig", {
+                media_attributes: attrs().addClass('media').mergeWith(media_attributes|default)
+            }) }}
         {% endif %}
     {% endblock %}
 

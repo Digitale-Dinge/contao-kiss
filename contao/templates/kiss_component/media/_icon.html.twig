@@ -2,6 +2,8 @@
     {% set item = item|default(_context) %}
 
     {% if item.icon|default %}
-        {{ svg_icon(item.icon) }}
+        <div{{ media_attributes|default }}>
+            {{ svg_icon(item.icon) }}
+        </div>
     {% endif %}
 {% endblock %}
