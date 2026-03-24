@@ -111,8 +111,12 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
-    public function addField(string $key, array $options): self
+    public function addField(string $key, array $options, array $eval = []): self
     {
+        if ([] !== $eval) {
+            $options['eval'] = array_merge($options['eval'] ?? [], $eval);
+        }
+
         $this->pendingFields[$key] = $options;
 
         return $this;
@@ -143,16 +147,20 @@ final class CustomElementsConfigurationBuilder
     {
         $blankOption = false;
 
-        // ToDo: Could allow translated options directly
+        // Blank option
         if ($options[array_key_first($options)] === '') {
             $blankOption = true;
             unset($options[array_key_first($options)]);
         }
 
-        $translatedOptions = [];
-
-        foreach ($options as $option) {
-            $translatedOptions[$option] = $this->translator->trans("rsce.field.$key.options.$option", [], 'rsce') ?? $option;
+        if (array_is_list($options)) {
+            foreach ($options as &$option) {
+                $option = $this->translator->trans(
+                    "rsce.field.$key.options.$option",
+                    [],
+                    'rsce'
+                );
+            }
         }
 
         return $this->addField($key, [
@@ -161,7 +169,7 @@ final class CustomElementsConfigurationBuilder
                 $this->translator->trans("rsce.field.$key.description", [], 'rsce'),
             ],
             'inputType' => 'select',
-            'options' => $translatedOptions,
+            'options' => $options,
             'eval' => [
                 'includeBlankOption' => $blankOption,
                 'tl_class' => 'w50 clr',
@@ -169,33 +177,40 @@ final class CustomElementsConfigurationBuilder
         ]);
     }
 
-    public function addHeadlineField(): self
+    public function addHeadlineField(array $eval = []): self
     {
         $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['headline'] : [
             'inputType' => 'standardField',
         ];
 
-        return $this->addField('headline', $options);
+        return $this->addField('headline', $options, $eval);
     }
 
-    public function addToplineField(): self
+    public function addToplineField(array $eval = []): self
     {
         $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['topline'] : [
             'inputType' => 'standardField',
         ];
 
-        return $this->addField('topline', $options);
+        return $this->addField('topline', $options, $eval);
     }
 
-    public function addRichTextField(bool $mandatory = true): self
+    public function addRichTextField(array $eval = []): self
     {
         $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['text'] : [
             'inputType' => 'standardField',
         ];
 
-        $options['eval']['mandatory'] = $mandatory;
+        return $this->addField('text', $options, $eval);
+    }
 
-        return $this->addField('text', $options);
+    public function addTextAlignmentField(array $eval = []): self
+    {
+        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['textAlignment'] : [
+            'inputType' => 'standardField',
+        ];
+
+        return $this->addField('textAlignment', $options, $eval);
     }
 
     public function addTextAppearanceField(array $eval = []): self
@@ -204,14 +219,14 @@ final class CustomElementsConfigurationBuilder
             'inputType' => 'standardField',
         ];
 
-        if ([] !== $eval) {
-            $options['eval'] = array_merge($options['eval'] ?? [], $eval);
-        }
-
-        return $this->addField('textAppearance', $options);
+        return $this->addField('textAppearance', $options, $eval);
     }
 
-    public function addImageField(string|null $dependsOn = null, bool $includeImageSizeField = false): self
+    public function addImageField(
+        array $eval = [],
+        string|null $dependsOn = null,
+        bool $includeImageSizeField = false,
+    ): self
     {
         $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['singleSRC'] : [
             'inputType' => 'standardField',
@@ -227,16 +242,16 @@ final class CustomElementsConfigurationBuilder
             ];
         }
 
-        $this->addField('singleSRC', $options);
+        $this->addField('singleSRC', $options, $eval);
 
         if ($includeImageSizeField) {
-            $this->addImageSizeField($dependsOn);
+            $this->addImageSizeField([], $dependsOn);
         }
 
         return $this;
     }
 
-    public function addImageSizeField(string|null $dependsOn = null): self
+    public function addImageSizeField(array $eval = [], string|null $dependsOn = null): self
     {
         $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['size'] : [
             'inputType' => 'standardField',
@@ -251,12 +266,12 @@ final class CustomElementsConfigurationBuilder
             ];
         }
 
-        $this->addField('size', $options);
+        $this->addField('size', $options, $eval);
 
         return $this;
     }
 
-    public function addIconField(string|null $dependsOn = null): self
+    public function addIconField(array $eval = [], string|null $dependsOn = null): self
     {
         $options = [
             'label' => [
@@ -278,36 +293,36 @@ final class CustomElementsConfigurationBuilder
             ];
         }
 
-        $this->addField('icon', $options);
+        $this->addField('icon', $options, $eval);
 
         return $this;
     }
 
-    public function addPhoneField(): self
+    public function addPhoneField(array $eval = []): self
     {
         $options = $GLOBALS['TL_DCA']['tl_member']['fields']['phone'];
         $options['eval']['mandatory'] = false;
 
-        $this->addField('phone', $options);
+        $this->addField('phone', $options, $eval);
 
         return $this;
     }
 
-    public function addEmailField(): self
+    public function addEmailField(array $eval = []): self
     {
         $options = $GLOBALS['TL_DCA']['tl_member']['fields']['email'];
         $options['eval']['mandatory'] = false;
 
-        $this->addField('email', $options);
+        $this->addField('email', $options, $eval);
 
         return $this;
     }
 
-    public function addSocialsField(): self
+    public function addSocialsField(array $eval = []): self
     {
         $options = $GLOBALS['TL_DCA']['tl_company']['fields']['socials'];
 
-        $this->addField('socials', $options);
+        $this->addField('socials', $options, $eval);
 
         return $this;
     }
@@ -315,13 +330,22 @@ final class CustomElementsConfigurationBuilder
     /**
      * @throws \Exception
      */
-    public function addCallToActionField(): self
+    public function addCallToActionField(array $eval = []): self
     {
         if ($this->isListField()) {
             throw new \Exception('Using addCallToActionField() is not allowed inside lists.');
         }
 
-        return $this->addField('callToAction', ['inputType' => 'standardField']);
+        return $this->addField('callToAction', ['inputType' => 'standardField'], $eval);
+    }
+
+    public function addBackgroundField(array $eval = []): self
+    {
+        if ($this->isListField()) {
+            throw new \Exception('Using addBackgroundField() is not allowed inside lists.');
+        }
+
+        return $this->addField('backgroundColor', ['inputType' => 'standardField'], $eval);
     }
 
     public function build(): array

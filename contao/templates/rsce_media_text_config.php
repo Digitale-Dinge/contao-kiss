@@ -23,12 +23,12 @@ return $configBuilder
         $translator->trans('rsce.group.settings', [], 'rsce'),
     ])
     ->addDependsOnField('type', ['image', 'icon', 'separated'])
-    ->addImageSizeField('type')
-    ->addIconField('type')
+    ->addImageSizeField([], 'type')
+    ->addIconField([], 'type')
     ->addGroup('media', [
         $translator->trans('rsce.group.media', [], 'rsce')
     ])
-    ->addImageField('type')
+    ->addImageField([], 'type')
     ->addHeadlineField() // Topline is appended automatically outside of lists
     ->addRichTextField()
     ->addCallToActionField()
