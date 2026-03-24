@@ -132,6 +132,28 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['gridGap'] = [
     ],
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['backgroundColor'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+        'class' => 'widget-icon icon-background',
+        'includeBlankOption' => true,
+        'chosen' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['textAlignment'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+        'includeBlankOption' => true,
+    ],
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['ctaAsButton'] = [
     'exclude' => true,
     'inputType' => 'checkbox',

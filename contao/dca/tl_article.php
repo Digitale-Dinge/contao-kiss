@@ -38,7 +38,6 @@ $GLOBALS['TL_DCA']['tl_article']['fields']['paddingBottom'] = [
     ],
 ];
 
-
 $GLOBALS['TL_DCA']['tl_article']['fields']['backgroundColor'] = [
     'exclude' => true,
     'inputType' => 'select',
@@ -57,7 +56,6 @@ $GLOBALS['TL_DCA']['tl_article']['fields']['textAlignment'] = [
     'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25',
-        //'class' => '',
         'includeBlankOption' => true,
     ],
 ];

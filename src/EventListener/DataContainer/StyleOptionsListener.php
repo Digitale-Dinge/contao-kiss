@@ -34,12 +34,14 @@ final class StyleOptionsListener
         ];
     }
 
+    #[AsCallback('tl_content', 'fields.backgroundColor.options')]
     #[AsCallback('tl_article', 'fields.backgroundColor.options')]
     public function addColorBackgroundOptions(): array
     {
         return $this->getTranslatedOptions(Color\Background::class);
     }
 
+    #[AsCallback('tl_content', 'fields.textAlignment.options')]
     #[AsCallback('tl_article', 'fields.textAlignment.options')]
     public function addTextAlignmentOptions(): array
     {

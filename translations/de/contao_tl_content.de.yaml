@@ -79,11 +79,15 @@ tl_content:
 
     backgroundColor:
         - Hintergrundfarbe
-        - Wählen Sie die Hintergrundfarbe für das Inhaltselement
+        - Wählen Sie die Hintergrundfarbe für das Inhaltselement.
+
+    textAlignment:
+        - Text-Ausrichtung
+        - Hier können Sie die Textausrichtung für das Inhaltselement einstellen.
 
     textAppearance:
         - Text-Aussehen
-        - Hier können Sie ein Auswählen für den Textinhalt auswählen.
+        - Hier können Sie ein Aussehen für den Textinhalt auswählen.
 
     icon:
         - Icon
