@@ -3,7 +3,9 @@
 
     {% if item.icon|default %}
         <div{{ media_attributes|default }}>
-            {{ svg_icon(item.icon) }}
+            {{ include('@Contao/kiss_component/media/_icon_include.html.twig', {
+                icon: item.icon
+            }) }}
         </div>
     {% endif %}
 {% endblock %}
