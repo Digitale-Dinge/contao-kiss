@@ -3,13 +3,16 @@
     {% set list_tag_name = list_tag_name|default('div') %}
 
     {% if list_mode %}
-        {% import '@Contao/kiss_component/grid/_macro.html.twig' as grid %}
-        {% set cols_key = styles.column(gridColumns|default(data.gridColumns|default))  %}
-        {% set gap = styles.gap(gridGap|default(data.gridGap|default)) %}
-        {% set list_wrapper_attributes = attrs(list_wrapper_attributes|default)
-            .addClass(['grid', grid.get_cols_class(cols_key), gap])
-        %}
-        <{{ list_tag_name }}{{ attrs(list_wrapper_attributes).addClass('list') }}>
+        {% set cols = gridColumns|default(data.gridColumns|default) %}
+        {% if cols is not empty %}
+            {% import '@Contao/kiss_component/grid/_macro.html.twig' as grid %}
+            {% set cols_key = styles.column(cols)  %}
+            {% set gap = styles.gap(gridGap|default(data.gridGap|default)) %}
+            {% set list_wrapper_attributes = attrs(list_wrapper_attributes|default)
+                .addClass(['grid', grid.get_cols_class(cols_key), gap])
+            %}
+        {% endif %}
+        <{{ list_tag_name }}{{ attrs(list_wrapper_attributes|default).addClass('list') }}>
     {% endif %}
     {% block content %}{% endblock %}
     {% if list_mode %}
