@@ -318,7 +318,7 @@ PaletteManipulator::create()
     ->addField(['textAlignment', 'lightboxIframe', 'icon', 'iconPosition', 'ctaAsButton'], 'rel', PaletteManipulator::POSITION_AFTER)
     ->applyToPalette('hyperlink', 'tl_content')
 
-    ->addField('textAlignment', 'ctaAsButton', 'download_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField(['textAlignment', 'ctaAsButton'], 'download_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('download', 'tl_content')
 
     ->addField('ctaAsButton', 'download_legend', PaletteManipulator::POSITION_APPEND)
