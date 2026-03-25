@@ -1,7 +1,7 @@
 {% block image %}
     {% if figure|default %}
         {% set figure_object = figure %}
-    {% elseif item.singleSRC|default %}
+    {% elseif item.singleSRC|default or singleSRC|default %}
         {% set item = item|default(_context) %}
         {% set figure_object = figure(item.singleSRC, size|default, configuration|default({})) %}
     {% endif %}
