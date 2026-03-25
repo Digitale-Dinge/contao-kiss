@@ -1,6 +1,6 @@
 {% extends '@Contao/content_element/hyperlink.html.twig' %}
 
-{% if data.hyperlinkAsButton|default %}
+{% if data.ctaAsButton|default %}
     {% set link_attributes = attrs(link_attributes|default)
         .addClass('btn')
         .addClass('btn-' ~ styles.size(data.ctaSize), data.ctaSize|default)
