@@ -10,7 +10,7 @@
     {% endif %}
 
     {% if topline|default %}
-        <p{{ attrs(topline_attributes|default).addClass('topline') }}>{{ topline }}</p>
+        <p{{ attrs(topline_attributes|default).addClass('topline') }}>{{ topline|insert_tag }}</p>
     {% endif %}
 
     {% set headline_source = is_from_iterable ? item.headline|default : data.headline|default|deserialize %}
