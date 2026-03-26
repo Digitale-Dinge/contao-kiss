@@ -1,7 +1,9 @@
- {% block header_inner %}
-    {{ include('@Contao/company/logo.html.twig', {
-        logo_class: 'header-logo',
-    }) }}
+{% use '@Contao/company/logo.html.twig' %}
+
+{% block header_inner %}
+    {% with { logo_class: 'header-logo'} %}
+        {{ block('company_logo') }}
+    {% endwith %}
     {% block header_elements %}
         {{ frontend_module('navigation', {
             levelOffset: 0,
