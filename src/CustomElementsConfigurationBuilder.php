@@ -154,13 +154,17 @@ final class CustomElementsConfigurationBuilder
         }
 
         if (array_is_list($options)) {
-            foreach ($options as &$option) {
-                $option = $this->translator->trans(
+            $translated = [];
+
+            foreach ($options as $option) {
+                $translated[$option] = $this->translator->trans(
                     "rsce.field.$key.options.$option",
                     [],
                     'rsce'
                 );
             }
+
+            $options = $translated;
         }
 
         return $this->addField($key, [
