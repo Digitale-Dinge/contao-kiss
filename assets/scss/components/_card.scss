@@ -61,10 +61,17 @@
       @apply border-t border-base-content/10;
     }
 
-    // Card Title
+    // Card Title — no font-size; inherits color from card variant
     &-title {
-      @apply text-lg font-semibold leading-tight;
-      @apply text-base-content;
+      @apply font-semibold leading-tight;
+      color: inherit;
+    }
+
+    // Reset margins inside card-body — spacing is handled by gap
+    &-body {
+      :is(h1, h2, h3, h4, h5, h6, .topline) {
+        @apply m-0;
+      }
     }
 
     // Card Actions
@@ -95,10 +102,6 @@
       > .card-footer {
         @apply px-3 py-2;
       }
-
-      .card-title {
-        @apply text-sm;
-      }
     }
 
     // Small
@@ -114,10 +117,6 @@
 
       > .card-footer {
         @apply px-4 py-3;
-      }
-
-      .card-title {
-        @apply text-base;
       }
     }
 
@@ -137,10 +136,6 @@
       > .card-footer {
         @apply px-8 py-5;
       }
-
-      .card-title {
-        @apply text-xl;
-      }
     }
 
     // Extra Large
@@ -156,10 +151,6 @@
 
       > .card-footer {
         @apply px-10 py-6;
-      }
-
-      .card-title {
-        @apply text-2xl;
       }
     }
 
@@ -215,10 +206,6 @@
         @apply relative z-10;
         @apply text-white;
       }
-
-      .card-title {
-        @apply text-white;
-      }
     }
 
     // Glass effect (can combine with colors)
@@ -228,10 +215,6 @@
       background-color: color-mix(in oklch, var(--color-base-100) 15%, transparent);
       border: 1px solid color-mix(in oklch, var(--color-base-100) 20%, transparent);
       box-shadow: 0 8px 32px 0 rgb(0 0 0 / 0.15);
-
-      .card-title {
-        @apply text-base-content;
-      }
 
       &.card-primary {
         background-color: color-mix(in oklch, var(--color-primary) 15%, transparent);
@@ -321,10 +304,6 @@
     &-primary {
       @apply bg-primary text-primary-content;
 
-      .card-title {
-        @apply text-primary-content;
-      }
-
       > .card-header,
       > .card-footer {
         @apply border-primary-content/20;
@@ -333,10 +312,6 @@
 
     &-secondary {
       @apply bg-secondary text-secondary-content;
-
-      .card-title {
-        @apply text-secondary-content;
-      }
 
       > .card-header,
       > .card-footer {
@@ -347,10 +322,6 @@
     &-accent {
       @apply bg-accent text-accent-content;
 
-      .card-title {
-        @apply text-accent-content;
-      }
-
       > .card-header,
       > .card-footer {
         @apply border-accent-content/20;
@@ -359,10 +330,6 @@
 
     &-info {
       @apply bg-info text-info-content;
-
-      .card-title {
-        @apply text-info-content;
-      }
 
       > .card-header,
       > .card-footer {
@@ -373,10 +340,6 @@
     &-success {
       @apply bg-success text-success-content;
 
-      .card-title {
-        @apply text-success-content;
-      }
-
       > .card-header,
       > .card-footer {
         @apply border-success-content/20;
@@ -386,10 +349,6 @@
     &-warning {
       @apply bg-warning text-warning-content;
 
-      .card-title {
-        @apply text-warning-content;
-      }
-
       > .card-header,
       > .card-footer {
         @apply border-warning-content/20;
@@ -398,10 +357,6 @@
 
     &-error {
       @apply bg-error text-error-content;
-
-      .card-title {
-        @apply text-error-content;
-      }
 
       > .card-header,
       > .card-footer {
@@ -415,10 +370,6 @@
 
       box-shadow: none;
 
-      .card-title {
-        @apply text-base-content;
-      }
-
       > .card-header,
       > .card-footer {
         @apply border-base-content/10;
@@ -426,10 +377,6 @@
 
       &.card-primary {
         @apply bg-primary/10 text-primary;
-
-        .card-title {
-          @apply text-primary;
-        }
 
         > .card-header,
         > .card-footer {
@@ -440,10 +387,6 @@
       &.card-secondary {
         @apply bg-secondary/10 text-secondary;
 
-        .card-title {
-          @apply text-secondary;
-        }
-
         > .card-header,
         > .card-footer {
           @apply border-secondary/20;
@@ -452,10 +395,6 @@
 
       &.card-accent {
         @apply bg-accent/10 text-accent;
-
-        .card-title {
-          @apply text-accent;
-        }
 
         > .card-header,
         > .card-footer {
@@ -466,10 +405,6 @@
       &.card-info {
         @apply bg-info/10 text-info;
 
-        .card-title {
-          @apply text-info;
-        }
-
         > .card-header,
         > .card-footer {
           @apply border-info/20;
@@ -478,10 +413,6 @@
 
       &.card-success {
         @apply bg-success/10 text-success;
-
-        .card-title {
-          @apply text-success;
-        }
 
         > .card-header,
         > .card-footer {
@@ -492,10 +423,6 @@
       &.card-warning {
         @apply bg-warning/10 text-warning;
 
-        .card-title {
-          @apply text-warning;
-        }
-
         > .card-header,
         > .card-footer {
           @apply border-warning/20;
@@ -504,10 +431,6 @@
 
       &.card-error {
         @apply bg-error/10 text-error;
-
-        .card-title {
-          @apply text-error;
-        }
 
         > .card-header,
         > .card-footer {
@@ -525,10 +448,6 @@
       @apply border-base-content/30;
       box-shadow: none;
 
-      .card-title {
-        @apply text-base-content;
-      }
-
       > .card-header,
       > .card-footer {
         @apply border-base-content/20;
@@ -536,10 +455,6 @@
 
       &.card-primary {
         @apply bg-transparent border-primary text-primary;
-
-        .card-title {
-          @apply text-primary;
-        }
 
         > .card-header,
         > .card-footer {
@@ -550,10 +465,6 @@
       &.card-secondary {
         @apply bg-transparent border-secondary text-secondary;
 
-        .card-title {
-          @apply text-secondary;
-        }
-
         > .card-header,
         > .card-footer {
           @apply border-secondary/30;
@@ -562,10 +473,6 @@
 
       &.card-accent {
         @apply bg-transparent border-accent text-accent;
-
-        .card-title {
-          @apply text-accent;
-        }
 
         > .card-header,
         > .card-footer {
@@ -576,10 +483,6 @@
       &.card-info {
         @apply bg-transparent border-info text-info;
 
-        .card-title {
-          @apply text-info;
-        }
-
         > .card-header,
         > .card-footer {
           @apply border-info/30;
@@ -588,10 +491,6 @@
 
       &.card-success {
         @apply bg-transparent border-success text-success;
-
-        .card-title {
-          @apply text-success;
-        }
 
         > .card-header,
         > .card-footer {
@@ -602,10 +501,6 @@
       &.card-warning {
         @apply bg-transparent border-warning text-warning;
 
-        .card-title {
-          @apply text-warning;
-        }
-
         > .card-header,
         > .card-footer {
           @apply border-warning/30;
@@ -614,10 +509,6 @@
 
       &.card-error {
         @apply bg-transparent border-error text-error;
-
-        .card-title {
-          @apply text-error;
-        }
 
         > .card-header,
         > .card-footer {
