@@ -1,7 +1,7 @@
 {% use '@Contao/company/logo.html.twig' %}
 
 {% block header_inner %}
-    {% with { logo_class: 'header-logo'} %}
+    {% with { logo_class: 'header-logo', company_logo_attributes: attrs().addClass('shrink-0')} %}
         {{ block('company_logo') }}
     {% endwith %}
     {% block header_elements %}

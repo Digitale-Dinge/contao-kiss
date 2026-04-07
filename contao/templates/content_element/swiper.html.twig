@@ -1,0 +1,8 @@
+{% extends '@Contao/content_element/swiper.html.twig' %}
+
+{# Hide the swiper buttons in the back end #}
+{% block controls %}
+    {% if not as_editor_view %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
