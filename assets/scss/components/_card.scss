@@ -223,14 +223,14 @@
 
     // Glass effect (can combine with colors)
     &-glass {
-      @apply backdrop-blur-md text-white;
+      @apply backdrop-blur-md text-base-content;
 
       background-color: color-mix(in oklch, var(--color-base-100) 15%, transparent);
       border: 1px solid color-mix(in oklch, var(--color-base-100) 20%, transparent);
       box-shadow: 0 8px 32px 0 rgb(0 0 0 / 0.15);
 
       .card-title {
-        @apply text-white;
+        @apply text-base-content;
       }
 
       &.card-primary {
