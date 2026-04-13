@@ -33,12 +33,12 @@ class StylesVariable
         return $this->getStyleOption(Layout\ContainerOption::class, $key);
     }
 
-    public function getColumn(string $key): StyleOption|Layout\ColumnOption
+    public function getColumn(string|null $key = null): StyleOption|Layout\ColumnOption
     {
         return $this->getStyleOption(Layout\ColumnOption::class, $key);
     }
 
-    public function getGap(string $key): StyleOption|Layout\GapOption
+    public function getGap(string|null $key = null): StyleOption|Layout\GapOption
     {
         return $this->getStyleOption(Layout\GapOption::class, $key);
     }
@@ -46,17 +46,17 @@ class StylesVariable
     /**
      * Typography
      */
-    public function getFont_size(string $key): StyleOption|Typography\FontSizeOption
+    public function getFont_size(string|null $key = null): StyleOption|Typography\FontSizeOption
     {
         return $this->getStyleOption(Typography\FontSizeOption::class, $key);
     }
 
-    public function getHeading(string $key): StyleOption|Typography\HeadingOption
+    public function getHeading(string|null $key = null): StyleOption|Typography\HeadingOption
     {
         return $this->getStyleOption(Typography\HeadingOption::class, $key);
     }
 
-    public function getText_alignment(string $key): StyleOption|Typography\AlignmentOption
+    public function getText_alignment(string|null $key = null): StyleOption|Typography\AlignmentOption
     {
         return $this->getStyleOption(Typography\AlignmentOption::class, $key);
     }
@@ -64,12 +64,12 @@ class StylesVariable
     /**
      * Color
      */
-    public function getBackground(string $key): StyleOption|Color\BackgroundOption
+    public function getBackground(string|null $key = null): StyleOption|Color\BackgroundOption
     {
         return $this->getStyleOption(Color\BackgroundOption::class, $key);
     }
 
-    public function getColor(string $key): StyleOption|Color\ColorOption
+    public function getColor(string|null $key = null): StyleOption|Color\ColorOption
     {
         return $this->getStyleOption(Color\ColorOption::class, $key);
     }
@@ -77,12 +77,12 @@ class StylesVariable
     /**
      * Margin
      */
-    public function getMargin_top(string $key): StyleOption|Margin\TopOption
+    public function getMargin_top(string|null $key = null): StyleOption|Margin\TopOption
     {
         return $this->getStyleOption(Margin\TopOption::class, $key);
     }
 
-    public function getMargin_bottom(string $key): StyleOption|Margin\BottomOption
+    public function getMargin_bottom(string|null $key = null): StyleOption|Margin\BottomOption
     {
         return $this->getStyleOption(Margin\BottomOption::class, $key);
     }
@@ -90,17 +90,17 @@ class StylesVariable
     /**
      * Padding
      */
-    public function getPadding_top(string $key): StyleOption|Padding\TopOption
+    public function getPadding_top(string|null $key = null): StyleOption|Padding\TopOption
     {
         return $this->getStyleOption(Padding\TopOption::class, $key);
     }
 
-    public function getPadding_bottom(string $key): StyleOption|Padding\BottomOption
+    public function getPadding_bottom(string|null $key = null): StyleOption|Padding\BottomOption
     {
         return $this->getStyleOption(Padding\BottomOption::class, $key);
     }
 
-    public function getSize(string $key): StyleOption|Size\SizeOption
+    public function getSize(string|null $key = null): StyleOption|Size\SizeOption
     {
         return $this->getStyleOption(Size\SizeOption::class, $key);
     }
@@ -108,12 +108,12 @@ class StylesVariable
     /**
      * Call to action design
      */
-    public function getCta_shape(string $key): StyleOption|Component\CallToAction\ShapeOption
+    public function getCta_shape(string|null $key = null): StyleOption|Component\CallToAction\ShapeOption
     {
         return $this->getStyleOption(Component\CallToAction\ShapeOption::class, $key);
     }
 
-    public function getCta_type(string $key): StyleOption|Component\CallToAction\TypeOption
+    public function getCta_type(string|null $key = null): StyleOption|Component\CallToAction\TypeOption
     {
         return $this->getStyleOption(Component\CallToAction\TypeOption::class, $key);
     }
