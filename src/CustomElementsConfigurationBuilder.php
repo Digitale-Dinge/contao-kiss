@@ -12,6 +12,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class CustomElementsConfigurationBuilder
 {
+    private string|null $type;
+
     private array $config = [];
 
     private array $listStack = [];
@@ -29,9 +31,14 @@ final class CustomElementsConfigurationBuilder
         Controller::loadDataContainer('tl_member');
     }
 
-    public function create(array $labels, string $contentCategory = 'texts', array|null $extra = []): self
+    public function create(array|string $translation, string $contentCategory = 'texts', array|null $extra = []): self
     {
-        $this->config['label'] = $labels;
+        if (is_string($translation)) {
+            $this->type = $translation;
+            $translation = $this->getTranslations(["$translation.label", "$translation.description"]);
+        }
+
+        $this->config['label'] = $translation;
         $this->config['contentCategory'] = $contentCategory;
 
         $this->config = [...$this->config, ...$extra];
@@ -113,6 +120,13 @@ final class CustomElementsConfigurationBuilder
 
     public function addField(string $key, array $options, array $eval = []): self
     {
+        if (is_bool($options['label'] ?? null) && null !== $this->type) {
+            $options['label'] = $this->getTranslations([
+                "$this->type.field.$key.label",
+                "$this->type.field.$key.description",
+            ]);
+        }
+
         if ([] !== $eval) {
             $options['eval'] = array_merge($options['eval'] ?? [], $eval);
         }
@@ -122,11 +136,11 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
-    public function addGroup(string $key, array $translations = []): self
+    public function addGroup(string $key, array|null $translations = null): self
     {
         return $this->addField($key, [
             'inputType' => 'group',
-            'label' => $translations,
+            'label' => $translations ?? $this->getTranslations(["group.$key"])
         ]);
     }
 
@@ -372,5 +386,16 @@ final class CustomElementsConfigurationBuilder
     private function isListField(): bool
     {
         return [] !== $this->listStack;
+    }
+
+    private function getTranslations(array $labels, string $translationTrail = 'rsce.', string $translationDomain = 'rsce'): array
+    {
+        $translated = [];
+
+        foreach ($labels as $label) {
+            $translated[] = $this->translator->trans($translationTrail.$label, [], $translationDomain);
+        }
+
+        return $translated;
     }
 }

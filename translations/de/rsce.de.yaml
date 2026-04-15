@@ -25,3 +25,11 @@ rsce:
     media_text_list:
         label:              Medien-Text-Liste
         description:        Eine Medien-Text Liste
+
+    icon:
+        label:              Icon
+        description:        Ein einzelnes Icon mit optionalem Beschreibungstext
+        field:
+            text:
+                label: Beschreibung
+                description: Ein beschreibender Text für das Icon
