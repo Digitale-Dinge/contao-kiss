@@ -39,6 +39,8 @@ class ArticleContentKissStylesMigration extends AbstractMigration
             ['paddingTop' => self::SPACING_MAP],
             ['paddingBottom' => self::SPACING_MAP],
             ['contentWidth' => self::LAYOUT_COLUMN_MAP],
+            ['icon' => []],
+            ['iconPosition' => []],
         ],
         'tl_article' => [
             ['paddingTop'=> self::SPACING_MAP],

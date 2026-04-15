@@ -100,3 +100,9 @@ style_options:
 
     size:                           Size
     heading:                        Heading
+
+    position:
+        left:                       Links
+        center:                     Mittig
+        right:                      Rechts
+        justify:                    Blocksatz

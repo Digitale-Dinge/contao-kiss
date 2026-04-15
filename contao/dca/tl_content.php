@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
+use DigitaleDinge\ContaoKiss\Styles\Option\IconPosition;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'ctaAsButton';
@@ -159,7 +160,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['ctaAsButton'] = [
     'inputType' => 'checkbox',
     'targetColumn' => 'kiss_styles',
     'eval' => [
-        'tl_class' => 'm12 clr',
+        'tl_class' => 'w25',
         'submitOnChange' => true,
     ],
 ];
@@ -169,7 +170,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['ctaType'] = [
     'inputType' => 'select',
     'targetColumn' => 'kiss_styles',
     'eval' => [
-        'tl_class' => 'w50',
+        'tl_class' => 'w25',
         'includeBlankOption' => true,
     ],
 ];
@@ -179,7 +180,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['ctaColor'] = [
     'inputType' => 'select',
     'targetColumn' => 'kiss_styles',
     'eval' => [
-        'tl_class' => 'w50',
+        'tl_class' => 'w25',
         'includeBlankOption' => true,
     ],
 ];
@@ -189,7 +190,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['ctaSize'] = [
     'inputType' => 'select',
     'targetColumn' => 'kiss_styles',
     'eval' => [
-        'tl_class' => 'w50',
+        'tl_class' => 'w25',
         'includeBlankOption' => true,
     ],
 ];
@@ -199,7 +200,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['ctaShape'] = [
     'inputType' => 'select',
     'targetColumn' => 'kiss_styles',
     'eval' => [
-        'tl_class' => 'w50',
+        'tl_class' => 'w25',
         'includeBlankOption' => true,
     ],
 ];
@@ -261,38 +262,25 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['textAppearance'] = [
     ],
 ];
 
-//$GLOBALS['TL_DCA']['tl_content']['fields']['rel']['eval']['tl_class'] = 'w25';
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['lightboxIframe'] = [
-    'exclude' => true,
-    'inputType' => 'checkbox',
-    'sql' => "char(1) NOT NULL default ''",
-    'eval' => [
-        'tl_class' => 'w25 m12',
-        'submitOnChange' => true,
-    ],
-];
-
 $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
     'inputType' => 'svgIconPicker',
+    'targetColumn' => 'kiss_styles',
     'eval' => [
         'sourceDirectory' => 'public/kiss_icons/svg',
         'metadataDirectory' => 'public/kiss_icons',
         'tl_class' => 'w50 clr',
     ],
-    'sql' => 'blob NULL',
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['iconPosition'] = [
     'exclude' => true,
-    'inputType' => 'radio',
-    'options' => ['left', 'right'],
-    'reference' => &$GLOBALS['TL_LANG']['tl_content'],
+    'inputType' => 'radioTable',
+    'enum' => IconPosition::class,
+    'targetColumn' => 'kiss_styles',
     'eval' => [
-        'tl_class' => 'w50 image-grid image-grid--highdpi',
-        'includeBlankOption' => false,
+        'cols' => count(IconPosition::cases()),
+        'tl_class' => 'w50',
     ],
-    'sql' => "varchar(32) NOT NULL default ''",
 ];
 
 /*
@@ -310,15 +298,16 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['allowHtml'] = tr
 /* HTML in Linktexten */
 //$GLOBALS['TL_DCA']['tl_content']['fields']['linktext']['eval']['allowHtml'] = true;
 
-
 PaletteManipulator::create()
     ->addField('callToAction', 'text_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('text', 'tl_content')
 
-    ->addField(['textAlignment', 'lightboxIframe', 'icon', 'iconPosition', 'ctaAsButton'], 'rel', PaletteManipulator::POSITION_AFTER)
+    ->addLegend('appearance_legend', 'link_legend')
+    ->addField(['icon', 'iconPosition', 'textAlignment', 'ctaAsButton'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('hyperlink', 'tl_content')
 
-    ->addField(['textAlignment', 'ctaAsButton'], 'download_legend', PaletteManipulator::POSITION_APPEND)
+    ->addLegend('appearance_legend', 'download_legend')
+    ->addField(['textAlignment', 'ctaAsButton'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('download', 'tl_content')
 
     ->addField('ctaAsButton', 'download_legend', PaletteManipulator::POSITION_APPEND)

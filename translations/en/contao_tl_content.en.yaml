@@ -1,6 +1,7 @@
 tl_content:
     layout_legend:              Layout settings
     grid_legend:                Grid settings
+    appearance_legend:          Appearance settings
 
     grid:                       Column grid
     contentTeaser:              Teaser
@@ -91,16 +92,8 @@ tl_content:
 
     icon:
         - Icon
-
-    iconColor:
-        primary: Primary
-        secondary: Secondary
-        outline: Outline
+        - Here you can choose an icon.
 
     iconPosition:
         - Position
-        - Select the desired position of the icon.
-
-    iconPositionOptions:
-        right: Right
-        left: Left
+        - Here you can choose the position of the icon.

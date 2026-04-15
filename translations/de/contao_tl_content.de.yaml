@@ -1,6 +1,7 @@
 tl_content:
     layout_legend:              Layout-Einstellungen
     grid_legend:                Grid-Einstellungen
+    appearance_legend:          Darstellungs-Einstellungen
 
     grid:                       Spalten-Grid
     contentTeaser:              Teaser
@@ -91,16 +92,8 @@ tl_content:
 
     icon:
         - Icon
-
-    iconColor:
-        primary: Primär (Standard) <img src="bundles/digitaledingecontaokiss/icons/primary.png">
-        secondary: Sekundär <img src="bundles/digitaledingecontaokiss/icons/secondary.png">
-        outline: Rahmen <img src="bundles/digitaledingecontaokiss/icons/outline.png">
+        - Hier können Sie ein Icon auswählen.
 
     iconPosition:
         - Position
-        - Wählen Sie die gewünschte Position des Icons.
-
-    iconPositionOptions:
-        right: Rechts <img src="bundles/digitaledingecontaokiss/icons/icon-right.png">
-        left: Links (Standard) <img src="bundles/digitaledingecontaokiss/icons/icon-left.png">
+        - Hier können Sie die Position des Icons auswählen.

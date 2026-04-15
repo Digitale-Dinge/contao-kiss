@@ -10,15 +10,13 @@
     %}
 {% endif %}
 
-{% set link_attributes = attrs(link_attributes|default)
-    .addClass('colorbox_iframe', data.lightboxIframe|default)
-%}
-
 {% block text_link %}
-    {% if icon|default %}
-        {{- text_before|default -}}
-        {{ include('@Contao/kiss_component/media/_icon_text.html.twig') }}
-        {{- text_after|default -}}
+    {% if data.icon|default %}
+        {{- text_before -}}
+        <a{{ attrs(link_attributes|default) }}>
+            {{ include('@Contao/kiss_component/media/_icon_text.html.twig', data|merge({text: link_text, add_wrapper: false})) }}
+        </a>
+        {{- text_after -}}
     {% else %}
         {{ parent() }}
     {% endif %}

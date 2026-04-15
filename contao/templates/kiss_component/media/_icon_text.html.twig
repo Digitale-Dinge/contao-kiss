@@ -1,21 +1,22 @@
 {% block icon_text %}
-    {% set item = icon|default(_context) %}
+    {% set item = item|default(_context) %}
+    {% set direction = enum('DigitaleDinge\\ContaoKiss\\Styles\\Option\\IconPosition').tryFrom(item.iconPosition|default)?.name %}
 
-    <{{ tag_name|default('span') }}{{ attrs(icon_text_wrapper_attributes|default) }}>
-        {% if item.position|default('left') == 'left' %}
-            {{ _self.span_icon(item.position|default, item) }}
-        {% endif %}
-        <span{{ attrs(icon_text_attributes|default).addClass(['text', 'leading-none']) }}>
-            {{ text|insert_tag }}
+    {% set icon_block %}
+        <span{{ attrs().addClass(direction == 'right' ? 'ml-1' : 'mr-1') }}>
+            {{ include('@Contao/kiss_component/media/_icon_include.html.twig') }}
         </span>
-        {% if item.position|default == 'right' %}
-            {{ _self.span_icon(item.position|default, item.icon) }}
-        {% endif %}
-    </{{ tag_name|default('span') }}>
-{% endblock %}
+    {% endset %}
 
-{% macro span_icon(direction, icon) %}
-    <span{{ attrs().addClass(direction == 'right' ? 'ml-1' : 'mr-1') }}>
-        {{ include('@Contao/kiss_component/media/_icon.html.twig') }}
-    </span>
-{% endmacro -%}
+    {% set text_block %}
+        <span{{ attrs(icon_text_attributes|default).addClass(['text', 'leading-none']) }}>
+            {{ text|default|insert_tag }}
+        </span>
+    {% endset %}
+
+    {% if direction == 'right' %}
+        {{ text_block }}{{ icon_block }}
+    {% else %}
+        {{ icon_block }}{{ text_block }}
+    {% endif %}
+{% endblock %}

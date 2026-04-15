@@ -277,17 +277,8 @@ final class CustomElementsConfigurationBuilder
 
     public function addIconField(array $eval = [], string|null $dependsOn = null): self
     {
-        $options = [
-            'label' => [
-                'de' => ['Icon', 'Hier können Sie ein Icon auswählen.'],
-                'en' => ['Icon', 'Here you can choose an icon.'],
-            ],
-            'inputType' => 'svgIconPicker',
-            'eval' => [
-                'sourceDirectory' => 'public/kiss_icons/svg',
-                'metadataDirectory' => 'public/kiss_icons',
-                'tl_class' => 'long clr',
-            ],
+        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] : [
+            'inputType' => 'standardField',
         ];
 
         if (null !== $dependsOn) {
@@ -300,6 +291,22 @@ final class CustomElementsConfigurationBuilder
         $this->addField('icon', $options, $eval);
 
         return $this;
+    }
+
+    public function addIconPositionField(array $eval = [], string|null $dependsOn = null): self
+    {
+        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['iconPosition'] : [
+            'inputType' => 'standardField',
+        ];
+
+        if (null !== $dependsOn) {
+            $options['dependsOn'] = [
+                'field' => $dependsOn,
+                'value' => 'icon',
+            ];
+        }
+
+        return $this->addField('iconPosition', $options, $eval);
     }
 
     public function addPhoneField(array $eval = []): self

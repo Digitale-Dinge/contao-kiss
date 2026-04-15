@@ -100,3 +100,9 @@ style_options:
 
     size:                           Größe
     heading:                        Überschrift
+
+    position:
+        left:                       Left
+        center:                     Center
+        right:                      Right
+        justify:                    Justify
