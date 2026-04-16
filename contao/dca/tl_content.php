@@ -301,18 +301,26 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['allowHtml'] = tr
 PaletteManipulator::create()
     ->addField('callToAction', 'text_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('text', 'tl_content')
+;
 
+PaletteManipulator::create()
     ->addLegend('appearance_legend', 'link_legend')
     ->addField(['icon', 'iconPosition', 'textAlignment', 'ctaAsButton'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('hyperlink', 'tl_content')
+;
 
+PaletteManipulator::create()
     ->addLegend('appearance_legend', 'download_legend')
     ->addField(['textAlignment', 'ctaAsButton'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('download', 'tl_content')
 
+;
+PaletteManipulator::create()
     ->addField('ctaAsButton', 'download_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('downloads', 'tl_content')
+;
 
+PaletteManipulator::create()
     ->addLegend('grid_legend', ['layout_legend', 'template_legend', 'protected_legend'], PaletteManipulator::POSITION_BEFORE)
     ->addField(['gridColumns', 'gridGap'], 'grid_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('element_group', 'tl_content')
