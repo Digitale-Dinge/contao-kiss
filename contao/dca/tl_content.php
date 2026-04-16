@@ -313,8 +313,8 @@ PaletteManipulator::create()
     ->addLegend('appearance_legend', 'download_legend')
     ->addField(['textAlignment', 'ctaAsButton'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('download', 'tl_content')
-
 ;
+
 PaletteManipulator::create()
     ->addField('ctaAsButton', 'download_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('downloads', 'tl_content')
