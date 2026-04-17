@@ -1,0 +1,62 @@
+/**
+ * KISS Layout Utilities (V1.0)
+ *
+ * Contao-specific responsive system
+ */
+
+@layer components {
+    .audio_container audio {
+        @apply max-w-full;
+    }
+
+    .video_container video {
+        @apply max-w-full h-auto;
+    }
+
+    :is(.aspect, .responsive) {
+        @apply relative;
+
+        iframe {
+            @apply absolute size-full inset-[0];
+        }
+
+        :is(picture, img) {
+            @apply block object-cover h-full
+        }
+    }
+
+    .aspect--16\:9,
+    .responsive.ratio-169 {
+        @apply aspect-video;
+    }
+
+    .aspect--16\:10,
+    .responsive.ratio-1610 {
+        @apply aspect-16/10;
+    }
+
+    .aspect--21\:9,
+    .responsive.ratio-219 {
+        @apply aspect-21/9;
+    }
+
+    .aspect--4\:3,
+    .responsive.ratio-43 {
+        @apply aspect-4/3;
+    }
+
+    .aspect--3\:2,
+    .responsive.ratio-32 {
+        @apply aspect-3/2;
+    }
+
+    .aspect--9\:16,
+    .responsive.ratio-916 {
+        @apply aspect-9/16;
+    }
+
+    .aspect--1\:1,
+    .responsive.ratio-11 {
+        @apply aspect-square;
+    }
+}
