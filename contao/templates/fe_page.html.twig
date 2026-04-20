@@ -4,7 +4,9 @@
 
 {% block head %}
     {{ parent() }}
-    {{ include('@Contao/kiss_component/theme/_init_script.html.twig') }}
+    {% block head_kiss %}
+        {{ include('@Contao/kiss_component/theme/_init_script.html.twig') }}
+    {% endblock %}
 {% endblock %}
 
 {% block header %}

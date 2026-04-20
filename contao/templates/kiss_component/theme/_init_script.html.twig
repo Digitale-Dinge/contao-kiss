@@ -15,7 +15,7 @@
     var themes = ['light', 'dark']; // Add more: 'high-contrast', 'sepia', etc.
     var mode = localStorage.getItem('theme') || 'system';
     var theme;
-    
+
     if (mode === 'system') {
         theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     } else if (themes.indexOf(mode) !== -1) {
@@ -24,7 +24,7 @@
         localStorage.setItem('theme', 'system');
         theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
-    
+
     themes.forEach(function(t) { document.documentElement.classList.remove(t); });
     if (theme !== 'light') document.documentElement.classList.add(theme);
 })();
