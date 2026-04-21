@@ -20,6 +20,7 @@ enum Background: string implements TranslatableLabelInterface
     case success = 'bg-success';
     case warning = 'bg-warning';
     case error = 'bg-error';
+    case base_content = 'bg-base-content';
 
     public function label(): TranslatableMessage
     {

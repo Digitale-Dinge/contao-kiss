@@ -49,6 +49,7 @@ style_options:
         success:                    Erfolg
         warning:                    Warnung
         error:                      Fehler
+        base_content:               Textfarbe
 
     spacing_option:
         half:                       Halbe Zeilenhöhe

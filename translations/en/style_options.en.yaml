@@ -49,6 +49,7 @@ style_options:
         success:                    Success
         warning:                    Warning
         error:                      Error
+        base_content:               Text color
 
     spacing_option:
         half:                       Half line height
