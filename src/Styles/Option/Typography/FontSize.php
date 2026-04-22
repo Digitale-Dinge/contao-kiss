@@ -9,13 +9,13 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 enum FontSize: string implements TranslatableLabelInterface
 {
-    case x_small = 'text-xs';
-    case small = 'text-sm';
-    case medium = 'text-base';
-    case large = 'md:text-lg';
-    case x_large = 'text-lg md:text-xl';
-    case xx_large = 'text-xl md:text-2xl';
-    case xxx_large = 'text-2xl md:text-3xl';
+    case x_small = 'text-xs!';
+    case small = 'text-sm!';
+    case medium = 'text-base!';
+    case large = 'md:text-lg!';
+    case x_large = 'text-lg! md:text-xl!';
+    case xx_large = 'text-xl! md:text-2xl!';
+    case xxx_large = 'text-2xl! md:text-3xl!';
 
     public function label(): TranslatableMessage
     {
