@@ -29,9 +29,9 @@ final readonly class BackendStylesRuntime implements RuntimeExtensionInterface
     /**
      * @throws Exception
      */
-    public function getGridClasses(int $id): array
+    public function getGridClasses(int $id, string $table): array
     {
-        $styles = $this->getKissStyles($id);
+        $styles = $this->getKissStyles($id, $table);
 
         if (empty($styles['gridColumns'])) {
             return [];
@@ -47,9 +47,9 @@ final readonly class BackendStylesRuntime implements RuntimeExtensionInterface
     /**
      * @throws Exception
      */
-    public function getGridLabel(int $id): string|null
+    public function getGridLabel(int $id, string $table): string|null
     {
-        $styles = $this->getKissStyles($id);
+        $styles = $this->getKissStyles($id, $table);
 
         if (empty($styles['gridColumns'])) {
             return null;
@@ -61,9 +61,17 @@ final readonly class BackendStylesRuntime implements RuntimeExtensionInterface
     /**
      * @throws Exception
      */
-    private function getKissStyles(int $id): array
+    private function getKissStyles(int $id, string $table): array
     {
-        $styles = $this->connection->fetchOne('SELECT kiss_styles FROM tl_content WHERE id = :id', ['id' => $id]);
+        $schemaManager = $this->connection->createSchemaManager();
+
+        $columns = array_keys($schemaManager->listTableColumns($table));
+
+        if (!\in_array('kiss_styles', $columns, true)) {
+            return [];
+        }
+
+        $styles = $this->connection->fetchOne('SELECT kiss_styles FROM ' . $table .  ' WHERE id = :id', ['id' => $id]);
 
         if (false === $styles || null === $styles) {
             return [];
