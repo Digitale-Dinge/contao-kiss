@@ -25,6 +25,9 @@ rsce:
     media_text_list:
         label:              Medien-Text-Liste
         description:        Eine Medien-Text Liste
+        mediaMargin:
+            label:          Abstand zu Media
+            description:    Bestimmen Sie den Abstand unterhalb des Mediums.
 
     icon:
         label:              Icon
@@ -33,6 +36,3 @@ rsce:
             text:
                 label: Beschreibung
                 description: Ein beschreibender Text für das Icon
-        mediaMargin:
-            label:          Abstand zu Media
-            description:    Bestimmen Sie den Abstand unterhalb des Mediums (Bild oder Icon).
