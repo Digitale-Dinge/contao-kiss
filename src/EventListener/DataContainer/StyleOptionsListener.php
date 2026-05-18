@@ -55,6 +55,12 @@ final class StyleOptionsListener
         return $this->getTranslatedOptions(Layout\Column::class);
     }
 
+    #[AsCallback('tl_form_field', 'fields.gridSpan.options')]
+    public function addLayoutGridSpanOptions(): array
+    {
+        return $this->getTranslatedOptions(Layout\ColumnSpan::class);
+    }
+
     #[AsCallback('tl_content', 'fields.gridGap.options')]
     #[AsCallback('tl_module', 'fields.gridGap.options')]
     public function addLayoutGapOptions(): array

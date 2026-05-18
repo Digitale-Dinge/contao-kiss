@@ -22,9 +22,7 @@
 } %}
 
 {% set wrapperAttributes = attrs(wrapperAttributes|default)
-    .addClass([
-
-    ])
+    .addClass([styles.span(this.gridSpan|default)])
 %}
 
 {% set form_inner_attributes = attrs(form_inner_attributes|default)

@@ -43,6 +43,11 @@ class StylesVariable
         return $this->getStyleOption(Layout\GapOption::class, $key);
     }
 
+    public function getSpan(string|null $key = null): StyleOption|Layout\ColumnSpanOption
+    {
+        return $this->getStyleOption(Layout\ColumnSpanOption::class, $key);
+    }
+
     /**
      * Typography
      */

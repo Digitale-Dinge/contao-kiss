@@ -33,6 +33,19 @@ style_options:
             x_large:                Larger
             xx_large:               Very large
 
+        column_span:
+            one:                    Element width 1/12 (>=Tablet)
+            two:                    Element width 1/6 (>=Tablet)
+            three:                  Element width 1/4 (>=Tablet)
+            four:                   Element width 1/3 (>=Tablet)
+            five:                   Element width 5/12 (>=Tablet)
+            six:                    Element width 1/2 (>=Tablet)
+            seven:                  Element width 7/12 (>=Tablet)
+            eight:                  Element width 8/12 (>=Tablet)
+            nine:                   Element width 3/4 (>=Tablet)
+            ten:                    Element width 5/6 (>=Tablet)
+            eleven:                 Element width 11/12 (>=Tablet)
+
     background_color:
         - Background color
         - Choose the background color for this element.

@@ -33,6 +33,19 @@ style_options:
             x_large:                Größer
             xx_large:               Sehr groß
 
+        column_span:
+            one:                    Elementbreite 1/12 (>=Tablet)
+            two:                    Elementbreite 1/6 (>=Tablet)
+            three:                  Elementbreite 1/4 (>=Tablet)
+            four:                   Elementbreite 1/3 (>=Tablet)
+            five:                   Elementbreite 5/12 (>=Tablet)
+            six:                    Elementbreite 1/2 (>=Tablet)
+            seven:                  Elementbreite 7/12 (>=Tablet)
+            eight:                  Elementbreite 8/12 (>=Tablet)
+            nine:                   Elementbreite 3/4 (>=Tablet)
+            ten:                    Elementbreite 5/6 (>=Tablet)
+            eleven:                 Elementbreite 11/12 (>=Tablet)
+
     background_color:
         - Hintergrundfarbe
         - Wählen Sie die Hintergrundfarbe für dieses Element
