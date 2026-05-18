@@ -1,0 +1,38 @@
+{% extends '@Contao/form_row.html.twig' %}
+
+{% set type_class_map = {
+    'text':     'form-input',
+    'altcha':   'form-input',
+    'captcha':  'form-input',
+    'email':    'form-input',
+    'password': 'form-input',
+    'upload':   'form-input',
+
+    'checkbox': 'form-checkbox',
+
+    'radio':    'form-radio',
+
+    'select':   'form-select',
+
+    'textarea': 'form-textarea',
+
+    'range':    'form-range',
+
+    'submit':   'btn',
+} %}
+
+{% set wrapperAttributes = attrs(wrapperAttributes|default)
+    .addClass([
+
+    ])
+%}
+
+{% set form_inner_attributes = attrs(form_inner_attributes|default)
+    .addClass([
+        type_class_map[this.type]|default,
+    ])
+%}
+
+{% for attribute, value in form_inner_attributes %}
+    {% do addAttribute.invoke(attribute, value) %}
+{% endfor %}

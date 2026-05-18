@@ -17,7 +17,7 @@
 
 @layer components {
     // Label text (above input)
-    .formbody label,
+    .widget > label,
     .label-text {
         @apply block text-sm font-medium text-base-content mb-1.5;
     }

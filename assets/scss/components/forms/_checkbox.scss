@@ -97,6 +97,14 @@
         }
     }
 
+    span:has(>.form-checkbox) {
+        @apply flex items-center gap-2 cursor-pointer;
+
+        label {
+            margin: 0;
+        }
+    }
+
     // ============================================
     // COLORS
     // ============================================
@@ -141,11 +149,15 @@
     .checkbox-xs {
         --size: 1rem;
         padding: 0.125rem;
+
+       @apply text-xs;
     }
 
     .checkbox-sm {
         --size: 1.25rem;
         padding: 0.125rem;
+
+        @apply text-sm;
     }
 
     // Default is 1.5rem with 0.1875rem padding (defined in base)
@@ -153,10 +165,14 @@
     .checkbox-lg {
         --size: 1.75rem;
         padding: 0.25rem;
+
+        @apply text-lg;
     }
 
     .checkbox-xl {
         --size: 2rem;
         padding: 0.3125rem;
+
+        @apply text-xl;
     }
 }

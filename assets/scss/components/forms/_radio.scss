@@ -75,6 +75,14 @@
         }
     }
 
+    span:has(>.form-radio) {
+        @apply flex items-center gap-2 cursor-pointer;
+
+        label {
+            margin: 0;
+        }
+    }
+
     // ============================================
     // COLORS
     // ============================================
