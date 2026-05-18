@@ -1,0 +1,126 @@
+site_name: Contao KISS
+site_url: https://digitale-dinge.github.io/contao-kiss/
+site_description: >-
+    Documentation for the Contao KISS (Keep it simple stupid) framework.
+docs_dir: 'docs'
+
+# Repository
+repo_name: Digitale-Dinge/contao-kiss
+repo_url: https://github.com/Digitale-Dinge/contao-kiss
+
+
+# Copyright
+copyright: Copyright &copy; 2026 Digitale Dinge GmbH
+
+# Configuration
+theme:
+    name: material
+    custom_dir: docs/theme/overrides
+    features:
+        - content.action.edit
+        - content.action.view
+        - content.code.annotate
+        - content.code.copy
+        # - content.code.select
+        # - content.footnote.tooltips
+        # - content.tabs.link
+        - content.tooltips
+        # - header.autohide
+        # - navigation.expand
+        - navigation.footer
+        - navigation.indexes
+        # - navigation.instant
+        # - navigation.instant.prefetch
+        # - navigation.instant.progress
+        # - navigation.prune
+        - navigation.sections
+        - navigation.tabs
+        # - navigation.tabs.sticky
+        - navigation.top
+        - navigation.tracking
+        - search.highlight
+        - search.share
+        - search.suggest
+        - toc.follow
+        # - toc.integrate
+    palette:
+        - media: "(prefers-color-scheme)"
+          toggle:
+              icon: material/link
+              name: Switch to light mode
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+          primary: indigo
+          accent: indigo
+          toggle:
+              icon: material/toggle-switch
+              name: Switch to dark mode
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          primary: black
+          accent: indigo
+          toggle:
+              icon: material/toggle-switch-off
+              name: Switch to system preference
+    font:
+        text: Roboto
+        code: Roboto Mono
+    favicon: assets/favicon.png
+    icon:
+        logo: logo
+
+# Plugins
+plugins:
+    - glightbox
+    - tags
+    - search:
+          lang: de
+
+# Extensions
+markdown_extensions:
+    - abbr
+    - admonition
+    - attr_list
+    - def_list
+    - footnotes
+    - md_in_html
+    - toc:
+          permalink: true
+    - pymdownx.caret
+    - pymdownx.details
+    - pymdownx.highlight:
+          use_pygments: true
+          anchor_linenums: true
+          line_spans: __span
+          pygments_lang_class: true
+          extend_pygments_lang:
+              - name: php
+                lang: php
+                options:
+                    startinline: true
+    - pymdownx.inlinehilite
+    - pymdownx.keys
+    - pymdownx.magiclink
+    - pymdownx.smartsymbols
+    - pymdownx.snippets
+    - pymdownx.superfences
+    -   pymdownx.tabbed:
+            alternate_style: true
+
+extra_css:
+    - assets/stylesheets/extra.css
+
+# Page tree
+nav:
+    - Home: index.md
+
+    - Getting started:
+          - Installation: getting_started/index.md
+          - Requirements: getting_started/requirements.md
+          - Principle: getting_started/principle.md
+
+    - Setup:
+        - setup/index.md
+
+    - Reference:
+        - reference/index.md
