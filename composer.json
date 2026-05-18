@@ -17,6 +17,12 @@
         "issues": "https://github.com/Digitale-Dinge/contao-kiss/issues",
         "source": "https://github.com/Digitale-Dinge/contao-kiss"
     },
+    "repositories": {
+        "digitaledinge/contao-company": {
+            "type": "git",
+            "url": "https://github.com/digitale-dinge/contao-company.git"
+        }
+    },
     "require": {
         "php": "^8.3",
         "contao/core-bundle": "^5.7",
