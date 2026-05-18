@@ -33,3 +33,6 @@ rsce:
             text:
                 label: Description
                 description: A describing text for the icon
+        mediaMargin:
+            label:          Spacing to media
+            description:    Determine the bottom spacing of the media (image or icon).

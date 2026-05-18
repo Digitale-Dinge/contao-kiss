@@ -18,6 +18,7 @@
 
 {% block content %}
     {% for item in list %}
+        {% set media_attributes = attrs().addClass(mediaMargin|default) %}
         {{ block('media_text') }}
     {% endfor %}
 {% endblock %}

@@ -33,3 +33,6 @@ rsce:
             text:
                 label: Beschreibung
                 description: Ein beschreibender Text für das Icon
+        mediaMargin:
+            label:          Abstand zu Media
+            description:    Bestimmen Sie den Abstand unterhalb des Mediums (Bild oder Icon).
