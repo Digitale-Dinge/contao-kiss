@@ -1,16 +1,16 @@
 /**
  * KISS Radio Component (V1.0)
- * 
+ *
  * Inspired by FlyonUI radio with animated dot.
- * 
- * Base: .radio
+ *
+ * Base: .form-radio
  * Colors: radio-{primary|secondary|accent|info|success|warning|error}
  * Sizes: radio-{xs|sm|lg|xl}
  * States: disabled
- * 
+ *
  * Example:
  *   <input type="radio" name="group" class="radio radio-primary">
- * 
+ *
  * With Label:
  *   <label class="flex items-center gap-2 cursor-pointer">
  *     <input type="radio" name="group" class="radio">
@@ -19,128 +19,128 @@
  */
 
 @layer components {
-  // ============================================
-  // BASE RADIO
-  // ============================================
-  .radio {
-    @apply relative shrink-0 cursor-pointer appearance-none rounded-full align-middle;
-    
-    // Size using CSS variable for easy adjustment
-    --size: 1.5rem;
-    --input-color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
-    width: var(--size);
-    height: var(--size);
-    
-    // Padding creates space between dot and border
-    padding: 0.25rem;
-    
-    // Border and background
-    @apply border border-base-content/40;
-    background-color: transparent;
-    
-    // Inner dot via ::before pseudo-element
-    &::before {
-      content: "";
-      @apply block size-full rounded-full;
-      background-color: transparent;
-      transition: background-color 0.15s, transform 0.2s;
-      transform: scale(0);
-    }
-    
-    // Focus state
-    &:focus-visible {
-      outline: 2px solid color-mix(in oklab, var(--input-color) 30%, transparent);
-      outline-offset: 0;
-    }
-    
     // ============================================
-    // CHECKED STATE
+    // BASE RADIO
     // ============================================
-    &:checked,
-    &[aria-checked="true"] {
-      border-color: var(--input-color);
-      animation: radio-pop 0.2s ease-out;
-      
-      &::before {
-        background-color: var(--input-color);
-        transform: scale(1);
-      }
+    .form-radio {
+        @apply relative shrink-0 cursor-pointer appearance-none rounded-full align-middle;
+
+        // Size using CSS variable for easy adjustment
+        --size: 1.5rem;
+        --input-color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+        width: var(--size);
+        height: var(--size);
+
+        // Padding creates space between dot and border
+        padding: 0.25rem;
+
+        // Border and background
+        @apply border border-base-content/40;
+        background-color: transparent;
+
+        // Inner dot via ::before pseudo-element
+        &::before {
+            content: "";
+            @apply block size-full rounded-full;
+            background-color: transparent;
+            transition: background-color 0.15s, transform 0.2s;
+            transform: scale(0);
+        }
+
+        // Focus state
+        &:focus-visible {
+            outline: 2px solid color-mix(in oklab, var(--input-color) 30%, transparent);
+            outline-offset: 0;
+        }
+
+        // ============================================
+        // CHECKED STATE
+        // ============================================
+        &:checked,
+        &[aria-checked="true"] {
+            border-color: var(--input-color);
+            animation: radio-pop 0.2s ease-out;
+
+            &::before {
+                background-color: var(--input-color);
+                transform: scale(1);
+            }
+        }
+
+        // ============================================
+        // DISABLED STATE
+        // ============================================
+        &:disabled {
+            @apply cursor-not-allowed opacity-50;
+        }
     }
-    
-    // ============================================
-    // DISABLED STATE
-    // ============================================
-    &:disabled {
-      @apply cursor-not-allowed opacity-50;
-    }
-    
+
     // ============================================
     // COLORS
     // ============================================
-    &-primary {
-      --input-color: var(--color-primary);
+    .radio-primary {
+        --input-color: var(--color-primary);
     }
-    
-    &-secondary {
-      --input-color: var(--color-secondary);
+
+    .radio-secondary {
+        --input-color: var(--color-secondary);
     }
-    
-    &-accent {
-      --input-color: var(--color-accent);
+
+    .radio-accent {
+        --input-color: var(--color-accent);
     }
-    
-    &-info {
-      --input-color: var(--color-info);
+
+    .radio-info {
+        --input-color: var(--color-info);
     }
-    
-    &-success {
-      --input-color: var(--color-success);
+
+    .radio-success {
+        --input-color: var(--color-success);
     }
-    
-    &-warning {
-      --input-color: var(--color-warning);
+
+    .radio-warning {
+        --input-color: var(--color-warning);
     }
-    
-    &-error {
-      --input-color: var(--color-error);
+
+    .radio-error {
+        --input-color: var(--color-error);
     }
-    
+
     // ============================================
     // SIZES
     // ============================================
-    &-xs {
-      --size: 1rem;
-      padding: 0.1875rem;
+    .radio-xs {
+        --size: 1rem;
+        padding: 0.1875rem;
     }
-    
-    &-sm {
-      --size: 1.25rem;
-      padding: 0.1875rem;
+
+    .radio-sm {
+        --size: 1.25rem;
+        padding: 0.1875rem;
     }
-    
+
     // Default is 1.5rem with 0.25rem padding (defined in base)
-    
-    &-lg {
-      --size: 1.75rem;
-      padding: 0.3125rem;
+
+    .radio-lg {
+        --size: 1.75rem;
+        padding: 0.3125rem;
     }
-    
-    &-xl {
-      --size: 2rem;
-      padding: 0.375rem;
+
+    .radio-xl {
+        --size: 2rem;
+        padding: 0.375rem;
     }
-  }
-  
-  // Pop animation for checked state
-  @keyframes radio-pop {
-    0% {
-      transform: scale(1);
+
+    // Pop animation for checked state
+    @keyframes radio-pop {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(0.9);
+        }
+        100% {
+            transform: scale(1);
+        }
     }
-    50% {
-      transform: scale(0.9);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
 }

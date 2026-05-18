@@ -1,174 +1,174 @@
 /**
  * KISS Range Component (V1.0)
- * 
- * Base: .range
+ *
+ * Base: .form-range
  * Colors: range-{primary|secondary|accent|info|success|warning|error}
  * Sizes: range-{xs|sm|lg|xl}
  * States: disabled
- * 
- * Example: 
- *   <input type="range" class="range range-primary" min="0" max="100" value="50">
+ *
+ * Example:
+ *   <input type="range" class="form-range range-primary" min="0" max="100" value="50">
  */
 
 @layer components {
-  .range {
-    // CSS custom properties for easy theming
-    --range-thumb-size: 1.25rem;
-    --range-track-height: 0.5rem;
-    --range-thumb-color: var(--color-base-content);
-    --range-track-color: var(--color-base-300);
-    --range-fill-color: var(--color-base-content);
+    .form-range {
+        // CSS custom properties for easy theming
+        --range-thumb-size: 1.25rem;
+        --range-track-height: 0.5rem;
+        --range-thumb-color: var(--color-base-content);
+        --range-track-color: var(--color-base-300);
+        --range-fill-color: var(--color-base-content);
 
-    @apply w-full cursor-pointer;
-    @apply disabled:opacity-50 disabled:cursor-not-allowed;
-    
-    appearance: none;
-    background: transparent;
-    height: var(--range-thumb-size);
+        @apply w-full cursor-pointer;
+        @apply disabled:opacity-50 disabled:cursor-not-allowed;
 
-    // ============================================
-    // WEBKIT (Chrome, Safari, Edge)
-    // ============================================
-    &::-webkit-slider-runnable-track {
-      @apply w-full;
-      height: var(--range-track-height);
-      background: var(--range-track-color);
-      border-radius: var(--radius-field, 9999px);
-    }
+        appearance: none;
+        background: transparent;
+        height: var(--range-thumb-size);
 
-    &::-webkit-slider-thumb {
-      appearance: none;
-      width: var(--range-thumb-size);
-      height: var(--range-thumb-size);
-      background: var(--range-thumb-color);
-      border: none;
-      border-radius: 50%;
-      margin-top: calc((var(--range-track-height) - var(--range-thumb-size)) / 2);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
+        // ============================================
+        // WEBKIT (Chrome, Safari, Edge)
+        // ============================================
+        &::-webkit-slider-runnable-track {
+            @apply w-full;
+            height: var(--range-track-height);
+            background: var(--range-track-color);
+            border-radius: var(--radius-field, 9999px);
+        }
 
-    &:hover:not(:disabled)::-webkit-slider-thumb {
-      transform: scale(1.1);
-    }
+        &::-webkit-slider-thumb {
+            appearance: none;
+            width: var(--range-thumb-size);
+            height: var(--range-thumb-size);
+            background: var(--range-thumb-color);
+            border: none;
+            border-radius: 50%;
+            margin-top: calc((var(--range-track-height) - var(--range-thumb-size)) / 2);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
 
-    &:active:not(:disabled)::-webkit-slider-thumb {
-      transform: scale(0.95);
-      box-shadow: 0 0 0 4px color-mix(in oklab, var(--range-thumb-color) 20%, transparent);
-    }
+        &:hover:not(:disabled)::-webkit-slider-thumb {
+            transform: scale(1.1);
+        }
 
-    // ============================================
-    // FIREFOX
-    // ============================================
-    &::-moz-range-track {
-      @apply w-full;
-      height: var(--range-track-height);
-      background: var(--range-track-color);
-      border-radius: var(--radius-field, 9999px);
-      border: none;
-    }
+        &:active:not(:disabled)::-webkit-slider-thumb {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 4px color-mix(in oklab, var(--range-thumb-color) 20%, transparent);
+        }
 
-    &::-moz-range-thumb {
-      appearance: none;
-      width: var(--range-thumb-size);
-      height: var(--range-thumb-size);
-      background: var(--range-thumb-color);
-      border: none;
-      border-radius: 50%;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
+        // ============================================
+        // FIREFOX
+        // ============================================
+        &::-moz-range-track {
+            @apply w-full;
+            height: var(--range-track-height);
+            background: var(--range-track-color);
+            border-radius: var(--radius-field, 9999px);
+            border: none;
+        }
 
-    &:hover:not(:disabled)::-moz-range-thumb {
-      transform: scale(1.1);
-    }
+        &::-moz-range-thumb {
+            appearance: none;
+            width: var(--range-thumb-size);
+            height: var(--range-thumb-size);
+            background: var(--range-thumb-color);
+            border: none;
+            border-radius: 50%;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
 
-    &:active:not(:disabled)::-moz-range-thumb {
-      transform: scale(0.95);
-      box-shadow: 0 0 0 4px color-mix(in oklab, var(--range-thumb-color) 20%, transparent);
+        &:hover:not(:disabled)::-moz-range-thumb {
+            transform: scale(1.1);
+        }
+
+        &:active:not(:disabled)::-moz-range-thumb {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 4px color-mix(in oklab, var(--range-thumb-color) 20%, transparent);
+        }
     }
 
     // ============================================
     // FILL VARIANT (requires JS controller for reactivity)
-    // Use: .range.range-fill + data-controller="range"
+    // Use: .form-range.range-fill + data-controller="range"
     // ============================================
-    &-fill {
-      // WebKit: Use CSS variable set by JS
-      &::-webkit-slider-runnable-track {
-        background: linear-gradient(
-          to right,
-          var(--range-fill-color) var(--range-fill-percent, 0%),
-          var(--range-track-color) var(--range-fill-percent, 0%)
-        );
-      }
+    .range-fill {
+        // WebKit: Use CSS variable set by JS
+        &::-webkit-slider-runnable-track {
+            background: linear-gradient(
+                    to right,
+                    var(--range-fill-color) var(--range-fill-percent, 0%),
+                    var(--range-track-color) var(--range-fill-percent, 0%)
+            );
+        }
 
-      // Firefox: Native progress pseudo-element
-      &::-moz-range-progress {
-        height: var(--range-track-height);
-        background: var(--range-fill-color);
-        border-radius: var(--radius-field, 9999px);
-      }
+        // Firefox: Native progress pseudo-element
+        &::-moz-range-progress {
+            height: var(--range-track-height);
+            background: var(--range-fill-color);
+            border-radius: var(--radius-field, 9999px);
+        }
     }
 
     // ============================================
     // COLORS
     // ============================================
-    &-primary {
-      --range-thumb-color: var(--color-primary);
-      --range-fill-color: var(--color-primary);
+    .range-primary {
+        --range-thumb-color: var(--color-primary);
+        --range-fill-color: var(--color-primary);
     }
 
-    &-secondary {
-      --range-thumb-color: var(--color-secondary);
-      --range-fill-color: var(--color-secondary);
+    .range-secondary {
+        --range-thumb-color: var(--color-secondary);
+        --range-fill-color: var(--color-secondary);
     }
 
-    &-accent {
-      --range-thumb-color: var(--color-accent);
-      --range-fill-color: var(--color-accent);
+    .range-accent {
+        --range-thumb-color: var(--color-accent);
+        --range-fill-color: var(--color-accent);
     }
 
-    &-info {
-      --range-thumb-color: var(--color-info);
-      --range-fill-color: var(--color-info);
+    .range-info {
+        --range-thumb-color: var(--color-info);
+        --range-fill-color: var(--color-info);
     }
 
-    &-success {
-      --range-thumb-color: var(--color-success);
-      --range-fill-color: var(--color-success);
+    .range-success {
+        --range-thumb-color: var(--color-success);
+        --range-fill-color: var(--color-success);
     }
 
-    &-warning {
-      --range-thumb-color: var(--color-warning);
-      --range-fill-color: var(--color-warning);
+    .range-warning {
+        --range-thumb-color: var(--color-warning);
+        --range-fill-color: var(--color-warning);
     }
 
-    &-error {
-      --range-thumb-color: var(--color-error);
-      --range-fill-color: var(--color-error);
+    .range-error {
+        --range-thumb-color: var(--color-error);
+        --range-fill-color: var(--color-error);
     }
 
     // ============================================
     // SIZES
     // ============================================
-    &-xs {
-      --range-thumb-size: 0.75rem;
-      --range-track-height: 0.25rem;
+    .range-xs {
+        --range-thumb-size: 0.75rem;
+        --range-track-height: 0.25rem;
     }
 
-    &-sm {
-      --range-thumb-size: 1rem;
-      --range-track-height: 0.375rem;
+    .range-sm {
+        --range-thumb-size: 1rem;
+        --range-track-height: 0.375rem;
     }
 
     // Default is already defined in base
 
-    &-lg {
-      --range-thumb-size: 1.5rem;
-      --range-track-height: 0.625rem;
+    .range-lg {
+        --range-thumb-size: 1.5rem;
+        --range-track-height: 0.625rem;
     }
 
-    &-xl {
-      --range-thumb-size: 1.75rem;
-      --range-track-height: 0.75rem;
+    .range-xl {
+        --range-thumb-size: 1.75rem;
+        --range-track-height: 0.75rem;
     }
-  }
 }

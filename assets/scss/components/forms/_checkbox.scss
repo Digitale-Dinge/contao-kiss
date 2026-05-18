@@ -1,162 +1,162 @@
 /**
  * KISS Checkbox Component (V1.0)
- * 
+ *
  * Inspired by FlyonUI checkbox with animated checkmark.
- * 
- * Base: .checkbox
+ *
+ * Base: .form-checkbox
  * Colors: checkbox-{primary|secondary|accent|info|success|warning|error}
  * Sizes: checkbox-{xs|sm|lg|xl}
  * States: disabled, indeterminate
- * 
+ *
  * Example:
- *   <input type="checkbox" class="checkbox checkbox-primary">
- * 
+ *   <input type="checkbox" class="form-checkbox checkbox-primary">
+ *
  * With Label:
  *   <label class="flex items-center gap-2 cursor-pointer">
- *     <input type="checkbox" class="checkbox">
+ *     <input type="checkbox" class="form-checkbox">
  *     <span>Label text</span>
  *   </label>
  */
 
 @layer components {
-  // ============================================
-  // BASE CHECKBOX
-  // ============================================
-  .checkbox {
-    @apply relative shrink-0 cursor-pointer appearance-none align-middle;
-    @apply text-base-content;
-    
-    // Size using CSS variable for easy adjustment
-    --size: 1.5rem;
-    --input-color: var(--color-base-300);
-    width: var(--size);
-    height: var(--size);
-    
-    // Padding creates space between checkmark and border
-    padding: 0.1875rem;
-    
-    // Border and background
-    @apply border border-base-content/40;
-    border-radius: var(--radius-checkbox, 0.25rem);
-    background-color: transparent;
-    
-    // Transitions
-    transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
-    
-    // Checkmark via ::before pseudo-element
-    &::before {
-      content: "";
-      @apply block size-full rotate-45 bg-current opacity-0;
-      transition: clip-path 0.3s, opacity 0.1s, rotate 0.3s, translate 0.3s;
-      transition-delay: 0.1s;
-      // Clip-path creates the animation - starts as a tiny line at bottom
-      clip-path: polygon(20% 100%, 20% 80%, 50% 80%, 50% 80%, 70% 80%, 70% 100%);
+    // ============================================
+    // BASE CHECKBOX
+    // ============================================
+    .form-checkbox {
+        @apply relative shrink-0 cursor-pointer appearance-none align-middle;
+        @apply text-base-content;
+
+        // Size using CSS variable for easy adjustment
+        --size: 1.5rem;
+        --input-color: var(--color-base-300);
+        width: var(--size);
+        height: var(--size);
+
+        // Padding creates space between checkmark and border
+        padding: 0.1875rem;
+
+        // Border and background
+        @apply border border-base-content/40;
+        border-radius: var(--radius-checkbox, 0.25rem);
+        background-color: transparent;
+
+        // Transitions
+        transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+
+        // Checkmark via ::before pseudo-element
+        &::before {
+            content: "";
+            @apply block size-full rotate-45 bg-current opacity-0;
+            transition: clip-path 0.3s, opacity 0.1s, rotate 0.3s, translate 0.3s;
+            transition-delay: 0.1s;
+            // Clip-path creates the animation - starts as a tiny line at bottom
+            clip-path: polygon(20% 100%, 20% 80%, 50% 80%, 50% 80%, 70% 80%, 70% 100%);
+        }
+
+        // Focus state
+        &:focus-visible {
+            outline: 2px solid color-mix(in oklab, var(--input-color) 30%, transparent);
+            outline-offset: 0;
+        }
+
+        // ============================================
+        // CHECKED STATE
+        // ============================================
+        &:checked,
+        &[aria-checked="true"] {
+            background-color: var(--input-color);
+            border-color: var(--input-color);
+
+            &::before {
+                @apply opacity-100;
+                // Clip-path reveals the checkmark by expanding upward
+                clip-path: polygon(20% 100%, 20% 80%, 50% 80%, 50% 0%, 70% 0%, 70% 100%);
+            }
+        }
+
+        // ============================================
+        // INDETERMINATE STATE
+        // ============================================
+        &:indeterminate {
+            background-color: var(--input-color);
+            border-color: var(--input-color);
+
+            &::before {
+                @apply rotate-0 opacity-100;
+                translate: 0 -35%;
+                // Horizontal line for indeterminate
+                clip-path: polygon(20% 100%, 20% 80%, 50% 80%, 50% 80%, 80% 80%, 80% 100%);
+            }
+        }
+
+        // ============================================
+        // DISABLED STATE
+        // ============================================
+        &:disabled {
+            @apply cursor-not-allowed opacity-50;
+        }
     }
-    
-    // Focus state
-    &:focus-visible {
-      outline: 2px solid color-mix(in oklab, var(--input-color) 30%, transparent);
-      outline-offset: 0;
-    }
-    
-    // ============================================
-    // CHECKED STATE
-    // ============================================
-    &:checked,
-    &[aria-checked="true"] {
-      background-color: var(--input-color);
-      border-color: var(--input-color);
-      
-      &::before {
-        @apply opacity-100;
-        // Clip-path reveals the checkmark by expanding upward
-        clip-path: polygon(20% 100%, 20% 80%, 50% 80%, 50% 0%, 70% 0%, 70% 100%);
-      }
-    }
-    
-    // ============================================
-    // INDETERMINATE STATE
-    // ============================================
-    &:indeterminate {
-      background-color: var(--input-color);
-      border-color: var(--input-color);
-      
-      &::before {
-        @apply rotate-0 opacity-100;
-        translate: 0 -35%;
-        // Horizontal line for indeterminate
-        clip-path: polygon(20% 100%, 20% 80%, 50% 80%, 50% 80%, 80% 80%, 80% 100%);
-      }
-    }
-    
-    // ============================================
-    // DISABLED STATE
-    // ============================================
-    &:disabled {
-      @apply cursor-not-allowed opacity-50;
-    }
-    
+
     // ============================================
     // COLORS
     // ============================================
-    &-primary {
-      @apply text-primary-content;
-      --input-color: var(--color-primary);
+    .checkbox-primary {
+        @apply text-primary-content;
+        --input-color: var(--color-primary);
     }
-    
-    &-secondary {
-      @apply text-secondary-content;
-      --input-color: var(--color-secondary);
+
+    .checkbox-secondary {
+        @apply text-secondary-content;
+        --input-color: var(--color-secondary);
     }
-    
-    &-accent {
-      @apply text-accent-content;
-      --input-color: var(--color-accent);
+
+    .checkbox-accent {
+        @apply text-accent-content;
+        --input-color: var(--color-accent);
     }
-    
-    &-info {
-      @apply text-info-content;
-      --input-color: var(--color-info);
+
+    .checkbox-info {
+        @apply text-info-content;
+        --input-color: var(--color-info);
     }
-    
-    &-success {
-      @apply text-success-content;
-      --input-color: var(--color-success);
+
+    .checkbox-success {
+        @apply text-success-content;
+        --input-color: var(--color-success);
     }
-    
-    &-warning {
-      @apply text-warning-content;
-      --input-color: var(--color-warning);
+
+    .checkbox-warning {
+        @apply text-warning-content;
+        --input-color: var(--color-warning);
     }
-    
-    &-error {
-      @apply text-error-content;
-      --input-color: var(--color-error);
+
+    .checkbox-error {
+        @apply text-error-content;
+        --input-color: var(--color-error);
     }
-    
+
     // ============================================
     // SIZES
     // ============================================
-    &-xs {
-      --size: 1rem;
-      padding: 0.125rem;
+    .checkbox-xs {
+        --size: 1rem;
+        padding: 0.125rem;
     }
-    
-    &-sm {
-      --size: 1.25rem;
-      padding: 0.125rem;
+
+    .checkbox-sm {
+        --size: 1.25rem;
+        padding: 0.125rem;
     }
-    
+
     // Default is 1.5rem with 0.1875rem padding (defined in base)
-    
-    &-lg {
-      --size: 1.75rem;
-      padding: 0.25rem;
+
+    .checkbox-lg {
+        --size: 1.75rem;
+        padding: 0.25rem;
     }
-    
-    &-xl {
-      --size: 2rem;
-      padding: 0.3125rem;
+
+    .checkbox-xl {
+        --size: 2rem;
+        padding: 0.3125rem;
     }
-  }
 }

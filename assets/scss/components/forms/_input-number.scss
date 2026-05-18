@@ -1,32 +1,32 @@
 /**
  * KISS Input Number Component (V3.0)
- * 
+ *
  * A number input with increment/decrement buttons.
  * Buttons automatically inherit size and color from the input using :has().
- * 
+ *
  * STRUCTURE:
  *   Container = layout (.input-number or .input-number-center)
- *   Input = standard .input with optional size/color classes
+ *   Input = standard .form-input with optional size/color classes
  *   Buttons = .input-number-btn (auto-styled)
- * 
+ *
  * LAYOUTS:
  *   .input-number         - Buttons on right inside input
  *   .input-number-center  - Buttons on edges, number centered
- * 
+ *
  * USAGE (Default layout):
  *   <div class="input-number">
- *     <input type="number" class="input input-primary input-lg" value="5">
+ *     <input type="number" class="form-input input-primary input-lg" value="5">
  *     <button class="input-number-btn">−</button>
  *     <button class="input-number-btn">+</button>
  *   </div>
- * 
+ *
  * USAGE (Center layout):
  *   <div class="input-number-center">
  *     <button class="input-number-btn">−</button>
- *     <input type="number" class="input input-secondary" value="5">
+ *     <input type="number" class="form-input input-secondary" value="5">
  *     <button class="input-number-btn">+</button>
  *   </div>
- * 
+ *
  * SIZES: .input-xs, .input-sm, (default), .input-lg, .input-xl
  * COLORS: .input-primary, .input-secondary, .input-accent, etc.
  */
@@ -39,13 +39,14 @@
     .input-number,
     .input-number-center {
         @apply relative inline-flex items-stretch;
-        
-        .input {
+
+        .form-input {
             &::-webkit-inner-spin-button,
             &::-webkit-outer-spin-button {
                 -webkit-appearance: none;
                 margin: 0;
             }
+
             -moz-appearance: textfield;
         }
     }
@@ -54,17 +55,18 @@
     // LAYOUT 1: DEFAULT (buttons on right)
     // ============================================
     .input-number {
-        .input {
+        .form-input {
             @apply text-left w-full;
             padding-right: 4rem;
         }
 
         .input-number-btn {
             @apply absolute top-1/2 -translate-y-1/2;
-            
+
             &:first-of-type {
                 right: 2.5rem;
             }
+
             &:last-of-type {
                 right: 0.75rem;
             }
@@ -75,7 +77,7 @@
     // LAYOUT 2: CENTER (buttons on edges)
     // ============================================
     .input-number-center {
-        .input {
+        .form-input {
             @apply text-center flex-1;
             padding-left: 2.5rem;
             padding-right: 2.5rem;
@@ -83,10 +85,11 @@
 
         .input-number-btn {
             @apply absolute top-1/2 -translate-y-1/2;
-            
+
             &:first-of-type {
                 left: 0.75rem;
             }
+
             &:last-of-type {
                 right: 0.75rem;
             }
@@ -104,7 +107,7 @@
         @apply cursor-pointer;
         @apply transition-colors duration-150;
         @apply text-base-content/50;
-        
+
         svg {
             @apply w-3.5 h-3.5;
         }
@@ -180,7 +183,6 @@
     // ============================================
     // SIZE VARIANTS (based on input size)
     // ============================================
-    
     // Extra Small (.input-xs)
     .input-number,
     .input-number-center {
@@ -195,13 +197,15 @@
     }
 
     .input-number:has(.input-xs) {
-        .input {
+        .form-input {
             padding-right: 2.75rem;
         }
+
         .input-number-btn {
             &:first-of-type {
                 right: 1.75rem;
             }
+
             &:last-of-type {
                 right: 0.5rem;
             }
@@ -209,14 +213,16 @@
     }
 
     .input-number-center:has(.input-xs) {
-        .input {
+        .form-input {
             padding-left: 1.75rem;
             padding-right: 1.75rem;
         }
+
         .input-number-btn {
             &:first-of-type {
                 left: 0.5rem;
             }
+
             &:last-of-type {
                 right: 0.5rem;
             }
@@ -237,13 +243,15 @@
     }
 
     .input-number:has(.input-sm) {
-        .input {
+        .form-input {
             padding-right: 3.25rem;
         }
+
         .input-number-btn {
             &:first-of-type {
                 right: 2rem;
             }
+
             &:last-of-type {
                 right: 0.5rem;
             }
@@ -251,14 +259,16 @@
     }
 
     .input-number-center:has(.input-sm) {
-        .input {
+        .form-input {
             padding-left: 2rem;
             padding-right: 2rem;
         }
+
         .input-number-btn {
             &:first-of-type {
                 left: 0.5rem;
             }
+
             &:last-of-type {
                 right: 0.5rem;
             }
@@ -279,13 +289,15 @@
     }
 
     .input-number:has(.input-lg) {
-        .input {
+        .form-input {
             padding-right: 5rem;
         }
+
         .input-number-btn {
             &:first-of-type {
                 right: 3rem;
             }
+
             &:last-of-type {
                 right: 0.75rem;
             }
@@ -293,14 +305,16 @@
     }
 
     .input-number-center:has(.input-lg) {
-        .input {
+        .form-input {
             padding-left: 3rem;
             padding-right: 3rem;
         }
+
         .input-number-btn {
             &:first-of-type {
                 left: 0.75rem;
             }
+
             &:last-of-type {
                 right: 0.75rem;
             }
@@ -321,13 +335,15 @@
     }
 
     .input-number:has(.input-xl) {
-        .input {
+        .form-input {
             padding-right: 6rem;
         }
+
         .input-number-btn {
             &:first-of-type {
                 right: 3.5rem;
             }
+
             &:last-of-type {
                 right: 0.75rem;
             }
@@ -335,14 +351,16 @@
     }
 
     .input-number-center:has(.input-xl) {
-        .input {
+        .form-input {
             padding-left: 3.5rem;
             padding-right: 3.5rem;
         }
+
         .input-number-btn {
             &:first-of-type {
                 left: 0.75rem;
             }
+
             &:last-of-type {
                 right: 0.75rem;
             }

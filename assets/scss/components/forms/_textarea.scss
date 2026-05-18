@@ -1,21 +1,21 @@
 /**
  * KISS Textarea Component (V1.0)
- * 
+ *
  * Extends input patterns for multi-line text.
- * 
- * Base: .textarea
+ *
+ * Base: .form-textarea
  * Styles: textarea-{soft} (outline is default)
  * Colors: textarea-{primary|secondary|accent|info|success|warning|error}
  * Sizes: textarea-{xs|sm|lg|xl}
  * States: is-valid, is-invalid, disabled, readonly
- * 
+ *
  * Floating Label:
  *   .textarea-floating       - Wrapper for floating label
  *   .textarea-floating-label - The floating label
- * 
- * Example: 
- *   <textarea class="textarea textarea-primary" placeholder="Enter message"></textarea>
- * 
+ *
+ * Example:
+ *   <textarea class="form-textarea textarea-primary" placeholder="Enter message"></textarea>
+ *
  * Floating Example:
  *   <div class="textarea-floating">
  *     <textarea class="textarea" placeholder=" "></textarea>
@@ -24,479 +24,498 @@
  */
 
 @layer components {
-  // ============================================
-  // BASE TEXTAREA
-  // ============================================
-  .textarea {
-    @apply block w-full;
-    @apply px-3 py-2.5;
-    @apply text-base text-base-content leading-relaxed;
-    @apply bg-transparent;
-    @apply transition-all duration-200;
-    @apply placeholder:text-base-content/40;
-    @apply disabled:opacity-50 disabled:cursor-not-allowed;
-    @apply read-only:bg-base-200/50 read-only:cursor-default;
-    @apply resize-y min-h-24;
+    // ============================================
+    // BASE TEXTAREA
+    // ============================================
+    .form-textarea {
+        @apply block w-full;
+        @apply px-3 py-2.5;
+        @apply text-base text-base-content leading-relaxed;
+        @apply bg-transparent;
+        @apply transition-all duration-200;
+        @apply placeholder:text-base-content/40;
+        @apply disabled:opacity-50 disabled:cursor-not-allowed;
+        @apply read-only:bg-base-200/50 read-only:cursor-default;
+        @apply resize-y min-h-24;
 
-    // Ensure border doesn't add to dimensions
-    box-sizing: border-box;
-    
-    // Use fixed border width, NEVER changes
-    @apply border border-base-300/50;
-    border-radius: var(--radius-box, 0.5rem);
-    outline: none;
+        // Ensure border doesn't add to dimensions
+        box-sizing: border-box;
 
-    // Hover state - full opacity border
-    &:hover:not(:focus):not(:disabled) {
-      border-color: var(--color-base-300);
-    }
+        // Use fixed border width, NEVER changes
+        @apply border border-base-300/50;
+        border-radius: var(--radius-box, 0.5rem);
+        outline: none;
 
-    // Focus state - inset box-shadow creates visual "thicker border" without layout shift
-    &:focus {
-      border-color: var(--color-base-content);
-      box-shadow: inset 0 0 0 1px var(--color-base-content);
+        // Hover state - full opacity border
+        &:hover:not(:focus):not(:disabled) {
+            border-color: var(--color-base-300);
+        }
+
+        // Focus state - inset box-shadow creates visual "thicker border" without layout shift
+        &:focus {
+            border-color: var(--color-base-content);
+            box-shadow: inset 0 0 0 1px var(--color-base-content);
+        }
+
+
+        // ============================================
+        // VALIDATION STATES
+        // ============================================
+        &.is-valid {
+            @apply border-success/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-success);
+            }
+
+            &:focus {
+                border-color: var(--color-success);
+                box-shadow: inset 0 0 0 1px var(--color-success);
+
+            }
+        }
+
+        &.is-invalid {
+            @apply border-error/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-error);
+            }
+
+            &:focus {
+                border-color: var(--color-error);
+                box-shadow: inset 0 0 0 1px var(--color-error);
+
+            }
+        }
     }
 
     // ============================================
     // STYLE: SOFT (tinted background with border)
     // ============================================
-    &-soft {
-      @apply bg-base-content/10 border-base-300/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-base-300);
-      }
-      
-      &:focus {
-        @apply bg-base-content/10;
-        border-color: var(--color-base-content);
-        box-shadow: inset 0 0 0 1px var(--color-base-content);
-        
-      }
+    .textarea-soft {
+        @apply bg-base-content/10 border-base-300/50;
+
+        &:hover:not(:focus):not(:disabled) {
+            border-color: var(--color-base-300);
+        }
+
+        &:focus {
+            @apply bg-base-content/10;
+            border-color: var(--color-base-content);
+            box-shadow: inset 0 0 0 1px var(--color-base-content);
+
+        }
     }
 
     // ============================================
     // COLORS (border shows selected color)
     // ============================================
-    &-primary {
-      @apply border-primary/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-primary);
-      }
-      
-      &:focus {
-        border-color: var(--color-primary);
-        box-shadow: inset 0 0 0 1px var(--color-primary);
-        
-      }
-      
-      &.textarea-soft {
-        @apply bg-primary/10 border-primary/50;
-        
+    .textarea-primary {
+        @apply border-primary/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-primary);
+            border-color: var(--color-primary);
         }
-        
-        &:focus { 
-          @apply bg-primary/10;
-          border-color: var(--color-primary);
-          box-shadow: inset 0 0 0 1px var(--color-primary);
-          
+
+        &:focus {
+            border-color: var(--color-primary);
+            box-shadow: inset 0 0 0 1px var(--color-primary);
+
         }
-      }
+
+        &.textarea-soft {
+            @apply bg-primary/10 border-primary/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-primary);
+            }
+
+            &:focus {
+                @apply bg-primary/10;
+                border-color: var(--color-primary);
+                box-shadow: inset 0 0 0 1px var(--color-primary);
+
+            }
+        }
     }
 
-    &-secondary {
-      @apply border-secondary/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-secondary);
-      }
-      
-      &:focus {
-        border-color: var(--color-secondary);
-        box-shadow: inset 0 0 0 1px var(--color-secondary);
-        
-      }
-      
-      &.textarea-soft {
-        @apply bg-secondary/10 border-secondary/50;
-        
+    .textarea-secondary {
+        @apply border-secondary/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-secondary);
+            border-color: var(--color-secondary);
         }
-        
-        &:focus { 
-          @apply bg-secondary/10;
-          border-color: var(--color-secondary);
-          box-shadow: inset 0 0 0 1px var(--color-secondary);
-          
+
+        &:focus {
+            border-color: var(--color-secondary);
+            box-shadow: inset 0 0 0 1px var(--color-secondary);
+
         }
-      }
+
+        &.textarea-soft {
+            @apply bg-secondary/10 border-secondary/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-secondary);
+            }
+
+            &:focus {
+                @apply bg-secondary/10;
+                border-color: var(--color-secondary);
+                box-shadow: inset 0 0 0 1px var(--color-secondary);
+
+            }
+        }
     }
 
-    &-accent {
-      @apply border-accent/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-accent);
-      }
-      
-      &:focus {
-        border-color: var(--color-accent);
-        box-shadow: inset 0 0 0 1px var(--color-accent);
-        
-      }
-      
-      &.textarea-soft {
-        @apply bg-accent/10 border-accent/50;
-        
+    .textarea-accent {
+        @apply border-accent/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-accent);
+            border-color: var(--color-accent);
         }
-        
-        &:focus { 
-          @apply bg-accent/10;
-          border-color: var(--color-accent);
-          box-shadow: inset 0 0 0 1px var(--color-accent);
-          
+
+        &:focus {
+            border-color: var(--color-accent);
+            box-shadow: inset 0 0 0 1px var(--color-accent);
+
         }
-      }
+
+        &.textarea-soft {
+            @apply bg-accent/10 border-accent/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-accent);
+            }
+
+            &:focus {
+                @apply bg-accent/10;
+                border-color: var(--color-accent);
+                box-shadow: inset 0 0 0 1px var(--color-accent);
+
+            }
+        }
     }
 
-    &-info {
-      @apply border-info/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-info);
-      }
-      
-      &:focus {
-        border-color: var(--color-info);
-        box-shadow: inset 0 0 0 1px var(--color-info);
-        
-      }
-      
-      &.textarea-soft {
-        @apply bg-info/10 border-info/50;
-        
+    .textarea-info {
+        @apply border-info/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-info);
+            border-color: var(--color-info);
         }
-        
-        &:focus { 
-          @apply bg-info/10;
-          border-color: var(--color-info);
-          box-shadow: inset 0 0 0 1px var(--color-info);
-          
+
+        &:focus {
+            border-color: var(--color-info);
+            box-shadow: inset 0 0 0 1px var(--color-info);
+
         }
-      }
+
+        &.textarea-soft {
+            @apply bg-info/10 border-info/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-info);
+            }
+
+            &:focus {
+                @apply bg-info/10;
+                border-color: var(--color-info);
+                box-shadow: inset 0 0 0 1px var(--color-info);
+
+            }
+        }
     }
 
-    &-success {
-      @apply border-success/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-success);
-      }
-      
-      &:focus {
-        border-color: var(--color-success);
-        box-shadow: inset 0 0 0 1px var(--color-success);
-        
-      }
-      
-      &.textarea-soft {
-        @apply bg-success/10 border-success/50;
-        
+    .textarea-success {
+        @apply border-success/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-success);
+            border-color: var(--color-success);
         }
-        
-        &:focus { 
-          @apply bg-success/10;
-          border-color: var(--color-success);
-          box-shadow: inset 0 0 0 1px var(--color-success);
-          
+
+        &:focus {
+            border-color: var(--color-success);
+            box-shadow: inset 0 0 0 1px var(--color-success);
+
         }
-      }
+
+        &.textarea-soft {
+            @apply bg-success/10 border-success/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-success);
+            }
+
+            &:focus {
+                @apply bg-success/10;
+                border-color: var(--color-success);
+                box-shadow: inset 0 0 0 1px var(--color-success);
+
+            }
+        }
     }
 
-    &-warning {
-      @apply border-warning/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-warning);
-      }
-      
-      &:focus {
-        border-color: var(--color-warning);
-        box-shadow: inset 0 0 0 1px var(--color-warning);
-        
-      }
-      
-      &.textarea-soft {
-        @apply bg-warning/10 border-warning/50;
-        
+    .textarea-warning {
+        @apply border-warning/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-warning);
+            border-color: var(--color-warning);
         }
-        
-        &:focus { 
-          @apply bg-warning/10;
-          border-color: var(--color-warning);
-          box-shadow: inset 0 0 0 1px var(--color-warning);
-          
+
+        &:focus {
+            border-color: var(--color-warning);
+            box-shadow: inset 0 0 0 1px var(--color-warning);
+
         }
-      }
+
+        &.textarea-soft {
+            @apply bg-warning/10 border-warning/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-warning);
+            }
+
+            &:focus {
+                @apply bg-warning/10;
+                border-color: var(--color-warning);
+                box-shadow: inset 0 0 0 1px var(--color-warning);
+
+            }
+        }
     }
 
-    &-error {
-      @apply border-error/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-error);
-      }
-      
-      &:focus {
-        border-color: var(--color-error);
-        box-shadow: inset 0 0 0 1px var(--color-error);
-        
-      }
-      
-      &.textarea-soft {
-        @apply bg-error/10 border-error/50;
-        
+    .textarea-error {
+        @apply border-error/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-error);
+            border-color: var(--color-error);
         }
-        
-        &:focus { 
-          @apply bg-error/10;
-          border-color: var(--color-error);
-          box-shadow: inset 0 0 0 1px var(--color-error);
-          
+
+        &:focus {
+            border-color: var(--color-error);
+            box-shadow: inset 0 0 0 1px var(--color-error);
+
         }
-      }
-    }
 
-    // ============================================
-    // VALIDATION STATES
-    // ============================================
-    &.is-valid {
-      @apply border-success/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-success);
-      }
-      
-      &:focus {
-        border-color: var(--color-success);
-        box-shadow: inset 0 0 0 1px var(--color-success);
-        
-      }
-    }
+        &.textarea-soft {
+            @apply bg-error/10 border-error/50;
 
-    &.is-invalid {
-      @apply border-error/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-error);
-      }
-      
-      &:focus {
-        border-color: var(--color-error);
-        box-shadow: inset 0 0 0 1px var(--color-error);
-        
-      }
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-error);
+            }
+
+            &:focus {
+                @apply bg-error/10;
+                border-color: var(--color-error);
+                box-shadow: inset 0 0 0 1px var(--color-error);
+
+            }
+        }
     }
 
     // ============================================
     // SIZES
     // ============================================
-    &-xs {
-      @apply px-2 py-1.5 text-xs min-h-16;
+    .textarea-xs {
+        @apply px-2 py-1.5 text-xs min-h-16;
     }
 
-    &-sm {
-      @apply px-2.5 py-2 text-sm min-h-20;
+    .textarea-sm {
+        @apply px-2.5 py-2 text-sm min-h-20;
     }
 
     // Default is already defined in base
 
-    &-lg {
-      @apply px-4 py-3 text-lg min-h-32;
+    .textarea-lg {
+        @apply px-4 py-3 text-lg min-h-32;
     }
 
-    &-xl {
-      @apply px-5 py-3.5 text-xl min-h-40;
+    .textarea-xl {
+        @apply px-5 py-3.5 text-xl min-h-40;
     }
 
     // ============================================
     // RESIZE OPTIONS
     // ============================================
-    &-resize-none {
-      @apply resize-none;
+    .resize-none {
+        @apply resize-none;
     }
 
-    &-resize-x {
-      @apply resize-x;
+    .resize-x {
+        @apply resize-x;
     }
 
-    &-resize-both {
-      @apply resize;
-    }
-  }
-
-  // ============================================
-  // FLOATING LABEL
-  // ============================================
-  .textarea-floating-label {
-    @apply absolute left-3 top-3;
-    @apply text-base text-base-content/50;
-    @apply pointer-events-none;
-    @apply origin-left;
-    @apply bg-transparent px-0;
-    @apply overflow-hidden text-ellipsis whitespace-nowrap;
-    max-width: calc(100% - 1.5rem);
-    transition: top 0.15s ease-out, translate 0.15s ease-out, scale 0.15s ease-out, background-color 0.15s ease-out, padding 0.15s ease-out;
-  }
-
-  .textarea-floating {
-    @apply relative;
-
-    .textarea {
-      @apply placeholder-transparent;
+    .resize-both {
+        @apply resize;
     }
 
-    // When textarea has value or is focused, move label to border
-    &:focus-within,
-    &:has(.textarea:not(:placeholder-shown)) {
-      .textarea-floating-label {
-        @apply top-0 px-1 font-medium;
-        @apply bg-base-100 text-base-content;
-        @apply pointer-events-auto;
-        translate: 0 calc(-50% - 0.0625em);
-        scale: 0.75;
-      }
+    // ============================================
+    // FLOATING LABEL
+    // ============================================
+    .textarea-floating-label {
+        @apply absolute left-3 top-3;
+        @apply text-base text-base-content/50;
+        @apply pointer-events-none;
+        @apply origin-left;
+        @apply bg-transparent px-0;
+        @apply overflow-hidden text-ellipsis whitespace-nowrap;
+        max-width: calc(100% - 1.5rem);
+        transition: top 0.15s ease-out, translate 0.15s ease-out, scale 0.15s ease-out, background-color 0.15s ease-out, padding 0.15s ease-out;
     }
 
-    // Color variants for floating label (apply when floated - focused or has value)
-    &:has(.textarea-primary):focus-within,
-    &:has(.textarea-primary .textarea:not(:placeholder-shown)),
-    &:has(.textarea-primary:not(:placeholder-shown)) {
-      .textarea-floating-label {
-        @apply text-primary;
-      }
-    }
-    &:has(.textarea-secondary):focus-within,
-    &:has(.textarea-secondary .textarea:not(:placeholder-shown)),
-    &:has(.textarea-secondary:not(:placeholder-shown)) {
-      .textarea-floating-label {
-        @apply text-secondary;
-      }
-    }
-    &:has(.textarea-accent):focus-within,
-    &:has(.textarea-accent .textarea:not(:placeholder-shown)),
-    &:has(.textarea-accent:not(:placeholder-shown)) {
-      .textarea-floating-label {
-        @apply text-accent;
-      }
-    }
-    &:has(.textarea-info):focus-within,
-    &:has(.textarea-info .textarea:not(:placeholder-shown)),
-    &:has(.textarea-info:not(:placeholder-shown)) {
-      .textarea-floating-label {
-        @apply text-info;
-      }
-    }
-    &:has(.textarea-success):focus-within,
-    &:has(.textarea-success .textarea:not(:placeholder-shown)),
-    &:has(.textarea-success:not(:placeholder-shown)) {
-      .textarea-floating-label {
-        @apply text-success;
-      }
-    }
-    &:has(.textarea-warning):focus-within,
-    &:has(.textarea-warning .textarea:not(:placeholder-shown)),
-    &:has(.textarea-warning:not(:placeholder-shown)) {
-      .textarea-floating-label {
-        @apply text-warning;
-      }
-    }
-    &:has(.textarea-error):focus-within,
-    &:has(.textarea-error .textarea:not(:placeholder-shown)),
-    &:has(.textarea-error:not(:placeholder-shown)) {
-      .textarea-floating-label {
-        @apply text-error;
-      }
-    }
+    .textarea-floating {
+        @apply relative;
 
-    // Validation states for floating label (always show color)
-    &:has(.textarea.is-valid) .textarea-floating-label {
-      @apply text-success;
-    }
-    &:has(.textarea.is-invalid) .textarea-floating-label {
-      @apply text-error;
-    }
+        .form-textarea {
+            @apply placeholder-transparent;
+        }
 
-    // Size variants - adjust left position and font size
-    &:has(.textarea-xs) .textarea-floating-label {
-      @apply left-2 text-xs;
-    }
-    &:has(.textarea-sm) .textarea-floating-label {
-      @apply left-2.5 text-sm;
-    }
-    &:has(.textarea-lg) .textarea-floating-label {
-      @apply left-4 text-lg;
-    }
-    &:has(.textarea-xl) .textarea-floating-label {
-      @apply left-5 text-xl;
-    }
+        // When textarea has value or is focused, move label to border
+        &:focus-within,
+        &:has(.form-textarea:not(:placeholder-shown)) {
+            .textarea-floating-label {
+                @apply top-0 px-1 font-medium;
+                @apply bg-base-100 text-base-content;
+                @apply pointer-events-auto;
+                translate: 0 calc(-50% - 0.0625em);
+                scale: 0.75;
+            }
+        }
 
-    // Auto-detect background when bg-base-* is on the wrapper
-    &.bg-base-100:focus-within .textarea-floating-label,
-    &.bg-base-100:has(.textarea:not(:placeholder-shown)) .textarea-floating-label {
-      @apply bg-base-100;
-    }
-    &.bg-base-200:focus-within .textarea-floating-label,
-    &.bg-base-200:has(.textarea:not(:placeholder-shown)) .textarea-floating-label {
-      @apply bg-base-200;
-    }
-    &.bg-base-300:focus-within .textarea-floating-label,
-    &.bg-base-300:has(.textarea:not(:placeholder-shown)) .textarea-floating-label {
-      @apply bg-base-300;
-    }
+        // Color variants for floating label (apply when floated - focused or has value)
+        &:has(.textarea-primary):focus-within,
+        &:has(.textarea-primary .form-textarea:not(:placeholder-shown)),
+        &:has(.textarea-primary:not(:placeholder-shown)) {
+            .textarea-floating-label {
+                @apply text-primary;
+            }
+        }
 
-    // Semantic colors
-    &.bg-primary:focus-within .textarea-floating-label,
-    &.bg-primary:has(.textarea:not(:placeholder-shown)) .textarea-floating-label {
-      @apply bg-primary;
+        &:has(.textarea-secondary):focus-within,
+        &:has(.textarea-secondary .form-textarea:not(:placeholder-shown)),
+        &:has(.textarea-secondary:not(:placeholder-shown)) {
+            .textarea-floating-label {
+                @apply text-secondary;
+            }
+        }
+
+        &:has(.textarea-accent):focus-within,
+        &:has(.textarea-accent .form-textarea:not(:placeholder-shown)),
+        &:has(.textarea-accent:not(:placeholder-shown)) {
+            .textarea-floating-label {
+                @apply text-accent;
+            }
+        }
+
+        &:has(.textarea-info):focus-within,
+        &:has(.textarea-info .form-textarea:not(:placeholder-shown)),
+        &:has(.textarea-info:not(:placeholder-shown)) {
+            .textarea-floating-label {
+                @apply text-info;
+            }
+        }
+
+        &:has(.textarea-success):focus-within,
+        &:has(.textarea-success .form-textarea:not(:placeholder-shown)),
+        &:has(.textarea-success:not(:placeholder-shown)) {
+            .textarea-floating-label {
+                @apply text-success;
+            }
+        }
+
+        &:has(.textarea-warning):focus-within,
+        &:has(.textarea-warning .form-textarea:not(:placeholder-shown)),
+        &:has(.textarea-warning:not(:placeholder-shown)) {
+            .textarea-floating-label {
+                @apply text-warning;
+            }
+        }
+
+        &:has(.textarea-error):focus-within,
+        &:has(.textarea-error .form-textarea:not(:placeholder-shown)),
+        &:has(.textarea-error:not(:placeholder-shown)) {
+            .textarea-floating-label {
+                @apply text-error;
+            }
+        }
+
+        // Validation states for floating label (always show color)
+        &:has(.textarea.is-valid) .textarea-floating-label {
+            @apply text-success;
+        }
+
+        &:has(.textarea.is-invalid) .textarea-floating-label {
+            @apply text-error;
+        }
+
+        // Size variants - adjust left position and font size
+        &:has(.textarea-xs) .textarea-floating-label {
+            @apply left-2 text-xs;
+        }
+
+        &:has(.textarea-sm) .textarea-floating-label {
+            @apply left-2.5 text-sm;
+        }
+
+        &:has(.textarea-lg) .textarea-floating-label {
+            @apply left-4 text-lg;
+        }
+
+        &:has(.textarea-xl) .textarea-floating-label {
+            @apply left-5 text-xl;
+        }
+
+        // Auto-detect background when bg-base-* is on the wrapper
+        &.bg-base-100:focus-within .textarea-floating-label,
+        &.bg-base-100:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
+            @apply bg-base-100;
+        }
+
+        &.bg-base-200:focus-within .textarea-floating-label,
+        &.bg-base-200:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
+            @apply bg-base-200;
+        }
+
+        &.bg-base-300:focus-within .textarea-floating-label,
+        &.bg-base-300:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
+            @apply bg-base-300;
+        }
+
+        // Semantic colors
+        &.bg-primary:focus-within .textarea-floating-label,
+        &.bg-primary:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
+            @apply bg-primary;
+        }
+
+        &.bg-secondary:focus-within .textarea-floating-label,
+        &.bg-secondary:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
+            @apply bg-secondary;
+        }
+
+        &.bg-accent:focus-within .textarea-floating-label,
+        &.bg-accent:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
+            @apply bg-accent;
+        }
+
+        &.bg-info:focus-within .textarea-floating-label,
+        &.bg-info:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
+            @apply bg-info;
+        }
+
+        &.bg-success:focus-within .textarea-floating-label,
+        &.bg-success:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
+            @apply bg-success;
+        }
+
+        &.bg-warning:focus-within .textarea-floating-label,
+        &.bg-warning:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
+            @apply bg-warning;
+        }
+
+        &.bg-error:focus-within .textarea-floating-label,
+        &.bg-error:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
+            @apply bg-error;
+        }
     }
-    &.bg-secondary:focus-within .textarea-floating-label,
-    &.bg-secondary:has(.textarea:not(:placeholder-shown)) .textarea-floating-label {
-      @apply bg-secondary;
-    }
-    &.bg-accent:focus-within .textarea-floating-label,
-    &.bg-accent:has(.textarea:not(:placeholder-shown)) .textarea-floating-label {
-      @apply bg-accent;
-    }
-    &.bg-info:focus-within .textarea-floating-label,
-    &.bg-info:has(.textarea:not(:placeholder-shown)) .textarea-floating-label {
-      @apply bg-info;
-    }
-    &.bg-success:focus-within .textarea-floating-label,
-    &.bg-success:has(.textarea:not(:placeholder-shown)) .textarea-floating-label {
-      @apply bg-success;
-    }
-    &.bg-warning:focus-within .textarea-floating-label,
-    &.bg-warning:has(.textarea:not(:placeholder-shown)) .textarea-floating-label {
-      @apply bg-warning;
-    }
-    &.bg-error:focus-within .textarea-floating-label,
-    &.bg-error:has(.textarea:not(:placeholder-shown)) .textarea-floating-label {
-      @apply bg-error;
-    }
-  }
 }

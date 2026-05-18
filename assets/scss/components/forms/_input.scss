@@ -1,532 +1,550 @@
 /**
  * KISS Input Component (V1.0)
- * 
- * Base: .input
+ *
+ * Base: .form-input
  * Styles: input-{soft} (outline is default)
  * Colors: input-{primary|secondary|accent|info|success|warning|error}
  * Sizes: input-{xs|sm|lg|xl}
  * States: is-valid, is-invalid, disabled, readonly
- * 
+ *
  * Floating Label:
  *   .input-floating         - Wrapper for floating label
  *   .input-floating-label   - The floating label
- * 
+ *
  * Input Group (with icons):
  *   .input-group            - Wrapper for input with icons
  *   .input-icon             - Icon container
- * 
- * Example: 
- *   <input class="input input-primary input-lg" placeholder="Enter text">
- * 
+ *
+ * Example:
+ *   <input class="form-input input-primary input-lg" placeholder="Enter text">
+ *
  * Floating Example:
  *   <div class="input-floating">
- *     <input class="input" placeholder=" ">
+ *     <input class="form-input" placeholder=" ">
  *     <label class="input-floating-label">Full Name</label>
  *   </div>
- * 
+ *
  * Icon Example:
  *   <div class="input-group">
  *     <span class="input-icon"><svg>...</svg></span>
- *     <input class="input">
+ *     <input class="form-input">
  *   </div>
  */
 
 @layer components {
-  // ============================================
-  // BASE INPUT
-  // ============================================
-  .input {
-    @apply block w-full;
-    @apply px-3 py-2.5;
-    @apply text-base text-base-content leading-tight;
-    @apply bg-transparent;
-    @apply placeholder:text-base-content/40;
-    @apply disabled:opacity-50 disabled:cursor-not-allowed;
-    @apply read-only:bg-base-200/50 read-only:cursor-default;
+    // ============================================
+    // BASE INPUT
+    // ============================================
+    .form-input {
+        @apply block w-full;
+        @apply px-3 py-2.5;
+        @apply text-base text-base-content leading-tight;
+        @apply bg-transparent;
+        @apply placeholder:text-base-content/40;
+        @apply disabled:opacity-50 disabled:cursor-not-allowed;
+        @apply read-only:bg-base-200/50 read-only:cursor-default;
 
-    // Ensure border doesn't add to dimensions
-    box-sizing: border-box;
-    
-    // Use fixed border width with fallback, NEVER changes
-    @apply border border-base-300/50;
-    border-radius: var(--radius-field, 0.5rem);
-    outline: none;
-    
+        // Ensure border doesn't add to dimensions
+        box-sizing: border-box;
 
-    // Hover state - full opacity border
-    &:hover:not(:focus):not(:disabled) {
-      border-color: var(--color-base-300);
-    }
+        // Use fixed border width with fallback, NEVER changes
+        @apply border border-base-300/50;
+        border-radius: var(--radius-field, 0.5rem);
+        outline: none;
 
-    // Focus state - inset box-shadow creates visual "thicker border" without layout shift
-    &:focus {
-      border-color: var(--color-base-content);
-      box-shadow: inset 0 0 0 1px var(--color-base-content);
+
+        // Hover state - full opacity border
+        &:hover:not(:focus):not(:disabled) {
+            border-color: var(--color-base-300);
+        }
+
+        // Focus state - inset box-shadow creates visual "thicker border" without layout shift
+        &:focus {
+            border-color: var(--color-base-content);
+            box-shadow: inset 0 0 0 1px var(--color-base-content);
+        }
+
+        // ============================================
+        // VALIDATION STATES
+        // ============================================
+        &.is-valid {
+            @apply border-success/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-success);
+            }
+
+            &:focus {
+                border-color: var(--color-success);
+                box-shadow: inset 0 0 0 1px var(--color-success);
+            }
+        }
+
+        &.is-invalid {
+            @apply border-error/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-error);
+            }
+
+            &:focus {
+                border-color: var(--color-error);
+                box-shadow: inset 0 0 0 1px var(--color-error);
+            }
+        }
     }
 
     // ============================================
     // STYLE: SOFT (tinted background with border)
     // ============================================
-    &-soft {
-      @apply bg-base-content/10 border-base-300/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-base-300);
-      }
-      
-      &:focus {
-        @apply bg-base-content/10;
-        border-color: var(--color-base-content);
-        box-shadow: inset 0 0 0 1px var(--color-base-content);
-      }
+    .input-soft {
+        @apply bg-base-content/10 border-base-300/50;
+
+        &:hover:not(:focus):not(:disabled) {
+            border-color: var(--color-base-300);
+        }
+
+        &:focus {
+            @apply bg-base-content/10;
+            border-color: var(--color-base-content);
+            box-shadow: inset 0 0 0 1px var(--color-base-content);
+        }
     }
 
     // ============================================
     // COLORS (border shows selected color)
     // ============================================
-    &-primary {
-      @apply border-primary/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-primary);
-      }
-      
-      &:focus {
-        border-color: var(--color-primary);
-        box-shadow: inset 0 0 0 1px var(--color-primary);
-      }
-      
-      &.input-soft {
-        @apply bg-primary/10 border-primary/50;
-        
+    .input-primary {
+        @apply border-primary/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-primary);
+            border-color: var(--color-primary);
         }
-        
-        &:focus { 
-          @apply bg-primary/10;
-          border-color: var(--color-primary);
-          box-shadow: inset 0 0 0 1px var(--color-primary);
+
+        &:focus {
+            border-color: var(--color-primary);
+            box-shadow: inset 0 0 0 1px var(--color-primary);
         }
-      }
+
+        &.input-soft {
+            @apply bg-primary/10 border-primary/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-primary);
+            }
+
+            &:focus {
+                @apply bg-primary/10;
+                border-color: var(--color-primary);
+                box-shadow: inset 0 0 0 1px var(--color-primary);
+            }
+        }
     }
 
-    &-secondary {
-      @apply border-secondary/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-secondary);
-      }
-      
-      &:focus {
-        border-color: var(--color-secondary);
-        box-shadow: inset 0 0 0 1px var(--color-secondary);
-      }
-      
-      &.input-soft {
-        @apply bg-secondary/10 border-secondary/50;
-        
+    .input-secondary {
+        @apply border-secondary/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-secondary);
+            border-color: var(--color-secondary);
         }
-        
-        &:focus { 
-          @apply bg-secondary/10;
-          border-color: var(--color-secondary);
-          box-shadow: inset 0 0 0 1px var(--color-secondary);
+
+        &:focus {
+            border-color: var(--color-secondary);
+            box-shadow: inset 0 0 0 1px var(--color-secondary);
         }
-      }
+
+        &.input-soft {
+            @apply bg-secondary/10 border-secondary/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-secondary);
+            }
+
+            &:focus {
+                @apply bg-secondary/10;
+                border-color: var(--color-secondary);
+                box-shadow: inset 0 0 0 1px var(--color-secondary);
+            }
+        }
     }
 
-    &-accent {
-      @apply border-accent/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-accent);
-      }
-      
-      &:focus {
-        border-color: var(--color-accent);
-        box-shadow: inset 0 0 0 1px var(--color-accent);
-      }
-      
-      &.input-soft {
-        @apply bg-accent/10 border-accent/50;
-        
+    .input-accent {
+        @apply border-accent/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-accent);
+            border-color: var(--color-accent);
         }
-        
-        &:focus { 
-          @apply bg-accent/10;
-          border-color: var(--color-accent);
-          box-shadow: inset 0 0 0 1px var(--color-accent);
+
+        &:focus {
+            border-color: var(--color-accent);
+            box-shadow: inset 0 0 0 1px var(--color-accent);
         }
-      }
+
+        &.input-soft {
+            @apply bg-accent/10 border-accent/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-accent);
+            }
+
+            &:focus {
+                @apply bg-accent/10;
+                border-color: var(--color-accent);
+                box-shadow: inset 0 0 0 1px var(--color-accent);
+            }
+        }
     }
 
-    &-info {
-      @apply border-info/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-info);
-      }
-      
-      &:focus {
-        border-color: var(--color-info);
-        box-shadow: inset 0 0 0 1px var(--color-info);
-      }
-      
-      &.input-soft {
-        @apply bg-info/10 border-info/50;
-        
+    .input-info {
+        @apply border-info/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-info);
+            border-color: var(--color-info);
         }
-        
-        &:focus { 
-          @apply bg-info/10;
-          border-color: var(--color-info);
-          box-shadow: inset 0 0 0 1px var(--color-info);
+
+        &:focus {
+            border-color: var(--color-info);
+            box-shadow: inset 0 0 0 1px var(--color-info);
         }
-      }
+
+        &.input-soft {
+            @apply bg-info/10 border-info/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-info);
+            }
+
+            &:focus {
+                @apply bg-info/10;
+                border-color: var(--color-info);
+                box-shadow: inset 0 0 0 1px var(--color-info);
+            }
+        }
     }
 
-    &-success {
-      @apply border-success/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-success);
-      }
-      
-      &:focus {
-        border-color: var(--color-success);
-        box-shadow: inset 0 0 0 1px var(--color-success);
-      }
-      
-      &.input-soft {
-        @apply bg-success/10 border-success/50;
-        
+    .input-success {
+        @apply border-success/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-success);
+            border-color: var(--color-success);
         }
-        
-        &:focus { 
-          @apply bg-success/10;
-          border-color: var(--color-success);
-          box-shadow: inset 0 0 0 1px var(--color-success);
+
+        &:focus {
+            border-color: var(--color-success);
+            box-shadow: inset 0 0 0 1px var(--color-success);
         }
-      }
+
+        &.input-soft {
+            @apply bg-success/10 border-success/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-success);
+            }
+
+            &:focus {
+                @apply bg-success/10;
+                border-color: var(--color-success);
+                box-shadow: inset 0 0 0 1px var(--color-success);
+            }
+        }
     }
 
-    &-warning {
-      @apply border-warning/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-warning);
-      }
-      
-      &:focus {
-        border-color: var(--color-warning);
-        box-shadow: inset 0 0 0 1px var(--color-warning);
-      }
-      
-      &.input-soft {
-        @apply bg-warning/10 border-warning/50;
-        
+    .input-warning {
+        @apply border-warning/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-warning);
+            border-color: var(--color-warning);
         }
-        
-        &:focus { 
-          @apply bg-warning/10;
-          border-color: var(--color-warning);
-          box-shadow: inset 0 0 0 1px var(--color-warning);
+
+        &:focus {
+            border-color: var(--color-warning);
+            box-shadow: inset 0 0 0 1px var(--color-warning);
         }
-      }
+
+        &.input-soft {
+            @apply bg-warning/10 border-warning/50;
+
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-warning);
+            }
+
+            &:focus {
+                @apply bg-warning/10;
+                border-color: var(--color-warning);
+                box-shadow: inset 0 0 0 1px var(--color-warning);
+            }
+        }
     }
 
-    &-error {
-      @apply border-error/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-error);
-      }
-      
-      &:focus {
-        border-color: var(--color-error);
-        box-shadow: inset 0 0 0 1px var(--color-error);
-      }
-      
-      &.input-soft {
-        @apply bg-error/10 border-error/50;
-        
+    .input-error {
+        @apply border-error/50;
+
         &:hover:not(:focus):not(:disabled) {
-          border-color: var(--color-error);
+            border-color: var(--color-error);
         }
-        
-        &:focus { 
-          @apply bg-error/10;
-          border-color: var(--color-error);
-          box-shadow: inset 0 0 0 1px var(--color-error);
+
+        &:focus {
+            border-color: var(--color-error);
+            box-shadow: inset 0 0 0 1px var(--color-error);
         }
-      }
-    }
 
-    // ============================================
-    // VALIDATION STATES
-    // ============================================
-    &.is-valid {
-      @apply border-success/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-success);
-      }
-      
-      &:focus {
-        border-color: var(--color-success);
-        box-shadow: inset 0 0 0 1px var(--color-success);
-      }
-    }
+        &.input-soft {
+            @apply bg-error/10 border-error/50;
 
-    &.is-invalid {
-      @apply border-error/50;
-      
-      &:hover:not(:focus):not(:disabled) {
-        border-color: var(--color-error);
-      }
-      
-      &:focus {
-        border-color: var(--color-error);
-        box-shadow: inset 0 0 0 1px var(--color-error);
-      }
+            &:hover:not(:focus):not(:disabled) {
+                border-color: var(--color-error);
+            }
+
+            &:focus {
+                @apply bg-error/10;
+                border-color: var(--color-error);
+                box-shadow: inset 0 0 0 1px var(--color-error);
+            }
+        }
     }
 
     // ============================================
     // SIZES
     // ============================================
-    &-xs {
-      @apply px-2 py-1.5 text-xs;
+    .input-xs {
+        @apply px-2 py-1.5 text-xs;
     }
 
-    &-sm {
-      @apply px-2.5 py-2 text-sm;
+    .input--sm {
+        @apply px-2.5 py-2 text-sm;
     }
 
     // Default is already defined in base
 
-    &-lg {
-      @apply px-4 py-3 text-lg;
+    .input-lg {
+        @apply px-4 py-3 text-lg;
     }
 
-    &-xl {
-      @apply px-5 py-3.5 text-xl;
-    }
-  }
-
-  // ============================================
-  // INPUT GROUP (with icons)
-  // ============================================
-  .input-group {
-    @apply relative flex items-center;
-
-    // Input inside group needs padding for icon
-    .input {
-      @apply w-full;
+    .input-xl {
+        @apply px-5 py-3.5 text-xl;
     }
 
-    // Leading icon (left)
-    &.has-icon-left {
-      .input {
-        @apply pl-10;
-      }
-      
-      .input-icon:first-child {
-        @apply left-3;
-      }
+    // ============================================
+    // INPUT GROUP (with icons)
+    // ============================================
+    .input-group {
+        @apply relative flex items-center;
+
+        // Input inside group needs padding for icon
+        .form-input {
+            @apply w-full;
+        }
+
+        // Leading icon (left)
+        &.has-icon-left {
+            .form-input {
+                @apply pl-10;
+            }
+
+            .input-icon:first-child {
+                @apply left-3;
+            }
+        }
+
+        // Trailing icon (right)
+        &.has-icon-right {
+            .form-input {
+                @apply pr-10;
+            }
+
+            .input-icon:last-child {
+                @apply right-3;
+            }
+        }
+
+        // Both icons
+        &.has-icon-left.has-icon-right {
+            .form-input {
+                @apply pl-10 pr-10;
+            }
+        }
     }
 
-    // Trailing icon (right)
-    &.has-icon-right {
-      .input {
-        @apply pr-10;
-      }
-      
-      .input-icon:last-child {
-        @apply right-3;
-      }
+    .input-icon {
+        @apply absolute flex items-center justify-center;
+        @apply text-base-content/50;
+        @apply pointer-events-none;
+        @apply size-5;
     }
 
-    // Both icons
-    &.has-icon-left.has-icon-right {
-      .input {
-        @apply pl-10 pr-10;
-      }
-    }
-  }
-
-  .input-icon {
-    @apply absolute flex items-center justify-center;
-    @apply text-base-content/50;
-    @apply pointer-events-none;
-    @apply size-5;
-  }
-
-  // ============================================
-  // FLOATING LABEL
-  // ============================================
-  .input-floating-label {
-    @apply absolute left-3 top-1/2;
-    @apply text-base text-base-content/50;
-    @apply pointer-events-none;
-    @apply origin-left;
-    @apply bg-transparent px-0;
-    @apply overflow-hidden text-ellipsis whitespace-nowrap;
-    max-width: calc(100% - 1.5rem);
-    translate: 0 -50%;
-    transition: top 0.15s ease-out, translate 0.15s ease-out, scale 0.15s ease-out, background-color 0.15s ease-out, padding 0.15s ease-out;
-  }
-
-  .input-floating {
-    @apply relative;
-
-    .input {
-      // Hide placeholder by default so label can sit in center
-      @apply placeholder-transparent;
-      
-      // Show placeholder when focused (label will be floated up)
-      &:focus {
-        @apply placeholder:text-base-content/40;
-      }
+    // ============================================
+    // FLOATING LABEL
+    // ============================================
+    .input-floating-label {
+        @apply absolute left-3 top-1/2;
+        @apply text-base text-base-content/50;
+        @apply pointer-events-none;
+        @apply origin-left;
+        @apply bg-transparent px-0;
+        @apply overflow-hidden text-ellipsis whitespace-nowrap;
+        max-width: calc(100% - 1.5rem);
+        translate: 0 -50%;
+        transition: top 0.15s ease-out, translate 0.15s ease-out, scale 0.15s ease-out, background-color 0.15s ease-out, padding 0.15s ease-out;
     }
 
-    // When input has value or is focused, move label to border
-    &:focus-within,
-    &:has(.input:not(:placeholder-shown)) {
-      .input-floating-label {
-        @apply top-0 px-1 font-medium;
-        @apply bg-base-100 text-base-content;
-        @apply pointer-events-auto;
-        translate: 0 calc(-50% - 0.0625em);
-        scale: 0.75;
-      }
-    }
+    .input-floating {
+        @apply relative;
 
-    // Color variants for floating label (apply when floated - focused or has value)
-    &:has(.input-primary):focus-within,
-    &:has(.input-primary .input:not(:placeholder-shown)),
-    &:has(.input-primary:not(:placeholder-shown)) {
-      .input-floating-label {
-        @apply text-primary;
-      }
-    }
-    &:has(.input-secondary):focus-within,
-    &:has(.input-secondary .input:not(:placeholder-shown)),
-    &:has(.input-secondary:not(:placeholder-shown)) {
-      .input-floating-label {
-        @apply text-secondary;
-      }
-    }
-    &:has(.input-accent):focus-within,
-    &:has(.input-accent .input:not(:placeholder-shown)),
-    &:has(.input-accent:not(:placeholder-shown)) {
-      .input-floating-label {
-        @apply text-accent;
-      }
-    }
-    &:has(.input-info):focus-within,
-    &:has(.input-info .input:not(:placeholder-shown)),
-    &:has(.input-info:not(:placeholder-shown)) {
-      .input-floating-label {
-        @apply text-info;
-      }
-    }
-    &:has(.input-success):focus-within,
-    &:has(.input-success .input:not(:placeholder-shown)),
-    &:has(.input-success:not(:placeholder-shown)) {
-      .input-floating-label {
-        @apply text-success;
-      }
-    }
-    &:has(.input-warning):focus-within,
-    &:has(.input-warning .input:not(:placeholder-shown)),
-    &:has(.input-warning:not(:placeholder-shown)) {
-      .input-floating-label {
-        @apply text-warning;
-      }
-    }
-    &:has(.input-error):focus-within,
-    &:has(.input-error .input:not(:placeholder-shown)),
-    &:has(.input-error:not(:placeholder-shown)) {
-      .input-floating-label {
-        @apply text-error;
-      }
-    }
+        .form-input {
+            // Hide placeholder by default so label can sit in center
+            @apply placeholder-transparent;
 
-    // Validation states for floating label (always show color)
-    &:has(.input.is-valid) .input-floating-label {
-      @apply text-success;
-    }
-    &:has(.input.is-invalid) .input-floating-label {
-      @apply text-error;
-    }
+            // Show placeholder when focused (label will be floated up)
+            &:focus {
+                @apply placeholder:text-base-content/40;
+            }
+        }
 
-    // Size variants - adjust left position and font size
-    &:has(.input-xs) .input-floating-label {
-      @apply left-2 text-xs;
-    }
-    &:has(.input-sm) .input-floating-label {
-      @apply left-2.5 text-sm;
-    }
-    &:has(.input-lg) .input-floating-label {
-      @apply left-4 text-lg;
-    }
-    &:has(.input-xl) .input-floating-label {
-      @apply left-5 text-xl;
-    }
+        // When input has value or is focused, move label to border
+        &:focus-within,
+        &:has(.form-input:not(:placeholder-shown)) {
+            .input-floating-label {
+                @apply top-0 px-1 font-medium;
+                @apply bg-base-100 text-base-content;
+                @apply pointer-events-auto;
+                translate: 0 calc(-50% - 0.0625em);
+                scale: 0.75;
+            }
+        }
 
-    // Auto-detect background when bg-base-* is on the wrapper
-    &.bg-base-100:focus-within .input-floating-label,
-    &.bg-base-100:has(.input:not(:placeholder-shown)) .input-floating-label {
-      @apply bg-base-100;
-    }
-    &.bg-base-200:focus-within .input-floating-label,
-    &.bg-base-200:has(.input:not(:placeholder-shown)) .input-floating-label {
-      @apply bg-base-200;
-    }
-    &.bg-base-300:focus-within .input-floating-label,
-    &.bg-base-300:has(.input:not(:placeholder-shown)) .input-floating-label {
-      @apply bg-base-300;
-    }
+        // Color variants for floating label (apply when floated - focused or has value)
+        &:has(.input-primary):focus-within,
+        &:has(.input-primary .form-input:not(:placeholder-shown)),
+        &:has(.input-primary:not(:placeholder-shown)) {
+            .input-floating-label {
+                @apply text-primary;
+            }
+        }
 
-    // Semantic colors
-    &.bg-primary:focus-within .input-floating-label,
-    &.bg-primary:has(.input:not(:placeholder-shown)) .input-floating-label {
-      @apply bg-primary;
+        &:has(.input-secondary):focus-within,
+        &:has(.input-secondary .form-input:not(:placeholder-shown)),
+        &:has(.input-secondary:not(:placeholder-shown)) {
+            .input-floating-label {
+                @apply text-secondary;
+            }
+        }
+
+        &:has(.input-accent):focus-within,
+        &:has(.input-accent .form-input:not(:placeholder-shown)),
+        &:has(.input-accent:not(:placeholder-shown)) {
+            .input-floating-label {
+                @apply text-accent;
+            }
+        }
+
+        &:has(.input-info):focus-within,
+        &:has(.input-info .form-input:not(:placeholder-shown)),
+        &:has(.input-info:not(:placeholder-shown)) {
+            .input-floating-label {
+                @apply text-info;
+            }
+        }
+
+        &:has(.input-success):focus-within,
+        &:has(.input-success .form-input:not(:placeholder-shown)),
+        &:has(.input-success:not(:placeholder-shown)) {
+            .input-floating-label {
+                @apply text-success;
+            }
+        }
+
+        &:has(.input-warning):focus-within,
+        &:has(.input-warning .form-input:not(:placeholder-shown)),
+        &:has(.input-warning:not(:placeholder-shown)) {
+            .input-floating-label {
+                @apply text-warning;
+            }
+        }
+
+        &:has(.input-error):focus-within,
+        &:has(.input-error .form-input:not(:placeholder-shown)),
+        &:has(.input-error:not(:placeholder-shown)) {
+            .input-floating-label {
+                @apply text-error;
+            }
+        }
+
+        // Validation states for floating label (always show color)
+        &:has(.form-input.is-valid) .input-floating-label {
+            @apply text-success;
+        }
+
+        &:has(.form-input.is-invalid) .input-floating-label {
+            @apply text-error;
+        }
+
+        // Size variants - adjust left position and font size
+        &:has(.input-xs) .input-floating-label {
+            @apply left-2 text-xs;
+        }
+
+        &:has(.input-sm) .input-floating-label {
+            @apply left-2.5 text-sm;
+        }
+
+        &:has(.input-lg) .input-floating-label {
+            @apply left-4 text-lg;
+        }
+
+        &:has(.input-xl) .input-floating-label {
+            @apply left-5 text-xl;
+        }
+
+        // Auto-detect background when bg-base-* is on the wrapper
+        &.bg-base-100:focus-within .input-floating-label,
+        &.bg-base-100:has(.form-input:not(:placeholder-shown)) .input-floating-label {
+            @apply bg-base-100;
+        }
+
+        &.bg-base-200:focus-within .input-floating-label,
+        &.bg-base-200:has(.form-input:not(:placeholder-shown)) .input-floating-label {
+            @apply bg-base-200;
+        }
+
+        &.bg-base-300:focus-within .input-floating-label,
+        &.bg-base-300:has(.form-input:not(:placeholder-shown)) .input-floating-label {
+            @apply bg-base-300;
+        }
+
+        // Semantic colors
+        &.bg-primary:focus-within .input-floating-label,
+        &.bg-primary:has(.form-input:not(:placeholder-shown)) .input-floating-label {
+            @apply bg-primary;
+        }
+
+        &.bg-secondary:focus-within .input-floating-label,
+        &.bg-secondary:has(.form-input:not(:placeholder-shown)) .input-floating-label {
+            @apply bg-secondary;
+        }
+
+        &.bg-accent:focus-within .input-floating-label,
+        &.bg-accent:has(.form-input:not(:placeholder-shown)) .input-floating-label {
+            @apply bg-accent;
+        }
+
+        &.bg-info:focus-within .input-floating-label,
+        &.bg-info:has(.form-input:not(:placeholder-shown)) .input-floating-label {
+            @apply bg-info;
+        }
+
+        &.bg-success:focus-within .input-floating-label,
+        &.bg-success:has(.form-input:not(:placeholder-shown)) .input-floating-label {
+            @apply bg-success;
+        }
+
+        &.bg-warning:focus-within .input-floating-label,
+        &.bg-warning:has(.form-input:not(:placeholder-shown)) .input-floating-label {
+            @apply bg-warning;
+        }
+
+        &.bg-error:focus-within .input-floating-label,
+        &.bg-error:has(.form-input:not(:placeholder-shown)) .input-floating-label {
+            @apply bg-error;
+        }
     }
-    &.bg-secondary:focus-within .input-floating-label,
-    &.bg-secondary:has(.input:not(:placeholder-shown)) .input-floating-label {
-      @apply bg-secondary;
-    }
-    &.bg-accent:focus-within .input-floating-label,
-    &.bg-accent:has(.input:not(:placeholder-shown)) .input-floating-label {
-      @apply bg-accent;
-    }
-    &.bg-info:focus-within .input-floating-label,
-    &.bg-info:has(.input:not(:placeholder-shown)) .input-floating-label {
-      @apply bg-info;
-    }
-    &.bg-success:focus-within .input-floating-label,
-    &.bg-success:has(.input:not(:placeholder-shown)) .input-floating-label {
-      @apply bg-success;
-    }
-    &.bg-warning:focus-within .input-floating-label,
-    &.bg-warning:has(.input:not(:placeholder-shown)) .input-floating-label {
-      @apply bg-warning;
-    }
-    &.bg-error:focus-within .input-floating-label,
-    &.bg-error:has(.input:not(:placeholder-shown)) .input-floating-label {
-      @apply bg-error;
-    }
-  }
 }
