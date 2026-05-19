@@ -139,6 +139,27 @@
         padding: 0.375rem;
     }
 
+
+    span:has(> .form-radio) {
+        @apply text-base;
+    }
+
+    span:has(> .radio-xs) {
+        @apply text-xs;
+    }
+
+    span:has(> .radio-sm) {
+        @apply text-sm;
+    }
+
+    span:has(> .radio-lg) {
+        @apply text-lg;
+    }
+
+    span:has(> .radio-xl) {
+        @apply text-xl;
+    }
+
     // Pop animation for checked state
     @keyframes radio-pop {
         0% {

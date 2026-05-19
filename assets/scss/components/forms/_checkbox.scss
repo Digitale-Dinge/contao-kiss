@@ -149,15 +149,11 @@
     .checkbox-xs {
         --size: 1rem;
         padding: 0.125rem;
-
-       @apply text-xs;
     }
 
     .checkbox-sm {
         --size: 1.25rem;
         padding: 0.125rem;
-
-        @apply text-sm;
     }
 
     // Default is 1.5rem with 0.1875rem padding (defined in base)
@@ -165,14 +161,30 @@
     .checkbox-lg {
         --size: 1.75rem;
         padding: 0.25rem;
-
-        @apply text-lg;
     }
 
     .checkbox-xl {
         --size: 2rem;
         padding: 0.3125rem;
+    }
 
+    span:has(> .form-checkbox) {
+        @apply text-base;
+    }
+
+    span:has(> .checkbox-xs) {
+        @apply text-xs;
+    }
+
+    span:has(> .checkbox-sm) {
+        @apply text-sm;
+    }
+
+    span:has(> .checkbox-lg) {
+        @apply text-lg;
+    }
+
+    span:has(> .checkbox-xl) {
         @apply text-xl;
     }
 }
