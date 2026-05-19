@@ -73,11 +73,15 @@ style_options:
         five:                       5x Zeilenhöhe
         six:                        6x Zeilenhöhe
 
-    size_option:
-        x_small:                    Sehr klein
-        small:                      Klein
-        large:                      Groß
-        x_large:                    Sehr groß
+    modifier:
+        size:
+            x_small:                Sehr klein
+            small:                  Klein
+            large:                  Groß
+            x_large:                Sehr groß
+
+        variant:
+            soft:                   Sanft
 
     typography:
         size:

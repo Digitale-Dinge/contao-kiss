@@ -11,11 +11,14 @@ use DigitaleDinge\ContaoKiss\Styles\Option\Color;
 use DigitaleDinge\ContaoKiss\Styles\Option\Component;
 use DigitaleDinge\ContaoKiss\Styles\Option\Layout;
 use DigitaleDinge\ContaoKiss\Styles\Option\Margin;
+use DigitaleDinge\ContaoKiss\Styles\Option\Modifier;
 use DigitaleDinge\ContaoKiss\Styles\Option\Padding;
-use DigitaleDinge\ContaoKiss\Styles\Option\Size;
 use DigitaleDinge\ContaoKiss\Styles\Option\Typography;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * @internal
+ */
 final class StyleOptionsListener
 {
     use TranslatableEnumTrait;
@@ -116,6 +119,7 @@ final class StyleOptionsListener
 
     #[AsCallback('tl_content', 'fields.ctaColor.options')]
     #[AsCallback('tl_content', 'fields.callToAction.fields.color.options')]
+    #[AsCallback('tl_form_field', 'fields.fieldColor.options')]
     public function addColorOptions(): array
     {
         return $this->getTranslatedOptions(Color\Color::class);
@@ -123,8 +127,15 @@ final class StyleOptionsListener
 
     #[AsCallback('tl_content', 'fields.ctaSize.options')]
     #[AsCallback('tl_content', 'fields.callToAction.fields.size.options')]
+    #[AsCallback('tl_form_field', 'fields.fieldSize.options')]
     public function addSizeOptions(): array
     {
-        return $this->getTranslatedOptions(Size\Size::class);
+        return $this->getTranslatedOptions(Modifier\Size::class);
+    }
+
+    #[AsCallback('tl_form_field', 'fields.fieldVariant.options')]
+    public function addVariantOptions(): array
+    {
+        return $this->getTranslatedOptions(Modifier\Variant::class);
     }
 }

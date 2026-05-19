@@ -39,7 +39,7 @@ tl_content:
         - Bestimmen Sie die den Typ der Aktion.
 
     ctaColor:
-        - Color
+        - Farbe
         - Bestimmen Sie die die Farbe der Aktion.
 
     ctaSize:

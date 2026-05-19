@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Styles\Option\Size;
+namespace DigitaleDinge\ContaoKiss\Styles\Option\Modifier;
 
-use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;;
+use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
  * @method string x_small

@@ -11,12 +11,15 @@ use DigitaleDinge\ContaoKiss\Styles\Option\Component;
 use DigitaleDinge\ContaoKiss\Styles\Option\Layout;
 use DigitaleDinge\ContaoKiss\Styles\Option\Margin;
 use DigitaleDinge\ContaoKiss\Styles\Option\Padding;
-use DigitaleDinge\ContaoKiss\Styles\Option\Size;
+use DigitaleDinge\ContaoKiss\Styles\Option\Modifier;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\Typography;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
+/**
+ * @experimental
+ */
 class StylesVariable
 {
     public function __construct(
@@ -105,9 +108,18 @@ class StylesVariable
         return $this->getStyleOption(Padding\BottomOption::class, $key);
     }
 
-    public function getSize(string|null $key = null): StyleOption|Size\SizeOption
+    /**
+     * Modifiers
+     */
+
+    public function getSize(string|null $key = null): StyleOption|Modifier\SizeOption
     {
-        return $this->getStyleOption(Size\SizeOption::class, $key);
+        return $this->getStyleOption(Modifier\SizeOption::class, $key);
+    }
+
+    public function getVariant(string|null $key = null): StyleOption|Modifier\VariantOption
+    {
+        return $this->getStyleOption(Modifier\VariantOption::class, $key);
     }
 
     /**
@@ -118,6 +130,9 @@ class StylesVariable
         return $this->getStyleOption(Component\CallToAction\ShapeOption::class, $key);
     }
 
+    /**
+     * ToDo: Might use getVariant instead
+     */
     public function getCta_type(string|null $key = null): StyleOption|Component\CallToAction\TypeOption
     {
         return $this->getStyleOption(Component\CallToAction\TypeOption::class, $key);

@@ -1,6 +1,19 @@
 tl_form_field:
     layout_legend:  Layout settings
+    appearance_legend: Appearance settings
 
     gridSpan:
         - Column behavior
         - Defines how form elements behave in a two-column layout.
+
+    fieldColor:
+        - Color
+        - Here you can choose the color of the field.
+
+    fieldSize:
+        - Size
+        - Here you can choose the size for the field.
+
+    fieldVariant:
+        - Variante
+        - Here you can choose a variant for the field.

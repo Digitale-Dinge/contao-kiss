@@ -73,11 +73,15 @@ style_options:
         five:                       5x line height
         six:                        6x line height
 
-    size_option:
-        x_small:                    Tiny
-        small:                      Small
-        large:                      Large
-        x_large:                    Extra large
+    modifier:
+        size:
+            x_small:                Tiny
+            small:                  Small
+            large:                  Large
+            x_large:                Extra large
+
+        variant:
+            soft:                   Soft
 
     typography:
         size:

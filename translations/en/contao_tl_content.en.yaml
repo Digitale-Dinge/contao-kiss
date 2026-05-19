@@ -47,8 +47,8 @@ tl_content:
         - Define the size of the action.
 
     ctaShape:
-        - Form
-        - Bestimmen Sie die Form der Aktion.
+        - Shape
+        - Here you can define the shape of the action.
 
     contentWidth:
         - Content width
