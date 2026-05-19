@@ -7,7 +7,7 @@ namespace DigitaleDinge\ContaoKiss\Styles\Option\Component\CallToAction;
 use Contao\CoreBundle\Translation\TranslatableLabelInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 
-enum Type: string implements TranslatableLabelInterface
+enum Variant: string implements TranslatableLabelInterface
 {
     case soft = 'btn-soft';
     case outline = 'btn-outline';
@@ -15,6 +15,6 @@ enum Type: string implements TranslatableLabelInterface
 
     public function label(): TranslatableMessage
     {
-        return new TranslatableMessage('style_options.component.button.type.'.$this->name, [], 'style_options');
+        return new TranslatableMessage('style_options.component.button.variant.'.$this->name, [], 'style_options');
     }
 }

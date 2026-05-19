@@ -133,9 +133,9 @@ class StylesVariable
     /**
      * ToDo: Might use getVariant instead
      */
-    public function getCta_type(string|null $key = null): StyleOption|Component\CallToAction\TypeOption
+    public function getCta_type(string|null $key = null): StyleOption|Component\CallToAction\VariantOption
     {
-        return $this->getStyleOption(Component\CallToAction\TypeOption::class, $key);
+        return $this->getStyleOption(Component\CallToAction\VariantOption::class, $key);
     }
 
     protected function getStyleOption(string $styleOption, string|null $key): StyleOption

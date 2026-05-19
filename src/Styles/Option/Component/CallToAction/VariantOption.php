@@ -11,7 +11,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
  * @method string outline
  * @method string text
  */
-class TypeOption extends StyleOption
+class VariantOption extends StyleOption
 {
-    public string $enumClass = Type::class;
+    public string $enumClass = Variant::class;
 }
