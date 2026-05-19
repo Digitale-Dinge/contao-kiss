@@ -6,6 +6,7 @@ namespace DigitaleDinge\ContaoKiss\EventListener\DataContainer;
 
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 
+use Contao\DataContainer;
 use DigitaleDinge\ContaoKiss\EventListener\TranslatableEnumTrait;
 use DigitaleDinge\ContaoKiss\Styles\Option\Color;
 use DigitaleDinge\ContaoKiss\Styles\Option\Component;
@@ -29,6 +30,7 @@ final class StyleOptionsListener
     #[AsCallback('tl_content', 'fields.headline.fields.appearance.options')]
     #[AsCallback('tl_content', 'fields.textAppearance.options')]
     #[AsCallback('tl_module', 'fields.headline.fields.appearance.options')]
+    #[AsCallback('tl_form_field', 'fields.textAppearance.options')]
     public function addHeadlineAppearanceOptions(): array
     {
         return [
@@ -46,6 +48,7 @@ final class StyleOptionsListener
 
     #[AsCallback('tl_content', 'fields.textAlignment.options')]
     #[AsCallback('tl_article', 'fields.textAlignment.options')]
+    #[AsCallback('tl_form_field', 'fields.textAlignment.options')]
     public function addTextAlignmentOptions(): array
     {
         return $this->getTranslatedOptions(Typography\Alignment::class);
@@ -108,10 +111,11 @@ final class StyleOptionsListener
     #[AsCallback('tl_content', 'fields.callToAction.fields.type.options')]
     public function addCtaTypeOptions(): array
     {
-        return $this->getTranslatedOptions(Component\CallToAction\Type::class);
+        return $this->getTranslatedOptions(Component\CallToAction\Variant::class);
     }
 
     #[AsCallback('tl_content', 'fields.ctaShape.options')]
+    #[AsCallback('tl_form_field', 'fields.fieldShape.options')]
     public function addCtaShapeOptions(): array
     {
         return $this->getTranslatedOptions(Component\CallToAction\Shape::class);
@@ -134,8 +138,14 @@ final class StyleOptionsListener
     }
 
     #[AsCallback('tl_form_field', 'fields.fieldVariant.options')]
-    public function addVariantOptions(): array
+    public function addVariantOptions(DataContainer $dc): array
     {
+        $type = $dc->getCurrentRecord()['type'] ?? null;
+
+        if ('submit' === $type) {
+            return $this->getTranslatedOptions(Component\CallToAction\Variant::class);
+        }
+
         return $this->getTranslatedOptions(Modifier\Variant::class);
     }
 }

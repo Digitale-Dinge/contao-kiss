@@ -108,7 +108,7 @@ style_options:
 
     component:
         button:
-            type:
+            variant:
                 soft:               Weich
                 outline:            Umrandet
                 text:               Text

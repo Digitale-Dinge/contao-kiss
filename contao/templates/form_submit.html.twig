@@ -1,0 +1,14 @@
+{% extends '@Contao/form_submit.html.twig' %}
+
+{% set wrapperAttributes = attrs(wrapperAttributes|default)
+    .addClass(styles.font_size(this.textAppearance|default), this.textAppearance|default)
+    .addClass(styles.text_alignment(this.textAlignment|default), this.textAlignment|default)
+%}
+
+{% set form_inner_attributes = attrs(form_inner_attributes|default)
+    .addClass('btn')
+    .addClass('btn-' ~ styles.color(this.fieldColor|default), this.fieldColor|default)
+    .addClass('btn-' ~ styles.size(this.fieldSize|default), this.fieldSize|default)
+    .addClass(styles.cta_shape(this.fieldShape|default), this.fieldShape|default)
+    .addClass(styles.cta_type(this.fieldVariant|default), this.fieldVariant|default)
+%}

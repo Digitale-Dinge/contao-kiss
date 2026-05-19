@@ -17,3 +17,15 @@ tl_form_field:
     fieldVariant:
         - Variante
         - Here you can choose a variant for the field.
+
+    fieldShape:
+        - Shape
+        - Here you can choose a shape for the field.
+
+    textAlignment:
+        - Text alignment
+        - Here you can set up the text alignment for the content element.
+
+    textAppearance:
+        - Text appearance
+        - Here you can choose an appearance for the text content.

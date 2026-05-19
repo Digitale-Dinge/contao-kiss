@@ -20,6 +20,7 @@ const FIELDS_APPLY_COLOR = [
     'range', // range
     'captcha', // input
     'altcha', // input
+    'submit', // button
 ];
 
 const FIELDS_APPLY_VARIANT = [
@@ -33,6 +34,7 @@ const FIELDS_APPLY_VARIANT = [
     'select', // select
     'captcha', // input
     'altcha', // input
+    'submit', // button
 ];
 
 const FIELDS_APPLY_SIZE = [
@@ -49,6 +51,7 @@ const FIELDS_APPLY_SIZE = [
     'range', // range
     'captcha', // input
     'altcha', // input
+    'submit', // button
 ];
 
 $GLOBALS['TL_DCA']['tl_form_field']['fields']['gridSpan'] = [
@@ -111,11 +114,41 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['fieldVariant'] = [
     ],
 ];
 
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['fieldShape'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+        'includeBlankOption' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['textAlignment'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25 clr',
+        'includeBlankOption' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['textAppearance'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+        'includeBlankOption' => true,
+    ],
+];
+
+
 $pmFieldColor = PaletteManipulator::create()
     ->addLegend('appearance_legend', 'layout_legend', PaletteManipulator::POSITION_AFTER)
     ->addField('fieldColor', 'appearance_legend', PaletteManipulator::POSITION_APPEND)
 ;
-
 
 $pmFieldSize = PaletteManipulator::create()
     ->addLegend('appearance_legend', 'layout_legend', PaletteManipulator::POSITION_AFTER)
@@ -127,7 +160,6 @@ $pmFieldVariant = PaletteManipulator::create()
     ->addField('fieldVariant', 'appearance_legend', PaletteManipulator::POSITION_APPEND)
 ;
 
-
 $applyPalette = static function(PaletteManipulator $pm, array $fields): void {
     foreach ($fields as $field) {
         try { $pm->applyToPalette($field, 'tl_form_field'); }
@@ -138,3 +170,16 @@ $applyPalette = static function(PaletteManipulator $pm, array $fields): void {
 $applyPalette($pmFieldColor, FIELDS_APPLY_COLOR);
 $applyPalette($pmFieldSize, FIELDS_APPLY_SIZE);
 $applyPalette($pmFieldVariant, FIELDS_APPLY_VARIANT);
+
+
+PaletteManipulator::create()
+    ->addLegend('appearance_legend', 'layout_legend', PaletteManipulator::POSITION_AFTER)
+    ->addField(['fieldShape', 'textAlignment'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
+    ->applyToPalette('submit', 'tl_form_field')
+;
+
+PaletteManipulator::create()
+    ->addLegend('appearance_legend', 'layout_legend', PaletteManipulator::POSITION_AFTER)
+    ->addField(['textAlignment', 'textAppearance'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
+    ->applyToPalette('explanation', 'tl_form_field')
+;

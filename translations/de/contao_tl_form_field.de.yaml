@@ -11,9 +11,21 @@ tl_form_field:
         - Hier können Sie die Farbe des Feldes auswählen.
 
     fieldSize:
-        - Size
+        - Größe
         - Hier können Sie die Farbe des Feldes einstellen.
 
     fieldVariant:
         - Variante
         - Hier können Sie eine Variante für das Feld auswählen.
+
+    fieldShape:
+        - Form
+        - Hier können Sie eine Form für das Feld auswählen.
+
+    textAlignment:
+        - Text-Ausrichtung
+        - Hier können Sie die Textausrichtung für das Inhaltselement einstellen.
+
+    textAppearance:
+        - Text-Aussehen
+        - Hier können Sie ein Aussehen für den Textinhalt auswählen.
