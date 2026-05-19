@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Styles\Option\Layout;
 
-use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;;
+use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
  * @method string one
@@ -18,7 +18,6 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;;
  * @method string nine
  * @method string ten
  * @method string eleven
- * @method string twelve
  */
 class ColumnSpanOption extends StyleOption
 {
