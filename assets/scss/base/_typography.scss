@@ -1,0 +1,47 @@
+@layer base {
+    html {
+        @apply box-border;
+    }
+
+    .invisible {
+        @apply sr-only;
+        visibility: visible;
+    }
+
+    /*h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+
+    }*/
+
+    /*ul, ol, dl, menu {
+        @apply px-2 py-1;
+    }
+
+    ul {
+        @apply list-disc;
+    }
+
+    ol {
+        @apply list-decimal;
+    }
+
+    li {
+        @apply ml-4 py-2 leading-normal;
+
+        text-indent: 0;
+    }
+
+    nav li,
+    menu li {
+        @apply list-none ml-0;
+
+        text-indent: 0;
+    }
+
+    dt {
+        text-indent: -0.618rem;
+    }
+
+    dd {
+        @apply px-2;
+    }*/
+}
