@@ -20,7 +20,8 @@ const FIELDS_APPLY_COLOR = [
     'range', // range
     'captcha', // input
     'altcha', // input
-    'submit', // button
+    'submit', // button,
+    'upload', // upload
 ];
 
 const FIELDS_APPLY_VARIANT = [

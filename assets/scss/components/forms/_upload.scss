@@ -1,0 +1,41 @@
+
+@layer components {
+    input.upload {
+        @apply file:bg-[var(--file-button-color,var(--color-base-content))] file:text-[var(--file-text-color,var(--color-white))];;
+    }
+
+    .upload-primary {
+        --file-button-color: var(--color-primary);
+        --file-text-color: var(--color-primary-content);
+    }
+
+    .upload-secondary {
+        --file-button-color: var(--color-secondary);
+        --file-text-color: var(--color-secondary-content);
+    }
+
+    .upload-accent {
+        --file-button-color: var(--color-accent);
+        --file-text-color: var(--color-accent-content);
+    }
+
+    .upload-info {
+        --file-button-color: var(--color-info);
+        --file-text-color: var(--color-info-content);
+    }
+
+    .upload-success {
+        --file-button-color: var(--color-success);
+        --file-text-color: var(--color-success-content);
+    }
+
+    .upload-warning {
+        --file-button-color: var(--color-warning);
+        --file-text-color: var(--color-warning-content);
+    }
+
+    .upload-error {
+        --file-button-color: var(--color-error);
+        --file-text-color: var(--color-error-content);
+    }
+}
