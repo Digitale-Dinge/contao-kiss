@@ -36,7 +36,9 @@
     // BASE INPUT
     // ============================================
     .form-input {
-        --tw-ring-color: var(--color-base-content);
+        --input-color: var(--color-base-content);
+        --input-border-opacity: 60%;
+        --tw-ring-color: var(--input-color);
 
         @apply block w-full;
         @apply px-3 py-2.5;
@@ -49,42 +51,30 @@
         // Ensure border doesn't add to dimensions
         box-sizing: border-box;
 
-        // Use fixed border width with fallback, NEVER changes
-        @apply border border-base-content/60;
+        // Add color mix for using --input-border-color
+        border: 1px solid color-mix(in oklch, var(--input-color) var(--input-border-opacity), transparent);
         border-radius: var(--radius-field, 0.5rem);
         outline: none;
 
         // Hover state - full opacity border
         &:hover:not(:focus):not(:disabled) {
-            @apply border-base-content;
+            --input-border-opacity: 100%;
         }
 
-        // Focus state
-        @apply focus:border-base-content focus:ring-1 focus:ring-inset;
+        &:focus {
+            --input-border-opacity: 100%;
+            @apply ring-1 ring-inset;
+        }
 
         // ============================================
         // VALIDATION STATES
         // ============================================
         &.is-valid {
-            --tw-ring-color: var(--color-success);
-            @apply border-success/50;
-
-            &:hover:not(:focus):not(:disabled) {
-                @apply border-success;
-            }
-
-            @apply focus:border-success;
+            --input-color: var(--color-success);
         }
 
         &.is-invalid {
-            --tw-ring-color: var(--color-error);
-            @apply border-error/50;
-
-            &:hover:not(:focus):not(:disabled) {
-                @apply border-error;
-            }
-
-            @apply focus:border-error;
+            --input-color: var(--color-error);
         }
     }
 
@@ -92,115 +82,38 @@
     // STYLE: SOFT (tinted background - standard border)
     // ============================================
     .input-soft {
-        @apply bg-base-content/10;
+        background-color: color-mix(in oklch, var(--input-color) 10%, transparent);
     }
 
     // ============================================
     // COLORS (border shows selected color)
     // ============================================
     .input-primary {
-        --tw-ring-color: var(--color-primary);
-        @apply border-primary/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            @apply border-primary;
-        }
-
-        @apply focus:border-primary;
-
-        &.input-soft {
-            @apply bg-primary/10;
-        }
+        --input-color: var(--color-primary);
     }
 
     .input-secondary {
-        --tw-ring-color: var(--color-secondary);
-        @apply border-secondary/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            @apply border-secondary;
-        }
-
-        @apply focus:border-secondary;
-
-        &.input-soft {
-            @apply bg-secondary/10;
-        }
+        --input-color: var(--color-secondary);
     }
 
     .input-accent {
-        --tw-ring-color: var(--color-accent);
-        @apply border-accent/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            @apply border-accent;
-        }
-
-        @apply focus:border-accent;
-
-        &.input-soft {
-            @apply bg-accent/10;
-        }
+        --input-color: var(--color-accent);
     }
 
     .input-info {
-        --tw-ring-color: var(--color-info);
-        @apply border-info/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            @apply border-info;
-        }
-
-        @apply focus:border-info;
-
-        &.input-soft {
-            @apply bg-info/10;
-        }
+        --input-color: var(--color-info);
     }
 
     .input-success {
-        --tw-ring-color: var(--color-success);
-        @apply border-success/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            @apply border-success;
-        }
-
-        @apply focus:border-success;
-
-        &.input-soft {
-            @apply bg-success/10;
-        }
+        --input-color: var(--color-success);
     }
 
     .input-warning {
-        --tw-ring-color: var(--color-warning);
-        @apply border-warning/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            @apply border-warning;
-        }
-
-        @apply focus:border-warning;
-
-        &.input-soft {
-            @apply bg-warning/10;
-        }
+        --input-color: var(--color-warning);
     }
 
     .input-error {
-        --tw-ring-color: var(--color-error);
-        @apply border-error/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            @apply border-error;
-        }
-
-        @apply focus:border-error;
-
-        &.input-soft {
-            @apply bg-error/10;
-        }
+        --input-color: var(--color-error);
     }
 
     // ============================================

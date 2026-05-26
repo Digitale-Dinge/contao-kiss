@@ -42,6 +42,10 @@
     // BASE SELECT
     // ============================================
     .form-select {
+        --select-color: var(--color-base-content);
+        --select-border-opacity: 60%;
+        --tw-ring-color: var(--select-color);
+
         @apply block w-full;
         @apply px-3 py-2.5 pr-10;
         @apply text-base text-base-content leading-tight;
@@ -52,8 +56,8 @@
         // Ensure border doesn't add to dimensions
         box-sizing: border-box;
 
-        // Use fixed border width with fallback, NEVER changes
-        @apply border border-base-300/50;
+        // Add color mix for using --select-color
+        border: 1px solid color-mix(in oklch, var(--select-color) var(--select-border-opacity), transparent);
         border-radius: var(--radius-field, 0.5rem);
         outline: none;
 
@@ -67,13 +71,12 @@
 
         // Hover state - full opacity border
         &:hover:not(:focus):not(:disabled) {
-            border-color: var(--color-base-300);
+            --select-border-opacity: 100%;
         }
 
-        // Focus state - inset box-shadow creates visual "thicker border" without layout shift
         &:focus {
-            border-color: var(--color-base-content);
-            box-shadow: inset 0 0 0 1px var(--color-base-content);
+            --select-border-opacity: 100%;
+            @apply ring-1 ring-inset;
         }
 
         // Style placeholder-like first option (when value is empty)
@@ -86,29 +89,11 @@
         // VALIDATION STATES
         // ============================================
         &.is-valid {
-            @apply border-success/50;
-
-            &:hover:not(:focus):not(:disabled) {
-                border-color: var(--color-success);
-            }
-
-            &:focus {
-                border-color: var(--color-success);
-                box-shadow: inset 0 0 0 1px var(--color-success);
-            }
+            --select-color: var(--color-success);
         }
 
         &.is-invalid {
-            @apply border-error/50;
-
-            &:hover:not(:focus):not(:disabled) {
-                border-color: var(--color-error);
-            }
-
-            &:focus {
-                border-color: var(--color-error);
-                box-shadow: inset 0 0 0 1px var(--color-error);
-            }
+            --select-color: var(--color-error);
         }
     }
 
@@ -116,209 +101,38 @@
     // STYLE: SOFT (tinted background with border)
     // ============================================
     .select-soft {
-        @apply bg-base-content/10 border-base-300/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            border-color: var(--color-base-300);
-        }
-
-        &:focus {
-            @apply bg-base-content/10;
-            border-color: var(--color-base-content);
-            box-shadow: inset 0 0 0 1px var(--color-base-content);
-        }
+        background-color: color-mix(in oklch, var(--select-color) 10%, transparent);
     }
 
     // ============================================
     // COLORS (border shows selected color)
     // ============================================
     .select-primary {
-        @apply border-primary/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            border-color: var(--color-primary);
-        }
-
-        &:focus {
-            border-color: var(--color-primary);
-            box-shadow: inset 0 0 0 1px var(--color-primary);
-        }
-
-        &.select-soft {
-            @apply bg-primary/10 border-primary/50;
-
-            &:hover:not(:focus):not(:disabled) {
-                border-color: var(--color-primary);
-            }
-
-            &:focus {
-                @apply bg-primary/10;
-                border-color: var(--color-primary);
-                box-shadow: inset 0 0 0 1px var(--color-primary);
-            }
-        }
+        --select-color: var(--color-primary);
     }
 
     .select-secondary {
-        @apply border-secondary/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            border-color: var(--color-secondary);
-        }
-
-        &:focus {
-            border-color: var(--color-secondary);
-            box-shadow: inset 0 0 0 1px var(--color-secondary);
-        }
-
-        &.select-soft {
-            @apply bg-secondary/10 border-secondary/50;
-
-            &:hover:not(:focus):not(:disabled) {
-                border-color: var(--color-secondary);
-            }
-
-            &:focus {
-                @apply bg-secondary/10;
-                border-color: var(--color-secondary);
-                box-shadow: inset 0 0 0 1px var(--color-secondary);
-            }
-        }
+        --select-color: var(--color-secondary);
     }
 
     .select-accent {
-        @apply border-accent/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            border-color: var(--color-accent);
-        }
-
-        &:focus {
-            border-color: var(--color-accent);
-            box-shadow: inset 0 0 0 1px var(--color-accent);
-        }
-
-        &.select-soft {
-            @apply bg-accent/10 border-accent/50;
-
-            &:hover:not(:focus):not(:disabled) {
-                border-color: var(--color-accent);
-            }
-
-            &:focus {
-                @apply bg-accent/10;
-                border-color: var(--color-accent);
-                box-shadow: inset 0 0 0 1px var(--color-accent);
-            }
-        }
+        --select-color: var(--color-accent);
     }
 
     .select-info {
-        @apply border-info/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            border-color: var(--color-info);
-        }
-
-        &:focus {
-            border-color: var(--color-info);
-            box-shadow: inset 0 0 0 1px var(--color-info);
-        }
-
-        &.select-soft {
-            @apply bg-info/10 border-info/50;
-
-            &:hover:not(:focus):not(:disabled) {
-                border-color: var(--color-info);
-            }
-
-            &:focus {
-                @apply bg-info/10;
-                border-color: var(--color-info);
-                box-shadow: inset 0 0 0 1px var(--color-info);
-            }
-        }
+        --select-color: var(--color-info);
     }
 
     .select-success {
-        @apply border-success/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            border-color: var(--color-success);
-        }
-
-        &:focus {
-            border-color: var(--color-success);
-            box-shadow: inset 0 0 0 1px var(--color-success);
-        }
-
-        &.select-soft {
-            @apply bg-success/10 border-success/50;
-
-            &:hover:not(:focus):not(:disabled) {
-                border-color: var(--color-success);
-            }
-
-            &:focus {
-                @apply bg-success/10;
-                border-color: var(--color-success);
-                box-shadow: inset 0 0 0 1px var(--color-success);
-            }
-        }
+        --select-color: var(--color-success);
     }
 
     .select-warning {
-        @apply border-warning/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            border-color: var(--color-warning);
-        }
-
-        &:focus {
-            border-color: var(--color-warning);
-            box-shadow: inset 0 0 0 1px var(--color-warning);
-        }
-
-        &.select-soft {
-            @apply bg-warning/10 border-warning/50;
-
-            &:hover:not(:focus):not(:disabled) {
-                border-color: var(--color-warning);
-            }
-
-            &:focus {
-                @apply bg-warning/10;
-                border-color: var(--color-warning);
-                box-shadow: inset 0 0 0 1px var(--color-warning);
-            }
-        }
+        --select-color: var(--color-warning);
     }
 
     .select-error {
-        @apply border-error/50;
-
-        &:hover:not(:focus):not(:disabled) {
-            border-color: var(--color-error);
-        }
-
-        &:focus {
-            border-color: var(--color-error);
-            box-shadow: inset 0 0 0 1px var(--color-error);
-        }
-
-        &.select-soft {
-            @apply bg-error/10 border-error/50;
-
-            &:hover:not(:focus):not(:disabled) {
-                border-color: var(--color-error);
-            }
-
-            &:focus {
-                @apply bg-error/10;
-                border-color: var(--color-error);
-                box-shadow: inset 0 0 0 1px var(--color-error);
-            }
-        }
+        --select-color: var(--color-error);
     }
 
     // ============================================
