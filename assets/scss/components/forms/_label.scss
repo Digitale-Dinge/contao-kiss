@@ -19,21 +19,29 @@
     // Label text (above input)
     .widget > label,
     .label-text {
-        @apply block text-sm font-medium text-base-content mb-1.5;
+        @apply block font-medium text-base-content mb-1.5 text-[calc(var(--text-base)*0.875)];
+    }
+
+    :is(
+        .helper-text,
+        .error-text,
+        .success-text
+    ) {
+        @apply block mt-1.5 text-[calc(var(--text-base)*0.75)]
     }
 
     // Helper text (below input)
     .helper-text {
-        @apply block text-xs text-base-content/60 mt-1.5;
+        @apply text-base-content/60;
     }
 
     // Error text (below input)
     .error-text {
-        @apply block text-xs text-error mt-1.5;
+        @apply text-error;
     }
 
     // Success text (below input)
     .success-text {
-        @apply block text-xs text-success mt-1.5;
+        @apply text-success;
     }
 }
