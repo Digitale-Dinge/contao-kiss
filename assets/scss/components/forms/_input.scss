@@ -48,14 +48,13 @@
         box-sizing: border-box;
 
         // Use fixed border width with fallback, NEVER changes
-        @apply border border-base-300/50;
+        @apply border border-base-content/60;
         border-radius: var(--radius-field, 0.5rem);
         outline: none;
 
-
         // Hover state - full opacity border
         &:hover:not(:focus):not(:disabled) {
-            border-color: var(--color-base-300);
+            @apply border-base-content;
         }
 
         // Focus state - inset box-shadow creates visual "thicker border" without layout shift
