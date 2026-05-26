@@ -42,11 +42,12 @@
 
 {% set wrapperAttributes = attrs(wrapperAttributes|default)
     .addClass([styles.span(this.gridSpan|default)])
+    .addClass('range-' ~ styles.color(this.fieldColor|default), this.type == 'range' and this.fieldColor|default)
 %}
 
 {% set form_inner_attributes = attrs(form_inner_attributes|default)
     .addClass(type_class_map[this.type]|default)
-    .addClass(type_prefix ~ '-' ~ styles.color(this.fieldColor|default), type_prefix and this.fieldColor|default)
+    .addClass(type_prefix ~ '-' ~ styles.color(this.fieldColor|default), this.type != 'range' and type_prefix and this.fieldColor|default)
     .addClass(type_prefix ~ '-' ~ styles.size(this.fieldSize|default), type_prefix and this.fieldSize|default)
     .addClass(type_prefix ~ '-' ~ styles.variant(this.fieldVariant|default), type_prefix and this.fieldVariant|default)
 %}
