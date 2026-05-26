@@ -1,0 +1,43 @@
+@layer base {
+    .headline-content {
+        :is(.topline, .headline) {
+            @apply text-base-content;
+        }
+    }
+
+    .headline-primary {
+        :is(.topline, .headline) {
+            @apply text-primary;
+        }
+    }
+
+    .headline-secondary {
+        :is(.topline, .headline) {
+            @apply text-secondary;
+        }
+    }
+
+    .headline-accent {
+        :is(.topline, .headline) {
+            @apply text-accent;
+        }
+    }
+
+    .headline-info {
+        :is(.topline, .headline) {
+            @apply text-info;
+        }
+    }
+
+    .headline-success {
+        :is(.topline, .headline) {
+            @apply text-success;
+        }
+    }
+
+    .headline-warning {
+        :is(.topline, .headline) {
+            @apply text-warning;
+        }
+    }
+}
