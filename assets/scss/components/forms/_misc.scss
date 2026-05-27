@@ -8,4 +8,8 @@
     label .mandatory {
         @apply text-error;
     }
+
+    [placeholder] {
+        text-overflow: ellipsis;
+    }
 }
