@@ -14,7 +14,7 @@ trait TranslatableEnumTrait
     ) {
     }
 
-    protected function getTranslatedOptions($enum): array
+    public function getTranslatedOptions($enum): array
     {
         if (!is_subclass_of($enum, \BackedEnum::class)) {
             throw new \LogicException(\sprintf('Invalid usage. Class "%s" must extend BackedEnum.', $enum));
