@@ -357,11 +357,11 @@ final class CustomElementsConfigurationBuilder
      */
     public function addCallToActionField(array $eval = []): self
     {
-        if ($this->isListField()) {
-            throw new \Exception('Using addCallToActionField() is not allowed inside lists.');
-        }
+        $options = $this->isListField() ? $this->generateListCtaField() : [
+            'inputType' => 'standardField',
+        ];
 
-        return $this->addField('callToAction', ['inputType' => 'standardField'], $eval);
+        return $this->addField('callToAction', $options, $eval);
     }
 
     public function addBackgroundField(array $eval = []): self
@@ -397,5 +397,35 @@ final class CustomElementsConfigurationBuilder
         }
 
         return $translated;
+    }
+
+    private function generateListCtaField(): array
+    {
+        return [
+            'inputType' => 'list',
+            'label' => [
+                $this->translator->trans('rsce.field.callToAction.label', [], 'rsce'),
+                $this->translator->trans('rsce.field.callToAction.description', [], 'rsce'),
+            ],
+            'elementLabel' => $this->translator->trans('rsce.field.callToAction.element', [], 'rsce'),
+            'minItems' => 0,
+            'maxItems' => 2,
+            'fields' => [
+                'text' => [
+                    'label' => &$GLOBALS['TL_LANG']['tl_content']['ctaText'],
+                    'inputType' => 'text',
+                    'eval' => ['tl_class' => 'w25'],
+                ],
+                'ctaType'  => $GLOBALS['TL_DCA']['tl_content']['fields']['ctaType'],
+                'ctaColor' => $GLOBALS['TL_DCA']['tl_content']['fields']['ctaColor'],
+                'ctaSize'  => $GLOBALS['TL_DCA']['tl_content']['fields']['ctaSize'],
+                'url'      => $GLOBALS['TL_DCA']['tl_content']['fields']['url'],
+                'target'   => $GLOBALS['TL_DCA']['tl_content']['fields']['target'],
+            ],
+            'eval' => [
+                'tl_class' => 'w100 clr call_to_action_widget',
+                'hide' => true
+            ],
+        ];
     }
 }

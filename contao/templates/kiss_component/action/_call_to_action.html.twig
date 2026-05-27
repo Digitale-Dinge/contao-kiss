@@ -13,7 +13,15 @@
         %}
         <div{{ cta_wrapper_attributes }}>
             {% for action in actions %}
-                {% with action only %}
+                {% with {
+                    text: action.text|default,
+                    url: action.url|default,
+                    target: action.target|default,
+                    ctaType: action.ctaType|default,
+                    ctaColor: action.ctaColor|default,
+                    ctaSize: action.ctaSize|default,
+                    ctaShape: action.ctaShape|default,
+                } %}
                     {{ block('action') }}
                 {% endwith %}
             {% endfor %}

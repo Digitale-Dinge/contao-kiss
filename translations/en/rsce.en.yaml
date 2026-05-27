@@ -17,6 +17,10 @@ rsce:
                 image:      Image
                 icon:       Icon
                 separated:  Separated
+        callToAction:
+            label:          Call-To-Action
+            description:    Here you can enter one or more call-to-actions which will be displayed in the element.
+            element:        Action
 
     media_text:
         label:              Media text
