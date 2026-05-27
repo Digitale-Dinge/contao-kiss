@@ -7,6 +7,7 @@
     'email':    'form-input',
     'password': 'form-input',
     'upload':   'form-input',
+    'date':     'form-input',
 
     'checkbox': 'form-checkbox',
 
@@ -26,6 +27,7 @@
     'email':    'input',
     'password': 'input',
     'upload':   'input',
+    'date':     'input',
 
     'checkbox': 'checkbox',
 
@@ -47,11 +49,12 @@
     .addClass('range-' ~ styles.color(this.fieldColor|default), this.type == 'range' and this.fieldColor|default)
 %}
 
-{% set form_inner_attributes = attrs(form_inner_attributes|default)
+{% set form_inner_attributes = attrs()
     .addClass(type_class_map[this.type]|default)
     .addClass(type_prefix ~ '-' ~ styles.color(this.fieldColor|default), this.type != 'range' and type_prefix and this.fieldColor|default)
     .addClass(type_prefix ~ '-' ~ styles.size(this.fieldSize|default), type_prefix and this.fieldSize|default)
     .addClass(type_prefix ~ '-' ~ styles.variant(this.fieldVariant|default), type_prefix and this.fieldVariant|default)
+    .mergeWith(form_inner_attributes|default)
 %}
 
 {% for attribute, value in form_inner_attributes %}
