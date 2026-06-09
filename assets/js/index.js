@@ -21,6 +21,7 @@
  * application.register('breadcrumb', BreadcrumbController);
  */
 
+export { default as DateRangePickerController } from './controllers/date-range-picker-controller';
 export { default as RangeController } from './controllers/range-controller';
 export { default as InputNumberController } from './controllers/input-number-controller';
 export { default as ThemeController } from './controllers/theme-controller';

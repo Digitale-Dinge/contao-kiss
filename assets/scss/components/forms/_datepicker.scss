@@ -1,0 +1,142 @@
+/**
+ * Date picker (vanillajs-datepicker) — KISS theming.
+ *
+ * The library's structural CSS is imported by the `date-range-picker` Stimulus
+ * controller; this partial only re-skins it with theme tokens so the calendar
+ * matches the active site theme instead of the library default.
+ *
+ * Token map (local var -> KISS token):
+ *   --dp-surface       base-200          popup background (popover/dropdown convention)
+ *   --dp-surface-hover base-300          day hover / keyboard focus
+ *   --dp-border        base-300          popup edge
+ *   --dp-fg            base-content      text
+ *   --dp-accent        primary           selected / range ends / today / footer buttons
+ *   --dp-accent-fg     primary-content   text on the accent
+ *   --dp-radius        radius-box        popup corners
+ *   --dp-radius-cell   radius-field      day-cell / button corners
+ */
+
+.datepicker {
+    --dp-surface: var(--color-base-200);
+    --dp-surface-hover: var(--color-base-300);
+    --dp-border: var(--color-base-300);
+    --dp-fg: var(--color-base-content);
+    --dp-accent: var(--color-primary);
+    --dp-accent-fg: var(--color-primary-content);
+    --dp-radius: var(--radius-box);
+    --dp-radius-cell: var(--radius-field);
+
+    z-index: 30;
+}
+
+.datepicker-dropdown {
+    padding-top: 0.5rem;
+}
+
+.datepicker-picker {
+    background: var(--dp-surface);
+    color: var(--dp-fg);
+    border: 1px solid var(--dp-border);
+    border-radius: var(--dp-radius);
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.18);
+    padding: 0.5rem;
+}
+
+/* Header controls: view-switch (month/year) + prev/next */
+.datepicker-controls .button {
+    background: transparent;
+    color: var(--dp-fg);
+    border: 0;
+    border-radius: var(--dp-radius-cell);
+    font-weight: 600;
+
+    &:hover,
+    &:focus-visible {
+        background: var(--dp-surface-hover);
+    }
+}
+
+/* Weekday header row */
+.datepicker-view .dow {
+    color: color-mix(in srgb, var(--dp-fg) 45%, transparent);
+    font-weight: 600;
+}
+
+.datepicker-cell {
+    border-radius: var(--dp-radius-cell);
+
+    &:not(.disabled):hover {
+        background: var(--dp-surface-hover);
+    }
+
+    &.focused:not(.selected) {
+        background: var(--dp-surface-hover);
+    }
+
+    /* Both the plain and focused "today" states (the library colours the focused
+     * one turquoise with higher specificity, so we must match it). */
+    &.today:not(.selected),
+    &.today.focused:not(.selected) {
+        background: color-mix(in srgb, var(--dp-accent) 22%, var(--dp-surface));
+        color: var(--dp-fg);
+    }
+
+    &.prev,
+    &.next {
+        color: color-mix(in srgb, var(--dp-fg) 45%, transparent);
+    }
+
+    &.disabled {
+        color: color-mix(in srgb, var(--dp-fg) 30%, transparent);
+    }
+
+    /* Days between the two range endpoints */
+    &.range {
+        background: color-mix(in srgb, var(--dp-accent) 22%, var(--dp-surface));
+        color: var(--dp-fg);
+        border-radius: 0;
+    }
+
+    /* Selected single date + range endpoints */
+    &.selected,
+    &.selected:hover,
+    &.range-start,
+    &.range-end {
+        background: var(--dp-accent);
+        color: var(--dp-accent-fg);
+        font-weight: 600;
+    }
+
+    &.range-start {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    &.range-end {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}
+
+/* Footer panel: drop the library's light-grey band + inset shadow */
+.datepicker-footer {
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Footer buttons (Heute / Löschen) — primary, pill-shaped.
+ * The selector matches the library's `.datepicker-footer .datepicker-controls .button`
+ * specificity (0,3,0) so our radius + colours win over its 2px default. */
+.datepicker-footer .datepicker-controls .button {
+    background: var(--dp-accent);
+    color: var(--dp-accent-fg);
+    border: 0;
+    border-radius: var(--dp-radius-cell);
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+
+    &:hover,
+    &:focus-visible {
+        background: color-mix(in srgb, var(--dp-accent) 88%, #000);
+    }
+}
