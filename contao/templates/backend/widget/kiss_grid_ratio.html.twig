@@ -1,0 +1,14 @@
+{#
+    Column-ratio ruler widget (element groups).
+    Markup is intentionally minimal: the bar, handles and % labels are built by
+    public/dist/backend/contao-kiss.js, which reads the gridColumns select named
+    in data-cols-field and writes the "fr" value (e.g. "3-7") into the hidden input.
+#}
+<div class="kiss-grid-ratio"
+     data-cols-field="{{ colsField }}"
+     data-hint-even="{{ 'tl_content.gridRatioEven'|trans({}, 'contao_tl_content') }}"
+     data-hint-disabled="{{ 'tl_content.gridRatioDisabled'|trans({}, 'contao_tl_content') }}">
+    <input type="hidden" name="{{ name }}" id="ctrl_{{ id }}" value="{{ value }}">
+    <div class="kiss-grid-ratio__bar" aria-hidden="true"></div>
+    <p class="kiss-grid-ratio__hint tl_help"></p>
+</div>

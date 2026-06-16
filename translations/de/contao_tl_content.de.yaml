@@ -78,6 +78,12 @@ tl_content:
         - Abstand
         - Legt den Abstand zwischen den einzelnen Elementen fest.
 
+    gridRatio:
+        - Spalten-Verhältnis
+        - Verteilt die Spalten ungleich (nur bei 2 oder 3 Spalten). Den Regler in 10%-Schritten ziehen.
+    gridRatioEven:             Gleichmäßig – zum Anpassen ziehen
+    gridRatioDisabled:         Nur bei 2 oder 3 Spalten verfügbar
+
     backgroundColor:
         - Hintergrundfarbe
         - Wählen Sie die Hintergrundfarbe für das Inhaltselement.
