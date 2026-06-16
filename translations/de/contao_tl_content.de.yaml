@@ -82,7 +82,7 @@ tl_content:
         - Spalten-Verhältnis
         - Verteilt die Spalten ungleich (nur bei 2 oder 3 Spalten). Den Regler in 10%-Schritten ziehen.
     gridRatioEven:             Gleichmäßig – zum Anpassen ziehen
-    gridRatioDisabled:         Nur bei 2 oder 3 Spalten verfügbar
+    gridRatioDisabled:         Die Spalten werden gleichmäßig über die Breite verteilt.
 
     backgroundColor:
         - Hintergrundfarbe

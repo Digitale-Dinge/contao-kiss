@@ -172,9 +172,13 @@ html[data-color-scheme="dark"] {
 /** Column-ratio ruler (kissGridRatio widget) */
 /* Plain CSS (no build step) -> flat selectors, no SCSS-style "&__bar" nesting. */
 .kiss-grid-ratio {
-    --kiss-ratio-bar: #e8e8ea;
-    --kiss-ratio-seg: #b6d8ff;
-    --kiss-ratio-handle: #2b5b8c;
+    /* Contao does not expose a generic accent variable, so we centralise the
+       Contao accent (orange) here; tweak these to restyle the whole widget.
+       Height matches the backend select/input fields (~40px). */
+    --kiss-ratio-height: 30px;
+    --kiss-ratio-bar: #f1f3f4;
+    --kiss-ratio-seg: #fce3cc;
+    --kiss-ratio-accent: #f47c00;
     margin-top: 4px;
 }
 
@@ -182,7 +186,7 @@ html[data-color-scheme="dark"] {
     position: relative;
     display: flex;
     align-items: stretch;
-    height: 36px;
+    height: var(--kiss-ratio-height);
     border-radius: var(--border-radius, 3px);
     background: var(--kiss-ratio-bar);
     border: 1px solid var(--form-border, #d0d0d2);
@@ -199,17 +203,12 @@ html[data-color-scheme="dark"] {
     justify-content: center;
     min-width: 0;
     background: var(--kiss-ratio-seg);
-    border-right: 1px solid var(--form-border, #d0d0d2);
-}
-
-.kiss-grid-ratio__seg:last-child {
-    border-right: 0;
 }
 
 .kiss-grid-ratio__label {
     font-size: .75rem;
     font-weight: 600;
-    color: #1c2a3a;
+    color: #7a3e00;
     pointer-events: none;
 }
 
@@ -221,7 +220,7 @@ html[data-color-scheme="dark"] {
     width: 14px;
     height: 100%;
     cursor: ew-resize;
-    background: var(--kiss-ratio-handle);
+    background: var(--kiss-ratio-accent);
     border-radius: 3px;
     box-shadow: 0 0 0 2px rgba(255, 255, 255, .65);
     z-index: 1;
@@ -243,22 +242,20 @@ html[data-color-scheme="dark"] {
     margin: 4px 0 0;
 }
 
+/* For 1 or 4-12 columns there is no ratio to set: hide the bar entirely and
+   show only the "evenly spaced" note. */
 .kiss-grid-ratio--disabled .kiss-grid-ratio__bar {
-    opacity: .5;
-}
-
-.kiss-grid-ratio--disabled .kiss-grid-ratio__seg {
-    background: var(--kiss-ratio-bar);
+    display: none;
 }
 
 html[data-color-scheme="dark"] .kiss-grid-ratio {
     --kiss-ratio-bar: #292c32;
-    --kiss-ratio-seg: #3b5670;
-    --kiss-ratio-handle: #6fa8dc;
+    --kiss-ratio-seg: #4a3320;
+    --kiss-ratio-accent: #f47c00;
 }
 
 html[data-color-scheme="dark"] .kiss-grid-ratio__label {
-    color: #e6edf3;
+    color: #f4d9bf;
 }
 
 html[data-color-scheme="dark"] .kiss-grid-ratio__handle {
