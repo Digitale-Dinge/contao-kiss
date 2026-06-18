@@ -51,6 +51,11 @@ class StylesVariable
         return $this->getStyleOption(Layout\ColumnSpanOption::class, $key);
     }
 
+    public function getCrossAlignment(string|null $key = null): StyleOption|Layout\CrossAlignmentOption
+    {
+        return $this->getStyleOption(Layout\CrossAlignmentOption::class, $key);
+    }
+
     /**
      * Typography
      */

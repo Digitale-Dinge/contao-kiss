@@ -133,6 +133,17 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['gridGap'] = [
     ],
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['gridCrossAlignment'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w50',
+        'chosen' => true,
+        'includeBlankOption' => true,
+    ],
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['backgroundColor'] = [
     'exclude' => true,
     'inputType' => 'select',
@@ -322,6 +333,6 @@ PaletteManipulator::create()
 
 PaletteManipulator::create()
     ->addLegend('grid_legend', ['layout_legend', 'template_legend', 'protected_legend'], PaletteManipulator::POSITION_BEFORE)
-    ->addField(['gridColumns', 'gridGap'], 'grid_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField(['gridColumns', 'gridGap', 'gridCrossAlignment'], 'grid_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('element_group', 'tl_content')
 ;

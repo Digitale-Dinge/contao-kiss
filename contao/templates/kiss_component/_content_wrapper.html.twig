@@ -8,8 +8,9 @@
             {% import '@Contao/kiss_component/grid/_macro.html.twig' as grid %}
             {% set cols_key = styles.column(cols)  %}
             {% set gap = styles.gap(gridGap|default(data.gridGap|default)) %}
+            {% set cross_alignment = styles.crossAlignment(gridCrossAlignment|default(data.gridCrossAlignment|default)) %}
             {% set list_wrapper_attributes = attrs(list_wrapper_attributes|default)
-                .addClass(['grid', grid.get_cols_class(cols_key), gap])
+                .addClass(['grid', grid.get_cols_class(cols_key), gap, cross_alignment])
             %}
         {% endif %}
         <{{ list_tag_name }}{{ attrs(list_wrapper_attributes|default).addClass('list') }}>

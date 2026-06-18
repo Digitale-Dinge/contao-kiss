@@ -74,6 +74,12 @@ final class StyleOptionsListener
         return $this->getTranslatedOptions(Layout\Gap::class);
     }
 
+    #[AsCallback('tl_content', 'fields.gridCrossAlignment.options')]
+    public function addLayoutCrossAlignmentOptions(): array
+    {
+        return $this->getTranslatedOptions(Layout\CrossAlignment::class);
+    }
+
     #[AsCallback('tl_content', 'fields.contentWidth.options')]
     #[AsCallback('tl_article', 'fields.contentWidth.options')]
     public function addLayoutContainerOptions(): array
