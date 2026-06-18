@@ -46,6 +46,12 @@ style_options:
             ten:                    Element width 5/6 (>=Tablet)
             eleven:                 Element width 11/12 (>=Tablet)
 
+        alignment:
+            y:
+                start:              Start
+                center:             Center
+                end:                End
+
     background_color:
         - Background color
         - Choose the background color for this element.
@@ -120,7 +126,7 @@ style_options:
     heading:                        Heading
 
     position:
-        left:                       Links
-        center:                     Mittig
-        right:                      Rechts
-        justify:                    Blocksatz
+        left:                       Left
+        center:                     Center
+        right:                      Right
+        justify:                    Justify

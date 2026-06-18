@@ -78,6 +78,10 @@ tl_content:
         - Abstand
         - Legt den Abstand zwischen den einzelnen Elementen fest.
 
+    gridCrossAlignment:
+        - Vertikale Ausrichtung
+        - Legt die vertikale Ausrichtung der Elemente fest.
+
     backgroundColor:
         - Hintergrundfarbe
         - Wählen Sie die Hintergrundfarbe für das Inhaltselement.

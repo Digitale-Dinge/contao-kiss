@@ -78,6 +78,10 @@ tl_content:
         - Gap
         - Defines the spacing between each item.
 
+    gridCrossAlignment:
+        - Vertical Alignment
+        - Defines the vertical Alignment of the elements.
+
     backgroundColor:
         - Background color
         - Choose the background color for the content element.

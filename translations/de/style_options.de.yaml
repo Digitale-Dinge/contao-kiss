@@ -46,6 +46,12 @@ style_options:
             ten:                    Elementbreite 5/6 (>=Tablet)
             eleven:                 Elementbreite 11/12 (>=Tablet)
 
+        alignment:
+            y:
+                start:              Anfang
+                center:             Zentriert
+                end:                Ende
+
     background_color:
         - Hintergrundfarbe
         - Wählen Sie die Hintergrundfarbe für dieses Element
@@ -120,7 +126,7 @@ style_options:
     heading:                        Überschrift
 
     position:
-        left:                       Left
-        center:                     Center
-        right:                      Right
-        justify:                    Justify
+        left:                       Links
+        center:                     Mittig
+        right:                      Rechts
+        justify:                    Blocksatz
