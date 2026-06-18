@@ -82,7 +82,7 @@ tl_content:
         - Column ratio
         - Distributes the columns unevenly (only for 2 or 3 columns). Drag the slider in 10% steps.
     gridRatioEven:             Even – drag to adjust
-    gridRatioDisabled:         The columns are spaced evenly across the width.
+    gridRatioDisabled:         Only available for 2 or 3 columns
 
     backgroundColor:
         - Background color
