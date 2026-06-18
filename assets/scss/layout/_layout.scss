@@ -104,23 +104,6 @@
         @apply grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-12 gap-2;
     }
 
-    // ============================================
-    // CUSTOM COLUMN RATIOS (element groups, 2-3 cols)
-    // ============================================
-    // Editor sets an uneven ratio (e.g. 30/70) in the backend ruler. The value
-    // is rendered as an inline custom property, e.g. style="--grid-cols: 3fr 7fr".
-    // Mobile stacks to a single column; the ratio kicks in from md upwards.
-    // Gap is still controlled by the separate gridGap utility class.
-    .grid-ratio {
-        @apply grid grid-cols-1;
-    }
-
-    @media (width >= 768px) {
-        .grid-ratio {
-            grid-template-columns: var(--grid-cols);
-        }
-    }
-
     .content-text .media {
         @apply overflow-hidden;
     }

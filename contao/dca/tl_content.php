@@ -133,18 +133,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['gridGap'] = [
     ],
 ];
 
-// Column ratio for element groups: only used for 2 or 3 columns, stored as
-// "fr" integers separated by "-" (e.g. "3-7", "2-3-5"). Empty = even columns.
-// The reactive ruler widget (kissGridRatio) reads the gridColumns select live.
-$GLOBALS['TL_DCA']['tl_content']['fields']['gridRatio'] = [
-    'exclude' => true,
-    'inputType' => 'kissGridRatio',
-    'targetColumn' => 'kiss_styles',
-    'eval' => [
-        'tl_class' => 'w50 clr',
-    ],
-];
-
 $GLOBALS['TL_DCA']['tl_content']['fields']['backgroundColor'] = [
     'exclude' => true,
     'inputType' => 'select',
@@ -334,6 +322,6 @@ PaletteManipulator::create()
 
 PaletteManipulator::create()
     ->addLegend('grid_legend', ['layout_legend', 'template_legend', 'protected_legend'], PaletteManipulator::POSITION_BEFORE)
-    ->addField(['gridColumns', 'gridGap', 'gridRatio'], 'grid_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField(['gridColumns', 'gridGap'], 'grid_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('element_group', 'tl_content')
 ;
