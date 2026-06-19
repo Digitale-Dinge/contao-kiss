@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace DigitaleDinge\ContaoKiss\InsertTag;
 
 use Contao\CoreBundle\DependencyInjection\Attribute\AsBlockInsertTag;
+use Contao\CoreBundle\InsertTag\InsertTagResult;
+use Contao\CoreBundle\InsertTag\OutputType;
 use Contao\CoreBundle\InsertTag\ParsedSequence;
 use Contao\CoreBundle\InsertTag\ResolvedInsertTag;
 use Contao\CoreBundle\InsertTag\Resolver\BlockInsertTagResolverNestedResolvedInterface;
@@ -41,6 +43,7 @@ final class ColorBlockInsertTag implements BlockInsertTagResolverNestedResolvedI
             'content' => $wrappedContent->serialize(),
         ]);
 
-        return new ParsedSequence([$html]);
+        // Return the HTML as an explicit "html" result. The headline renders via
+        return new ParsedSequence([new InsertTagResult($html, OutputType::html)]);
     }
 }
