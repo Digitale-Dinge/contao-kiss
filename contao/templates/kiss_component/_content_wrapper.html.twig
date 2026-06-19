@@ -4,7 +4,9 @@
 
     {% if list_mode %}
         {% set cols = gridColumns|default(data.gridColumns|default) %}
-        {% if cols is not empty %}
+        {# When the grid-ratio widget is active it provides its own .grid-ratio
+           grid; skip the column grid here to avoid nesting two grids. #}
+        {% if cols is not empty and not data.gridRatioActive|default %}
             {% import '@Contao/kiss_component/grid/_macro.html.twig' as grid %}
             {% set cols_key = styles.column(cols)  %}
             {% set gap = styles.gap(gridGap|default(data.gridGap|default)) %}
