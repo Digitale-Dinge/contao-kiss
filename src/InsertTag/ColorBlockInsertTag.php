@@ -17,9 +17,15 @@ use Twig\Environment;
  *
  * Usage in the back end (e.g. inside a headline):
  *     {{color::primary}}UNSERE MARKE.{{endcolor}}{{br}}KLAR DEFINIERT.
+ *     {{color::primary::accent}}UNSERE MARKE.{{endcolor}}   (text + background)
+ *     {{color::::accent}}UNSERE MARKE.{{endcolor}}          (background only)
+ *
+ * Parameters:
+ *     0 = text colour key (e.g. "primary")        -> text-<key>
+ *     1 = background colour key (optional)         -> bg-<key>
  *
  * Produces:
- *     <span class="text-primary">UNSERE MARKE.</span><br>KLAR DEFINIERT.
+ *     <span class="text-primary bg-accent">UNSERE MARKE.</span>
  *
  */
 #[AsBlockInsertTag('color', endTag: 'endcolor')]
@@ -32,14 +38,16 @@ final class ColorBlockInsertTag implements BlockInsertTagResolverNestedResolvedI
     public function __invoke(ResolvedInsertTag $insertTag, ParsedSequence $wrappedContent): ParsedSequence
     {
         $value = (string) $insertTag->getParameters()->get(0);
+        $bg = (string) $insertTag->getParameters()->get(1);
 
-        // No colour given -> output the wrapped content unchanged.
-        if ('' === $value) {
+        // Neither a text colour nor a background given -> output unchanged.
+        if ('' === $value && '' === $bg) {
             return $wrappedContent;
         }
 
-        $html = $this->twig->render('@Contao/component/_color_text.html.twig', [
+        $html = $this->twig->render('@Contao/kiss_component/_color_text.html.twig', [
             'value' => $value,
+            'bg' => $bg,
             'content' => $wrappedContent->serialize(),
         ]);
 

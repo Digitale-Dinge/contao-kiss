@@ -1,0 +1,18 @@
+{#-
+    Renders the {{color::TEXT::BG}}…{{endcolor}} block insert tag.
+
+    - "value"   = text colour key (param 0, e.g. "primary")  -> text-<key>
+    - "bg"      = background key   (param 1, optional)        -> bg-<key>
+    - "content" = the already-resolved inner HTML (output raw)
+
+    Known keys map to utility classes; unknown keys fall back to
+    "text-<key>" / "bg-<key>". Extend the maps (or change the markup) per
+    project as needed. Either parameter may be empty (e.g. background only:
+    {{color::::primary}}…{{endcolor}}).
+-#}
+{%- set text_map = {primary: 'text-primary', secondary: 'text-secondary', accent: 'text-accent'} -%}
+{%- set bg_map   = {primary: 'bg-primary', secondary: 'bg-secondary', accent: 'bg-accent'} -%}
+{%- set classes = [] -%}
+{%- if value -%}{%- set classes = classes|merge([text_map[value]|default('text-' ~ value)]) -%}{%- endif -%}
+{%- if bg -%}{%- set classes = classes|merge([bg_map[bg]|default('bg-' ~ bg)]) -%}{%- endif -%}
+{{- '<span class="'|raw -}}{{- classes|join(' ') -}}{{- '">'|raw -}}{{- content|raw -}}{{- '</span>'|raw -}}
