@@ -133,6 +133,20 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['gridGap'] = [
     ],
 ];
 
+/* How many slides the content slider shows at once (responsive presets, see the swiper template) */
+$GLOBALS['TL_DCA']['tl_content']['fields']['slidesPerView'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'options' => ['2', '3', '4', 'auto'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['slidesPerView_options'],
+    'eval' => [
+        'tl_class' => 'w50',
+        'chosen' => true,
+        'includeBlankOption' => true,
+    ],
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['gridCrossAlignment'] = [
     'exclude' => true,
     'inputType' => 'select',
@@ -335,4 +349,10 @@ PaletteManipulator::create()
     ->addLegend('grid_legend', ['layout_legend', 'template_legend', 'protected_legend'], PaletteManipulator::POSITION_BEFORE)
     ->addField(['gridColumns', 'gridGap', 'gridCrossAlignment'], 'grid_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('element_group', 'tl_content')
+;
+
+/* Expose the "cards per row" preset on the content slider */
+PaletteManipulator::create()
+    ->addField('slidesPerView', 'sliderContinuous', PaletteManipulator::POSITION_AFTER)
+    ->applyToPalette('swiper', 'tl_content')
 ;

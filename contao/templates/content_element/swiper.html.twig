@@ -1,5 +1,35 @@
 {% extends '@Contao/content_element/swiper.html.twig' %}
 
+{#
+    "Cards per row" (data.slidesPerView, set in the back end): turns the slider
+    from one-slide-at-a-time into a multi-card slider. Each preset maps to a
+    baked-in responsive set (mobile peeks the next card, tablet steps down).
+    "auto" lets every slide keep its own width. Empty = core default (1 / full width).
+#}
+{% set _slider_presets = {
+    '2': { base: 1.1, md: 2, lg: 2 },
+    '3': { base: 1.1, md: 2, lg: 3 },
+    '4': { base: 1.2, md: 3, lg: 4 },
+} %}
+{% set _spv = data.slidesPerView|default %}
+
+{% if _spv == 'auto' %}
+    {% set slider_settings = slider_settings|default({})|merge({
+        slidesPerView: 'auto',
+        spaceBetween: 24,
+    }) %}
+{% elseif _slider_presets[_spv] is defined %}
+    {% set _p = _slider_presets[_spv] %}
+    {% set slider_settings = slider_settings|default({})|merge({
+        slidesPerView: _p.base,
+        spaceBetween: 24,
+        breakpoints: {
+            768: { slidesPerView: _p.md },
+            1024: { slidesPerView: _p.lg },
+        },
+    }) %}
+{% endif %}
+
 {# Hide the swiper buttons in the back end #}
 {% block controls %}
     {% if not as_editor_view %}

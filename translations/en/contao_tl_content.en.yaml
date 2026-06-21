@@ -82,6 +82,15 @@ tl_content:
         - Vertical Alignment
         - Defines the vertical Alignment of the elements.
 
+    slidesPerView:
+        - Cards per row
+        - How many cards are shown side by side. Mobile and tablet show fewer automatically.
+    slidesPerView_options:
+        '2': 2 cards
+        '3': 3 cards
+        '4': 4 cards
+        auto: Auto (each card sets its own width)
+
     backgroundColor:
         - Background color
         - Choose the background color for the content element.

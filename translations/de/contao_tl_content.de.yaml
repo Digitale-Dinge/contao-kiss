@@ -82,6 +82,15 @@ tl_content:
         - Vertikale Ausrichtung
         - Legt die vertikale Ausrichtung der Elemente fest.
 
+    slidesPerView:
+        - Karten pro Reihe
+        - Wie viele Karten nebeneinander angezeigt werden. Auf Smartphone und Tablet automatisch weniger.
+    slidesPerView_options:
+        '2': 2 Karten
+        '3': 3 Karten
+        '4': 4 Karten
+        auto: Automatisch (Karte bestimmt ihre Breite)
+
     backgroundColor:
         - Hintergrundfarbe
         - Wählen Sie die Hintergrundfarbe für das Inhaltselement.
