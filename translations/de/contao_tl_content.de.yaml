@@ -84,12 +84,7 @@ tl_content:
 
     slidesPerView:
         - Karten pro Reihe
-        - Wie viele Karten nebeneinander angezeigt werden. Auf Smartphone und Tablet automatisch weniger.
-    slidesPerView_options:
-        '2': 2 Karten
-        '3': 3 Karten
-        '4': 4 Karten
-        auto: Automatisch (Karte bestimmt ihre Breite)
+        - Anzahl der Karten nebeneinander auf dem Desktop (z. B. 3). Tablet und Smartphone reduzieren automatisch. Leer lassen für eine Karte über die volle Breite.
 
     backgroundColor:
         - Hintergrundfarbe

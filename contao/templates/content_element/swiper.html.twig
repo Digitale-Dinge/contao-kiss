@@ -1,36 +1,32 @@
 {% extends '@Contao/content_element/swiper.html.twig' %}
 
-{#
-    "Cards per row" (data.slidesPerView, set in the back end): turns the slider
-    from one-slide-at-a-time into a multi-card slider. Each preset maps to a
-    baked-in responsive set (mobile peeks the next card, tablet steps down).
-    "auto" lets every slide keep its own width. Empty = core default (1 / full width).
-#}
-{% set _slider_presets = {
-    '2': { base: 1.1, md: 2, lg: 2 },
-    '3': { base: 1.1, md: 2, lg: 3 },
-    '4': { base: 1.2, md: 3, lg: 4 },
-} %}
-{% set _spv = data.slidesPerView|default %}
+{# Multi-card slider: "data.slidesPerView" is the desktop card count (tablet shows
+   2, mobile 1). Empty or 1 keeps the default single full-width slider.
 
-{% if _spv == 'auto' %}
-    {% set slider_settings = slider_settings|default({})|merge({
-        slidesPerView: 'auto',
-        spaceBetween: 24,
-    }) %}
-{% elseif _slider_presets[_spv] is defined %}
-    {% set _p = _slider_presets[_spv] %}
-    {% set slider_settings = slider_settings|default({})|merge({
-        slidesPerView: _p.base,
-        spaceBetween: 24,
-        breakpoints: {
-            768: { slidesPerView: _p.md },
-            1024: { slidesPerView: _p.lg },
-        },
-    }) %}
-{% endif %}
+   The slider is wrapped in .swiper-bleed: the track sits inset from the viewport,
+   neighbouring cards peek past it, and the frame clips that peek at the screen
+   edge (see _swiper.scss). This needs no Swiper offsets, so it works the same with
+   or without continuous/loop. #}
+{% block content %}
+    {% set columns = data.slidesPerView|default(0) + 0 %}
 
-{# Hide the swiper buttons in the back end #}
+    {% if columns >= 2 %}
+        {% set slider_settings = slider_settings|default({})|merge({
+            slidesPerView: 1,
+            spaceBetween: 24,
+            pagination: false,
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: min(columns, 6) },
+            },
+        }) %}
+        <div class="swiper-bleed">{{ parent() }}</div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{# Hide the navigation buttons in the back-end editor view. #}
 {% block controls %}
     {% if not as_editor_view %}
         {{ parent() }}

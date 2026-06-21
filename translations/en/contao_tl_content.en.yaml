@@ -84,12 +84,7 @@ tl_content:
 
     slidesPerView:
         - Cards per row
-        - How many cards are shown side by side. Mobile and tablet show fewer automatically.
-    slidesPerView_options:
-        '2': 2 cards
-        '3': 3 cards
-        '4': 4 cards
-        auto: Auto (each card sets its own width)
+        - Number of cards side by side on desktop (e.g. 3). Tablet and mobile step down automatically. Leave empty for one full-width slide.
 
     backgroundColor:
         - Background color

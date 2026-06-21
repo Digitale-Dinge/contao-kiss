@@ -1,0 +1,28 @@
+/**
+ * Multi-card content slider (Contao "swiper" element).
+ *
+ * The track is inset from the viewport and shows its real overflow, so the
+ * neighbouring cards peek past it. The .swiper-bleed frame clips that peek at the
+ * screen edge — so cards never look glued to the edge and never look cut off,
+ * with or without continuous/loop (no Swiper slide offsets involved).
+ */
+.swiper-bleed {
+    overflow: hidden;
+}
+
+.swiper-bleed .swiper {
+    overflow: visible;
+    margin-inline: 1rem;
+}
+
+@media (width >= 768px) {
+    .swiper-bleed .swiper {
+        margin-inline: 1.5rem;
+    }
+}
+
+@media (width >= 1024px) {
+    .swiper-bleed .swiper {
+        margin-inline: 2rem;
+    }
+}

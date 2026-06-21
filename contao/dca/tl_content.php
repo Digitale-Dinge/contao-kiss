@@ -133,17 +133,16 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['gridGap'] = [
     ],
 ];
 
-/* How many slides the content slider shows at once (responsive presets, see the swiper template) */
+/* Cards per row on the content slider (desktop count; smaller screens are derived in the swiper template) */
 $GLOBALS['TL_DCA']['tl_content']['fields']['slidesPerView'] = [
     'exclude' => true,
-    'inputType' => 'select',
+    'inputType' => 'text',
     'targetColumn' => 'kiss_styles',
-    'options' => ['2', '3', '4', 'auto'],
-    'reference' => &$GLOBALS['TL_LANG']['tl_content']['slidesPerView_options'],
     'eval' => [
         'tl_class' => 'w50',
-        'chosen' => true,
-        'includeBlankOption' => true,
+        'rgxp' => 'natural',
+        'maximum' => 6,
+        'placeholder' => '1',
     ],
 ];
 
