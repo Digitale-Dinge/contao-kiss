@@ -1,0 +1,5 @@
+{% set prefix = prefix ?? 'text-' %}
+{% set span_attributes = attrs()
+    .addClass(prefix ~ value, value)
+%}
+<span{{ span_attributes }}>{{- content|sanitize_html('contao')|insert_tag_raw -}}</span>
