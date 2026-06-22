@@ -4,11 +4,12 @@
 
     {% if list_mode %}
         {% if data.gridRatioActive|default %}
-            {# The grid is the .grid-ratio div one level down, so pass Gap and
-               Cross-alignment to it as inherited custom properties. #}
             {% set gap = styles.gap(gridGap|default(data.gridGap|default)) %}
             {% set cross_alignment = styles.crossAlignment(gridCrossAlignment|default(data.gridCrossAlignment|default)) %}
-            {% set list_wrapper_attributes = attrs(list_wrapper_attributes|default) %}
+            {% set list_wrapper_attributes = attrs(list_wrapper_attributes|default)
+                .addClass('grid-ratio')
+                .addStyle('--grid-cols: ' ~ data.gridRatio|default)
+            %}
             {% if gap %}
                 {% set list_wrapper_attributes = list_wrapper_attributes.addStyle('--grid-ratio-gap: calc(var(--spacing) * ' ~ (gap|split('-')|last) ~ ')') %}
             {% endif %}
