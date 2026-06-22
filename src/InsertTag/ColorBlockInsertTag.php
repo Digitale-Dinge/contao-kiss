@@ -12,22 +12,6 @@ use Contao\CoreBundle\InsertTag\ResolvedInsertTag;
 use Contao\CoreBundle\InsertTag\Resolver\BlockInsertTagResolverNestedResolvedInterface;
 use Twig\Environment;
 
-/**
- * Colour a span of text via a block insert tag.
- *
- * Usage in the back end (e.g. inside a headline):
- *     {{color::primary}}UNSERE MARKE.{{endcolor}}{{br}}KLAR DEFINIERT.
- *     {{color::primary::accent}}UNSERE MARKE.{{endcolor}}   (text + background)
- *     {{color::::accent}}UNSERE MARKE.{{endcolor}}          (background only)
- *
- * Parameters:
- *     0 = text colour key (e.g. "primary")        -> text-<key>
- *     1 = background colour key (optional)         -> bg-<key>
- *
- * Produces:
- *     <span class="text-primary bg-accent">UNSERE MARKE.</span>
- *
- */
 #[AsBlockInsertTag('color', endTag: 'endcolor')]
 final class ColorBlockInsertTag implements BlockInsertTagResolverNestedResolvedInterface
 {
@@ -37,18 +21,19 @@ final class ColorBlockInsertTag implements BlockInsertTagResolverNestedResolvedI
 
     public function __invoke(ResolvedInsertTag $insertTag, ParsedSequence $wrappedContent): ParsedSequence
     {
-        $value = (string) $insertTag->getParameters()->get(0);
-        $bg = (string) $insertTag->getParameters()->get(1);
+        $value = $insertTag->getParameters()->get(0);
 
-        // Neither a text colour nor a background given -> output unchanged.
-        if ('' === $value && '' === $bg) {
+        if (null === $value) {
             return $wrappedContent;
         }
 
-        $html = $this->twig->render('@Contao/kiss_component/_color_text.html.twig', [
+        $prefix = $insertTag->getParameters()->get(1);
+        $prefix = $prefix ? $prefix . '-' : null;
+
+        $html = $this->twig->render('@Contao/kiss_component/_color_insert_tag.html.twig', [
             'value' => $value,
-            'bg' => $bg,
-            'content' => $wrappedContent->serialize(),
+            'prefix' => $prefix,
+            'content' => $wrappedContent,
         ]);
 
         // Return the HTML as an explicit "html" result. The headline renders via
