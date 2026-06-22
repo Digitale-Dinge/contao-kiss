@@ -33,7 +33,7 @@ final class ColorBlockInsertTag implements BlockInsertTagResolverNestedResolvedI
         $html = $this->twig->render('@Contao/kiss_component/_color_insert_tag.html.twig', [
             'value' => $value,
             'prefix' => $prefix,
-            'content' => $wrappedContent,
+            'content' => $wrappedContent->serialize(),
         ]);
 
         // Return the HTML as an explicit "html" result. The headline renders via
