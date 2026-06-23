@@ -49,10 +49,15 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
     /**
      * @throws Exception
      */
-    public function getGridAttributes(int $id, string $table): HtmlAttributes
+    public function getGridAttributes(int|null $id, string $table): HtmlAttributes
     {
         $attributes = new HtmlAttributes();
-        $styles = $this->getKissStyles($id, $table);
+
+        if (null === $id) {
+            return $attributes;
+        }
+
+        $styles = $this->getParentKissStyles($id, $table);
 
         $hasGridRatio = !empty($styles['gridRatioActive']) && !empty($styles['gridRatio']);
 
@@ -87,13 +92,21 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
      */
     private function getKissStyles(int $id, string $table): array
     {
-        return $this->cache[$table][$id] ??= $this->loadKissStyles($id, $table);
+        return $this->cache[$table]['self'][$id] ??= $this->loadKissStyles($id, $table);
     }
 
     /**
      * @throws Exception
      */
-    private function loadKissStyles(int $id, string $table): array
+    private function getParentKissStyles(int $id, string $table): array
+    {
+        return $this->cache[$table]['parent'][$id] ??= $this->loadKissStyles($id, $table, true);
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function loadKissStyles(int $id, string $table, bool $fromParent = false): array
     {
         $schemaManager = $this->connection->createSchemaManager();
 
@@ -103,7 +116,16 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
             return [];
         }
 
-        $data = $this->connection->fetchAssociative('SELECT kiss_styles, jsonData FROM ' . $table .  ' WHERE id = :id', ['id' => $id]);
+        if ($fromParent) {
+            $statement = 'SELECT kiss_styles, jsonData FROM ' . $table
+                . ' WHERE id = (SELECT pid FROM ' . $table . ' WHERE id = :id AND ptable = :table)';
+            $parameters = ['id' => $id, 'table' => $table];
+        } else {
+            $statement = 'SELECT kiss_styles, jsonData FROM ' . $table . ' WHERE id = :id';
+            $parameters = ['id' => $id];
+        }
+
+        $data = $this->connection->fetchAssociative($statement, $parameters);
 
         if (false === $data || null === $data['kiss_styles']) {
             return [];
