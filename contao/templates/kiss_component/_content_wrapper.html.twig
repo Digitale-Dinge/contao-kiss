@@ -1,19 +1,23 @@
+{% use '@Contao/grid/grid_ratio_attributes.html.twig' %}
+
 {% block content_wrapper %}
-    {% set list_mode = list|default is iterable and list|length or data.gridColumns|default %}
+    {% set grid_ratio_active = data.gridRatioActive|default %}
+    {% set list_mode = list|default is iterable and list|length or data.gridColumns|default or grid_ratio_active %}
     {% set list_tag_name = list_tag_name|default('div') %}
 
     {% if list_mode %}
+        {% from '@Contao/kiss_component/grid/_macro.html.twig' import cols_style %}
         {% set cols = gridColumns|default(data.gridColumns|default) %}
-        {% if cols is not empty %}
-            {% from '@Contao/kiss_component/grid/_macro.html.twig' import cols_style %}
 
-            {% set gap = styles.gap(gridGap|default(data.gridGap|default)) %}
-            {% set cross_alignment = styles.crossAlignment(gridCrossAlignment|default(data.gridCrossAlignment|default)) %}
+        {% set gap = styles.gap(gridGap|default(data.gridGap|default)) %}
+        {% set cross_alignment = styles.crossAlignment(gridCrossAlignment|default(data.gridCrossAlignment|default)) %}
 
-            {% set list_wrapper_attributes = attrs(list_wrapper_attributes|default)
-                .addClass(['grid', cols_style(cols), gap, cross_alignment])
-            %}
-        {% endif %}
+        {% set list_wrapper_attributes = attrs(list_wrapper_attributes|default)
+            .addClass(['grid', gap, cross_alignment])
+            .addClass(cols_style(cols), cols is not empty and not grid_ratio_active)
+            .mergeWith(block('grid_ratio_attributes'), grid_ratio_active)
+        %}
+
         <{{ list_tag_name }}{{ attrs(list_wrapper_attributes|default).addClass('list') }}>
     {% endif %}
     {% block content %}{% endblock %}
