@@ -2,7 +2,7 @@
 .kiss_grid {
     /* Direct descendant within parent-view + preview grid for element groups */
     > ul,
-    .cte_preview > div > .grid {
+    .cte_preview > div > .grid:not(.grid-ratio) {
         display: grid;
         grid-template-columns: repeat(var(--be_kiss-cols, 1), minmax(0, 1fr));
         gap: 18px var(--main-panel-gap, 10px);

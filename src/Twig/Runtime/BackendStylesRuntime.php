@@ -54,7 +54,7 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
         $attributes = new HtmlAttributes();
         $styles = $this->getKissStyles($id, $table);
 
-        $hasGridRatio = isset($styles['gridRatioActive'], $styles['gridRatio']);
+        $hasGridRatio = !empty($styles['gridRatioActive']) && !empty($styles['gridRatio']);
 
         if (empty($styles['gridColumns']) && !$hasGridRatio) {
             return $attributes;
