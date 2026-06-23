@@ -58,9 +58,9 @@ style_options:
 
     color:
         transparent:                Transparent
-        base_100:                   Hintergrund (stark)
-        base_200:                   Hintergrund (mittel)
-        base_300:                   Hintergrund (leicht)
+        base_100:                   Hintergrund (100)
+        base_200:                   Hintergrund (200)
+        base_300:                   Hintergrund (300)
         primary:                    Primär
         secondary:                  Sekundär
         accent:                     Akzent
