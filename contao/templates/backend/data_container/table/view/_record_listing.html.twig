@@ -17,9 +17,6 @@
     {% endfor %}
 
     {% if show_grid_classes %}
-        {% set listing_attributes = attrs()
-            .addClass(getGridClasses(pid, table))
-            .mergeWith(listing_attributes)
-        %}
+        {% set listing_attributes = attrs(getGridAttributes(pid, table)).mergeWith(listing_attributes) %}
     {% endif %}
 {% endif %}

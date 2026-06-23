@@ -48,6 +48,14 @@
 }
 
 @media (width >= 48rem) {
+    /* Add the grid ratio classes */
+    .kiss_grid-ratio > ul,
+    .cte_preview > div > .grid-ratio {
+        display: grid;
+        grid-template-columns: var(--grid-cols, 1fr);
+        gap: 18px var(--main-panel-gap, 10px);
+    }
+
     .kiss_cols_3,
     .kiss_cols_4 {
         --be_kiss-cols: 3;
