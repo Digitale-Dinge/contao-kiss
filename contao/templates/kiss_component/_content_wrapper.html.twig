@@ -1,32 +1,18 @@
 {% block content_wrapper %}
-    {% set list_mode = list|default is iterable and list|length or data.gridColumns|default or data.gridRatioActive|default %}
+    {% set list_mode = list|default is iterable and list|length or data.gridColumns|default %}
     {% set list_tag_name = list_tag_name|default('div') %}
 
     {% if list_mode %}
-        {% if data.gridRatioActive|default %}
+        {% set cols = gridColumns|default(data.gridColumns|default) %}
+        {% if cols is not empty %}
+            {% from '@Contao/kiss_component/grid/_macro.html.twig' import cols_style %}
+
             {% set gap = styles.gap(gridGap|default(data.gridGap|default)) %}
             {% set cross_alignment = styles.crossAlignment(gridCrossAlignment|default(data.gridCrossAlignment|default)) %}
+
             {% set list_wrapper_attributes = attrs(list_wrapper_attributes|default)
-                .addClass('grid-ratio')
-                .addStyle('--grid-cols: ' ~ data.gridRatio|default)
+                .addClass(['grid', cols_style(cols), gap, cross_alignment])
             %}
-            {% if gap %}
-                {% set list_wrapper_attributes = list_wrapper_attributes.addStyle('--grid-ratio-gap: calc(var(--spacing) * ' ~ (gap|split('-')|last) ~ ')') %}
-            {% endif %}
-            {% if cross_alignment %}
-                {% set list_wrapper_attributes = list_wrapper_attributes.addStyle('--grid-ratio-align: ' ~ (cross_alignment|split('-')|last)) %}
-            {% endif %}
-        {% else %}
-            {% set cols = gridColumns|default(data.gridColumns|default) %}
-            {% if cols is not empty %}
-                {% import '@Contao/kiss_component/grid/_macro.html.twig' as grid %}
-                {% set cols_key = styles.column(cols)  %}
-                {% set gap = styles.gap(gridGap|default(data.gridGap|default)) %}
-                {% set cross_alignment = styles.crossAlignment(gridCrossAlignment|default(data.gridCrossAlignment|default)) %}
-                {% set list_wrapper_attributes = attrs(list_wrapper_attributes|default)
-                    .addClass(['grid', grid.get_cols_class(cols_key), gap, cross_alignment])
-                %}
-            {% endif %}
         {% endif %}
         <{{ list_tag_name }}{{ attrs(list_wrapper_attributes|default).addClass('list') }}>
     {% endif %}
