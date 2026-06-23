@@ -4,7 +4,7 @@
             .set('href', url|default|insert_tag|encode_email)
             .set('target', '_blank', target|default)
             .set('rel', 'noreferrer noopener')
-            .addClass('btn', ctaType|default !== 'text')
+            .addClass('btn')
             .addClass('btn-' ~ styles.size(ctaSize), ctaSize|default)
             .addClass('btn-' ~ styles.color(ctaColor), ctaColor|default)
             .addClass(styles.cta_type(ctaType|default))

@@ -152,13 +152,16 @@
     }
 
     .btn-text {
-        @apply cursor-pointer;
         --btn-bg:           transparent;
         --btn-border:       transparent;
         --btn-border-hover: var(--btn-ring);
         --btn-color:        var(--btn-ring);
         --btn-color-hover:  var(--btn-ring);
         --btn-bg-hover:     color-mix(in oklch, var(--btn-ring) 10%, transparent);
+
+        &:not(&:hover, &:focus-visible) {
+            --btn-px: 0;
+        }
     }
 
     // Shadows
