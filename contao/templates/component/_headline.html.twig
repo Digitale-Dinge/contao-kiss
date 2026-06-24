@@ -9,6 +9,12 @@
         {% set topline = data.topline|default %}
     {% endif %}
 
+    {% set headline_text = is_from_iterable ? item.headline.value : headline.text|default(headline) %}
+
+    {% if headline_text and topline|default %}
+        <hgroup>
+    {% endif %}
+
     {% if topline|default %}
         <p{{ attrs(topline_attributes|default).addClass('topline') }}>{{ topline|insert_tag }}</p>
     {% endif %}
@@ -18,9 +24,13 @@
     {% set attributes = headline_source.attributes|default %}
 
     {% set headline = {
-        text: is_from_iterable ? item.headline.value : headline.text|default(headline),
+        text: headline_text,
         tag_name: is_from_iterable ? item.headline.unit|default : headline.tag_name|default,
         attributes: attrs(attributes).addClass(['headline', styles.font_size(appearance)|default(styles.heading(appearance))]).mergeWith(headline_classes|default)
     } %}
     {{ parent() }}
+
+    {% if headline_text and topline|default %}
+        </hgroup>
+    {% endif %}
 {% endblock %}
