@@ -11,7 +11,7 @@ enum Gap: string implements TranslatableLabelInterface
 {
     case x_small = 'gap-2';
     case small = 'gap-4';
-    case medium = 'gap-8';
+    case medium = 'gap-6';
     case large = 'gap-10';
     case x_large = 'gap-12';
     case xx_large = 'gap-20';
