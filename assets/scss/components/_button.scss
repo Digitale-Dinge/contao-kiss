@@ -164,6 +164,15 @@
         }
     }
 
+    .btn-link {
+        color: var(--btn-bg);
+        font-size: var(--btn-text);
+
+        &:hover {
+            color: var(--btn-hover);
+        }
+    }
+
     // Shadows
     .btn-shadow-none {
         @apply shadow-none;
