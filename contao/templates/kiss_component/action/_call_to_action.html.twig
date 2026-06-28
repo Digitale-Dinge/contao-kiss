@@ -21,6 +21,8 @@
                     ctaColor: action.ctaColor|default,
                     ctaSize: action.ctaSize|default,
                     ctaShape: action.ctaShape|default,
+                    loopIndex: loop.index,
+                    loopLength: actions|length,
                 } %}
                     {{ block('action') }}
                 {% endwith %}
