@@ -21,84 +21,60 @@
         @apply flex! flex-wrap gap-6 items-center justify-between;
 
         p:first-child {
-            @apply m-0!
+            @apply m-0!;
         }
 
-        // Hide screen reader paragraph from layout
         > .sr-only {
             @apply sr-only;
         }
 
-        // =========================================
-        // ALL PAGINATION ITEMS (button-like styles)
-        // Contao: ul > li > a
-        // =========================================
+        // All pagination items
         li > a,
         li > button,
         li > span:not(.sr-only) {
-            // Base button styles
             @apply inline-flex items-center justify-center gap-2;
-            @apply px-3 py-2;
-            @apply font-medium text-base leading-tight;
+            @apply font-medium leading-tight;
             @apply transition-all duration-200;
             @apply cursor-pointer select-none;
             @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
             @apply no-underline;
+            @apply bg-base-200 text-base-content;
+            @apply hover:bg-base-300;
+            @apply focus-visible:ring-base-content/20;
+            @apply h-10 min-w-10 px-3 text-base;
 
-            // Square proportions for page numbers
-            @apply h-10 min-w-10;
-
-            // Theme variables
-            border-width: var(--border);
+            border-width: var(--border-width);
             border-style: solid;
             border-color: transparent;
             border-radius: var(--radius-field);
             box-shadow: var(--shadow);
 
-            // Default button colors (neutral)
-            @apply bg-base-200 text-base-content;
-            @apply hover:bg-base-300;
-            @apply focus-visible:ring-base-content/20;
-
-            // Disabled state
             &[disabled],
             &.disabled {
                 @apply opacity-50 cursor-not-allowed pointer-events-none;
             }
         }
 
-        // =========================================
-        // ACTIVE PAGE (primary button styles)
-        // Contao: <strong class="active">
-        // =========================================
+        // Active page
         li > strong,
         li > a[aria-current="page"],
         li > a.active {
-            // Base button styles
             @apply inline-flex items-center justify-center gap-2;
-            @apply px-3 py-2;
-            @apply font-medium text-base leading-tight;
-            @apply h-10 min-w-10;
+            @apply font-medium leading-tight cursor-default;
+            @apply bg-primary-solid text-primary-on-solid border-primary-border;
+            @apply h-10 min-w-10 px-3 text-base;
 
-            // Theme variables
-            border-width: var(--border);
+            border-width: var(--border-width);
             border-style: solid;
             border-radius: var(--radius-field);
             box-shadow: var(--shadow);
-
-            // Primary button colors
-            @apply bg-primary text-primary-content border-primary;
-            @apply cursor-default;
         }
 
         ul {
             @apply list-none flex flex-wrap items-center gap-1 sm:gap-2;
         }
 
-        // =========================================
-        // SIZE VARIANTS
-        // =========================================
-
+        // Sizes
         &-xs {
             @apply gap-0.5;
 
@@ -113,7 +89,10 @@
         &-sm {
             @apply gap-0.5;
 
-            li > a, li > button, li > span:not(.sr-only), li > strong {
+            li > a,
+            li > button,
+            li > span:not(.sr-only),
+            li > strong {
                 @apply h-8 min-w-8 px-2 text-sm;
             }
         }
@@ -121,7 +100,10 @@
         &-lg {
             @apply gap-1.5;
 
-            li > a, li > button, li > span:not(.sr-only), li > strong {
+            li > a,
+            li > button,
+            li > span:not(.sr-only),
+            li > strong {
                 @apply h-12 min-w-12 px-4 text-lg;
             }
         }
@@ -137,16 +119,13 @@
             }
         }
 
-        // =========================================
-        // SHAPE VARIANTS
-        // =========================================
-
+        // Shapes
         &-circle {
             li > a,
             li > button,
             li > span:not(.sr-only),
             li > strong {
-                @apply rounded-full;
+                border-radius: 9999px;
             }
         }
 
@@ -155,7 +134,7 @@
             li > button,
             li > span:not(.sr-only),
             li > strong {
-                @apply rounded-none;
+                border-radius: 0;
             }
         }
     }

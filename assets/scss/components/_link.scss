@@ -1,229 +1,151 @@
 /**
  * KISS Link Component (V1.0)
- TODO: Change SVG in external link
- * 
+ * TODO: Change SVG in external link
+ *
  * Base: .link
- * Colors: link-{primary|secondary|accent|info|success|warning|error} (base-content is default)
+ * Colors: link-{primary|secondary|accent|success|warning|error} (base-content is default)
  * Sizes: link-{xs|sm|lg|xl} (text-base is default)
  * Styles: link-{underline-hover|underline-animate|underline-none}
  * Special: link-external
- * 
+ *
  * Example: <a class="link link-primary link-lg link-underline-animate">Link Text</a>
  */
 
 @layer components {
-  .link {
-    // Base link styles - always underlined by default, less intense until hover
-    @apply inline-flex items-center gap-1;
-    @apply text-base leading-normal;
-    @apply text-base-content/80 underline decoration-2;
-    @apply transition-all duration-200;
-    @apply cursor-pointer;
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-base-content/20;
-    
-    // Base hover - full intensity
-    &:hover {
-      @apply text-base-content;
-    }
-    
-    // Color variants - less intense by default, full on hover (FlyonUI style)
-    &-primary {
-      @apply text-primary/80;
-      @apply focus-visible:ring-primary/30;
-      
-      &:hover {
-        @apply text-primary;
-      }
-    }
-    
-    &-secondary {
-      @apply text-secondary/80;
-      @apply focus-visible:ring-secondary/30;
-      
-      &:hover {
-        @apply text-secondary;
-      }
-    }
-    
-    &-accent {
-      @apply text-accent/80;
-      @apply focus-visible:ring-accent/30;
-      
-      &:hover {
-        @apply text-accent;
-      }
-    }
-    
-    &-info {
-      @apply text-info/80;
-      @apply focus-visible:ring-info/30;
-      
-      &:hover {
-        @apply text-info;
-      }
-    }
-    
-    &-success {
-      @apply text-success/80;
-      @apply focus-visible:ring-success/30;
-      
-      &:hover {
-        @apply text-success;
-      }
-    }
-    
-    &-warning {
-      @apply text-warning/80;
-      @apply focus-visible:ring-warning/30;
-      
-      &:hover {
-        @apply text-warning;
-      }
-    }
-    
-    &-error {
-      @apply text-error/80;
-      @apply focus-visible:ring-error/30;
-      
-      &:hover {
-        @apply text-error;
-      }
-    }
-    
-    /* ============================================ */
+    .link {
+        --link-color: var(--color-base-content);
+        --link-text: var(--text-base, 1rem);
+        --link-gap: 0.25rem;
 
-    /* SIZE VARIANTS                               */
+        @apply inline-flex items-center;
+        @apply leading-normal underline decoration-2;
+        @apply transition-all duration-200;
+        @apply cursor-pointer;
+        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
 
-    /* ============================================ */
-    
-    &-xs {
-      @apply text-xs gap-0.5;
-    }
-    
-    &-sm {
-      @apply text-sm gap-1;
-    }
-    
-    // Default is text-base (no modifier needed)
-    
-    &-lg {
-      @apply text-lg gap-1.5;
-    }
-    
-    &-xl {
-      @apply text-xl gap-2;
-    }
-    
-    /* ============================================ */
+        font-size: var(--link-text);
+        gap: var(--link-gap);
+        color: color-mix(in oklch, var(--link-color) 80%, transparent);
 
-    /* STYLE VARIANTS                              */
+        &:hover {
+            color: var(--link-color);
+        }
 
-    /* ============================================ */
-    
-    // Show underline only on hover (remove default underline)
-    &-underline-hover {
-      @apply no-underline;
-      
-      &:hover {
-        @apply underline;
-      }
+        &:focus-visible {
+            --tw-ring-color: color-mix(in oklch, var(--link-color) 30%, transparent);
+        }
     }
-    
-    // Animated underline on hover (from center outward)
-    &-underline-animate {
-      @apply relative no-underline;
-      
-      &::after {
-        content: '';
 
-        @apply absolute bottom-0 left-1/2 w-0 h-0.5;
-        @apply bg-current transition-all duration-300 ease-out;
-        @apply -translate-x-1/2;
-      }
-      
-      &:hover::after {
-        @apply w-full;
-      }
+    // Colors
+    .link-primary {
+        --link-color: var(--color-primary-solid);
     }
-    
-    // Remove underline completely
-    // When combined with color variants: base text → color on hover
-    &-underline-none {
-      @apply no-underline;
-      
-      // Color variants with underline-none: base text → color on hover
-      &.link-primary {
-        @apply text-base-content;
-        &:hover { @apply text-primary; }
-      }
-      
-      &.link-secondary {
-        @apply text-base-content;
-        &:hover { @apply text-secondary; }
-      }
-      
-      &.link-accent {
-        @apply text-base-content;
-        &:hover { @apply text-accent; }
-      }
-      
-      &.link-info {
-        @apply text-base-content;
-        &:hover { @apply text-info; }
-      }
-      
-      &.link-success {
-        @apply text-base-content;
-        &:hover { @apply text-success; }
-      }
-      
-      &.link-warning {
-        @apply text-base-content;
-        &:hover { @apply text-warning; }
-      }
-      
-      &.link-error {
-        @apply text-base-content;
-        &:hover { @apply text-error; }
-      }
-    }
-    
-    /* ============================================ */
 
-    /* SPECIAL VARIANTS                            */
-
-    /* ============================================ */
-    
-    // External link (with icon)
-    &-external {
-      &::after {
-        content: '';
-
-        @apply inline-block w-3.5 h-3.5 ml-1;
-        @apply bg-current transition-opacity duration-200;
-
-        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'%3E%3C/path%3E%3C/svg%3E");
-        mask-size: contain;
-        mask-repeat: no-repeat;
-        mask-position: center;
-      }
-      
-      &:hover::after {
-        @apply opacity-80;
-      }
+    .link-secondary {
+        --link-color: var(--color-secondary-solid);
     }
-    
-    // Disabled state
-    &-disabled,
-    &:disabled {
-      @apply opacity-50 cursor-not-allowed pointer-events-none;
+
+    .link-accent {
+        --link-color: var(--color-tertiary-solid);
     }
-    
-    // Icon inside link
-    .icon,
-    [class^="icon-"],
-    [class*=" icon-"] {
-      @apply shrink-0 w-4 h-4;
+
+    .link-success {
+        --link-color: var(--color-status-success-solid);
     }
-  }
+
+    .link-warning {
+        --link-color: var(--color-status-warning-solid);
+    }
+
+    .link-error {
+        --link-color: var(--color-status-error-solid);
+    }
+
+    // Sizes
+    .link-xs {
+        --link-text: var(--text-xs, 0.75rem);
+        --link-gap: 0.125rem;
+    }
+
+    .link-sm {
+        --link-text: var(--text-sm, 0.875rem);
+        --link-gap: 0.25rem;
+    }
+
+    // Default: text-base (no modifier needed)
+
+    .link-lg {
+        --link-text: var(--text-lg, 1.125rem);
+        --link-gap: 0.375rem;
+    }
+
+    .link-xl {
+        --link-text: var(--text-xl, 1.25rem);
+        --link-gap: 0.5rem;
+    }
+
+    // Variants
+    .link-underline-hover {
+        @apply no-underline;
+
+        &:hover {
+            @apply underline;
+        }
+    }
+
+    .link-underline-animate {
+        @apply relative no-underline;
+
+        &::after {
+            content: '';
+            @apply absolute bottom-0 left-1/2 w-0 h-0.5;
+            @apply bg-current transition-all duration-300 ease-out;
+            @apply -translate-x-1/2;
+        }
+
+        &:hover::after {
+            @apply w-full;
+        }
+    }
+
+    .link-underline-none {
+        @apply no-underline;
+
+        color: var(--color-base-content);
+
+        &:hover {
+            color: var(--link-color);
+        }
+    }
+
+    // Special variants
+    .link-external {
+        &::after {
+            content: '';
+            @apply inline-block w-3.5 h-3.5 ml-1;
+            @apply bg-current transition-opacity duration-200;
+
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'%3E%3C/path%3E%3C/svg%3E");
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
+
+        &:hover::after {
+            @apply opacity-80;
+        }
+    }
+
+    .link-disabled,
+    .link:disabled {
+        @apply opacity-50 cursor-not-allowed pointer-events-none;
+    }
+
+    .link {
+        .icon,
+        [class^="icon-"],
+        [class*=" icon-"] {
+            @apply shrink-0 w-4 h-4;
+        }
+    }
 }

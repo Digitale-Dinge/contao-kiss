@@ -2,7 +2,7 @@
  * KISS Range Component (V1.0)
  *
  * Base: .form-range
- * Colors: range-{primary|secondary|accent|info|success|warning|error}
+ * Colors: range-{primary|secondary|accent|success|warning|error}
  * Sizes: range-{xs|sm|lg|xl}
  * States: disabled
  *
@@ -115,38 +115,33 @@
     // COLORS
     // ============================================
     .range-primary {
-        --range-thumb-color: var(--color-primary);
-        --range-fill-color: var(--color-primary);
+        --range-thumb-color: var(--color-primary-solid);
+        --range-fill-color: var(--color-primary-solid);
     }
 
     .range-secondary {
-        --range-thumb-color: var(--color-secondary);
-        --range-fill-color: var(--color-secondary);
+        --range-thumb-color: var(--color-secondary-solid);
+        --range-fill-color: var(--color-secondary-solid);
     }
 
     .range-accent {
-        --range-thumb-color: var(--color-accent);
-        --range-fill-color: var(--color-accent);
-    }
-
-    .range-info {
-        --range-thumb-color: var(--color-info);
-        --range-fill-color: var(--color-info);
+        --range-thumb-color: var(--color-tertiary-solid);
+        --range-fill-color: var(--color-tertiary-solid);
     }
 
     .range-success {
-        --range-thumb-color: var(--color-success);
-        --range-fill-color: var(--color-success);
+        --range-thumb-color: var(--color-status-success-solid);
+        --range-fill-color: var(--color-status-success-solid);
     }
 
     .range-warning {
-        --range-thumb-color: var(--color-warning);
-        --range-fill-color: var(--color-warning);
+        --range-thumb-color: var(--color-status-warning-solid);
+        --range-fill-color: var(--color-status-warning-solid);
     }
 
     .range-error {
-        --range-thumb-color: var(--color-error);
-        --range-fill-color: var(--color-error);
+        --range-thumb-color: var(--color-status-error-solid);
+        --range-fill-color: var(--color-status-error-solid);
     }
 
     // ============================================

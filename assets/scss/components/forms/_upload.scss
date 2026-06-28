@@ -1,41 +1,35 @@
-
 @layer components {
     input.upload {
         @apply file:bg-[var(--file-button-color,var(--color-base-content))] file:text-[var(--file-text-color,var(--color-white))];;
     }
 
     .upload-primary {
-        --file-button-color: var(--color-primary);
-        --file-text-color: var(--color-primary-content);
+        --file-button-color: var(--color-primary-solid);
+        --file-text-color: var(--color-primary-on-solid);
     }
 
     .upload-secondary {
-        --file-button-color: var(--color-secondary);
-        --file-text-color: var(--color-secondary-content);
+        --file-button-color: var(--color-secondary-solid);
+        --file-text-color: var(--color-secondary-on-solid);
     }
 
     .upload-accent {
-        --file-button-color: var(--color-accent);
-        --file-text-color: var(--color-accent-content);
-    }
-
-    .upload-info {
-        --file-button-color: var(--color-info);
-        --file-text-color: var(--color-info-content);
+        --file-button-color: var(--color-tertiary-solid);
+        --file-text-color: var(--color-tertiary-on-solid);
     }
 
     .upload-success {
-        --file-button-color: var(--color-success);
-        --file-text-color: var(--color-success-content);
+        --file-button-color: var(--color-status-success-solid);
+        --file-text-color: var(--color-status-success-on-solid);
     }
 
     .upload-warning {
-        --file-button-color: var(--color-warning);
-        --file-text-color: var(--color-warning-content);
+        --file-button-color: var(--color-status-warning-solid);
+        --file-text-color: var(--color-status-warning-on-solid);
     }
 
     .upload-error {
-        --file-button-color: var(--color-error);
-        --file-text-color: var(--color-error-content);
+        --file-button-color: var(--color-status-error-solid);
+        --file-text-color: var(--color-status-error-on-solid);
     }
 }

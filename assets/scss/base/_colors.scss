@@ -7,37 +7,37 @@
 
     .headline-primary {
         :is(.topline, .headline) {
-            @apply text-primary;
+            @apply text-primary-solid;
         }
     }
 
     .headline-secondary {
         :is(.topline, .headline) {
-            @apply text-secondary;
+            @apply text-secondary-solid;
         }
     }
 
     .headline-accent {
         :is(.topline, .headline) {
-            @apply text-accent;
+            @apply text-tertiary-solid;
         }
     }
 
     .headline-info {
         :is(.topline, .headline) {
-            @apply text-info;
+            @apply text-status-info-solid;
         }
     }
 
     .headline-success {
         :is(.topline, .headline) {
-            @apply text-success;
+            @apply text-status-success-solid;
         }
     }
 
     .headline-warning {
         :is(.topline, .headline) {
-            @apply text-warning;
+            @apply text-status-warning-solid;
         }
     }
 }

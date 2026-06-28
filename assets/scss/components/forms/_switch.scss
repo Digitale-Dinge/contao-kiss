@@ -4,7 +4,7 @@
  * A toggle switch styled as a sliding button.
  *
  * Base: .form-switch
- * Colors: switch-{primary|secondary|accent|info|success|warning|error}
+ * Colors: switch-{primary|secondary|accent|success|warning|error}
  * Sizes: switch-{xs|sm|lg|xl}
  * Variants: switch-outline
  * States: disabled
@@ -112,31 +112,27 @@
     // COLORS
     // ============================================
     .switch-primary {
-        --input-color: var(--color-primary);
+        --input-color: var(--color-primary-solid);
     }
 
     .switch-secondary {
-        --input-color: var(--color-secondary);
+        --input-color: var(--color-secondary-solid);
     }
 
     .switch-accent {
-        --input-color: var(--color-accent);
-    }
-
-    .switch-info {
-        --input-color: var(--color-info);
+        --input-color: var(--color-tertiary-solid);
     }
 
     .switch-success {
-        --input-color: var(--color-success);
+        --input-color: var(--color-status-success-solid);
     }
 
     .switch-warning {
-        --input-color: var(--color-warning);
+        --input-color: var(--color-status-warning-solid);
     }
 
     .switch-error {
-        --input-color: var(--color-error);
+        --input-color: var(--color-status-error-solid);
     }
 
     // ============================================

@@ -37,11 +37,11 @@
 
     // Error text (below input)
     .error-text {
-        @apply text-error;
+        @apply text-status-error-solid;
     }
 
     // Success text (below input)
     .success-text {
-        @apply text-success;
+        @apply text-status-success-solid;
     }
 }

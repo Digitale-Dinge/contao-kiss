@@ -9,10 +9,10 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 enum Color: string implements TranslatableLabelInterface
 {
+    // ToDo: currently used as modifier options for components -> migrate to design tokens?
     case primary = 'primary';
     case secondary = 'secondary';
     case accent = 'accent';
-    case info = 'info';
     case success = 'success';
     case warning = 'warning';
     case error = 'error';

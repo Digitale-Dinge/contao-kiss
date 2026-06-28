@@ -5,7 +5,7 @@
  *
  * Base: .form-textarea
  * Styles: textarea-{soft} (outline is default)
- * Colors: textarea-{primary|secondary|accent|info|success|warning|error}
+ * Colors: textarea-{primary|secondary|accent|success|warning|error}
  * Sizes: textarea-{xs|sm|lg|xl}
  * States: is-valid, is-invalid, disabled, readonly
  *
@@ -18,39 +18,38 @@
  *
  * Floating Example:
  *   <div class="textarea-floating">
- *     <textarea class="textarea" placeholder=" "></textarea>
+ *     <textarea class="form-textarea" placeholder=" "></textarea>
  *     <label class="textarea-floating-label">Your Message</label>
  *   </div>
  */
 
 @layer components {
-    // ============================================
-    // BASE TEXTAREA
-    // ============================================
     .form-textarea {
         --textarea-color: var(--color-base-content);
         --textarea-border-opacity: 60%;
+        --textarea-px: 0.75rem;
+        --textarea-py: 0.625rem;
+        --textarea-text: var(--text-base, 1rem);
+        --textarea-min-h: 6rem;
+        --textarea-label-color: var(--textarea-color);
+        --textarea-label-bg: var(--color-base-100);
         --tw-ring-color: var(--textarea-color);
 
-        @apply block w-full;
-        @apply px-3 py-2.5;
-        @apply text-base text-base-content leading-relaxed;
-        @apply bg-transparent;
+        @apply block w-full bg-transparent resize-y;
         @apply transition-all duration-200;
         @apply placeholder:text-base-content/40;
         @apply disabled:opacity-50 disabled:cursor-not-allowed;
         @apply read-only:bg-base-200/50 read-only:cursor-default;
-        @apply resize-y min-h-24;
+        @apply leading-relaxed;
 
-        // Ensure border doesn't add to dimensions
         box-sizing: border-box;
-
-        // Add color mix for using --textarea-color
+        font-size: var(--textarea-text);
+        padding: var(--textarea-py) var(--textarea-px);
+        min-height: var(--textarea-min-h);
         border: 1px solid color-mix(in oklch, var(--textarea-color) var(--textarea-border-opacity), transparent);
         border-radius: var(--radius-box, 0.5rem);
         outline: none;
 
-        // Hover state - full opacity border
         &:hover:not(:focus):not(:disabled) {
             --textarea-border-opacity: 100%;
         }
@@ -61,98 +60,87 @@
         }
 
         &.is-valid {
-            --textarea-color: var(--color-success);
+            --textarea-color: var(--color-status-success-solid);
         }
 
         &.is-invalid {
-            --textarea-color: var(--color-error);
+            --textarea-color: var(--color-status-error-solid);
         }
     }
 
-    // ============================================
-    // STYLE: SOFT (tinted background with border)
-    // ============================================
+    // Variants
     .textarea-soft {
         background-color: color-mix(in oklch, var(--textarea-color) 10%, transparent);
     }
 
-    // ============================================
-    // COLORS (border shows selected color)
-    // ============================================
+    // Colors
     .textarea-primary {
-        --textarea-color: var(--color-primary);
+        --textarea-color: var(--color-primary-solid);
     }
 
     .textarea-secondary {
-        --textarea-color: var(--color-secondary);
+        --textarea-color: var(--color-secondary-solid);
     }
 
     .textarea-accent {
-        --textarea-color: var(--color-accent);
-    }
-
-    .textarea-info {
-        --textarea-color: var(--color-info);
+        --textarea-color: var(--color-tertiary-solid);
     }
 
     .textarea-success {
-        --textarea-color: var(--color-success);
+        --textarea-color: var(--color-status-success-solid);
     }
 
     .textarea-warning {
-        --textarea-color: var(--color-warning);
+        --textarea-color: var(--color-status-warning-solid);
     }
 
     .textarea-error {
-        --textarea-color: var(--color-error);
+        --textarea-color: var(--color-status-error-solid);
     }
 
-    // ============================================
-    // SIZES
-    // ============================================
+    // Sizes
     .textarea-xs {
-        @apply px-2 py-1.5 text-xs min-h-16;
+        --textarea-px: 0.5rem;
+        --textarea-py: 0.375rem;
+        --textarea-text: var(--text-xs, 0.75rem);
+        --textarea-min-h: 4rem;
     }
 
     .textarea-sm {
-        @apply px-2.5 py-2 text-sm min-h-20;
+        --textarea-px: 0.625rem;
+        --textarea-py: 0.5rem;
+        --textarea-text: var(--text-sm, 0.875rem);
+        --textarea-min-h: 5rem;
     }
 
-    // Default is already defined in base
-
     .textarea-lg {
-        @apply px-4 py-3 text-lg min-h-32;
+        --textarea-px: 1rem;
+        --textarea-py: 0.75rem;
+        --textarea-text: var(--text-lg, 1.125rem);
+        --textarea-min-h: 8rem;
     }
 
     .textarea-xl {
-        @apply px-5 py-3.5 text-xl min-h-40;
+        --textarea-px: 1.25rem;
+        --textarea-py: 0.875rem;
+        --textarea-text: var(--text-xl, 1.25rem);
+        --textarea-min-h: 10rem;
     }
 
-    // ============================================
-    // RESIZE OPTIONS
-    // ============================================
-    .resize-none {
-        @apply resize-none;
-    }
+    // Resize options
+    .resize-none { resize: none; }
+    .resize-x    { resize: horizontal; }
+    .resize-both { resize: both; }
 
-    .resize-x {
-        @apply resize-x;
-    }
-
-    .resize-both {
-        @apply resize;
-    }
-
-    // ============================================
-    // FLOATING LABEL
-    // ============================================
+    // Floating label
     .textarea-floating-label {
-        @apply absolute left-3 top-3;
-        @apply text-base text-base-content/50;
-        @apply pointer-events-none;
-        @apply origin-left;
-        @apply bg-transparent px-0;
-        @apply overflow-hidden text-ellipsis whitespace-nowrap;
+        @apply absolute pointer-events-none origin-left;
+        @apply overflow-hidden text-ellipsis whitespace-nowrap bg-transparent px-0;
+
+        left: var(--textarea-px, 0.75rem);
+        top: 0.75rem;
+        font-size: var(--textarea-text, var(--text-base, 1rem));
+        color: color-mix(in oklch, var(--color-base-content) 50%, transparent);
         max-width: calc(100% - 1.5rem);
         transition: top 0.15s ease-out, translate 0.15s ease-out, scale 0.15s ease-out, background-color 0.15s ease-out, padding 0.15s ease-out;
     }
@@ -164,151 +152,53 @@
             @apply placeholder-transparent;
         }
 
-        // When textarea has value or is focused, move label to border
         &:focus-within,
         &:has(.form-textarea:not(:placeholder-shown)) {
             .textarea-floating-label {
-                @apply top-0 px-1 font-medium;
-                @apply bg-base-100 text-base-content;
-                @apply pointer-events-auto;
+                @apply pointer-events-auto font-medium px-1;
+
+                top: 0;
+                color: var(--textarea-label-color);
+                background: var(--textarea-label-bg);
                 translate: 0 calc(-50% - 0.0625em);
                 scale: 0.75;
             }
         }
 
-        // Color variants for floating label (apply when floated - focused or has value)
-        &:has(.textarea-primary):focus-within,
-        &:has(.textarea-primary .form-textarea:not(:placeholder-shown)),
-        &:has(.textarea-primary:not(:placeholder-shown)) {
-            .textarea-floating-label {
-                @apply text-primary;
-            }
+        &.bg-base-100 {
+            --textarea-label-bg: var(--color-base-100);
         }
 
-        &:has(.textarea-secondary):focus-within,
-        &:has(.textarea-secondary .form-textarea:not(:placeholder-shown)),
-        &:has(.textarea-secondary:not(:placeholder-shown)) {
-            .textarea-floating-label {
-                @apply text-secondary;
-            }
+        &.bg-base-200 {
+            --textarea-label-bg: var(--color-base-200);
         }
 
-        &:has(.textarea-accent):focus-within,
-        &:has(.textarea-accent .form-textarea:not(:placeholder-shown)),
-        &:has(.textarea-accent:not(:placeholder-shown)) {
-            .textarea-floating-label {
-                @apply text-accent;
-            }
+        &.bg-base-300 {
+            --textarea-label-bg: var(--color-base-300);
         }
 
-        &:has(.textarea-info):focus-within,
-        &:has(.textarea-info .form-textarea:not(:placeholder-shown)),
-        &:has(.textarea-info:not(:placeholder-shown)) {
-            .textarea-floating-label {
-                @apply text-info;
-            }
+        &.bg-primary-solid {
+            --textarea-label-bg: var(--color-primary-solid);
         }
 
-        &:has(.textarea-success):focus-within,
-        &:has(.textarea-success .form-textarea:not(:placeholder-shown)),
-        &:has(.textarea-success:not(:placeholder-shown)) {
-            .textarea-floating-label {
-                @apply text-success;
-            }
+        &.bg-secondary-solid {
+            --textarea-label-bg: var(--color-secondary-solid);
         }
 
-        &:has(.textarea-warning):focus-within,
-        &:has(.textarea-warning .form-textarea:not(:placeholder-shown)),
-        &:has(.textarea-warning:not(:placeholder-shown)) {
-            .textarea-floating-label {
-                @apply text-warning;
-            }
+        &.bg-tertiary-solid {
+            --textarea-label-bg: var(--color-tertiary-solid);
         }
 
-        &:has(.textarea-error):focus-within,
-        &:has(.textarea-error .form-textarea:not(:placeholder-shown)),
-        &:has(.textarea-error:not(:placeholder-shown)) {
-            .textarea-floating-label {
-                @apply text-error;
-            }
+        &.bg-status-success-solid {
+            --textarea-label-bg: var(--color-status-success-solid);
         }
 
-        // Validation states for floating label (always show color)
-        &:has(.textarea.is-valid) .textarea-floating-label {
-            @apply text-success;
+        &.bg-status-warning-solid {
+            --textarea-label-bg: var(--color-status-warning-solid);
         }
 
-        &:has(.textarea.is-invalid) .textarea-floating-label {
-            @apply text-error;
-        }
-
-        // Size variants - adjust left position and font size
-        &:has(.textarea-xs) .textarea-floating-label {
-            @apply left-2 text-xs;
-        }
-
-        &:has(.textarea-sm) .textarea-floating-label {
-            @apply left-2.5 text-sm;
-        }
-
-        &:has(.textarea-lg) .textarea-floating-label {
-            @apply left-4 text-lg;
-        }
-
-        &:has(.textarea-xl) .textarea-floating-label {
-            @apply left-5 text-xl;
-        }
-
-        // Auto-detect background when bg-base-* is on the wrapper
-        &.bg-base-100:focus-within .textarea-floating-label,
-        &.bg-base-100:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
-            @apply bg-base-100;
-        }
-
-        &.bg-base-200:focus-within .textarea-floating-label,
-        &.bg-base-200:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
-            @apply bg-base-200;
-        }
-
-        &.bg-base-300:focus-within .textarea-floating-label,
-        &.bg-base-300:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
-            @apply bg-base-300;
-        }
-
-        // Semantic colors
-        &.bg-primary:focus-within .textarea-floating-label,
-        &.bg-primary:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
-            @apply bg-primary;
-        }
-
-        &.bg-secondary:focus-within .textarea-floating-label,
-        &.bg-secondary:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
-            @apply bg-secondary;
-        }
-
-        &.bg-accent:focus-within .textarea-floating-label,
-        &.bg-accent:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
-            @apply bg-accent;
-        }
-
-        &.bg-info:focus-within .textarea-floating-label,
-        &.bg-info:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
-            @apply bg-info;
-        }
-
-        &.bg-success:focus-within .textarea-floating-label,
-        &.bg-success:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
-            @apply bg-success;
-        }
-
-        &.bg-warning:focus-within .textarea-floating-label,
-        &.bg-warning:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
-            @apply bg-warning;
-        }
-
-        &.bg-error:focus-within .textarea-floating-label,
-        &.bg-error:has(.form-textarea:not(:placeholder-shown)) .textarea-floating-label {
-            @apply bg-error;
+        &.bg-status-error-solid {
+            --textarea-label-bg: var(--color-status-error-solid);
         }
     }
 }

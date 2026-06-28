@@ -13,13 +13,13 @@ enum Background: string implements TranslatableLabelInterface
     case base_100 = 'bg-base-100';
     case base_200 = 'bg-base-200';
     case base_300 = 'bg-base-300';
-    case primary = 'bg-primary';
-    case secondary = 'bg-secondary';
-    case accent = 'bg-accent';
-    case info = 'bg-info';
-    case success = 'bg-success';
-    case warning = 'bg-warning';
-    case error = 'bg-error';
+    case primary = 'bg-primary-solid';
+    case secondary = 'bg-secondary-solid';
+    case accent = 'bg-tertiary-solid'; // ToDo: Migrate accent option
+    //case quaternary = 'bg-quaternary-solid';
+    case success = 'bg-status-success-solid';
+    case warning = 'bg-status-warning-solid';
+    case error = 'bg-status-error-solid';
     case base_content = 'bg-base-content';
 
     public function label(): TranslatableMessage

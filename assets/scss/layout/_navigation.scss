@@ -4,7 +4,7 @@
 
 :root {
     /* === NAVIGATION COLORS === */
-    --nav-color: var(--color-primary);
+    --nav-color: var(--color-primary-solid);
     --nav-active-color: var(--color-base-content);
     --nav-submenu-background: var(--color-base-100);
 
@@ -12,16 +12,16 @@
     --nav-mobile-background: var(--color-base-200);
     --nav-mobile-color: var(--color-base-content);
     --nav-mobile-active-background: var(--color-base-200);
-    --nav-mobile-active-color: var(--color-primary);
-    --nav-mobile-active-border-color: var(--color-primary);
-    --nav-mobile-btn-clr: var(--color-primary);
+    --nav-mobile-active-color: var(--color-primary-solid);
+    --nav-mobile-active-border-color: var(--color-primary-solid);
+    --nav-mobile-btn-clr: var(--color-primary-solid);
     --nav-mobile-separator-color: var(--color-base-300);
-    --nav-burger-line-color: var(--color-primary);
+    --nav-burger-line-color: var(--color-primary-solid);
 
     /* === ACCESSIBILITY (Skip Links) === */
     --skip-background: var(--color-base-200);
     --skip-color: var(--color-base-content);
-    --skip-focus-border-color: var(--color-primary);
+    --skip-focus-border-color: var(--color-primary-solid);
 
     /* === NAVIGATION ICONS === */
     /* Note: SVG data URIs can't use CSS variables, so we use a neutral gray that works in both light/dark modes */

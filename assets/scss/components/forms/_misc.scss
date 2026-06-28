@@ -2,11 +2,11 @@
     // Required indicator
     .label-required::after {
         content: " *";
-        @apply text-error;
+        @apply text-status-error-solid;
     }
 
     span.mandatory {
-        @apply text-error;
+        @apply text-status-error-solid;
     }
 
     [placeholder] {

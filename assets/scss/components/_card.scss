@@ -5,7 +5,7 @@
  * Sections: card-{body|header|footer|title|actions|alert}
  * Sizes: card-{xs|sm|lg|xl}
  * Styles: card-{side|soft|outline|glass}
- * Colors: card-{primary|secondary|accent|info|success|warning|error}
+ * Colors: card-{primary|secondary|accent|success|warning|error}
  * Interactive: card-{hover|grow|link}
  * Effects: image-full
  *
@@ -17,505 +17,278 @@
  */
 
 @layer components {
-  .card {
-    // Base card styles
-    @apply relative flex flex-col;
-    @apply bg-base-200 text-base-content;
-    @apply w-full;
-    @apply overflow-hidden;
+    .card {
+        --card-bg: var(--color-base-200);
+        --card-fg: var(--color-base-content);
+        --card-border: var(--color-base-content);
+        --card-border-opacity: 20%;
+        --card-ring: var(--color-base-content);
 
-    border-width: var(--border, 1px);
-    border-style: solid;
-    @apply border-base-content/20;
-    border-radius: var(--radius-box, 0.5rem);
-    box-shadow: var(--shadow, none);
+        @apply relative flex flex-col w-full overflow-hidden;
 
-    // Figure/Image handling
-    > figure,
-    > .card-figure {
-      @apply relative overflow-hidden;
-      @apply w-full;
+        background: var(--card-bg);
+        color: var(--card-fg);
+        border-width: var(--border-width, 1px);
+        border-style: solid;
+        border-color: color-mix(in oklch, var(--card-border) var(--card-border-opacity), transparent);
+        border-radius: var(--radius-box, 0.5rem);
+        box-shadow: var(--shadow, none);
 
-      > img {
-        @apply w-full h-auto object-cover;
-      }
-    }
+        // Figure/Image handling
+        > figure,
+        > .card-figure {
+            @apply relative overflow-hidden w-full;
 
-    // Card Header
-    &-header {
-      @apply flex items-center gap-4;
-      @apply px-6 py-4;
-      @apply border-b border-base-content/10;
-    }
-
-    // Card Body
-    &-body {
-      @apply flex flex-col flex-1;
-      @apply px-6 py-5;
-      @apply gap-2;
-    }
-
-    // Card Footer
-    &-footer {
-      @apply px-6 py-4;
-      @apply border-t border-base-content/10;
-    }
-
-    // Card Title — no font-size; inherits color from card variant
-    &-title {
-      @apply font-semibold leading-tight;
-      color: inherit;
-    }
-
-    // Reset margins inside card-body — spacing is handled by gap
-    &-body {
-      :is(h1, h2, h3, h4, h5, h6, .topline) {
-        @apply m-0;
-      }
-    }
-
-    // Card Actions
-    &-actions {
-      @apply flex flex-wrap items-center gap-2;
-    }
-
-    // Card Alert
-    &-alert {
-      @apply w-full;
-    }
-
-    // =========================================
-    // SIZE VARIANTS
-    // =========================================
-
-    // Extra Small
-    &-xs {
-      > .card-header {
-        @apply px-3 py-2;
-      }
-
-      > .card-body {
-        @apply px-3 py-2.5;
-        @apply gap-1;
-      }
-
-      > .card-footer {
-        @apply px-3 py-2;
-      }
-    }
-
-    // Small
-    &-sm {
-      > .card-header {
-        @apply px-4 py-3;
-      }
-
-      > .card-body {
-        @apply px-4 py-3;
-        @apply gap-1.5;
-      }
-
-      > .card-footer {
-        @apply px-4 py-3;
-      }
-    }
-
-    // Medium (default) - no modifier needed
-
-    // Large
-    &-lg {
-      > .card-header {
-        @apply px-8 py-5;
-      }
-
-      > .card-body {
-        @apply px-8 py-6;
-        @apply gap-3;
-      }
-
-      > .card-footer {
-        @apply px-8 py-5;
-      }
-    }
-
-    // Extra Large
-    &-xl {
-      > .card-header {
-        @apply px-10 py-6;
-      }
-
-      > .card-body {
-        @apply px-10 py-8;
-        @apply gap-4;
-      }
-
-      > .card-footer {
-        @apply px-10 py-6;
-      }
-    }
-
-    // =========================================
-    // STYLE VARIANTS
-    // =========================================
-
-    // Side layout (horizontal card with image on side)
-    &-side {
-      @apply sm:flex-row;
-
-      > figure,
-      > .card-figure {
-        @apply w-auto max-w-[40%] flex-shrink-0;
-
-        > img {
-          @apply h-full object-cover;
+            > img {
+                @apply w-full h-auto object-cover;
+            }
         }
-      }
 
-      > .card-body {
-        @apply justify-center;
-      }
+        // Card Header
+        &-header {
+            @apply flex items-center gap-4;
+            @apply px-6 py-4;
+            @apply border-b border-base-content/10;
+        }
+
+        // Card Body
+        &-body {
+            @apply flex flex-col flex-1;
+            @apply px-6 py-5;
+            @apply gap-2;
+
+            :is(h1, h2, h3, h4, h5, h6, .topline) {
+                @apply m-0;
+            }
+        }
+
+        // Card Footer
+        &-footer {
+            @apply px-6 py-4;
+            @apply border-t border-base-content/10;
+        }
+
+        // Card Title
+        &-title {
+            @apply font-semibold leading-tight;
+            color: inherit;
+        }
+
+        // Card Actions
+        &-actions {
+            @apply flex flex-wrap items-center gap-2;
+        }
+
+        // Card Alert
+        &-alert {
+            @apply w-full;
+        }
     }
 
-    // =========================================
-    // SPECIAL EFFECTS
-    // =========================================
+    // Sizes
+    .card-xs {
+        > .card-header {
+            @apply px-3 py-2;
+        }
+
+        > .card-body {
+            @apply px-3 py-2.5 gap-1;
+        }
+
+        > .card-footer {
+            @apply px-3 py-2;
+        }
+    }
+
+    .card-sm {
+        > .card-header {
+            @apply px-4 py-3;
+        }
+
+        > .card-body {
+            @apply px-4 py-3 gap-1.5;
+        }
+
+        > .card-footer {
+            @apply px-4 py-3;
+        }
+    }
+
+    // Default: defined in base
+
+    .card-lg {
+        > .card-header {
+            @apply px-8 py-5;
+        }
+
+        > .card-body {
+            @apply px-8 py-6 gap-3;
+        }
+
+        > .card-footer {
+            @apply px-8 py-5;
+        }
+    }
+
+    .card-xl {
+        > .card-header {
+            @apply px-10 py-6;
+        }
+
+        > .card-body {
+            @apply px-10 py-8 gap-4;
+        }
+
+        > .card-footer {
+            @apply px-10 py-6;
+        }
+    }
+
+    // Colors
+    .card-primary {
+        --card-bg: var(--color-primary-solid);
+        --card-fg: var(--color-primary-on-solid);
+        --card-border: var(--color-primary-border-content);
+        --card-ring: var(--color-primary-solid);
+    }
+
+    .card-secondary {
+        --card-bg: var(--color-secondary-solid);
+        --card-fg: var(--color-secondary-on-solid);
+        --card-border: var(--color-secondary-border-content);
+        --card-ring: var(--color-secondary-solid);
+    }
+
+    .card-accent {
+        --card-bg: var(--color-tertiary-solid);
+        --card-fg: var(--color-tertiary-on-solid);
+        --card-border: var(--color-tertiary-border-content);
+        --card-ring: var(--color-tertiary-solid);
+    }
+
+    .card-success {
+        --card-bg: var(--color-status-success-solid);
+        --card-fg: var(--color-status-success-on-solid);
+        --card-border: var(--color-status-success-border-content);
+        --card-ring: var(--color-status-success-solid);
+    }
+
+    .card-warning {
+        --card-bg: var(--color-status-warning-solid);
+        --card-fg: var(--color-status-warning-on-solid);
+        --card-border: var(--color-status-warning-border-content);
+        --card-ring: var(--color-status-warning-solid);
+    }
+
+    .card-error {
+        --card-bg: var(--color-status-error-solid);
+        --card-fg: var(--color-status-error-on-solid);
+        --card-border: var(--color-status-error-border-content);
+        --card-ring: var(--color-status-error-solid);
+    }
+
+    // Variants
+    .card-soft {
+        --card-bg: color-mix(in oklch, var(--card-ring) 10%, transparent);
+        --card-fg: var(--card-ring);
+        --card-border: var(--card-ring);
+        --card-border-opacity: 20%;
+
+        box-shadow: none;
+    }
+
+    .card-outline {
+        --card-bg: transparent;
+        --card-fg: var(--card-ring);
+        --card-border: var(--card-ring);
+        --card-border-opacity: 30%;
+
+        box-shadow: none;
+    }
+
+    .card-glass {
+        @apply backdrop-blur-md;
+
+        background-color: color-mix(in oklch, var(--card-ring) 15%, transparent);
+        border: 1px solid color-mix(in oklch, var(--card-ring) 20%, transparent);
+        box-shadow: 0 8px 32px 0 rgb(0 0 0 / 0.15);
+    }
+
+    // Side layout
+    .card-side {
+        @apply sm:flex-row;
+
+        > figure,
+        > .card-figure {
+            @apply w-auto max-w-[40%] flex-shrink-0;
+
+            > img {
+                @apply h-full object-cover;
+            }
+        }
+
+        > .card-body {
+            @apply justify-center;
+        }
+    }
 
     // Image full overlay
-    &.image-full {
-      @apply relative;
+    .card.image-full {
+        @apply relative;
 
-      > figure,
-      > .card-figure {
-        @apply absolute inset-0 z-0;
+        > figure,
+        > .card-figure {
+            @apply absolute inset-0 z-0;
 
-        > img {
-          @apply w-full h-full object-cover;
+            > img {
+                @apply w-full h-full object-cover;
+            }
+
+            &::after {
+                @apply absolute inset-0 bg-black/50;
+                content: "";
+            }
         }
 
-        &::after {
-          @apply absolute inset-0;
-          @apply bg-black/50;
-
-          content: "";
-        }
-      }
-
-      > .card-body,
-      > .card-header,
-      > .card-footer {
-        @apply relative z-10;
-        @apply text-white;
-      }
-    }
-
-    // Glass effect (can combine with colors)
-    &-glass {
-      @apply backdrop-blur-md text-base-content;
-
-      background-color: color-mix(in oklch, var(--color-base-100) 15%, transparent);
-      border: 1px solid color-mix(in oklch, var(--color-base-100) 20%, transparent);
-      box-shadow: 0 8px 32px 0 rgb(0 0 0 / 0.15);
-
-      &.card-primary {
-        background-color: color-mix(in oklch, var(--color-primary) 15%, transparent);
-        border-color: color-mix(in oklch, var(--color-primary) 30%, transparent);
-      }
-
-      &.card-secondary {
-        background-color: color-mix(in oklch, var(--color-secondary) 15%, transparent);
-        border-color: color-mix(in oklch, var(--color-secondary) 30%, transparent);
-      }
-
-      &.card-accent {
-        background-color: color-mix(in oklch, var(--color-accent) 15%, transparent);
-        border-color: color-mix(in oklch, var(--color-accent) 30%, transparent);
-      }
-
-      &.card-info {
-        background-color: color-mix(in oklch, var(--color-info) 15%, transparent);
-        border-color: color-mix(in oklch, var(--color-info) 30%, transparent);
-      }
-
-      &.card-success {
-        background-color: color-mix(in oklch, var(--color-success) 15%, transparent);
-        border-color: color-mix(in oklch, var(--color-success) 30%, transparent);
-      }
-
-      &.card-warning {
-        background-color: color-mix(in oklch, var(--color-warning) 15%, transparent);
-        border-color: color-mix(in oklch, var(--color-warning) 30%, transparent);
-      }
-
-      &.card-error {
-        background-color: color-mix(in oklch, var(--color-error) 15%, transparent);
-        border-color: color-mix(in oklch, var(--color-error) 30%, transparent);
-      }
-    }
-
-    // =========================================
-    // INTERACTIVE STATES
-    // =========================================
-
-    // Hover shadow effect
-    &-hover {
-      @apply transition-all duration-300 ease-in-out;
-      @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-base-content/20 focus-visible:ring-offset-2;
-
-      &:hover,
-      &:focus-visible {
-        @apply shadow-lg;
-      }
-    }
-
-    // Grow effect
-    &-grow {
-      @apply transition-all duration-300 ease-in-out;
-      @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-base-content/20 focus-visible:ring-offset-2;
-
-      &:hover,
-      &:focus-visible {
-        transform: scale(1.02);
-      }
-    }
-
-    // Clickable card (makes entire card a link target)
-    &-link {
-      @apply cursor-pointer;
-      @apply transition-all duration-200 ease-in-out;
-      @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-base-content/20 focus-visible:ring-offset-2;
-
-      // Stretch link pattern - allows nested link to cover entire card
-      > a.stretched-link::after {
-        @apply absolute inset-0 z-10;
-
-        content: "";
-      }
-    }
-
-    // Dismissible card animation
-    &.removing {
-      @apply translate-x-5 opacity-0;
-    }
-
-    // =========================================
-    // COLOR VARIANTS
-    // =========================================
-
-    &-primary {
-      @apply bg-primary text-primary-content;
-
-      > .card-header,
-      > .card-footer {
-        @apply border-primary-content/20;
-      }
-    }
-
-    &-secondary {
-      @apply bg-secondary text-secondary-content;
-
-      > .card-header,
-      > .card-footer {
-        @apply border-secondary-content/20;
-      }
-    }
-
-    &-accent {
-      @apply bg-accent text-accent-content;
-
-      > .card-header,
-      > .card-footer {
-        @apply border-accent-content/20;
-      }
-    }
-
-    &-info {
-      @apply bg-info text-info-content;
-
-      > .card-header,
-      > .card-footer {
-        @apply border-info-content/20;
-      }
-    }
-
-    &-success {
-      @apply bg-success text-success-content;
-
-      > .card-header,
-      > .card-footer {
-        @apply border-success-content/20;
-      }
-    }
-
-    &-warning {
-      @apply bg-warning text-warning-content;
-
-      > .card-header,
-      > .card-footer {
-        @apply border-warning-content/20;
-      }
-    }
-
-    &-error {
-      @apply bg-error text-error-content;
-
-      > .card-header,
-      > .card-footer {
-        @apply border-error-content/20;
-      }
-    }
-
-    // Style variants - Soft
-    &-soft {
-      @apply bg-base-200/50 text-base-content;
-
-      box-shadow: none;
-
-      > .card-header,
-      > .card-footer {
-        @apply border-base-content/10;
-      }
-
-      &.card-primary {
-        @apply bg-primary/10 text-primary;
-
+        > .card-body,
         > .card-header,
         > .card-footer {
-          @apply border-primary/20;
+            @apply relative z-10 text-white;
         }
-      }
-
-      &.card-secondary {
-        @apply bg-secondary/10 text-secondary;
-
-        > .card-header,
-        > .card-footer {
-          @apply border-secondary/20;
-        }
-      }
-
-      &.card-accent {
-        @apply bg-accent/10 text-accent;
-
-        > .card-header,
-        > .card-footer {
-          @apply border-accent/20;
-        }
-      }
-
-      &.card-info {
-        @apply bg-info/10 text-info;
-
-        > .card-header,
-        > .card-footer {
-          @apply border-info/20;
-        }
-      }
-
-      &.card-success {
-        @apply bg-success/10 text-success;
-
-        > .card-header,
-        > .card-footer {
-          @apply border-success/20;
-        }
-      }
-
-      &.card-warning {
-        @apply bg-warning/10 text-warning;
-
-        > .card-header,
-        > .card-footer {
-          @apply border-warning/20;
-        }
-      }
-
-      &.card-error {
-        @apply bg-error/10 text-error;
-
-        > .card-header,
-        > .card-footer {
-          @apply border-error/20;
-        }
-      }
     }
 
-    // Style variants - Outline
-    &-outline {
-      @apply bg-transparent text-base-content;
+    // Interactive states
+    .card-hover {
+        @apply transition-all duration-300 ease-in-out;
+        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-base-content/20 focus-visible:ring-offset-2;
 
-      border-width: var(--border);
-      border-style: solid;
-      @apply border-base-content/30;
-      box-shadow: none;
-
-      > .card-header,
-      > .card-footer {
-        @apply border-base-content/20;
-      }
-
-      &.card-primary {
-        @apply bg-transparent border-primary text-primary;
-
-        > .card-header,
-        > .card-footer {
-          @apply border-primary/30;
+        &:hover,
+        &:focus-visible {
+            @apply shadow-lg;
         }
-      }
-
-      &.card-secondary {
-        @apply bg-transparent border-secondary text-secondary;
-
-        > .card-header,
-        > .card-footer {
-          @apply border-secondary/30;
-        }
-      }
-
-      &.card-accent {
-        @apply bg-transparent border-accent text-accent;
-
-        > .card-header,
-        > .card-footer {
-          @apply border-accent/30;
-        }
-      }
-
-      &.card-info {
-        @apply bg-transparent border-info text-info;
-
-        > .card-header,
-        > .card-footer {
-          @apply border-info/30;
-        }
-      }
-
-      &.card-success {
-        @apply bg-transparent border-success text-success;
-
-        > .card-header,
-        > .card-footer {
-          @apply border-success/30;
-        }
-      }
-
-      &.card-warning {
-        @apply bg-transparent border-warning text-warning;
-
-        > .card-header,
-        > .card-footer {
-          @apply border-warning/30;
-        }
-      }
-
-      &.card-error {
-        @apply bg-transparent border-error text-error;
-
-        > .card-header,
-        > .card-footer {
-          @apply border-error/30;
-        }
-      }
     }
-  }
 
+    .card-grow {
+        @apply transition-all duration-300 ease-in-out;
+        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-base-content/20 focus-visible:ring-offset-2;
+
+        &:hover,
+        &:focus-visible {
+            transform: scale(1.02);
+        }
+    }
+
+    .card-link {
+        @apply cursor-pointer transition-all duration-200 ease-in-out;
+        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-base-content/20 focus-visible:ring-offset-2;
+
+        > a.stretched-link::after {
+            @apply absolute inset-0 z-10;
+            content: "";
+        }
+    }
+
+    .card.removing {
+        @apply translate-x-5 opacity-0;
+    }
 }
