@@ -18,21 +18,21 @@
 
 @layer components {
     .card {
-        --card-bg: var(--color-base-200);
+        --card-bg: var(--kiss-comp-card-color-background, var(--color-base-200));
         --card-fg: var(--color-base-content);
-        --card-border: var(--color-base-content);
-        --card-border-opacity: 20%;
+        --card-border: var(--kiss-comp-card-color-border, var(--color-neutral-border-light));
+        --card-border-opacity: 100%;
         --card-ring: var(--color-base-content);
 
         @apply relative flex flex-col w-full overflow-hidden;
 
         background: var(--card-bg);
         color: var(--card-fg);
-        border-width: var(--border-width, 1px);
+        border-width: var(--kiss-comp-card-border-width-default, var(--border-width-thin, 1px));
         border-style: solid;
         border-color: color-mix(in oklch, var(--card-border) var(--card-border-opacity), transparent);
-        border-radius: var(--radius-box, 0.5rem);
-        box-shadow: var(--shadow, none);
+        border-radius: var(--kiss-comp-card-border-radius-default, var(--radius-box, 0.5rem));
+        box-shadow: var(--shadow-card);
 
         // Figure/Image handling
         > figure,
@@ -148,42 +148,42 @@
     .card-primary {
         --card-bg: var(--color-primary-solid);
         --card-fg: var(--color-primary-on-solid);
-        --card-border: var(--color-primary-border-content);
+        --card-border: var(--color-primary-border);
         --card-ring: var(--color-primary-solid);
     }
 
     .card-secondary {
         --card-bg: var(--color-secondary-solid);
         --card-fg: var(--color-secondary-on-solid);
-        --card-border: var(--color-secondary-border-content);
+        --card-border: var(--color-secondary-border);
         --card-ring: var(--color-secondary-solid);
     }
 
     .card-accent {
         --card-bg: var(--color-tertiary-solid);
         --card-fg: var(--color-tertiary-on-solid);
-        --card-border: var(--color-tertiary-border-content);
+        --card-border: var(--color-tertiary-border);
         --card-ring: var(--color-tertiary-solid);
     }
 
     .card-success {
         --card-bg: var(--color-status-success-solid);
         --card-fg: var(--color-status-success-on-solid);
-        --card-border: var(--color-status-success-border-content);
+        --card-border: var(--color-status-success-border);
         --card-ring: var(--color-status-success-solid);
     }
 
     .card-warning {
         --card-bg: var(--color-status-warning-solid);
         --card-fg: var(--color-status-warning-on-solid);
-        --card-border: var(--color-status-warning-border-content);
+        --card-border: var(--color-status-warning-border);
         --card-ring: var(--color-status-warning-solid);
     }
 
     .card-error {
         --card-bg: var(--color-status-error-solid);
         --card-fg: var(--color-status-error-on-solid);
-        --card-border: var(--color-status-error-border-content);
+        --card-border: var(--color-status-error-border);
         --card-ring: var(--color-status-error-solid);
     }
 
@@ -264,7 +264,7 @@
 
         &:hover,
         &:focus-visible {
-            @apply shadow-lg;
+            box-shadow: var(--shadow-card-hover);
         }
     }
 

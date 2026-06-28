@@ -13,9 +13,10 @@
 
 @layer components {
     .link {
-        --link-color: var(--color-base-content);
-        --link-text: var(--text-base, 1rem);
-        --link-gap: 0.25rem;
+        --link-color: var(--kiss-comp-link-neutral-color-text-default, var(--color-base-content));
+        --link-color-hover: var(--kiss-comp-link-neutral-color-text-hover, var(--color-neutral-on-light));
+        --link-gap: var(--kiss-comp-link-md-spacing-gap, 0.25rem);
+        --link-font: var(--kiss-comp-link-md-font-inline, var(--text-base, 1rem));
 
         @apply inline-flex items-center;
         @apply leading-normal underline decoration-2;
@@ -23,12 +24,12 @@
         @apply cursor-pointer;
         @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
 
-        font-size: var(--link-text);
+        font: var(--link-font);
         gap: var(--link-gap);
-        color: color-mix(in oklch, var(--link-color) 80%, transparent);
+        color: var(--link-color);
 
         &:hover {
-            color: var(--link-color);
+            color: var(--link-color-hover);
         }
 
         &:focus-visible {
@@ -38,50 +39,56 @@
 
     // Colors
     .link-primary {
-        --link-color: var(--color-primary-solid);
+        --link-color: var(--kiss-comp-link-primary-color-text-default, var(--color-primary-solid));
+        --link-color-hover: var(--kiss-comp-link-primary-color-text-hover, var(--color-primary-hover-medium));
     }
 
     .link-secondary {
-        --link-color: var(--color-secondary-solid);
+        --link-color: var(--kiss-comp-link-secondary-color-text-default, var(--color-secondary-solid));
+        --link-color-hover: var(--kiss-comp-link-secondary-color-text-hover, var(--color-secondary-hover-medium));
     }
 
     .link-accent {
-        --link-color: var(--color-tertiary-solid);
+        --link-color: var(--kiss-comp-link-tertiary-color-text-default, var(--color-tertiary-solid));
+        --link-color-hover: var(--kiss-comp-link-tertiary-color-text-hover, var(--color-tertiary-hover-medium));
     }
 
     .link-success {
         --link-color: var(--color-status-success-solid);
+        --link-color-hover: var(--color-status-success-hover);
     }
 
     .link-warning {
         --link-color: var(--color-status-warning-solid);
+        --link-color-hover: var(--color-status-warning-hover);
     }
 
     .link-error {
         --link-color: var(--color-status-error-solid);
+        --link-color-hover: var(--color-status-error-hover);
     }
 
     // Sizes
     .link-xs {
-        --link-text: var(--text-xs, 0.75rem);
-        --link-gap: 0.125rem;
+        --link-gap: var(--kiss-comp-link-xs-spacing-gap, 0.125rem);
+        --link-font: var(--kiss-comp-link-xs-font-inline, var(--text-xs, 0.75rem));
     }
 
     .link-sm {
-        --link-text: var(--text-sm, 0.875rem);
-        --link-gap: 0.25rem;
+        --link-gap: var(--kiss-comp-link-sm-spacing-gap, 0.25rem);
+        --link-font: var(--kiss-comp-link-sm-font-inline, var(--text-sm, 0.875rem));
     }
 
-    // Default: text-base (no modifier needed)
+    // Default: md (defined in base)
 
     .link-lg {
-        --link-text: var(--text-lg, 1.125rem);
-        --link-gap: 0.375rem;
+        --link-gap: var(--kiss-comp-link-lg-spacing-gap, 0.375rem);
+        --link-font: var(--kiss-comp-link-lg-font-inline, var(--text-lg, 1.125rem));
     }
 
     .link-xl {
-        --link-text: var(--text-xl, 1.25rem);
-        --link-gap: 0.5rem;
+        --link-gap: var(--kiss-comp-link-xl-spacing-gap, 0.5rem);
+        --link-font: var(--kiss-comp-link-xl-font-inline, var(--text-xl, 1.25rem));
     }
 
     // Variants
@@ -114,7 +121,7 @@
         color: var(--color-base-content);
 
         &:hover {
-            color: var(--link-color);
+            color: var(--link-color-hover);
         }
     }
 
