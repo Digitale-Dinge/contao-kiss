@@ -19,7 +19,7 @@
         @apply p-4 text-base;
         @apply transition-all duration-200;
 
-        border-width: var(--border-width, 1px);
+        border-width: var(--border-width-thin, 1px);
         border-style: solid;
         border-color: var(--alert-border);
         border-radius: var(--radius-box, 0.5rem);

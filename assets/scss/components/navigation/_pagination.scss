@@ -43,7 +43,7 @@
             @apply focus-visible:ring-base-content/20;
             @apply h-10 min-w-10 px-3 text-base;
 
-            border-width: var(--border-width);
+            border-width: var(--border-width-thin);
             border-style: solid;
             border-color: transparent;
             border-radius: var(--radius-field);
@@ -64,7 +64,7 @@
             @apply bg-primary-solid text-primary-on-solid border-primary-border;
             @apply h-10 min-w-10 px-3 text-base;
 
-            border-width: var(--border-width);
+            border-width: var(--border-width-thin);
             border-style: solid;
             border-radius: var(--radius-field);
             box-shadow: var(--shadow);
@@ -125,7 +125,7 @@
             li > button,
             li > span:not(.sr-only),
             li > strong {
-                border-radius: 9999px;
+                border-radius: var(--radius-full);
             }
         }
 

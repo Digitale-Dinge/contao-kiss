@@ -28,7 +28,7 @@
 {% block element_header %}
     {% set accordion_header_attributes = attrs()
         .addClass('handorgel__header')
-        .addClass('text-primary')
+        .addClass('text-primary-solid')
         .addClass(styleManager(data).get('general', ['headline-font-size'])|default('h6'))
         .mergeWith(accordion_header_attributes|default)
     %}

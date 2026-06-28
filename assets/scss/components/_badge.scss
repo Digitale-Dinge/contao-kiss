@@ -28,7 +28,7 @@
         padding: var(--badge-py) var(--badge-px);
         gap: var(--badge-gap);
         font-size: var(--badge-text);
-        border-width: var(--border-width, 1px);
+        border-width: var(--border-width-thin, 1px);
         border-style: solid;
         border-color: var(--badge-border);
         border-radius: var(--radius-selector, 0.25rem);
@@ -134,7 +134,7 @@
 
     // Shapes
     .badge-pill {
-        border-radius: 9999px;
+        border-radius: var(--radius-full);
     }
 
     .badge-square {

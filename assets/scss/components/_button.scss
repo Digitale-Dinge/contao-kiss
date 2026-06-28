@@ -39,7 +39,7 @@
         font-size:     var(--btn-text);
         padding:       var(--btn-py) var(--btn-px);
         gap:           var(--btn-gap);
-        border-width:  var(--border-width, 1px);
+        border-width:  var(--border-width-thin, 1px);
         border-style:  solid;
         border-radius: var(--radius-field, 0.5rem);
         box-shadow:    var(--shadow, none);
