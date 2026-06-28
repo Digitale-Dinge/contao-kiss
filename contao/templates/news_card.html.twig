@@ -8,7 +8,7 @@
     {% block info %}
         <p class="info"><time datetime="{{ datetime }}">{{ date }}</time> {{ author }}</p>
     {% endblock %}
-    <{{ headline_unit|default('h2') }}>{{ linkHeadline|sanitize_html('contao') }}</{{ headline_unit|default('h2') }}>
+    <{{ headline_unit|default('h2') }}{{ headline_attributes|default }}>{{ linkHeadline|sanitize_html('contao') }}</{{ headline_unit|default('h2') }}>
 {% endblock %}
 
 {% block text_additional %}
