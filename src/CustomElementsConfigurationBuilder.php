@@ -355,9 +355,9 @@ final class CustomElementsConfigurationBuilder
     /**
      * @throws \Exception
      */
-    public function addCallToActionField(array $eval = []): self
+    public function addCallToActionField(array $eval = [], array $options = []): self
     {
-        $options = $this->isListField() ? $this->generateListCtaField() : [
+        $options = $this->isListField() ? $this->generateListCtaField($eval, $options) : [
             'inputType' => 'standardField',
         ];
 
@@ -399,9 +399,9 @@ final class CustomElementsConfigurationBuilder
         return $translated;
     }
 
-    private function generateListCtaField(): array
+    private function generateListCtaField(array $eval = [], array $options = []): array
     {
-        return [
+        return array_merge([
             'inputType' => 'list',
             'label' => [
                 $this->translator->trans('rsce.field.callToAction.label', [], 'rsce'),
@@ -426,6 +426,6 @@ final class CustomElementsConfigurationBuilder
                 'tl_class' => 'w100 clr call_to_action_widget',
                 'hide' => true
             ],
-        ];
+        ], $options);
     }
 }
