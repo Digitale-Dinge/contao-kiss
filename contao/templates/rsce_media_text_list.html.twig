@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block media_text %}
-    <div{{ attrs(media_text_item_attributes|default).addClass('media_text') }}>
+    <div{{ attrs(media_text_item_attributes|default).addClass(['media_text', 'responsive-body3']) }}>
         {{ parent() }}
     </div>
 {% endblock %}

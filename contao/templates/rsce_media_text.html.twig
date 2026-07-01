@@ -1,7 +1,7 @@
 {% extends '@Contao/content_element/_base.html.twig' %}
 {% use '@Contao/kiss_component/media/_media_text.html.twig' %}
 
-{% set attributes = attrs(attributes|default).addClass('media_text') %}
+{% set attributes = attrs(attributes|default).addClass(['media_text', 'responsive-body3']) %}
 
 {% block headline %}
     {% if headline.text %}

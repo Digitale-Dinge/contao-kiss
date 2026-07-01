@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block media_text %}
-    <{{ tag_name|default('div') }}{% block attributes %}{{ attrs(attributes|default).addClass('media_text') }}{% endblock %}>
+    <{{ tag_name|default('div') }}{% block attributes %}{{ attrs(attributes|default).addClass(['media_text', 'responsive-body3']) }}{% endblock %}>
         {{ parent() }}
     </{{ tag_name|default('div') }}>
 {% endblock %}
