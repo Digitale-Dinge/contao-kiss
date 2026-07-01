@@ -5,9 +5,9 @@ style_options:
 
     layout:
         container:
-            small:                  Satzspiegel schmal
+            small:                  Satzspiegel kleiner
             base:                   Satzspiegel
-            narrow:                 Satzspiegel schmaler
+            narrow:                 Satzspiegel klein
             full_pad:               Volle Breite mit Abstand links und rechts
             full:                   Volle Breite ohne Abstand links und rechts
 

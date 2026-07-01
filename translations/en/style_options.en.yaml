@@ -5,9 +5,9 @@ style_options:
 
     layout:
         container:
-            small:                  Narrow text width
+            small:                  Very small text width
             base:                   Default text width
-            narrow:                 Extra narrow text width
+            narrow:                 Small text width
             full_pad:               Full width with left and right padding
             full:                   Full width without left and right padding
 
