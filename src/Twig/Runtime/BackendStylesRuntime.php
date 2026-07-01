@@ -108,6 +108,10 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
      */
     private function loadKissStyles(int $id, string $table, bool $fromParent = false): array
     {
+        if ('tl_content' !== $table) {
+            return [];
+        }
+
         $schemaManager = $this->connection->createSchemaManager();
 
         $columns = array_keys($schemaManager->listTableColumns($table));
