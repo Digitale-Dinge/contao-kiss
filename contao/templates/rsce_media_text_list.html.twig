@@ -4,7 +4,7 @@
 
 {% if show_as_card|default %}
     {% set media_text_item_attributes = attrs().addClass([
-        'card', '[&_img]:rounded-none!'
+        'card'
     ]).mergeWith(media_text_item_attributes|default) %}
 
     {% set text_attributes = attrs().addClass([
