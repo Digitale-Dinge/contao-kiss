@@ -12,6 +12,10 @@
 
 {% block text_link %}
     {% if data.icon|default %}
+        {% set link_attributes = attrs(link_attributes|default)
+            .addClass('inline-flex items-center')
+            .addClass('[&_svg]:h-[1em] [&_svg]:w-[1em] [&_svg]:shrink-0')
+        %}
         {{- text_before -}}
         <a{{ attrs(link_attributes|default) }}>
             {{ include('@Contao/kiss_component/media/_icon_text.html.twig', data|merge({text: link_text, add_wrapper: false})) }}
