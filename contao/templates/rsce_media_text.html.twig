@@ -1,7 +1,17 @@
 {% extends '@Contao/content_element/_base.html.twig' %}
 {% use '@Contao/kiss_component/media/_media_text.html.twig' %}
 
-{% set attributes = attrs(attributes|default).addClass(['media_text', 'responsive-body3']) %}
+{% set attributes = attrs(attributes|default)
+    .addClass(['media_text', 'responsive-body3'])
+    .addClass('card [&_img]:rounded-none!', show_as_card|default)
+
+ %}
+
+{% if show_as_card|default %}
+    {% set text_attributes = attrs().addClass([
+        'card-body'
+    ]).mergeWith(text_attributes|default) %}
+{% endif %}
 
 {% block headline %}
     {% if headline.text %}

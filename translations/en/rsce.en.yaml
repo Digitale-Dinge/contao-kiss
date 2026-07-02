@@ -1,42 +1,48 @@
 rsce:
     group:
-        settings:           Element settings
-        media:              Image/Icon/Text
-        grid:               Grid settings
+        settings:               Element settings
+        media:                  Image/Icon/Text
+        grid:                   Grid settings
 
     list:
-        label:              Elements
-        description:        'Insert any number of elements.'
-        element:            'Element %s'
+        label:                  Elements
+        description:            'Insert any number of elements.'
+        element:                'Element %s'
 
     field:
         type:
-            label:          Type
-            description:    Here you can choose a type for the element.
+            label:              Type
+            description:        Here you can choose a type for the element.
             options:
-                image:      Image
-                icon:       Icon
-                separated:  Separated
+                image:          Image
+                icon:           Icon
+                separated:      Separated
         callToAction:
-            label:          Call-To-Action
-            description:    Here you can enter one or more call-to-actions which will be displayed in the element.
-            element:        Action
+            label:              Call-To-Action
+            description:        Here you can enter one or more call-to-actions which will be displayed in the element.
+            element:            Action
 
     media_text:
-        label:              Media text
-        description:        A media text element
+        label:                  Media text
+        description:            A media text element
+        field:
+            show_as_card:
+                label:          Show as card
+                description:    Show this element as a card
+
 
     media_text_list:
-        label:              Media text list
-        description:        A media text list element
-        mediaMargin:
-            label:          Spacing to media
-            description:    Determine the bottom spacing of the media.
+        label:                  Media text list
+        description:            A media text list element
+        field:
+            show_as_card:
+                label:          Show as cards
+                description:    Show elements as cards
 
     icon:
-        label:              Icon
-        description:        A single icon with optional description
+        label:                  Icon
+        description:            A single icon with optional description
         field:
             text:
-                label: Description
-                description: A describing text for the icon
+                label:          Description
+                description:    A describing text for the icon

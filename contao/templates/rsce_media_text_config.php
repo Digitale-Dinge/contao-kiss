@@ -14,6 +14,14 @@ return $configBuilder
     ->addGroup('settings')
     ->addDependsOnField('type', ['image', 'icon', 'separated'])
     ->addImageSizeField([], 'type')
+    ->addTextAlignmentField()
+    ->addField('show_as_card', [
+        'label' => true,
+        'inputType' => 'checkbox',
+        'eval' => [
+            'tl_class' => 'w25',
+        ],
+    ])
     ->addIconField([], 'type')
     ->addGroup('media')
     ->addImageField([], 'type')

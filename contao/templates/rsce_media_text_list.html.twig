@@ -2,6 +2,16 @@
 {% use '@Contao/kiss_component/media/_media_text.html.twig' %}
 {% extends '@Contao/content_element/_base.html.twig' %}
 
+{% if show_as_card|default %}
+    {% set media_text_item_attributes = attrs().addClass([
+        'card', '[&_img]:rounded-none!'
+    ]).mergeWith(media_text_item_attributes|default) %}
+
+    {% set text_attributes = attrs().addClass([
+        'card-body'
+    ]).mergeWith(text_attributes|default) %}
+{% endif %}
+
 {% set attributes = attrs(attributes|default).addClass('media_text_list') %}
 
 {% block headline %}
@@ -18,7 +28,6 @@
 
 {% block content %}
     {% for item in list %}
-        {% set media_attributes = attrs().addClass(mediaMargin|default) %}
         {{ block('media_text') }}
     {% endfor %}
 {% endblock %}

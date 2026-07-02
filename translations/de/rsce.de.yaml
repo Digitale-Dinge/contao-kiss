@@ -1,42 +1,47 @@
 rsce:
     group:
-        settings:           Element-Einstellungen
-        media:              Bild/Icon/Text
-        grid:               Grid-Einstellungen
+        settings:               Element-Einstellungen
+        media:                  Bild/Icon/Text
+        grid:                   Grid-Einstellungen
 
     list:
-        label:              Elemente
-        description:        'Fügen Sie eine beliebige Anzahl an Elementen ein.'
-        element:            'Element %s'
+        label:                  Elemente
+        description:            'Fügen Sie eine beliebige Anzahl an Elementen ein.'
+        element:                'Element %s'
 
     field:
         type:
-            label:          Typ
-            description:    Hier können Sie einen Element-Typen auswählen.
+            label:              Typ
+            description:        Hier können Sie einen Element-Typen auswählen.
             options:
-                image:      Bild
-                icon:       Icon
-                separated:  Separiert
+                image:          Bild
+                icon:           Icon
+                separated:      Separiert
         callToAction:
-            label:          Call-To-Action
-            description:    Hier können Sie eine oder mehrere Call-To-Action angeben, welche im Element angezeigt werden sollen.
-            element:        Aktion
+            label:              Call-To-Action
+            description:        Hier können Sie eine oder mehrere Call-To-Action angeben, welche im Element angezeigt werden sollen.
+            element:            Aktion
 
     media_text:
-        label:              Medien-Text
-        description:        Ein Medien-Text Element
+        label:                  Medien-Text
+        description:            Ein Medien-Text Element
+        field:
+            show_as_card:
+                label:          Als Karte anzeigen
+                description:    Dieses Element als Karte anzeigen
 
     media_text_list:
-        label:              Medien-Text-Liste
-        description:        Eine Medien-Text Liste
-        mediaMargin:
-            label:          Abstand zu Media
-            description:    Bestimmen Sie den Abstand unterhalb des Mediums.
+        label:                  Medien-Text-Liste
+        description:            Eine Medien-Text Liste
+        field:
+            show_as_card:
+                label:          Als Karten anzeigen
+                description:    Elemente als Karten anzeigen
 
     icon:
-        label:              Icon
-        description:        Ein einzelnes Icon mit optionalem Beschreibungstext
+        label:                  Icon
+        description:            Ein einzelnes Icon mit optionalem Beschreibungstext
         field:
             text:
-                label: Beschreibung
-                description: Ein beschreibender Text für das Icon
+                label:          Beschreibung
+                description:    Ein beschreibender Text für das Icon
