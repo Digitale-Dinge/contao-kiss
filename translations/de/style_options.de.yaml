@@ -5,11 +5,12 @@ style_options:
 
     layout:
         container:
-            small:                  Satzspiegel kleiner
-            base:                   Satzspiegel
-            narrow:                 Satzspiegel klein
-            full_pad:               Volle Breite mit Abstand links und rechts
-            full:                   Volle Breite ohne Abstand links und rechts
+            base:                   Normal
+            narrower:               Sehr schmal
+            narrow:                 Schmal
+            full_pad:               Volle Breite mit Seitenabstand
+            full:                   Volle Breite ohne Seitenabstand
+            reset:                  '-'
 
         column:
             one:                    1 Spalte

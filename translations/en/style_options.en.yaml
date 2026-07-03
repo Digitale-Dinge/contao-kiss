@@ -5,11 +5,12 @@ style_options:
 
     layout:
         container:
-            small:                  Very small text width
-            base:                   Default text width
-            narrow:                 Small text width
-            full_pad:               Full width with left and right padding
-            full:                   Full width without left and right padding
+            base:                   Normal
+            narrower:               Very narrow
+            narrow:                 Narrow
+            full_pad:               Full width with padding
+            full:                   Full width without padding
+            reset:                  '-'
 
         column:
             one:                    1 Column

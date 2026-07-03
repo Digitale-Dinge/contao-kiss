@@ -28,7 +28,7 @@
         }
     },
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "contao/core-bundle": "^5.7",
         "digitaledinge/contao-company": "@dev",
         "digitaledinge/contao-grid-ratio-widget": "^0.1.1",

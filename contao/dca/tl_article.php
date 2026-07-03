@@ -9,7 +9,6 @@ $GLOBALS['TL_DCA']['tl_article']['fields']['contentWidth'] = [
     'eval' => [
         'tl_class' => 'w25 clr',
         'class' => 'widget-icon icon-width',
-        'includeBlankOption' => true,
         'chosen' => true,
     ],
 ];

@@ -3,59 +3,46 @@
  *
  * Container classes for content-width settings in Articles and Content Elements
  * Matches PHP enum: DigitaleDinge\ContaoKiss\Styles\Option\Layout\Container
- *
- * Usage: container-{small|narrow|base|full-pad|full}
  */
 
 @layer components {
-    // ============================================
-    // CONTAINER WIDTHS
-    // ============================================
-    .container-small {
-        @apply max-w-4xl mx-auto px-4 md:px-6;
-    }
-
-    .container-narrow {
-        @apply max-w-5xl mx-auto px-4 md:px-6;
-    }
-
-    .container-base {
-        @apply max-w-7xl mx-auto px-4 md:px-6 lg:px-8;
-    }
-
+    .container-narrower,
+    .container-narrow,
+    .container-base,
     .container-full-pad {
-        @apply w-full px-4 md:px-6 lg:px-8;
-    }
+        --container-px: --spacing(4);
+        padding-inline: var(--container-px);
+        margin-inline: auto;
 
-    .container-full {
-        @apply w-full;
-    }
-
-    // ============================================
-    // NESTED CONTAINER HANDLING
-    // ============================================
-    // Prevent double padding when containers are nested
-    [class*="container-"]:not(.container-full) {
-        [class*="container-"] {
-            @apply px-0;
+        @variant md {
+            --container-px: --spacing(7);
         }
     }
 
-    // ============================================
-    // COLUMN GRID SYSTEM
-    // ============================================
-    // Used for: Forms, Galleries, Content Element Groups
-    // Matches PHP enum: DigitaleDinge\ContaoKiss\Styles\Option\Layout\Column
-    //
-    // How it works:
-    // - Editor picks "3 columns" in backend
-    // - Class "cols_3" is added to the element
-    // - Children are arranged in a 3-column grid
-    //
-    // Responsive behavior:
-    // - Mobile: 1 column (stacked)
-    // - Tablet: 2 columns
-    // - Desktop: Full columns
+    .container-narrower {
+        max-width: calc(var(--kiss-sys-sizing-responsive-semantic-container-narrow, 37.5rem) + 2 * var(--container-px));
+    }
+
+    .container-narrow {
+        max-width: calc(var(--kiss-sys-sizing-responsive-semantic-container-narrow_temp, 63.5rem) + 2 * var(--container-px));
+    }
+
+    .container-base {
+        max-width: calc(var(--kiss-sys-sizing-responsive-semantic-container-base, 76.5rem) + 2 * var(--container-px));
+    }
+
+    .container-full-pad,
+    .container-full {
+        max-width: 100%;
+    }
+
+    // Nested container handling - prevent double padding
+    [class*="container-"]:not(.container-full) {
+        [class*="container-"] {
+            --container-px: 0px;
+        }
+    }
+
     .cols_1 {
         @apply grid grid-cols-1 gap-4;
     }
@@ -108,6 +95,7 @@
         @apply overflow-hidden;
     }
 
+    // Contao responsive css
     .media--right {
         > figure {
             @apply float-right ml-4;

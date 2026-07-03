@@ -7,11 +7,12 @@ namespace DigitaleDinge\ContaoKiss\Styles\Option\Layout;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
- * @method string small
  * @method string base
+ * @method string narrower
  * @method string narrow
  * @method string full_pad
  * @method string full
+ * @method string reset
  */
 class ContainerOption extends StyleOption
 {

@@ -9,11 +9,12 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 enum Container: string implements TranslatableLabelInterface
 {
-    case small = 'container-small';
     case base = 'container-base';
+    case narrower = 'container-narrower';
     case narrow = 'container-narrow';
     case full_pad = 'container-full-pad';
     case full = 'container-full';
+    case reset = '';
 
     public function label(): TranslatableMessage
     {
