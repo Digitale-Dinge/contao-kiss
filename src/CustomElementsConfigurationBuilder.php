@@ -147,7 +147,7 @@ final class CustomElementsConfigurationBuilder
     public function addGridGroup(): self
     {
         if ($this->isListField()) {
-            throw new \Exception('Using addGridGroup() is not allowed inside lists.');
+            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
         }
 
         $this->addGroup('grid', [$this->translator->trans('rsce.group.grid', [], 'rsce')]);
@@ -367,10 +367,23 @@ final class CustomElementsConfigurationBuilder
     public function addBackgroundField(array $eval = []): self
     {
         if ($this->isListField()) {
-            throw new \Exception('Using addBackgroundField() is not allowed inside lists.');
+            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
         }
 
         return $this->addField('backgroundColor', ['inputType' => 'standardField'], $eval);
+    }
+
+    public function addShowAsCardField(array $eval = []): self
+    {
+        if ($this->isListField()) {
+            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+        }
+
+        if ([] !== $eval) {
+            $eval = ['submitOnChange' => false];
+        }
+
+        return $this->addField('showAsCard', ['inputType' => 'standardField'], $eval);
     }
 
     public function build(): array
