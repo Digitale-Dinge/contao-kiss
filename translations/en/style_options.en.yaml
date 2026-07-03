@@ -49,9 +49,9 @@ style_options:
 
         alignment:
             y:
-                start:              Start
+                start:              Top
                 center:             Center
-                end:                End
+                end:                Bottom
 
     background_color:
         - Background color
