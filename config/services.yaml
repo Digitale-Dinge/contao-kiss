@@ -20,5 +20,6 @@ services:
         public: true
         arguments:
             - '@translator'
+            - '@contao.framework'
 
     DigitaleDinge\ContaoKiss\CustomElementsConfigurationBuilder: '@kiss.rsce_config.builder'

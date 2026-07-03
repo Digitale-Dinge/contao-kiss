@@ -16,13 +16,7 @@ return $configBuilder
     ->addDependsOnField('type', ['image', 'icon', 'separated'])
     ->addImageSizeField([], 'type')
     ->addTextAlignmentField()
-    ->addField('show_as_card', [
-        'label' => true,
-        'inputType' => 'checkbox',
-        'eval' => [
-            'tl_class' => 'w25',
-        ],
-    ])
+    ->addShowAsCardField()
     ->startList()
         ->addIconField([], '../type')
         ->addImageField([], '../type')

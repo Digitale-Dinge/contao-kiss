@@ -2,15 +2,34 @@
 {% use '@Contao/kiss_component/media/_media_text.html.twig' %}
 {% extends '@Contao/content_element/_base.html.twig' %}
 
+{% set show_as_card = data.showAsCard|default %}
+
 {% if show_as_card|default %}
-    {% set media_text_item_attributes = attrs().addClass('card').mergeWith(media_text_item_attributes|default) %}
+    {% set media_text_item_attributes = attrs()
+        .addClass(['card', styles.background(data.backgroundColor|default)])
+        .mergeWith(media_text_item_attributes|default)
+    %}
     {% set text_attributes = attrs().addClass(['card-body']).mergeWith(text_attributes|default) %}
     {% set headline_classes = attrs().addClass('responsive-headline3!').mergeWith(headline_classes|default) %}
 {% endif %}
 
 {# Always set the responsive body3 on media text cards #}
 {% set text_attributes = attrs().addClass('responsive-body3').mergeWith(text_attributes|default) %}
-{% set attributes = attrs(attributes|default).addClass('media_text_list') %}
+
+{# Rebuild the attributes to remove bg color #}
+{% block attributes %}
+    {% set attributes = attrs(attributes|default)
+        .addClass([
+            styles.container(data.contentWidth|default),
+            styles.padding_top(data.paddingTop|default),
+            styles.padding_bottom(data.paddingBottom|default),
+            styles.margin_top(data.marginTop|default),
+            styles.margin_bottom(data.marginBottom|default),
+            styles.text_alignment(data.textAlignment|default),
+        ])
+        .addClass('media_text_list')
+    %}
+{% endblock %}
 
 {% block headline %}
     {% if item.headline.value|default or item.topline|default %}
