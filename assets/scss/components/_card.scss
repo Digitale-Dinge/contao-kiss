@@ -53,9 +53,8 @@
 
         // Card Body
         &-body {
-            @apply flex flex-col flex-1;
+            @apply flex flex-col flex-1 gap-2;
             padding: var(--kiss-comp-card-spacing-padding, 1.25rem) var(--kiss-comp-card-spacing-padding, 1.5rem);
-            @apply gap-2;
 
             :is(h1, h2, h3, h4, h5, h6, .topline) {
                 @apply m-0;

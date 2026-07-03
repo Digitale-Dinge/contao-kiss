@@ -3,13 +3,9 @@
 {% extends '@Contao/content_element/_base.html.twig' %}
 
 {% if show_as_card|default %}
-    {% set media_text_item_attributes = attrs().addClass([
-        'card'
-    ]).mergeWith(media_text_item_attributes|default) %}
-
-    {% set text_attributes = attrs().addClass([
-        'card-body'
-    ]).mergeWith(text_attributes|default) %}
+    {% set media_text_item_attributes = attrs().addClass(['card']).mergeWith(media_text_item_attributes|default) %}
+    {% set text_attributes = attrs().addClass(['card-body', 'responsive-body3']).mergeWith(text_attributes|default) %}
+    {% set headline_classes = attrs().addClass('responsive-headline3!').mergeWith(headline_classes|default) %}
 {% endif %}
 
 {% set attributes = attrs(attributes|default).addClass('media_text_list') %}

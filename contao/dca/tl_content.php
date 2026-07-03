@@ -9,6 +9,9 @@ use Doctrine\DBAL\Platforms\MySQLPlatform;
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'ctaAsButton';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['ctaAsButton'] = 'ctaType,ctaColor,ctaSize,ctaShape';
 
+$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'showAsCard';
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['showAsCard'] = 'backgroundColor';
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['inputType'] = 'collection';
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['tl_class'] = 'w50 clr hl_collection';
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['fields'] = [
@@ -292,6 +295,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['showAsCard'] = [
     'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w50',
+        'submitOnChange' => true,
     ],
 ];
 

@@ -4,6 +4,8 @@
 
 {% if show_as_card %}
     {% set attributes = attrs().addClass('card').mergeWith(attributes|default) %}
+    {% set headline_classes = attrs().addClass('responsive-headline3!').mergeWith(headline_classes|default) %}
+    {% set text_attributes = attrs().addClass('responsive-body3').mergeWith(text_attributes|default) %}
 {% endif %}
 
 {% block inner %}
