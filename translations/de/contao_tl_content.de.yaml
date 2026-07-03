@@ -98,6 +98,10 @@ tl_content:
         - Text-Aussehen
         - Hier können Sie ein Aussehen für den Textinhalt auswählen.
 
+    showAsCard:
+        - Als Karte anzeigen
+        - Dieses Element als Karte anzeigen.
+
     icon:
         - Icon
         - Hier können Sie ein Icon auswählen.

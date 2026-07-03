@@ -98,6 +98,10 @@ tl_content:
         - Text appearance
         - Here you can choose an appearance for the text content.
 
+    showAsCard:
+        - Show as card
+        - Show this element as a card.
+
     icon:
         - Icon
         - Here you can choose an icon.

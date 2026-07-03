@@ -286,6 +286,15 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['textAppearance'] = [
     ],
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['showAsCard'] = [
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w50',
+    ],
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
     'inputType' => 'svgIconPicker',
     'targetColumn' => 'kiss_styles',
@@ -324,6 +333,11 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['allowHtml'] = tr
 
 PaletteManipulator::create()
     ->addField('callToAction', 'text_legend', PaletteManipulator::POSITION_APPEND)
+    ->applyToPalette('text', 'tl_content')
+;
+
+PaletteManipulator::create()
+    ->addField(['textAppearance', 'showAsCard'], 'text', PaletteManipulator::POSITION_BEFORE)
     ->applyToPalette('text', 'tl_content')
 ;
 
