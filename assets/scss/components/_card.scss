@@ -34,13 +34,11 @@
         border-radius: var(--kiss-comp-card-border-radius-default, var(--radius-box, 0.5rem));
         box-shadow: var(--shadow-card);
 
-        // Figure/Image handling
-        > figure,
-        > .card-figure {
-            @apply relative overflow-hidden w-full;
+        figure:not(.card-body *) {
+            @apply w-full;
 
-            > img {
-                @apply w-full h-auto object-cover;
+            img {
+                @apply w-full h-auto object-cover rounded-none!;
             }
         }
 
@@ -213,6 +211,8 @@
         box-shadow: 0 8px 32px 0 rgb(0 0 0 / 0.15);
     }
 
+    // ToDo: This hallucinated CSS won't work due to the nature of the card component
+    /*
     // Side layout
     .card-side {
         @apply sm:flex-row;
@@ -254,7 +254,7 @@
         > .card-footer {
             @apply relative z-10 text-white;
         }
-    }
+    }*/
 
     // Interactive states
     .card-hover {

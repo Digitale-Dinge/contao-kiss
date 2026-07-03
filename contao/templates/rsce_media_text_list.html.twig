@@ -3,11 +3,13 @@
 {% extends '@Contao/content_element/_base.html.twig' %}
 
 {% if show_as_card|default %}
-    {% set media_text_item_attributes = attrs().addClass(['card']).mergeWith(media_text_item_attributes|default) %}
-    {% set text_attributes = attrs().addClass(['card-body', 'responsive-body3']).mergeWith(text_attributes|default) %}
+    {% set media_text_item_attributes = attrs().addClass('card').mergeWith(media_text_item_attributes|default) %}
+    {% set text_attributes = attrs().addClass(['card-body']).mergeWith(text_attributes|default) %}
     {% set headline_classes = attrs().addClass('responsive-headline3!').mergeWith(headline_classes|default) %}
 {% endif %}
 
+{# Always set the responsive body3 on media text cards #}
+{% set text_attributes = attrs().addClass('responsive-body3').mergeWith(text_attributes|default) %}
 {% set attributes = attrs(attributes|default).addClass('media_text_list') %}
 
 {% block headline %}
@@ -17,7 +19,7 @@
 {% endblock %}
 
 {% block media_text %}
-    <div{{ attrs(media_text_item_attributes|default).addClass(['media_text', 'responsive-body3']) }}>
+    <div{{ attrs(media_text_item_attributes|default).addClass('media_text') }}>
         {{ parent() }}
     </div>
 {% endblock %}
