@@ -108,6 +108,11 @@ style_options:
             h5:                     h5
             h6:                     h6
 
+        display:
+            display_one:            Titel Riesig
+            display_two:            Titel Groß
+            display_three:          Titel Normal
+
         alignment:
             start:                  Anfang
             center:                 Zentriert
@@ -124,8 +129,9 @@ style_options:
                 wide:               Breit
                 block:              Volle Breite
 
-    size:                           Größe
+    display:                        Titel
     heading:                        Überschrift
+    size:                           Textgröße
 
     position:
         left:                       Links

@@ -69,6 +69,11 @@ class StylesVariable
         return $this->getStyleOption(Typography\HeadingOption::class, $key);
     }
 
+    public function getFont_display(string|null $key = null): StyleOption|Typography\DisplayOption
+    {
+        return $this->getStyleOption(Typography\DisplayOption::class, $key);
+    }
+
     public function getText_alignment(string|null $key = null): StyleOption|Typography\AlignmentOption
     {
         return $this->getStyleOption(Typography\AlignmentOption::class, $key);

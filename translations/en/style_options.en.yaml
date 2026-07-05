@@ -108,6 +108,11 @@ style_options:
             h5:                     h5
             h6:                     h6
 
+        display:
+            display_one:            Display Huge
+            display_two:            Display Large
+            display_three:          Display Normal
+
         alignment:
             start:                  Start
             center:                 Center
@@ -124,8 +129,9 @@ style_options:
                 wide:               Wide
                 block:              Full width
 
-    size:                           Size
+    display:                        Display
     heading:                        Heading
+    size:                           Text size
 
     position:
         left:                       Left

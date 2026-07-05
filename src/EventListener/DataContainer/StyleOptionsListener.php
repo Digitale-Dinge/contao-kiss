@@ -28,10 +28,19 @@ final class StyleOptionsListener
     {}
 
     #[AsCallback('tl_content', 'fields.headline.fields.appearance.options')]
-    #[AsCallback('tl_content', 'fields.textAppearance.options')]
     #[AsCallback('tl_module', 'fields.headline.fields.appearance.options')]
-    #[AsCallback('tl_form_field', 'fields.textAppearance.options')]
     public function addHeadlineAppearanceOptions(): array
+    {
+        return [
+            $this->translator->trans('style_options.display', [], 'style_options') => $this->getTranslatedOptions(Typography\Display::class),
+            $this->translator->trans('style_options.heading', [], 'style_options') => $this->getTranslatedOptions(Typography\Heading::class),
+            $this->translator->trans('style_options.size', [], 'style_options') => $this->getTranslatedOptions(Typography\FontSize::class),
+        ];
+    }
+
+    #[AsCallback('tl_content', 'fields.textAppearance.options')]
+    #[AsCallback('tl_form_field', 'fields.textAppearance.options')]
+    public function addTextAppearanceOptions(): array
     {
         return [
             $this->translator->trans('style_options.heading', [], 'style_options') => $this->getTranslatedOptions(Typography\Heading::class),
