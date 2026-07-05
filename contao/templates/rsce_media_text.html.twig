@@ -10,7 +10,7 @@
 
 {% if show_as_card|default %}
     {% set text_attributes = attrs().addClass(['card-body', 'responsive-body3']).mergeWith(text_attributes|default) %}
-    {% set headline_classes = attrs().addClass('responsive-headline3!').mergeWith(headline_classes|default) %}
+    {% set headline_classes = attrs().addClass('responsive-headline3').mergeWith(headline_classes|default) %}
 {% endif %}
 
 {% block headline %}

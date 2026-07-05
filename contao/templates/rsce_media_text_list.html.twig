@@ -10,7 +10,7 @@
         .mergeWith(media_text_item_attributes|default)
     %}
     {% set text_attributes = attrs().addClass(['card-body']).mergeWith(text_attributes|default) %}
-    {% set headline_classes = attrs().addClass('responsive-headline3!').mergeWith(headline_classes|default) %}
+    {% set headline_classes = attrs().addClass('responsive-headline3').mergeWith(headline_classes|default) %}
 {% endif %}
 
 {# Always set the responsive body3 on media text cards #}
