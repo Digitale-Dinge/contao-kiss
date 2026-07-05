@@ -145,9 +145,10 @@ final class StyleOptionsListener
     }
 
     #[AsCallback('tl_content', 'fields.ctaSize.options')]
+    #[AsCallback('tl_content', 'fields.elementSize.options')]
     #[AsCallback('tl_content', 'fields.callToAction.fields.size.options')]
     #[AsCallback('tl_form_field', 'fields.fieldSize.options')]
-    public function addSizeOptions(): array
+    public function addSizeOptions(DataContainer $dc): array
     {
         return $this->getTranslatedOptions(Modifier\Size::class);
     }

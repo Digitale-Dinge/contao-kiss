@@ -54,6 +54,13 @@
             @apply flex flex-col flex-1 gap-2;
             padding: var(--kiss-comp-card-spacing-padding, 1.25rem) var(--kiss-comp-card-spacing-padding, 1.5rem);
 
+            hgroup {
+                .topline {
+                    @apply mb-3;
+                }
+            }
+
+            // ToDo: Heading Margin reset hgroup *
             :is(h1, h2, h3, h4, h5, h6, .topline) {
                 @apply m-0;
             }

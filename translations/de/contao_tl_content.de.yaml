@@ -109,3 +109,8 @@ tl_content:
     iconPosition:
         - Position
         - Hier können Sie die Position des Icons auswählen.
+
+    elementSize:
+        - Größe
+        - Bestimmen Sie die Größe des Elements.
+        - Normal # Default label - size

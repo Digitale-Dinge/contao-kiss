@@ -6,7 +6,8 @@
 {% set attributes = attrs(attributes|default)
     .addClass(['media_text', 'responsive-body3'])
     .addClass('card', show_as_card|default)
- %}
+    .addClass('card-' ~ styles.size(data.elementSize|default), data.elementSize|default)
+%}
 
 {% if show_as_card|default %}
     {% set text_attributes = attrs().addClass(['card-body', 'responsive-body3']).mergeWith(text_attributes|default) %}
