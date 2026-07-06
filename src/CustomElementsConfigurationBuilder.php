@@ -254,7 +254,8 @@ final class CustomElementsConfigurationBuilder
     public function addImageField(
         array $eval = [],
         string|null $dependsOn = null,
-        bool $includeImageSizeField = false,
+        bool $includeSizeField = false,
+        bool $includeImageSizeField = false, /* @deprecated  has been deprecated, use includeSizeField instead !*/
     ): self
     {
         $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['singleSRC'] : [
@@ -273,7 +274,7 @@ final class CustomElementsConfigurationBuilder
 
         $this->addField('singleSRC', $options, $eval);
 
-        if ($includeImageSizeField) {
+        if ($includeSizeField || $includeImageSizeField) {
             $this->addImageSizeField([], $dependsOn);
         }
 
@@ -296,6 +297,55 @@ final class CustomElementsConfigurationBuilder
         }
 
         $this->addField('size', $options, $eval);
+
+        return $this;
+    }
+
+    public function addLogoField(
+        array $eval = [],
+        string|null $dependsOn = null,
+        bool $includeSizeField = false,
+    ): self
+    {
+        $options = [
+            'label' => $this->getTranslations(["logo.label", "logo.description"]),
+            'inputType' => 'fileTree',
+            'eval' => [
+                'filesOnly' => true,
+                'fieldType' => 'radio',
+                'mandatory' => true,
+                'tl_class' => 'clr'
+            ],
+        ];
+
+        if (null !== $dependsOn) {
+            $options['dependsOn'] = [
+                'field' => $dependsOn,
+                'value' => 'image',
+            ];
+        }
+
+        $this->addField('logoSRC', $options, $eval);
+
+        if ($includeSizeField) {
+            $this->addLogoSizeField([], $dependsOn);
+        }
+
+        return $this;
+    }
+
+    public function addLogoSizeField(array $eval = [], string|null $dependsOn = null): self
+    {
+        $options = $GLOBALS['TL_DCA']['tl_content']['fields']['size'];
+
+        if (null !== $dependsOn) {
+            $options['dependsOn'] = [
+                'field' => $dependsOn,
+                'value' => 'image',
+            ];
+        }
+
+        $this->addField('logoSize', $options, $eval);
 
         return $this;
     }

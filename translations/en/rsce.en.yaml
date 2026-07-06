@@ -54,3 +54,7 @@ rsce:
             text:
                 label:          Description
                 description:    A describing text for the icon
+
+    logo:
+        label:                  Logo
+        description:            Here you can choose a logo.
