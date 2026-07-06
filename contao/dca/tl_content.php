@@ -320,6 +320,40 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
     ],
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['responsiveVideo'] = [
+    'inputType' => 'rowWizard',
+    'fields' => [
+        'screen' => [
+            'label' => &$GLOBALS['TL_LANG']['tl_content']['responsiveVideoFieldScreen'],
+            'inputType' => 'select',
+            'options' => ['Mobile', 'Tablet', 'Desktop'],
+            'eval' => [
+                'cell_style' => 'width: 120px',
+            ]
+        ],
+        'video' => [
+            'label' => &$GLOBALS['TL_LANG']['tl_content']['responsiveVideoFieldVideo'],
+            'inputType' => 'fileTree',
+            'eval' => [
+                'multiple' => false,
+                'fieldType' => 'radio',
+                'filesOnly' => true,
+                'extensions' => 'mp4,webm',
+            ],
+        ],
+    ],
+    'eval' => [
+        'tl_class' => 'clr',
+        'style' => 'max-width: 800px',
+        'max' => 3,
+    ],
+    'sql' => [
+        'type' => 'blob',
+        'length' => MySQLPlatform::LENGTH_LIMIT_BLOB,
+        'notnull' => false
+    ]
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['iconPosition'] = [
     'exclude' => true,
     'inputType' => 'radioTable',

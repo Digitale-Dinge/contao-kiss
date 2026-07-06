@@ -114,3 +114,10 @@ tl_content:
         - Größe
         - Bestimmen Sie die Größe des Elements.
         - Normal # Default label - size
+
+    responsiveVideo:
+        - Videos
+        - Hier können Sie Videos auswählen, welche in responsiven Ansichten geladen werden sollen.
+
+    responsiveVideoFieldScreen: Gerät
+    responsiveVideoFieldVideo: Video

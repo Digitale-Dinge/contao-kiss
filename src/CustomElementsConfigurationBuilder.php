@@ -144,6 +144,9 @@ final class CustomElementsConfigurationBuilder
         ]);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function addGridGroup(): self
     {
         if ($this->isListField()) {
@@ -164,9 +167,9 @@ final class CustomElementsConfigurationBuilder
         // Blank option
         if ($options[array_key_first($options)] === '') {
             $blankOption = true;
-            unset($options[array_key_first($options)]);
+            array_shift($options);
 
-            if ($eval['blankOptionLabel'] ?? false) {
+            if (($eval['blankOptionLabel'] ?? false) === true) {
                 $eval['blankOptionLabel'] = $this->translator->trans("rsce.$this->type.field.$key.blankOption", [], 'rsce');
             }
         }
@@ -372,6 +375,9 @@ final class CustomElementsConfigurationBuilder
         return $this->addField('callToAction', $options, $eval);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function addBackgroundField(array $eval = []): self
     {
         if ($this->isListField()) {
@@ -381,6 +387,30 @@ final class CustomElementsConfigurationBuilder
         return $this->addField('backgroundColor', ['inputType' => 'standardField'], $eval);
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function addResponsiveVideoField(array $eval = [], string|null $dependsOn = null): self
+    {
+        if ($this->isListField()) {
+            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+        }
+
+        $options = ['inputType' => 'standardField'];
+
+        if (null !== $dependsOn) {
+            $options['dependsOn'] = [
+                'field' => $dependsOn,
+                'value' => 'video',
+            ];
+        }
+
+        return $this->addField('responsiveVideo', $options, $eval);
+    }
+
+    /**
+     * @throws \Exception
+     */
     public function addShowAsCardField(array $eval = []): self
     {
         if ($this->isListField()) {

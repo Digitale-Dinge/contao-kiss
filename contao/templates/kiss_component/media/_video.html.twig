@@ -1,0 +1,49 @@
+{% macro _source(uuid, media) %}
+    {% set file = uuid|file %}
+
+    {% if file|default %}
+        {% set source_attributes = attrs()
+            .setIfExists('media', media|default)
+            .set('type', file.item.mimeType)
+            .set('src', '/' ~ file.path)
+        %}
+
+        {% do csp_source('media-src', source_attributes.src) %}
+        <source{{ source_attributes }}>
+    {% endif %}
+{% endmacro %}
+
+{% block video %}
+    {% set responsiveVideo = responsiveVideo|default|deserialize %}
+
+    {% if responsiveVideo %}
+        {% set screen_order = {'Desktop': 0, 'Tablet': 1, 'Mobile': 2} %}
+        {% set media_query_map = {
+            'Desktop': '(min-width: 64rem)',
+            'Tablet': '(min-width: 30rem)',
+            'Mobile': null,
+        } %}
+
+        {% set video_attributes = attrs(video_attributes|default)
+            .set('autoplay')
+            .set('muted')
+            .set('loop')
+            .set('playsinline')
+        %}
+
+        {% set sources = responsiveVideo
+            |filter(s => screen_order[s.screen] is defined)
+            |sort((a, b) => screen_order[a.screen] <=> screen_order[b.screen])
+        %}
+
+        <div{{ media_attributes|default }}>
+            <video{{ attrs(video_attributes|default).set('autoplay') }}>
+                {% for source in sources|deserialize|default %}
+                    {% if source.video %}
+                        {{ _self._source(source.video, media_query_map[source.screen]|default) }}
+                    {% endif %}
+                {% endfor %}
+            </video>
+        </div>
+    {% endif %}
+{% endblock %}

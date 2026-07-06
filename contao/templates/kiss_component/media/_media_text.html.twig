@@ -4,7 +4,7 @@
     {% set item = item|default(_context) %}
 
     {% block media %}
-        {% if type|default in ['image', 'icon'] %}
+        {% if type|default in ['image', 'icon', 'video'] %}
             {{ include("@Contao/kiss_component/media/_#{type}.html.twig", {
                 media_attributes: attrs().addClass('media').mergeWith(media_attributes|default)
             }) }}

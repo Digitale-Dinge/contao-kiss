@@ -176,3 +176,17 @@ html[data-color-scheme="dark"] {
         }
     }
 }
+
+[data-contao--row-wizard-name-value="responsiveVideo"] {
+    .selector_container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+
+        > ul > li {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+}
