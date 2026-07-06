@@ -157,7 +157,7 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
-    public function addDependsOnField(string $key, array $options): self
+    public function addDependsOnField(string $key, array $options, array $eval = []): self
     {
         $blankOption = false;
 
@@ -165,6 +165,10 @@ final class CustomElementsConfigurationBuilder
         if ($options[array_key_first($options)] === '') {
             $blankOption = true;
             unset($options[array_key_first($options)]);
+
+            if ($eval['blankOptionLabel'] ?? false) {
+                $eval['blankOptionLabel'] = $this->translator->trans("rsce.$this->type.field.$key.blankOption", [], 'rsce');
+            }
         }
 
         if (array_is_list($options)) {
@@ -181,6 +185,13 @@ final class CustomElementsConfigurationBuilder
             $options = $translated;
         }
 
+        $settings = [
+            'includeBlankOption' => $blankOption,
+            'tl_class' => 'w50 clr',
+        ];
+
+        $eval = array_merge($settings, $eval);
+
         return $this->addField($key, [
             'label' => [
                 $this->translator->trans("rsce.field.$key.label", [], 'rsce'),
@@ -188,10 +199,7 @@ final class CustomElementsConfigurationBuilder
             ],
             'inputType' => 'select',
             'options' => $options,
-            'eval' => [
-                'includeBlankOption' => $blankOption,
-                'tl_class' => 'w50 clr',
-            ],
+            'eval' => $eval,
         ]);
     }
 
