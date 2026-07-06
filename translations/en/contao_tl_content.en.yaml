@@ -120,4 +120,10 @@ tl_content:
         - Here you can select videos to be loaded in responsive views.
 
     responsiveVideoFieldScreen: Device
-    responsiveVideoFieldVideo: Video
+
+    responsiveVideoFieldVideo:  Video
+
+    responsiveVideoOptions:
+        mobile:                 Default
+        tablet:                 From tablet (>= 768px)
+        desktop:                From desktop (>= 1024px)
