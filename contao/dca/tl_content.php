@@ -326,7 +326,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['responsiveVideo'] = [
         'screen' => [
             'label' => &$GLOBALS['TL_LANG']['tl_content']['responsiveVideoFieldScreen'],
             'inputType' => 'select',
-            'options' => ['Mobile', 'Tablet', 'Desktop'],
+            'options' => ['mobile', 'tabled', 'desktop'],
             'eval' => [
                 'cell_style' => 'width: 120px',
             ]

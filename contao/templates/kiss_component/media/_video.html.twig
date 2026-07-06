@@ -17,11 +17,11 @@
     {% set responsiveVideo = responsiveVideo|default|deserialize %}
 
     {% if responsiveVideo %}
-        {% set screen_order = {'Desktop': 0, 'Tablet': 1, 'Mobile': 2} %}
+        {% set screen_order = {'desktop': 0, 'tablet': 1, 'mobile': 2} %}
         {% set media_query_map = {
-            'Desktop': '(min-width: 64rem)',
-            'Tablet': '(min-width: 30rem)',
-            'Mobile': null,
+            'desktop': '(min-width: 64rem)',
+            'tablet': '(min-width: 30rem)',
+            'mobile': null,
         } %}
 
         {% set video_attributes = attrs(video_attributes|default)
