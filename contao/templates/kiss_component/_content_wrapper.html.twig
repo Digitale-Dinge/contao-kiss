@@ -1,27 +1,47 @@
 {% use '@Contao/grid/grid_ratio_attributes.html.twig' %}
+{% use '@Contao/kiss_component/_swiper.html.twig' with
+    script as swiper_script,
+    style as swiper_style
+%}
 
 {% block content_wrapper %}
     {% set grid_ratio_active = data.gridRatioActive|default %}
-    {% set list_mode = list|default is iterable and list|length or data.gridColumns|default or grid_ratio_active %}
+    {% set list_mode = not kiss_swiper|default and (list|default is iterable and list|length or data.gridColumns|default or grid_ratio_active) %}
     {% set list_tag_name = list_tag_name|default('div') %}
 
-    {% if list_mode %}
-        {% from '@Contao/kiss_component/grid/_macro.html.twig' import cols_style %}
-        {% set cols = gridColumns|default(data.gridColumns|default) %}
+    {% if kiss_swiper|default %}
+        {{ block('swiper') }}
+    {% else %}
+        {% if list_mode %}
+            {% from '@Contao/kiss_component/grid/_macro.html.twig' import cols_style %}
+            {% set cols = gridColumns|default(data.gridColumns|default) %}
 
-        {% set gap = styles.gap(gridGap|default(data.gridGap|default)) %}
-        {% set cross_alignment = styles.crossAlignment(gridCrossAlignment|default(data.gridCrossAlignment|default)) %}
+            {% set gap = styles.gap(gridGap|default(data.gridGap|default)) %}
+            {% set cross_alignment = styles.crossAlignment(gridCrossAlignment|default(data.gridCrossAlignment|default)) %}
 
-        {% set list_wrapper_attributes = attrs(list_wrapper_attributes|default)
-            .addClass(['grid', gap, cross_alignment])
-            .addClass(cols_style(cols), cols is not empty and not grid_ratio_active)
-            .mergeWith(block('grid_ratio_attributes'), grid_ratio_active)
-        %}
+            {% set list_wrapper_attributes = attrs(list_wrapper_attributes|default)
+                .addClass(['grid', gap, cross_alignment])
+                .addClass(cols_style(cols), cols is not empty and not grid_ratio_active)
+                .mergeWith(block('grid_ratio_attributes'), grid_ratio_active)
+            %}
 
-        <{{ list_tag_name }}{{ attrs(list_wrapper_attributes|default).addClass('list') }}>
+            <{{ list_tag_name }}{{ attrs(list_wrapper_attributes|default).addClass('list') }}>
+        {% endif %}
+        {% block content %}{% endblock %}
+        {% if list_mode %}
+            </{{ list_tag_name }}>
+        {% endif %}
     {% endif %}
-    {% block content %}{% endblock %}
-    {% if list_mode %}
-        </{{ list_tag_name }}>
+{% endblock %}
+
+{% block script %}
+    {% if kiss_swiper|default %}
+        {{ block('swiper_script') }}
+    {% endif %}
+{% endblock %}
+
+{% block style %}
+    {% if kiss_swiper|default %}
+        {{ block('swiper_style') }}
     {% endif %}
 {% endblock %}
