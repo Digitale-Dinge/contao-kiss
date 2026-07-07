@@ -118,8 +118,12 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
-    public function addField(string $key, array $options, array $eval = []): self
+    public function addField(string $key, array|null $options = [], array|null $eval = []): self
     {
+        if (null === $options) {
+            return $this;
+        }
+
         if (is_bool($options['label'] ?? null) && null !== $this->type) {
             $options['label'] = $this->getTranslations([
                 "$this->type.field.$key.label",
