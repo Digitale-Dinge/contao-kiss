@@ -1,5 +1,7 @@
 @layer components {
     .form-grid {
+        --altcha-max-width: 100%;
+
         .formbody {
             @apply grid grid-cols-12 gap-4;
 
@@ -13,6 +15,13 @@
 
             > * {
                 @apply col-span-full;
+            }
+
+            &.checkbox_container {
+                .form-checkbox {
+                    align-self: start;
+                    margin-top: 0.2em;
+                }
             }
         }
     }
