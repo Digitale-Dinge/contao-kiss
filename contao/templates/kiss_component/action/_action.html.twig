@@ -10,6 +10,6 @@
             .addClass('btn-' ~ styles.color(ctaColor), ctaColor|default)
             .addClass(styles.cta_shape(ctaShape|default))
         %}
-        <a{{ cta_attributes }}>{{ text|insert_tag|encode_email }}</a>
+        <a{{ cta_attributes }}>{{ text|encode_email|insert_tag_raw }}</a>
     {% endif %}
 {% endblock %}
