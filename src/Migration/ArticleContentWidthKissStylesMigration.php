@@ -24,6 +24,8 @@ class ArticleContentWidthKissStylesMigration extends AbstractMigration
 
     public function shouldRun(): bool
     {
+        return false;
+
         $schema = $this->connection->createSchemaManager();
 
         if (!$schema->tablesExist([self::TABLE])) {
