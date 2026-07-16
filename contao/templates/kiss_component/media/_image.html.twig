@@ -24,6 +24,9 @@
         <div{{ media_attributes|default }}>
             {{ include('@Contao/component/_figure.html.twig', {
                 figure: figure_object,
+                figure_attributes: figure_attributes|default,
+                caption_attributes: caption_attributes|default,
+                link_attributes: link_attributes|default,
                 img_attributes: { class: img_class|default }
             }, false) }}
         </div>
