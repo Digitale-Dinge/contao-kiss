@@ -3,7 +3,21 @@
         {% set figure_object = figure %}
     {% elseif item.singleSRC|default or singleSRC|default %}
         {% set item = item|default(_context) %}
-        {% set figure_object = figure(item.singleSRC, size|default, configuration|default({})) %}
+        {% set configuration = configuration|default({}) %}
+
+        {# overwrite Meta support #}
+        {% if item.overwriteMeta|default(false) %}
+            {% set configuration = configuration|merge({
+                metadata: {
+                    alt: item.alt|default(''),
+                    title: item.imageTitle|default(''),
+                    link: item.imageUrl|default(''),
+                    caption: item.caption|default(''),
+                }
+            }) %}
+        {% endif %}
+
+        {% set figure_object = figure(item.singleSRC, size|default(item.size|default), configuration) %}
     {% endif %}
 
     {% if figure_object|default %}
