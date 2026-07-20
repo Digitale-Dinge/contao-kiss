@@ -8,10 +8,12 @@
 
     {% if figure_object|default %}
         <div{{ media_attributes|default }}>
+            {% if link_href|default %}<a href="{{ link_href }}" class="media-link block">{% endif %}
             {{ include('@Contao/component/_figure.html.twig', {
                 figure: figure_object,
                 img_attributes: { class: img_class|default }
             }, false) }}
+            {% if link_href|default %}</a>{% endif %}
         </div>
     {% endif %}
 {% endblock %}

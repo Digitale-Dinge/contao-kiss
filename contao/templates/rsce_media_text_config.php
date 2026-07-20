@@ -17,6 +17,7 @@ return $configBuilder
     ->addIconField([], 'type')
     ->addGroup('media')
     ->addImageField([], 'type')
+    ->addLinkField()
     ->addHeadlineField() // Topline is appended automatically outside of lists
     ->addRichTextField()
     ->addCallToActionField()

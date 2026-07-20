@@ -343,6 +343,25 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
+    public function addLinkField(array $eval = []): self
+    {
+        $options = [
+            'label' => true,
+            'exclude' => true,
+            'inputType' => 'text',
+            'eval' => [
+                'decodeEntities' => true,
+                'maxlength' => 255,
+                'mandatory' => false,
+                'tl_class' => 'w50',
+            ],
+        ];
+
+        $this->addField('imageUrl', $options, $eval);
+
+        return $this;
+    }
+
     public function addSocialsField(array $eval = []): self
     {
         $options = $GLOBALS['TL_DCA']['tl_company']['fields']['socials'];

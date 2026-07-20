@@ -6,7 +6,8 @@
     {% block media %}
         {% if type|default in ['image', 'icon'] %}
             {{ include("@Contao/kiss_component/media/_#{type}.html.twig", {
-                media_attributes: attrs().addClass('media').mergeWith(media_attributes|default)
+                media_attributes: attrs().addClass('media').mergeWith(media_attributes|default),
+                link_href: item.imageUrl|default ? item.imageUrl|insert_tag : null,
             }) }}
         {% endif %}
     {% endblock %}
