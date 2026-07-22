@@ -392,6 +392,24 @@ final class CustomElementsConfigurationBuilder
         return $this->addField('backgroundColor', ['inputType' => 'standardField'], $eval);
     }
 
+    public function addResponsiveVideoField(array $eval = [], string|null $dependsOn = null): self
+    {
+        if ($this->isListField()) {
+            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+        }
+
+        $options = ['inputType' => 'standardField'];
+
+        if (null !== $dependsOn) {
+            $options['dependsOn'] = [
+                'field' => $dependsOn,
+                'value' => 'video',
+            ];
+        }
+
+        return $this->addField('responsiveVideo', $options, $eval);
+    }
+
     public function build(): array
     {
         $this->applyPendingFields();
