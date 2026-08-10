@@ -233,7 +233,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['ctaShape'] = [
 $GLOBALS['TL_DCA']['tl_content']['fields']['callToAction'] = [
     'exclude' => true,
     'inputType' => 'group',
-    'palette' => ['text', 'ctaType', 'ctaColor', 'ctaSize', 'url', 'target'],
+    'palette' => ['text', 'ctaType', 'ctaColor', 'ctaSize', 'url', 'target', 'rel'],
     'fields' => [
         'text' => [
             'label' => &$GLOBALS['TL_LANG']['tl_content']['ctaText'],
@@ -264,9 +264,15 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['callToAction'] = [
         ],
         '&target' => [
             'eval' => [
+                'tl_class' => 'w25',
                 'mandatory' => false,
             ],
         ],
+        '&rel' => [
+            'eval' => [
+                'tl_class' => 'w25',
+            ],
+        ]
     ],
     'max' => 2,
     'eval' => [

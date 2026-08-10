@@ -458,6 +458,7 @@ final class CustomElementsConfigurationBuilder
                 'ctaSize'  => $GLOBALS['TL_DCA']['tl_content']['fields']['ctaSize'],
                 'url'      => $GLOBALS['TL_DCA']['tl_content']['fields']['url'],
                 'target'   => $GLOBALS['TL_DCA']['tl_content']['fields']['target'],
+                'rel'      => $GLOBALS['TL_DCA']['tl_content']['fields']['rel'],
             ],
             'eval' => [
                 'tl_class' => 'w100 clr call_to_action_widget',
