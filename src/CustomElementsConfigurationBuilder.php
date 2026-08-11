@@ -345,17 +345,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addLinkField(array $eval = []): self
     {
-        $options = [
-            'label' => true,
-            'exclude' => true,
-            'inputType' => 'text',
-            'eval' => [
-                'decodeEntities' => true,
-                'maxlength' => 255,
-                'mandatory' => false,
-                'tl_class' => 'w50',
-            ],
-        ];
+        $options = $GLOBALS['TL_DCA']['tl_content']['fields']['url'];
 
         $this->addField('imageUrl', $options, $eval);
 

@@ -25,10 +25,6 @@ rsce:
     media_text:
         label:              Medien-Text
         description:        Ein Medien-Text Element
-        field:
-            imageUrl:
-                label:          Bild-Link
-                description:    Optionaler Link auf dem Bild.
 
     media_text_list:
         label:              Medien-Text-Liste
