@@ -408,6 +408,15 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
+    public function addLinkField(array $eval = []): self
+    {
+        $options = $GLOBALS['TL_DCA']['tl_content']['fields']['url'];
+
+        $this->addField('imageUrl', $options, $eval);
+
+        return $this;
+    }
+
     public function addSocialsField(array $eval = []): self
     {
         $options = $GLOBALS['TL_DCA']['tl_company']['fields']['socials'];
@@ -526,6 +535,7 @@ final class CustomElementsConfigurationBuilder
                 'ctaSize'  => $GLOBALS['TL_DCA']['tl_content']['fields']['ctaSize'],
                 'url'      => $GLOBALS['TL_DCA']['tl_content']['fields']['url'],
                 'target'   => $GLOBALS['TL_DCA']['tl_content']['fields']['target'],
+                'rel'      => $GLOBALS['TL_DCA']['tl_content']['fields']['rel'],
             ],
             'eval' => [
                 'tl_class' => 'w100 clr call_to_action_widget',

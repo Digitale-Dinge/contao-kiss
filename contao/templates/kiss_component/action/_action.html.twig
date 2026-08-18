@@ -4,6 +4,7 @@
             .set('href', url|default|insert_tag|encode_email)
             .set('target', '_blank', target|default)
             .set('rel', 'noreferrer noopener')
+            .setIfExists('data-lightbox', rel|default)
             .addClass('btn', ctaType|default !== 'link')
             .addClass(styles.cta_type(ctaType|default))
             .addClass('btn-' ~ styles.size(ctaSize), ctaSize|default)
