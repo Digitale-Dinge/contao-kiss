@@ -17,7 +17,11 @@
             }) %}
         {% endif %}
 
-        {% set figure_object = figure(item.singleSRC, size|default(item.size|default), configuration) %}
+        {% set figure_object = figure(
+            item.singleSRC,
+            size|default,
+            configuration|default({})|merge(item.imageUrl|default ? {linkHref: item.imageUrl} : {})
+        ) %}
     {% endif %}
 
     {% if figure_object|default %}
