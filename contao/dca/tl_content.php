@@ -428,7 +428,6 @@ PaletteManipulator::create()
     ->applyToPalette('swiper', 'tl_content')
 ;
 
-/* Responsive video field (used by media components / heroes via addResponsiveVideoField()). */
 $GLOBALS['TL_DCA']['tl_content']['fields']['responsiveVideo'] = [
     'inputType' => 'rowWizard',
     'fields' => [
