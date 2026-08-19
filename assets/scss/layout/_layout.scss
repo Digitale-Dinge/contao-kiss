@@ -20,11 +20,11 @@
     }
 
     .container-narrower {
-        max-width: calc(var(--kiss-sys-sizing-responsive-semantic-container-narrow, 37.5rem) + 2 * var(--container-px));
+        max-width: calc(var(--kiss-sys-sizing-responsive-semantic-container-narrower, 37.5rem) + 2 * var(--container-px));
     }
 
     .container-narrow {
-        max-width: calc(var(--kiss-sys-sizing-responsive-semantic-container-narrow_temp, 63.5rem) + 2 * var(--container-px));
+        max-width: calc(var(--kiss-sys-sizing-responsive-semantic-container-narrow, 63.5rem) + 2 * var(--container-px));
     }
 
     .container-base {
@@ -33,7 +33,7 @@
 
     .container-full-pad,
     .container-full {
-        max-width: 100%;
+        max-width: var(--kiss-sys-sizing-responsive-medium-container-full, 100%);
     }
 
     // Nested container handling - prevent double padding
