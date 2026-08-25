@@ -34,7 +34,6 @@ final class StyleOptionsListener
         return [
             $this->translator->trans('style_options.display', [], 'style_options') => $this->getTranslatedOptions(Typography\Display::class),
             $this->translator->trans('style_options.heading', [], 'style_options') => $this->getTranslatedOptions(Typography\Heading::class),
-            $this->translator->trans('style_options.size', [], 'style_options') => $this->getTranslatedOptions(Typography\FontSize::class),
         ];
     }
 
