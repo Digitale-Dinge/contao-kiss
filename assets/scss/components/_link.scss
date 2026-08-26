@@ -3,7 +3,7 @@
  * TODO: Change SVG in external link
  *
  * Base: .link
- * Colors: link-{primary|secondary|accent|success|warning|error} (base-content is default)
+ * Colors: link-{primary|secondary|tertiary|success|warning|error} (base-content is default)
  * Sizes: link-{xs|sm|lg|xl} (text-base is default)
  * Styles: link-{underline-hover|underline-animate|underline-none}
  * Special: link-external
@@ -48,7 +48,7 @@
         --link-color-hover: var(--kiss-comp-link-secondary-color-text-hover, var(--color-secondary-hover-medium));
     }
 
-    .link-accent {
+    .link-tertiary {
         --link-color: var(--kiss-comp-link-tertiary-color-text-default, var(--color-tertiary-solid));
         --link-color-hover: var(--kiss-comp-link-tertiary-color-text-hover, var(--color-tertiary-hover-medium));
     }

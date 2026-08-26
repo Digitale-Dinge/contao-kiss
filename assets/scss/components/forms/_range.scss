@@ -2,7 +2,7 @@
  * KISS Range Component (V1.0)
  *
  * Base: .form-range
- * Colors: range-{primary|secondary|accent|success|warning|error}
+ * Colors: range-{primary|secondary|tertiary|success|warning|error}
  * Sizes: range-{xs|sm|lg|xl}
  * States: disabled
  *
@@ -124,7 +124,7 @@
         --range-fill-color: var(--color-secondary-solid);
     }
 
-    .range-accent {
+    .range-tertiary {
         --range-thumb-color: var(--color-tertiary-solid);
         --range-fill-color: var(--color-tertiary-solid);
     }

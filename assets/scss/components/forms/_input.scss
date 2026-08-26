@@ -3,7 +3,7 @@
  *
  * Base: .form-input
  * Styles: input-{soft} (outline is default)
- * Colors: input-{primary|secondary|accent|success|warning|error}
+ * Colors: input-{primary|secondary|tertiary|success|warning|error}
  * Sizes: input-{xs|sm|lg|xl}
  * States: is-valid, is-invalid, disabled, readonly
  *
@@ -88,7 +88,7 @@
         --input-color: var(--color-secondary-solid);
     }
 
-    .input-accent {
+    .input-tertiary {
         --input-color: var(--color-tertiary-solid);
     }
 

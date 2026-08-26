@@ -9,7 +9,7 @@
   or later via DCA/RSCE configuration.
 
   @var string|null breadcrumb_size     Size variant: 'xs', 'sm', 'lg', 'xl' (default: null = medium)
-  @var string|null breadcrumb_color    Color variant: 'primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error'
+  @var string|null breadcrumb_color    Color variant: 'primary', 'secondary', 'tertiary', 'success', 'warning', 'error'
   @var string|null separator_type      Separator type: 'chevron' (default), 'slash', 'dot', 'arrow', 'custom'
   @var string|null separator_custom    Custom separator (SVG string or text) when separator_type is 'custom'
   @var int|null    max_items           Max visible items before collapsing (JS default: 4, 0 = disable controller)
@@ -20,7 +20,7 @@
   --------------------
   - Base: .breadcrumb (from Contao wrapper)
   - Size: .breadcrumb-{xs|sm|lg|xl}
-  - Color: .breadcrumb-{primary|secondary|accent|info|success|warning|error}
+  - Color: .breadcrumb-{primary|secondary|tertiary|success|warning|error}
 #}
 {% extends '@Contao/mod_breadcrumb' %}
 
@@ -71,7 +71,7 @@
 {% endif %}
 
 {# Color variant #}
-{% if breadcrumb_color in ['primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error'] %}
+{% if breadcrumb_color in ['primary', 'secondary', 'tertiary', 'success', 'warning', 'error'] %}
     {% set component_classes = component_classes|merge(['breadcrumb-' ~ breadcrumb_color]) %}
 {% endif %}
 

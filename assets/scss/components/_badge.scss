@@ -3,7 +3,7 @@
  *
  * Base: .badge
  * Styles: badge-{soft|outline|dashed}
- * Colors: badge-{primary|secondary|accent|success|warning|error}
+ * Colors: badge-{primary|secondary|tertiary|success|warning|error}
  * Sizes: badge-{xs|sm|lg|xl}
  * Shapes: badge-{pill|square}
  *
@@ -52,7 +52,7 @@
         --badge-ring: var(--color-secondary-solid);
     }
 
-    .badge-accent {
+    .badge-tertiary {
         --badge-bg: var(--color-tertiary-solid);
         --badge-fg: var(--color-tertiary-on-solid);
         --badge-border: var(--color-tertiary-border);

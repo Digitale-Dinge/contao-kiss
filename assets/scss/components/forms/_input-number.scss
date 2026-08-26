@@ -28,7 +28,7 @@
  *   </div>
  *
  * SIZES: .input-xs, .input-sm, (default), .input-lg, .input-xl
- * COLORS: .input-primary, .input-secondary, .input-accent, etc.
+ * COLORS: .input-primary, .input-secondary, .input-tertiary, etc.
  */
 
 @layer components {
@@ -139,7 +139,7 @@
             --btn-color: var(--color-secondary-solid);
         }
 
-        &:has(.input-accent) {
+        &:has(.input-tertiary) {
             --btn-color: var(--color-tertiary-solid);
         }
 
