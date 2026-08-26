@@ -23,12 +23,6 @@
         }
     }
 
-    .headline-info {
-        :is(.topline, .headline) {
-            @apply text-status-info-solid;
-        }
-    }
-
     .headline-success {
         :is(.topline, .headline) {
             @apply text-status-success-solid;
