@@ -10,9 +10,9 @@ use Symfony\Component\Translation\TranslatableMessage;
 enum Background: string implements TranslatableLabelInterface
 {
     case transparent = 'bg-transparent';
-    case base_100 = 'bg-base-100';
-    case base_200 = 'bg-base-200';
-    case base_300 = 'bg-base-300';
+    case base_100 = 'bg-neutral-surface-1';
+    case base_200 = 'bg-neutral-surface-2';
+    case base_300 = 'bg-neutral-surface-3';
     case primary = 'bg-primary-solid';
     case secondary = 'bg-secondary-solid';
     case accent = 'bg-tertiary-solid'; // ToDo: Migrate accent option
@@ -20,7 +20,7 @@ enum Background: string implements TranslatableLabelInterface
     case success = 'bg-status-success-solid';
     case warning = 'bg-status-warning-solid';
     case error = 'bg-status-error-solid';
-    case base_content = 'bg-base-content';
+    case base_content = 'bg-neutral-inverse';
 
     public function label(): TranslatableMessage
     {

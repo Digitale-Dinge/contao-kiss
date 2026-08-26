@@ -15,9 +15,9 @@
         // CSS custom properties for easy theming
         --range-thumb-size: 1.25rem;
         --range-track-height: 0.5rem;
-        --range-thumb-color: var(--color-base-content);
-        --range-track-color: var(--color-base-200);
-        --range-fill-color: var(--color-base-content);
+        --range-thumb-color: var(--kiss-sys-color-neutral-on-strong);
+        --range-track-color: var(--kiss-sys-color-neutral-surface-2);
+        --range-fill-color: var(--kiss-sys-color-neutral-on-strong);
     }
 
     .form-range {
