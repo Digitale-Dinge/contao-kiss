@@ -4,9 +4,3 @@ services:
             - '@database_connection'
         tags:
             - { name: contao.migration, priority: 0 }
-
-    DigitaleDinge\ContaoKiss\Migration\AccentToTertiaryMigration:
-        arguments:
-            - '@database_connection'
-        tags:
-            - { name: contao.migration, priority: 0 }
