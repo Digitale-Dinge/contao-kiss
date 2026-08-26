@@ -18,14 +18,14 @@
 
 @layer components {
   .card {
-    --card-bg: var(--kiss-comp-card-color-background, var(--color-base-200));
-    --card-fg: var(--color-base-content);
+    --card-bg: var(--kiss-comp-card-color-background, var(--kiss-sys-color-neutral-surface-2));
+    --card-fg: var(--kiss-sys-color-neutral-on-strong);
     --card-border: var(
       --kiss-comp-card-color-border,
       var(--color-neutral-border-light)
     );
     --card-border-opacity: 100%;
-    --card-ring: var(--color-base-content);
+    --card-ring: var(--kiss-sys-color-neutral-on-strong);
 
     @apply relative flex flex-col w-full overflow-hidden;
 
@@ -59,7 +59,7 @@
     &-header {
       @apply flex items-center gap-4;
       @apply px-6 py-4;
-      @apply border-b border-base-content/10;
+      @apply border-b border-neutral-border-light;
     }
 
     // Card Body
@@ -84,7 +84,7 @@
     &-footer {
       padding: var(--kiss-comp-card-spacing-padding, 1.25rem)
         var(--kiss-comp-card-spacing-padding, 1.5rem);
-      @apply border-t border-base-content/10;
+      @apply border-t border-neutral-border-light;
     }
 
     // Card Title
@@ -281,7 +281,7 @@
   // Interactive states
   .card-hover {
     @apply transition-all duration-300 ease-in-out;
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-base-content/20 focus-visible:ring-offset-2;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-border-strong focus-visible:ring-offset-2;
 
     &:hover,
     &:focus-visible {
@@ -291,7 +291,7 @@
 
   .card-grow {
     @apply transition-all duration-300 ease-in-out;
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-base-content/20 focus-visible:ring-offset-2;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-border-strong focus-visible:ring-offset-2;
 
     &:hover,
     &:focus-visible {
@@ -301,7 +301,7 @@
 
   .card-link {
     @apply cursor-pointer transition-all duration-200 ease-in-out;
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-base-content/20 focus-visible:ring-offset-2;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-border-strong focus-visible:ring-offset-2;
 
     > a.stretched-link::after {
       @apply absolute inset-0 z-10;

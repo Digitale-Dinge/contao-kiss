@@ -5,22 +5,22 @@
 :root {
     /* === NAVIGATION COLORS === */
     --nav-color: var(--color-primary-solid);
-    --nav-active-color: var(--color-base-content);
-    --nav-submenu-background: var(--color-base-100);
+    --nav-active-color: var(--kiss-sys-color-neutral-on-strong);
+    --nav-submenu-background: var(--kiss-sys-color-neutral-surface-1);
 
     /* === MOBILE NAVIGATION === */
-    --nav-mobile-background: var(--color-base-200);
-    --nav-mobile-color: var(--color-base-content);
-    --nav-mobile-active-background: var(--color-base-200);
+    --nav-mobile-background: var(--kiss-sys-color-neutral-surface-2);
+    --nav-mobile-color: var(--kiss-sys-color-neutral-on-strong);
+    --nav-mobile-active-background: var(--kiss-sys-color-neutral-surface-2);
     --nav-mobile-active-color: var(--color-primary-solid);
     --nav-mobile-active-border-color: var(--color-primary-solid);
     --nav-mobile-btn-clr: var(--color-primary-solid);
-    --nav-mobile-separator-color: var(--color-base-300);
+    --nav-mobile-separator-color: var(--kiss-sys-color-neutral-surface-3);
     --nav-burger-line-color: var(--color-primary-solid);
 
     /* === ACCESSIBILITY (Skip Links) === */
-    --skip-background: var(--color-base-200);
-    --skip-color: var(--color-base-content);
+    --skip-background: var(--kiss-sys-color-neutral-surface-2);
+    --skip-color: var(--kiss-sys-color-neutral-on-strong);
     --skip-focus-border-color: var(--color-primary-solid);
 
     /* === NAVIGATION ICONS === */

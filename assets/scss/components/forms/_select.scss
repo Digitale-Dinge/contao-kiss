@@ -39,7 +39,7 @@
 
 @layer components {
     .form-select {
-        --select-color: var(--color-base-content);
+        --select-color: var(--kiss-sys-color-neutral-on-strong);
         --select-border-opacity: 60%;
         --select-px: 0.75rem;
         --select-py: 0.625rem;
@@ -48,7 +48,7 @@
         --select-arrow-size: 1rem;
         --select-arrow-right: 0.75rem;
         --select-label-color: var(--select-color);
-        --select-label-bg: var(--color-base-100);
+        --select-label-bg: var(--kiss-sys-color-neutral-surface-1);
         --tw-ring-color: var(--select-color);
 
         @apply block w-full bg-transparent cursor-pointer;
@@ -78,7 +78,7 @@
 
         &:invalid,
         &:has(option[value=""]:checked) {
-            @apply text-base-content/40;
+            @apply text-neutral-on-light;
         }
 
         &.is-valid {
@@ -193,7 +193,7 @@
 
     .select-icon {
         @apply absolute flex items-center justify-center;
-        @apply text-base-content/50 pointer-events-none size-5;
+        @apply text-neutral-on-light pointer-events-none size-5;
     }
 
     // Floating label
@@ -204,8 +204,8 @@
         left: var(--select-px, 0.75rem);
         top: 0;
         font-size: var(--select-text, var(--text-base, 1rem));
-        color: color-mix(in oklch, var(--color-base-content) 50%, transparent);
-        background: var(--select-label-bg, var(--color-base-100));
+        color: color-mix(in oklch, var(--kiss-sys-color-neutral-on-strong) 50%, transparent);
+        background: var(--select-label-bg, var(--kiss-sys-color-neutral-surface-1));
         max-width: calc(100% - 3rem);
         padding: 0 0.25rem;
         translate: 0 calc(-50% - 0.0625em);
@@ -222,16 +222,16 @@
             }
         }
 
-        &.bg-base-100 {
-            --select-label-bg: var(--color-base-100);
+        &.bg-neutral-surface-1 {
+            --select-label-bg: var(--kiss-sys-color-neutral-surface-1);
         }
 
-        &.bg-base-200 {
-            --select-label-bg: var(--color-base-200);
+        &.bg-neutral-surface-2 {
+            --select-label-bg: var(--kiss-sys-color-neutral-surface-2);
         }
 
-        &.bg-base-300 {
-            --select-label-bg: var(--color-base-300);
+        &.bg-neutral-surface-3 {
+            --select-label-bg: var(--kiss-sys-color-neutral-surface-3);
         }
 
         &.bg-primary-solid {

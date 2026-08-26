@@ -1,7 +1,7 @@
 @layer base {
     .headline-content {
         :is(.topline, .headline) {
-            @apply text-base-content;
+            @apply text-neutral-on-strong;
         }
     }
 
@@ -23,11 +23,6 @@
         }
     }
 
-    .headline-info {
-        :is(.topline, .headline) {
-            @apply text-status-info-solid;
-        }
-    }
 
     .headline-success {
         :is(.topline, .headline) {

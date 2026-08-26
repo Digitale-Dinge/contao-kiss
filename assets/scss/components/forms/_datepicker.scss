@@ -17,10 +17,10 @@
  */
 
 .datepicker {
-    --dp-surface: var(--color-base-200);
-    --dp-surface-hover: var(--color-base-300);
-    --dp-border: var(--color-base-300);
-    --dp-fg: var(--color-base-content);
+    --dp-surface: var(--kiss-sys-color-neutral-surface-2);
+    --dp-surface-hover: var(--kiss-sys-color-neutral-surface-3);
+    --dp-border: var(--kiss-sys-color-neutral-surface-3);
+    --dp-fg: var(--kiss-sys-color-neutral-on-strong);
     --dp-accent: var(--color-primary-solid);
     --dp-accent-fg: var(--color-primary-on-solid);
     --dp-radius: var(--radius-box);
