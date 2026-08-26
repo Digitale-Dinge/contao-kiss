@@ -13,8 +13,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
  * @method string base_300
  * @method string primary
  * @method string secondary
- * @method string accent
- * @method string info
+ * @method string tertiary
  * @method string success
  * @method string warning
  * @method string error
