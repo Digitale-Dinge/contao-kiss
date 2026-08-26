@@ -4,7 +4,7 @@
  * Inspired by FlyonUI checkbox with animated checkmark.
  *
  * Base: .form-checkbox
- * Colors: checkbox-{primary|secondary|accent|success|warning|error}
+ * Colors: checkbox-{primary|secondary|tertiary|success|warning|error}
  * Sizes: checkbox-{xs|sm|lg|xl}
  * States: disabled, indeterminate
  *
@@ -94,7 +94,7 @@
         @apply text-secondary-on-solid;
     }
 
-    .checkbox-accent {
+    .checkbox-tertiary {
         --input-color: var(--color-tertiary-solid);
         @apply text-tertiary-on-solid;
     }

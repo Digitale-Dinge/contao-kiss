@@ -17,7 +17,7 @@
         }
     }
 
-    .headline-accent {
+    .headline-tertiary {
         :is(.topline, .headline) {
             @apply text-tertiary-solid;
         }

@@ -5,7 +5,7 @@
  * Sections: card-{body|header|footer|title|actions|alert}
  * Sizes: card-{xs|sm|lg|xl}
  * Styles: card-{side|soft|outline|glass}
- * Colors: card-{primary|secondary|accent|success|warning|error}
+ * Colors: card-{primary|secondary|tertiary|success|warning|error}
  * Interactive: card-{hover|grow|link}
  * Effects: image-full
  *
@@ -178,7 +178,7 @@
     --card-ring: var(--color-secondary-solid);
   }
 
-  .card-accent {
+  .card-tertiary {
     --card-bg: var(--color-tertiary-solid);
     --card-fg: var(--color-tertiary-on-solid);
     --card-border: var(--color-tertiary-border);
