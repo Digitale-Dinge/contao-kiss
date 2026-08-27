@@ -17,6 +17,7 @@ enum Background: string implements TranslatableLabelInterface
     case secondary = 'bg-secondary-solid';
     case accent = 'bg-tertiary-solid'; // ToDo: Migrate accent option
     //case quaternary = 'bg-quaternary-solid';
+    case info = 'bg-status-info-solid';
     case success = 'bg-status-success-solid';
     case warning = 'bg-status-warning-solid';
     case error = 'bg-status-error-solid';

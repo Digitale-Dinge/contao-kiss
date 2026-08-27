@@ -129,6 +129,17 @@ style_options:
                 wide:               Breit
                 block:              Volle Breite
 
+        card:
+            layout:
+                reverse:            Umgekehrt
+                side:               Nebeneinander
+                side_reverse:       Nebeneinander (umgekehrt)
+                media_full:         Vollflächiges Medium
+            variant:
+                soft:               Sanft
+                outline:            Umrandet
+                glass:              Glas
+
     display:                        Titel
     heading:                        Überschrift
     size:                           Textgröße

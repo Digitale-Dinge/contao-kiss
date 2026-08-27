@@ -129,6 +129,17 @@ style_options:
                 wide:               Wide
                 block:              Full width
 
+        card:
+            layout:
+                reverse:            Reversed
+                side:               Side by side
+                side_reverse:       Side by side (reversed)
+                media_full:         Full media
+            variant:
+                soft:               Soft
+                outline:            Outlined
+                glass:              Glass
+
     display:                        Display
     heading:                        Heading
     size:                           Text size
