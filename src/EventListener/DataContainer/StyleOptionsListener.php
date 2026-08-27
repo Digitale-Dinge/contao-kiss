@@ -137,7 +137,6 @@ final class StyleOptionsListener
     }
 
     #[AsCallback('tl_content', 'fields.ctaColor.options')]
-    #[AsCallback('tl_content', 'fields.cardColor.options')]
     #[AsCallback('tl_content', 'fields.callToAction.fields.color.options')]
     #[AsCallback('tl_form_field', 'fields.fieldColor.options')]
     public function addColorOptions(): array
@@ -160,7 +159,7 @@ final class StyleOptionsListener
         return $this->getTranslatedOptions(Component\Card\Layout::class);
     }
 
-    #[AsCallback('tl_content', 'fields.cardVariant.options')]
+    #[AsCallback('tl_content', 'fields.elementVariant.options')]
     #[AsCallback('tl_form_field', 'fields.fieldVariant.options')]
     public function addVariantOptions(DataContainer $dc): array
     {

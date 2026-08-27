@@ -118,16 +118,10 @@ tl_content:
     cardLayout:
         - Karten-Layout
         - Bestimmen Sie die Anordnung von Medium und Inhalt.
-        - Standard # Default label - stacked layout
 
-    cardVariant:
-        - Karten-Stil
-        - Bestimmen Sie den Stil der Karte.
-        - Standard # Default label - solid
-
-    cardColor:
-        - Karten-Farbe
-        - Bestimmen Sie die Farbe der Karte.
+    elementVariant:
+        - Stil
+        - Bestimmen Sie den Stil des Elements.
 
     responsiveVideo:
         - Videos

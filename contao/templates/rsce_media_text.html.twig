@@ -8,8 +8,7 @@
     .addClass('card', show_as_card|default)
     .addClass('card-' ~ styles.size(data.elementSize|default), data.elementSize|default)
     .addClass('card-' ~ styles.card_layout(data.cardLayout|default), data.cardLayout|default)
-    .addClass('card-' ~ styles.variant(data.cardVariant|default), data.cardVariant|default)
-    .addClass('card-' ~ styles.color(data.cardColor|default), data.cardColor|default)
+    .addClass('card-' ~ styles.variant(data.elementVariant|default), data.elementVariant|default)
 %}
 
 {% if show_as_card|default %}

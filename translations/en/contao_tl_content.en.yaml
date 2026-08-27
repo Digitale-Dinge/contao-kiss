@@ -118,16 +118,10 @@ tl_content:
     cardLayout:
         - Card layout
         - Define the arrangement of media and content.
-        - Default # Default label - stacked layout
 
-    cardVariant:
-        - Card style
-        - Define the style of the card.
-        - Default # Default label - solid
-
-    cardColor:
-        - Card color
-        - Define the color of the card.
+    elementVariant:
+        - Style
+        - Define the style of the element.
 
     responsiveVideo:
         - Videos
