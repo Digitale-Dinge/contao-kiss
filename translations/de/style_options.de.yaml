@@ -89,6 +89,8 @@ style_options:
 
         variant:
             soft:                   Sanft
+            outline:                Umrandet
+            glass:                  Glas
 
     typography:
         size:
@@ -135,10 +137,6 @@ style_options:
                 side:               Nebeneinander
                 side_reverse:       Nebeneinander (umgekehrt)
                 media_full:         Vollflächiges Medium
-            variant:
-                soft:               Sanft
-                outline:            Umrandet
-                glass:              Glas
 
     display:                        Titel
     heading:                        Überschrift

@@ -7,27 +7,10 @@
     .addClass(['media_text', 'responsive-body3'])
     .addClass('card', show_as_card|default)
     .addClass('card-' ~ styles.size(data.elementSize|default), data.elementSize|default)
-    .addClass(styles.card_layout(data.cardLayout|default), data.cardLayout|default)
-    .addClass(styles.card_variant(data.cardVariant|default), data.cardVariant|default)
+    .addClass('card-' ~ styles.card_layout(data.cardLayout|default), data.cardLayout|default)
+    .addClass('card-' ~ styles.variant(data.cardVariant|default), data.cardVariant|default)
+    .addClass('card-' ~ styles.color(data.cardColor|default), data.cardColor|default)
 %}
-
-{# Rebuild the attributes: as a card, the background color is resolved to a
-   semantic card color instead of a background class #}
-{% block attributes %}
-    {% set attributes = attrs(attributes|default)
-        .addClass([
-            styles.container(data.contentWidth|default),
-            styles.padding_top(data.paddingTop|default),
-            styles.padding_bottom(data.paddingBottom|default),
-            styles.margin_top(data.marginTop|default),
-            styles.margin_bottom(data.marginBottom|default),
-            styles.text_alignment(data.textAlignment|default),
-        ])
-        .addClass(styles.background(data.backgroundColor|default), not show_as_card)
-        .addClass(styles.card_color(data.backgroundColor|default), show_as_card|default and data.backgroundColor|default)
-    %}
-    {{ attributes }}
-{% endblock %}
 
 {% if show_as_card|default %}
     {% set text_attributes = attrs().addClass(['card-body', 'responsive-body3']).mergeWith(text_attributes|default) %}

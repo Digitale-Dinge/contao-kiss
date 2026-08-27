@@ -9,9 +9,9 @@
     {% set attributes = attrs()
         .addClass('card')
         .addClass('card-' ~ styles.size(data.elementSize|default), data.elementSize|default)
-        .addClass(styles.card_layout(data.cardLayout|default), data.cardLayout|default)
-        .addClass(styles.card_variant(data.cardVariant|default), data.cardVariant|default)
-        .addClass(styles.card_color(data.backgroundColor|default), data.backgroundColor|default)
+        .addClass('card-' ~ styles.card_layout(data.cardLayout|default), data.cardLayout|default)
+        .addClass('card-' ~ styles.variant(data.cardVariant|default), data.cardVariant|default)
+        .addClass('card-' ~ styles.color(data.cardColor|default), data.cardColor|default)
         .mergeWith(attributes|default)
     %}
     {% set text_attributes = attrs().addClass(['card-body', 'responsive-body3']).mergeWith(text_attributes|default) %}

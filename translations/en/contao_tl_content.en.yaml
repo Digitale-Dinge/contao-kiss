@@ -125,6 +125,10 @@ tl_content:
         - Define the style of the card.
         - Default # Default label - solid
 
+    cardColor:
+        - Card color
+        - Define the color of the card.
+
     responsiveVideo:
         - Videos
         - Here you can select videos to be loaded in responsive views.

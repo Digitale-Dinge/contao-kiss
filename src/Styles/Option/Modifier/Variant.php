@@ -10,6 +10,8 @@ use Symfony\Component\Translation\TranslatableMessage;
 enum Variant: string implements TranslatableLabelInterface
 {
     case soft = 'soft';
+    case outline = 'outline';
+    case glass = 'glass';
 
     public function label(): TranslatableMessage
     {

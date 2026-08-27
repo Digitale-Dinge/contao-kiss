@@ -125,6 +125,10 @@ tl_content:
         - Bestimmen Sie den Stil der Karte.
         - Standard # Default label - solid
 
+    cardColor:
+        - Karten-Farbe
+        - Bestimmen Sie die Farbe der Karte.
+
     responsiveVideo:
         - Videos
         - Hier können Sie Videos auswählen, welche in responsiven Ansichten geladen werden sollen.
