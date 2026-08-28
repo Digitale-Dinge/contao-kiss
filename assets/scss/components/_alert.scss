@@ -3,7 +3,7 @@
  *
  * Base: .alert
  * Styles: alert-{soft|outline|dashed}
- * Colors: alert-{primary|secondary|accent|success|warning|error}
+ * Colors: alert-{primary|secondary|tertiary|success|warning|error}
  *
  * Example: <div class="alert alert-success alert-soft">Success message</div>
  */
@@ -43,7 +43,7 @@
         --alert-ring: var(--color-secondary-solid);
     }
 
-    .alert-accent {
+    .alert-tertiary {
         --alert-bg: var(--color-tertiary-solid);
         --alert-fg: var(--color-tertiary-on-solid);
         --alert-border: var(--color-tertiary-border);

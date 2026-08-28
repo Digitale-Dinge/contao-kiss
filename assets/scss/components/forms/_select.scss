@@ -3,7 +3,7 @@
  *
  * Base: .form-select
  * Styles: select-{soft} (outline is default)
- * Colors: select-{primary|secondary|accent|success|warning|error}
+ * Colors: select-{primary|secondary|tertiary|success|warning|error}
  * Sizes: select-{xs|sm|lg|xl}
  * States: is-valid, is-invalid, disabled
  *
@@ -104,7 +104,7 @@
         --select-color: var(--color-secondary-solid);
     }
 
-    .select-accent {
+    .select-tertiary {
         --select-color: var(--color-tertiary-solid);
     }
 

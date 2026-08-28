@@ -5,7 +5,7 @@
  *
  * Base: .form-textarea
  * Styles: textarea-{soft} (outline is default)
- * Colors: textarea-{primary|secondary|accent|success|warning|error}
+ * Colors: textarea-{primary|secondary|tertiary|success|warning|error}
  * Sizes: textarea-{xs|sm|lg|xl}
  * States: is-valid, is-invalid, disabled, readonly
  *
@@ -82,7 +82,7 @@
         --textarea-color: var(--color-secondary-solid);
     }
 
-    .textarea-accent {
+    .textarea-tertiary {
         --textarea-color: var(--color-tertiary-solid);
     }
 

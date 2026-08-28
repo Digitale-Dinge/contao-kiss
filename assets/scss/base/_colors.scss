@@ -17,15 +17,9 @@
         }
     }
 
-    .headline-accent {
+    .headline-tertiary {
         :is(.topline, .headline) {
             @apply text-tertiary-solid;
-        }
-    }
-
-    .headline-info {
-        :is(.topline, .headline) {
-            @apply text-status-info-solid;
         }
     }
 

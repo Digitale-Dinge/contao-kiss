@@ -3,7 +3,7 @@
  *
  * Base: .btn
  * Styles: btn-{soft|outline|text}
- * Colors: btn-{primary|secondary|accent|success|warning|error}
+ * Colors: btn-{primary|secondary|tertiary|success|warning|error}
  * Sizes: btn-{xs|sm|lg|xl}
  * Shapes: btn-{circle|square|rounded|wide|block}
  * Effects: btn-shadow, btn-active
@@ -82,7 +82,7 @@
         --btn-hover-opacity: 90%;
     }
 
-    .btn-accent {
+    .btn-tertiary {
         --btn-bg:            var(--color-tertiary-solid);
         --btn-border:        var(--color-tertiary-solid);
         --btn-color:         var(--color-tertiary-on-solid);

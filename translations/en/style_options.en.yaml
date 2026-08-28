@@ -64,8 +64,7 @@ style_options:
         neutral_three:              Background (300)
         primary:                    Primary
         secondary:                  Secondary
-        accent:                     Accent
-        info:                       Info
+        tertiary:                     Tertiary
         success:                    Success
         warning:                    Warning
         error:                      Error
