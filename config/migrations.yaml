@@ -4,3 +4,9 @@ services:
             - '@database_connection'
         tags:
             - { name: contao.migration, priority: 0 }
+
+    DigitaleDinge\ContaoKiss\Migration\ArticleContentBackgroundColorKissStylesMigration:
+        arguments:
+            - '@database_connection'
+        tags:
+            - { name: contao.migration, priority: 0 }
