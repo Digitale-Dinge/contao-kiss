@@ -453,6 +453,23 @@ final class CustomElementsConfigurationBuilder
     /**
      * @throws \Exception
      */
+    public function addCardStyleFields(array $eval = []): self
+    {
+        if ($this->isListField()) {
+            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+        }
+
+        $this->addBackgroundField($eval);
+        $this->addField('elementSize', ['inputType' => 'standardField'], $eval);
+        $this->addField('cardLayout', ['inputType' => 'standardField'], $eval);
+        $this->addField('elementVariant', ['inputType' => 'standardField'], $eval);
+
+        return $this;
+    }
+
+    /**
+     * @throws \Exception
+     */
     public function addResponsiveVideoField(array $eval = [], string|null $dependsOn = null): self
     {
         if ($this->isListField()) {

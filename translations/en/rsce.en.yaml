@@ -47,6 +47,10 @@ rsce:
                 label:          Show as cards
                 description:    Show elements as cards
 
+    card_group:
+        label:                  Card group
+        description:            A group of cards with a shared size, color and style
+
     icon:
         label:                  Icon
         description:            A single icon with optional description

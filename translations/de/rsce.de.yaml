@@ -46,6 +46,10 @@ rsce:
                 label:          Als Karten anzeigen
                 description:    Elemente als Karten anzeigen
 
+    card_group:
+        label:                  Card-Gruppe
+        description:            Eine Gruppe von Karten mit einheitlicher Größe, Farbe und Stil
+
     icon:
         label:                  Icon
         description:            Ein einzelnes Icon mit optionalem Beschreibungstext

@@ -1,0 +1,33 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+
+{# Rebuild the attributes to remove bg color, which applies per card instead #}
+{% block attributes %}
+    {% set attributes = attrs(attributes|default)
+        .addClass([
+            styles.container(data.contentWidth|default),
+            styles.padding_top(data.paddingTop|default),
+            styles.padding_bottom(data.paddingBottom|default),
+            styles.margin_top(data.marginTop|default),
+            styles.margin_bottom(data.marginBottom|default),
+            styles.text_alignment(data.textAlignment|default),
+        ])
+        .addClass('card_group')
+    %}
+{% endblock %}
+
+{% block content %}
+    {% for item in list %}
+        {% embed '@Contao/kiss_component/media/_media_text_wrapper.html.twig' with {
+            item: item,
+            show_as_card: true,
+        } %}
+            {% use '@Contao/component/_headline.html.twig' %}
+
+            {% block headline %}
+                {% if item.headline.value|default or item.topline|default %}
+                    {{ block('headline_component') }}
+                {% endif %}
+            {% endblock %}
+        {% endembed %}
+    {% endfor %}
+{% endblock %}
