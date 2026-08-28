@@ -4,7 +4,7 @@
  * Inspired by FlyonUI radio with animated dot.
  *
  * Base: .form-radio
- * Colors: radio-{primary|secondary|accent|success|warning|error}
+ * Colors: radio-{primary|secondary|tertiary|success|warning|error}
  * Sizes: radio-{xs|sm|lg|xl}
  * States: disabled
  *
@@ -96,7 +96,7 @@
         --input-color: var(--color-secondary-solid);
     }
 
-    .radio-accent {
+    .radio-tertiary {
         --input-color: var(--color-tertiary-solid);
     }
 

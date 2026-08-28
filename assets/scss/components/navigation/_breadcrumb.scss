@@ -6,7 +6,7 @@
  *
  * Base: .breadcrumb or .mod_breadcrumb
  * Sizes: breadcrumb-{xs|sm|lg|xl}
- * Colors: breadcrumb-{primary|secondary|accent|success|warning|error}
+ * Colors: breadcrumb-{primary|secondary|tertiary|success|warning|error}
  *
  * Collapsible: Add data-controller="breadcrumb" and mark items with data-breadcrumb-target="item"
  * Configuration (via data attributes, handled by JS):
@@ -91,8 +91,8 @@
         --breadcrumb-color: var(--color-secondary-solid);
     }
 
-    .breadcrumb-accent,
-    .mod_breadcrumb.breadcrumb-accent {
+    .breadcrumb-tertiary,
+    .mod_breadcrumb.breadcrumb-tertiary {
         --breadcrumb-color: var(--color-tertiary-solid);
     }
 

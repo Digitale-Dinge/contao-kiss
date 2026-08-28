@@ -64,8 +64,7 @@ style_options:
         base_300:                   Background (300)
         primary:                    Primary
         secondary:                  Secondary
-        accent:                     Accent
-        info:                       Info
+        tertiary:                     Tertiary
         success:                    Success
         warning:                    Warning
         error:                      Error
