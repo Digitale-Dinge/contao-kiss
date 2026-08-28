@@ -69,7 +69,7 @@ style_options:
         success:                    Erfolg
         warning:                    Warnung
         error:                      Fehler
-        base_content:               Textfarbe
+        neutral_inverse:            Textfarbe
 
     spacing_option:
         half:                       Halbe Zeilenhöhe

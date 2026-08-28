@@ -16,6 +16,7 @@ class ArticleContentBackgroundColorKissStylesMigration extends AbstractMigration
         'base_100' => 'neutral_one',
         'base_200' => 'neutral_two',
         'base_300' => 'neutral_three',
+        'base_content' => 'neutral_inverse',
     ];
 
     public function __construct(
