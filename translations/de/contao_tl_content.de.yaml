@@ -115,6 +115,14 @@ tl_content:
         - Bestimmen Sie die Größe des Elements.
         - Normal # Default label - size
 
+    cardLayout:
+        - Karten-Layout
+        - Bestimmen Sie die Anordnung von Medium und Inhalt.
+
+    elementVariant:
+        - Stil
+        - Bestimmen Sie den Stil des Elements.
+
     responsiveVideo:
         - Videos
         - Hier können Sie Videos auswählen, welche in responsiven Ansichten geladen werden sollen.

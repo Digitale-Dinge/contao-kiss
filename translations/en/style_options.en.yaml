@@ -89,6 +89,8 @@ style_options:
 
         variant:
             soft:                   Soft
+            outline:                Outlined
+            glass:                  Glass
 
     typography:
         size:
@@ -128,6 +130,13 @@ style_options:
             shape:
                 wide:               Wide
                 block:              Full width
+
+        card:
+            layout:
+                reverse:            Reversed
+                side:               Side by side
+                side_reverse:       Side by side (reversed)
+                media_full:         Full media
 
     display:                        Display
     heading:                        Heading

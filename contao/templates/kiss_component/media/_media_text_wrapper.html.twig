@@ -9,6 +9,8 @@
     {% set attributes = attrs()
         .addClass('card')
         .addClass('card-' ~ styles.size(data.elementSize|default), data.elementSize|default)
+        .addClass('card-' ~ styles.card_layout(data.cardLayout|default), data.cardLayout|default)
+        .addClass('card-' ~ styles.variant(data.elementVariant|default), data.elementVariant|default)
         .mergeWith(attributes|default)
     %}
     {% set text_attributes = attrs().addClass(['card-body', 'responsive-body3']).mergeWith(text_attributes|default) %}

@@ -115,6 +115,14 @@ tl_content:
         - Define the size of the element.
         - Normal # Default label - size
 
+    cardLayout:
+        - Card layout
+        - Define the arrangement of media and content.
+
+    elementVariant:
+        - Style
+        - Define the style of the element.
+
     responsiveVideo:
         - Videos
         - Here you can select videos to be loaded in responsive views.
