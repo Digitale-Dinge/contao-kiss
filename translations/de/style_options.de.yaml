@@ -59,9 +59,9 @@ style_options:
 
     color:
         transparent:                Transparent
-        neutral_one:                Hintergrund (100)
-        neutral_two:                Hintergrund (200)
-        neutral_three:              Hintergrund (300)
+        neutral_one:                Neutral 1
+        neutral_two:                Netural 2
+        neutral_three:              Neutral 3
         primary:                    Primär
         secondary:                  Sekundär
         tertiary:                     Tertiär
