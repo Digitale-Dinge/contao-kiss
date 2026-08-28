@@ -453,6 +453,7 @@ final class CustomElementsConfigurationBuilder
     /**
      * @throws \Exception
      */
+    /** Groups the following fields for the card element - backgroundColor, elementSize, cardLayout, elementVariant */
     public function addCardStyleFields(array $eval = []): self
     {
         if ($this->isListField()) {

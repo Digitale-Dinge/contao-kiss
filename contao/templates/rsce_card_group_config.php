@@ -15,6 +15,7 @@ return $configBuilder
     ->addDependsOnField('type', ['image', 'icon', 'separated'])
     ->addImageSizeField([], 'type')
     ->addTextAlignmentField()
+    /** Groups the following fields for the card element - backgroundColor, elementSize, cardLayout, elementVariant */
     ->addCardStyleFields()
     ->startList()
         ->addIconField([], '../type')
