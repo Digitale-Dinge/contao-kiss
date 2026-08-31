@@ -40,10 +40,8 @@
       <div class="alert-title">{{ title }}</div>
     {% endif %}
 
-    {% if description|default %}
-      <div class="alert-description">{{ description|raw }}</div>
-    {% elseif message|default %}
-      <div class="alert-description">{{ message|raw }}</div>
+    {% if text|default %}
+      <div class="alert-description">{{ text|raw }}</div>
     {% endif %}
 
     {% block alert_content %}{% endblock %}

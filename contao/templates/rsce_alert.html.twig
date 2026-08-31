@@ -3,7 +3,7 @@
 {% block content %}
     {{ include('@Contao/kiss_component/status/_alert.html.twig', {
         title: data.title|default,
-        description: data.text|default|insert_tag,
+        text: data.text|default|insert_tag,
         icon: data.icon|default,
         color: data.backgroundColor|default ? styles.color(data.backgroundColor) : null,
         style: data.elementVariant|default ? styles.variant(data.elementVariant) : null,
