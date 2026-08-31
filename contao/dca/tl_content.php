@@ -10,7 +10,7 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'ctaAsButton';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['ctaAsButton'] = 'ctaType,ctaColor,ctaSize,ctaShape';
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'showAsCard';
-$GLOBALS['TL_DCA']['tl_content']['subpalettes']['showAsCard'] = 'backgroundColor,elementSize,cardLayout,elementVariant';
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['showAsCard'] = 'backgroundColor,elementSize,elementVariant';
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['inputType'] = 'collection';
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['tl_class'] = 'w50 clr hl_collection';
@@ -300,7 +300,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['showAsCard'] = [
     'inputType' => 'checkbox',
     'targetColumn' => 'kiss_styles',
     'eval' => [
-        'tl_class' => 'w50',
+        'tl_class' => 'w25',
         'submitOnChange' => true,
     ],
 ];
@@ -316,7 +316,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['elementSize'] = [
     ],
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['cardLayout'] = [
+$GLOBALS['TL_DCA']['tl_content']['fields']['elementLayout'] = [
     'exclude' => true,
     'inputType' => 'select',
     'targetColumn' => 'kiss_styles',
@@ -413,7 +413,13 @@ PaletteManipulator::create()
 ;
 
 PaletteManipulator::create()
-    ->addField(['textAppearance', 'showAsCard'], 'text', PaletteManipulator::POSITION_BEFORE)
+    ->addField('textAppearance', 'text', PaletteManipulator::POSITION_BEFORE)
+    ->applyToPalette('text', 'tl_content')
+;
+
+PaletteManipulator::create()
+    ->addLegend('card_legend:collapsed', 'text_legend', PaletteManipulator::POSITION_AFTER)
+    ->addField('showAsCard', 'card_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('text', 'tl_content')
 ;
 
