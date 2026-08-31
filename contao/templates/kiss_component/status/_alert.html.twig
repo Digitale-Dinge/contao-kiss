@@ -21,13 +21,13 @@
 
 {% set alertClasses = [
   'alert',
-  color ? 'alert-' ~ color : '',
-  style ? 'alert-' ~ style : '',
-  class ?? '',
+  color|default ? 'alert-' ~ color : '',
+  style|default ? 'alert-' ~ style : '',
+  class|default,
 ]|filter(v => v)|join(' ') %}
 
 <div class="{{ alertClasses }}" role="alert">
-  {% if icon %}
+  {% if icon|default %}
     <span class="alert-icon">
       {{ include('@Contao/kiss_component/media/_icon_include.html.twig', {
         icon: icon
@@ -36,13 +36,13 @@
   {% endif %}
 
   <div class="alert-content">
-    {% if title %}
+    {% if title|default %}
       <div class="alert-title">{{ title }}</div>
     {% endif %}
 
-    {% if description %}
+    {% if description|default %}
       <div class="alert-description">{{ description|raw }}</div>
-    {% elseif message %}
+    {% elseif message|default %}
       <div class="alert-description">{{ message|raw }}</div>
     {% endif %}
 
