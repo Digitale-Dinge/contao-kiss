@@ -7,6 +7,8 @@ namespace DigitaleDinge\ContaoKiss\Styles\Option\Typography;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
+ * @deprecated No longer offered in any backend dropdown.
+ *
  * @method string x_small
  * @method string small
  * @method string medium

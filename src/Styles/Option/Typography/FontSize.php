@@ -7,6 +7,9 @@ namespace DigitaleDinge\ContaoKiss\Styles\Option\Typography;
 use Contao\CoreBundle\Translation\TranslatableLabelInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 
+/**
+ * @deprecated No longer offered in any backend dropdown.
+ */
 enum FontSize: string implements TranslatableLabelInterface
 {
     case x_small = 'text-xs';
