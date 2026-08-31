@@ -37,7 +37,7 @@
     );
     border-style: solid;
     border-color: color-mix(
-      in oklch,
+      in oklab,
       var(--card-border) var(--card-border-opacity),
       transparent
     );
@@ -208,7 +208,7 @@
 
   // Variants
   .card-soft {
-    --card-bg: color-mix(in oklch, var(--card-ring) 10%, transparent);
+    --card-bg: color-mix(in oklab, var(--card-ring) 10%, transparent);
     --card-fg: var(--card-ring);
     --card-border: var(--card-ring);
     --card-border-opacity: 20%;
@@ -228,8 +228,8 @@
   .card-glass {
     @apply backdrop-blur-md;
 
-    background-color: color-mix(in oklch, var(--card-ring) 15%, transparent);
-    border: 1px solid color-mix(in oklch, var(--card-ring) 20%, transparent);
+    background-color: color-mix(in oklab, var(--card-ring) 15%, transparent);
+    border: 1px solid color-mix(in oklab, var(--card-ring) 20%, transparent);
     box-shadow: 0 8px 32px 0 rgb(0 0 0 / 0.15);
   }
 

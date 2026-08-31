@@ -33,7 +33,7 @@
         }
 
         &:focus-visible {
-            --tw-ring-color: color-mix(in oklch, var(--link-color) 30%, transparent);
+            --tw-ring-color: color-mix(in oklab, var(--link-color) 30%, transparent);
         }
     }
 

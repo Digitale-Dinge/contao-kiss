@@ -57,7 +57,7 @@
         box-sizing: border-box;
         font-size: var(--select-text);
         padding: var(--select-py) var(--select-pr) var(--select-py) var(--select-px);
-        border: 1px solid color-mix(in oklch, var(--select-color) var(--select-border-opacity), transparent);
+        border: 1px solid color-mix(in oklab, var(--select-color) var(--select-border-opacity), transparent);
         border-radius: var(--radius-field, 0.5rem);
         outline: none;
         appearance: none;
@@ -92,7 +92,7 @@
 
     // Variants
     .select-soft {
-        background-color: color-mix(in oklch, var(--select-color) 10%, transparent);
+        background-color: color-mix(in oklab, var(--select-color) 10%, transparent);
     }
 
     // Colors
@@ -204,8 +204,8 @@
         left: var(--select-px, 0.75rem);
         top: 0;
         font-size: var(--select-text, var(--text-base, 1rem));
-        color: color-mix(in oklch, var(--color-base-content) 50%, transparent);
-        background: var(--select-label-bg, var(--color-base-100));
+        color: color-mix(in oklab, var(--kiss-sys-color-neutral-on-strong) 50%, transparent);
+        background: var(--select-label-bg, var(--kiss-sys-color-neutral-surface-1));
         max-width: calc(100% - 3rem);
         padding: 0 0.25rem;
         translate: 0 calc(-50% - 0.0625em);

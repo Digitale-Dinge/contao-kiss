@@ -63,7 +63,7 @@
             @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:rounded;
 
             &:focus-visible {
-                --tw-ring-color: color-mix(in oklch, var(--breadcrumb-color) 50%, transparent);
+                --tw-ring-color: color-mix(in oklab, var(--breadcrumb-color) 50%, transparent);
             }
 
             svg {

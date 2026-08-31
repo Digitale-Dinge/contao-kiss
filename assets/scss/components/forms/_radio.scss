@@ -37,7 +37,7 @@
         padding: 0.25rem;
 
         // Border and background
-        border: 1px solid color-mix(in oklch, var(--input-color) var(--input-border-opacity), transparent);
+        border: 1px solid color-mix(in oklab, var(--input-color) var(--input-border-opacity), transparent);
         background-color: transparent;
 
         // Inner dot via ::before pseudo-element

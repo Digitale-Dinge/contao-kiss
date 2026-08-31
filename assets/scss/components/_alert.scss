@@ -73,7 +73,7 @@
 
     // Variants
     .alert-soft {
-        --alert-bg: color-mix(in oklch, var(--alert-ring) 10%, transparent);
+        --alert-bg: color-mix(in oklab, var(--alert-ring) 10%, transparent);
         --alert-fg: var(--alert-ring);
         --alert-border: var(--alert-ring);
     }

@@ -30,7 +30,7 @@
         width: var(--size);
         height: var(--size);
         padding: var(--size-padding);
-        border: 1px solid color-mix(in oklch, var(--input-color) var(--input-border-opacity), transparent);
+        border: 1px solid color-mix(in oklab, var(--input-color) var(--input-border-opacity), transparent);
         border-radius: var(--radius-checkbox, 0.25rem);
         background-color: transparent;
         transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;

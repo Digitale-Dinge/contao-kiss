@@ -25,8 +25,8 @@
         --btn-py:               calc(var(--spacing, 0.25rem) * 2.5);
         --btn-gap:              calc(var(--spacing, 0.25rem) * 2);
         --btn-text:             var(--text-base, 1rem);
-        --btn-bg-hover:         color-mix(in oklch, var(--btn-bg) var(--btn-hover-opacity), transparent);
-        --btn-border-hover:     color-mix(in oklch, var(--btn-bg) var(--btn-hover-opacity), transparent);
+        --btn-bg-hover:         color-mix(in oklab, var(--btn-bg) var(--btn-hover-opacity), transparent);
+        --btn-border-hover:     color-mix(in oklab, var(--btn-bg) var(--btn-hover-opacity), transparent);
 
 
         @apply inline-flex items-center justify-center;
@@ -54,7 +54,7 @@
         }
 
         &:focus-visible {
-            --tw-ring-color: color-mix(in oklch, var(--btn-ring) 20%, transparent);
+            --tw-ring-color: color-mix(in oklab, var(--btn-ring) 20%, transparent);
         }
 
         &:active:not(:disabled) {
@@ -128,8 +128,8 @@
         --btn-border-hover: transparent;
         --btn-color:        var(--btn-ring);
         --btn-color-hover:  var(--btn-ring);
-        --btn-bg:           color-mix(in oklch, var(--btn-ring) 10%, transparent);
-        --btn-bg-hover:     color-mix(in oklch, var(--btn-ring) 20%, transparent);
+        --btn-bg:           color-mix(in oklab, var(--btn-ring) 10%, transparent);
+        --btn-bg-hover:     color-mix(in oklab, var(--btn-ring) 20%, transparent);
     }
 
     .btn-outline {
@@ -147,7 +147,7 @@
         --btn-border-hover: var(--btn-ring);
         --btn-color:        var(--btn-ring);
         --btn-color-hover:  var(--btn-ring);
-        --btn-bg-hover:     color-mix(in oklch, var(--btn-ring) 10%, transparent);
+        --btn-bg-hover:     color-mix(in oklab, var(--btn-ring) 10%, transparent);
 
         &:not(&:hover, &:focus-visible) {
             --btn-px: 0;

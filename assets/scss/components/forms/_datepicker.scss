@@ -58,7 +58,7 @@
 
 /* Weekday header row */
 .datepicker-view .dow {
-    color: color-mix(in srgb, var(--dp-fg) 45%, transparent);
+    color: color-mix(in oklab, var(--dp-fg) 45%, transparent);
     font-weight: 600;
 }
 
@@ -77,22 +77,22 @@
      * one turquoise with higher specificity, so we must match it). */
     &.today:not(.selected),
     &.today.focused:not(.selected) {
-        background: color-mix(in srgb, var(--dp-accent) 22%, var(--dp-surface));
+        background: color-mix(in oklab, var(--dp-accent) 22%, var(--dp-surface));
         color: var(--dp-fg);
     }
 
     &.prev,
     &.next {
-        color: color-mix(in srgb, var(--dp-fg) 45%, transparent);
+        color: color-mix(in oklab, var(--dp-fg) 45%, transparent);
     }
 
     &.disabled {
-        color: color-mix(in srgb, var(--dp-fg) 30%, transparent);
+        color: color-mix(in oklab, var(--dp-fg) 30%, transparent);
     }
 
     /* Days between the two range endpoints */
     &.range {
-        background: color-mix(in srgb, var(--dp-accent) 22%, var(--dp-surface));
+        background: color-mix(in oklab, var(--dp-accent) 22%, var(--dp-surface));
         color: var(--dp-fg);
         border-radius: 0;
     }
@@ -137,6 +137,6 @@
 
     &:hover,
     &:focus-visible {
-        background: color-mix(in srgb, var(--dp-accent) 88%, #000);
+        background: color-mix(in oklab, var(--dp-accent) 88%, #000);
     }
 }

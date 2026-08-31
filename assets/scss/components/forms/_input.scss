@@ -51,7 +51,7 @@
         box-sizing: border-box;
         font-size: var(--input-text);
         padding: var(--input-py) var(--input-px);
-        border: 1px solid color-mix(in oklch, var(--input-color) var(--input-border-opacity), transparent);
+        border: 1px solid color-mix(in oklab, var(--input-color) var(--input-border-opacity), transparent);
         border-radius: var(--radius-field, 0.5rem);
         outline: none;
         color: var(--color-base-content);
@@ -76,7 +76,7 @@
 
     // Variants
     .input-soft {
-        background-color: color-mix(in oklch, var(--input-color) 10%, transparent);
+        background-color: color-mix(in oklab, var(--input-color) 10%, transparent);
     }
 
     // Colors
@@ -177,7 +177,7 @@
         left: var(--input-px, 0.75rem);
         top: 50%;
         font-size: var(--input-text, var(--text-base, 1rem));
-        color: color-mix(in oklch, var(--color-base-content) 50%, transparent);
+        color: color-mix(in oklab, var(--kiss-sys-color-neutral-on-strong) 50%, transparent);
         max-width: calc(100% - 1.5rem);
         translate: 0 -50%;
         transition: top 0.15s ease-out, translate 0.15s ease-out, scale 0.15s ease-out, background-color 0.15s ease-out, padding 0.15s ease-out;

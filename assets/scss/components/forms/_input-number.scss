@@ -106,7 +106,7 @@
         border: 0;
         cursor: pointer;
         transition: color 150ms, background-color 150ms;
-        color: color-mix(in oklch, var(--btn-color) 50%, transparent);
+        color: color-mix(in oklab, var(--btn-color) 50%, transparent);
 
         svg {
             width: var(--btn-icon-size);
@@ -115,7 +115,7 @@
 
         &:hover:not(:disabled) {
             color: var(--btn-color);
-            background-color: color-mix(in oklch, var(--btn-color) 10%, transparent);
+            background-color: color-mix(in oklab, var(--btn-color) 10%, transparent);
         }
 
         &:active:not(:disabled) {

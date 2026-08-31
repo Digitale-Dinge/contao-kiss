@@ -82,7 +82,7 @@
 
     // Variants
     .badge-soft {
-        --badge-bg: color-mix(in oklch, var(--badge-ring) 10%, transparent);
+        --badge-bg: color-mix(in oklab, var(--badge-ring) 10%, transparent);
         --badge-fg: var(--badge-ring);
         --badge-border: transparent;
     }
