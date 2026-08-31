@@ -69,7 +69,7 @@ class StylesVariable
         return $this->getStyleOption(Typography\HeadingOption::class, $key);
     }
 
-    public function getResponsive(string|null $key = null): StyleOption|Typography\ResponsiveOption
+    public function getFont_responsive(string|null $key = null): StyleOption|Typography\ResponsiveOption
     {
         return $this->getStyleOption(Typography\ResponsiveOption::class, $key);
     }
