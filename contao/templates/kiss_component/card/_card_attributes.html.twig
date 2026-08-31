@@ -1,0 +1,7 @@
+{% block card_attributes %}
+    {{- attrs(card_attributes|default)
+        .addClass('card')
+        .addClass('card-' ~ styles.size(data.elementSize|default), data.elementSize|default)
+        .addClass('card-' ~ styles.variant(data.elementVariant|default), data.elementVariant|default)
+    -}}
+{% endblock %}

@@ -1,21 +1,16 @@
 {% extends '@Contao/kiss_component/media/_media_text.html.twig' %}
+{% use '@Contao/kiss_component/card/_card_attributes.html.twig' %}
 
 {% if addImage|default %}
     {% set type = addImage ? 'image' : null %}
     {% set img_class = 'w-full' %}
 {% endif %}
 
-{% if show_as_card|default %}
-    {% set attributes = attrs()
-        .addClass('card')
-        .addClass('card-' ~ styles.size(data.elementSize|default), data.elementSize|default)
-        .addClass('card-' ~ styles.card_layout(data.cardLayout|default), data.cardLayout|default)
-        .addClass('card-' ~ styles.variant(data.elementVariant|default), data.elementVariant|default)
-        .mergeWith(attributes|default)
-    %}
-    {% set text_attributes = attrs().addClass(['card-body', 'responsive-body3']).mergeWith(text_attributes|default) %}
-    {% set headline_classes = attrs().addClass('responsive-headline3').mergeWith(headline_classes|default) %}
-{% endif %}
+{% set attributes = attrs()
+    .mergeWith(block('card_attributes'), show_as_card|default)
+    .addClass('media-' ~ styles.media_layout(data.elementLayout|default), data.elementLayout|default)
+    .mergeWith(attributes|default)
+%}
 
 {% block headline %}
     {% if headline.text %}
