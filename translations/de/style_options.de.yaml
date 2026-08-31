@@ -110,10 +110,16 @@ style_options:
             h5:                     h5
             h6:                     h6
 
-        display:
-            display_one:            Titel Riesig
-            display_two:            Titel Groß
-            display_three:          Titel Normal
+        responsive:
+            display_one:            Display 1
+            display_two:            Display 2
+            display_three:          Display 3
+            headline_one:           Überschrift 1
+            headline_two:           Überschrift 2
+            headline_three:         Überschrift 3
+            body_one:               Fließtext 1
+            body_two:               Fließtext 2
+            body_three:             Fließtext 3
 
         alignment:
             start:                  Anfang
@@ -138,7 +144,7 @@ style_options:
                 side_reverse:       Nebeneinander (umgekehrt)
                 media_full:         Vollflächiges Medium
 
-    display:                        Titel
+    responsive:                     Responsiv
     heading:                        Überschrift
     size:                           Textgröße
 

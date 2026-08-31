@@ -69,9 +69,9 @@ class StylesVariable
         return $this->getStyleOption(Typography\HeadingOption::class, $key);
     }
 
-    public function getFont_display(string|null $key = null): StyleOption|Typography\DisplayOption
+    public function getResponsive(string|null $key = null): StyleOption|Typography\ResponsiveOption
     {
-        return $this->getStyleOption(Typography\DisplayOption::class, $key);
+        return $this->getStyleOption(Typography\ResponsiveOption::class, $key);
     }
 
     public function getText_alignment(string|null $key = null): StyleOption|Typography\AlignmentOption

@@ -110,10 +110,16 @@ style_options:
             h5:                     h5
             h6:                     h6
 
-        display:
-            display_one:            Display Huge
-            display_two:            Display Large
-            display_three:          Display Normal
+        responsive:
+            display_one:            Display 1
+            display_two:            Display 2
+            display_three:          Display 3
+            headline_one:           Headline 1
+            headline_two:           Headline 2
+            headline_three:         Headline 3
+            body_one:               Body 1
+            body_two:               Body 2
+            body_three:             Body 3
 
         alignment:
             start:                  Start
@@ -138,7 +144,7 @@ style_options:
                 side_reverse:       Side by side (reversed)
                 media_full:         Full media
 
-    display:                        Display
+    responsive:                     Responsive
     heading:                        Heading
     size:                           Text size
 

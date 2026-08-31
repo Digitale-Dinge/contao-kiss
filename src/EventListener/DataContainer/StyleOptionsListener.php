@@ -32,8 +32,8 @@ final class StyleOptionsListener
     public function addHeadlineAppearanceOptions(): array
     {
         return [
-            $this->translator->trans('style_options.display', [], 'style_options') => $this->getTranslatedOptions(Typography\Display::class),
             $this->translator->trans('style_options.heading', [], 'style_options') => $this->getTranslatedOptions(Typography\Heading::class),
+            $this->translator->trans('style_options.responsive', [], 'style_options') => $this->getTranslatedOptions(Typography\Responsive::class),
         ];
     }
 
@@ -43,7 +43,7 @@ final class StyleOptionsListener
     {
         return [
             $this->translator->trans('style_options.heading', [], 'style_options') => $this->getTranslatedOptions(Typography\Heading::class),
-            $this->translator->trans('style_options.size', [], 'style_options') => $this->getTranslatedOptions(Typography\FontSize::class),
+            $this->translator->trans('style_options.responsive', [], 'style_options') => $this->getTranslatedOptions(Typography\Responsive::class),
         ];
     }
 
