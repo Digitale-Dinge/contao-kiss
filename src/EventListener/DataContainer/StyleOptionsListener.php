@@ -152,10 +152,10 @@ final class StyleOptionsListener
         return $this->getTranslatedOptions(Modifier\Size::class);
     }
 
-    #[AsCallback('tl_content', 'fields.cardLayout.options')]
-    public function addCardLayoutOptions(): array
+    #[AsCallback('tl_content', 'fields.elementLayout.options')]
+    public function addElementLayoutOptions(): array
     {
-        return $this->getTranslatedOptions(Component\Card\Layout::class);
+        return $this->getTranslatedOptions(Component\Media\Layout::class);
     }
 
     #[AsCallback('tl_content', 'fields.elementVariant.options')]

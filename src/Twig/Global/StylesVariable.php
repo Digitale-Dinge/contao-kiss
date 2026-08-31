@@ -143,12 +143,9 @@ class StylesVariable
         return $this->getStyleOption(Component\CallToAction\VariantOption::class, $key);
     }
 
-    /**
-     * Card design
-     */
-    public function getCard_layout(string|null $key = null): StyleOption|Component\Card\LayoutOption
+    public function getMedia_layout(string|null $key = null): StyleOption|Component\Media\LayoutOption
     {
-        return $this->getStyleOption(Component\Card\LayoutOption::class, $key);
+        return $this->getStyleOption(Component\Media\LayoutOption::class, $key);
     }
 
     protected function getStyleOption(string $styleOption, string|null $key): StyleOption
