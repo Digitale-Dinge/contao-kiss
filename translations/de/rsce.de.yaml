@@ -78,6 +78,16 @@ rsce:
             text:
                 label:          Text
                 description:    Der Text des Badges
+    alert:
+        label:                  Alert
+        description:            Eine Hinweisbox mit Titel, Text und Farbe
+        field:
+            title:
+                label:          Titel
+                description:    Der Titel des Alerts
+            text:
+                label:          Text
+                description:    Der Beschreibungstext des Alerts
 
     icon:
         label:                  Icon

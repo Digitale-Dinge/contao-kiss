@@ -6,7 +6,7 @@
   @param {string} message - Alert message (backward compatibility with 'description')
   @param {string} color - Alert color variant: primary|secondary|tertiary|success|warning|error
   @param {string} style - Alert style: soft|outline|dashed (default: solid)
-  @param {string} icon - Icon class name
+  @param {string} icon - Icon key, rendered via the SVG icon picker
   @param {string} class - Additional CSS classes
 
   Usage:
@@ -15,7 +15,7 @@
     description: 'Your changes have been saved.',
     color: 'success',
     style: 'soft',
-    icon: 'icon-check-circle'
+    icon: 'check-circle'
   } only %}
 #}
 
@@ -29,7 +29,9 @@
 <div class="{{ alertClasses }}" role="alert">
   {% if icon %}
     <span class="alert-icon">
-      <i class="{{ icon }}"></i>
+      {{ include('@Contao/kiss_component/media/_icon_include.html.twig', {
+        icon: icon
+      }) }}
     </span>
   {% endif %}
 
