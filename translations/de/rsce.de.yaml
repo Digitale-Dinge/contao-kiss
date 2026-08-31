@@ -46,6 +46,17 @@ rsce:
                 label:          Als Karten anzeigen
                 description:    Elemente als Karten anzeigen
 
+    alert:
+        label:                  Alert
+        description:            Eine Hinweisbox mit Titel, Text und Farbe
+        field:
+            title:
+                label:          Titel
+                description:    Der Titel des Alerts
+            text:
+                label:          Text
+                description:    Der Beschreibungstext des Alerts
+
     icon:
         label:                  Icon
         description:            Ein einzelnes Icon mit optionalem Beschreibungstext
