@@ -115,8 +115,8 @@ tl_content:
         - Define the size of the element.
         - Normal # Default label - size
 
-    cardLayout:
-        - Card layout
+    elementLayout:
+        - Medium layout
         - Define the arrangement of media and content.
 
     elementVariant:

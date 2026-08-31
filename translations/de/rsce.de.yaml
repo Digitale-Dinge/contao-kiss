@@ -1,8 +1,10 @@
 rsce:
     group:
         settings:               Element-Einstellungen
-        media:                  Bild/Icon/Text
+        media:                  Text/Medium
         grid:                   Grid-Einstellungen
+        appearance:             Darstellungs-Einstellungen
+        card:                   Card-Einstellungen
 
     list:
         label:                  Elemente
@@ -16,6 +18,7 @@ rsce:
             options:
                 image:          Bild
                 icon:           Icon
+                video:          Video
                 separated:      Separiert
 
         mediaType:
@@ -25,13 +28,20 @@ rsce:
                 image:          Bild
                 video:          Video
 
+        addMedia:
+            label:              Medium hinzufügen
+            description:        Fügt den Elementen ein Medium hinzu
+
         callToAction:
             label:              Call-To-Action
             description:        Hier können Sie eine oder mehrere Call-To-Action angeben, welche im Element angezeigt werden sollen.
             element:            Aktion
 
+        imageUrl:
+            label:              Bild-URL
+
     media_text:
-        label:                  Medien-Text
+        label:                  Text (mit Medium)
         description:            Ein Medien-Text Element
         field:
             show_as_card:
@@ -39,7 +49,7 @@ rsce:
                 description:    Dieses Element als Karte anzeigen
 
     media_text_list:
-        label:                  Medien-Text-Liste
+        label:                  Text-Liste (mit Medium)
         description:            Eine Medien-Text Liste
         field:
             show_as_card:

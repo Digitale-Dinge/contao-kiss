@@ -112,9 +112,9 @@ style_options:
             body_three:             Fließtext 3
 
         alignment:
-            start:                  Anfang
+            start:                  Linksbündig
             center:                 Zentriert
-            end:                    Ende
+            end:                    Rechtsbündig
 
     component:
         button:
@@ -127,7 +127,7 @@ style_options:
                 wide:               Breit
                 block:              Volle Breite
 
-        card:
+        media:
             layout:
                 reverse:            Umgekehrt
                 side:               Nebeneinander

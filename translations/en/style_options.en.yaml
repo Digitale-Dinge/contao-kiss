@@ -112,9 +112,9 @@ style_options:
             body_three:             Body 3
 
         alignment:
-            start:                  Start
+            start:                  Left aligned
             center:                 Center
-            end:                    End
+            end:                    Right aligned
 
     component:
         button:
@@ -127,7 +127,7 @@ style_options:
                 wide:               Wide
                 block:              Full width
 
-        card:
+        media:
             layout:
                 reverse:            Reversed
                 side:               Side by side
