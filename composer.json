@@ -30,6 +30,7 @@
     "require": {
         "php": "^8.4",
         "contao/core-bundle": "^5.7",
+        "symfony/deprecation-contracts": "^3.0",
         "digitaledinge/contao-company": "@dev",
         "digitaledinge/contao-grid-ratio-widget": "^0.1.1",
         "madeyourday/contao-rocksolid-custom-elements": "^2.4.10",

@@ -20,4 +20,15 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 class FontSizeOption extends StyleOption
 {
     public string $enumClass = FontSize::class;
+
+    public function __toString(): string
+    {
+        $value = parent::__toString();
+
+        if ('' !== $value) {
+            trigger_deprecation('digitaledinge/contao-kiss', '1.0', 'Font sizes are no longer used since the design system was introduced. Use "Responsive" instead.');
+        }
+
+        return $value;
+    }
 }
