@@ -5,7 +5,7 @@
     {% set show_as_card = show_as_card|default(data.showAsCard|default) %}
 
     {% block media %}
-        {% if type|default in ['image', 'icon', 'video'] %}
+        {% if mediaType|default in ['image', 'icon', 'video'] %}
             {# ToDo: Add image size fallback if not set -> 800px if as card -> 800 or 600 if as gridlist #}
             {{ include("@Contao/kiss_component/media/_#{mediaType}.html.twig", {
                 media_attributes: attrs().addClass('media').mergeWith(media_attributes|default),
