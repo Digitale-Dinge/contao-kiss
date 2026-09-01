@@ -3,7 +3,7 @@
 {% set text_appearance = this.textAppearance|default %}
 
 {% set wrapperAttributes = attrs(wrapperAttributes|default)
-    .addClass(styles.heading(text_appearance)|default(styles.font_responsive(text_appearance)), text_appearance)
+    .addClass(styles.font_responsive(this.text_appearance|default), this.text_appearance|default)
     .addClass(styles.text_alignment(this.textAlignment|default), this.textAlignment|default)
 %}
 
