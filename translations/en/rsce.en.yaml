@@ -12,14 +12,6 @@ rsce:
         element:                'Element %s'
 
     field:
-        type:
-            label:              Type
-            description:        Here you can choose a type for the element.
-            options:
-                image:          Image
-                icon:           Icon
-                video:          Video
-
         addMedia:
             label:              Add media
             description:        Adds a medium to the element
@@ -29,6 +21,7 @@ rsce:
             description:        Here you can choose a media type.
             options:
                 image:          Image
+                icon:           Icon
                 video:          Video
 
         callToAction:

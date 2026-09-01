@@ -15,7 +15,6 @@
 
 {# Remove bg color #}
 {% set data = data|merge({backgroundColor: null}) %}
-{# ToDo: media_type instead of type due to classes #}
 {% set attributes = attrs(attributes|default).addClass('media_text_list') %}
 
 {# Always set the responsive body3 on media text cards #}
