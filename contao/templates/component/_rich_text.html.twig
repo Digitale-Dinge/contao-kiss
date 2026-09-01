@@ -9,7 +9,7 @@
 
     {% if text_appearance %}
         {% set rich_text_attributes = attrs(rich_text_attributes|default)
-            .addClass(styles.heading(text_appearance)|default(styles.font_responsive(text_appearance)))
+            .addClass(styles.heading(text_appearance)|default(styles.font_appearance(text_appearance)))
         %}
     {% endif %}
     {{ parent() }}

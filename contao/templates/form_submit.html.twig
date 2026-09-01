@@ -1,7 +1,7 @@
 {% extends '@Contao/form_submit.html.twig' %}
 
 {% set wrapperAttributes = attrs(wrapperAttributes|default)
-    .addClass(styles.font_responsive(this.text_appearance|default), this.text_appearance|default)
+    .addClass(styles.font_appearance(this.text_appearance|default), this.text_appearance|default)
     .addClass(styles.text_alignment(this.textAlignment|default), this.textAlignment|default)
 %}
 
