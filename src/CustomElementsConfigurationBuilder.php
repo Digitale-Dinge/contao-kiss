@@ -334,8 +334,13 @@ final class CustomElementsConfigurationBuilder
             'inputType' => 'standardField',
         ];
 
-        $options['label'][0] = $this->translator->trans('rsce.field.imageUrl.label', [], 'rsce');
+        $options['label'] = [
+            $this->translator->trans('rsce.field.imageUrl.label', [], 'rsce'),
+            &$GLOBALS['TL_LANG']['MSC']['url'][1]
+        ];
+
         $options['eval']['mandatory'] = false;
+        $options['eval']['tl_class'] = 'w50';
 
         if (null !== $dependsOn) {
             $options['dependsOn'] = [
