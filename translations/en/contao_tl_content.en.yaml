@@ -110,6 +110,10 @@ tl_content:
         - Position
         - Here you can choose the position of the icon.
 
+    elementColor:
+        - Color
+        - Define the color of the element.
+
     elementSize:
         - Size
         - Define the size of the element.

@@ -11,6 +11,7 @@ enum Variant: string implements TranslatableLabelInterface
 {
     case soft = 'soft';
     case outline = 'outline';
+    case dashed = 'dashed';
     case glass = 'glass';
 
     public function label(): TranslatableMessage

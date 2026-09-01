@@ -89,6 +89,7 @@ style_options:
         variant:
             soft:                   Soft
             outline:                Outlined
+            dashed:                 Dashed
             glass:                  Glass
 
     typography:

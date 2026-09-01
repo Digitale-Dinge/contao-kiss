@@ -24,6 +24,25 @@ final class StyleOptionsListener
 {
     use TranslatableEnumTrait;
 
+    private const CARD_VARIANTS = [Modifier\Variant::soft, Modifier\Variant::outline, Modifier\Variant::glass];
+
+    private const ELEMENT_VARIANTS = [
+        'rsce_alert' => [Modifier\Variant::soft, Modifier\Variant::outline, Modifier\Variant::dashed],
+    ];
+
+    private const INPUT_VARIANTS = [Modifier\Variant::soft];
+
+    private const FIELD_VARIANTS = [
+        'text'     => self::INPUT_VARIANTS,
+        'password' => self::INPUT_VARIANTS,
+        'email'    => self::INPUT_VARIANTS,
+        'date'     => self::INPUT_VARIANTS,
+        'captcha'  => self::INPUT_VARIANTS,
+        'altcha'   => self::INPUT_VARIANTS,
+        'select'   => self::INPUT_VARIANTS,
+        'textarea' => self::INPUT_VARIANTS,
+    ];
+
     public function __construct(private readonly TranslatorInterface $translator)
     {}
 
@@ -135,6 +154,7 @@ final class StyleOptionsListener
         return $this->getTranslatedOptions(Component\CallToAction\Shape::class);
     }
 
+    #[AsCallback('tl_content', 'fields.elementColor.options')]
     #[AsCallback('tl_content', 'fields.ctaColor.options')]
     #[AsCallback('tl_content', 'fields.callToAction.fields.color.options')]
     #[AsCallback('tl_form_field', 'fields.fieldColor.options')]
@@ -159,15 +179,22 @@ final class StyleOptionsListener
     }
 
     #[AsCallback('tl_content', 'fields.elementVariant.options')]
-    #[AsCallback('tl_form_field', 'fields.fieldVariant.options')]
     public function addVariantOptions(DataContainer $dc): array
     {
-        $type = $dc->getCurrentRecord()['type'] ?? null;
+        $type = $dc->getCurrentRecord()['type'] ?? '';
+
+        return $this->getTranslatedCases(...(self::ELEMENT_VARIANTS[$type] ?? self::CARD_VARIANTS));
+    }
+
+    #[AsCallback('tl_form_field', 'fields.fieldVariant.options')]
+    public function addFieldVariantOptions(DataContainer $dc): array
+    {
+        $type = $dc->getCurrentRecord()['type'] ?? '';
 
         if ('submit' === $type) {
             return $this->getTranslatedOptions(Component\CallToAction\Variant::class);
         }
 
-        return $this->getTranslatedOptions(Modifier\Variant::class);
+        return $this->getTranslatedCases(...(self::FIELD_VARIANTS[$type] ?? []));
     }
 }
