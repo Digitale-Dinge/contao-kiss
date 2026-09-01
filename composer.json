@@ -41,15 +41,22 @@
     },
     "require-dev": {
         "contao/manager-plugin": "^2.0",
-        "shipmonk/composer-dependency-analyser": "^1.8"
+        "shipmonk/composer-dependency-analyser": "^1.8",
+        "phpunit/phpunit": "^13.3"
     },
     "autoload": {
         "psr-4": {
             "DigitaleDinge\\ContaoKiss\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "DigitaleDinge\\ContaoKiss\\Tests\\": "tests/"
+        }
+    },
     "scripts": {
-        "depcheck": "@php vendor/bin/composer-dependency-analyser --config=depcheck.php"
+        "depcheck": "@php vendor/bin/composer-dependency-analyser --config=depcheck.php",
+        "unit-tests": "@php vendor/bin/phpunit --fail-on-phpunit-notice"
     },
     "extra": {
         "contao-manager-plugin": "DigitaleDinge\\ContaoKiss\\ContaoManager\\Plugin"
