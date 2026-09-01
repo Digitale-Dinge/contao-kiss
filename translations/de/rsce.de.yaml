@@ -30,6 +30,21 @@ rsce:
             description:        Hier können Sie eine oder mehrere Call-To-Action angeben, welche im Element angezeigt werden sollen.
             element:            Aktion
 
+        listLayout:
+            label:              Layout
+            description:        Wählen Sie zwischen einer kompakten (Mini) und einer großen Darstellung.
+            options:
+                mini:           Mini
+                large:          Groß
+
+    info-list:
+        label:                  Info-Liste mit Icons
+        description:            Eine Liste von Infos oder Kontaktdaten, jeweils mit Icon, Titel und Text.
+        field:
+            headline:
+                label:          Titel
+                description:    'Geben Sie den Titel des Eintrags ein, z. B. "Telefon".'
+
     media_text:
         label:                  Medien-Text
         description:            Ein Medien-Text Element

@@ -30,6 +30,21 @@ rsce:
             description:        Here you can enter one or more call-to-actions which will be displayed in the element.
             element:            Action
 
+        listLayout:
+            label:              Layout
+            description:        Choose between a compact (mini) and a large display.
+            options:
+                mini:           Mini
+                large:          Large
+
+    info-list:
+        label:                  Info list with icons
+        description:            A list of info or contact items, each with an icon, title and text.
+        field:
+            headline:
+                label:          Title
+                description:    'Enter the item''s title, e.g. "Phone".'
+
     media_text:
         label:                  Media text
         description:            A media text element

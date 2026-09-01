@@ -1,27 +1,27 @@
-<?php $this->extend('block_unsearchable_no-headline') ?>
+{% extends '@Contao/content_element/_base.html.twig' %}
 
-<?php $this->class = 'c-info-list'?>
-<?php $this->block('addClass') ?><?= $this->class ?>--<?= $this->listLayout ?><?php $this->endblock() ?>
-<?php $this->block('content') ?>
+{% set attributes = attrs()
+    .addClass('info_list')
+    .addClass('info_list--' ~ data.listLayout|default, data.listLayout|default)
+    .mergeWith(attributes|default)
+%}
 
-<div class="<?= $this->class ?>__items">
-    <?php foreach ( $this->items as $item ): ?>
-        <div class="<?= $this->class ?>__item">
-            <?php if ( ! empty( $item->icon ) ): ?>
-                <div class="<?= $this->class ?>__icon">
-                    <span aria-hidden="true" data-icon="&#x<?= $item->icon ?>;"></span>
+{% block content %}
+    {% for item in list %}
+        <div class="info_list__item">
+            {% if item.icon|default %}
+                <div class="info_list__icon">
+                    {{ include('@Contao/kiss_component/media/_icon_include.html.twig', { icon: item.icon }) }}
                 </div>
-            <?php endif; ?>
-            <div class="<?= $this->class ?>__content">
-                <?php if ( ! empty( $item->headline ) ): ?>
-                    <p class="<?= $this->class ?>__headline"><?= $item->headline ?></p>
-                <?php endif; ?>
-                <?php if ( ! empty( $item->text ) ): ?>
-                    <div class="<?= $this->class ?>__text"><?= $item->text ?></div>
-                <?php endif; ?>
+            {% endif %}
+            <div class="info_list__content">
+                {% if item.headline|default %}
+                    <p class="info_list__headline">{{ item.headline|insert_tag }}</p>
+                {% endif %}
+                {% if item.text|default %}
+                    <div class="info_list__text">{{ item.text|raw }}</div>
+                {% endif %}
             </div>
         </div>
-    <?php endforeach ?>
-</div>
-
-<?php $this->endblock() ?>
+    {% endfor %}
+{% endblock %}
