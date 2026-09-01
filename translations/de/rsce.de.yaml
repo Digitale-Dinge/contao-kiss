@@ -13,8 +13,8 @@ rsce:
 
     field:
         addMedia:
-            label: Medium hinzufügen
-            description: Fügt den Elementen ein Medium hinzu
+            label:              Medium hinzufügen
+            description:        Fügt den Elementen ein Medium hinzu
 
         mediaType:
             label:              Typ
