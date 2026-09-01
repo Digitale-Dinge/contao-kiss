@@ -1,9 +1,9 @@
 {% use '@Contao/component/_headline.html.twig' %}
 
 {% block headline_component %}
-    {% set is_from_iterable = item.headline|default is iterable %}
+    {% set is_from_iterable = item.headline.value is defined %}
 
-    {% if item is defined %}
+    {% if is_from_iterable %}
         {% set topline = item.topline|default %}
     {% elseif data.topline|default %}
         {% set topline = data.topline|default %}
