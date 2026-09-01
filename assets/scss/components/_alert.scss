@@ -95,6 +95,10 @@
     // Parts
     .alert-icon {
         @apply shrink-0 w-5 h-5 mt-0.5;
+
+        svg {
+            @apply w-full h-full;
+        }
     }
 
     .alert-content {
