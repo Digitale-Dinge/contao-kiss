@@ -93,15 +93,6 @@ style_options:
             glass:                  Glas
 
     typography:
-        size:
-            x_small:                Sehr klein
-            small:                  Klein
-            medium:                 Normal
-            large:                  Groß
-            x_large:                Größer
-            xx_large:               Sehr groß
-            xxx_large:              Riesig
-
         heading:
             h1:                     h1
             h2:                     h2
@@ -146,7 +137,6 @@ style_options:
 
     responsive:                     Responsiv
     heading:                        Überschrift
-    size:                           Textgröße
 
     position:
         left:                       Links

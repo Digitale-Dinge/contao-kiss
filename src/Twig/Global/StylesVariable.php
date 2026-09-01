@@ -59,11 +59,6 @@ class StylesVariable
     /**
      * Typography
      */
-    public function getFont_size(string|null $key = null): StyleOption|Typography\FontSizeOption
-    {
-        return $this->getStyleOption(Typography\FontSizeOption::class, $key);
-    }
-
     public function getHeading(string|null $key = null): StyleOption|Typography\HeadingOption
     {
         return $this->getStyleOption(Typography\HeadingOption::class, $key);

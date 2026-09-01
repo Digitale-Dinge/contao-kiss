@@ -26,7 +26,7 @@
     {% set headline = {
         text: headline_text,
         tag_name: is_from_iterable ? item.headline.unit|default : headline.tag_name|default,
-        attributes: attrs(attributes).addClass(['headline', styles.font_size(appearance)|default(styles.heading(appearance)|default(styles.font_responsive(appearance)))]).mergeWith(headline_classes|default)
+        attributes: attrs(attributes).addClass(['headline', styles.heading(appearance)|default(styles.font_responsive(appearance))]).mergeWith(headline_classes|default)
     } %}
     {{ parent() }}
 
