@@ -25,21 +25,21 @@
 
 @layer components {
     .form-textarea {
-        --textarea-color: var(--color-base-content);
+        --textarea-color: var(--kiss-sys-color-neutral-on-strong);
         --textarea-border-opacity: 60%;
         --textarea-px: 0.75rem;
         --textarea-py: 0.625rem;
         --textarea-text: var(--text-base, 1rem);
         --textarea-min-h: 6rem;
         --textarea-label-color: var(--textarea-color);
-        --textarea-label-bg: var(--color-base-100);
+        --textarea-label-bg: var(--kiss-sys-color-neutral-surface-1);
         --tw-ring-color: var(--textarea-color);
 
         @apply block w-full bg-transparent resize-y;
         @apply transition-all duration-200;
-        @apply placeholder:text-base-content/40;
+        @apply placeholder:text-neutral-on-light;
         @apply disabled:opacity-50 disabled:cursor-not-allowed;
-        @apply read-only:bg-base-200/50 read-only:cursor-default;
+        @apply read-only:bg-neutral-surface-2/50 read-only:cursor-default;
         @apply leading-relaxed;
 
         box-sizing: border-box;
@@ -140,7 +140,7 @@
         left: var(--textarea-px, 0.75rem);
         top: 0.75rem;
         font-size: var(--textarea-text, var(--text-base, 1rem));
-        color: color-mix(in oklch, var(--color-base-content) 50%, transparent);
+        color: color-mix(in oklch, var(--kiss-sys-color-neutral-on-strong) 50%, transparent);
         max-width: calc(100% - 1.5rem);
         transition: top 0.15s ease-out, translate 0.15s ease-out, scale 0.15s ease-out, background-color 0.15s ease-out, padding 0.15s ease-out;
     }
@@ -165,16 +165,16 @@
             }
         }
 
-        &.bg-base-100 {
-            --textarea-label-bg: var(--color-base-100);
+        &.bg-neutral-surface-1 {
+            --textarea-label-bg: var(--kiss-sys-color-neutral-surface-1);
         }
 
-        &.bg-base-200 {
-            --textarea-label-bg: var(--color-base-200);
+        &.bg-neutral-surface-2 {
+            --textarea-label-bg: var(--kiss-sys-color-neutral-surface-2);
         }
 
-        &.bg-base-300 {
-            --textarea-label-bg: var(--color-base-300);
+        &.bg-neutral-surface-3 {
+            --textarea-label-bg: var(--kiss-sys-color-neutral-surface-3);
         }
 
         &.bg-primary-solid {

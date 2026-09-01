@@ -13,12 +13,12 @@
 
 @layer components {
     .btn {
-        --btn-bg:               var(--color-base-content);
-        --btn-border:           var(--color-base-content);
-        --btn-color:            var(--color-base-100);
-        --btn-color-hover:      var(--color-base-100);
-        --btn-content:          var(--color-base-100);
-        --btn-ring:             var(--color-base-content);
+        --btn-bg:               var(--kiss-sys-color-neutral-on-strong);
+        --btn-border:           var(--kiss-sys-color-neutral-on-strong);
+        --btn-color:            var(--kiss-sys-color-neutral-surface-1);
+        --btn-color-hover:      var(--kiss-sys-color-neutral-surface-1);
+        --btn-content:          var(--kiss-sys-color-neutral-surface-1);
+        --btn-ring:             var(--kiss-sys-color-neutral-on-strong);
         --btn-hover-opacity:    85%;
         --btn-size:             2.75rem;
         --btn-px:               calc(var(--spacing, 0.25rem) * 4);

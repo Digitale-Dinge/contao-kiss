@@ -6,21 +6,21 @@
  * matches the active site theme instead of the library default.
  *
  * Token map (local var -> KISS token):
- *   --dp-surface       base-200          popup background (popover/dropdown convention)
- *   --dp-surface-hover base-300          day hover / keyboard focus
- *   --dp-border        base-300          popup edge
- *   --dp-fg            base-content      text
- *   --dp-accent        primary           selected / range ends / today / footer buttons
- *   --dp-accent-fg     primary-content   text on the accent
+ *   --dp-surface       neutral-surface-2   popup background (popover/dropdown convention)
+ *   --dp-surface-hover neutral-surface-3   day hover / keyboard focus
+ *   --dp-border        neutral-surface-3   popup edge
+ *   --dp-fg            neutral-on-strong   text
+ *   --dp-accent        primary-solid       selected / range ends / today / footer buttons
+ *   --dp-accent-fg     primary-on-solid    text on the accent
  *   --dp-radius        radius-box        popup corners
  *   --dp-radius-cell   radius-field      day-cell / button corners
  */
 
 .datepicker {
-    --dp-surface: var(--color-base-200);
-    --dp-surface-hover: var(--color-base-300);
-    --dp-border: var(--color-base-300);
-    --dp-fg: var(--color-base-content);
+    --dp-surface: var(--kiss-sys-color-neutral-surface-2);
+    --dp-surface-hover: var(--kiss-sys-color-neutral-surface-3);
+    --dp-border: var(--kiss-sys-color-neutral-surface-3);
+    --dp-fg: var(--kiss-sys-color-neutral-on-strong);
     --dp-accent: var(--color-primary-solid);
     --dp-accent-fg: var(--color-primary-on-solid);
     --dp-radius: var(--radius-box);

@@ -38,9 +38,9 @@
             @apply cursor-pointer select-none;
             @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
             @apply no-underline;
-            @apply bg-base-200 text-base-content;
-            @apply hover:bg-base-300;
-            @apply focus-visible:ring-base-content/20;
+            @apply bg-neutral-surface-2 text-neutral-on-strong;
+            @apply hover:bg-neutral-surface-3;
+            @apply focus-visible:ring-neutral-border-strong;
             @apply h-10 min-w-10 px-3 text-base;
 
             border-width: var(--border-width-thin);

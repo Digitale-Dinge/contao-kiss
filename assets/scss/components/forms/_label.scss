@@ -19,7 +19,7 @@
     // Label text (above input)
     .widget > label,
     .label-text {
-        @apply block font-medium text-base-content mb-1.5 text-base;
+        @apply block font-medium text-neutral-on-strong mb-1.5 text-base;
     }
 
     :is(
@@ -32,7 +32,7 @@
 
     // Helper text (below input)
     .helper-text {
-        @apply text-base-content/60;
+        @apply text-neutral-on-light;
     }
 
     // Error text (below input)

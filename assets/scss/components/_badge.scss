@@ -12,10 +12,10 @@
 
 @layer components {
     .badge {
-        --badge-bg: var(--color-base-200);
-        --badge-fg: var(--color-base-content);
+        --badge-bg: var(--kiss-sys-color-neutral-surface-2);
+        --badge-fg: var(--kiss-sys-color-neutral-on-strong);
         --badge-border: transparent;
-        --badge-ring: var(--color-base-content);
+        --badge-ring: var(--kiss-sys-color-neutral-on-strong);
         --badge-px: 0.625rem;
         --badge-py: 0.25rem;
         --badge-gap: 0.25rem;
