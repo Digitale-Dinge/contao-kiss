@@ -1,0 +1,27 @@
+<?php $this->extend('block_unsearchable_no-headline') ?>
+
+<?php $this->class = 'c-info-list'?>
+<?php $this->block('addClass') ?><?= $this->class ?>--<?= $this->listLayout ?><?php $this->endblock() ?>
+<?php $this->block('content') ?>
+
+<div class="<?= $this->class ?>__items">
+    <?php foreach ( $this->items as $item ): ?>
+        <div class="<?= $this->class ?>__item">
+            <?php if ( ! empty( $item->icon ) ): ?>
+                <div class="<?= $this->class ?>__icon">
+                    <span aria-hidden="true" data-icon="&#x<?= $item->icon ?>;"></span>
+                </div>
+            <?php endif; ?>
+            <div class="<?= $this->class ?>__content">
+                <?php if ( ! empty( $item->headline ) ): ?>
+                    <p class="<?= $this->class ?>__headline"><?= $item->headline ?></p>
+                <?php endif; ?>
+                <?php if ( ! empty( $item->text ) ): ?>
+                    <div class="<?= $this->class ?>__text"><?= $item->text ?></div>
+                <?php endif; ?>
+            </div>
+        </div>
+    <?php endforeach ?>
+</div>
+
+<?php $this->endblock() ?>
