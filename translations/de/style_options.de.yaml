@@ -59,16 +59,16 @@ style_options:
 
     color:
         transparent:                Transparent
-        base_100:                   Hintergrund (100)
-        base_200:                   Hintergrund (200)
-        base_300:                   Hintergrund (300)
+        neutral_one:                Neutral 1
+        neutral_two:                Netural 2
+        neutral_three:              Neutral 3
         primary:                    Primär
         secondary:                  Sekundär
         tertiary:                     Tertiär
         success:                    Erfolg
         warning:                    Warnung
         error:                      Fehler
-        base_content:               Textfarbe
+        neutral_inverse:            Textfarbe
 
     spacing_option:
         half:                       Halbe Zeilenhöhe

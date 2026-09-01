@@ -31,15 +31,15 @@
         --switch-height: 1.5rem;
         --thumb-size: 1.25rem;
         --thumb-offset: 0.125rem;
-        --input-color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+        --input-color: color-mix(in oklab, var(--kiss-sys-color-neutral-on-strong) 40%, transparent);
 
         width: var(--switch-width);
         height: var(--switch-height);
         border-radius: var(--switch-height);
 
         // Track background - off state
-        background-color: var(--color-base-300);
-        border: 1px solid var(--color-base-300);
+        background-color: var(--kiss-sys-color-neutral-surface-3);
+        border: 1px solid var(--kiss-sys-color-neutral-surface-3);
 
         transition: background-color 0.2s, border-color 0.2s;
 
@@ -52,7 +52,7 @@
             top: 50%;
             left: var(--thumb-offset);
             transform: translateY(-50%);
-            background-color: var(--color-base-100);
+            background-color: var(--kiss-sys-color-neutral-surface-1);
             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
             transition: transform 0.2s ease-out, background-color 0.2s;
         }
@@ -90,10 +90,10 @@
     // ============================================
     .switch-outline {
         background-color: transparent;
-        @apply border border-base-content/30;
+        @apply border border-neutral-border-strong;
 
         &::before {
-            @apply bg-base-content/30;
+            @apply bg-neutral-border-strong;
             box-shadow: none;
         }
 

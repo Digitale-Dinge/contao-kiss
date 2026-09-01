@@ -20,12 +20,12 @@
 
 @layer components {
     .form-checkbox {
-        --input-color: var(--color-base-content);
+        --input-color: var(--kiss-sys-color-neutral-on-strong);
         --input-border-opacity: 60%;
         --size: 1.5rem;
         --size-padding: 0.1875rem;
 
-        @apply relative shrink-0 cursor-pointer appearance-none align-middle text-base-100;
+        @apply relative shrink-0 cursor-pointer appearance-none align-middle text-neutral-surface-1;
 
         width: var(--size);
         height: var(--size);

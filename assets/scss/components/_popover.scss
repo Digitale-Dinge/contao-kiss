@@ -33,9 +33,9 @@
     // Container styling
     @apply min-w-[8rem] max-w-[calc(100vw-2rem)];
     @apply p-4;
-    @apply bg-base-100 text-base-content;
+    @apply bg-neutral-surface-1 text-neutral-on-strong;
     @apply shadow-xl;
-    @apply border border-base-300;
+    @apply border border-neutral-surface-3;
     border-radius: var(--radius-box, 0.5rem);
 
     // Transform origin (updated by JS based on placement)
@@ -89,7 +89,7 @@
     &::before {
       content: '';
       @apply absolute inset-0;
-      @apply bg-base-100 border border-base-300;
+      @apply bg-neutral-surface-1 border border-neutral-surface-3;
       @apply rotate-45;
     }
   }
@@ -134,10 +134,10 @@
   .popover-content.popover-tooltip {
     @apply p-2 px-3 min-w-0 text-xs;
     border-radius: var(--radius-box);
-    @apply bg-base-200 text-base-content border-base-200;
+    @apply bg-neutral-surface-2 text-neutral-on-strong border-neutral-surface-2;
 
     .popover-arrow::before {
-      @apply bg-base-200 border-base-200;
+      @apply bg-neutral-surface-2 border-neutral-surface-2;
     }
 
     // Size variants override base
@@ -168,13 +168,13 @@
   .dropdown-item {
     @apply flex items-center gap-2;
     @apply w-full px-3 py-2;
-    @apply text-sm text-base-content;
-    @apply hover:bg-base-200;
+    @apply text-sm text-neutral-on-strong;
+    @apply hover:bg-neutral-surface-2;
     @apply cursor-pointer select-none;
     border-radius: var(--radius-box);
     @apply transition-colors duration-150;
     @apply no-underline border-0 bg-transparent;
-    @apply focus-visible:outline-none focus-visible:bg-base-200;
+    @apply focus-visible:outline-none focus-visible:bg-neutral-surface-2;
 
     // Active state
     &.active,
@@ -193,15 +193,15 @@
 
     // Shortcut hint
     .dropdown-item-shortcut {
-      @apply ml-auto text-xs text-base-content/50;
+      @apply ml-auto text-xs text-neutral-on-light;
     }
   }
 
   .dropdown-separator {
-    @apply my-1.5 -mx-1.5 h-px bg-base-300;
+    @apply my-1.5 -mx-1.5 h-px bg-neutral-surface-3;
   }
 
   .dropdown-label {
-    @apply px-3 py-1.5 text-xs font-medium text-base-content/50 uppercase tracking-wider;
+    @apply px-3 py-1.5 text-xs font-medium text-neutral-on-light uppercase tracking-wider;
   }
 }

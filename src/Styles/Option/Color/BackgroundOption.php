@@ -8,9 +8,9 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
  * @method string transparent
- * @method string base_100
- * @method string base_200
- * @method string base_300
+ * @method string neutral_one
+ * @method string neutral_two
+ * @method string neutral_three
  * @method string primary
  * @method string secondary
  * @method string tertiary

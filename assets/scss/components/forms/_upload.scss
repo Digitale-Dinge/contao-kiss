@@ -1,6 +1,6 @@
 @layer components {
     input.upload {
-        @apply file:bg-[var(--file-button-color,var(--color-base-content))] file:text-[var(--file-text-color,var(--color-white))];;
+        @apply file:bg-[var(--file-button-color,var(--kiss-sys-color-neutral-on-strong))] file:text-[var(--file-text-color,var(--color-white))];;
     }
 
     .upload-primary {

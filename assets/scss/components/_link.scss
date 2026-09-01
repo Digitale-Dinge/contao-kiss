@@ -3,7 +3,7 @@
  * TODO: Change SVG in external link
  *
  * Base: .link
- * Colors: link-{primary|secondary|tertiary|success|warning|error} (base-content is default)
+ * Colors: link-{primary|secondary|accent|success|warning|error} (neutral-on-strong is default)
  * Sizes: link-{xs|sm|lg|xl} (text-base is default)
  * Styles: link-{underline-hover|underline-animate|underline-none}
  * Special: link-external
@@ -13,7 +13,7 @@
 
 @layer components {
     .link {
-        --link-color: var(--kiss-comp-link-neutral-color-text-default, var(--color-base-content));
+        --link-color: var(--kiss-comp-link-neutral-color-text-default, var(--kiss-sys-color-neutral-on-strong));
         --link-color-hover: var(--kiss-comp-link-neutral-color-text-hover, var(--color-neutral-on-light));
         --link-gap: var(--kiss-comp-link-md-spacing-gap, 0.25rem);
         --link-font: var(--kiss-comp-link-md-font-inline, var(--text-base, 1rem));
@@ -118,7 +118,7 @@
     .link-underline-none {
         @apply no-underline;
 
-        color: var(--color-base-content);
+        color: var(--kiss-sys-color-neutral-on-strong);
 
         &:hover {
             color: var(--link-color-hover);

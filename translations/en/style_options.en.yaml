@@ -59,16 +59,16 @@ style_options:
 
     color:
         transparent:                Transparent
-        base_100:                   Background (100)
-        base_200:                   Background (200)
-        base_300:                   Background (300)
+        neutral_one:                Neutral 1
+        neutral_two:                Neutral 2
+        neutral_three:              Neutral 3
         primary:                    Primary
         secondary:                  Secondary
         tertiary:                     Tertiary
         success:                    Success
         warning:                    Warning
         error:                      Error
-        base_content:               Text color
+        neutral_inverse:            Text color
 
     spacing_option:
         half:                       Half line height

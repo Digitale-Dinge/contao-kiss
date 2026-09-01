@@ -30,7 +30,7 @@
         }
 
         a {
-            @apply text-base-content/70 no-underline transition-colors;
+            @apply text-neutral-on-medium no-underline transition-colors;
 
             &:hover {
                 color: var(--breadcrumb-color);
@@ -38,7 +38,7 @@
         }
 
         .breadcrumb-separator {
-            @apply text-base-content/40 mx-2 select-none flex items-center;
+            @apply text-neutral-on-light mx-2 select-none flex items-center;
 
             svg {
                 @apply size-3;
@@ -47,7 +47,7 @@
 
         li[aria-current="page"] a,
         li.active a {
-            @apply text-base-content;
+            @apply text-neutral-on-strong;
         }
 
         // Ellipsis
@@ -57,7 +57,7 @@
 
         .breadcrumb-ellipsis-btn {
             @apply inline-flex items-center justify-center px-1;
-            @apply text-base-content/70 bg-transparent;
+            @apply text-neutral-on-medium bg-transparent;
             @apply transition-colors duration-200;
             @apply cursor-pointer border-0 leading-none;
             @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:rounded;
