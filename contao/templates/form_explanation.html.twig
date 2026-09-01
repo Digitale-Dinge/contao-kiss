@@ -1,6 +1,8 @@
 {% extends '@Contao/form_explanation.html.twig' %}
 
+{% set text_appearance = this.textAppearance|default %}
+
 {% set wrapperAttributes = attrs(wrapperAttributes|default)
-    .addClass(styles.font_size(this.textAppearance|default), this.textAppearance|default)
+    .addClass(styles.heading(text_appearance)|default(styles.font_appearance(text_appearance)), text_appearance)
     .addClass(styles.text_alignment(this.textAlignment|default), this.textAlignment|default)
 %}
