@@ -20,10 +20,15 @@ trait TranslatableEnumTrait
             throw new \LogicException(\sprintf('Invalid usage. Class "%s" must extend BackedEnum.', $enum));
         }
 
+        return $this->getTranslatedCases(...$enum::cases());
+    }
+
+    public function getTranslatedCases(\BackedEnum ...$cases): array
+    {
         $options = [];
 
-        foreach ($enum::cases() as $case) {
-            $options[$case->name] = is_subclass_of($case, TranslatableLabelInterface::class) ? $case->label()->trans($this->translator) : $case->value;
+        foreach ($cases as $case) {
+            $options[$case->name] = $case instanceof TranslatableLabelInterface ? $case->label()->trans($this->translator) : $case->value;
         }
 
         return $options;
