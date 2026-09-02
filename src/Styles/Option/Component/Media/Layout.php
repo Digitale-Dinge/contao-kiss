@@ -9,10 +9,11 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 enum Layout: string implements TranslatableLabelInterface
 {
+    case default = '';
     case reverse = 'reverse';
     case side = 'side';
     case side_reverse = 'side-reverse';
-    case media_full = 'media-full';
+    case media_background = 'media-background';
 
     public function label(): TranslatableMessage
     {
