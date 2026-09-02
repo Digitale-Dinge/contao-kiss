@@ -17,10 +17,10 @@ rsce:
             description:        Fügt den Elementen ein Medium hinzu
 
         mediaType:
-            label:              Typ
+            label:              Medien-Typ
             description:        Hier können Sie einen Media-Typen auswählen.
             options:
-                image:          Image
+                image:          Bild
                 icon:           Icon
                 video:          Video
 

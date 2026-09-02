@@ -17,7 +17,7 @@ rsce:
             description:        Adds a medium to the element
 
         mediaType:
-            label:              Type
+            label:              Media type
             description:        Here you can choose a media type.
             options:
                 image:          Image

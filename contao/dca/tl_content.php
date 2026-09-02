@@ -318,11 +318,12 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['elementSize'] = [
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['elementLayout'] = [
     'exclude' => true,
-    'inputType' => 'select',
+    'inputType' => 'radioImage',
     'targetColumn' => 'kiss_styles',
+    'default' => 'default',
     'eval' => [
-        'tl_class' => 'w25',
-        'includeBlankOption' => true,
+        'imagePath' => 'bundles/digitaledingecontaokiss/icons/media/layout/',
+        'tl_class' => 'w75',
     ],
 ];
 

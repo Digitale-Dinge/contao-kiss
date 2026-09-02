@@ -32,12 +32,13 @@
         "contao/core-bundle": "^5.7 || ^6.0",
         "digitaledinge/contao-company": "@dev",
         "digitaledinge/contao-grid-ratio-widget": "^0.2",
-        "madeyourday/contao-rocksolid-custom-elements": "^2.4.15",
+        "doctrine/dbal": "^3.7 || ^4.3",
         "lukasbableck/contao-svg-icon-picker-bundle": "^1.2",
+        "madeyourday/contao-rocksolid-custom-elements": "^2.4.15",
+        "mvo/contao-group-widget": "^1.6",
         "twig/intl-extra": "^3.18",
         "zoglo/contao-collection-widget": "^0.2",
-        "mvo/contao-group-widget": "^1.6",
-        "doctrine/dbal": "^3.7 || ^4.3"
+        "zoglo/contao-radio-image-widget": "^1.0"
     },
     "require-dev": {
         "contao/manager-plugin": "^2.0",

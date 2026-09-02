@@ -129,10 +129,11 @@ style_options:
 
         media:
             layout:
-                reverse:            Umgekehrt
-                side:               Nebeneinander
-                side_reverse:       Nebeneinander (umgekehrt)
-                media_full:         Vollflächiges Medium
+                default:            Medium oben, Text unten
+                reverse:            Text oben, Medium unten
+                side:               Medium links, Text rechts
+                side_reverse:       Text links, Medium rechts
+                media_background:   Medium im Hintergrund
 
     responsive:                     Responsiv
     heading:                        Überschrift
