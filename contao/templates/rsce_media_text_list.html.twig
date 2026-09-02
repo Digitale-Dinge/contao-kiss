@@ -6,6 +6,7 @@
 {% set type = 'media_text_list' %}
 
 {% set show_as_card = data.showAsCard|default %}
+{% set layout_prefix = show_as_card ? 'card-' : 'layout-' %}
 
 {% if show_as_card %}
     {% set media_text_item_attributes = attrs()
@@ -14,6 +15,10 @@
         .mergeWith(media_text_item_attributes|default)
     %}
 {% endif %}
+
+{% set media_text_item_attributes = attrs(media_text_item_attributes|default)
+    .addClass(layout_prefix ~ styles.media_layout(data.elementLayout|default), data.elementLayout|default)
+%}
 
 {# Remove bg color #}
 {% set data = data|merge({backgroundColor: null}) %}
