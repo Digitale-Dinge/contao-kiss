@@ -17,299 +17,299 @@
  */
 
 @layer components {
-  .card {
-    --card-bg: var(--kiss-comp-card-color-background, var(--kiss-sys-color-neutral-surface-2));
-    --card-fg: var(--kiss-sys-color-neutral-on-strong);
-    --card-border: var(
-      --kiss-comp-card-color-border,
-      var(--color-neutral-border-light)
-    );
-    --card-border-opacity: 100%;
-    --card-ring: var(--kiss-sys-color-neutral-on-strong);
+    .card {
+        --card-bg: var(--kiss-comp-card-color-background, var(--kiss-sys-color-neutral-surface-2));
+        --card-fg: var(--kiss-sys-color-neutral-on-strong);
+        --card-border: var(
+                --kiss-comp-card-color-border,
+                var(--color-neutral-border-light)
+        );
+        --card-border-opacity: 100%;
+        --card-ring: var(--kiss-sys-color-neutral-on-strong);
 
-    @apply relative flex flex-col w-full overflow-hidden;
+        @apply relative flex flex-col w-full overflow-hidden;
 
-    background: var(--card-bg);
-    color: var(--card-fg);
-    border-width: var(
-      --kiss-comp-card-border-width-default,
-      var(--border-width-thin, 1px)
-    );
-    border-style: solid;
-    border-color: color-mix(
-      in oklch,
-      var(--card-border) var(--card-border-opacity),
-      transparent
-    );
-    border-radius: var(
-      --kiss-comp-card-border-radius-default,
-      var(--radius-box, 0.5rem)
-    );
-    box-shadow: var(--shadow-card);
+        background: var(--card-bg);
+        color: var(--card-fg);
+        border-width: var(
+                --kiss-comp-card-border-width-default,
+                var(--border-width-thin, 1px)
+        );
+        border-style: solid;
+        border-color: color-mix(
+                in oklch,
+                var(--card-border) var(--card-border-opacity),
+                transparent
+        );
+        border-radius: var(
+                --kiss-comp-card-border-radius-default,
+                var(--radius-box, 0.5rem)
+        );
+        box-shadow: var(--shadow-card);
 
-    figure:not(.card-body *) {
-      @apply w-full;
+        figure:not(.card-body *) {
+            @apply w-full;
 
-      img {
-        @apply w-full h-auto object-cover rounded-none!;
-      }
-    }
-
-    // Card Header
-    &-header {
-      @apply flex items-center gap-4;
-      @apply px-6 py-4;
-      @apply border-b border-neutral-border-light;
-    }
-
-    // Card Body
-    &-body {
-      @apply flex flex-col flex-1 gap-2;
-      padding: var(--kiss-comp-card-spacing-padding, 1.25rem)
-        var(--kiss-comp-card-spacing-padding, 1.5rem);
-
-      hgroup {
-        .topline {
-          @apply mb-3;
-        }
-      }
-
-      // ToDo: Heading Margin reset hgroup *
-      :is(> h1, > h2, > h3, > h4, > h5, > h6, > .topline, > hgroup) {
-        @apply m-0;
-      }
-    }
-
-    // Card Footer
-    &-footer {
-      padding: var(--kiss-comp-card-spacing-padding, 1.25rem)
-        var(--kiss-comp-card-spacing-padding, 1.5rem);
-      @apply border-t border-neutral-border-light;
-    }
-
-    // Card Title
-    &-title {
-      @apply font-semibold leading-tight;
-      color: inherit;
-    }
-
-    // Card Actions
-    &-actions {
-      @apply flex flex-wrap items-center gap-2;
-    }
-
-    // Card Alert
-    &-alert {
-      @apply w-full;
-    }
-  }
-
-  // Sizes
-  .card-xs {
-    > .card-header {
-      @apply px-3 py-2;
-    }
-
-    > .card-body {
-      @apply px-3 py-2.5 gap-1;
-    }
-
-    > .card-footer {
-      @apply px-3 py-2.5;
-    }
-  }
-
-  .card-sm {
-    > .card-header {
-      @apply px-4 py-3;
-    }
-
-    > .card-body {
-      @apply px-4 py-3 gap-1.5;
-    }
-
-    > .card-footer {
-      @apply px-4 py-3;
-    }
-  }
-
-  // Default: defined in base
-
-  .card-lg {
-    > .card-header {
-      @apply px-8 py-5;
-    }
-
-    > .card-body {
-      @apply px-8 py-6 gap-3;
-    }
-
-    > .card-footer {
-      @apply px-8 py-6;
-    }
-  }
-
-  .card-xl {
-    > .card-header {
-      @apply px-10 py-6;
-    }
-
-    > .card-body {
-      @apply px-10 py-8 gap-4;
-    }
-
-    > .card-footer {
-      @apply px-10 py-8;
-    }
-  }
-
-  // Colors
-  .card-primary {
-    --card-bg: var(--color-primary-solid);
-    --card-fg: var(--color-primary-on-solid);
-    --card-border: var(--color-primary-border);
-    --card-ring: var(--color-primary-solid);
-  }
-
-  .card-secondary {
-    --card-bg: var(--color-secondary-solid);
-    --card-fg: var(--color-secondary-on-solid);
-    --card-border: var(--color-secondary-border);
-    --card-ring: var(--color-secondary-solid);
-  }
-
-  .card-tertiary {
-    --card-bg: var(--color-tertiary-solid);
-    --card-fg: var(--color-tertiary-on-solid);
-    --card-border: var(--color-tertiary-border);
-    --card-ring: var(--color-tertiary-solid);
-  }
-
-  .card-success {
-    --card-bg: var(--color-status-success-solid);
-    --card-fg: var(--color-status-success-on-solid);
-    --card-border: var(--color-status-success-border);
-    --card-ring: var(--color-status-success-solid);
-  }
-
-  .card-warning {
-    --card-bg: var(--color-status-warning-solid);
-    --card-fg: var(--color-status-warning-on-solid);
-    --card-border: var(--color-status-warning-border);
-    --card-ring: var(--color-status-warning-solid);
-  }
-
-  .card-error {
-    --card-bg: var(--color-status-error-solid);
-    --card-fg: var(--color-status-error-on-solid);
-    --card-border: var(--color-status-error-border);
-    --card-ring: var(--color-status-error-solid);
-  }
-
-  // Variants
-  .card-soft {
-    --card-bg: color-mix(in oklch, var(--card-ring) 10%, transparent);
-    --card-fg: var(--card-ring);
-    --card-border: var(--card-ring);
-    --card-border-opacity: 20%;
-
-    box-shadow: none;
-  }
-
-  .card-outline {
-    --card-bg: transparent;
-    --card-fg: var(--card-ring);
-    --card-border: var(--card-ring);
-    --card-border-opacity: 30%;
-
-    box-shadow: none;
-  }
-
-  .card-glass {
-    @apply backdrop-blur-md;
-
-    background-color: color-mix(in oklch, var(--card-ring) 15%, transparent);
-    border: 1px solid color-mix(in oklch, var(--card-ring) 20%, transparent);
-    box-shadow: 0 8px 32px 0 rgb(0 0 0 / 0.15);
-  }
-
-  // ToDo: This hallucinated CSS won't work due to the nature of the card component
-  /*
-    // Side layout
-    .card-side {
-        @apply sm:flex-row;
-
-        > figure,
-        > .card-figure {
-            @apply w-auto max-w-[40%] flex-shrink-0;
-
-            > img {
-                @apply h-full object-cover;
+            img {
+                @apply w-full h-auto object-cover rounded-none!;
             }
+        }
+
+        // Card Header
+        &-header {
+            @apply flex items-center gap-4;
+            @apply px-6 py-4;
+            @apply border-b border-neutral-border-light;
+        }
+
+        // Card Body
+        &-body {
+            @apply flex flex-col flex-1 gap-2;
+            padding: var(--kiss-comp-card-spacing-padding, 1.25rem)
+            var(--kiss-comp-card-spacing-padding, 1.5rem);
+
+            hgroup {
+                .topline {
+                    @apply mb-3;
+                }
+            }
+
+            // ToDo: Heading Margin reset hgroup *
+            :is(> h1, > h2, > h3, > h4, > h5, > h6, > .topline, > hgroup) {
+                @apply m-0;
+            }
+        }
+
+        // Card Footer
+        &-footer {
+            padding: var(--kiss-comp-card-spacing-padding, 1.25rem)
+            var(--kiss-comp-card-spacing-padding, 1.5rem);
+            @apply border-t border-neutral-border-light;
+        }
+
+        // Card Title
+        &-title {
+            @apply font-semibold leading-tight;
+            color: inherit;
+        }
+
+        // Card Actions
+        &-actions {
+            @apply flex flex-wrap items-center gap-2;
+        }
+
+        // Card Alert
+        &-alert {
+            @apply w-full;
+        }
+    }
+
+    // Sizes
+    .card-xs {
+        > .card-header {
+            @apply px-3 py-2;
         }
 
         > .card-body {
-            @apply justify-center;
-        }
-    }
-
-    // Image full overlay
-    .card.image-full {
-        @apply relative;
-
-        > figure,
-        > .card-figure {
-            @apply absolute inset-0 z-0;
-
-            > img {
-                @apply w-full h-full object-cover;
-            }
-
-            &::after {
-                @apply absolute inset-0 bg-black/50;
-                content: "";
-            }
+            @apply px-3 py-2.5 gap-1;
         }
 
-        > .card-body,
-        > .card-header,
         > .card-footer {
-            @apply relative z-10 text-white;
+            @apply px-3 py-2.5;
         }
-    }*/
-
-  // Interactive states
-  .card-hover {
-    @apply transition-all duration-300 ease-in-out;
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-border-strong focus-visible:ring-offset-2;
-
-    &:hover,
-    &:focus-visible {
-      box-shadow: var(--shadow-card-hover);
     }
-  }
 
-  .card-grow {
-    @apply transition-all duration-300 ease-in-out;
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-border-strong focus-visible:ring-offset-2;
+    .card-sm {
+        > .card-header {
+            @apply px-4 py-3;
+        }
 
-    &:hover,
-    &:focus-visible {
-      transform: scale(1.02);
+        > .card-body {
+            @apply px-4 py-3 gap-1.5;
+        }
+
+        > .card-footer {
+            @apply px-4 py-3;
+        }
     }
-  }
 
-  .card-link {
-    @apply cursor-pointer transition-all duration-200 ease-in-out;
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-border-strong focus-visible:ring-offset-2;
+    // Default: defined in base
 
-    > a.stretched-link::after {
-      @apply absolute inset-0 z-10;
-      content: "";
+    .card-lg {
+        > .card-header {
+            @apply px-8 py-5;
+        }
+
+        > .card-body {
+            @apply px-8 py-6 gap-3;
+        }
+
+        > .card-footer {
+            @apply px-8 py-6;
+        }
     }
-  }
 
-  .card.removing {
-    @apply translate-x-5 opacity-0;
-  }
+    .card-xl {
+        > .card-header {
+            @apply px-10 py-6;
+        }
+
+        > .card-body {
+            @apply px-10 py-8 gap-4;
+        }
+
+        > .card-footer {
+            @apply px-10 py-8;
+        }
+    }
+
+    // Colors
+    .card-primary {
+        --card-bg: var(--color-primary-solid);
+        --card-fg: var(--color-primary-on-solid);
+        --card-border: var(--color-primary-border);
+        --card-ring: var(--color-primary-solid);
+    }
+
+    .card-secondary {
+        --card-bg: var(--color-secondary-solid);
+        --card-fg: var(--color-secondary-on-solid);
+        --card-border: var(--color-secondary-border);
+        --card-ring: var(--color-secondary-solid);
+    }
+
+    .card-tertiary {
+        --card-bg: var(--color-tertiary-solid);
+        --card-fg: var(--color-tertiary-on-solid);
+        --card-border: var(--color-tertiary-border);
+        --card-ring: var(--color-tertiary-solid);
+    }
+
+    .card-success {
+        --card-bg: var(--color-status-success-solid);
+        --card-fg: var(--color-status-success-on-solid);
+        --card-border: var(--color-status-success-border);
+        --card-ring: var(--color-status-success-solid);
+    }
+
+    .card-warning {
+        --card-bg: var(--color-status-warning-solid);
+        --card-fg: var(--color-status-warning-on-solid);
+        --card-border: var(--color-status-warning-border);
+        --card-ring: var(--color-status-warning-solid);
+    }
+
+    .card-error {
+        --card-bg: var(--color-status-error-solid);
+        --card-fg: var(--color-status-error-on-solid);
+        --card-border: var(--color-status-error-border);
+        --card-ring: var(--color-status-error-solid);
+    }
+
+    // Variants
+    .card-soft {
+        --card-bg: color-mix(in oklch, var(--card-ring) 10%, transparent);
+        --card-fg: var(--card-ring);
+        --card-border: var(--card-ring);
+        --card-border-opacity: 20%;
+
+        box-shadow: none;
+    }
+
+    .card-outline {
+        --card-bg: transparent;
+        --card-fg: var(--card-ring);
+        --card-border: var(--card-ring);
+        --card-border-opacity: 30%;
+
+        box-shadow: none;
+    }
+
+    .card-glass {
+        @apply backdrop-blur-md;
+
+        background-color: color-mix(in oklch, var(--card-ring) 15%, transparent);
+        border: 1px solid color-mix(in oklch, var(--card-ring) 20%, transparent);
+        box-shadow: 0 8px 32px 0 rgb(0 0 0 / 0.15);
+    }
+
+    // ToDo: This hallucinated CSS won't work due to the nature of the card component
+    /*
+      // Side layout
+      .card-side {
+          @apply sm:flex-row;
+
+          > figure,
+          > .card-figure {
+              @apply w-auto max-w-[40%] flex-shrink-0;
+
+              > img {
+                  @apply h-full object-cover;
+              }
+          }
+
+          > .card-body {
+              @apply justify-center;
+          }
+      }
+
+      // Image full overlay
+      .card.image-full {
+          @apply relative;
+
+          > figure,
+          > .card-figure {
+              @apply absolute inset-0 z-0;
+
+              > img {
+                  @apply w-full h-full object-cover;
+              }
+
+              &::after {
+                  @apply absolute inset-0 bg-black/50;
+                  content: "";
+              }
+          }
+
+          > .card-body,
+          > .card-header,
+          > .card-footer {
+              @apply relative z-10 text-white;
+          }
+      }*/
+
+    // Interactive states
+    .card-hover {
+        @apply transition-all duration-300 ease-in-out;
+        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-border-strong focus-visible:ring-offset-2;
+
+        &:hover,
+        &:focus-visible {
+            box-shadow: var(--shadow-card-hover);
+        }
+    }
+
+    .card-grow {
+        @apply transition-all duration-300 ease-in-out;
+        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-border-strong focus-visible:ring-offset-2;
+
+        &:hover,
+        &:focus-visible {
+            transform: scale(1.02);
+        }
+    }
+
+    .card-link {
+        @apply cursor-pointer transition-all duration-200 ease-in-out;
+        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-border-strong focus-visible:ring-offset-2;
+
+        > a.stretched-link::after {
+            @apply absolute inset-0 z-10;
+            content: "";
+        }
+    }
+
+    .card.removing {
+        @apply translate-x-5 opacity-0;
+    }
 }
