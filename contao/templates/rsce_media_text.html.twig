@@ -2,6 +2,8 @@
 {% use '@Contao/kiss_component/media/_media_text.html.twig' %}
 {% use '@Contao/kiss_component/card/_card_attributes.html.twig' %}
 
+{% set type = 'media_text' %}
+
 {% set show_as_card = data.showAsCard|default %}
 
 {% if not show_as_card %}

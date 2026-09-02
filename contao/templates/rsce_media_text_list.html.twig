@@ -3,9 +3,11 @@
 {% use '@Contao/kiss_component/card/_card_attributes.html.twig' %}
 {% extends '@Contao/content_element/_base.html.twig' %}
 
+{% set type = 'media_text_list' %}
+
 {% set show_as_card = data.showAsCard|default %}
 
-{% if show_as_card|default %}
+{% if show_as_card %}
     {% set media_text_item_attributes = attrs()
         .mergeWith(block('card_attributes'))
         .addClass(styles.background(data.backgroundColor|default))
