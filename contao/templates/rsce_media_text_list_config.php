@@ -15,8 +15,8 @@ return $configBuilder
     ->addGroup('appearance')
     ->addTextAlignmentField(eval: ['tl_class' => 'w25 clr'])
     ->addDependsOnField('addMedia')
-    ->addElementLayoutField(dependsOn: 'addMedia')
     ->addDependsOnField('mediaType', ['image', 'icon'], dependsOn: ['addMedia'])
+    ->addElementLayoutField(dependsOn: 'addMedia')
     ->addImageSizeField(dependsOn: 'mediaType')
 
     ->startList()
