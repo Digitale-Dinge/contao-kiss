@@ -4,10 +4,10 @@
  * Base: .card
  * Sections: card-{body|header|footer|title|actions|alert}
  * Sizes: card-{xs|sm|lg|xl}
- * Styles: card-{side|soft|outline|glass}
+ * Styles: card-{soft|outline|glass}
  * Colors: card-{primary|secondary|tertiary|success|warning|error}
+ * Layouts: {card|layout}-{reverse|side|side-reverse|media-background}
  * Interactive: card-{hover|grow|link}
- * Effects: image-full
  *
  * Example: <div class="card card-soft card-primary card-lg">
  *            <div class="card-header"><h5 class="card-title">Title</h5></div>
@@ -47,10 +47,14 @@
         );
         box-shadow: var(--shadow-card);
 
-        figure:not(.card-body *) {
+        > .media {
             @apply w-full;
 
-            img {
+            picture {
+                @apply block;
+            }
+
+            img, video {
                 @apply w-full h-auto object-cover rounded-none!;
             }
         }
@@ -65,8 +69,7 @@
         // Card Body
         &-body {
             @apply flex flex-col flex-1 gap-2;
-            padding: var(--kiss-comp-card-spacing-padding, 1.25rem)
-            var(--kiss-comp-card-spacing-padding, 1.5rem);
+            padding: var(--kiss-comp-card-spacing-padding, 1.25rem) var(--kiss-comp-card-spacing-padding, 1.5rem);
 
             hgroup {
                 .topline {
@@ -101,6 +104,20 @@
         // Card Alert
         &-alert {
             @apply w-full;
+        }
+    }
+
+    .media-layout {
+        > .media {
+            @apply w-full;
+
+            picture {
+                @apply block;
+            }
+
+            img, video {
+                @apply w-full h-auto object-cover rounded-none!;
+            }
         }
     }
 
@@ -233,50 +250,88 @@
         box-shadow: 0 8px 32px 0 rgb(0 0 0 / 0.15);
     }
 
-    // ToDo: This hallucinated CSS won't work due to the nature of the card component
-    /*
-      // Side layout
-      .card-side {
-          @apply sm:flex-row;
+    // Layouts
+    .card-reverse,
+    .layout-reverse {
+        @apply flex-col-reverse;
+    }
 
-          > figure,
-          > .card-figure {
-              @apply w-auto max-w-[40%] flex-shrink-0;
+    .card-side,
+    .layout-side,
+    .card-side-reverse,
+    .layout-side-reverse {
+        @apply items-stretch;
 
-              > img {
-                  @apply h-full object-cover;
-              }
-          }
+        > .media {
+            @apply w-full shrink-0 sm:w-2/5;
 
-          > .card-body {
-              @apply justify-center;
-          }
-      }
+            figure,
+            picture {
+                @apply block h-full!;
+            }
 
-      // Image full overlay
-      .card.image-full {
-          @apply relative;
+            img {
+                @apply h-full! object-cover;
+            }
+        }
+    }
 
-          > figure,
-          > .card-figure {
-              @apply absolute inset-0 z-0;
+    .card-side,
+    .layout-side {
+        @apply sm:flex sm:flex-row;
+    }
 
-              > img {
-                  @apply w-full h-full object-cover;
-              }
+    .card-side-reverse,
+    .layout-side-reverse {
+        @apply sm:flex sm:flex-row-reverse;
+    }
 
-              &::after {
-                  @apply absolute inset-0 bg-black/50;
-                  content: "";
-              }
-          }
+    .card-media-background,
+    .layout-media-background {
+        --card-fg: var(--kiss-comp-card-color-on-media, var(--color-white));
+        @apply relative;
 
-          > .card-body,
-          > .card-header,
-          > .card-footer {
-              @apply relative z-10 text-white;
-          }
-      }*/
+        > .media {
+            @apply relative w-full z-0;
+
+            picture {
+                @apply block;
+            }
+
+            img, video {
+                @apply w-full h-auto object-cover;
+            }
+
+            &::after {
+                @apply absolute inset-0;
+                background: var(--kiss-comp-card-color-media-overlay, color-mix(in oklch, var(--color-neutral-on-strong) 50%, transparent));
+                content: "";
+            }
+        }
+
+        > :is(.card-header, .card-body, .card-footer, .text) {
+            @apply absolute inset-x-0 z-10;
+            color: var(--card-fg);
+        }
+
+        > .card-header {
+            @apply top-0;
+        }
+
+        > :is(.card-body, .text) {
+            @apply inset-y-0 justify-end;
+        }
+
+        // ToDo: Discuss, this should not live here
+        > .text:not(.card-body) {
+            @apply flex flex-col flex-1 gap-2;
+            padding: var(--kiss-comp-card-spacing-padding, 1.25rem) var(--kiss-comp-card-spacing-padding, 1.5rem);
+        }
+
+        > .card-footer {
+            @apply bottom-0 border-t-0;
+        }
+    }
 
     // Interactive states
     .card-hover {
