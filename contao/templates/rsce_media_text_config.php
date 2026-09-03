@@ -16,14 +16,14 @@ return $configBuilder
     ->addTextAlignmentField(eval: ['tl_class' => 'w25 clr'])
     ->addDependsOnField('addMedia')
     ->addDependsOnField('mediaType', ['image', 'icon', 'video'], ['tl_class' => 'w25'], dependsOn: ['addMedia'])
-    ->addElementLayoutField(dependsOn: 'addMedia')
     ->addImageSizeField(dependsOn: 'mediaType')
+    ->addElementLayoutField(dependsOn: 'addMedia')
 
     ->addGroup('media')
     ->addImageField(dependsOn: 'mediaType')
     ->addImageUrlField(dependsOn: 'mediaType')
     ->addIconField(dependsOn: 'mediaType')
-    ->addResponsiveVideoField(dependsOn: 'mediaType')
+    ->addResponsiveVideoField(['tl_class' => 'w100'], dependsOn: 'mediaType')
 
     ->addHeadlineField() // Topline is appended automatically outside of lists
     ->addRichTextField()
