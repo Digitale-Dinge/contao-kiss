@@ -10,7 +10,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
  * @method string reverse
  * @method string side
  * @method string side_reverse
- * @method string media_full
+ * @method string media_background
  */
 class LayoutOption extends StyleOption
 {
