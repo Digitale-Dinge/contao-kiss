@@ -9,6 +9,9 @@ use Contao\CoreBundle\Migration\MigrationResult;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 
+/**
+ * @internal
+ */
 abstract class AbstractJsonColumnMigration extends AbstractMigration
 {
     public function __construct(protected readonly Connection $connection)
