@@ -6,20 +6,25 @@
 
     {% block media %}
         {% if mediaType|default in ['image', 'icon', 'video'] %}
+            {% set media_attributes = attrs()
+                .addClass('card-media', show_as_card)
+                .addClass(['media-' ~ mediaType, 'media'])
+                .mergeWith(media_attributes|default)
+            %}
             {# ToDo: Add image size fallback if not set -> 800px if as card -> 800 or 600 if as gridlist #}
-            {{ include("@Contao/kiss_component/media/_#{mediaType}.html.twig", {
-                media_attributes: attrs().addClass('media').mergeWith(media_attributes|default),
-            }) }}
+            {{ include("@Contao/kiss_component/media/_#{mediaType}.html.twig") }}
         {% endif %}
     {% endblock %}
 
     {% if item.text|default or headline.text %}
         <div{{ attrs()
+            .addClass(['card-body', 'responsive-body3'], show_as_card)
             .addClass('text')
-            .addClass(show_as_card ? ['card-body', 'responsive-body3'] : [])
             .mergeWith(text_attributes|default)
         }}>
-            {% with {headline_classes: attrs(headline_classes|default).addClass(show_as_card ? 'responsive-headline3' : '')} %}
+            {% with {headline_classes: attrs(headline_classes|default)
+                .addClass(['card-title', 'responsive-headline3'], show_as_card)}
+            %}
                 {% block headline %}{% endblock %}
             {% endwith %}
             {% with {text: item.text|default} %}

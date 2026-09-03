@@ -5,7 +5,6 @@
 {% set type = 'media_text' %}
 
 {% set show_as_card = data.showAsCard|default %}
-{% set layout_prefix = show_as_card ? 'card-' : 'layout-' %}
 
 {% if not show_as_card %}
     {% set data = data|merge({backgroundColor: null}) %}
@@ -13,7 +12,6 @@
 
 {% set attributes = attrs(attributes|default)
     .addClass(['media_text', 'responsive-body3'])
-    .addClass(layout_prefix ~ styles.media_layout(data.elementLayout|default), data.elementLayout|default)
     .mergeWith(block('card_attributes'), show_as_card)
 %}
 

@@ -6,7 +6,12 @@
 {% set type = 'media_text_list' %}
 
 {% set show_as_card = data.showAsCard|default %}
+
 {% set layout_prefix = show_as_card ? 'card-' : 'layout-' %}
+{% set layout_option = styles.media_layout(data.elementLayout|default)|trim %}
+{% set layout_class = layout_option ? layout_prefix ~ layout_option : '' %}
+
+{% set media_text_item_attributes = attrs(media_text_item_attributes|default).addClass(layout_class) %}
 
 {% if show_as_card %}
     {% set media_text_item_attributes = attrs()
@@ -16,12 +21,8 @@
     %}
 {% endif %}
 
-{% set media_text_item_attributes = attrs(media_text_item_attributes|default)
-    .addClass(layout_prefix ~ styles.media_layout(data.elementLayout|default), data.elementLayout|default)
-%}
-
-{# Remove bg color #}
-{% set data = data|merge({backgroundColor: null}) %}
+{# Reset element layout and background color for list #}
+{% set data = data|merge({elementLayout: null, backgroundColor: null}) %}
 {% set attributes = attrs(attributes|default).addClass('media_text_list') %}
 
 {# Always set the responsive body3 on media text cards #}
