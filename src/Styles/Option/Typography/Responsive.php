@@ -9,15 +9,15 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 enum Responsive: string implements TranslatableLabelInterface
 {
-    case display_one = 'responsive-display1';
-    case display_two = 'responsive-display2';
-    case display_three = 'responsive-display3';
-    case headline_one = 'responsive-headline1';
-    case headline_two = 'responsive-headline2';
-    case headline_three = 'responsive-headline3';
-    case body_one = 'responsive-body1';
-    case body_two = 'responsive-body2';
-    case body_three = 'responsive-body3';
+    case display_one = 'responsive-display-lg';
+    case display_two = 'responsive-display-md';
+    case display_three = 'responsive-display-sm';
+    case headline_one = 'responsive-headline-lg';
+    case headline_two = 'responsive-headline-md';
+    case headline_three = 'responsive-headline-sm';
+    case body_one = 'responsive-body-lg';
+    case body_two = 'responsive-body-md';
+    case body_three = 'responsive-body-sm';
 
     public function label(): TranslatableMessage
     {

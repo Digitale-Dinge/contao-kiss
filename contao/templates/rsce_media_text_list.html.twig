@@ -25,8 +25,8 @@
 {% set data = data|merge({elementLayout: null, backgroundColor: null}) %}
 {% set attributes = attrs(attributes|default).addClass('media_text_list') %}
 
-{# Always set the responsive body3 on media text cards #}
-{% set text_attributes = attrs().addClass('responsive-body3').mergeWith(text_attributes|default) %}
+{# Always set the responsive body-sm on media text cards #}
+{% set text_attributes = attrs().addClass('responsive-body-sm').mergeWith(text_attributes|default) %}
 
 {% block headline %}
     {% if item.headline.value|default or item.topline|default %}
