@@ -9,7 +9,7 @@
         {% set topline = data.topline|default %}
     {% endif %}
 
-    {% set headline_text = is_from_iterable ? item.headline.value : headline.text|default(headline) %}
+    {% set headline_text = is_from_iterable ? item.headline.value : data.headline|default ? data.headline|deserialize.value : headline.text|default(headline) %}
 
     {% if headline_text and topline|default %}
         <hgroup>
