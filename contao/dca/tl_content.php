@@ -305,6 +305,18 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['showAsCard'] = [
     ],
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['elementColor'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+        'class' => 'widget-icon icon-background',
+        'includeBlankOption' => true,
+        'chosen' => true,
+    ],
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['elementSize'] = [
     'exclude' => true,
     'inputType' => 'select',

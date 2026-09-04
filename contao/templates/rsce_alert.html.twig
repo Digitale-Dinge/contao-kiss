@@ -1,0 +1,11 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+
+{% block content %}
+    {{ include('@Contao/kiss_component/status/_alert.html.twig', {
+        title: data.title|default,
+        text: data.text|default|insert_tag,
+        icon: data.icon|default,
+        color: data.elementColor|default ? styles.color(data.elementColor) : null,
+        style: data.elementVariant|default ? styles.variant(data.elementVariant) : null,
+    }) }}
+{% endblock %}

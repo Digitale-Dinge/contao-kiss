@@ -47,6 +47,17 @@ rsce:
                 label:          Show as cards
                 description:    Show elements as cards
 
+    alert:
+        label:                  Alert
+        description:            An alert box with title, text and color
+        field:
+            title:
+                label:          Title
+                description:    The title of the alert
+            text:
+                label:          Text
+                description:    The description text of the alert
+
     icon:
         label:                  Icon
         description:            A single icon with optional description
