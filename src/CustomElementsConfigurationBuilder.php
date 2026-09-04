@@ -164,8 +164,32 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
-    public function addDependsOnField(string $key, array $options, array $eval = []): self
+    public function addDependsOnField(string $key, array $options = [], array $eval = [], array|null $dependsOn = null): self
     {
+        $field = [
+            'label' => [
+                $this->translator->trans("rsce.field.$key.label", [], 'rsce'),
+                $this->translator->trans("rsce.field.$key.description", [], 'rsce'),
+            ],
+        ];
+
+        if (null !== $dependsOn && array_is_list($dependsOn)) {
+            $dependsOn = [
+                'field' => $dependsOn[0],
+                'value' => $dependsOn[1] ?? '1',
+            ];
+        }
+
+        if ([] === $options) {
+            $field['inputType'] = 'checkbox';
+
+            if (null !== $dependsOn) {
+                $field['dependsOn'] = $dependsOn;
+            }
+
+            return $this->addField($key, $field, $eval);
+        }
+
         $blankOption = false;
 
         // Blank option
@@ -194,20 +218,20 @@ final class CustomElementsConfigurationBuilder
 
         $settings = [
             'includeBlankOption' => $blankOption,
-            'tl_class' => 'w50 clr',
+            'tl_class' => 'w25 clr',
         ];
 
         $eval = array_merge($settings, $eval);
 
-        return $this->addField($key, [
-            'label' => [
-                $this->translator->trans("rsce.field.$key.label", [], 'rsce'),
-                $this->translator->trans("rsce.field.$key.description", [], 'rsce'),
-            ],
-            'inputType' => 'select',
-            'options' => $options,
-            'eval' => $eval,
-        ]);
+        $field['inputType'] = 'select';
+        $field['options'] = $options;
+        $field['eval'] = $eval;
+
+        if (null !== $dependsOn) {
+            $field['dependsOn'] = $dependsOn;
+        }
+
+        return $this->addField($key, $field);
     }
 
     public function addHeadlineField(array $eval = []): self
@@ -264,10 +288,9 @@ final class CustomElementsConfigurationBuilder
     {
         $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['singleSRC'] : [
             'inputType' => 'standardField',
-            'eval' => [
-                'tl_class' => 'w50 clr',
-            ],
         ];
+
+        $options['eval']['tl_class'] = 'w50 clr';
 
         if (null !== $dependsOn) {
             $options['dependsOn'] = [
@@ -291,7 +314,7 @@ final class CustomElementsConfigurationBuilder
             'inputType' => 'standardField',
         ];
 
-        $options['eval']['tl_class'] = 'w50';
+        $options['eval']['tl_class'] = 'w50 clr';
 
         if (null !== $dependsOn) {
             $options['dependsOn'] = [
@@ -303,6 +326,30 @@ final class CustomElementsConfigurationBuilder
         $this->addField('size', $options, $eval);
 
         return $this;
+    }
+
+    public function addImageUrlField(array $eval = [], string|null $dependsOn = null): self
+    {
+        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['url'] : [
+            'inputType' => 'standardField',
+        ];
+
+        $options['label'] = [
+            $this->translator->trans('rsce.field.imageUrl.label', [], 'rsce'),
+            &$GLOBALS['TL_LANG']['MSC']['url'][1]
+        ];
+
+        $options['eval']['mandatory'] = false;
+        $options['eval']['tl_class'] = 'w50';
+
+        if (null !== $dependsOn) {
+            $options['dependsOn'] = [
+                'field' => $dependsOn,
+                'value' => 'image',
+            ];
+        }
+
+        return $this->addField('imageUrl', $options, $eval);
     }
 
     public function addLogoField(
@@ -408,15 +455,6 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
-    public function addLinkField(array $eval = []): self
-    {
-        $options = $GLOBALS['TL_DCA']['tl_content']['fields']['url'];
-
-        $this->addField('imageUrl', $options, $eval);
-
-        return $this;
-    }
-
     public function addSocialsField(array $eval = []): self
     {
         $options = $GLOBALS['TL_DCA']['tl_company']['fields']['socials'];
@@ -448,6 +486,26 @@ final class CustomElementsConfigurationBuilder
         }
 
         return $this->addField('backgroundColor', ['inputType' => 'standardField'], $eval);
+    }
+
+    public function addElementLayoutField(array $eval = [], string|null $dependsOn = null): self
+    {
+        if ($this->isListField()) {
+            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+        }
+
+        $options = ['inputType' => 'standardField'];
+
+        $options = $this->inheritEvalClass('elementLayout', $options);
+
+        if (null !== $dependsOn) {
+            $options['dependsOn'] = [
+                'field' => $dependsOn,
+                'value' => '1',
+            ];
+        }
+
+        return $this->addField('elementLayout', $options, $eval);
     }
 
     /**
@@ -487,6 +545,24 @@ final class CustomElementsConfigurationBuilder
         return $this->addField('showAsCard', ['inputType' => 'standardField'], $eval);
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function addCardSettings(): self
+    {
+        if ($this->isListField()) {
+            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+        }
+
+        $eval = [
+            'collapsed' => true,
+        ];
+
+        $this->addGroup('card', [$this->translator->trans('rsce.group.card', [], 'rsce')]);
+
+        return $this->addField('showAsCard', ['inputType' => 'standardField'], $eval);
+    }
+
     public function build(): array
     {
         $this->applyPendingFields();
@@ -495,6 +571,13 @@ final class CustomElementsConfigurationBuilder
         $this->fields = [];
 
         return $this->config;
+    }
+
+    private function inheritEvalClass(string $key, array $options): array
+    {
+        $options['eval']['tl_class'] ??= $GLOBALS['TL_DCA']['tl_content']['fields'][$key]['eval']['tl_class'] ?? '';
+
+        return $options;
     }
 
     private function isListField(): bool

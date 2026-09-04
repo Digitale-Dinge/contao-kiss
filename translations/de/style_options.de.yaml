@@ -112,9 +112,9 @@ style_options:
             body_three:             Fließtext 3
 
         alignment:
-            start:                  Anfang
+            start:                  Linksbündig
             center:                 Zentriert
-            end:                    Ende
+            end:                    Rechtsbündig
 
     component:
         button:
@@ -127,12 +127,13 @@ style_options:
                 wide:               Breit
                 block:              Volle Breite
 
-        card:
+        media:
             layout:
-                reverse:            Umgekehrt
-                side:               Nebeneinander
-                side_reverse:       Nebeneinander (umgekehrt)
-                media_full:         Vollflächiges Medium
+                default:            Medium oben, Text unten
+                reverse:            Text oben, Medium unten
+                side:               Medium links, Text rechts
+                side_reverse:       Text links, Medium rechts
+                media_background:   Medium im Hintergrund
 
     responsive:                     Responsiv
     heading:                        Überschrift

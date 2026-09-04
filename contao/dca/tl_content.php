@@ -10,7 +10,7 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'ctaAsButton';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['ctaAsButton'] = 'ctaType,ctaColor,ctaSize,ctaShape';
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'showAsCard';
-$GLOBALS['TL_DCA']['tl_content']['subpalettes']['showAsCard'] = 'backgroundColor,elementSize,cardLayout,elementVariant';
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['showAsCard'] = 'backgroundColor,elementSize,elementVariant';
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['inputType'] = 'collection';
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['tl_class'] = 'w50 clr hl_collection';
@@ -300,7 +300,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['showAsCard'] = [
     'inputType' => 'checkbox',
     'targetColumn' => 'kiss_styles',
     'eval' => [
-        'tl_class' => 'w50',
+        'tl_class' => 'w25',
         'submitOnChange' => true,
     ],
 ];
@@ -316,13 +316,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['elementSize'] = [
     ],
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['cardLayout'] = [
+$GLOBALS['TL_DCA']['tl_content']['fields']['elementLayout'] = [
     'exclude' => true,
-    'inputType' => 'select',
+    'inputType' => 'radioImage',
     'targetColumn' => 'kiss_styles',
+    'default' => 'default',
     'eval' => [
-        'tl_class' => 'w25',
-        'includeBlankOption' => true,
+        'imagePath' => 'bundles/digitaledingecontaokiss/icons/media/layout/',
+        'tl_class' => 'clr',
     ],
 ];
 
@@ -371,7 +372,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['responsiveVideo'] = [
     ],
     'eval' => [
         'tl_class' => 'clr',
-        'style' => 'max-width: 800px',
+        'style' => 'max-width: 980px',
         'max' => 3,
     ],
     'sql' => [
@@ -413,7 +414,13 @@ PaletteManipulator::create()
 ;
 
 PaletteManipulator::create()
-    ->addField(['textAppearance', 'showAsCard'], 'text', PaletteManipulator::POSITION_BEFORE)
+    ->addField('textAppearance', 'text', PaletteManipulator::POSITION_BEFORE)
+    ->applyToPalette('text', 'tl_content')
+;
+
+PaletteManipulator::create()
+    ->addLegend('card_legend:collapsed', 'text_legend', PaletteManipulator::POSITION_AFTER)
+    ->addField('showAsCard', 'card_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('text', 'tl_content')
 ;
 
@@ -447,38 +454,3 @@ PaletteManipulator::create()
     ->addField('slidesPerView', 'sliderContinuous', PaletteManipulator::POSITION_AFTER)
     ->applyToPalette('swiper', 'tl_content')
 ;
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['responsiveVideo'] = [
-    'inputType' => 'rowWizard',
-    'fields' => [
-        'screen' => [
-            'label' => &$GLOBALS['TL_LANG']['tl_content']['responsiveVideoFieldScreen'],
-            'inputType' => 'select',
-            'options' => ['mobile', 'tablet', 'desktop'],
-            'reference' => &$GLOBALS['TL_LANG']['tl_content']['responsiveVideoOptions'],
-            'eval' => [
-                'cell_style' => 'width: 150px',
-            ]
-        ],
-        'video' => [
-            'label' => &$GLOBALS['TL_LANG']['tl_content']['responsiveVideoFieldVideo'],
-            'inputType' => 'fileTree',
-            'eval' => [
-                'multiple' => false,
-                'fieldType' => 'radio',
-                'filesOnly' => true,
-                'extensions' => 'mp4,webm',
-            ],
-        ],
-    ],
-    'eval' => [
-        'tl_class' => 'clr',
-        'style' => 'max-width: 800px',
-        'max' => 3,
-    ],
-    'sql' => [
-        'type' => 'blob',
-        'length' => MySQLPlatform::LENGTH_LIMIT_BLOB,
-        'notnull' => false
-    ]
-];

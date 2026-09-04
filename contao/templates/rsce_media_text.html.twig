@@ -1,20 +1,19 @@
 {% extends '@Contao/content_element/_base.html.twig' %}
 {% use '@Contao/kiss_component/media/_media_text.html.twig' %}
+{% use '@Contao/kiss_component/card/_card_attributes.html.twig' %}
+
+{% set type = 'media_text' %}
 
 {% set show_as_card = data.showAsCard|default %}
 
+{% if not show_as_card %}
+    {% set data = data|merge({backgroundColor: null}) %}
+{% endif %}
+
 {% set attributes = attrs(attributes|default)
     .addClass(['media_text', 'responsive-body3'])
-    .addClass('card', show_as_card|default)
-    .addClass('card-' ~ styles.size(data.elementSize|default), data.elementSize|default)
-    .addClass('card-' ~ styles.card_layout(data.cardLayout|default), data.cardLayout|default)
-    .addClass('card-' ~ styles.variant(data.elementVariant|default), data.elementVariant|default)
+    .mergeWith(block('card_attributes'), show_as_card)
 %}
-
-{% if show_as_card|default %}
-    {% set text_attributes = attrs().addClass(['card-body', 'responsive-body3']).mergeWith(text_attributes|default) %}
-    {% set headline_classes = attrs().addClass('responsive-headline3').mergeWith(headline_classes|default) %}
-{% endif %}
 
 {% block headline %}
     {% if headline.text %}

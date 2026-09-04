@@ -1,38 +1,32 @@
 {% use '@Contao/component/_headline.html.twig' %}
 {% use '@Contao/kiss_component/media/_media_text.html.twig' %}
+{% use '@Contao/kiss_component/card/_card_attributes.html.twig' %}
 {% extends '@Contao/content_element/_base.html.twig' %}
+
+{% set type = 'media_text_list' %}
 
 {% set show_as_card = data.showAsCard|default %}
 
-{% if show_as_card|default %}
+{% set layout_prefix = show_as_card ? 'card-' : 'layout-' %}
+{% set layout_option = styles.media_layout(data.elementLayout|default)|trim %}
+{% set layout_class = layout_option ? layout_prefix ~ layout_option : '' %}
+
+{% set media_text_item_attributes = attrs(media_text_item_attributes|default).addClass(layout_class) %}
+
+{% if show_as_card %}
     {% set media_text_item_attributes = attrs()
-        .addClass(['card', styles.background(data.backgroundColor|default)])
-        .addClass('card-' ~ styles.size(data.elementSize|default), data.elementSize|default)
-        .addClass('card-' ~ styles.card_layout(data.cardLayout|default), data.cardLayout|default)
-        .addClass('card-' ~ styles.variant(data.elementVariant|default), data.elementVariant|default)
+        .mergeWith(block('card_attributes'))
+        .addClass(styles.background(data.backgroundColor|default))
         .mergeWith(media_text_item_attributes|default)
     %}
-    {% set text_attributes = attrs().addClass(['card-body']).mergeWith(text_attributes|default) %}
-    {% set headline_classes = attrs().addClass('responsive-headline3').mergeWith(headline_classes|default) %}
 {% endif %}
+
+{# Reset element layout and background color for list #}
+{% set data = data|merge({elementLayout: null, backgroundColor: null}) %}
+{% set attributes = attrs(attributes|default).addClass('media_text_list') %}
 
 {# Always set the responsive body3 on media text cards #}
 {% set text_attributes = attrs().addClass('responsive-body3').mergeWith(text_attributes|default) %}
-
-{# Rebuild the attributes to remove bg color #}
-{% block attributes %}
-    {% set attributes = attrs(attributes|default)
-        .addClass([
-            styles.container(data.contentWidth|default),
-            styles.padding_top(data.paddingTop|default),
-            styles.padding_bottom(data.paddingBottom|default),
-            styles.margin_top(data.marginTop|default),
-            styles.margin_bottom(data.marginBottom|default),
-            styles.text_alignment(data.textAlignment|default),
-        ])
-        .addClass('media_text_list')
-    %}
-{% endblock %}
 
 {% block headline %}
     {% if item.headline.value|default or item.topline|default %}

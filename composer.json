@@ -32,24 +32,32 @@
         "contao/core-bundle": "^5.7 || ^6.0",
         "digitaledinge/contao-company": "@dev",
         "digitaledinge/contao-grid-ratio-widget": "^0.2",
-        "madeyourday/contao-rocksolid-custom-elements": "^2.4.15",
+        "doctrine/dbal": "^3.7 || ^4.3",
         "lukasbableck/contao-svg-icon-picker-bundle": "^1.2",
+        "madeyourday/contao-rocksolid-custom-elements": "^2.4.15",
+        "mvo/contao-group-widget": "^1.6",
         "twig/intl-extra": "^3.18",
         "zoglo/contao-collection-widget": "^0.2",
-        "mvo/contao-group-widget": "^1.6",
-        "doctrine/dbal": "^3.7 || ^4.3"
+        "zoglo/contao-radio-image-widget": "^1.0"
     },
     "require-dev": {
         "contao/manager-plugin": "^2.0",
-        "shipmonk/composer-dependency-analyser": "^1.8"
+        "shipmonk/composer-dependency-analyser": "^1.8",
+        "phpunit/phpunit": "^13.3"
     },
     "autoload": {
         "psr-4": {
             "DigitaleDinge\\ContaoKiss\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "DigitaleDinge\\ContaoKiss\\Tests\\": "tests/"
+        }
+    },
     "scripts": {
-        "depcheck": "@php vendor/bin/composer-dependency-analyser --config=depcheck.php"
+        "depcheck": "@php vendor/bin/composer-dependency-analyser --config=depcheck.php",
+        "unit-tests": "@php vendor/bin/phpunit --fail-on-phpunit-notice"
     },
     "extra": {
         "contao-manager-plugin": "DigitaleDinge\\ContaoKiss\\ContaoManager\\Plugin"

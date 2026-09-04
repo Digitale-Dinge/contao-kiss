@@ -115,8 +115,8 @@ tl_content:
         - Bestimmen Sie die Größe des Elements.
         - Normal # Default label - size
 
-    cardLayout:
-        - Karten-Layout
+    elementLayout:
+        - Medium-Layout
         - Bestimmen Sie die Anordnung von Medium und Inhalt.
 
     elementVariant:

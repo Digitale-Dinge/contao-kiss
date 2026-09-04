@@ -5,6 +5,10 @@
 {% set list_tag_name = list_tag_name|default('div') %}
 
 {% block attributes %}
+    {% set show_as_card = show_as_card|default(data.showAsCard|default) %}
+    {% set layout_prefix = show_as_card ? 'card-' : 'layout-' %}
+    {% set layout_option = styles.media_layout(data.elementLayout|default)|trim %}
+
     {% set attributes = attrs(attributes|default)
         .addClass([
             styles.container(data.contentWidth|default),
@@ -15,6 +19,7 @@
             styles.background(data.backgroundColor|default),
             styles.text_alignment(data.textAlignment|default),
         ])
+        .addClass(layout_prefix ~ layout_option, layout_option)
     %}
     {{ parent() }}
 {% endblock %}

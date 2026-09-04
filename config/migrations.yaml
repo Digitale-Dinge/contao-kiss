@@ -1,11 +1,23 @@
 services:
-    DigitaleDinge\ContaoKiss\Migration\ArticleContentKissStylesMigration:
+    DigitaleDinge\ContaoKiss\Migration\Version100\ArticleContentKissStylesMigration:
         arguments:
             - '@database_connection'
         tags:
             - { name: contao.migration, priority: 0 }
 
-    DigitaleDinge\ContaoKiss\Migration\ArticleContentBackgroundColorKissStylesMigration:
+    DigitaleDinge\ContaoKiss\Migration\Version100\ArticleContentBackgroundColorKissStylesMigration:
+        arguments:
+            - '@database_connection'
+        tags:
+            - { name: contao.migration, priority: 0 }
+
+    DigitaleDinge\ContaoKiss\Migration\Version100\ArticleContentWidthKissStylesMigration:
+        arguments:
+            - '@database_connection'
+        tags:
+            - { name: contao.migration, priority: 0 }
+
+    DigitaleDinge\ContaoKiss\Migration\Version100\ContentMediaTypeRsceDataMigration:
         arguments:
             - '@database_connection'
         tags:

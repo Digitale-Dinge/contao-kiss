@@ -1,8 +1,10 @@
 rsce:
     group:
         settings:               Element settings
-        media:                  Image/Icon/Text
+        media:                  Text/Medium
         grid:                   Grid settings
+        appearance:             Appearance settings
+        card:                   Card settings
 
     list:
         label:                  Elements
@@ -10,19 +12,16 @@ rsce:
         element:                'Element %s'
 
     field:
-        type:
-            label:              Type
-            description:        Here you can choose a type for the element.
-            options:
-                image:          Image
-                icon:           Icon
-                separated:      Separated
+        addMedia:
+            label:              Add media
+            description:        Adds a medium to the element
 
         mediaType:
-            label:              Type
+            label:              Media type
             description:        Here you can choose a media type.
             options:
                 image:          Image
+                icon:           Icon
                 video:          Video
 
         callToAction:
@@ -30,8 +29,11 @@ rsce:
             description:        Here you can enter one or more call-to-actions which will be displayed in the element.
             element:            Action
 
+        imageUrl:
+            label:              Image URL
+
     media_text:
-        label:                  Media text
+        label:                  Text (with medium)
         description:            A media text element
         field:
             show_as_card:
@@ -40,9 +42,12 @@ rsce:
 
 
     media_text_list:
-        label:                  Media text list
+        label:                  Text list (with medium)
         description:            A media text list element
         field:
+            add_media:
+                label:          Add media
+                description:    Adds a medium to the elements
             show_as_card:
                 label:          Show as cards
                 description:    Show elements as cards
