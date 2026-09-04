@@ -18,12 +18,12 @@
 
     {% if item.text|default or headline.text %}
         <div{{ attrs()
-            .addClass(['card-body', 'responsive-body3'], show_as_card)
+            .addClass(['card-body', 'responsive-body-sm'], show_as_card)
             .addClass('text')
             .mergeWith(text_attributes|default)
         }}>
             {% with {headline_classes: attrs(headline_classes|default)
-                .addClass(['card-title', 'responsive-headline3'], show_as_card)}
+                .addClass(['card-title', 'responsive-headline-sm'], show_as_card)}
             %}
                 {% block headline %}{% endblock %}
             {% endwith %}
