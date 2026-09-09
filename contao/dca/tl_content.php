@@ -367,6 +367,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['responsiveVideo'] = [
                 'fieldType' => 'radio',
                 'filesOnly' => true,
                 'extensions' => 'mp4,webm',
+                // ToDo: Check - see contao/contao#10175
+                'binary' => false,
             ],
         ],
     ],
