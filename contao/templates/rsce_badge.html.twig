@@ -1,0 +1,20 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+
+{# Badges flow inline, so the grid wrapper the list mode would add is replaced by a flex wrapper #}
+{% block content_wrapper %}
+    {{ block('content') }}
+{% endblock %}
+
+{% block content %}
+    <div{{ attrs().addClass(['badges', 'inline-flex', 'flex-wrap', 'gap-2']) }}>
+        {% for item in list %}
+            {# Size und Form gelten für alle Badges des Elements #}
+            {{ include('@Contao/kiss_component/status/_badge.html.twig', {
+                item: item|merge({
+                    size: badgeSize|default,
+                    shape: badgeShape|default,
+                })
+            }) }}
+        {% endfor %}
+    </div>
+{% endblock %}

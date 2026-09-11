@@ -1,42 +1,38 @@
 {#
-  KISS Badge Component Template
+  KISS Badge Component
 
-  @param {string} text - Badge text content (required)
-  @param {string} color - Badge color variant: primary|secondary|tertiary|success|warning|error
-  @param {string} style - Badge style: soft|outline|dashed (default: solid)
-  @param {string} size - Badge size: xs|sm|lg|xl
-  @param {string} shape - Badge shape: pill|square (default: radius-selector from tailwind.theme.css)
-  @param {string} icon - Icon class name
-  @param {string} iconPosition - Icon position: left|right (default: left)
-  @param {string} class - Additional CSS classes
+  @param {string} text - Badge-Text (Insert-Tags erlaubt)
+  @param {string} icon - Icon-Name für svg_icon()
+  @param {string} color - Key aus Color (primary, secondary, success …)
+  @param {string} variant - Badge-Stil: soft|outline|dashed
+  @param {string} size - Key aus Modifier\Size (x_small, small, large …)
+  @param {string} shape - Badge-Form: pill|square
+  @param {HtmlAttributes} badge_attributes - zusätzliche Attribute
+
+  Alle Werte werden aus `item` gelesen, ersatzweise aus dem Kontext.
 
   Usage:
-  {% include 'components/_badge.html.twig' with {
-    text: 'New',
-    color: 'primary',
-    style: 'soft',
-    size: 'lg',
-    shape: 'pill'
-  } only %}
+  {{ include('@Contao/kiss_component/status/_badge.html.twig', {
+    item: {text: 'Neu', icon: 'check', color: 'primary', variant: 'soft', size: 'large', shape: 'pill'}
+  }) }}
 #}
 
-{% set badge_attrs = attrs()
-  .addClass(['badge')
-  .addClass('badge-' ~ color, color|default)
-  .addClass('badge-' ~ style, style|default)
-  .addClass('badge-' ~ size, size|default)
-  .addClass('badge-' ~ shape, shape|default)
-  .addClass('badge-' ~ class, class|default)
-%}
+{% block badge %}
+    {% set item = item|default(_context) %}
 
-<span{{ badge_attrs }}>
-  {% if icon and iconPosition|default('left') == 'left' %}
-    <i class="{{ icon }}"></i>
-  {% endif %}
-
-  {{ text }}
-
-  {% if icon and iconPosition == 'right' %}
-    <i class="{{ icon }}"></i>
-  {% endif %}
-</span>
+    {# Variante und Form sind badge-lokal und werden 1:1 auf die badge-* Klassen abgebildet #}
+    <span{{ attrs(badge_attributes|default)
+        .addClass('badge')
+        .addClass('badge-' ~ styles.color(item.color|default), item.color|default)
+        .addClass('badge-' ~ item.variant|default, item.variant|default)
+        .addClass('badge-' ~ styles.size(item.size|default), item.size|default)
+        .addClass('badge-' ~ item.shape|default, item.shape|default)
+    }}>
+        {% if item.icon|default %}
+            {{ include('@Contao/kiss_component/media/_icon_include.html.twig', {icon: item.icon}) }}
+        {% endif %}
+        {% if item.text|default %}
+            {{ item.text|insert_tag }}
+        {% endif %}
+    </span>
+{% endblock %}
