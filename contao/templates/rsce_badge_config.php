@@ -14,12 +14,12 @@ return $configBuilder
         'standardFields' => ['cssID'],
     ])
 
-    ->addEnumField('badgeSize', Size::class)
+    ->addStyleOptionsField('badgeSize', Size::class)
     // Badge shapes per _badge.scss, the blank option keeps the default corner radius
     ->addDependsOnField('badgeShape', ['', 'pill', 'square'], ['tl_class' => 'w25'])
 
     ->startList()
-        ->addEnumField('color', Color::class)
+        ->addStyleOptionsField('color', Color::class)
         // Badge styles per _badge.scss: the shared soft/outline, extended with a badge-only dashed
         ->addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
         ->addIconField()

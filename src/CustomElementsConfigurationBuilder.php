@@ -149,7 +149,7 @@ final class CustomElementsConfigurationBuilder
      *
      * @param class-string<\BackedEnum> $enum
      */
-    public function addEnumField(string $key, string $enum, array $eval = []): self
+    public function addStyleOptionsField(string $key, string $enum, array $eval = []): self
     {
         return $this->addField($key, [
             'label' => [
