@@ -5,17 +5,15 @@
   @param {string} icon - Icon-Name für svg_icon()
   @param {string} color - Key aus Color (primary, secondary, success …)
   @param {string} variant - Badge-Stil: soft|outline|dashed
-  @param {string} size - Key aus Modifier\Size (x_small, small, large …)
-  @param {string} shape - Badge-Form: pill|square
+  @param {string} badgeSize - Key aus Modifier\Size (x_small, small, large …)
+  @param {string} badgeShape - Badge-Form: pill|square
   @param {HtmlAttributes} badge_attributes - zusätzliche Attribute
 
-  Badge-eigene Werte werden aus `item` gelesen, ersatzweise aus dem Kontext.
-  `size` und `shape` gelten elementweit und kommen immer aus dem Kontext.
+  Alle Werte werden aus `item` gelesen, ersatzweise aus dem Kontext.
 
   Usage:
-  {{ include('@Contao/kiss_component/status/_badge.html.twig', {
-    text: 'Neu', icon: 'check', color: 'primary', variant: 'soft', size: 'large', shape: 'pill'
-  }) }}
+  {% use '@Contao/kiss_component/status/_badge.html.twig' %}
+  {{ block('badge') }}
 #}
 
 {% block badge %}
@@ -26,8 +24,8 @@
         .addClass('badge')
         .addClass('badge-' ~ styles.color(item.color|default), item.color|default)
         .addClass('badge-' ~ item.variant|default, item.variant|default)
-        .addClass('badge-' ~ styles.size(size|default), size|default)
-        .addClass('badge-' ~ shape|default, shape|default)
+        .addClass('badge-' ~ styles.size(item.badgeSize|default), item.badgeSize|default)
+        .addClass('badge-' ~ item.badgeShape|default, item.badgeShape|default)
     }}>
         {% if item.icon|default %}
             {{ include('@Contao/kiss_component/media/_icon_include.html.twig', {icon: item.icon}) }}

@@ -1,3 +1,4 @@
+{% use '@Contao/kiss_component/status/_badge.html.twig' %}
 {% extends '@Contao/content_element/_base.html.twig' %}
 
 {# Badges flow inline, so the grid wrapper the list mode would add is replaced by a flex wrapper #}
@@ -13,11 +14,7 @@
 {% block content %}
     <div{{ badge_outer_attributes }}>
         {% for item in list %}
-            {# Size und Form gelten für alle Badges des Elements, das Item kommt aus der Schleife #}
-            {{ include('@Contao/kiss_component/status/_badge.html.twig', {
-                size: badgeSize|default,
-                shape: badgeShape|default,
-            }) }}
+            {{ block('badge') }}
         {% endfor %}
     </div>
 {% endblock %}
