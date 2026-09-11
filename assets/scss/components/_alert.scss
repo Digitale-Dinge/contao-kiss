@@ -2,30 +2,117 @@
  * KISS Alert Component (V1.0)
  *
  * Base: .alert
+ * Sections: alert-{icon|content|title|description}
+ * Sizes: alert-{xs|sm|lg|xl}
  * Styles: alert-{soft|outline|dashed}
  * Colors: alert-{primary|secondary|tertiary|success|warning|error}
  *
- * Example: <div class="alert alert-success alert-soft">Success message</div>
+ * Every modifier only swaps custom properties, so a consumer can restyle the
+ * component by redefining --alert-* (or the --kiss-comp-alert-* tokens) instead
+ * of overriding rules.
+ *
+ * Example: <div class="alert alert-success alert-soft alert-lg">Success message</div>
  */
 
 @layer components {
     .alert {
-        --alert-bg: var(--kiss-sys-color-neutral-surface-2);
-        --alert-fg: var(--kiss-sys-color-neutral-on-strong);
-        --alert-border: var(--kiss-sys-color-neutral-surface-3);
+        --alert-bg: var(--kiss-comp-alert-color-background, var(--kiss-sys-color-neutral-surface-2));
+        --alert-fg: var(--kiss-comp-alert-color-foreground, var(--kiss-sys-color-neutral-on-strong));
+        --alert-border: var(--kiss-comp-alert-color-border, var(--kiss-sys-color-neutral-surface-3));
+        --alert-border-opacity: 100%;
         --alert-ring: var(--kiss-sys-color-neutral-on-strong);
 
-        @apply flex items-start gap-3;
-        @apply p-4 text-base;
+        // Sizing: the size modifiers below redefine these and nothing else
+        --alert-px: var(--kiss-comp-alert-spacing-padding-inline, 1rem);
+        --alert-py: var(--kiss-comp-alert-spacing-padding-block, 1rem);
+        --alert-gap: var(--kiss-comp-alert-spacing-gap, 0.75rem);
+        --alert-text: var(--text-base, 1rem);
+        --alert-title-text: var(--alert-text);
+        --alert-description-text: var(--text-sm, 0.875rem);
+        --alert-icon-size: 1.25em;
+
+        @apply flex items-start;
         @apply transition-all duration-200;
 
-        border-width: var(--border-width-thin, 1px);
+        padding: var(--alert-py) var(--alert-px);
+        gap: var(--alert-gap);
+        font-size: var(--alert-text);
+        border-width: var(--kiss-comp-alert-border-width-default, var(--border-width-thin, 1px));
         border-style: solid;
-        border-color: var(--alert-border);
-        border-radius: var(--radius-box, 0.5rem);
+        border-color: color-mix(in oklch, var(--alert-border) var(--alert-border-opacity), transparent);
+        border-radius: var(--kiss-comp-alert-border-radius-default, var(--radius-box, 0.5rem));
         box-shadow: var(--shadow, none);
         background: var(--alert-bg);
         color: var(--alert-fg);
+
+        // Alert Icon
+        &-icon {
+            @apply shrink-0;
+
+            // Scales with the alert font size instead of keeping its intrinsic size
+            width: var(--alert-icon-size);
+            height: var(--alert-icon-size);
+            margin-top: calc((1em * 1.5 - var(--alert-icon-size)) / 2);
+
+            svg {
+                @apply w-full h-full;
+            }
+        }
+
+        // Alert Content
+        &-content {
+            @apply flex-1 min-w-0;
+        }
+
+        // Alert Title
+        &-title {
+            @apply font-semibold mb-1;
+
+            font-size: var(--alert-title-text);
+            color: inherit;
+        }
+
+        // Alert Description
+        &-description {
+            @apply opacity-90;
+
+            font-size: var(--alert-description-text);
+        }
+    }
+
+    // Sizes
+    .alert-xs {
+        --alert-px: 0.625rem;
+        --alert-py: 0.5rem;
+        --alert-gap: 0.5rem;
+        --alert-text: var(--text-xs, 0.75rem);
+        --alert-description-text: var(--text-xs, 0.75rem);
+    }
+
+    .alert-sm {
+        --alert-px: 0.75rem;
+        --alert-py: 0.75rem;
+        --alert-gap: 0.625rem;
+        --alert-text: var(--text-sm, 0.875rem);
+        --alert-description-text: var(--text-xs, 0.75rem);
+    }
+
+    // Default: defined in base
+
+    .alert-lg {
+        --alert-px: 1.25rem;
+        --alert-py: 1.25rem;
+        --alert-gap: 1rem;
+        --alert-text: var(--text-lg, 1.125rem);
+        --alert-description-text: var(--text-base, 1rem);
+    }
+
+    .alert-xl {
+        --alert-px: 1.5rem;
+        --alert-py: 1.5rem;
+        --alert-gap: 1.25rem;
+        --alert-text: var(--text-xl, 1.25rem);
+        --alert-description-text: var(--text-lg, 1.125rem);
     }
 
     // Colors
@@ -76,40 +163,21 @@
         --alert-bg: color-mix(in oklch, var(--alert-ring) 10%, transparent);
         --alert-fg: var(--alert-ring);
         --alert-border: var(--alert-ring);
+        --alert-border-opacity: 20%;
     }
 
     .alert-outline {
         --alert-bg: transparent;
         --alert-fg: var(--alert-ring);
         --alert-border: var(--alert-ring);
+        --alert-border-opacity: 30%;
     }
 
     .alert-dashed {
         --alert-bg: transparent;
         --alert-fg: var(--alert-ring);
+        --alert-border: currentcolor;
 
         border-style: dashed;
-        border-color: currentcolor;
-    }
-
-    // Parts
-    .alert-icon {
-        @apply shrink-0 w-5 h-5 mt-0.5;
-
-        svg {
-            @apply w-full h-full;
-        }
-    }
-
-    .alert-content {
-        @apply flex-1 min-w-0;
-    }
-
-    .alert-title {
-        @apply font-semibold mb-1;
-    }
-
-    .alert-description {
-        @apply text-sm opacity-90;
     }
 }

@@ -30,6 +30,7 @@ return $configBuilder
     ])
     ->addIconField()
     ->addField('elementColor', ['inputType' => 'standardField'])
+    ->addField('elementSize', ['inputType' => 'standardField'])
     ->addField('elementVariant', ['inputType' => 'standardField'])
     ->build()
 ;

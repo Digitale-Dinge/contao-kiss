@@ -1,50 +1,54 @@
 {#
-  KISS Alert Component Template
+  KISS Alert Component
 
-  @param {string} title - Alert title/heading
-  @param {string} text - Alert message
-  @param {string} description - Alert message/description
-  @param {string} message - Alert message (backward compatibility with 'description')
-  @param {string} color - Alert color variant: primary|secondary|tertiary|success|warning|error
-  @param {string} style - Alert style: soft|outline|dashed (default: solid)
-  @param {string} icon - Icon key, rendered via the SVG icon picker
-  @param {string} class - Additional CSS classes
+  @param {string} title - Überschrift der Meldung
+  @param {string} text - Meldungstext (HTML und Insert-Tags erlaubt)
+  @param {string} icon - Icon-Name für svg_icon()
+  @param {string} elementColor - Key aus Color (primary, secondary, success …)
+  @param {string} elementVariant - Key aus Modifier\Variant (soft, outline, dashed)
+  @param {string} elementSize - Key aus Modifier\Size (x_small, small, large …)
+  @param {HtmlAttributes} alert_attributes - zusätzliche Attribute am Alert
+  @param {HtmlAttributes} alert_content_attributes - zusätzliche Attribute am Inhalts-Wrapper
+
+  Alle Werte werden aus `item` gelesen, ersatzweise aus dem Kontext.
 
   Usage:
-  {% include 'components/_alert.html.twig' with {
-    title: 'Success!',
-    description: 'Your changes have been saved.',
-    color: 'success',
-    style: 'soft',
-    icon: 'check-circle'
-  } only %}
+  {% use '@Contao/kiss_component/status/_alert.html.twig' %}
+  {{ block('alert') }}
 #}
 
-{% set alertClasses = [
-  'alert',
-  color|default ? 'alert-' ~ color : '',
-  style|default ? 'alert-' ~ style : '',
-  class|default,
-]|filter(v => v)|join(' ') %}
+{% block alert %}
+    {% set item = item|default(_context) %}
 
-<div class="{{ alertClasses }}" role="alert">
-  {% if icon|default %}
-    <span class="alert-icon">
-      {{ include('@Contao/kiss_component/media/_icon_include.html.twig', {
-        icon: icon
-      }) }}
-    </span>
-  {% endif %}
+    <div{{ attrs(alert_attributes|default)
+        .addClass('alert')
+        .addClass('alert-' ~ styles.color(item.elementColor|default), item.elementColor|default)
+        .addClass('alert-' ~ styles.variant(item.elementVariant|default), item.elementVariant|default)
+        .addClass('alert-' ~ styles.size(item.elementSize|default), item.elementSize|default)
+        .set('role', 'alert')
+    }}>
+        {% block alert_icon %}
+            {% if item.icon|default %}
+                <span{{ attrs(alert_icon_attributes|default).addClass('alert-icon') }}>
+                    {{ include('@Contao/kiss_component/media/_icon_include.html.twig', {icon: item.icon}) }}
+                </span>
+            {% endif %}
+        {% endblock %}
 
-  <div class="alert-content">
-    {% if title|default %}
-      <div class="alert-title">{{ title }}</div>
-    {% endif %}
+        <div{{ attrs(alert_content_attributes|default).addClass('alert-content') }}>
+            {% block alert_title %}
+                {% if item.title|default %}
+                    <div{{ attrs(alert_title_attributes|default).addClass('alert-title') }}>{{ item.title|insert_tag }}</div>
+                {% endif %}
+            {% endblock %}
 
-    {% if text|default %}
-      <div class="alert-description">{{ text|raw }}</div>
-    {% endif %}
+            {% block alert_text %}
+                {% if item.text|default %}
+                    <div{{ attrs(alert_description_attributes|default).addClass('alert-description') }}>{{ item.text|insert_tag_raw }}</div>
+                {% endif %}
+            {% endblock %}
 
-    {% block alert_content %}{% endblock %}
-  </div>
-</div>
+            {% block alert_content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
