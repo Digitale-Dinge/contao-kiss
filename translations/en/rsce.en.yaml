@@ -32,6 +32,29 @@ rsce:
         imageUrl:
             label:              Image URL
 
+        badgeSize:
+            label:              Size
+            description:        Choose the size of all badges
+
+        badgeShape:
+            label:              Shape
+            description:        Choose the shape of all badges
+            options:
+                pill:           Pill
+                square:         Square
+
+        color:
+            label:              Colour
+            description:        Here you can choose a colour.
+
+        variant:
+            label:              Style
+            description:        Here you can choose a style.
+            options:
+                soft:           Soft
+                outline:        Outline
+                dashed:         Dashed
+
     media_text:
         label:                  Text (with medium)
         description:            A media text element
@@ -51,6 +74,14 @@ rsce:
             show_as_card:
                 label:          Show as cards
                 description:    Show elements as cards
+
+    badge:
+        label:                  Badge
+        description:            Any number of badges with colour, style, icon and text
+        field:
+            text:
+                label:          Text
+                description:    The text of the badge
 
     icon:
         label:                  Icon

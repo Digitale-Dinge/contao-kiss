@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DigitaleDinge\ContaoKiss;
 
 use Contao\Controller;
+use DigitaleDinge\ContaoKiss\EventListener\TranslatableEnumTrait;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -12,6 +13,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class CustomElementsConfigurationBuilder
 {
+    use TranslatableEnumTrait;
+
     private string|null $type;
 
     private array $config = [];
@@ -22,7 +25,7 @@ final class CustomElementsConfigurationBuilder
 
     private array $pendingFields = [];
 
-    public function __construct(private TranslatorInterface $translator)
+    public function __construct(private readonly TranslatorInterface $translator)
     {
         // ToDo: Think about a better solution in the future
         Controller::loadDataContainer('tl_content');
@@ -138,6 +141,24 @@ final class CustomElementsConfigurationBuilder
         $this->pendingFields[$key] = $options;
 
         return $this;
+    }
+
+    /**
+     * Select field whose options are taken from a translatable enum, so option labels
+     * never have to be spelled out in a config file.
+     *
+     * @param class-string<\BackedEnum> $enum
+     */
+    public function addEnumField(string $key, string $enum, array $eval = []): self
+    {
+        return $this->addField($key, [
+            'label' => [
+                $this->translator->trans("rsce.field.$key.label", [], 'rsce'),
+                $this->translator->trans("rsce.field.$key.description", [], 'rsce'),
+            ],
+            'inputType' => 'select',
+            'options' => $this->getTranslatedOptions($enum),
+        ], array_merge(['tl_class' => 'w25', 'includeBlankOption' => true], $eval));
     }
 
     public function addGroup(string $key, array|null $translations = null): self
