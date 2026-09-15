@@ -15,6 +15,7 @@ return $configBuilder
     ])
 
     ->addStyleOptionsField('color', Color::class)
+    // Alert styles per _alert.scss: the shared soft/outline, extended with an alert-only dashed
     ->addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
     ->addStyleOptionsField('alertSize', Size::class)
     ->addIconField()

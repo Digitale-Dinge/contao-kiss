@@ -8,7 +8,10 @@
   @param {string} variant - Alert-Stil: soft|outline|dashed
   @param {string} alertSize - Key aus Modifier\Size (x_small, small, large …)
   @param {HtmlAttributes} alert_attributes - zusätzliche Attribute am Alert
+  @param {HtmlAttributes} alert_icon_attributes - zusätzliche Attribute am Icon-Wrapper
   @param {HtmlAttributes} alert_content_attributes - zusätzliche Attribute am Inhalts-Wrapper
+  @param {HtmlAttributes} alert_title_attributes - zusätzliche Attribute am Titel
+  @param {HtmlAttributes} alert_description_attributes - zusätzliche Attribute am Beschreibungstext
 
   Alle Werte werden aus `item` gelesen, ersatzweise aus dem Kontext.
 
@@ -20,6 +23,7 @@
 {% block alert %}
     {% set item = item|default(_context) %}
 
+    {# Die Variante ist alert-lokal und wird 1:1 auf die alert-* Klassen abgebildet #}
     <div{{ attrs(alert_attributes|default)
         .addClass('alert')
         .addClass('alert-' ~ styles.color(item.color|default), item.color|default)
