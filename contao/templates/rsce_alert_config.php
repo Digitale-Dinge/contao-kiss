@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use Contao\System;
+use DigitaleDinge\ContaoKiss\Styles\Option\Color\Color;
+use DigitaleDinge\ContaoKiss\Styles\Option\Modifier\Size;
 
 $configBuilder = System::getContainer()->get('kiss.rsce_config.builder');
 
@@ -11,11 +13,16 @@ return $configBuilder
         'types' => ['content'],
         'standardFields' => ['cssID'],
     ])
+
+    ->addStyleOptionsField('color', Color::class)
+    ->addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
+    ->addStyleOptionsField('alertSize', Size::class)
+    ->addIconField()
     ->addField('title', [
         'label' => true,
         'inputType' => 'text',
         'eval' => [
-            'tl_class' => 'w50',
+            'tl_class' => 'w50 clr',
             'mandatory' => false,
         ],
     ])
@@ -28,9 +35,6 @@ return $configBuilder
             'allowHtml' => true,
         ],
     ])
-    ->addIconField()
-    ->addField('elementColor', ['inputType' => 'standardField'])
-    ->addField('elementSize', ['inputType' => 'standardField'])
-    ->addField('elementVariant', ['inputType' => 'standardField'])
+
     ->build()
 ;

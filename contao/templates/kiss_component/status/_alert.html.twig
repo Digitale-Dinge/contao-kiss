@@ -4,9 +4,9 @@
   @param {string} title - Überschrift der Meldung
   @param {string} text - Meldungstext (HTML und Insert-Tags erlaubt)
   @param {string} icon - Icon-Name für svg_icon()
-  @param {string} elementColor - Key aus Color (primary, secondary, success …)
-  @param {string} elementVariant - Key aus Modifier\Variant (soft, outline, dashed)
-  @param {string} elementSize - Key aus Modifier\Size (x_small, small, large …)
+  @param {string} color - Key aus Color (primary, secondary, success …)
+  @param {string} variant - Alert-Stil: soft|outline|dashed
+  @param {string} alertSize - Key aus Modifier\Size (x_small, small, large …)
   @param {HtmlAttributes} alert_attributes - zusätzliche Attribute am Alert
   @param {HtmlAttributes} alert_content_attributes - zusätzliche Attribute am Inhalts-Wrapper
 
@@ -22,9 +22,9 @@
 
     <div{{ attrs(alert_attributes|default)
         .addClass('alert')
-        .addClass('alert-' ~ styles.color(item.elementColor|default), item.elementColor|default)
-        .addClass('alert-' ~ styles.variant(item.elementVariant|default), item.elementVariant|default)
-        .addClass('alert-' ~ styles.size(item.elementSize|default), item.elementSize|default)
+        .addClass('alert-' ~ styles.color(item.color|default), item.color|default)
+        .addClass('alert-' ~ item.variant|default, item.variant|default)
+        .addClass('alert-' ~ styles.size(item.alertSize|default), item.alertSize|default)
         .set('role', 'alert')
     }}>
         {% block alert_icon %}

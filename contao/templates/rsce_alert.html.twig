@@ -1,9 +1,6 @@
 {% use '@Contao/kiss_component/status/_alert.html.twig' %}
 {% extends '@Contao/content_element/_base.html.twig' %}
 
-{# Die Alert-Felder liegen auf Element-Ebene, das Item ist damit das Element selbst #}
-{% set item = data %}
-
 {% block content %}
     {{ block('alert') }}
 {% endblock %}
