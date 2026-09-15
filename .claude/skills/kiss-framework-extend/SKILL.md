@@ -1,5 +1,5 @@
 ---
-name: kiss-framework-erweitern
+name: kiss-framework-extend
 description: Extends the contao-kiss framework (Digitale Dinge, Contao 5 bundle) with components, StyleOptions, manipulators and templates — inventory before building, strict scope discipline, questions before assumptions. ALWAYS use this skill when working in the contao-kiss repo or any KISS-based Contao project and the task touches Twig templates, components (Card, media_text, CTA …), StyleOptions/Modifier/Enums, the `styles` Twig global, rsce elements, tl_content fields, kiss_styles or backend options — including terse requests like "build me a card component", "add option X", "new variant for Y", "the card needs sizes/colors/layouts" or "why doesn't this class apply?".
 ---
 
