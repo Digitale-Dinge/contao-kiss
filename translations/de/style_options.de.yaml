@@ -89,7 +89,6 @@ style_options:
         variant:
             soft:                   Sanft
             outline:                Umrandet
-            dashed:                 Gestrichelt
             glass:                  Glas
 
     typography:
