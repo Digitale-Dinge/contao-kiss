@@ -19,9 +19,6 @@
  */
 
 @layer components {
-    // ============================================
-    // BASE RADIO
-    // ============================================
     .form-radio {
         --input-color: var(--kiss-sys-color-neutral-on-strong);
         --input-border-opacity: 60%;
@@ -29,18 +26,14 @@
 
         @apply relative shrink-0 cursor-pointer appearance-none rounded-full align-middle;
 
-        // Size using CSS variable for easy adjustment
         width: var(--size);
         height: var(--size);
 
-        // Padding creates space between dot and border
         padding: 0.25rem;
 
-        // Border and background
         border: 1px solid color-mix(in oklch, var(--input-color) var(--input-border-opacity), transparent);
         background-color: transparent;
 
-        // Inner dot via ::before pseudo-element
         &::before {
             content: "";
             @apply block size-full rounded-full;
@@ -49,15 +42,11 @@
             transform: scale(0);
         }
 
-        // Focus state
         &:focus-visible {
             outline: 2px solid color-mix(in oklab, var(--input-color) 30%, transparent);
             outline-offset: 0;
         }
 
-        // ============================================
-        // CHECKED STATE
-        // ============================================
         &:checked,
         &[aria-checked="true"] {
             border-color: var(--input-color);
@@ -69,9 +58,6 @@
             }
         }
 
-        // ============================================
-        // DISABLED STATE
-        // ============================================
         &:disabled {
             @apply cursor-not-allowed opacity-50;
         }
@@ -85,9 +71,7 @@
         }
     }
 
-    // ============================================
-    // COLORS
-    // ============================================
+    // Colors
     .radio-primary {
         --input-color: var(--color-primary-solid);
     }
@@ -112,9 +96,7 @@
         --input-color: var(--color-status-error-solid);
     }
 
-    // ============================================
     // SIZES
-    // ============================================
     .radio-xs {
         --size: 1rem;
         padding: 0.1875rem;

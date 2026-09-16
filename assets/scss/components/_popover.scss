@@ -19,189 +19,159 @@
  */
 
 @layer components {
-  // ============================================
-  // BASE POPOVER
-  // ============================================
-  .popover-content {
-    // Hidden state (default) - absolute so it sticks to parent
-    @apply absolute z-50;
-    @apply opacity-0 invisible;
-    @apply scale-95;
-    @apply transition-all duration-150 ease-out;
-    @apply pointer-events-none;
+    .popover-content {
+        @apply absolute z-50;
+        @apply opacity-0 invisible;
+        @apply scale-95;
+        @apply transition-all duration-150 ease-out;
+        @apply pointer-events-none;
 
-    // Container styling
-    @apply min-w-[8rem] max-w-[calc(100vw-2rem)];
-    @apply p-4;
-    @apply bg-neutral-surface-1 text-neutral-on-strong;
-    @apply shadow-xl;
-    @apply border border-neutral-surface-3;
-    border-radius: var(--radius-box, 0.5rem);
+        // Container
+        @apply min-w-[8rem] max-w-[calc(100vw-2rem)];
+        @apply p-4;
+        @apply bg-neutral-surface-1 text-neutral-on-strong;
+        @apply shadow-xl;
+        @apply border border-neutral-surface-3;
+        border-radius: var(--radius-box, 0.5rem);
 
-    // Transform origin (updated by JS based on placement)
-    transform-origin: center top;
+        transform-origin: center top;
 
-    // Open state
-    &.popover-open,
-    &[data-state="open"] {
-      @apply opacity-100 visible;
-      @apply scale-100;
-      @apply pointer-events-auto;
+        &.popover-open,
+        &[data-state="open"] {
+            @apply opacity-100 visible;
+            @apply scale-100;
+            @apply pointer-events-auto;
+        }
+
+        &.popover-top { transform-origin: center bottom; }
+        &.popover-bottom { transform-origin: center top; }
+        &.popover-left { transform-origin: right center; }
+        &.popover-right { transform-origin: left center; }
+
+        // Sizes
+        &.popover-xs {
+            @apply min-w-[6rem] p-2 text-xs;
+        }
+
+        &.popover-sm {
+            @apply min-w-[7rem] p-3 text-sm;
+        }
+
+        &.popover-lg {
+            @apply min-w-[10rem] p-5 text-base;
+        }
+
+        &.popover-xl {
+            @apply min-w-[12rem] p-6 text-lg;
+        }
+    }
+
+    // Arrow
+    .popover-arrow {
+        @apply absolute pointer-events-none;
+        width: 12px;
+        height: 12px;
+
+        &::before {
+            content: '';
+            @apply absolute inset-0;
+            @apply bg-neutral-surface-1 border border-neutral-surface-3;
+            @apply rotate-45;
+        }
+    }
+
+    .popover-content {
+        &.popover-bottom .popover-arrow {
+            top: -7px;
+            &::before { @apply border-b-0 border-r-0; }
+        }
+
+        &.popover-top .popover-arrow {
+            bottom: -7px;
+            &::before { @apply border-t-0 border-l-0; }
+        }
+
+        &.popover-left .popover-arrow {
+            right: -7px;
+            &::before { @apply border-b-0 border-l-0; }
+        }
+
+        &.popover-right .popover-arrow {
+            left: -7px;
+            &::before { @apply border-t-0 border-r-0; }
+        }
+    }
+
+    .popover-content.popover-dropdown {
+        @apply p-1.5 min-w-[10rem];
+    }
+
+    .popover-content.popover-tooltip {
+        @apply p-2 px-3 min-w-0 text-xs;
+        border-radius: var(--radius-box);
+        @apply bg-neutral-surface-2 text-neutral-on-strong border-neutral-surface-2;
+
+        .popover-arrow::before {
+            @apply bg-neutral-surface-2 border-neutral-surface-2;
+        }
+
+        &.popover-xs {
+            @apply p-1.5 px-2 text-xs;
+        }
+
+        &.popover-sm {
+            @apply p-2 px-3 text-xs;
+        }
+
+        &.popover-lg {
+            @apply p-3 px-4 text-sm;
+        }
+
+        &.popover-xl {
+            @apply p-4 px-5 text-base;
+        }
     }
 
     // ============================================
-    // PLACEMENT (transform-origin for animation)
+    // DROPDOWN MENU ITEMS
     // ============================================
-    &.popover-top { transform-origin: center bottom; }
-    &.popover-bottom { transform-origin: center top; }
-    &.popover-left { transform-origin: right center; }
-    &.popover-right { transform-origin: left center; }
-
-    // ============================================
-    // SIZE VARIANTS
-    // ============================================
-    &.popover-xs {
-      @apply min-w-[6rem] p-2 text-xs;
+    .dropdown-menu {
+        @apply flex flex-col list-none m-0 p-0;
     }
 
-    &.popover-sm {
-      @apply min-w-[7rem] p-3 text-sm;
+    .dropdown-item {
+        @apply flex items-center gap-2;
+        @apply w-full px-3 py-2;
+        @apply text-sm text-neutral-on-strong;
+        @apply hover:bg-neutral-surface-2;
+        @apply cursor-pointer select-none;
+        border-radius: var(--radius-box);
+        @apply transition-colors duration-150;
+        @apply no-underline border-0 bg-transparent;
+        @apply focus-visible:outline-none focus-visible:bg-neutral-surface-2;
+
+        &.active,
+        &[aria-selected="true"] {
+            @apply bg-primary-solid/10 text-primary-solid;
+        }
+
+        &[disabled],
+        &[aria-disabled="true"] {
+            @apply opacity-50 cursor-not-allowed pointer-events-none;
+        }
+
+        svg { @apply size-4 opacity-70; }
+
+        .dropdown-item-shortcut {
+            @apply ml-auto text-xs text-neutral-on-light;
+        }
     }
 
-    &.popover-lg {
-      @apply min-w-[10rem] p-5 text-base;
+    .dropdown-separator {
+        @apply my-1.5 -mx-1.5 h-px bg-neutral-surface-3;
     }
 
-    &.popover-xl {
-      @apply min-w-[12rem] p-6 text-lg;
+    .dropdown-label {
+        @apply px-3 py-1.5 text-xs font-medium text-neutral-on-light uppercase tracking-wider;
     }
-  }
-
-  // ============================================
-  // ARROW (optional)
-  // JS positions the arrow dynamically via left/top
-  // ============================================
-  .popover-arrow {
-    @apply absolute pointer-events-none;
-    width: 12px;
-    height: 12px;
-
-    &::before {
-      content: '';
-      @apply absolute inset-0;
-      @apply bg-neutral-surface-1 border border-neutral-surface-3;
-      @apply rotate-45;
-    }
-  }
-
-  // Arrow positioning based on placement
-  .popover-content {
-    // Bottom: arrow at top edge, pointing up
-    &.popover-bottom .popover-arrow {
-      top: -7px;
-      &::before { @apply border-b-0 border-r-0; }
-    }
-
-    // Top: arrow at bottom edge, pointing down
-    &.popover-top .popover-arrow {
-      bottom: -7px;
-      &::before { @apply border-t-0 border-l-0; }
-    }
-
-    // Left: arrow at right edge, pointing right
-    &.popover-left .popover-arrow {
-      right: -7px;
-      &::before { @apply border-b-0 border-l-0; }
-    }
-
-    // Right: arrow at left edge, pointing left
-    &.popover-right .popover-arrow {
-      left: -7px;
-      &::before { @apply border-t-0 border-r-0; }
-    }
-  }
-
-  // ============================================
-  // DROPDOWN PRESET
-  // ============================================
-  .popover-content.popover-dropdown {
-    @apply p-1.5 min-w-[10rem];
-  }
-
-  // ============================================
-  // TOOLTIP PRESET
-  // ============================================
-  .popover-content.popover-tooltip {
-    @apply p-2 px-3 min-w-0 text-xs;
-    border-radius: var(--radius-box);
-    @apply bg-neutral-surface-2 text-neutral-on-strong border-neutral-surface-2;
-
-    .popover-arrow::before {
-      @apply bg-neutral-surface-2 border-neutral-surface-2;
-    }
-
-    // Size variants override base
-    &.popover-xs {
-      @apply p-1.5 px-2 text-xs;
-    }
-
-    &.popover-sm {
-      @apply p-2 px-3 text-xs;
-    }
-
-    &.popover-lg {
-      @apply p-3 px-4 text-sm;
-    }
-
-    &.popover-xl {
-      @apply p-4 px-5 text-base;
-    }
-  }
-
-  // ============================================
-  // DROPDOWN MENU ITEMS
-  // ============================================
-  .dropdown-menu {
-    @apply flex flex-col list-none m-0 p-0;
-  }
-
-  .dropdown-item {
-    @apply flex items-center gap-2;
-    @apply w-full px-3 py-2;
-    @apply text-sm text-neutral-on-strong;
-    @apply hover:bg-neutral-surface-2;
-    @apply cursor-pointer select-none;
-    border-radius: var(--radius-box);
-    @apply transition-colors duration-150;
-    @apply no-underline border-0 bg-transparent;
-    @apply focus-visible:outline-none focus-visible:bg-neutral-surface-2;
-
-    // Active state
-    &.active,
-    &[aria-selected="true"] {
-      @apply bg-primary-solid/10 text-primary-solid;
-    }
-
-    // Disabled state
-    &[disabled],
-    &[aria-disabled="true"] {
-      @apply opacity-50 cursor-not-allowed pointer-events-none;
-    }
-
-    // Icon
-    svg { @apply size-4 opacity-70; }
-
-    // Shortcut hint
-    .dropdown-item-shortcut {
-      @apply ml-auto text-xs text-neutral-on-light;
-    }
-  }
-
-  .dropdown-separator {
-    @apply my-1.5 -mx-1.5 h-px bg-neutral-surface-3;
-  }
-
-  .dropdown-label {
-    @apply px-3 py-1.5 text-xs font-medium text-neutral-on-light uppercase tracking-wider;
-  }
 }

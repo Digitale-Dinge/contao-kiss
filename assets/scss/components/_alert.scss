@@ -49,7 +49,6 @@
         &-icon {
             @apply shrink-0;
 
-            // Scales with the alert font size instead of keeping its intrinsic size
             width: var(--alert-icon-size);
             height: var(--alert-icon-size);
             margin-top: calc((1em * 1.5 - var(--alert-icon-size)) / 2);

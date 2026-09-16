@@ -12,7 +12,6 @@
 
 @layer components {
     .widget-range {
-        // CSS custom properties for easy theming
         --range-thumb-size: 1.25rem;
         --range-track-height: 0.5rem;
         --range-thumb-color: var(--kiss-sys-color-neutral-on-strong);
@@ -28,9 +27,7 @@
         background: transparent;
         height: var(--range-thumb-size);
 
-        // ============================================
-        // WEBKIT (Chrome, Safari, Edge)
-        // ============================================
+        // Webkit (Chrome, Safari, Edge)
         &::-webkit-slider-runnable-track {
             @apply w-full;
             height: var(--range-track-height);
@@ -58,9 +55,7 @@
             box-shadow: 0 0 0 4px color-mix(in oklab, var(--range-thumb-color) 20%, transparent);
         }
 
-        // ============================================
-        // FIREFOX
-        // ============================================
+        // Gecko (Firefox)
         &::-moz-range-track {
             @apply w-full;
             height: var(--range-track-height);
@@ -89,12 +84,8 @@
         }
     }
 
-    // ============================================
-    // FILL VARIANT (requires JS controller for reactivity)
-    // Use: .form-range.range-fill + data-controller="range"
-    // ============================================
     .range-fill {
-        // WebKit: Use CSS variable set by JS
+        // WebKit
         &::-webkit-slider-runnable-track {
             background: linear-gradient(
                     to right,
@@ -103,7 +94,7 @@
             );
         }
 
-        // Firefox: Native progress pseudo-element
+        // Gecko (Firefox)
         &::-moz-range-progress {
             height: var(--range-track-height);
             background: var(--range-fill-color);
@@ -111,9 +102,7 @@
         }
     }
 
-    // ============================================
     // COLORS
-    // ============================================
     .range-primary {
         --range-thumb-color: var(--color-primary-solid);
         --range-fill-color: var(--color-primary-solid);
@@ -144,9 +133,7 @@
         --range-fill-color: var(--color-status-error-solid);
     }
 
-    // ============================================
     // SIZES
-    // ============================================
     .range-xs {
         --range-thumb-size: 0.75rem;
         --range-track-height: 0.25rem;

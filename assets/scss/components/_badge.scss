@@ -36,7 +36,6 @@
         background: var(--badge-bg);
         color: var(--badge-fg);
 
-        // Icons scale with the badge font size instead of keeping their intrinsic size
         svg {
             width: 1em;
             height: 1em;
