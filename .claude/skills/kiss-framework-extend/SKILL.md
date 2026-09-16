@@ -32,6 +32,39 @@ Change exclusively what was requested:
 - If a requirement is ambiguous ("use X" — but how exactly? "colors" — background or text?): **ask**, do not silently implement the most plausible interpretation. A question costs a minute; a wrong interpretation costs a review cycle.
 - If you cannot read a file you need (repo not mounted, branch not checked out): **ask for it by path** instead of guessing its contents. Colleagues may have already solved part of the task on another branch — ask whether that is the case before rebuilding it.
 
+## Rule One: no comments that restate the code, everything in English
+
+Code comments are the second most common review complaint after scope creep. Lines like these got flagged and had to be deleted:
+
+```scss
+// Sizing: the size modifiers below redefine these and nothing else
+--alert-px: var(--kiss-comp-alert-spacing-padding-inline, 1rem);
+```
+
+(The `// Sizing` header itself is fine — the half-sentence after it is the problem, see below.)
+
+```twig
+{# The variant is alert-local and maps 1:1 onto the alert-* classes #}
+.addClass('alert-' ~ item.variant|default, item.variant|default)
+```
+
+```php
+// Alert styles per _alert.scss: the shared soft/outline, extended with an alert-only dashed
+->addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
+```
+
+Every one of them says what the next line already says. A programmer reads `addDependsOnField('variant', [...])` faster than the sentence describing it. Rules:
+
+- **Default is no comment.** The framework's naming conventions carry the meaning; a comment that explains a well-named line is noise.
+- **Never comment the what**: not what a call does, not which file a class name belongs to, not that a value "maps 1:1", not how the size modifiers "redefine these and nothing else".
+- **Section headers in SCSS and PHP are fine** when they group a block of related lines: `// Sizing`, `// Colors`, `// Typography` — a bare label, nothing appended. `// Sizing: the size modifiers below redefine these and nothing else` is not a header, it is a narration.
+- **Twig gets no comments at all** apart from the component docblock. No section headers, no `{# … #}` above an `addClass`, no `{# NOT LIKE THIS #}` markers.
+- **A why is allowed only when it is invisible in the code**: a workaround for a Contao or Twig quirk, a deliberate deviation from a neighbouring pattern, a link to the issue that forced it. One line, states the reason, nothing else. If you cannot name such a reason, delete the comment.
+- **The docblock of a standalone component is the one Twig exception** (see the mandatory structure below) — it is the API contract, not commentary.
+- **English only, everywhere you write**: code, comments, docblocks, identifiers, commit messages, YAML keys, replies to the user. No German, no mixed German/English. The only German that may appear is the *content* of `translations/de/*.yaml` and existing German strings you are told to keep.
+
+Self-check line for this rule: for every comment in the diff ask "is this a bare section header in SCSS/PHP, or a why the code cannot express?" Anything else goes.
+
 ## Step 1: MoSCoW before the first edit
 
 Break the task down and stick to the categories:
@@ -172,7 +205,7 @@ Before every hand-written options array, every translation line in PHP and every
 
 - **Style values come from the global enums** under `src/Styles/Option/` (`Modifier\Size`, `Modifier\Variant`, `Color\Color` …) — never from a component-specific parallel enum, never from a list of strings in the config file.
 - **Option lists are built by the builder**, not by the config file. `->addStyleOptionsField('<field>', <Enum>::class)` generates select, options and labels from the enum (internally `TranslatableEnumTrait::getTranslatedOptions()`). For options without an enum: `->addDependsOnField('<field>', ['', 'a', 'b'])` — the leading `''` creates the blank option; labels come from `rsce.field.<field>.options.*`.
-- **Never plain-text labels in the config file.** `'dashed' => 'Gestrichelt'` belongs in `translations/{de,en}/rsce.*.yaml`, not in PHP. Same for element label and description: `->create('<name>', …)` in string form, texts under `rsce.<name>.label`/`.description`.
+- **Never plain-text labels in the config file.** `'dashed' => 'Dashed'` belongs in `translations/{de,en}/rsce.*.yaml`, not in PHP. Same for element label and description: `->create('<name>', …)` in string form, texts under `rsce.<name>.label`/`.description`.
 - If a builder method is missing for a recurring case, **add it to the builder** instead of spelling it out in the config file — that is the place where it reaches all elements.
 
 ### Local special values belong in `_config.php`, not in the enum
@@ -180,16 +213,14 @@ Before every hand-written options array, every translation line in PHP and every
 If a component needs its own values besides the global ones (e.g. badge knows `soft`/`outline` from `Modifier\Variant`, plus a badge-only `dashed`), that is assembled **only in `rsce_<name>_config.php`** — with `addDependsOnField()` and the labels in `rsce.*.yaml`:
 
 ```php
-// Badge styles per _badge.css: the shared soft/outline, extended with a badge-only dashed
 ->addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
 ```
 
 The global enum is **not** extended for this: a case that only one component can render becomes a dead option in every other select. Conversely: if the value is conceptually usable everywhere, it belongs in the global enum and not in the config file. The deciding question is not "where is it more convenient" but "could a second component render this value?"
 
-In the component such local values pass through 1:1, commented, without `styles.*()`:
+In the component such local values pass through 1:1, without `styles.*()`:
 
 ```twig
-{# Variant and shape are badge-local and map 1:1 onto the badge-* classes #}
 .addClass('badge-' ~ item.variant|default, item.variant|default)
 ```
 
@@ -224,6 +255,7 @@ RSCE-specific self-check: was an existing media/action component reused via `{% 
 - `php -l` on every changed PHP file; parse the YAML files.
 - Read the diff again asking "which line did nobody order?" — revert every such line or report it as a proposal. Same question for deletions: "which existing line did I remove without being asked?"
 - DE and EN translations both present?
+- Any comment in the diff that restates the code below it ("maps 1:1", "styles per _x.scss", a section header with a sentence appended)? Any `{# #}` in Twig outside the component docblock? Delete it. Any non-English word in code, comments, identifiers or the reply? Translate it.
 - Did a prefix land in an enum that belongs in the template? Did a new Twig global or a new `Component\<X>\Variant`/`Color` enum appear although `Modifier\Variant` / `Color\Color` exist?
 - Did a deprecated or docblock-only case (`info`) get resurrected?
 - Are card/media classes added inside the existing `show_as_card` branch of the wrapper, not in a new `attributes` block?
