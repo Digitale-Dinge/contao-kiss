@@ -43,7 +43,7 @@ export default class extends Controller {
         if (getComputedStyle(this.element).position === 'static') {
             this.element.style.position = 'relative';
         }
-        
+
         // Setup hover trigger
         if (this.triggerValue === 'hover' && this.hasTriggerTarget) {
             this._hoverOpen = () => this.open();
@@ -71,8 +71,7 @@ export default class extends Controller {
     disconnect() {
         this.cancelClose();
         this.removeListeners();
-        
-        // Clean up hover listeners
+
         if (this._hoverOpen) {
             this.triggerTarget?.removeEventListener('mouseenter', this._hoverOpen);
             this.triggerTarget?.removeEventListener('mouseleave', this._hoverClose);
@@ -116,9 +115,6 @@ export default class extends Controller {
         clearTimeout(this._closeTimeout);
     }
 
-    // ========================================
-    // POSITIONING
-    // ========================================
     position() {
         const content = this.contentTarget;
         const trigger = this.triggerTarget;
@@ -129,7 +125,6 @@ export default class extends Controller {
         // Reset positioning
         Object.assign(content.style, { position: 'absolute', top: '', bottom: '', left: '', right: '' });
 
-        // Get trigger measurements
         const triggerRect = trigger.getBoundingClientRect();
         const triggerWidth = trigger.offsetWidth;
         const triggerHeight = trigger.offsetHeight;
@@ -149,7 +144,6 @@ export default class extends Controller {
             Object.assign(content.style, { visibility: '', opacity: '' });
         }
 
-        // Determine placement (with flip)
         let placement = this.placementValue;
         if (flip) {
             placement = this.getFlippedPlacement(placement, triggerRect, contentWidth, contentHeight, offset);
@@ -160,7 +154,6 @@ export default class extends Controller {
         const isVertical = placement === 'top' || placement === 'bottom';
         
         if (isVertical) {
-            // Vertical: set top/bottom, align horizontally
             if (placement === 'top') {
                 content.style.bottom = `${triggerHeight + offset}px`;
                 content.style.top = 'auto';
@@ -176,7 +169,6 @@ export default class extends Controller {
             );
             content.style.left = `${left}px`;
         } else {
-            // Horizontal: set left/right, align vertically
             if (placement === 'left') {
                 content.style.right = `${triggerWidth + offset}px`;
                 content.style.left = 'auto';
@@ -193,11 +185,9 @@ export default class extends Controller {
             content.style.top = `${top}px`;
         }
 
-        // Update placement class
         content.className = content.className.replace(/popover-(top|bottom|left|right)/g, '');
         content.classList.add(`popover-${placement}`);
 
-        // Position arrow
         if (this.hasArrowTarget) {
             this.positionArrow(placement, triggerLeft, triggerTop, triggerWidth, triggerHeight, contentWidth, contentHeight, left, top);
         }
@@ -259,9 +249,6 @@ export default class extends Controller {
         }
     }
 
-    // ========================================
-    // LISTENERS
-    // ========================================
     addListeners() {
         this._onClickOutside = (e) => !this.element.contains(e.target) && this.close();
         this._onKeydown = (e) => e.key === 'Escape' && this.close();
