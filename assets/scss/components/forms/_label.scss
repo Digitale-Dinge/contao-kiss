@@ -16,7 +16,6 @@
  */
 
 @layer components {
-    // Label text (above input)
     .widget > label,
     .label-text {
         @apply block font-medium text-neutral-on-strong mb-1.5 text-base;
@@ -30,17 +29,14 @@
         @apply block mt-1.5 text-base;
     }
 
-    // Helper text (below input)
     .helper-text {
         @apply text-neutral-on-light;
     }
 
-    // Error text (below input)
     .error-text {
         @apply text-status-error-solid;
     }
 
-    // Success text (below input)
     .success-text {
         @apply text-status-success-solid;
     }

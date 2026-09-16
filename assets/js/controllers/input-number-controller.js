@@ -65,7 +65,6 @@ export default class extends Controller {
         const min = parseFloat(input.min);
         const max = parseFloat(input.max);
 
-        // Find all buttons and determine which is decrement/increment by their action
         const buttons = this.element.querySelectorAll('.input-number-btn');
         
         buttons.forEach(btn => {
@@ -78,12 +77,10 @@ export default class extends Controller {
         });
     }
 
-    // Handle manual input changes
     inputChanged() {
         this.updateButtonStates();
     }
 
-    // Helper: Get decimal places from step
     getDecimals(step) {
         const str = step.toString();
         const decimal = str.indexOf('.');

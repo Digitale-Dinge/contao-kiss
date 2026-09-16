@@ -37,10 +37,8 @@ export default class extends Controller {
         const input = this.inputTarget;
         const percent = ((input.value - input.min) / (input.max - input.min)) * 100;
 
-        // Set CSS custom property for fill percentage (used by SCSS)
         input.style.setProperty('--range-fill-percent', `${percent}%`);
 
-        // Update value display if target exists
         if (this.hasValueTarget) {
             this.valueTarget.textContent = this.numberFormatter.format(input.value) + this.suffixValue;
         }

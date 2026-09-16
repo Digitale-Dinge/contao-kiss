@@ -26,9 +26,7 @@
 
 {% trans_default_domain 'contao_default' %}
 
-{# ============================================================================
-   CONFIGURATION DEFAULTS
-   ============================================================================ #}
+{# Config #}
 {% set breadcrumb_size = breadcrumb_size|default %}
 {% set breadcrumb_color = breadcrumb_color|default %}
 {% set separator_type = separator_type|default('chevron') %}
@@ -37,11 +35,7 @@
 {% set breakpoint = breakpoint|default %}
 {% set collapsible = collapsible|default(true) %}
 
-{# ============================================================================
-   SEPARATOR ICONS
-   Map separator types to their SVG representations
-   ============================================================================ #}
-{% set separators = {
+{% set separator_icons = {
     'chevron': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>',
     'chevron-thin': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>',
     'slash': '<span class="separator-slash">/</span>',
@@ -51,18 +45,14 @@
     'double-chevron': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/></svg>'
 } %}
 
-{# Resolve separator content #}
 {% if separator_type == 'custom' and separator_custom %}
     {% set separator_content = separator_custom %}
-{% elseif separators[separator_type] is defined %}
-    {% set separator_content = separators[separator_type] %}
+{% elseif separator_icons[separator_type] is defined %}
+    {% set separator_content = separator_icons[separator_type] %}
 {% else %}
-    {% set separator_content = separators['chevron'] %}
+    {% set separator_content = separator_icons['chevron'] %}
 {% endif %}
 
-{# ============================================================================
-   BUILD COMPONENT CLASSES
-   ============================================================================ #}
 {% set component_classes = [] %}
 
 {# Size variant #}
@@ -75,10 +65,6 @@
     {% set component_classes = component_classes|merge(['breadcrumb-' ~ breadcrumb_color]) %}
 {% endif %}
 
-{# ============================================================================
-   BUILD WRAPPER ATTRIBUTES
-   Merge our component classes with Contao's wrapperAttributes
-   ============================================================================ #}
 {% set wrapperAttributes = attrs(cssID)
     .addClass([class, 'block']|merge(component_classes))
     .addStyle(style|default)
@@ -86,11 +72,10 @@
     .mergeWith(wrapperAttributes|default)
 %}
 
-{# Add Stimulus controller attributes if collapsible #}
+{# Add Stimulus controller attributes #}
 {% if collapsible %}
     {% set wrapperAttributes = wrapperAttributes.set('data-controller', 'breadcrumb') %}
 
-    {# Only add data attributes if explicitly set (JS has its own defaults) #}
     {% if max_items is not empty %}
         {% set wrapperAttributes = wrapperAttributes.set('data-breadcrumb-max-items-value', max_items) %}
     {% endif %}
@@ -99,18 +84,13 @@
     {% endif %}
 {% endif %}
 
-{# ============================================================================
-   TEMPLATE BLOCKS
-   ============================================================================ #}
 {% block content %}
     <ul{{ collapsible ? ' data-breadcrumb-target="list"' : '' }}>
         {% for item in items %}
-            {# Add separator before each item except the first #}
             {% if not loop.first %}
                 <li class="breadcrumb-separator" aria-hidden="true">{{ separator_content|raw }}</li>
             {% endif %}
 
-            {# Determine if this item should be collapsible (middle items) #}
             {% set is_collapsible = collapsible and not loop.first and not loop.last %}
 
             {% if item.isActive %}

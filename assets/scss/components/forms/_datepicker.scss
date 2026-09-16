@@ -73,8 +73,6 @@
         background: var(--dp-surface-hover);
     }
 
-    /* Both the plain and focused "today" states (the library colours the focused
-     * one turquoise with higher specificity, so we must match it). */
     &.today:not(.selected),
     &.today.focused:not(.selected) {
         background: color-mix(in srgb, var(--dp-accent) 22%, var(--dp-surface));
@@ -118,15 +116,12 @@
     }
 }
 
-/* Footer panel: drop the library's light-grey band + inset shadow */
+/* Reset library defaults */
 .datepicker-footer {
     background: transparent;
     box-shadow: none;
 }
 
-/* Footer buttons (Heute / Löschen) — primary, pill-shaped.
- * The selector matches the library's `.datepicker-footer .datepicker-controls .button`
- * specificity (0,3,0) so our radius + colours win over its 2px default. */
 .datepicker-footer .datepicker-controls .button {
     background: var(--dp-accent);
     color: var(--dp-accent-fg);

@@ -404,11 +404,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['text']['eval']['tl_class'] = 'long c
 $GLOBALS['TL_DCA']['tl_content']['fields']['optionalText']['eval']['tl_class'] = 'long clr';
 $GLOBALS['TL_DCA']['tl_content']['fields']['useImage']['eval']['tl_class'] = 'long clr';
 
-/* HTML in Überschriften */
+/* HTML in headlines */
 $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['allowHtml'] = true;
-
-/* HTML in Linktexten */
-//$GLOBALS['TL_DCA']['tl_content']['fields']['linktext']['eval']['allowHtml'] = true;
 
 PaletteManipulator::create()
     ->addField('callToAction', 'text_legend', PaletteManipulator::POSITION_APPEND)

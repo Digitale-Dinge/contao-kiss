@@ -19,7 +19,6 @@
 {% block badge %}
     {% set item = item|default(_context) %}
 
-    {# Variante und Form sind badge-lokal und werden 1:1 auf die badge-* Klassen abgebildet #}
     <span{{ attrs(badge_attributes|default)
         .addClass('badge')
         .addClass('badge-' ~ styles.color(item.color|default), item.color|default)

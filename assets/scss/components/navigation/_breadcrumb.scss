@@ -50,7 +50,6 @@
             @apply text-neutral-on-strong;
         }
 
-        // Ellipsis
         .breadcrumb-ellipsis {
             @apply relative flex items-center;
         }
@@ -196,7 +195,6 @@
         }
     }
 
-    // Home icon variant
     .breadcrumb-home-icon,
     .mod_breadcrumb.breadcrumb-home-icon {
         li:first-child a {

@@ -9,7 +9,7 @@ Contents:
 3. Positive example 2: `news_card.html.twig` (mapping a foreign template onto a KISS component)
 4. Positive example 3: `rsce_card_group.html.twig` (card settings once per element)
 5. Positive example 4: `_badge.html.twig` + `rsce_badge.html.twig` (standalone component via `use`)
-6. Negative examples 1–7
+6. Negative examples 1–8
 7. Cheat sheet: attribute hooks of the media_text chain and the content wrapper
 
 ---
@@ -196,7 +196,6 @@ The reference structure for components that do **not** inherit from the media_te
 {% block badge %}
     {% set item = item|default(_context) %}
 
-    {# Variant and shape are badge-local and map 1:1 onto the badge-* classes #}
     <span{{ attrs(badge_attributes|default)
         .addClass('badge')
         .addClass('badge-' ~ styles.color(item.color|default), item.color|default)
@@ -220,7 +219,6 @@ The reference structure for components that do **not** inherit from the media_te
 {% use '@Contao/kiss_component/status/_badge.html.twig' %}
 {% extends '@Contao/content_element/_base.html.twig' %}
 
-{# Badges flow inline, so the grid wrapper the list mode would add is replaced by a flex wrapper #}
 {% set badge_outer_attributes = attrs()
     .addClass(['badges', 'inline-flex', 'flex-wrap', 'gap-2'])
     .mergeWith(badge_outer_attributes|default)
@@ -245,12 +243,10 @@ The reference structure for components that do **not** inherit from the media_te
 ->create('badge', 'texts', ['types' => ['content'], 'standardFields' => ['cssID']])
 
 ->addStyleOptionsField('badgeSize', Size::class)
-// Badge shapes per _badge.css, the blank option keeps the default corner radius
 ->addDependsOnField('badgeShape', ['', 'pill', 'square'], ['tl_class' => 'w25'])
 
 ->startList()
     ->addStyleOptionsField('color', Color::class)
-    // Badge styles per _badge.css: the shared soft/outline, extended with a badge-only dashed
     ->addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
     ->addIconField()
 ->endList()
@@ -264,6 +260,7 @@ Why this is good:
 - **Global enums via the builder:** `addStyleOptionsField()` pulls options and labels from `Modifier\Size` and `Color\Color`. No `foreach (Size::cases())` in the config file, no plain-text labels in PHP.
 - **Local special value `dashed` only in the config:** `Modifier\Variant` stays untouched because no other element can render `badge-dashed`. Label lives in `rsce.field.variant.options.dashed`.
 - **Docblock as contract**, icons via `_icon_include.html.twig`, text via `|insert_tag` — no `<i class="…">`, no `|raw`.
+- **Not a single comment in component, RSCE template, config or CSS.** `addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'])` does not need a line above it saying which of those are shared and which is badge-only; `svg { width: 1em }` does not need to be told it scales with the font size. The docblock is the only comment the component carries.
 
 In CSS (`assets/css/components/_badge.css`) icons grow with the badge size because they take their size from the font size:
 
@@ -271,7 +268,6 @@ In CSS (`assets/css/components/_badge.css`) icons grow with the badge size becau
 .badge {
     font-size: var(--badge-text);
 
-    /* Icons scale with the badge font size instead of keeping their intrinsic size */
     svg {
         width: 1em;
         height: 1em;
@@ -308,7 +304,6 @@ Detection question: "Does my new enum value contain a component prefix (`card-`,
 **Wrong (really happened):** overriding the `attributes` block in `rsce_media_text.html.twig` and duplicating the complete class list from the KISS `_base` (container, paddings, margins, background …) just to make one class conditional:
 
 ```twig
-{# NOT LIKE THIS — duplicates the entire _base logic #}
 {% block attributes %}
     {% set attributes = attrs(attributes|default)
         .addClass([styles.container(...), styles.padding_top(...), ...])
@@ -345,7 +340,6 @@ All really happened, all had to be reverted in review:
 **Wrong (really happened, while building `rsce_card_group.html.twig`):** to reuse the card class logic from `_media_text_wrapper.html.twig` in a loop, an `{% embed %}` of the wrapper file was built for every list item, because its card logic sits at root level (no `{% block %}`) and `{% use %}` therefore does not reach it:
 
 ```twig
-{# NOT LIKE THIS — new Twig construct, unknown in the repo, for a solved problem #}
 {% block content %}
     {% for item in list %}
         {% embed '@Contao/kiss_component/media/_media_text_wrapper.html.twig' with {
@@ -389,7 +383,6 @@ Detection question: "Is there already a model in the repo for this rendering pat
 **Wrong (really happened, flagged in the `rsce_badge` PR review):** the element-wide options were renamed in the RSCE template and pushed into the component via `include`:
 
 ```twig
-{# NOT LIKE THIS — passes through instead of inheriting #}
 {% for item in list %}
     {{ include('@Contao/kiss_component/status/_badge.html.twig', {
         item: item|merge({size: badgeSize|default, shape: badgeShape|default})
@@ -408,7 +401,6 @@ Detection question: "Am I passing any variables at all when calling a kiss_compo
 **Wrong (really happened, flagged in the `rsce_badge` PR review):**
 
 ```php
-// NOT LIKE THIS — duplicates the builder and hides translations in PHP
 $sizeOptions = [];
 
 foreach (Size::cases() as $case) {
@@ -416,19 +408,19 @@ foreach (Size::cases() as $case) {
 }
 
 $shapeOptions = [
-    'pill' => 'Abgerundet',
-    'square' => 'Eckig',
+    'pill' => 'Pill',
+    'square' => 'Square',
 ];
 
 ->addField('badgeShape', [
-    'label' => ['Form', 'Bestimmen Sie die Form aller Badges'],
+    'label' => ['Shape', 'Sets the shape of all badges'],
     'inputType' => 'select',
     'options' => $shapeOptions,
     …
 ])
 ```
 
-Three convention breaks at once: the enum loop duplicates `TranslatableEnumTrait::getTranslatedOptions()`, the labels are German plain text in PHP instead of `translations/{de,en}/rsce.*.yaml`, and `create(['Badge', '…'])` in array form prevents `'label' => true` from resolving the element translations.
+Three convention breaks at once: the enum loop duplicates `TranslatableEnumTrait::getTranslatedOptions()`, the labels are plain text in PHP instead of `translations/{de,en}/rsce.*.yaml`, and `create(['Badge', '…'])` in array form prevents `'label' => true` from resolving the element translations.
 
 **Right:**
 
@@ -440,7 +432,49 @@ Three convention breaks at once: the enum loop duplicates `TranslatableEnumTrait
 
 Labels and options land in **both** YAML files under `rsce.field.badgeShape.label`/`.description`/`.options.*` and `rsce.badge.label`/`.description`.
 
-Detection question: "Does my config file contain a German or English sentence, a `foreach` over an enum or a `$GLOBALS['TL_LANG']` reference?" → None of the three belongs there.
+Detection question: "Does my config file contain a human-readable sentence, a `foreach` over an enum or a `$GLOBALS['TL_LANG']` reference?" → None of the three belongs there.
+
+## Negative example 8: comments that narrate the code
+
+**Wrong (really happened, flagged in the alert component review):**
+
+```scss
+.alert {
+    --alert-bg: var(--kiss-comp-alert-color-background, var(--kiss-sys-color-neutral-surface-2));
+
+    // Sizing: the size modifiers below redefine these and nothing else
+    --alert-px: var(--kiss-comp-alert-spacing-padding-inline, 1rem);
+    --alert-py: var(--kiss-comp-alert-spacing-padding-block, 1rem);
+}
+```
+
+```twig
+{# The variant is alert-local and maps 1:1 onto the alert-* classes #}
+<div{{ attrs(alert_attributes|default)
+```
+
+```php
+// Alert styles per _alert.scss: the shared soft/outline, extended with an alert-only dashed
+->addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
+```
+
+Each comment narrates the line under it: the `addClass` says it maps the variant, the method name and array say which values exist, and the SCSS header stops being a header the moment ": the size modifiers below redefine these and nothing else" is appended to it. The Twig one was additionally written in German. Comments like these cost the reviewer a read, rot the moment the line changes and mark the diff as generated.
+
+**Right:**
+
+```scss
+.alert {
+    --alert-bg: var(--kiss-comp-alert-color-background, var(--kiss-sys-color-neutral-surface-2));
+
+    // Sizing
+    --alert-px: var(--kiss-comp-alert-spacing-padding-inline, 1rem);
+    --alert-py: var(--kiss-comp-alert-spacing-padding-block, 1rem);
+}
+```
+
+The Twig and PHP snippets: comment lines deleted, nothing else changes. A bare section header in SCSS or PHP grouping related lines is fine; Twig gets no comments apart from the component docblock in new components, if needed.
+
+Detection question: "Is this a bare section header in SCSS/PHP, or a one-line *why* the code cannot express (a quirk, a deliberate deviation, an issue link)?" → If neither, delete it. In Twig only the `@param` docblock of a standalone component survives.
 
 ---
 

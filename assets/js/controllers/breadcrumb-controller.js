@@ -37,10 +37,8 @@ export default class extends Controller {
     };
 
     connect() {
-        // Early exit if no list or no collapsible items
         if (!this.hasListTarget || this.itemTargets.length === 0) return;
-        
-        // Check once on page load - collapse if below breakpoint OR too many items
+
         const shouldCollapse = 
             window.innerWidth < this.breakpointValue || 
             this.itemTargets.length > this.maxItemsValue;
@@ -58,23 +56,19 @@ export default class extends Controller {
     collapse() {
         const items = this.itemTargets;
         const dropdownLinks = [];
-        
-        // Hide items and collect links for dropdown (single loop)
+
         items.forEach(item => {
             item.style.display = 'none';
-            
-            // Hide preceding separator
+
             const prev = item.previousElementSibling;
             if (prev?.classList.contains('breadcrumb-separator')) {
-                prev.style.display = 'none';
+                prev.style.display = 'none'; // Hide preceding separator
             }
-            
-            // Collect link for dropdown
+
             const link = item.querySelector('a');
             if (link) dropdownLinks.push(link);
         });
-        
-        // Create and insert ellipsis
+
         this.createEllipsis(dropdownLinks);
     }
 
@@ -111,8 +105,7 @@ export default class extends Controller {
                 <nav class="dropdown-menu" role="menu">${menuItems}</nav>
             </div>
         `;
-        
-        // Insert after first visible item (Home) and its separator
+
         const firstItem = this.listTarget.querySelector('li:not(.breadcrumb-separator)');
         const insertAfter = firstItem?.nextElementSibling?.classList.contains('breadcrumb-separator')
             ? firstItem.nextElementSibling
