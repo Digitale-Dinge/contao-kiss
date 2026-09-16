@@ -1,28 +1,5 @@
 {% extends '@Contao/content_element/accordion.html.twig' %}
 
-{#
-  ** Add changes to the base template here. **
-
-  Hint: Try adjusting blocks and attributes instead of
-  overwriting the whole template. This way your version
-  can remain compatible with future changes to the base
-  template as well as adjustments made by extensions.
-
-  Currently available blocks:
-    "stylesheet_component", "content", "element",
-    "element_header", "element_content", "script",
-    "init_options", "style", "attributes",
-    "headline_component", "headline_attributes",
-    "headline_inner", "wrapper", "wrapper_tag",
-    "inner", "metadata"
-
-  Example:
-    {% block stylesheet_component %}
-       {{ parent() }}
-       My additional content for 'stylesheet_component'…
-    {% endblock %}
-#}
-
 {% set headline_element = headline %}
 {% set headline = {text: ''} %}
 {% block element_header %}
