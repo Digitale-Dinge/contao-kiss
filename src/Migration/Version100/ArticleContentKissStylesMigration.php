@@ -9,6 +9,10 @@ use Contao\CoreBundle\Migration\MigrationResult;
 use Contao\DcaExtractor;
 use Doctrine\DBAL\Connection;
 
+/**
+ * Not used and only serves as a migration for old versions (0.1 - 0.3)
+ * Should be added in the app instead.
+ */
 class ArticleContentKissStylesMigration extends AbstractMigration
 {
     private static array $kissContentColumns = [];
