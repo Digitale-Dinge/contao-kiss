@@ -9,7 +9,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\Modifier\Size;
 $configBuilder = System::getContainer()->get('kiss.rsce_config.builder');
 
 return $configBuilder
-    ->create('badge', 'texts', [
+    ->create('badge', 'miscellaneous', [
         'types' => ['content'],
         'standardFields' => ['cssID'],
     ])
