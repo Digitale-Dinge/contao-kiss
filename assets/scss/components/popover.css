@@ -1,0 +1,216 @@
+/**
+ * KISS Popover Component
+ *
+ * A simple popover component for dropdowns, tooltips, and menus.
+ * Uses absolute positioning to stick to trigger on scroll.
+ * Works with the popover Stimulus controller.
+ *
+ * Base: .popover-content
+ * Sizes: popover-{xs|sm|lg|xl} (text-base is default)
+ * Presets: popover-dropdown, popover-tooltip
+ *
+ * Example:
+ *   <div data-controller="popover" class="relative">
+ *     <button data-popover-target="trigger" data-action="click->popover#toggle">Open</button>
+ *     <div data-popover-target="content" class="popover-content">
+ *       Content here...
+ *     </div>
+ *   </div>
+ */
+@layer components {
+    .popover-content {
+        --popover-bg: var(--kiss-sys-color-neutral-surface-1);
+        --popover-fg: var(--kiss-sys-color-neutral-on-strong);
+        --popover-border: var(--kiss-sys-color-neutral-surface-3);
+        --popover-radius: var(--radius-box, 0.5rem);
+        --popover-border-width: var(--border-width-thin, 1px);
+        --popover-shadow: var(--shadow-xl);
+        --popover-px: 1rem;
+        --popover-py: 1rem;
+        --popover-min-w: 8rem;
+        --popover-max-w: calc(100vw - 2rem);
+        --popover-text: var(--text-base, 1rem);
+        --popover-arrow-size: 12px;
+        --popover-arrow-offset: calc((var(--popover-arrow-size) / 2 + 1px) * -1);
+
+        @apply absolute z-50 opacity-0 invisible scale-95 pointer-events-none transition-all duration-150 ease-out;
+
+        min-width: var(--popover-min-w);
+        max-width: var(--popover-max-w);
+        padding: var(--popover-py) var(--popover-px);
+        font-size: var(--popover-text);
+        background: var(--popover-bg);
+        color: var(--popover-fg);
+        border-width: var(--popover-border-width);
+        border-style: solid;
+        border-color: var(--popover-border);
+        border-radius: var(--popover-radius);
+        box-shadow: var(--popover-shadow);
+        transform-origin: center top;
+    }
+
+    .popover-open,
+    .popover-content[data-state="open"] {
+        @apply opacity-100 visible scale-100 pointer-events-auto;
+    }
+
+    /* Positions */
+    .popover-top {
+        --popover-arrow-bottom: var(--popover-arrow-offset);
+        --popover-arrow-border-width: 0 var(--popover-border-width) var(--popover-border-width) 0;
+
+        transform-origin: center bottom;
+    }
+
+    .popover-bottom {
+        --popover-arrow-top: var(--popover-arrow-offset);
+        --popover-arrow-border-width: var(--popover-border-width) 0 0 var(--popover-border-width);
+
+        transform-origin: center top;
+    }
+
+    .popover-left {
+        --popover-arrow-right: var(--popover-arrow-offset);
+        --popover-arrow-border-width: var(--popover-border-width) var(--popover-border-width) 0 0;
+
+        transform-origin: right center;
+    }
+
+    .popover-right {
+        --popover-arrow-left: var(--popover-arrow-offset);
+        --popover-arrow-border-width: 0 0 var(--popover-border-width) var(--popover-border-width);
+
+        transform-origin: left center;
+    }
+
+    /* Sizes */
+    .popover-xs {
+        --popover-px: 0.5rem;
+        --popover-py: 0.5rem;
+        --popover-min-w: 6rem;
+        --popover-text: var(--text-xs, 0.75rem);
+    }
+
+    .popover-sm {
+        --popover-px: 0.75rem;
+        --popover-py: 0.75rem;
+        --popover-min-w: 7rem;
+        --popover-text: var(--text-sm, 0.875rem);
+    }
+
+    /* Medium is the default */
+
+    .popover-lg {
+        --popover-px: 1.25rem;
+        --popover-py: 1.25rem;
+        --popover-min-w: 10rem;
+        --popover-text: var(--text-base, 1rem);
+    }
+
+    .popover-xl {
+        --popover-px: 1.5rem;
+        --popover-py: 1.5rem;
+        --popover-min-w: 12rem;
+        --popover-text: var(--text-lg, 1.125rem);
+    }
+
+    /* Arrow */
+    .popover-arrow {
+        @apply absolute pointer-events-none;
+
+        top: var(--popover-arrow-top, auto);
+        right: var(--popover-arrow-right, auto);
+        bottom: var(--popover-arrow-bottom, auto);
+        left: var(--popover-arrow-left, auto);
+        width: var(--popover-arrow-size);
+        height: var(--popover-arrow-size);
+    }
+
+    .popover-arrow::before {
+        @apply absolute inset-0 rotate-45;
+
+        background: var(--popover-bg);
+        border-width: var(--popover-arrow-border-width, var(--popover-border-width));
+        border-style: solid;
+        border-color: var(--popover-border);
+        content: '';
+    }
+
+    /* Presets */
+    .popover-dropdown {
+        --popover-px: 0.375rem;
+        --popover-py: 0.375rem;
+        --popover-min-w: 10rem;
+    }
+
+    .popover-tooltip {
+        --popover-bg: var(--kiss-sys-color-neutral-surface-2);
+        --popover-fg: var(--kiss-sys-color-neutral-on-strong);
+        --popover-border: var(--kiss-sys-color-neutral-surface-2);
+        --popover-px: 0.75rem;
+        --popover-py: 0.5rem;
+        --popover-min-w: 0;
+        --popover-text: var(--text-xs, 0.75rem);
+    }
+
+    .popover-tooltip.popover-xs {
+        --popover-px: 0.5rem;
+        --popover-py: 0.375rem;
+        --popover-text: var(--text-xs, 0.75rem);
+    }
+
+    .popover-tooltip.popover-sm {
+        --popover-px: 0.75rem;
+        --popover-py: 0.5rem;
+        --popover-text: var(--text-xs, 0.75rem);
+    }
+
+    .popover-tooltip.popover-lg {
+        --popover-px: 1rem;
+        --popover-py: 0.75rem;
+        --popover-text: var(--text-sm, 0.875rem);
+    }
+
+    .popover-tooltip.popover-xl {
+        --popover-px: 1.25rem;
+        --popover-py: 1rem;
+        --popover-text: var(--text-base, 1rem);
+    }
+
+    /* Dropdown menu */
+    .dropdown-menu {
+        @apply flex flex-col list-none m-0 p-0;
+    }
+
+    .dropdown-item {
+        @apply flex items-center gap-2 w-full px-3 py-2 text-sm text-neutral-on-strong no-underline border-0 bg-transparent cursor-pointer select-none transition-colors duration-150 hover:bg-neutral-surface-2 focus-visible:outline-none focus-visible:bg-neutral-surface-2;
+
+        border-radius: var(--radius-box);
+
+        &.active,
+        &[aria-selected="true"] {
+            @apply bg-primary-solid/10 text-primary-solid;
+        }
+
+        &[disabled],
+        &[aria-disabled="true"] {
+            @apply opacity-50 cursor-not-allowed pointer-events-none;
+        }
+
+        svg {
+            @apply size-4 opacity-70;
+        }
+    }
+
+    .dropdown-item-shortcut {
+        @apply ml-auto text-xs text-neutral-on-light;
+    }
+
+    .dropdown-separator {
+        @apply my-1.5 -mx-1.5 h-px bg-neutral-surface-3;
+    }
+
+    .dropdown-label {
+        @apply px-3 py-1.5 text-xs font-medium text-neutral-on-light uppercase tracking-wider;
+    }
+}
