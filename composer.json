@@ -17,20 +17,10 @@
         "issues": "https://github.com/Digitale-Dinge/contao-kiss/issues",
         "source": "https://github.com/Digitale-Dinge/contao-kiss"
     },
-    "repositories": {
-        "digitaledinge/contao-company": {
-            "type": "git",
-            "url": "https://github.com/digitale-dinge/contao-company.git"
-        },
-        "digitaledinge/contao-grid-ratio-widget": {
-            "type": "git",
-            "url": "https://github.com/Digitale-Dinge/contao-grid-ratio-widget.git"
-        }
-    },
     "require": {
         "php": "^8.4",
         "contao/core-bundle": "^5.7 || ^6.0",
-        "digitaledinge/contao-company": "@dev",
+        "digitaledinge/contao-company": "0.1.*",
         "digitaledinge/contao-grid-ratio-widget": "^1.0",
         "doctrine/dbal": "^3.7 || ^4.3",
         "lukasbableck/contao-svg-icon-picker-bundle": "^1.2",
