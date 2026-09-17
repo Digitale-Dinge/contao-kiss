@@ -13,9 +13,9 @@ use Contao\CoreBundle\InsertTag\Resolver\BlockInsertTagResolverNestedResolvedInt
 use Twig\Environment;
 
 #[AsBlockInsertTag('sup', endTag: 'endsup')]
-final class SupBlockInsertTag implements BlockInsertTagResolverNestedResolvedInterface
+final readonly class SupBlockInsertTag implements BlockInsertTagResolverNestedResolvedInterface
 {
-    public function __construct(private readonly Environment $twig)
+    public function __construct(private Environment $twig)
     {}
 
     public function __invoke(ResolvedInsertTag $insertTag, ParsedSequence $wrappedContent): ParsedSequence

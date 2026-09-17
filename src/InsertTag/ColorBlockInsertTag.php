@@ -13,9 +13,9 @@ use Contao\CoreBundle\InsertTag\Resolver\BlockInsertTagResolverNestedResolvedInt
 use Twig\Environment;
 
 #[AsBlockInsertTag('color', endTag: 'endcolor')]
-final class ColorBlockInsertTag implements BlockInsertTagResolverNestedResolvedInterface
+final readonly class ColorBlockInsertTag implements BlockInsertTagResolverNestedResolvedInterface
 {
-    public function __construct(private readonly Environment $twig)
+    public function __construct(private Environment $twig)
     {
     }
 
@@ -36,7 +36,6 @@ final class ColorBlockInsertTag implements BlockInsertTagResolverNestedResolvedI
             'content' => $wrappedContent->serialize(),
         ]);
 
-        // Return the HTML as an explicit "html" result. The headline renders via
         return new ParsedSequence([new InsertTagResult($html, OutputType::html)]);
     }
 }

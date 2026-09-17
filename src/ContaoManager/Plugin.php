@@ -17,7 +17,7 @@ class Plugin implements BundlePluginInterface
     public function getBundles(ParserInterface $parser): array
     {
         return [
-            (new BundleConfig(DigitaleDingeContaoKissBundle::class))
+            new BundleConfig(DigitaleDingeContaoKissBundle::class)
                 ->setLoadAfter([
                     ContaoCoreBundle::class,
                     DigitaleDingeCompanyBundle::class,
