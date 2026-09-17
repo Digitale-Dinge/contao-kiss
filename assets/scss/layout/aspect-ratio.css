@@ -1,9 +1,8 @@
 /**
- * KISS Layout Utilities (V1.0)
+ * KISS Layout Utilities
  *
  * Contao-specific responsive system
  */
-
 @layer components {
     .audio_container audio {
         @apply max-w-full;
@@ -17,11 +16,11 @@
         @apply relative;
 
         iframe {
-            @apply absolute size-full inset-[0];
+            @apply absolute size-full inset-0;
         }
 
         :is(picture, img) {
-            @apply block object-cover h-full
+            @apply block object-cover h-full;
         }
     }
 

@@ -1,7 +1,9 @@
-// KISS Navigation Overrides
-// Override Contao navigation CSS variables with theme colors
-// NOT in @layer so it can override Contao's unlayered CSS
-
+/**
+ *  KISS Navigation Overrides
+ *
+ *  Override Contao navigation CSS variables with theme colors
+ *  NOT in @layer so it can override Contao's unlayered CSS
+*/
 :root {
     /* Navigation colors */
     --nav-color: var(--color-primary-solid);
