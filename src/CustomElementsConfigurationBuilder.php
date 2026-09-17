@@ -676,8 +676,8 @@ final class CustomElementsConfigurationBuilder
                 'ctaColor' => $GLOBALS['TL_DCA']['tl_content']['fields']['ctaColor'],
                 'ctaSize'  => $GLOBALS['TL_DCA']['tl_content']['fields']['ctaSize'],
                 'url'      => $GLOBALS['TL_DCA']['tl_content']['fields']['url'],
-                'target'   => $GLOBALS['TL_DCA']['tl_content']['fields']['target'],
-                'rel'      => $GLOBALS['TL_DCA']['tl_content']['fields']['rel'],
+                'target'   => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['target'], ['eval' => ['tl_class' => 'w25']]),
+                'rel'      => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['rel'], ['eval' => ['tl_class' => 'w25']]),
             ],
             'eval' => [
                 'tl_class' => 'w100 clr call_to_action_widget',
