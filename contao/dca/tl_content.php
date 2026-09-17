@@ -367,7 +367,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['responsiveVideo'] = [
                 'fieldType' => 'radio',
                 'filesOnly' => true,
                 'extensions' => 'mp4,webm',
-                // ToDo: Check - see contao/contao#10175
+                // See contao/contao#10175
                 'binary' => false,
             ],
         ],
@@ -403,9 +403,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['iconPosition'] = [
 $GLOBALS['TL_DCA']['tl_content']['fields']['text']['eval']['tl_class'] = 'long clr';
 $GLOBALS['TL_DCA']['tl_content']['fields']['optionalText']['eval']['tl_class'] = 'long clr';
 $GLOBALS['TL_DCA']['tl_content']['fields']['useImage']['eval']['tl_class'] = 'long clr';
-
-/* HTML in headlines */
-$GLOBALS['TL_DCA']['tl_content']['fields']['headline']['eval']['allowHtml'] = true;
 
 PaletteManipulator::create()
     ->addField('callToAction', 'text_legend', PaletteManipulator::POSITION_APPEND)
