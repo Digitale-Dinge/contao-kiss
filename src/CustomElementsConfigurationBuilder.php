@@ -185,31 +185,21 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
-    public function addDependsOnField(string $key, array $options = [], array $eval = [], array|null $dependsOn = null): self
+    /**
+     * @throws \Exception
+     */
+    public function addSelectField(string $key, array $options, array $eval = [], array|null $dependsOn = null): self
     {
+        if ([] === $options) {
+            throw new \Exception(sprintf('%s() requires at least one option.', __FUNCTION__));
+        }
+
         $field = [
             'label' => [
                 $this->translator->trans("rsce.field.$key.label", [], 'rsce'),
                 $this->translator->trans("rsce.field.$key.description", [], 'rsce'),
             ],
         ];
-
-        if (null !== $dependsOn && array_is_list($dependsOn)) {
-            $dependsOn = [
-                'field' => $dependsOn[0],
-                'value' => $dependsOn[1] ?? '1',
-            ];
-        }
-
-        if ([] === $options) {
-            $field['inputType'] = 'checkbox';
-
-            if (null !== $dependsOn) {
-                $field['dependsOn'] = $dependsOn;
-            }
-
-            return $this->addField($key, $field, $eval);
-        }
 
         $blankOption = false;
 
@@ -248,11 +238,47 @@ final class CustomElementsConfigurationBuilder
         $field['options'] = $options;
         $field['eval'] = $eval;
 
+        $dependsOn = $this->normalizeDependsOn($dependsOn);
+
         if (null !== $dependsOn) {
             $field['dependsOn'] = $dependsOn;
         }
 
         return $this->addField($key, $field);
+    }
+
+    public function addCheckboxField(string $key, array $eval = [], array|null $dependsOn = null): self
+    {
+        $field = [
+            'label' => [
+                $this->translator->trans("rsce.field.$key.label", [], 'rsce'),
+                $this->translator->trans("rsce.field.$key.description", [], 'rsce'),
+            ],
+            'inputType' => 'checkbox',
+        ];
+
+        $dependsOn = $this->normalizeDependsOn($dependsOn);
+
+        if (null !== $dependsOn) {
+            $field['dependsOn'] = $dependsOn;
+        }
+
+        return $this->addField($key, $field, $eval);
+    }
+
+    /**
+     * @deprecated use addSelectField() or addCheckboxField() instead
+     *
+     * @throws \Exception
+     */
+    public function addDependsOnField(string $key, array $options = [], array $eval = [], array|null $dependsOn = null): self
+    {
+        trigger_deprecation('digitaledinge/contao-kiss', '0.6', 'Using "%s()" is deprecated and will no longer work. Use addSelectField() or addCheckboxField() instead.', __METHOD__);
+
+        return [] === $options
+            ? $this->addCheckboxField($key, $eval, $dependsOn)
+            : $this->addSelectField($key, $options, $eval, $dependsOn)
+        ;
     }
 
     public function addHeadlineField(array $eval = []): self
@@ -615,6 +641,18 @@ final class CustomElementsConfigurationBuilder
         }
 
         return $translated;
+    }
+
+    private function normalizeDependsOn(array|null $dependsOn): array|null
+    {
+        if (null === $dependsOn || !array_is_list($dependsOn)) {
+            return $dependsOn;
+        }
+
+        return [
+            'field' => $dependsOn[0],
+            'value' => $dependsOn[1] ?? '1',
+        ];
     }
 
     private function generateListCtaField(array $eval = [], array $options = []): array
