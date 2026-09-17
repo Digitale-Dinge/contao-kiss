@@ -1,5 +1,5 @@
 @layer base {
-    .headline-content {
+    .headline-neutral {
         :is(.topline, .headline) {
             @apply text-neutral-on-strong;
         }
