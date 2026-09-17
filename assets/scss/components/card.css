@@ -1,5 +1,5 @@
 /**
- * KISS Card Component (V1.0)
+ * KISS Card Component
  *
  * Base: .card
  * Sections: card-{body|header|footer|title|actions|alert}
@@ -9,7 +9,6 @@
  * Layouts: {card|layout}-{reverse|side|side-reverse|media-background}
  * Interactive: card-{hover|grow|link}
  */
-
 @layer components {
     .card {
         --card-bg: var(--kiss-comp-card-color-background, var(--kiss-sys-color-neutral-surface-2));
