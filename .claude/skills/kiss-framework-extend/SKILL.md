@@ -50,10 +50,10 @@ Code comments are the second most common review complaint after scope creep. Lin
 
 ```php
 // Alert styles per _alert.scss: the shared soft/outline, extended with an alert-only dashed
-->addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
+->addSelectField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
 ```
 
-Every one of them says what the next line already says. A programmer reads `addDependsOnField('variant', [...])` faster than the sentence describing it. Rules:
+Every one of them says what the next line already says. A programmer reads `addSelectField('variant', [...])` faster than the sentence describing it. Rules:
 
 - **Default is no comment.** The framework's naming conventions carry the meaning; a comment that explains a well-named line is noise.
 - **Never comment the what**: not what a call does, not which file a class name belongs to, not that a value "maps 1:1", not how the size modifiers "redefine these and nothing else".
@@ -204,16 +204,16 @@ The component's field names are therefore **identical to the field names in `rsc
 Before every hand-written options array, every translation line in PHP and every new Twig variable: **something global probably exists already.**
 
 - **Style values come from the global enums** under `src/Styles/Option/` (`Modifier\Size`, `Modifier\Variant`, `Color\Color` …) — never from a component-specific parallel enum, never from a list of strings in the config file.
-- **Option lists are built by the builder**, not by the config file. `->addStyleOptionsField('<field>', <Enum>::class)` generates select, options and labels from the enum (internally `TranslatableEnumTrait::getTranslatedOptions()`). For options without an enum: `->addDependsOnField('<field>', ['', 'a', 'b'])` — the leading `''` creates the blank option; labels come from `rsce.field.<field>.options.*`.
+- **Option lists are built by the builder**, not by the config file. `->addStyleOptionsField('<field>', <Enum>::class)` generates select, options and labels from the enum (internally `TranslatableEnumTrait::getTranslatedOptions()`). For options without an enum: `->addSelectField('<field>', ['', 'a', 'b'])` — the leading `''` creates the blank option; labels come from `rsce.field.<field>.options.*`.
 - **Never plain-text labels in the config file.** `'dashed' => 'Dashed'` belongs in `translations/{de,en}/rsce.*.yaml`, not in PHP. Same for element label and description: `->create('<name>', …)` in string form, texts under `rsce.<name>.label`/`.description`.
 - If a builder method is missing for a recurring case, **add it to the builder** instead of spelling it out in the config file — that is the place where it reaches all elements.
 
 ### Local special values belong in `_config.php`, not in the enum
 
-If a component needs its own values besides the global ones (e.g. badge knows `soft`/`outline` from `Modifier\Variant`, plus a badge-only `dashed`), that is assembled **only in `rsce_<name>_config.php`** — with `addDependsOnField()` and the labels in `rsce.*.yaml`:
+If a component needs its own values besides the global ones (e.g. badge knows `soft`/`outline` from `Modifier\Variant`, plus a badge-only `dashed`), that is assembled **only in `rsce_<name>_config.php`** — with `addSelectField()` and the labels in `rsce.*.yaml`:
 
 ```php
-->addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
+->addSelectField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
 ```
 
 The global enum is **not** extended for this: a case that only one component can render becomes a dead option in every other select. Conversely: if the value is conceptually usable everywhere, it belongs in the global enum and not in the config file. The deciding question is not "where is it more convenient" but "could a second component render this value?"
@@ -241,7 +241,7 @@ Per size variant (`badge-xs`, `badge-xl` …) only the font size is then set —
 
 New content elements are always built as RSCE (`madeyourday/contao-rocksolid-custom-elements`), not as a custom DCA/model class. An element consists of exactly two same-named files in `contao/templates/` plus translations:
 
-1. **Inventory first**: read the existing `rsce_*_config.php` with the most similar need (list vs. single element, media types) as the template. Check whether `CustomElementsConfigurationBuilder` (`src/CustomElementsConfigurationBuilder.php`) already has a helper for the required field (`addGroup`, `addImageField`, `addImageSizeField`, `addRichTextField`, `addBackgroundField`, `addHeadlineField`, `addIconField`, `addCallToActionField`, `addStyleOptionsField`, `addDependsOnField`, `addCardStyleFields`, …). New `addField()` calls only for truly element-specific fields — for anything reusable add a new helper to the builder instead of an inline duplicate. An `addField()` always uses `'label' => true` (the label resolves from `rsce.<name>.field.<field>.*` / `rsce.field.<field>.*`) plus `inputType` and `eval` (`tl_class`, `maxlength`, `mandatory` …) — never a label string in PHP.
+1. **Inventory first**: read the existing `rsce_*_config.php` with the most similar need (list vs. single element, media types) as the template. Check whether `CustomElementsConfigurationBuilder` (`src/CustomElementsConfigurationBuilder.php`) already has a helper for the required field (`addGroup`, `addImageField`, `addImageSizeField`, `addRichTextField`, `addBackgroundField`, `addHeadlineField`, `addIconField`, `addCallToActionField`, `addStyleOptionsField`, `addSelectField`, `addCardStyleFields`, …). New `addField()` calls only for truly element-specific fields — for anything reusable add a new helper to the builder instead of an inline duplicate. An `addField()` always uses `'label' => true` (the label resolves from `rsce.<name>.field.<field>.*` / `rsce.field.<field>.*`) plus `inputType` and `eval` (`tl_class`, `maxlength`, `mandatory` …) — never a label string in PHP.
 2. **Config file** `rsce_<name>_config.php`: fetches `kiss.rsce_config.builder` from the container and starts with `->create('<name>', '<category>', ['types' => ['content'], 'standardFields' => [...]])`. `<name>` determines the content element type in the backend via RockSolid naming convention and may be hyphenated (`hero-detail` → `rsce_hero-detail_config.php` + `rsce_hero-detail.html.twig`). `<category>` (second parameter) follows existing elements (`media`, `texts`, …); no new category without asking. For list elements wrap item fields in `->startList()/->endList()`; append `->addGridGroup()` only when a grid layout is needed.
 3. **Twig template** `rsce_<name>.html.twig`: always extends `@Contao/content_element/_base.html.twig`. For markup **do not write a new standalone structure** — import existing components from `kiss_component/media/` or `kiss_component/action/` via `{% use %}` or embed them via `{{ include() }}` (see `rsce_icon.html.twig`, `rsce_media_text.html.twig`). Set style classes as everywhere else via `styles.*()` with the context prefix in the template — RSCE templates are not a special case of the style system.
 4. **`data.<field>` vs. top-level variable — check before writing the template:** what decides is *where the builder stores the value*, not whether a column of that name exists in `tl_content.php`. Values stored in a real column arrive as `data.<field>`: the `standardFields` (`cssID`, …), the style options in `kiss_styles` (`data.elementVariant`, `data.backgroundColor`, `data.cardLayout`, `data.paddingTop` …) and helpers that reuse a standard column (`addBackgroundField()` → `data.backgroundColor`). Values the config declares as RSCE fields are stored in `rsce_data` and arrive as top-level variables without `data.` — **even when a same-named `tl_content` column exists**: `addImageField()` yields `singleSRC` / `addImage`, `addRichTextField()` yields `text`, a custom `addField('text', …)` yields `text`. `headline` is special: the core content-element context provides it top-level as `{text, tagName}` (`headline.text`). Compare `rsce_hero-detail.html.twig` (`singleSRC`, `addImage`, `headline.text` top-level; `data.backgroundColor`, `data.paddingTop` for columns) with `rsce_media_text.html.twig` (`data.elementVariant`). This cannot be guessed — when in doubt, open the builder helper and check whether it declares a standard field or its own field.
@@ -261,5 +261,5 @@ RSCE-specific self-check: was an existing media/action component reused via `{% 
 - Are card/media classes added inside the existing `show_as_card` branch of the wrapper, not in a new `attributes` block?
 - Does every new standalone component in `kiss_component/` have a docblock with `@param` + `Usage`, one root block, `item|default(_context)`, `attrs()` instead of string classes and `_icon_include.html.twig` instead of `<i class>`?
 - Does the RSCE include the component via `{% use %}` + `{{ block('…') }}` without passing variables — and are the component fields named exactly like the config fields?
-- Does the config file still contain a plain-text label, a `foreach` over an enum or a `$GLOBALS['TL_LANG']` reference instead of `addStyleOptionsField()` / `addDependsOnField()` + `rsce.*.yaml`?
+- Does the config file still contain a plain-text label, a `foreach` over an enum or a `$GLOBALS['TL_LANG']` reference instead of `addStyleOptionsField()` / `addSelectField()` + `rsce.*.yaml`?
 - Return Could and Won't items to the user as proposals at the end instead of implementing them. Every open question that was not answered stays a question, not an assumption.

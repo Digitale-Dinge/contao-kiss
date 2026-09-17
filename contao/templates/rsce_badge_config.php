@@ -15,11 +15,11 @@ return $configBuilder
     ])
 
     ->addStyleOptionsField('badgeSize', Size::class)
-    ->addDependsOnField('badgeShape', ['', 'pill', 'square'], ['tl_class' => 'w25'])
+    ->addSelectField('badgeShape', ['', 'pill', 'square'], ['tl_class' => 'w25'])
 
     ->startList()
         ->addStyleOptionsField('color', Color::class)
-        ->addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
+        ->addSelectField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
         ->addIconField()
         ->addField('text', [
             'label' => true,

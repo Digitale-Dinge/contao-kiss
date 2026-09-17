@@ -14,8 +14,8 @@ return $configBuilder
 
     ->addGroup('appearance')
     ->addTextAlignmentField(eval: ['tl_class' => 'w25 clr'])
-    ->addDependsOnField('addMedia')
-    ->addDependsOnField('mediaType', ['image', 'icon', 'video'], ['tl_class' => 'w25'], dependsOn: ['addMedia'])
+    ->addCheckboxField('addMedia')
+    ->addSelectField('mediaType', ['image', 'icon', 'video'], ['tl_class' => 'w25'], dependsOn: ['addMedia'])
     ->addImageSizeField(dependsOn: 'mediaType')
     ->addElementLayoutField(dependsOn: 'addMedia')
 

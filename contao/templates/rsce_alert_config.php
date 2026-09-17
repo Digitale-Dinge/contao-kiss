@@ -15,7 +15,7 @@ return $configBuilder
     ])
 
     ->addStyleOptionsField('color', Color::class)
-    ->addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
+    ->addSelectField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
     ->addStyleOptionsField('alertSize', Size::class)
     ->addIconField()
     ->addField('title', [

@@ -243,11 +243,11 @@ The reference structure for components that do **not** inherit from the media_te
 ->create('badge', 'texts', ['types' => ['content'], 'standardFields' => ['cssID']])
 
 ->addStyleOptionsField('badgeSize', Size::class)
-->addDependsOnField('badgeShape', ['', 'pill', 'square'], ['tl_class' => 'w25'])
+->addSelectField('badgeShape', ['', 'pill', 'square'], ['tl_class' => 'w25'])
 
 ->startList()
     ->addStyleOptionsField('color', Color::class)
-    ->addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
+    ->addSelectField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
     ->addIconField()
 ->endList()
 ```
@@ -260,7 +260,7 @@ Why this is good:
 - **Global enums via the builder:** `addStyleOptionsField()` pulls options and labels from `Modifier\Size` and `Color\Color`. No `foreach (Size::cases())` in the config file, no plain-text labels in PHP.
 - **Local special value `dashed` only in the config:** `Modifier\Variant` stays untouched because no other element can render `badge-dashed`. Label lives in `rsce.field.variant.options.dashed`.
 - **Docblock as contract**, icons via `_icon_include.html.twig`, text via `|insert_tag` — no `<i class="…">`, no `|raw`.
-- **Not a single comment in component, RSCE template, config or CSS.** `addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'])` does not need a line above it saying which of those are shared and which is badge-only; `svg { width: 1em }` does not need to be told it scales with the font size. The docblock is the only comment the component carries.
+- **Not a single comment in component, RSCE template, config or CSS.** `addSelectField('variant', ['', 'soft', 'outline', 'dashed'])` does not need a line above it saying which of those are shared and which is badge-only; `svg { width: 1em }` does not need to be told it scales with the font size. The docblock is the only comment the component carries.
 
 In CSS (`assets/css/components/_badge.css`) icons grow with the badge size because they take their size from the font size:
 
@@ -427,7 +427,7 @@ Three convention breaks at once: the enum loop duplicates `TranslatableEnumTrait
 ```php
 ->create('badge', 'texts', […])
 ->addStyleOptionsField('badgeSize', Size::class)
-->addDependsOnField('badgeShape', ['', 'pill', 'square'], ['tl_class' => 'w25'])
+->addSelectField('badgeShape', ['', 'pill', 'square'], ['tl_class' => 'w25'])
 ```
 
 Labels and options land in **both** YAML files under `rsce.field.badgeShape.label`/`.description`/`.options.*` and `rsce.badge.label`/`.description`.
@@ -455,7 +455,7 @@ Detection question: "Does my config file contain a human-readable sentence, a `f
 
 ```php
 // Alert styles per _alert.scss: the shared soft/outline, extended with an alert-only dashed
-->addDependsOnField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
+->addSelectField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
 ```
 
 Each comment narrates the line under it: the `addClass` says it maps the variant, the method name and array say which values exist, and the SCSS header stops being a header the moment ": the size modifiers below redefine these and nothing else" is appended to it. The Twig one was additionally written in German. Comments like these cost the reviewer a read, rot the moment the line changes and mark the diff as generated.
