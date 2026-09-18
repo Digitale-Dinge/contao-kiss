@@ -1,5 +1,5 @@
 /**
- * KISS Breadcrumb Component (V1.0)
+ * KISS Breadcrumb Component
  *
  * A responsive breadcrumb navigation with threshold-based collapsing.
  * Uses popover component for the dropdown menu.
@@ -13,13 +13,12 @@
  *   data-breadcrumb-max-items-value="4"   - Collapse if more than N collapsible items (default: 4)
  *   data-breadcrumb-breakpoint-value="640" - Force collapse below this viewport width (default: 640px)
  */
-
 @layer components {
     .breadcrumb,
     .mod_breadcrumb {
-        --breadcrumb-color: var(--color-primary-solid);
-        --breadcrumb-separator-mx: 0.5rem;
-        --breadcrumb-separator-icon: 0.75rem;
+        --breadcrumb-color: var(--kiss-sys-color-brand-primary-solid);
+        --breadcrumb-separator-mx: .5rem;
+        --breadcrumb-separator-icon: .75rem;
         --breadcrumb-btn-icon: 1rem;
 
         @apply flex items-center flex-wrap text-sm;
@@ -33,7 +32,9 @@
         }
 
         a {
-            @apply text-neutral-on-medium no-underline transition-colors;
+            @apply no-underline transition-colors;
+
+            color: var(--kiss-sys-color-neutral-on-medium);
 
             &:hover {
                 color: var(--breadcrumb-color);
@@ -41,7 +42,9 @@
         }
 
         .breadcrumb-separator {
-            @apply text-neutral-on-light select-none flex items-center;
+            @apply select-none flex items-center;
+
+            color: var(--kiss-sys-color-neutral-on-light);
 
             margin-inline: var(--breadcrumb-separator-mx);
 
@@ -53,7 +56,7 @@
 
         li[aria-current="page"] a,
         li.active a {
-            @apply text-neutral-on-strong;
+            color: var(--kiss-sys-color-neutral-on-strong);
         }
 
         .breadcrumb-ellipsis {
@@ -61,7 +64,9 @@
         }
 
         .breadcrumb-ellipsis-btn {
-            @apply inline-flex items-center justify-center px-1 text-neutral-on-medium bg-transparent cursor-pointer border-0 leading-none transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:rounded;
+            @apply inline-flex items-center justify-center px-1 bg-transparent cursor-pointer border-0 leading-none transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:rounded;
+
+            color: var(--kiss-sys-color-neutral-on-medium);
 
             &:focus-visible {
                 --tw-ring-color: color-mix(in oklch, var(--breadcrumb-color) 50%, transparent);
@@ -84,34 +89,34 @@
 
     /* Colors */
     .breadcrumb-primary {
-        --breadcrumb-color: var(--color-primary-solid);
+        --breadcrumb-color: var(--kiss-sys-color-brand-primary-solid);
     }
 
     .breadcrumb-secondary {
-        --breadcrumb-color: var(--color-secondary-solid);
+        --breadcrumb-color: var(--kiss-sys-color-brand-secondary-solid);
     }
 
     .breadcrumb-tertiary {
-        --breadcrumb-color: var(--color-tertiary-solid);
+        --breadcrumb-color: var(--kiss-sys-color-brand-tertiary-solid);
     }
 
     .breadcrumb-success {
-        --breadcrumb-color: var(--color-status-success-solid);
+        --breadcrumb-color: var(--kiss-sys-color-status-success-solid);
     }
 
     .breadcrumb-warning {
-        --breadcrumb-color: var(--color-status-warning-solid);
+        --breadcrumb-color: var(--kiss-sys-color-status-warning-solid);
     }
 
     .breadcrumb-error {
-        --breadcrumb-color: var(--color-status-error-solid);
+        --breadcrumb-color: var(--kiss-sys-color-status-error-solid);
     }
 
     /* Sizes */
     .breadcrumb-xs {
-        --breadcrumb-separator-mx: 0.25rem;
-        --breadcrumb-separator-icon: 0.625rem;
-        --breadcrumb-btn-icon: 0.75rem;
+        --breadcrumb-separator-mx: .25rem;
+        --breadcrumb-separator-icon: .625rem;
+        --breadcrumb-btn-icon: .75rem;
 
         @apply text-xs;
 
@@ -121,9 +126,9 @@
     }
 
     .breadcrumb-sm {
-        --breadcrumb-separator-mx: 0.375rem;
-        --breadcrumb-separator-icon: 0.625rem;
-        --breadcrumb-btn-icon: 0.875rem;
+        --breadcrumb-separator-mx: .375rem;
+        --breadcrumb-separator-icon: .625rem;
+        --breadcrumb-btn-icon: .875rem;
 
         @apply text-sm;
 
@@ -135,7 +140,7 @@
     /* Medium is the default */
 
     .breadcrumb-lg {
-        --breadcrumb-separator-mx: 0.625rem;
+        --breadcrumb-separator-mx: .625rem;
         --breadcrumb-separator-icon: 1rem;
         --breadcrumb-btn-icon: 1.25rem;
 
@@ -147,7 +152,7 @@
     }
 
     .breadcrumb-xl {
-        --breadcrumb-separator-mx: 0.75rem;
+        --breadcrumb-separator-mx: .75rem;
         --breadcrumb-separator-icon: 1.25rem;
         --breadcrumb-btn-icon: 1.5rem;
 
