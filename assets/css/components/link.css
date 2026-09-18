@@ -12,9 +12,10 @@
 @layer components {
     .link {
         --link-color: var(--kiss-comp-link-neutral-color-text-default, var(--kiss-sys-color-neutral-on-strong));
-        --link-color-hover: var(--kiss-comp-link-neutral-color-text-hover, var(--color-neutral-on-light));
-        --link-gap: var(--kiss-comp-link-md-spacing-gap, 0.25rem);
+        --link-color-hover: var(--kiss-comp-link-neutral-color-text-hover, var(--kiss-sys-color-neutral-on-light));
+        --link-gap: var(--kiss-comp-link-md-spacing-gap, .25rem);
         --link-font: var(--kiss-comp-link-md-font-inline, var(--text-base, 1rem));
+        --link-icon: var(--kiss-comp-link-md-sizing-icon, 1rem);
 
         @apply inline-flex items-center leading-normal underline decoration-2 cursor-pointer transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
 
@@ -33,62 +34,69 @@
         .icon,
         [class^="icon-"],
         [class*=" icon-"] {
-            @apply shrink-0 w-4 h-4;
+            @apply shrink-0;
+
+            width: var(--link-icon);
+            height: var(--link-icon);
         }
     }
 
     /* Colors */
     .link-primary {
-        --link-color: var(--kiss-comp-link-primary-color-text-default, var(--color-primary-solid));
-        --link-color-hover: var(--kiss-comp-link-primary-color-text-hover, var(--color-primary-hover-medium));
+        --link-color: var(--kiss-comp-link-primary-color-text-default, var(--kiss-sys-color-brand-primary-solid));
+        --link-color-hover: var(--kiss-comp-link-primary-color-text-hover, var(--kiss-sys-color-brand-primary-hover-medium));
     }
 
     .link-secondary {
-        --link-color: var(--kiss-comp-link-secondary-color-text-default, var(--color-secondary-solid));
-        --link-color-hover: var(--kiss-comp-link-secondary-color-text-hover, var(--color-secondary-hover-medium));
+        --link-color: var(--kiss-comp-link-secondary-color-text-default, var(--kiss-sys-color-brand-secondary-solid));
+        --link-color-hover: var(--kiss-comp-link-secondary-color-text-hover, var(--kiss-sys-color-brand-secondary-hover-medium));
     }
 
     .link-tertiary {
-        --link-color: var(--kiss-comp-link-tertiary-color-text-default, var(--color-tertiary-solid));
-        --link-color-hover: var(--kiss-comp-link-tertiary-color-text-hover, var(--color-tertiary-hover-medium));
+        --link-color: var(--kiss-comp-link-tertiary-color-text-default, var(--kiss-sys-color-brand-tertiary-solid));
+        --link-color-hover: var(--kiss-comp-link-tertiary-color-text-hover, var(--kiss-sys-color-brand-tertiary-hover-medium));
     }
 
     .link-success {
-        --link-color: var(--color-status-success-solid);
-        --link-color-hover: var(--color-status-success-hover);
+        --link-color: var(--kiss-sys-color-status-success-solid);
+        --link-color-hover: var(--kiss-sys-color-status-success-hover);
     }
 
     .link-warning {
-        --link-color: var(--color-status-warning-solid);
-        --link-color-hover: var(--color-status-warning-hover);
+        --link-color: var(--kiss-sys-color-status-warning-solid);
+        --link-color-hover: var(--kiss-sys-color-status-warning-hover);
     }
 
     .link-error {
-        --link-color: var(--color-status-error-solid);
-        --link-color-hover: var(--color-status-error-hover);
+        --link-color: var(--kiss-sys-color-status-error-solid);
+        --link-color-hover: var(--kiss-sys-color-status-error-hover);
     }
 
     /* Sizes */
     .link-xs {
-        --link-gap: var(--kiss-comp-link-xs-spacing-gap, 0.125rem);
-        --link-font: var(--kiss-comp-link-xs-font-inline, var(--text-xs, 0.75rem));
+        --link-gap: var(--kiss-comp-link-xs-spacing-gap, .125rem);
+        --link-font: var(--kiss-comp-link-xs-font-inline, var(--text-xs, .75rem));
+        --link-icon: var(--kiss-comp-link-xs-sizing-icon, .75rem);
     }
 
     .link-sm {
-        --link-gap: var(--kiss-comp-link-sm-spacing-gap, 0.25rem);
-        --link-font: var(--kiss-comp-link-sm-font-inline, var(--text-sm, 0.875rem));
+        --link-gap: var(--kiss-comp-link-sm-spacing-gap, .25rem);
+        --link-font: var(--kiss-comp-link-sm-font-inline, var(--text-sm, .875rem));
+        --link-icon: var(--kiss-comp-link-sm-sizing-icon, .75rem);
     }
 
     /* Medium is the default */
 
     .link-lg {
-        --link-gap: var(--kiss-comp-link-lg-spacing-gap, 0.375rem);
+        --link-gap: var(--kiss-comp-link-lg-spacing-gap, .375rem);
         --link-font: var(--kiss-comp-link-lg-font-inline, var(--text-lg, 1.125rem));
+        --link-icon: var(--kiss-comp-link-lg-sizing-icon, 1.5rem);
     }
 
     .link-xl {
-        --link-gap: var(--kiss-comp-link-xl-spacing-gap, 0.5rem);
+        --link-gap: var(--kiss-comp-link-xl-spacing-gap, .5rem);
         --link-font: var(--kiss-comp-link-xl-font-inline, var(--text-xl, 1.25rem));
+        --link-icon: var(--kiss-comp-link-xl-sizing-icon, 1.5rem);
     }
 
     /* Variants */

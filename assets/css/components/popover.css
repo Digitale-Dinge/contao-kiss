@@ -22,7 +22,7 @@
         --popover-bg: var(--kiss-sys-color-neutral-surface-1);
         --popover-fg: var(--kiss-sys-color-neutral-on-strong);
         --popover-border: var(--kiss-sys-color-neutral-surface-3);
-        --popover-radius: var(--radius-box, 0.5rem);
+        --popover-radius: var(--radius-box, .5rem);
         --popover-border-width: var(--border-width-thin, 1px);
         --popover-shadow: var(--shadow-xl);
         --popover-px: 1rem;
@@ -85,17 +85,17 @@
 
     /* Sizes */
     .popover-xs {
-        --popover-px: 0.5rem;
-        --popover-py: 0.5rem;
+        --popover-px: .5rem;
+        --popover-py: .5rem;
         --popover-min-w: 6rem;
-        --popover-text: var(--text-xs, 0.75rem);
+        --popover-text: var(--text-xs, .75rem);
     }
 
     .popover-sm {
-        --popover-px: 0.75rem;
-        --popover-py: 0.75rem;
+        --popover-px: .75rem;
+        --popover-py: .75rem;
         --popover-min-w: 7rem;
-        --popover-text: var(--text-sm, 0.875rem);
+        --popover-text: var(--text-sm, .875rem);
     }
 
     /* Medium is the default */
@@ -138,8 +138,8 @@
 
     /* Presets */
     .popover-dropdown {
-        --popover-px: 0.375rem;
-        --popover-py: 0.375rem;
+        --popover-px: .375rem;
+        --popover-py: .375rem;
         --popover-min-w: 10rem;
     }
 
@@ -147,28 +147,28 @@
         --popover-bg: var(--kiss-sys-color-neutral-surface-2);
         --popover-fg: var(--kiss-sys-color-neutral-on-strong);
         --popover-border: var(--kiss-sys-color-neutral-surface-2);
-        --popover-px: 0.75rem;
-        --popover-py: 0.5rem;
+        --popover-px: .75rem;
+        --popover-py: .5rem;
         --popover-min-w: 0;
-        --popover-text: var(--text-xs, 0.75rem);
+        --popover-text: var(--text-xs, .75rem);
     }
 
     .popover-tooltip.popover-xs {
-        --popover-px: 0.5rem;
-        --popover-py: 0.375rem;
-        --popover-text: var(--text-xs, 0.75rem);
+        --popover-px: .5rem;
+        --popover-py: .375rem;
+        --popover-text: var(--text-xs, .75rem);
     }
 
     .popover-tooltip.popover-sm {
-        --popover-px: 0.75rem;
-        --popover-py: 0.5rem;
-        --popover-text: var(--text-xs, 0.75rem);
+        --popover-px: .75rem;
+        --popover-py: .5rem;
+        --popover-text: var(--text-xs, .75rem);
     }
 
     .popover-tooltip.popover-lg {
         --popover-px: 1rem;
-        --popover-py: 0.75rem;
-        --popover-text: var(--text-sm, 0.875rem);
+        --popover-py: .75rem;
+        --popover-text: var(--text-sm, .875rem);
     }
 
     .popover-tooltip.popover-xl {
@@ -177,40 +177,53 @@
         --popover-text: var(--text-base, 1rem);
     }
 
-    /* Dropdown menu */
+    /* Dropdown menu items */
     .dropdown-menu {
         @apply flex flex-col list-none m-0 p-0;
     }
 
     .dropdown-item {
-        @apply flex items-center gap-2 w-full px-3 py-2 text-sm text-neutral-on-strong no-underline border-0 bg-transparent cursor-pointer select-none transition-colors duration-150 hover:bg-neutral-surface-2 focus-visible:outline-none focus-visible:bg-neutral-surface-2;
+        @apply flex items-center gap-2 w-full px-3 py-2 text-sm no-underline border-0 bg-transparent cursor-pointer select-none transition-colors duration-150 focus-visible:outline-none;
 
+        color: var(--kiss-sys-color-neutral-on-strong);
         border-radius: var(--radius-box);
 
-        &.active,
-        &[aria-selected="true"] {
-            @apply bg-primary-solid/10 text-primary-solid;
+        &:hover,
+        &:focus-visible {
+            background-color: var(--kiss-sys-color-neutral-surface-2);
         }
+    }
 
-        &[disabled],
-        &[aria-disabled="true"] {
-            @apply opacity-50 cursor-not-allowed pointer-events-none;
-        }
+    .dropdown-item.active,
+    .dropdown-item[aria-selected="true"] {
+        background-color: color-mix(in oklab, var(--kiss-sys-color-brand-primary-solid) 10%, transparent);
+        color: var(--kiss-sys-color-brand-primary-solid);
+    }
 
-        svg {
-            @apply size-4 opacity-70;
-        }
+    .dropdown-item[disabled],
+    .dropdown-item[aria-disabled="true"] {
+        @apply opacity-50 cursor-not-allowed pointer-events-none;
+    }
+
+    .dropdown-item svg {
+        @apply size-4 opacity-70;
     }
 
     .dropdown-item-shortcut {
-        @apply ml-auto text-xs text-neutral-on-light;
+        @apply ml-auto text-xs;
+
+        color: var(--kiss-sys-color-neutral-on-light);
     }
 
     .dropdown-separator {
-        @apply my-1.5 -mx-1.5 h-px bg-neutral-surface-3;
+        @apply my-1.5 -mx-1.5 h-px;
+
+        background-color: var(--kiss-sys-color-neutral-surface-3);
     }
 
     .dropdown-label {
-        @apply px-3 py-1.5 text-xs font-medium text-neutral-on-light uppercase tracking-wider;
+        @apply px-3 py-1.5 text-xs font-medium uppercase tracking-wider;
+
+        color: var(--kiss-sys-color-neutral-on-light);
     }
 }

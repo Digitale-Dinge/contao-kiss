@@ -22,10 +22,10 @@
         --alert-ring: var(--kiss-sys-color-neutral-on-strong);
         --alert-px: var(--kiss-comp-alert-spacing-padding-inline, 1rem);
         --alert-py: var(--kiss-comp-alert-spacing-padding-block, 1rem);
-        --alert-gap: var(--kiss-comp-alert-spacing-gap, 0.75rem);
+        --alert-gap: var(--kiss-comp-alert-spacing-gap, .75rem);
         --alert-text: var(--text-base, 1rem);
         --alert-title-text: var(--alert-text);
-        --alert-description-text: var(--text-sm, 0.875rem);
+        --alert-description-text: var(--text-sm, .875rem);
         --alert-icon-size: 1.25em;
 
         @apply flex items-start transition-all duration-200;
@@ -36,7 +36,7 @@
         border-width: var(--kiss-comp-alert-border-width-default, var(--border-width-thin, 1px));
         border-style: solid;
         border-color: color-mix(in oklch, var(--alert-border) var(--alert-border-opacity), transparent);
-        border-radius: var(--kiss-comp-alert-border-radius-default, var(--radius-box, 0.5rem));
+        border-radius: var(--kiss-comp-alert-border-radius-default, var(--radius-box, .5rem));
         box-shadow: var(--shadow, none);
         background: var(--alert-bg);
         color: var(--alert-fg);
@@ -74,19 +74,19 @@
 
     /* Sizes */
     .alert-xs {
-        --alert-px: 0.625rem;
-        --alert-py: 0.5rem;
-        --alert-gap: 0.5rem;
-        --alert-text: var(--text-xs, 0.75rem);
-        --alert-description-text: var(--text-xs, 0.75rem);
+        --alert-px: .625rem;
+        --alert-py: .5rem;
+        --alert-gap: .5rem;
+        --alert-text: var(--text-xs, .75rem);
+        --alert-description-text: var(--text-xs, .75rem);
     }
 
     .alert-sm {
-        --alert-px: 0.75rem;
-        --alert-py: 0.75rem;
-        --alert-gap: 0.625rem;
-        --alert-text: var(--text-sm, 0.875rem);
-        --alert-description-text: var(--text-xs, 0.75rem);
+        --alert-px: .75rem;
+        --alert-py: .75rem;
+        --alert-gap: .625rem;
+        --alert-text: var(--text-sm, .875rem);
+        --alert-description-text: var(--text-xs, .75rem);
     }
 
     /* Medium is the default */
@@ -109,45 +109,45 @@
 
     /* Colors */
     .alert-primary {
-        --alert-bg: var(--color-primary-solid);
-        --alert-fg: var(--color-primary-on-solid);
-        --alert-border: var(--color-primary-border);
-        --alert-ring: var(--color-primary-solid);
+        --alert-bg: var(--kiss-sys-color-brand-primary-solid);
+        --alert-fg: var(--kiss-sys-color-brand-primary-on-solid);
+        --alert-border: var(--kiss-sys-color-brand-primary-border);
+        --alert-ring: var(--kiss-sys-color-brand-primary-solid);
     }
 
     .alert-secondary {
-        --alert-bg: var(--color-secondary-solid);
-        --alert-fg: var(--color-secondary-on-solid);
-        --alert-border: var(--color-secondary-border);
-        --alert-ring: var(--color-secondary-solid);
+        --alert-bg: var(--kiss-sys-color-brand-secondary-solid);
+        --alert-fg: var(--kiss-sys-color-brand-secondary-on-solid);
+        --alert-border: var(--kiss-sys-color-brand-secondary-border);
+        --alert-ring: var(--kiss-sys-color-brand-secondary-solid);
     }
 
     .alert-tertiary {
-        --alert-bg: var(--color-tertiary-solid);
-        --alert-fg: var(--color-tertiary-on-solid);
-        --alert-border: var(--color-tertiary-border);
-        --alert-ring: var(--color-tertiary-solid);
+        --alert-bg: var(--kiss-sys-color-brand-tertiary-solid);
+        --alert-fg: var(--kiss-sys-color-brand-tertiary-on-solid);
+        --alert-border: var(--kiss-sys-color-brand-tertiary-border);
+        --alert-ring: var(--kiss-sys-color-brand-tertiary-solid);
     }
 
     .alert-success {
-        --alert-bg: var(--color-status-success-solid);
-        --alert-fg: var(--color-status-success-on-solid);
-        --alert-border: var(--color-status-success-border);
-        --alert-ring: var(--color-status-success-solid);
+        --alert-bg: var(--kiss-sys-color-status-success-solid);
+        --alert-fg: var(--kiss-sys-color-status-success-on-solid);
+        --alert-border: var(--kiss-sys-color-status-success-border);
+        --alert-ring: var(--kiss-sys-color-status-success-solid);
     }
 
     .alert-warning {
-        --alert-bg: var(--color-status-warning-solid);
-        --alert-fg: var(--color-status-warning-on-solid);
-        --alert-border: var(--color-status-warning-border);
-        --alert-ring: var(--color-status-warning-solid);
+        --alert-bg: var(--kiss-sys-color-status-warning-solid);
+        --alert-fg: var(--kiss-sys-color-status-warning-on-solid);
+        --alert-border: var(--kiss-sys-color-status-warning-border);
+        --alert-ring: var(--kiss-sys-color-status-warning-solid);
     }
 
     .alert-error {
-        --alert-bg: var(--color-status-error-solid);
-        --alert-fg: var(--color-status-error-on-solid);
-        --alert-border: var(--color-status-error-border);
-        --alert-ring: var(--color-status-error-solid);
+        --alert-bg: var(--kiss-sys-color-status-error-solid);
+        --alert-fg: var(--kiss-sys-color-status-error-on-solid);
+        --alert-border: var(--kiss-sys-color-status-error-border);
+        --alert-ring: var(--kiss-sys-color-status-error-solid);
     }
 
     /* Variants */

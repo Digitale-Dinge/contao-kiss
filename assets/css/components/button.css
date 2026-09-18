@@ -57,61 +57,61 @@
 
     /* Colors */
     .btn-primary {
-        --btn-bg: var(--color-primary-solid);
-        --btn-border: var(--color-primary-solid);
-        --btn-color: var(--color-primary-on-solid);
-        --btn-color-hover: var(--color-primary-on-solid);
-        --btn-content: var(--color-primary-on-solid);
-        --btn-ring: var(--color-primary-solid);
+        --btn-bg: var(--kiss-sys-color-brand-primary-solid);
+        --btn-border: var(--kiss-sys-color-brand-primary-solid);
+        --btn-color: var(--kiss-sys-color-brand-primary-on-solid);
+        --btn-color-hover: var(--kiss-sys-color-brand-primary-on-solid);
+        --btn-content: var(--kiss-sys-color-brand-primary-on-solid);
+        --btn-ring: var(--kiss-sys-color-brand-primary-solid);
     }
 
     .btn-secondary {
-        --btn-bg: var(--color-secondary-solid);
-        --btn-border: var(--color-secondary-solid);
-        --btn-color: var(--color-secondary-on-solid);
-        --btn-color-hover: var(--color-secondary-on-solid);
-        --btn-content: var(--color-secondary-on-solid);
-        --btn-ring: var(--color-secondary-solid);
+        --btn-bg: var(--kiss-sys-color-brand-secondary-solid);
+        --btn-border: var(--kiss-sys-color-brand-secondary-solid);
+        --btn-color: var(--kiss-sys-color-brand-secondary-on-solid);
+        --btn-color-hover: var(--kiss-sys-color-brand-secondary-on-solid);
+        --btn-content: var(--kiss-sys-color-brand-secondary-on-solid);
+        --btn-ring: var(--kiss-sys-color-brand-secondary-solid);
         --btn-hover-opacity: 90%;
     }
 
     .btn-tertiary {
-        --btn-bg: var(--color-tertiary-solid);
-        --btn-border: var(--color-tertiary-solid);
-        --btn-color: var(--color-tertiary-on-solid);
-        --btn-color-hover: var(--color-tertiary-on-solid);
-        --btn-content: var(--color-tertiary-on-solid);
-        --btn-ring: var(--color-tertiary-solid);
+        --btn-bg: var(--kiss-sys-color-brand-tertiary-solid);
+        --btn-border: var(--kiss-sys-color-brand-tertiary-solid);
+        --btn-color: var(--kiss-sys-color-brand-tertiary-on-solid);
+        --btn-color-hover: var(--kiss-sys-color-brand-tertiary-on-solid);
+        --btn-content: var(--kiss-sys-color-brand-tertiary-on-solid);
+        --btn-ring: var(--kiss-sys-color-brand-tertiary-solid);
         --btn-hover-opacity: 90%;
     }
 
     .btn-success {
-        --btn-bg: var(--color-status-success-solid);
-        --btn-border: var(--color-status-success-solid);
-        --btn-color: var(--color-status-success-on-solid);
-        --btn-color-hover: var(--color-status-success-on-solid);
-        --btn-content: var(--color-status-success-on-solid);
-        --btn-ring: var(--color-status-success-solid);
+        --btn-bg: var(--kiss-sys-color-status-success-solid);
+        --btn-border: var(--kiss-sys-color-status-success-solid);
+        --btn-color: var(--kiss-sys-color-status-success-on-solid);
+        --btn-color-hover: var(--kiss-sys-color-status-success-on-solid);
+        --btn-content: var(--kiss-sys-color-status-success-on-solid);
+        --btn-ring: var(--kiss-sys-color-status-success-solid);
         --btn-hover-opacity: 90%;
     }
 
     .btn-warning {
-        --btn-bg: var(--color-status-warning-solid);
-        --btn-border: var(--color-status-warning-solid);
-        --btn-color: var(--color-status-warning-on-solid);
-        --btn-color-hover: var(--color-status-warning-on-solid);
-        --btn-content: var(--color-status-warning-on-solid);
-        --btn-ring: var(--color-status-warning-solid);
+        --btn-bg: var(--kiss-sys-color-status-warning-solid);
+        --btn-border: var(--kiss-sys-color-status-warning-solid);
+        --btn-color: var(--kiss-sys-color-status-warning-on-solid);
+        --btn-color-hover: var(--kiss-sys-color-status-warning-on-solid);
+        --btn-content: var(--kiss-sys-color-status-warning-on-solid);
+        --btn-ring: var(--kiss-sys-color-status-warning-solid);
         --btn-hover-opacity: 90%;
     }
 
     .btn-error {
-        --btn-bg: var(--color-status-error-solid);
-        --btn-border: var(--color-status-error-solid);
-        --btn-color: var(--color-status-error-on-solid);
-        --btn-color-hover: var(--color-status-error-on-solid);
-        --btn-content: var(--color-status-error-on-solid);
-        --btn-ring: var(--color-status-error-solid);
+        --btn-bg: var(--kiss-sys-color-status-error-solid);
+        --btn-border: var(--kiss-sys-color-status-error-solid);
+        --btn-color: var(--kiss-sys-color-status-error-on-solid);
+        --btn-color-hover: var(--kiss-sys-color-status-error-on-solid);
+        --btn-content: var(--kiss-sys-color-status-error-on-solid);
+        --btn-ring: var(--kiss-sys-color-status-error-solid);
         --btn-hover-opacity: 90%;
     }
 

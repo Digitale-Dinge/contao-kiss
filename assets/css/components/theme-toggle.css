@@ -1,7 +1,6 @@
 /**
  * Animated Sun/Moon Theme Toggle
  *
- * Custom SCSS for the theme toggle component.
  * Use together with the Twig template: @Contao/kiss_component/theme/_toggle.html.twig
  *
  * Features:
@@ -10,16 +9,14 @@
  * - Wiggle hover effect
  * - Respects light/dark mode
  */
-
-// Spring-like easing curves
-$spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-$spring-smooth: cubic-bezier(0.34, 1.56, 0.64, 1);
-
 .theme-toggle {
+    --theme-toggle-ease-bounce: cubic-bezier(0.175, .885, .32, 1.275);
+    --theme-toggle-ease-smooth: cubic-bezier(0.34, 1.56, .64, 1);
+
     appearance: none;
     background: transparent;
     border: none;
-    padding: 0.5rem;
+    padding: .5rem;
     cursor: pointer;
     border-radius: 50%;
     display: inline-flex;
@@ -28,15 +25,15 @@ $spring-smooth: cubic-bezier(0.34, 1.56, 0.64, 1);
     overflow: visible;
 
     &:hover .theme-toggle__icon {
-        animation: wiggle-sun 0.4s ease-out;
+        animation: wiggle-sun .4s ease-out;
     }
 
     .dark &:hover .theme-toggle__icon {
-        animation: wiggle-moon 0.4s ease-out;
+        animation: wiggle-moon .4s ease-out;
     }
 
     &:focus-visible {
-        outline: 2px solid currentColor;
+        outline: 2px solid currentcolor;
         outline-offset: 2px;
     }
 }
@@ -60,7 +57,7 @@ $spring-smooth: cubic-bezier(0.34, 1.56, 0.64, 1);
 .theme-toggle__icon {
     display: block;
     transform-origin: center;
-    transition: transform 0.5s $spring-bounce;
+    transition: transform .5s var(--theme-toggle-ease-bounce);
     overflow: visible;
 
     .dark & {
@@ -71,15 +68,14 @@ $spring-smooth: cubic-bezier(0.34, 1.56, 0.64, 1);
 .theme-toggle__rays {
     transform-origin: center;
     transition:
-            transform 0.4s $spring-smooth,
-            opacity 0.3s ease;
-
-    line {
-        stroke: currentColor;
-    }
-
+            transform .4s var(--theme-toggle-ease-smooth),
+            opacity .3s ease;
     transform: scale(1);
     opacity: 1;
+
+    line {
+        stroke: currentcolor;
+    }
 
     html.dark & {
         transform: scale(0);
@@ -89,7 +85,7 @@ $spring-smooth: cubic-bezier(0.34, 1.56, 0.64, 1);
 
 .theme-toggle__circle {
     transform-origin: center;
-    transition: transform 0.5s $spring-bounce;
+    transition: transform .5s var(--theme-toggle-ease-bounce);
     transform: scale(1);
 
     html.dark & {
@@ -98,7 +94,7 @@ $spring-smooth: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .theme-toggle__mask {
-    transition: transform 0.5s $spring-bounce;
+    transition: transform .5s var(--theme-toggle-ease-bounce);
     transform: translateX(20px);
 
     html.dark & {
@@ -110,8 +106,8 @@ $spring-smooth: cubic-bezier(0.34, 1.56, 0.64, 1);
     .theme-toggle__sun,
     .theme-toggle__moon {
         transition:
-                transform 0.3s $spring-bounce,
-                opacity 0.2s ease;
+                transform .3s var(--theme-toggle-ease-bounce),
+                opacity .2s ease;
     }
 
     .theme-toggle__sun {
