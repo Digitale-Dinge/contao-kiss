@@ -30,16 +30,16 @@
  * SIZES: .input-xs, .input-sm, (default), .input-lg, .input-xl
  * COLORS: .input-primary, .input-secondary, .input-tertiary, etc.
  */
-
 @layer components {
     .input-number,
     .input-number-center {
         --btn-size: 1.5rem;
-        --btn-icon-size: 0.875rem;
+        --btn-icon-size: .875rem;
         --btn-color: var(--kiss-sys-color-neutral-on-strong);
-        --input-pr: 4rem;
-        --btn-offset-1: 2.5rem;
-        --btn-offset-2: 0.75rem;
+        --btn-gap: .25rem;
+        --btn-offset-2: .75rem;
+        --btn-offset-1: calc(var(--btn-offset-2) + var(--btn-size) + var(--btn-gap));
+        --input-pr: calc(var(--btn-offset-1) + var(--btn-size));
 
         @apply relative inline-flex items-stretch;
 
@@ -54,10 +54,11 @@
         }
     }
 
-    // Layout: buttons on right
+    /* Layout: buttons on right */
     .input-number {
         .form-input {
             @apply text-left w-full;
+
             padding-right: var(--input-pr);
         }
 
@@ -74,10 +75,11 @@
         }
     }
 
-    // Layout: buttons on edges
+    /* Layout: buttons on edges */
     .input-number-center {
         .form-input {
             @apply text-center flex-1;
+
             padding-left: var(--btn-offset-1);
             padding-right: var(--btn-offset-1);
         }
@@ -101,7 +103,7 @@
         justify-content: center;
         width: var(--btn-size);
         height: var(--btn-size);
-        border-radius: var(--radius-field, 0.25rem);
+        border-radius: var(--radius-field, .25rem);
         background: transparent;
         border: 0;
         cursor: pointer;
@@ -119,76 +121,68 @@
         }
 
         &:active:not(:disabled) {
-            scale: 0.95;
+            scale: .95;
         }
 
         &:disabled {
-            opacity: 0.3;
+            opacity: .3;
             cursor: not-allowed;
         }
     }
 
-    // Colors
+    /* Colors */
     .input-number,
     .input-number-center {
         &:has(.input-primary) {
-            --btn-color: var(--color-primary-solid);
+            --btn-color: var(--kiss-sys-color-brand-primary-solid);
         }
 
         &:has(.input-secondary) {
-            --btn-color: var(--color-secondary-solid);
+            --btn-color: var(--kiss-sys-color-brand-secondary-solid);
         }
 
         &:has(.input-tertiary) {
-            --btn-color: var(--color-tertiary-solid);
+            --btn-color: var(--kiss-sys-color-brand-tertiary-solid);
         }
 
         &:has(.input-success) {
-            --btn-color: var(--color-status-success-solid);
+            --btn-color: var(--kiss-sys-color-status-success-solid);
         }
 
         &:has(.input-warning) {
-            --btn-color: var(--color-status-warning-solid);
+            --btn-color: var(--kiss-sys-color-status-warning-solid);
         }
 
         &:has(.input-error) {
-            --btn-color: var(--color-status-error-solid);
+            --btn-color: var(--kiss-sys-color-status-error-solid);
         }
     }
 
-    // Sizes
+    /* Sizes */
     .input-number,
     .input-number-center {
         &:has(.input-xs) {
             --btn-size: 1rem;
-            --btn-icon-size: 0.625rem;
-            --input-pr: 2.75rem;
-            --btn-offset-1: 1.75rem;
-            --btn-offset-2: 0.5rem;
+            --btn-icon-size: .625rem;
+            --btn-offset-2: .5rem;
         }
 
         &:has(.input-sm) {
             --btn-size: 1.25rem;
-            --btn-icon-size: 0.75rem;
-            --input-pr: 3.25rem;
-            --btn-offset-1: 2rem;
-            --btn-offset-2: 0.5rem;
+            --btn-icon-size: .75rem;
+            --btn-offset-2: .5rem;
         }
 
         &:has(.input-lg) {
             --btn-size: 2rem;
             --btn-icon-size: 1.25rem;
-            --input-pr: 5rem;
-            --btn-offset-1: 3rem;
-            --btn-offset-2: 0.75rem;
+            --btn-offset-2: .75rem;
         }
 
         &:has(.input-xl) {
             --btn-size: 2.5rem;
             --btn-icon-size: 1.5rem;
-            --input-pr: 6rem;
-            --btn-offset-1: 3.5rem;
-            --btn-offset-2: 0.75rem;
+            --btn-offset-2: .75rem;
         }
     }
 }

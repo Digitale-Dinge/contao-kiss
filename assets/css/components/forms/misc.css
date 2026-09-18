@@ -1,12 +1,12 @@
 @layer components {
-    // Required indicator
+    /* Required indicator */
     .label-required::after {
         content: " *";
-        @apply text-status-error-solid;
+        color: var(--kiss-sys-color-status-error-solid);
     }
 
     span.mandatory {
-        @apply text-status-error-solid;
+        color: var(--kiss-sys-color-status-error-solid);
     }
 
     [placeholder] {

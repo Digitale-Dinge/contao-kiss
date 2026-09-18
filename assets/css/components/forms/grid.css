@@ -20,7 +20,7 @@
             &.checkbox_container {
                 .form-checkbox {
                     align-self: start;
-                    margin-top: 0.2em;
+                    margin-top: .2em;
                 }
             }
         }

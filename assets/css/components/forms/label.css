@@ -1,5 +1,5 @@
 /**
- * KISS Form Label Component (V1.0)
+ * KISS Form Label Component
  *
  * Parts:
  *   .label-text    - Main label above input
@@ -14,30 +14,27 @@
  *   <input class="form-input">
  *   <span class="helper-text">We'll never share your email</span>
  */
-
 @layer components {
     .widget > label,
     .label-text {
-        @apply block font-medium text-neutral-on-strong mb-1.5 text-base;
+        @apply block font-medium mb-1.5 text-base;
+
+        color: var(--kiss-sys-color-neutral-on-strong);
     }
 
-    :is(
-        .helper-text,
-        .error-text,
-        .success-text
-    ) {
+    :is(.helper-text, .error-text, .success-text) {
         @apply block mt-1.5 text-base;
     }
 
     .helper-text {
-        @apply text-neutral-on-light;
+        color: var(--kiss-sys-color-neutral-on-light);
     }
 
     .error-text {
-        @apply text-status-error-solid;
+        color: var(--kiss-sys-color-status-error-solid);
     }
 
     .success-text {
-        @apply text-status-success-solid;
+        color: var(--kiss-sys-color-status-success-solid);
     }
 }

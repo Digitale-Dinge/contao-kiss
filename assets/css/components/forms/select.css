@@ -1,5 +1,5 @@
 /**
- * KISS Select Component (V1.0)
+ * KISS Select Component
  *
  * Base: .form-select
  * Styles: select-{soft} (outline is default)
@@ -36,29 +36,27 @@
  *     <select class="form-select">...</select>
  *   </div>
  */
-
 @layer components {
     .form-select {
         --select-color: var(--kiss-sys-color-neutral-on-strong);
         --select-border-opacity: 60%;
-        --select-px: 0.75rem;
-        --select-py: 0.625rem;
+        --select-px: .75rem;
+        --select-py: .625rem;
         --select-pr: 2.5rem;
         --select-text: var(--text-base, 1rem);
         --select-arrow-size: 1rem;
-        --select-arrow-right: 0.75rem;
+        --select-arrow-right: .75rem;
         --select-label-color: var(--select-color);
         --select-label-bg: var(--kiss-sys-color-neutral-surface-1);
         --tw-ring-color: var(--select-color);
 
-        @apply block w-full bg-transparent cursor-pointer;
-        @apply disabled:opacity-50 disabled:cursor-not-allowed;
+        @apply block w-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
 
         box-sizing: border-box;
         font-size: var(--select-text);
         padding: var(--select-py) var(--select-pr) var(--select-py) var(--select-px);
         border: 1px solid color-mix(in oklch, var(--select-color) var(--select-border-opacity), transparent);
-        border-radius: var(--radius-field, 0.5rem);
+        border-radius: var(--radius-field, .5rem);
         outline: none;
         appearance: none;
         background-color: transparent;
@@ -78,70 +76,70 @@
 
         &:invalid,
         &:has(option[value=""]:checked) {
-            @apply text-neutral-on-light;
+            color: var(--kiss-sys-color-neutral-on-light);
         }
 
         &.is-valid {
-            --select-color: var(--color-status-success-solid);
+            --select-color: var(--kiss-sys-color-status-success-solid);
         }
 
         &.is-invalid {
-            --select-color: var(--color-status-error-solid);
+            --select-color: var(--kiss-sys-color-status-error-solid);
         }
     }
 
-    // Variants
+    /* Variants */
     .select-soft {
         background-color: color-mix(in oklch, var(--select-color) 10%, transparent);
     }
 
-    // Colors
+    /* Colors */
     .select-primary {
-        --select-color: var(--color-primary-solid);
+        --select-color: var(--kiss-sys-color-brand-primary-solid);
     }
 
     .select-secondary {
-        --select-color: var(--color-secondary-solid);
+        --select-color: var(--kiss-sys-color-brand-secondary-solid);
     }
 
     .select-tertiary {
-        --select-color: var(--color-tertiary-solid);
+        --select-color: var(--kiss-sys-color-brand-tertiary-solid);
     }
 
     .select-success {
-        --select-color: var(--color-status-success-solid);
+        --select-color: var(--kiss-sys-color-status-success-solid);
     }
 
     .select-warning {
-        --select-color: var(--color-status-warning-solid);
+        --select-color: var(--kiss-sys-color-status-warning-solid);
     }
 
     .select-error {
-        --select-color: var(--color-status-error-solid);
+        --select-color: var(--kiss-sys-color-status-error-solid);
     }
 
-    // Sizes
+    /* Sizes */
     .select-xs {
-        --select-px: 0.5rem;
-        --select-py: 0.375rem;
+        --select-px: .5rem;
+        --select-py: .375rem;
         --select-pr: 2rem;
-        --select-text: var(--text-xs, 0.75rem);
-        --select-arrow-size: 0.75rem;
-        --select-arrow-right: 0.5rem;
+        --select-text: var(--text-xs, .75rem);
+        --select-arrow-size: .75rem;
+        --select-arrow-right: .5rem;
     }
 
     .select-sm {
-        --select-px: 0.625rem;
-        --select-py: 0.5rem;
+        --select-px: .625rem;
+        --select-py: .5rem;
         --select-pr: 2.25rem;
-        --select-text: var(--text-sm, 0.875rem);
-        --select-arrow-size: 0.875rem;
-        --select-arrow-right: 0.625rem;
+        --select-text: var(--text-sm, .875rem);
+        --select-arrow-size: .875rem;
+        --select-arrow-right: .625rem;
     }
 
     .select-lg {
         --select-px: 1rem;
-        --select-py: 0.75rem;
+        --select-py: .75rem;
         --select-pr: 3rem;
         --select-text: var(--text-lg, 1.125rem);
         --select-arrow-size: 1.25rem;
@@ -150,67 +148,75 @@
 
     .select-xl {
         --select-px: 1.25rem;
-        --select-py: 0.875rem;
+        --select-py: .875rem;
         --select-pr: 3.5rem;
         --select-text: var(--text-xl, 1.25rem);
         --select-arrow-size: 1.5rem;
         --select-arrow-right: 1.25rem;
     }
 
-    // Select group
+    /* Select group */
     .select-group {
+        --select-icon-space: 2.5rem;
+        --select-icon-inset: .75rem;
+
         @apply relative flex items-center;
 
         .form-select {
             @apply w-full;
         }
 
+        &:has(.select-xs) {
+            --select-icon-space: 2rem;
+            --select-icon-inset: .5rem;
+        }
+
+        &:has(.select-sm) {
+            --select-icon-space: 2.25rem;
+            --select-icon-inset: .625rem;
+        }
+
+        &:has(.select-lg) {
+            --select-icon-space: 3rem;
+            --select-icon-inset: 1rem;
+        }
+
+        &:has(.select-xl) {
+            --select-icon-space: 3.5rem;
+            --select-icon-inset: 1.25rem;
+        }
+
         &.has-icon-left {
-            .form-select { @apply pl-10; }
-            .select-icon:first-child { @apply left-3; }
-        }
+            .form-select {
+                padding-left: var(--select-icon-space);
+            }
 
-        &:has(.select-xs).has-icon-left {
-            .form-select { @apply pl-8; }
-            .select-icon:first-child { @apply left-2; }
-        }
-
-        &:has(.select-sm).has-icon-left {
-            .form-select { @apply pl-9; }
-            .select-icon:first-child { @apply left-2.5; }
-        }
-
-        &:has(.select-lg).has-icon-left {
-            .form-select { @apply pl-12; }
-            .select-icon:first-child { @apply left-4; }
-        }
-
-        &:has(.select-xl).has-icon-left {
-            .form-select { @apply pl-14; }
-            .select-icon:first-child { @apply left-5; }
+            .select-icon:first-child {
+                left: var(--select-icon-inset);
+            }
         }
     }
 
     .select-icon {
-        @apply absolute flex items-center justify-center;
-        @apply text-neutral-on-light pointer-events-none size-5;
+        @apply absolute flex items-center justify-center pointer-events-none size-5;
+
+        color: var(--kiss-sys-color-neutral-on-light);
     }
 
-    // Floating label
+    /* Floating label */
     .select-floating-label {
-        @apply absolute pointer-events-auto origin-left font-medium;
-        @apply overflow-hidden text-ellipsis whitespace-nowrap;
+        @apply absolute pointer-events-auto origin-left font-medium overflow-hidden text-ellipsis whitespace-nowrap;
 
-        left: var(--select-px, 0.75rem);
+        left: var(--select-px, .75rem);
         top: 0;
         font-size: var(--select-text, var(--text-base, 1rem));
         color: color-mix(in oklch, var(--kiss-sys-color-neutral-on-strong) 50%, transparent);
         background: var(--select-label-bg, var(--kiss-sys-color-neutral-surface-1));
         max-width: calc(100% - 3rem);
-        padding: 0 0.25rem;
-        translate: 0 calc(-50% - 0.0625em);
-        scale: 0.75;
-        transition: color 0.15s ease-out;
+        padding: 0 .25rem;
+        translate: 0 calc(-50% - .0625em);
+        scale: .75;
+        transition: color .15s ease-out;
     }
 
     .select-floating {
@@ -235,27 +241,27 @@
         }
 
         &.bg-primary-solid {
-            --select-label-bg: var(--color-primary-solid);
+            --select-label-bg: var(--kiss-sys-color-brand-primary-solid);
         }
 
         &.bg-secondary-solid {
-            --select-label-bg: var(--color-secondary-solid);
+            --select-label-bg: var(--kiss-sys-color-brand-secondary-solid);
         }
 
         &.bg-tertiary-solid {
-            --select-label-bg: var(--color-tertiary-solid);
+            --select-label-bg: var(--kiss-sys-color-brand-tertiary-solid);
         }
 
         &.bg-status-success-solid {
-            --select-label-bg: var(--color-status-success-solid);
+            --select-label-bg: var(--kiss-sys-color-status-success-solid);
         }
 
         &.bg-status-warning-solid {
-            --select-label-bg: var(--color-status-warning-solid);
+            --select-label-bg: var(--kiss-sys-color-status-warning-solid);
         }
 
         &.bg-status-error-solid {
-            --select-label-bg: var(--color-status-error-solid);
+            --select-label-bg: var(--kiss-sys-color-status-error-solid);
         }
     }
 }

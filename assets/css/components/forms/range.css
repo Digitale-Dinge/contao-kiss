@@ -1,5 +1,5 @@
 /**
- * KISS Range Component (V1.0)
+ * KISS Range Component
  *
  * Base: .form-range
  * Colors: range-{primary|secondary|tertiary|success|warning|error}
@@ -9,27 +9,26 @@
  * Example:
  *   <input type="range" class="form-range range-primary" min="0" max="100" value="50">
  */
-
 @layer components {
     .widget-range {
         --range-thumb-size: 1.25rem;
-        --range-track-height: 0.5rem;
+        --range-track-height: .5rem;
         --range-thumb-color: var(--kiss-sys-color-neutral-on-strong);
         --range-track-color: var(--kiss-sys-color-neutral-surface-2);
         --range-fill-color: var(--kiss-sys-color-neutral-on-strong);
     }
 
     .form-range {
-        @apply w-full cursor-pointer;
-        @apply disabled:opacity-50 disabled:cursor-not-allowed;
+        @apply w-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
 
         appearance: none;
         background: transparent;
         height: var(--range-thumb-size);
 
-        // Webkit (Chrome, Safari, Edge)
+        /* Webkit (Chrome, Safari, Edge) */
         &::-webkit-slider-runnable-track {
             @apply w-full;
+
             height: var(--range-track-height);
             background: var(--range-track-color);
             border-radius: var(--radius-field, 9999px);
@@ -43,7 +42,7 @@
             border: none;
             border-radius: 50%;
             margin-top: calc((var(--range-track-height) - var(--range-thumb-size)) / 2);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            transition: transform .15s ease, box-shadow .15s ease;
         }
 
         &:hover:not(:disabled)::-webkit-slider-thumb {
@@ -55,9 +54,10 @@
             box-shadow: 0 0 0 4px color-mix(in oklab, var(--range-thumb-color) 20%, transparent);
         }
 
-        // Gecko (Firefox)
+        /* Gecko (Firefox) */
         &::-moz-range-track {
             @apply w-full;
+
             height: var(--range-track-height);
             background: var(--range-track-color);
             border-radius: var(--radius-field, 9999px);
@@ -71,7 +71,7 @@
             background: var(--range-thumb-color);
             border: none;
             border-radius: 50%;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            transition: transform .15s ease, box-shadow .15s ease;
         }
 
         &:hover:not(:disabled)::-moz-range-thumb {
@@ -85,7 +85,7 @@
     }
 
     .range-fill {
-        // WebKit
+        /* WebKit */
         &::-webkit-slider-runnable-track {
             background: linear-gradient(
                     to right,
@@ -94,7 +94,7 @@
             );
         }
 
-        // Gecko (Firefox)
+        /* Gecko (Firefox) */
         &::-moz-range-progress {
             height: var(--range-track-height);
             background: var(--range-fill-color);
@@ -102,62 +102,62 @@
         }
     }
 
-    // COLORS
+    /* Colors */
     .range-primary {
-        --range-thumb-color: var(--color-primary-solid);
-        --range-fill-color: var(--color-primary-solid);
+        --range-thumb-color: var(--kiss-sys-color-brand-primary-solid);
+        --range-fill-color: var(--kiss-sys-color-brand-primary-solid);
     }
 
     .range-secondary {
-        --range-thumb-color: var(--color-secondary-solid);
-        --range-fill-color: var(--color-secondary-solid);
+        --range-thumb-color: var(--kiss-sys-color-brand-secondary-solid);
+        --range-fill-color: var(--kiss-sys-color-brand-secondary-solid);
     }
 
     .range-tertiary {
-        --range-thumb-color: var(--color-tertiary-solid);
-        --range-fill-color: var(--color-tertiary-solid);
+        --range-thumb-color: var(--kiss-sys-color-brand-tertiary-solid);
+        --range-fill-color: var(--kiss-sys-color-brand-tertiary-solid);
     }
 
     .range-success {
-        --range-thumb-color: var(--color-status-success-solid);
-        --range-fill-color: var(--color-status-success-solid);
+        --range-thumb-color: var(--kiss-sys-color-status-success-solid);
+        --range-fill-color: var(--kiss-sys-color-status-success-solid);
     }
 
     .range-warning {
-        --range-thumb-color: var(--color-status-warning-solid);
-        --range-fill-color: var(--color-status-warning-solid);
+        --range-thumb-color: var(--kiss-sys-color-status-warning-solid);
+        --range-fill-color: var(--kiss-sys-color-status-warning-solid);
     }
 
     .range-error {
-        --range-thumb-color: var(--color-status-error-solid);
-        --range-fill-color: var(--color-status-error-solid);
+        --range-thumb-color: var(--kiss-sys-color-status-error-solid);
+        --range-fill-color: var(--kiss-sys-color-status-error-solid);
     }
 
-    // SIZES
+    /* Sizes */
     .range-xs {
-        --range-thumb-size: 0.75rem;
-        --range-track-height: 0.25rem;
+        --range-thumb-size: .75rem;
+        --range-track-height: .25rem;
     }
 
     .range-sm {
         --range-thumb-size: 1rem;
-        --range-track-height: 0.375rem;
+        --range-track-height: .375rem;
     }
 
-    // Default is already defined in base
+    /* Default is already defined in base */
 
     .range-lg {
         --range-thumb-size: 1.5rem;
-        --range-track-height: 0.625rem;
+        --range-track-height: .625rem;
     }
 
     .range-xl {
         --range-thumb-size: 1.75rem;
-        --range-track-height: 0.75rem;
+        --range-track-height: .75rem;
     }
 
     /* Helper class */
     .range-color {
-        color: var(--range-fill-color)
+        color: var(--range-fill-color);
     }
 }

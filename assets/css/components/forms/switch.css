@@ -1,5 +1,5 @@
 /**
- * KISS Switch Component (V1.0)
+ * KISS Switch Component
  *
  * A toggle switch styled as a sliding button.
  *
@@ -18,15 +18,15 @@
  *     <span>Toggle me</span>
  *   </label>
  */
-
 @layer components {
     .form-switch {
-        @apply relative shrink-0 cursor-pointer appearance-none;
         --switch-width: 2.75rem;
         --switch-height: 1.5rem;
         --thumb-size: 1.25rem;
-        --thumb-offset: 0.125rem;
+        --thumb-offset: .125rem;
         --input-color: color-mix(in oklab, var(--kiss-sys-color-neutral-on-strong) 40%, transparent);
+
+        @apply relative shrink-0 cursor-pointer appearance-none;
 
         width: var(--switch-width);
         height: var(--switch-height);
@@ -35,19 +35,20 @@
         background-color: var(--kiss-sys-color-neutral-surface-3);
         border: 1px solid var(--kiss-sys-color-neutral-surface-3);
 
-        transition: background-color 0.2s, border-color 0.2s;
+        transition: background-color .2s, border-color .2s;
 
         &::before {
-            content: "";
             @apply absolute block rounded-full;
+
+            content: '';
             width: var(--thumb-size);
             height: var(--thumb-size);
             top: 50%;
             left: var(--thumb-offset);
             transform: translateY(-50%);
             background-color: var(--kiss-sys-color-neutral-surface-1);
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            transition: transform 0.2s ease-out, background-color 0.2s;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);
+            transition: transform .2s ease-out, background-color .2s;
         }
 
         &:focus-visible {
@@ -70,13 +71,17 @@
         }
     }
 
-    // Variants
+    /* Variants */
     .switch-outline {
+        @apply border;
+
+        border-color: var(--kiss-sys-color-neutral-border-strong);
+
         background-color: transparent;
-        @apply border border-neutral-border-strong;
 
         &::before {
-            @apply bg-neutral-border-strong;
+            background-color: var(--kiss-sys-color-neutral-border-strong);
+
             box-shadow: none;
         }
 
@@ -91,59 +96,59 @@
         }
     }
 
-    // Colors
+    /* Colors */
     .switch-primary {
-        --input-color: var(--color-primary-solid);
+        --input-color: var(--kiss-sys-color-brand-primary-solid);
     }
 
     .switch-secondary {
-        --input-color: var(--color-secondary-solid);
+        --input-color: var(--kiss-sys-color-brand-secondary-solid);
     }
 
     .switch-tertiary {
-        --input-color: var(--color-tertiary-solid);
+        --input-color: var(--kiss-sys-color-brand-tertiary-solid);
     }
 
     .switch-success {
-        --input-color: var(--color-status-success-solid);
+        --input-color: var(--kiss-sys-color-status-success-solid);
     }
 
     .switch-warning {
-        --input-color: var(--color-status-warning-solid);
+        --input-color: var(--kiss-sys-color-status-warning-solid);
     }
 
     .switch-error {
-        --input-color: var(--color-status-error-solid);
+        --input-color: var(--kiss-sys-color-status-error-solid);
     }
 
-    // Sizes
+    /* Sizes */
     .switch-xs {
         --switch-width: 1.75rem;
         --switch-height: 1rem;
-        --thumb-size: 0.75rem;
-        --thumb-offset: 0.125rem;
+        --thumb-size: .75rem;
+        --thumb-offset: .125rem;
     }
 
     .switch-sm {
         --switch-width: 2.25rem;
         --switch-height: 1.25rem;
         --thumb-size: 1rem;
-        --thumb-offset: 0.125rem;
+        --thumb-offset: .125rem;
     }
 
-    // Default is defined in base
+    /* Default is defined in base */
 
     .switch-lg {
         --switch-width: 3.25rem;
         --switch-height: 1.75rem;
         --thumb-size: 1.5rem;
-        --thumb-offset: 0.125rem;
+        --thumb-offset: .125rem;
     }
 
     .switch-xl {
         --switch-width: 4rem;
         --switch-height: 2.25rem;
         --thumb-size: 1.875rem;
-        --thumb-offset: 0.1875rem;
+        --thumb-offset: .1875rem;
     }
 }

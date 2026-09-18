@@ -1,5 +1,5 @@
 /**
- * KISS Checkbox Component (V1.0)
+ * KISS Checkbox Component
  *
  * Inspired by FlyonUI checkbox with animated checkmark.
  *
@@ -17,29 +17,31 @@
  *     <span>Label text</span>
  *   </label>
  */
-
 @layer components {
     .form-checkbox {
         --input-color: var(--kiss-sys-color-neutral-on-strong);
         --input-border-opacity: 60%;
         --size: 1.5rem;
-        --size-padding: 0.1875rem;
+        --size-padding: .1875rem;
 
-        @apply relative shrink-0 cursor-pointer appearance-none align-middle text-neutral-surface-1;
+        @apply relative shrink-0 cursor-pointer appearance-none align-middle;
+
+        color: var(--kiss-sys-color-neutral-surface-1);
 
         width: var(--size);
         height: var(--size);
         padding: var(--size-padding);
         border: 1px solid color-mix(in oklch, var(--input-color) var(--input-border-opacity), transparent);
-        border-radius: var(--radius-checkbox, 0.25rem);
+        border-radius: var(--radius-checkbox, .25rem);
         background-color: transparent;
-        transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+        transition: background-color .2s, border-color .2s, box-shadow .2s;
 
         &::before {
-            content: "";
             @apply block size-full rotate-45 bg-current opacity-0;
-            transition: clip-path 0.3s, opacity 0.1s, rotate 0.3s, translate 0.3s;
-            transition-delay: 0.1s;
+
+            content: '';
+            transition: clip-path .3s, opacity .1s, rotate .3s, translate .3s;
+            transition-delay: .1s;
             clip-path: polygon(20% 100%, 20% 80%, 50% 80%, 50% 80%, 70% 80%, 70% 100%);
         }
 
@@ -55,6 +57,7 @@
 
             &::before {
                 @apply opacity-100;
+
                 clip-path: polygon(20% 100%, 20% 80%, 50% 80%, 50% 0%, 70% 0%, 70% 100%);
             }
         }
@@ -65,6 +68,7 @@
 
             &::before {
                 @apply rotate-0 opacity-100;
+
                 translate: 0 -35%;
                 clip-path: polygon(20% 100%, 20% 80%, 50% 80%, 50% 80%, 80% 80%, 80% 100%);
             }
@@ -83,58 +87,58 @@
         }
     }
 
-    // Colors
+    /* Colors */
     .checkbox-primary {
-        --input-color: var(--color-primary-solid);
-        @apply text-primary-on-solid;
+        --input-color: var(--kiss-sys-color-brand-primary-solid);
+        color: var(--kiss-sys-color-brand-primary-on-solid);
     }
 
     .checkbox-secondary {
-        --input-color: var(--color-secondary-solid);
-        @apply text-secondary-on-solid;
+        --input-color: var(--kiss-sys-color-brand-secondary-solid);
+        color: var(--kiss-sys-color-brand-secondary-on-solid);
     }
 
     .checkbox-tertiary {
-        --input-color: var(--color-tertiary-solid);
-        @apply text-tertiary-on-solid;
+        --input-color: var(--kiss-sys-color-brand-tertiary-solid);
+        color: var(--kiss-sys-color-brand-tertiary-on-solid);
     }
 
     .checkbox-success {
-        --input-color: var(--color-status-success-solid);
-        @apply text-status-success-on-solid;
+        --input-color: var(--kiss-sys-color-status-success-solid);
+        color: var(--kiss-sys-color-status-success-on-solid);
     }
 
     .checkbox-warning {
-        --input-color: var(--color-status-warning-solid);
-        @apply text-status-warning-on-solid;
+        --input-color: var(--kiss-sys-color-status-warning-solid);
+        color: var(--kiss-sys-color-status-warning-on-solid);
     }
 
     .checkbox-error {
-        --input-color: var(--color-status-error-solid);
-        @apply text-status-error-on-solid;
+        --input-color: var(--kiss-sys-color-status-error-solid);
+        color: var(--kiss-sys-color-status-error-on-solid);
     }
 
-    // Sizes
+    /* Sizes */
     .checkbox-xs {
         --size: 1rem;
-        --size-padding: 0.125rem;
+        --size-padding: .125rem;
     }
 
     .checkbox-sm {
         --size: 1.25rem;
-        --size-padding: 0.125rem;
+        --size-padding: .125rem;
     }
 
-    // Default is 1.5rem with 0.1875rem padding (defined in base)
+    /* Default is 1.5rem with .1875rem padding (defined in base) */
 
     .checkbox-lg {
         --size: 1.75rem;
-        --size-padding: 0.25rem;
+        --size-padding: .25rem;
     }
 
     .checkbox-xl {
         --size: 2rem;
-        --size-padding: 0.3125rem;
+        --size-padding: .3125rem;
     }
 
     span:has(> .checkbox-xs) {

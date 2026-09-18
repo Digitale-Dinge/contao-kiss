@@ -15,14 +15,13 @@
  *   --dp-radius        radius-box        popup corners
  *   --dp-radius-cell   radius-field      day-cell / button corners
  */
-
 .datepicker {
     --dp-surface: var(--kiss-sys-color-neutral-surface-2);
     --dp-surface-hover: var(--kiss-sys-color-neutral-surface-3);
     --dp-border: var(--kiss-sys-color-neutral-surface-3);
     --dp-fg: var(--kiss-sys-color-neutral-on-strong);
-    --dp-accent: var(--color-primary-solid);
-    --dp-accent-fg: var(--color-primary-on-solid);
+    --dp-accent: var(--kiss-sys-color-brand-primary-solid);
+    --dp-accent-fg: var(--kiss-sys-color-brand-primary-on-solid);
     --dp-radius: var(--radius-box);
     --dp-radius-cell: var(--radius-field);
 
@@ -30,7 +29,7 @@
 }
 
 .datepicker-dropdown {
-    padding-top: 0.5rem;
+    padding-top: .5rem;
 }
 
 .datepicker-picker {
@@ -38,8 +37,8 @@
     color: var(--dp-fg);
     border: 1px solid var(--dp-border);
     border-radius: var(--dp-radius);
-    box-shadow: 0 10px 30px rgb(0 0 0 / 0.18);
-    padding: 0.5rem;
+    box-shadow: 0 10px 30px rgb(0 0 0 / .18);
+    padding: .5rem;
 }
 
 /* Header controls: view-switch (month/year) + prev/next */
@@ -127,7 +126,7 @@
     color: var(--dp-accent-fg);
     border: 0;
     border-radius: var(--dp-radius-cell);
-    padding: 0.5rem 1rem;
+    padding: .5rem 1rem;
     font-weight: 600;
 
     &:hover,
