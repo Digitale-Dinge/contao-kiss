@@ -7,25 +7,24 @@
  * Usage: Add class "icon-ellipsis-dots" to any element containing the SVG.
  * The SVG should have 3 circle elements for the animation to work.
  */
-
 .icon-ellipsis-dots {
     circle {
+        --ellipsis-delay: 0s;
+
         transform-origin: center;
         transform-box: fill-box;
+
+        &:nth-child(2) {
+            --ellipsis-delay: .1s;
+        }
+
+        &:nth-child(3) {
+            --ellipsis-delay: .2s;
+        }
     }
 
-    &:hover {
-        circle:nth-child(1) {
-            animation: ellipsis-bounce 0.4s ease-out;
-        }
-
-        circle:nth-child(2) {
-            animation: ellipsis-bounce 0.4s ease-out 0.1s;
-        }
-
-        circle:nth-child(3) {
-            animation: ellipsis-bounce 0.4s ease-out 0.2s;
-        }
+    &:hover circle {
+        animation: ellipsis-bounce .4s ease-out var(--ellipsis-delay);
     }
 }
 
