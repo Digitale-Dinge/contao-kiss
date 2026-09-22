@@ -11,17 +11,20 @@ use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use DigitaleDinge\CompanyBundle\DigitaleDingeCompanyBundle;
 use DigitaleDinge\ContaoKiss\DigitaleDingeContaoKissBundle;
 use DigitaleDinge\GridRatioWidgetBundle\DigitaleDingeGridRatioWidgetBundle;
+use Symfony\Reprise\RepriseBundle;
 
 class Plugin implements BundlePluginInterface
 {
     public function getBundles(ParserInterface $parser): array
     {
         return [
+            new BundleConfig(RepriseBundle::class),
             new BundleConfig(DigitaleDingeContaoKissBundle::class)
                 ->setLoadAfter([
                     ContaoCoreBundle::class,
                     DigitaleDingeCompanyBundle::class,
                     DigitaleDingeGridRatioWidgetBundle::class,
+                    RepriseBundle::class,
                 ]),
         ];
     }
