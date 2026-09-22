@@ -2,10 +2,10 @@ import { Controller } from '@hotwired/stimulus';
 
 /**
  * Popover Controller (V1.5)
- * 
+ *
  * A popover that sticks to its trigger using absolute positioning.
  * Auto-flips when hitting viewport edges. Repositions on scroll/resize.
- * 
+ *
  * Usage:
  *   <div data-controller="popover">
  *     <button data-popover-target="trigger" data-action="click->popover#toggle">Open</button>
@@ -14,14 +14,14 @@ import { Controller } from '@hotwired/stimulus';
  *       Content
  *     </div>
  *   </div>
- * 
+ *
  * Configuration:
  *   data-popover-placement-value="bottom"   - top|bottom|left|right (default: bottom)
  *   data-popover-alignment-value="start"    - start|center|end (default: center)
  *   data-popover-offset-value="8"           - gap in px (default: 8)
  *   data-popover-trigger-value="click"      - click|hover (default: click)
  *   data-popover-flip-value="true"          - auto-flip on edge collision (default: true)
- * 
+ *
  * Timing (hardcoded - edit delayedClose() to change):
  *   - Open delay: 0ms (instant)
  *   - Close delay: 150ms (in delayedClose method, prevents flicker when moving to content)
@@ -38,7 +38,7 @@ export default class extends Controller {
 
     connect() {
         this.isOpen = false;
-        
+
         // Ensure container is positioned for absolute children
         if (getComputedStyle(this.element).position === 'static') {
             this.element.style.position = 'relative';
@@ -49,16 +49,16 @@ export default class extends Controller {
             this._hoverOpen = () => this.open();
             this._hoverClose = () => this.delayedClose();
             this._hoverCancel = () => this.cancelClose();
-            
+
             this.triggerTarget.addEventListener('mouseenter', this._hoverOpen);
             this.triggerTarget.addEventListener('mouseleave', this._hoverClose);
-            
+
             if (this.hasContentTarget) {
                 this.contentTarget.addEventListener('mouseenter', this._hoverCancel);
                 this.contentTarget.addEventListener('mouseleave', this._hoverClose);
             }
         }
-        
+
         // Setup ARIA
         if (this.hasTriggerTarget && this.hasContentTarget) {
             const id = this.contentTarget.id || `popover-${crypto.randomUUID().slice(0, 8)}`;
@@ -88,7 +88,7 @@ export default class extends Controller {
 
     open() {
         if (this.isOpen || !this.hasContentTarget) return;
-        
+
         this.isOpen = true;
         this.triggerTarget?.setAttribute('aria-expanded', 'true');
         this.position();
@@ -99,7 +99,7 @@ export default class extends Controller {
 
     close() {
         if (!this.isOpen) return;
-        
+
         this.isOpen = false;
         this.triggerTarget?.setAttribute('aria-expanded', 'false');
         this.contentTarget?.classList.remove('popover-open');
@@ -121,7 +121,7 @@ export default class extends Controller {
         if (!content || !trigger) return;
 
         const { offsetValue: offset, alignmentValue: alignment, flipValue: flip } = this;
-        
+
         // Reset positioning
         Object.assign(content.style, { position: 'absolute', top: '', bottom: '', left: '', right: '' });
 
@@ -130,7 +130,7 @@ export default class extends Controller {
         const triggerHeight = trigger.offsetHeight;
         const triggerLeft = trigger.offsetLeft;
         const triggerTop = trigger.offsetTop;
-        
+
         // Measure content
         const wasOpen = content.classList.contains('popover-open');
         if (!wasOpen) {
@@ -152,7 +152,7 @@ export default class extends Controller {
         // Calculate position
         let left, top;
         const isVertical = placement === 'top' || placement === 'bottom';
-        
+
         if (isVertical) {
             if (placement === 'top') {
                 content.style.bottom = `${triggerHeight + offset}px`;
@@ -165,7 +165,7 @@ export default class extends Controller {
                 this.getAlignedPos(alignment, triggerLeft, triggerWidth, contentWidth),
                 contentWidth,
                 triggerRect.left - triggerLeft,
-                true
+                true,
             );
             content.style.left = `${left}px`;
         } else {
@@ -180,7 +180,7 @@ export default class extends Controller {
                 this.getAlignedPos(alignment, triggerTop, triggerHeight, contentHeight),
                 contentHeight,
                 triggerRect.top - triggerTop,
-                false
+                false,
             );
             content.style.top = `${top}px`;
         }
@@ -189,7 +189,17 @@ export default class extends Controller {
         content.classList.add(`popover-${placement}`);
 
         if (this.hasArrowTarget) {
-            this.positionArrow(placement, triggerLeft, triggerTop, triggerWidth, triggerHeight, contentWidth, contentHeight, left, top);
+            this.positionArrow(
+                placement,
+                triggerLeft,
+                triggerTop,
+                triggerWidth,
+                triggerHeight,
+                contentWidth,
+                contentHeight,
+                left,
+                top,
+            );
         }
     }
 
@@ -203,11 +213,11 @@ export default class extends Controller {
         const viewportSize = isHorizontal ? window.innerWidth : window.innerHeight;
         const padding = 8;
         const viewportPos = viewportOffset + pos;
-        
+
         if (viewportPos + size > viewportSize - padding) {
-            pos -= (viewportPos + size - viewportSize + padding);
+            pos -= viewportPos + size - viewportSize + padding;
         } else if (viewportPos < padding) {
-            pos += (padding - viewportPos);
+            pos += padding - viewportPos;
         }
         return pos;
     }
@@ -215,29 +225,39 @@ export default class extends Controller {
     getFlippedPlacement(placement, triggerRect, cW, cH, offset) {
         const { innerWidth: vw, innerHeight: vh } = window;
         const p = 8; // padding
-        
+
         const space = {
             top: triggerRect.top - p,
             bottom: vh - triggerRect.bottom - p,
             left: triggerRect.left - p,
             right: vw - triggerRect.right - p,
         };
-        
+
         const flip = {
             bottom: space.bottom < cH + offset && space.top > cH + offset ? 'top' : null,
             top: space.top < cH + offset && space.bottom > cH + offset ? 'bottom' : null,
             right: space.right < cW + offset && space.left > cW + offset ? 'left' : null,
             left: space.left < cW + offset && space.right > cW + offset ? 'right' : null,
         };
-        
+
         return flip[placement] || placement;
     }
 
-    positionArrow(placement, triggerLeft, triggerTop, triggerWidth, triggerHeight, contentWidth, contentHeight, contentLeft, contentTop) {
+    positionArrow(
+        placement,
+        triggerLeft,
+        triggerTop,
+        triggerWidth,
+        triggerHeight,
+        contentWidth,
+        contentHeight,
+        contentLeft,
+        contentTop,
+    ) {
         const arrow = this.arrowTarget;
         const size = 12;
         const min = 12;
-        
+
         Object.assign(arrow.style, { left: '', right: '', top: '', bottom: '' });
 
         if (placement === 'top' || placement === 'bottom') {
@@ -262,7 +282,7 @@ export default class extends Controller {
 
     removeListeners() {
         if (!this._onClickOutside) return;
-        
+
         document.removeEventListener('click', this._onClickOutside, true);
         document.removeEventListener('keydown', this._onKeydown);
         window.removeEventListener('scroll', this._onReposition, true);

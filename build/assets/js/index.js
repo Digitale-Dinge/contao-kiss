@@ -21,8 +21,8 @@
  * application.register('breadcrumb', BreadcrumbController);
  */
 
-export { default as RangeController } from './controllers/range-controller';
-export { default as InputNumberController } from './controllers/input-number-controller';
-export { default as ThemeController } from './controllers/theme-controller';
-export { default as PopoverController } from './controllers/popover-controller';
 export { default as BreadcrumbController } from './controllers/breadcrumb-controller';
+export { default as InputNumberController } from './controllers/input-number-controller';
+export { default as PopoverController } from './controllers/popover-controller';
+export { default as RangeController } from './controllers/range-controller';
+export { default as ThemeController } from './controllers/theme-controller';

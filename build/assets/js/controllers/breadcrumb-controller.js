@@ -2,18 +2,18 @@ import { Controller } from '@hotwired/stimulus';
 
 /**
  * Breadcrumb Controller (V1.1)
- * 
+ *
  * Simple threshold-based collapsing. When collapsed, ALL items marked with
  * data-breadcrumb-target="item" are hidden and shown in a dropdown.
- * 
+ *
  * Collapse triggers (checked once on page load):
  * 1. Viewport width < breakpoint (default 640px)
  * 2. Marked item count > maxItems (default 4)
- * 
+ *
  * HTML Structure:
  *   - Items WITHOUT data-breadcrumb-target: Always visible (Home, Current Page, etc.)
  *   - Items WITH data-breadcrumb-target="item": Collapsible (hidden when collapsed)
- * 
+ *
  * Usage:
  *   <nav class="breadcrumb" data-controller="breadcrumb" aria-label="Breadcrumb">
  *     <ol data-breadcrumb-target="list">
@@ -24,7 +24,7 @@ import { Controller } from '@hotwired/stimulus';
  *       <li aria-current="page"><a href="/c">Current</a></li>
  *     </ol>
  *   </nav>
- * 
+ *
  * Configuration:
  *   data-breadcrumb-max-items-value="4"    - Collapse when MORE than N items (default: 4)
  *   data-breadcrumb-breakpoint-value="640" - Force collapse below this width (default: 640)
@@ -33,16 +33,14 @@ export default class extends Controller {
     static targets = ['list', 'item'];
     static values = {
         maxItems: { type: Number, default: 4 },
-        breakpoint: { type: Number, default: 640 }
+        breakpoint: { type: Number, default: 640 },
     };
 
     connect() {
         if (!this.hasListTarget || this.itemTargets.length === 0) return;
 
-        const shouldCollapse = 
-            window.innerWidth < this.breakpointValue || 
-            this.itemTargets.length > this.maxItemsValue;
-        
+        const shouldCollapse = window.innerWidth < this.breakpointValue || this.itemTargets.length > this.maxItemsValue;
+
         if (shouldCollapse) {
             this.collapse();
         }
@@ -57,7 +55,7 @@ export default class extends Controller {
         const items = this.itemTargets;
         const dropdownLinks = [];
 
-        items.forEach(item => {
+        items.forEach((item) => {
             item.style.display = 'none';
 
             const prev = item.previousElementSibling;
@@ -78,15 +76,17 @@ export default class extends Controller {
         this.ellipsisSeparator.className = 'breadcrumb-separator breadcrumb-ellipsis-separator';
         this.ellipsisSeparator.setAttribute('aria-hidden', 'true');
         this.ellipsisSeparator.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>`;
-        
+
         // Build dropdown menu HTML
-        const menuItems = links.map(link => {
-            const clone = link.cloneNode(true);
-            clone.className = 'dropdown-item';
-            clone.setAttribute('role', 'menuitem');
-            return clone.outerHTML;
-        }).join('');
-        
+        const menuItems = links
+            .map((link) => {
+                const clone = link.cloneNode(true);
+                clone.className = 'dropdown-item';
+                clone.setAttribute('role', 'menuitem');
+                return clone.outerHTML;
+            })
+            .join('');
+
         // Create ellipsis with popover
         this.ellipsisElement = document.createElement('li');
         this.ellipsisElement.className = 'breadcrumb-ellipsis';
@@ -110,7 +110,7 @@ export default class extends Controller {
         const insertAfter = firstItem?.nextElementSibling?.classList.contains('breadcrumb-separator')
             ? firstItem.nextElementSibling
             : firstItem;
-        
+
         if (insertAfter?.nextSibling) {
             this.listTarget.insertBefore(this.ellipsisSeparator, insertAfter.nextSibling);
             this.listTarget.insertBefore(this.ellipsisElement, this.ellipsisSeparator.nextSibling);

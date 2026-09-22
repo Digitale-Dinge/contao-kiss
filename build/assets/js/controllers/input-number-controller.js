@@ -2,17 +2,17 @@ import { Controller } from '@hotwired/stimulus';
 
 /**
  * Input Number Controller
- * 
+ *
  * Provides increment/decrement functionality for number inputs.
  * Respects min, max, and step attributes on the input.
- * 
+ *
  * Default layout (number left, buttons right):
  *   <div class="input-number" data-controller="input-number">
  *     <input type="number" class="input" data-input-number-target="input" value="5" min="0" max="100">
  *     <button type="button" class="input-number-btn" data-action="click->input-number#decrement">−</button>
  *     <button type="button" class="input-number-btn" data-action="click->input-number#increment">+</button>
  *   </div>
- * 
+ *
  * Center layout (buttons on edges):
  *   <div class="input-number input-number-center" data-controller="input-number">
  *     <button type="button" class="input-number-btn" data-action="click->input-number#decrement">−</button>
@@ -45,8 +45,8 @@ export default class extends Controller {
         value += step * direction;
 
         // Clamp to min/max
-        if (!isNaN(min) && value < min) value = min;
-        if (!isNaN(max) && value > max) value = max;
+        if (!Number.isNaN(min) && value < min) value = min;
+        if (!Number.isNaN(max) && value > max) value = max;
 
         // Handle floating point precision
         const decimals = this.getDecimals(step);
@@ -66,13 +66,13 @@ export default class extends Controller {
         const max = parseFloat(input.max);
 
         const buttons = this.element.querySelectorAll('.input-number-btn');
-        
-        buttons.forEach(btn => {
+
+        buttons.forEach((btn) => {
             const action = btn.getAttribute('data-action') || '';
             if (action.includes('decrement')) {
-                btn.disabled = !isNaN(min) && value <= min;
+                btn.disabled = !Number.isNaN(min) && value <= min;
             } else if (action.includes('increment')) {
-                btn.disabled = !isNaN(max) && value >= max;
+                btn.disabled = !Number.isNaN(max) && value >= max;
             }
         });
     }

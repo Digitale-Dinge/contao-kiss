@@ -1,4 +1,6 @@
-a/**
+import { Controller } from '@hotwired/stimulus';
+
+/**
  * KISS Theme Controller
  *
  * A Stimulus controller for theme switching with localStorage persistence,
@@ -129,9 +131,6 @@ a/**
  * ✓ Icon visibility sync
  *
  */
-
-import { Controller } from '@hotwired/stimulus';
-
 class SystemThemeListener {
     constructor(callback) {
         this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -271,7 +270,7 @@ export default class ThemeController extends Controller {
     setThemeClass(theme) {
         const html = document.documentElement;
         // Reset theme classes
-        ThemeController.THEMES.forEach(t => {
+        ThemeController.THEMES.forEach((t) => {
             if (t !== ThemeController.DEFAULT_THEME) {
                 html.classList.remove(t);
             }
