@@ -10,17 +10,24 @@ use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use DigitaleDinge\CompanyBundle\DigitaleDingeCompanyBundle;
 use DigitaleDinge\GridRatioWidgetBundle\DigitaleDingeGridRatioWidgetBundle;
 use PHPUnit\Framework\TestCase;
+use Symfony\Reprise\RepriseBundle;
 
 class PluginTest extends TestCase
 {
     public function testReturnsTheBundleConfiguration(): void
     {
-        $config = new Plugin()->getBundles($this->createStub(ParserInterface::class))[0];
+        $configs = new Plugin()->getBundles($this->createStub(ParserInterface::class));
+
+        $this->assertCount(2, $configs);
+        $this->assertSame(RepriseBundle::class, $configs[0]->getName());
+
+        $config = $configs[1];
 
         $plugins = [
             ContaoCoreBundle::class,
             DigitaleDingeCompanyBundle::class,
             DigitaleDingeGridRatioWidgetBundle::class,
+            RepriseBundle::class,
         ];
 
         $this->assertInstanceOf(BundleConfig::class, $config);
