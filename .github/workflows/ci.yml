@@ -4,7 +4,6 @@ on:
     push:
         branches:
             - main
-            - feature/css-only
     pull_request: ~
 
 permissions: read-all
