@@ -24,14 +24,6 @@
     justify-content: center;
     overflow: visible;
 
-    &:hover .theme-toggle__icon {
-        animation: wiggle-sun .4s ease-out;
-    }
-
-    .dark &:hover .theme-toggle__icon {
-        animation: wiggle-moon .4s ease-out;
-    }
-
     &:focus-visible {
         outline: 2px solid currentcolor;
         outline-offset: 2px;
@@ -62,6 +54,14 @@
 
     .dark & {
         transform: rotate(-45deg);
+    }
+
+    .theme-toggle:hover & {
+        animation: wiggle-sun .4s ease-out;
+    }
+
+    .dark .theme-toggle:hover & {
+        animation: wiggle-moon .4s ease-out;
     }
 }
 

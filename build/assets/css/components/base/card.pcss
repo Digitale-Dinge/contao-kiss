@@ -142,7 +142,7 @@
 
         background-color: color-mix(in oklch, var(--card-ring) 15%, transparent);
         border: 1px solid color-mix(in oklch, var(--card-ring) 20%, transparent);
-        box-shadow: 0 8px 32px 0 rgb(0 0 0 / .15);
+        box-shadow: 0 8px 32px 0 rgb(0 0 0 / 15%);
     }
 
     /* Layouts */
@@ -183,6 +183,7 @@
     .card-media-background,
     .layout-media-background {
         --card-fg: var(--kiss-comp-card-color-on-media, var(--color-white));
+
         @apply relative;
 
         > .media {
@@ -205,13 +206,9 @@
         }
 
         > :is(.card-body, .text) {
-            @apply absolute inset-x-0 z-10;
+            @apply absolute inset-x-0 z-10 inset-y-0 justify-end;
 
             color: var(--card-fg);
-        }
-
-        > :is(.card-body, .text) {
-            @apply inset-y-0 justify-end;
         }
 
         /* ToDo: This should not live here */

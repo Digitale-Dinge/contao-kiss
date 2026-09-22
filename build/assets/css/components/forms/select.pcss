@@ -65,18 +65,18 @@
         background-size: var(--select-arrow-size);
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 
-        &:hover:not(:focus):not(:disabled) {
-            --select-border-opacity: 100%;
-        }
-
         &:focus {
             --select-border-opacity: 100%;
+
             @apply ring-1 ring-inset;
         }
 
-        &:invalid,
-        &:has(option[value=""]:checked) {
+        &:invalid {
             color: var(--kiss-sys-color-neutral-on-light);
+        }
+
+        &:hover:not(:focus, :disabled) {
+            --select-border-opacity: 100%;
         }
 
         &.is-valid {
@@ -156,6 +156,12 @@
     }
 
     /* Select group */
+    .select-icon {
+        @apply absolute flex items-center justify-center pointer-events-none size-5;
+
+        color: var(--kiss-sys-color-neutral-on-light);
+    }
+
     .select-group {
         --select-icon-space: 2.5rem;
         --select-icon-inset: .75rem;
@@ -197,11 +203,6 @@
         }
     }
 
-    .select-icon {
-        @apply absolute flex items-center justify-center pointer-events-none size-5;
-
-        color: var(--kiss-sys-color-neutral-on-light);
-    }
 
     /* Floating label */
     .select-floating-label {
@@ -263,5 +264,9 @@
         &.bg-status-error-solid {
             --select-label-bg: var(--kiss-sys-color-status-error-solid);
         }
+    }
+
+    .form-select:has(option[value=""]:checked) {
+        color: var(--kiss-sys-color-neutral-on-light);
     }
 }

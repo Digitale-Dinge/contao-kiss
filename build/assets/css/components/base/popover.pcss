@@ -118,10 +118,7 @@
     .popover-arrow {
         @apply absolute pointer-events-none;
 
-        top: var(--popover-arrow-top, auto);
-        right: var(--popover-arrow-right, auto);
-        bottom: var(--popover-arrow-bottom, auto);
-        left: var(--popover-arrow-left, auto);
+        inset: var(--popover-arrow-top, auto) var(--popover-arrow-right, auto) var(--popover-arrow-bottom, auto) var(--popover-arrow-left, auto);
         width: var(--popover-arrow-size);
         height: var(--popover-arrow-size);
     }

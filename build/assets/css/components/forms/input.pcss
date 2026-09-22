@@ -59,13 +59,14 @@
         outline: none;
         color: var(--kiss-sys-color-neutral-on-strong);
 
-        &:hover:not(:focus):not(:disabled) {
-            --input-border-opacity: 100%;
-        }
-
         &:focus {
             --input-border-opacity: 100%;
+
             @apply ring-1 ring-inset;
+        }
+
+        &:hover:not(:focus, :disabled) {
+            --input-border-opacity: 100%;
         }
 
         &.is-valid {

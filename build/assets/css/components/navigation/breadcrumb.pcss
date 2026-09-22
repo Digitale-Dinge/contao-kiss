@@ -20,10 +20,15 @@
         --breadcrumb-separator-mx: .5rem;
         --breadcrumb-separator-icon: .75rem;
         --breadcrumb-btn-icon: 1rem;
+        --breadcrumb-text: var(--text-sm, .875rem);
+        --breadcrumb-item-py: .5rem;
+        --breadcrumb-item-px: .75rem;
 
-        @apply flex items-center flex-wrap text-sm;
+        @apply flex items-center flex-wrap;
 
-        ol, ul {
+        font-size: var(--breadcrumb-text);
+
+        :is(ol, ul) {
             @apply flex items-center flex-wrap m-0 p-0 list-none;
         }
 
@@ -33,7 +38,9 @@
 
         a {
             @apply no-underline transition-colors;
+        }
 
+        :is(a, .breadcrumb-ellipsis-btn) {
             color: var(--kiss-sys-color-neutral-on-medium);
 
             &:hover {
@@ -41,22 +48,20 @@
             }
         }
 
+        li:is([aria-current="page"], .active) a {
+            color: var(--kiss-sys-color-neutral-on-strong);
+        }
+
         .breadcrumb-separator {
             @apply select-none flex items-center;
 
             color: var(--kiss-sys-color-neutral-on-light);
-
             margin-inline: var(--breadcrumb-separator-mx);
 
             svg {
                 width: var(--breadcrumb-separator-icon);
                 height: var(--breadcrumb-separator-icon);
             }
-        }
-
-        li[aria-current="page"] a,
-        li.active a {
-            color: var(--kiss-sys-color-neutral-on-strong);
         }
 
         .breadcrumb-ellipsis {
@@ -66,14 +71,8 @@
         .breadcrumb-ellipsis-btn {
             @apply inline-flex items-center justify-center px-1 bg-transparent cursor-pointer border-0 leading-none transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:rounded;
 
-            color: var(--kiss-sys-color-neutral-on-medium);
-
             &:focus-visible {
                 --tw-ring-color: color-mix(in oklch, var(--breadcrumb-color) 50%, transparent);
-            }
-
-            &:hover {
-                color: var(--breadcrumb-color);
             }
 
             svg {
@@ -84,6 +83,12 @@
 
         .breadcrumb-dropdown {
             @apply min-w-40;
+
+            .dropdown-item {
+                font-size: var(--breadcrumb-text);
+                padding-block: var(--breadcrumb-item-py);
+                padding-inline: var(--breadcrumb-item-px);
+            }
         }
     }
 
@@ -117,24 +122,18 @@
         --breadcrumb-separator-mx: .25rem;
         --breadcrumb-separator-icon: .625rem;
         --breadcrumb-btn-icon: .75rem;
-
-        @apply text-xs;
-
-        .breadcrumb-dropdown .dropdown-item {
-            @apply text-xs py-1 px-2;
-        }
+        --breadcrumb-text: var(--text-xs, .75rem);
+        --breadcrumb-item-py: .25rem;
+        --breadcrumb-item-px: .5rem;
     }
 
     .breadcrumb-sm {
         --breadcrumb-separator-mx: .375rem;
         --breadcrumb-separator-icon: .625rem;
         --breadcrumb-btn-icon: .875rem;
-
-        @apply text-sm;
-
-        .breadcrumb-dropdown .dropdown-item {
-            @apply text-sm py-1.5 px-2.5;
-        }
+        --breadcrumb-text: var(--text-sm, .875rem);
+        --breadcrumb-item-py: .375rem;
+        --breadcrumb-item-px: .625rem;
     }
 
     /* Medium is the default */
@@ -143,31 +142,25 @@
         --breadcrumb-separator-mx: .625rem;
         --breadcrumb-separator-icon: 1rem;
         --breadcrumb-btn-icon: 1.25rem;
-
-        @apply text-base;
-
-        .breadcrumb-dropdown .dropdown-item {
-            @apply text-base py-2.5 px-4;
-        }
+        --breadcrumb-text: var(--text-base, 1rem);
+        --breadcrumb-item-py: .625rem;
+        --breadcrumb-item-px: 1rem;
     }
 
     .breadcrumb-xl {
         --breadcrumb-separator-mx: .75rem;
         --breadcrumb-separator-icon: 1.25rem;
         --breadcrumb-btn-icon: 1.5rem;
-
-        @apply text-lg;
-
-        .breadcrumb-dropdown .dropdown-item {
-            @apply text-lg py-3 px-5;
-        }
+        --breadcrumb-text: var(--text-lg, 1.125rem);
+        --breadcrumb-item-py: .75rem;
+        --breadcrumb-item-px: 1.25rem;
     }
 
     .breadcrumb-home-icon {
         li:first-child a {
             @apply flex items-center gap-1;
 
-            @media (max-width: 639px) {
+            @media (width <= 639px) {
                 span:not(.breadcrumb-icon) {
                     @apply sr-only;
                 }

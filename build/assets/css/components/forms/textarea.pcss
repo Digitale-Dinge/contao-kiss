@@ -52,13 +52,14 @@
         border-radius: var(--radius-box, .5rem);
         outline: none;
 
-        &:hover:not(:focus):not(:disabled) {
-            --textarea-border-opacity: 100%;
-        }
-
         &:focus {
             --textarea-border-opacity: 100%;
+
             @apply ring-1 ring-inset;
+        }
+
+        &:hover:not(:focus, :disabled) {
+            --textarea-border-opacity: 100%;
         }
 
         &.is-valid {

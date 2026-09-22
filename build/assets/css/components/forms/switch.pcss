@@ -31,10 +31,8 @@
         width: var(--switch-width);
         height: var(--switch-height);
         border-radius: var(--switch-height);
-
         background-color: var(--kiss-sys-color-neutral-surface-3);
         border: 1px solid var(--kiss-sys-color-neutral-surface-3);
-
         transition: background-color .2s, border-color .2s;
 
         &::before {
@@ -47,7 +45,7 @@
             left: var(--thumb-offset);
             transform: translateY(-50%);
             background-color: var(--kiss-sys-color-neutral-surface-1);
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px -1px rgb(0 0 0 / 10%);
             transition: transform .2s ease-out, background-color .2s;
         }
 
@@ -76,12 +74,10 @@
         @apply border;
 
         border-color: var(--kiss-sys-color-neutral-border-strong);
-
         background-color: transparent;
 
         &::before {
             background-color: var(--kiss-sys-color-neutral-border-strong);
-
             box-shadow: none;
         }
 
