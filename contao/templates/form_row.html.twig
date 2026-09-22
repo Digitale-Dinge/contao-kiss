@@ -1,45 +1,45 @@
 {% extends '@Contao/form_row.html.twig' %}
 
 {% set type_class_map = {
-    'text':     'form-input',
-    'altcha':   'form-input',
-    'captcha':  'form-input',
-    'email':    'form-input',
-    'password': 'form-input',
-    'upload':   'form-input',
-    'date':     'form-input',
+    text: 'form-input',
+    altcha: 'form-input',
+    captcha: 'form-input',
+    email: 'form-input',
+    password: 'form-input',
+    upload: 'form-input',
+    date: 'form-input',
 
-    'checkbox': 'form-checkbox',
+    checkbox: 'form-checkbox',
 
-    'radio':    'form-radio',
+    radio: 'form-radio',
 
-    'select':   'form-select',
+    select: 'form-select',
 
-    'textarea': 'form-textarea',
+    textarea: 'form-textarea',
 
-    'range':    'form-range',
+    range: 'form-range',
 } %}
 
 {% set type_prefix_map = {
-    'text':     'input',
-    'altcha':   'input',
-    'captcha':  'input',
-    'email':    'input',
-    'password': 'input',
-    'upload':   'input',
-    'date':     'input',
+    text: 'input',
+    altcha: 'input',
+    captcha: 'input',
+    email: 'input',
+    password: 'input',
+    upload: 'input',
+    date: 'input',
 
-    'checkbox': 'checkbox',
+    checkbox: 'checkbox',
 
-    'radio':    'radio',
+    radio: 'radio',
 
-    'select':   'select',
+    select: 'select',
 
-    'textarea': 'textarea',
+    textarea: 'textarea',
 
-    'range':    'range',
+    range: 'range',
 
-    'upload':   'upload',
+    upload: 'upload',
 } %}
 
 {% set type_prefix = type_prefix_map[this.type]|default %}
