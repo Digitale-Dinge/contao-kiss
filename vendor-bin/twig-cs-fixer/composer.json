@@ -6,6 +6,11 @@
         "contao/core-bundle": "^5.7 || ^6.0",
         "symfony/twig-bridge": "^7.4 || ^8.1"
     },
+    "autoload": {
+        "psr-4": {
+            "DigitaleDinge\\ContaoKiss\\Tools\\TwigCsFixer\\": "src/"
+        }
+    },
     "config": {
         "platform": {
             "php": "8.4"
