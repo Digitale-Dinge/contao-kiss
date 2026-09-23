@@ -5,6 +5,8 @@ declare(strict_types=1);
 use Contao\CoreBundle\Twig\Defer\DeferTokenParser;
 use Contao\CoreBundle\Twig\ResponseContext\AddTokenParser;
 use Contao\CoreBundle\Twig\Slots\SlotTokenParser;
+use DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\ImportSelfRule;
+use DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\SetUnderscoreRule;
 use DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\VariableNameRule;
 use TwigCsFixer\Config\Config;
 use TwigCsFixer\File\Finder;
@@ -27,14 +29,9 @@ $ruleset->addStandard(new TwigCsFixer());
 
 $ruleset->overrideRule(new CompactHashRule(true));
 $ruleset->removeRule(UpstreamVariableNameRule::class);
-$ruleset->addRule(new VariableNameRule(
-    optionalPrefix: '_',
-    ignore: [
-        'wrapperAttributes',
-        'bodyAttributes',
-        'cssID',
-    ]
-));
+$ruleset->addRule(new VariableNameRule(optionalPrefix: '_', ignore: ['wrapperAttributes', 'bodyAttributes', 'cssID']));
+$ruleset->addRule(new SetUnderscoreRule());
+$ruleset->addRule(new ImportSelfRule());
 
 $ruleset->addRule(new DirectoryNameRule(baseDirectory: $templatePath));
 $ruleset->addRule(new FileNameRule(baseDirectory: $templatePath, optionalPrefix: '_'));
