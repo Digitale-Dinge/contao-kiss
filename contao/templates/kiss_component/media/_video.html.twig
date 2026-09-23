@@ -14,9 +14,9 @@
 {% endmacro %}
 
 {% block video %}
-    {% set responsiveVideo = responsiveVideo|default|deserialize %}
+    {% set responsive_video = responsiveVideo|default|deserialize %}
 
-    {% if responsiveVideo %}
+    {% if responsive_video %}
         {% set screen_order = {desktop: 0, tablet: 1, mobile: 2} %}
         {% set media_query_map = {
             desktop: '(min-width: 64rem)',
@@ -31,7 +31,7 @@
             .set('playsinline')
         %}
 
-        {% set sources = responsiveVideo
+        {% set sources = responsive_video
             |filter(s => screen_order[s.screen] is defined)
             |sort((a, b) => screen_order[a.screen] <=> screen_order[b.screen])
         %}
