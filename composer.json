@@ -63,12 +63,13 @@
         "ci": [
             "@depcheck",
             "@unit-tests",
-            "@php vendor-bin/twig-cs-fixer/vendor/bin/twig-cs-fixer lint",
             "@twig-cs-fixer-tests",
+            "@twig-cs-fixer-lint",
             "npm --prefix build run lint"
         ],
         "depcheck": "@php vendor/bin/composer-dependency-analyser --config=depcheck.php",
         "twig-cs-fixer": "@php vendor-bin/twig-cs-fixer/vendor/bin/twig-cs-fixer fix -v",
+        "twig-cs-fixer-lint": "@php vendor-bin/twig-cs-fixer/vendor/bin/twig-cs-fixer lint",
         "twig-cs-fixer-tests": "@php vendor-bin/twig-cs-fixer/vendor/bin/phpunit -c vendor-bin/twig-cs-fixer/phpunit.xml.dist",
         "unit-tests": "@php vendor/bin/phpunit --fail-on-phpunit-notice"
     },

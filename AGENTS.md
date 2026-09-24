@@ -50,6 +50,7 @@ contao/
 translations/{de,en}/                       style_options.*, contao_tl_content.*, rsce.*
 public/dist/                                backend assets, committed and served from vendor/
 vendor-bin/                                 isolated tooling
+└── twig-cs-fixer/                          custom Twig rules and their tests
 ```
 
 PHP is PSR-4 under `src/`, tests under `tests/`. `.editorconfig` is authoritative.
@@ -153,6 +154,9 @@ For content elements there is the RSCE builder: `rsce_<name>_config.php` goes th
 existing components rather than writing new markup. Check for a builder helper before every `addField()`. Whether a
 value arrives as `data.<field>` or top-level depends on where the builder stores it — open the helper, do not guess.
 
+The linter enforces part of this section: no `include()` with variables into `kiss_component/*`, no `{% embed %}`,
+hooks enriched via `attrs(x|default)` / `.mergeWith()`, `addClass()` with its condition, no `|raw`.
+
 ## Assets
 
 - `build/vite.mjs` is the projects' Vite config. Changing a default changes every project's build.
@@ -163,13 +167,24 @@ value arrives as `data.<field>` or top-level depends on where the builder stores
 
 ## Verification
 
-Run the narrowest useful check first.
+**Every change to a `.twig` file ends with `composer twig-cs-fixer-lint` at zero errors.** Not optional, not "the
+narrowest useful check", not left to CI. A Twig change without a clean lint is not done.
+
+- Warnings in files you touched get fixed, or reported with the reason they can't be.
+- Never silence the linter: no `{# twig-cs-fixer-disable #}`, no new entries in an `ignore` list or `SHAME_ON_YOU`,
+  no edits to `.twig-cs-fixer.php`, unless the task is exactly that.
+- `composer twig-cs-fixer -- <path>` applies fixes. Pass the templates you are changing, never the whole folder, then
+  lint again.
+- Changed a rule in `vendor-bin/twig-cs-fixer/`? `composer twig-cs-fixer-tests` first, then the lint.
+
+Otherwise run the narrowest useful check first.
 
 ```bash
+composer twig-cs-fixer-lint
+composer twig-cs-fixer-tests
 composer unit-tests
 composer unit-tests -- --filter TestName
 composer depcheck
-composer twig-cs-fixer
 
 cd build && npm run lint
 
@@ -179,6 +194,7 @@ composer ci
 
 ## Self-check before handing over
 
+- `composer twig-cs-fixer-lint` ran after the last Twig change: zero errors, no new warnings, nothing silenced?
 - `grep` every new identifier: listener, DCA, template and translations consistent, no orphans?
 - `php -l` on changed PHP files, parse changed YAML.
 - DE **and** EN translations present?
