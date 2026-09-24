@@ -20,7 +20,7 @@
     "require": {
         "php": "^8.4",
         "contao/core-bundle": "^5.7 || ^6.0",
-        "digitaledinge/contao-company": "0.1.*",
+        "digitaledinge/contao-company": "0.2.*",
         "digitaledinge/contao-grid-ratio-widget": "^1.0",
         "doctrine/dbal": "^3.7 || ^4.3",
         "lukasbableck/contao-svg-icon-picker-bundle": "^1.2",
