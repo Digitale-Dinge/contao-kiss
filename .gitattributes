@@ -2,6 +2,7 @@
 /.editorconfig export-ignore
 /.gitattributes export-ignore
 /.github export-ignore
+/.githooks export-ignore
 /.gitignore export-ignore
 /.twig-cs-fixer.php export-ignore
 /AGENTS.md export-ignore
