@@ -31,11 +31,11 @@ jobs:
               with:
                   working-directory: vendor-bin/twig-cs-fixer
 
-            - name: Run Twig CS Fixer
-              run: vendor-bin/twig-cs-fixer/vendor/bin/twig-cs-fixer lint
-
             - name: Run the Twig CS Fixer rule tests
               run: vendor-bin/twig-cs-fixer/vendor/bin/phpunit -c vendor-bin/twig-cs-fixer/phpunit.xml.dist
+
+            - name: Run Twig CS Fixer
+              run: vendor-bin/twig-cs-fixer/vendor/bin/twig-cs-fixer lint
 
     depcheck:
         name: Dependency analyser
