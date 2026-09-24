@@ -1,0 +1,30 @@
+{
+    "require": {
+        "vincentlanglet/twig-cs-fixer": "^4.1"
+    },
+    "require-dev": {
+        "contao/core-bundle": "^5.7 || ^6.0",
+        "symfony/twig-bridge": "^7.4 || ^8.1",
+        "phpunit/phpunit": "^13.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "DigitaleDinge\\ContaoKiss\\Tools\\TwigCsFixer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DigitaleDinge\\ContaoKiss\\Tools\\TwigCsFixer\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "8.4.15"
+        },
+        "allow-plugins": {
+            "contao-components/installer": false,
+            "contao/manager-plugin": false,
+            "php-http/discovery": true
+        }
+    }
+}

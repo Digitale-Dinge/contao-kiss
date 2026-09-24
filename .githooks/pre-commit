@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+
+if echo "$staged" | grep -q '^vendor-bin/twig-cs-fixer/'; then
+    composer twig-cs-fixer-tests
+fi
+
+if echo "$staged" | grep -qE '^(contao/templates/|vendor-bin/twig-cs-fixer/|\.twig-cs-fixer\.php$)'; then
+    composer twig-cs-fixer-lint
+fi
+
+if echo "$staged" | grep -q '^build/assets/'; then
+    (cd build && npx biome ci assets && npx stylelint "assets/**/*.{css,pcss}" --allow-empty-input)
+fi

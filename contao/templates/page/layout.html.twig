@@ -1,6 +1,6 @@
 {% extends '@Contao/page/layout.html.twig' %}
 
-{# Add KISS base classes to body #}
+{# Add base classes to body #}
 {% set body_attributes = attrs()
     .addClass(['text-neutral-on-strong', 'min-h-screen'])
     .mergeWith(body_attributes|default)
@@ -11,10 +11,17 @@
     {% block head_kiss %}
         {{ include('@Contao/kiss_component/theme/_init_script.html.twig') }}
     {% endblock %}
+    {% block kiss_theme_assets %}
+        {% set theme_entry = kiss_theme_entry|default('app') %}
+        {% if reprise_entry_exists(theme_entry) %}
+            <script type="module" src="{{ asset(theme_entry ~ '.js', 'kiss_theme') }}" data-turbo-track="reload"></script>
+            <link rel="stylesheet" href="{{ asset(theme_entry ~ '.css', 'kiss_theme') }}" data-turbo-track="reload">
+        {% endif %}
+    {% endblock %}
 {% endblock %}
 
 {% block body_content %}
-    <header{{ attrs(header_attributes|default).set('id', 'header')}}>
+    <header{{ attrs(header_attributes|default).set('id', 'header') }}>
         {% slot header_meta %}
             <div{{ attrs().addClass(['header-meta']).mergeWith(header_meta_attributes|default) }}>
                 <div{{ attrs().addClass(['inside', styles.container]).mergeWith(header_meta_inside_attribute|default) }}>

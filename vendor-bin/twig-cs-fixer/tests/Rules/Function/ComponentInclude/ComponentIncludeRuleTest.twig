@@ -1,0 +1,7 @@
+{{ include('@Contao/kiss_component/status/_badge.html.twig', {text: 'a'}) }}
+{{ include('@Contao/kiss_component/media/_icon_text.html.twig', data|merge({text: 'a'})) }}
+{% include '@Contao/kiss_component/status/_alert.html.twig' with {text: 'a'} %}
+{{ include('@Contao/kiss_component/media/_icon_include.html.twig', {icon: 'x'}) }}
+{{ include('@Contao/kiss_component/status/_badge.html.twig') }}
+{% include '@Contao/kiss_component/status/_alert.html.twig' %}
+{{ include('@Contao/component/_figure.html.twig', {figure: figure}) }}

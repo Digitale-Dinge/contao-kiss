@@ -18,10 +18,10 @@
 
 {% macro get_cols_class(key) %}
     {% set cols = key[5:] %}
-    {{- _self.cols_class(cols)}}
+    {{- _self.cols_class(cols) }}
 {% endmacro %}
 
 {% macro cols_style(cols) %}
-    {% set cols_key = styles.column(cols)  %}
+    {% set cols_key = styles.column(cols) %}
     {{- _self.get_cols_class(cols_key) -}}
 {% endmacro %}

@@ -1,0 +1,206 @@
+/**
+ * KISS Textarea Component
+ *
+ * Extends input patterns for multi-line text.
+ *
+ * Base: .form-textarea
+ * Styles: textarea-{soft} (outline is default)
+ * Colors: textarea-{primary|secondary|tertiary|success|warning|error}
+ * Sizes: textarea-{xs|sm|lg|xl}
+ * States: is-valid, is-invalid, disabled, readonly
+ *
+ * Floating Label:
+ *   .textarea-floating       - Wrapper for floating label
+ *   .textarea-floating-label - The floating label
+ *
+ * Example:
+ *   <textarea class="form-textarea textarea-primary" placeholder="Enter message"></textarea>
+ *
+ * Floating Example:
+ *   <div class="textarea-floating">
+ *     <textarea class="form-textarea" placeholder=" "></textarea>
+ *     <label class="textarea-floating-label">Your Message</label>
+ *   </div>
+ */
+@layer components {
+    .form-textarea {
+        --textarea-color: var(--kiss-sys-color-neutral-on-strong);
+        --textarea-border-opacity: 60%;
+        --textarea-px: .75rem;
+        --textarea-py: .625rem;
+        --textarea-text: var(--text-base, 1rem);
+        --textarea-min-h: 6rem;
+        --textarea-label-color: var(--textarea-color);
+        --textarea-label-bg: var(--kiss-sys-color-neutral-surface-1);
+        --tw-ring-color: var(--textarea-color);
+
+        @apply block w-full bg-transparent resize-y transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed read-only:cursor-default leading-relaxed;
+
+        &::placeholder {
+            color: var(--kiss-sys-color-neutral-on-light);
+        }
+
+        &:read-only {
+            background-color: color-mix(in oklab, var(--kiss-sys-color-neutral-surface-2) 50%, transparent);
+        }
+
+        box-sizing: border-box;
+        font-size: var(--textarea-text);
+        padding: var(--textarea-py) var(--textarea-px);
+        min-height: var(--textarea-min-h);
+        border: 1px solid color-mix(in oklch, var(--textarea-color) var(--textarea-border-opacity), transparent);
+        border-radius: var(--radius-box, .5rem);
+        outline: none;
+
+        &:focus {
+            --textarea-border-opacity: 100%;
+
+            @apply ring-1 ring-inset;
+        }
+
+        &:hover:not(:focus, :disabled) {
+            --textarea-border-opacity: 100%;
+        }
+
+        &.is-valid {
+            --textarea-color: var(--kiss-sys-color-status-success-solid);
+        }
+
+        &.is-invalid {
+            --textarea-color: var(--kiss-sys-color-status-error-solid);
+        }
+    }
+
+    /* Variants */
+    .textarea-soft {
+        background-color: color-mix(in oklch, var(--textarea-color) 10%, transparent);
+    }
+
+    /* Colors */
+    .textarea-primary {
+        --textarea-color: var(--kiss-sys-color-brand-primary-solid);
+    }
+
+    .textarea-secondary {
+        --textarea-color: var(--kiss-sys-color-brand-secondary-solid);
+    }
+
+    .textarea-tertiary {
+        --textarea-color: var(--kiss-sys-color-brand-tertiary-solid);
+    }
+
+    .textarea-success {
+        --textarea-color: var(--kiss-sys-color-status-success-solid);
+    }
+
+    .textarea-warning {
+        --textarea-color: var(--kiss-sys-color-status-warning-solid);
+    }
+
+    .textarea-error {
+        --textarea-color: var(--kiss-sys-color-status-error-solid);
+    }
+
+    /* Sizes */
+    .textarea-xs {
+        --textarea-px: .5rem;
+        --textarea-py: .375rem;
+        --textarea-text: var(--text-xs, .75rem);
+        --textarea-min-h: 4rem;
+    }
+
+    .textarea-sm {
+        --textarea-px: .625rem;
+        --textarea-py: .5rem;
+        --textarea-text: var(--text-sm, .875rem);
+        --textarea-min-h: 5rem;
+    }
+
+    .textarea-lg {
+        --textarea-px: 1rem;
+        --textarea-py: .75rem;
+        --textarea-text: var(--text-lg, 1.125rem);
+        --textarea-min-h: 8rem;
+    }
+
+    .textarea-xl {
+        --textarea-px: 1.25rem;
+        --textarea-py: .875rem;
+        --textarea-text: var(--text-xl, 1.25rem);
+        --textarea-min-h: 10rem;
+    }
+
+    /* Resize options */
+    .resize-none { resize: none; }
+    .resize-x    { resize: horizontal; }
+    .resize-both { resize: both; }
+
+    /* Floating label */
+    .textarea-floating-label {
+        @apply absolute pointer-events-none origin-left overflow-hidden text-ellipsis whitespace-nowrap bg-transparent px-0;
+
+        left: var(--textarea-px, .75rem);
+        top: .75rem;
+        font-size: var(--textarea-text, var(--text-base, 1rem));
+        color: color-mix(in oklch, var(--kiss-sys-color-neutral-on-strong) 50%, transparent);
+        max-width: calc(100% - 1.5rem);
+        transition: top .15s ease-out, translate .15s ease-out, scale .15s ease-out, background-color .15s ease-out, padding .15s ease-out;
+    }
+
+    .textarea-floating {
+        @apply relative;
+
+        .form-textarea {
+            @apply placeholder-transparent;
+        }
+
+        &:focus-within,
+        &:has(.form-textarea:not(:placeholder-shown)) {
+            .textarea-floating-label {
+                @apply pointer-events-auto font-medium px-1;
+
+                top: 0;
+                color: var(--textarea-label-color);
+                background: var(--textarea-label-bg);
+                translate: 0 calc(-50% - .0625em);
+                scale: .75;
+            }
+        }
+
+        &.bg-neutral-surface-1 {
+            --textarea-label-bg: var(--kiss-sys-color-neutral-surface-1);
+        }
+
+        &.bg-neutral-surface-2 {
+            --textarea-label-bg: var(--kiss-sys-color-neutral-surface-2);
+        }
+
+        &.bg-neutral-surface-3 {
+            --textarea-label-bg: var(--kiss-sys-color-neutral-surface-3);
+        }
+
+        &.bg-primary-solid {
+            --textarea-label-bg: var(--kiss-sys-color-brand-primary-solid);
+        }
+
+        &.bg-secondary-solid {
+            --textarea-label-bg: var(--kiss-sys-color-brand-secondary-solid);
+        }
+
+        &.bg-tertiary-solid {
+            --textarea-label-bg: var(--kiss-sys-color-brand-tertiary-solid);
+        }
+
+        &.bg-status-success-solid {
+            --textarea-label-bg: var(--kiss-sys-color-status-success-solid);
+        }
+
+        &.bg-status-warning-solid {
+            --textarea-label-bg: var(--kiss-sys-color-status-warning-solid);
+        }
+
+        &.bg-status-error-solid {
+            --textarea-label-bg: var(--kiss-sys-color-status-error-solid);
+        }
+    }
+}

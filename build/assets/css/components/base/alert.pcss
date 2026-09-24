@@ -1,0 +1,175 @@
+/**
+ * KISS Alert Component
+ *
+ * Base: .alert
+ * Sections: alert-{icon|content|title|description}
+ * Sizes: alert-{xs|sm|lg|xl}
+ * Styles: alert-{soft|outline|dashed}
+ * Colors: alert-{primary|secondary|tertiary|success|warning|error}
+ *
+ * Every modifier only swaps custom properties, so a consumer can restyle the
+ * component by redefining --alert-* (or the --kiss-comp-alert-* tokens) instead
+ * of overriding rules.
+ *
+ * Example: <div class="alert alert-success alert-soft alert-lg">Success message</div>
+ */
+@layer components {
+    .alert {
+        --alert-bg: var(--kiss-comp-alert-color-background, var(--kiss-sys-color-neutral-surface-2));
+        --alert-fg: var(--kiss-comp-alert-color-foreground, var(--kiss-sys-color-neutral-on-strong));
+        --alert-border: var(--kiss-comp-alert-color-border, var(--kiss-sys-color-neutral-surface-3));
+        --alert-border-opacity: 100%;
+        --alert-ring: var(--kiss-sys-color-neutral-on-strong);
+        --alert-px: var(--kiss-comp-alert-spacing-padding-inline, 1rem);
+        --alert-py: var(--kiss-comp-alert-spacing-padding-block, 1rem);
+        --alert-gap: var(--kiss-comp-alert-spacing-gap, .75rem);
+        --alert-text: var(--text-base, 1rem);
+        --alert-title-text: var(--alert-text);
+        --alert-description-text: var(--text-sm, .875rem);
+        --alert-icon-size: 1.25em;
+
+        @apply flex items-start transition-all duration-200;
+
+        padding: var(--alert-py) var(--alert-px);
+        gap: var(--alert-gap);
+        font-size: var(--alert-text);
+        border-width: var(--kiss-comp-alert-border-width-default, var(--border-width-thin, 1px));
+        border-style: solid;
+        border-color: color-mix(in oklch, var(--alert-border) var(--alert-border-opacity), transparent);
+        border-radius: var(--kiss-comp-alert-border-radius-default, var(--radius-box, .5rem));
+        box-shadow: var(--shadow, none);
+        background: var(--alert-bg);
+        color: var(--alert-fg);
+    }
+
+    /* Sections */
+    .alert-icon {
+        @apply shrink-0;
+
+        width: var(--alert-icon-size);
+        height: var(--alert-icon-size);
+        margin-top: calc((1em * 1.5 - var(--alert-icon-size)) / 2);
+
+        svg {
+            @apply w-full h-full;
+        }
+    }
+
+    .alert-content {
+        @apply flex-1 min-w-0;
+    }
+
+    .alert-title {
+        @apply font-semibold mb-1;
+
+        font-size: var(--alert-title-text);
+        color: inherit;
+    }
+
+    .alert-description {
+        @apply opacity-90;
+
+        font-size: var(--alert-description-text);
+    }
+
+    /* Sizes */
+    .alert-xs {
+        --alert-px: .625rem;
+        --alert-py: .5rem;
+        --alert-gap: .5rem;
+        --alert-text: var(--text-xs, .75rem);
+        --alert-description-text: var(--text-xs, .75rem);
+    }
+
+    .alert-sm {
+        --alert-px: .75rem;
+        --alert-py: .75rem;
+        --alert-gap: .625rem;
+        --alert-text: var(--text-sm, .875rem);
+        --alert-description-text: var(--text-xs, .75rem);
+    }
+
+    /* Medium is the default */
+
+    .alert-lg {
+        --alert-px: 1.25rem;
+        --alert-py: 1.25rem;
+        --alert-gap: 1rem;
+        --alert-text: var(--text-lg, 1.125rem);
+        --alert-description-text: var(--text-base, 1rem);
+    }
+
+    .alert-xl {
+        --alert-px: 1.5rem;
+        --alert-py: 1.5rem;
+        --alert-gap: 1.25rem;
+        --alert-text: var(--text-xl, 1.25rem);
+        --alert-description-text: var(--text-lg, 1.125rem);
+    }
+
+    /* Colors */
+    .alert-primary {
+        --alert-bg: var(--kiss-sys-color-brand-primary-solid);
+        --alert-fg: var(--kiss-sys-color-brand-primary-on-solid);
+        --alert-border: var(--kiss-sys-color-brand-primary-border);
+        --alert-ring: var(--kiss-sys-color-brand-primary-solid);
+    }
+
+    .alert-secondary {
+        --alert-bg: var(--kiss-sys-color-brand-secondary-solid);
+        --alert-fg: var(--kiss-sys-color-brand-secondary-on-solid);
+        --alert-border: var(--kiss-sys-color-brand-secondary-border);
+        --alert-ring: var(--kiss-sys-color-brand-secondary-solid);
+    }
+
+    .alert-tertiary {
+        --alert-bg: var(--kiss-sys-color-brand-tertiary-solid);
+        --alert-fg: var(--kiss-sys-color-brand-tertiary-on-solid);
+        --alert-border: var(--kiss-sys-color-brand-tertiary-border);
+        --alert-ring: var(--kiss-sys-color-brand-tertiary-solid);
+    }
+
+    .alert-success {
+        --alert-bg: var(--kiss-sys-color-status-success-solid);
+        --alert-fg: var(--kiss-sys-color-status-success-on-solid);
+        --alert-border: var(--kiss-sys-color-status-success-border);
+        --alert-ring: var(--kiss-sys-color-status-success-solid);
+    }
+
+    .alert-warning {
+        --alert-bg: var(--kiss-sys-color-status-warning-solid);
+        --alert-fg: var(--kiss-sys-color-status-warning-on-solid);
+        --alert-border: var(--kiss-sys-color-status-warning-border);
+        --alert-ring: var(--kiss-sys-color-status-warning-solid);
+    }
+
+    .alert-error {
+        --alert-bg: var(--kiss-sys-color-status-error-solid);
+        --alert-fg: var(--kiss-sys-color-status-error-on-solid);
+        --alert-border: var(--kiss-sys-color-status-error-border);
+        --alert-ring: var(--kiss-sys-color-status-error-solid);
+    }
+
+    /* Variants */
+    .alert-soft {
+        --alert-bg: color-mix(in oklch, var(--alert-ring) 10%, transparent);
+        --alert-fg: var(--alert-ring);
+        --alert-border: var(--alert-ring);
+        --alert-border-opacity: 20%;
+    }
+
+    .alert-outline {
+        --alert-bg: transparent;
+        --alert-fg: var(--alert-ring);
+        --alert-border: var(--alert-ring);
+        --alert-border-opacity: 30%;
+    }
+
+    .alert-dashed {
+        --alert-bg: transparent;
+        --alert-fg: var(--alert-ring);
+        --alert-border: currentcolor;
+
+        border-style: dashed;
+    }
+}

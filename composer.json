@@ -26,11 +26,25 @@
         "lukasbableck/contao-svg-icon-picker-bundle": "^1.2",
         "madeyourday/contao-rocksolid-custom-elements": "^2.4.15",
         "mvo/contao-group-widget": "^1.6",
+        "symfony/asset": "^7.4 || ^8.0",
+        "symfony/config": "^7.4 || ^8.0",
+        "symfony/console": "^7.4 || ^8.0",
+        "symfony/dependency-injection": "^7.4 || ^8.0",
+        "symfony/deprecation-contracts": "^3.0",
+        "symfony/event-dispatcher": "^7.4 || ^8.0",
+        "symfony/event-dispatcher-contracts": "^3.0",
+        "symfony/http-kernel": "^7.4.11 || ^8.0",
+        "symfony/reprise": "^1.1",
+        "symfony/translation": "^7.4 || ^8.0",
+        "symfony/translation-contracts": "^3.0",
+        "symfony/uid": "^7.4 || ^8.0",
         "twig/intl-extra": "^3.18",
+        "twig/twig": "^3.23",
         "zoglo/contao-collection-widget": "^1.0",
         "zoglo/contao-radio-image-widget": "^1.0"
     },
     "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.8",
         "contao/manager-plugin": "^2.0",
         "shipmonk/composer-dependency-analyser": "^1.8",
         "phpunit/phpunit": "^13.3"
@@ -46,14 +60,29 @@
         }
     },
     "scripts": {
+        "ci": [
+            "@depcheck",
+            "@unit-tests",
+            "@twig-cs-fixer-tests",
+            "@twig-cs-fixer-lint",
+            "npm --prefix build run lint"
+        ],
         "depcheck": "@php vendor/bin/composer-dependency-analyser --config=depcheck.php",
+        "twig-cs-fixer": "@php vendor-bin/twig-cs-fixer/vendor/bin/twig-cs-fixer fix -v",
+        "twig-cs-fixer-lint": "@php vendor-bin/twig-cs-fixer/vendor/bin/twig-cs-fixer lint",
+        "twig-cs-fixer-tests": "@php vendor-bin/twig-cs-fixer/vendor/bin/phpunit -c vendor-bin/twig-cs-fixer/phpunit.xml.dist",
         "unit-tests": "@php vendor/bin/phpunit --fail-on-phpunit-notice"
     },
     "extra": {
+        "bamarni-bin": {
+            "bin-links": false,
+            "forward-command": false
+        },
         "contao-manager-plugin": "DigitaleDinge\\ContaoKiss\\ContaoManager\\Plugin"
     },
     "config": {
         "allow-plugins": {
+            "bamarni/composer-bin-plugin": true,
             "contao-components/installer": true,
             "php-http/discovery": false,
             "contao/manager-plugin": true

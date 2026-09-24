@@ -1,0 +1,90 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\Variable;
+
+use TwigCsFixer\Rules\AbstractRule;
+use TwigCsFixer\Rules\ConfigurableRuleInterface;
+use TwigCsFixer\Token\Token;
+use TwigCsFixer\Token\Tokens;
+use TwigCsFixer\Util\StringUtil;
+use Webmozart\Assert\Assert;
+
+final class VariableNameRule extends AbstractRule implements ConfigurableRuleInterface
+{
+    // Kebab case is not a valid case for variable names.
+    public const string SNAKE_CASE = 'snake_case';
+    public const string CAMEL_CASE = 'camelCase';
+    public const string PASCAL_CASE = 'PascalCase';
+
+    /**
+     * @param self::*      $case
+     * @param list<string> $ignore
+     */
+    public function __construct(
+        private readonly string $case = self::SNAKE_CASE,
+        private readonly string $optionalPrefix = '',
+        private readonly array $ignore = [],
+    ) {
+    }
+
+    public function getConfiguration(): array
+    {
+        return [
+            'case' => $this->case,
+            'optionalPrefix' => $this->optionalPrefix,
+            'ignore' => $this->ignore,
+        ];
+    }
+
+    protected function process(int $tokenIndex, Tokens $tokens): void
+    {
+        $token = $tokens->get($tokenIndex);
+
+        if ($token->isMatching(Token::BLOCK_NAME_TYPE, 'set')) {
+            $nameTokenIndex = $tokens->findNext(Token::NAME_TYPE, $tokenIndex);
+            Assert::notFalse($nameTokenIndex, 'A BLOCK_NAME_TYPE "set" must be followed by a name');
+
+            $this->validateVariable($tokens->get($nameTokenIndex));
+        } elseif ($token->isMatching(Token::BLOCK_NAME_TYPE, 'for')) {
+            $nameTokenIndex = $tokens->findNext(Token::NAME_TYPE, $tokenIndex);
+            Assert::notFalse($nameTokenIndex, 'A BLOCK_NAME_TYPE "for" must be followed by a name');
+
+            $secondNameTokenIndex = $tokens->findNext([Token::NAME_TYPE, Token::OPERATOR_TYPE], $nameTokenIndex + 1);
+            Assert::notFalse($secondNameTokenIndex, 'A BLOCK_NAME_TYPE "for" must use the "in" operator');
+
+            $this->validateVariable($tokens->get($nameTokenIndex));
+            if ($tokens->get($secondNameTokenIndex)->isMatching(Token::NAME_TYPE)) {
+                $this->validateVariable($tokens->get($secondNameTokenIndex));
+            }
+        }
+    }
+
+    private function validateVariable(Token $token): void
+    {
+        $name = $token->getValue();
+        if (\in_array($name, $this->ignore, true)) {
+            return;
+        }
+
+        $prefix = '';
+        if (str_starts_with($name, $this->optionalPrefix)) {
+            $prefix = $this->optionalPrefix;
+            $name = substr($name, \strlen($this->optionalPrefix));
+        }
+
+        $expected = match ($this->case) {
+            self::SNAKE_CASE => StringUtil::toSnakeCase($name),
+            self::CAMEL_CASE => StringUtil::toCamelCase($name),
+            self::PASCAL_CASE => StringUtil::toPascalCase($name),
+        };
+
+        if ($expected !== $name) {
+            $this->addError(
+                \sprintf('The var name must use %s; expected %s.', $this->case, $prefix.$expected),
+                $token,
+            );
+        }
+    }
+}

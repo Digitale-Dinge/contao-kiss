@@ -1,0 +1,8 @@
+{% set attributes = attrs()
+    .addClass('card-' ~ styles.size(data.elementSize|default))
+    .addClass('badge-' ~ item.variant|default)
+    .addClass('card-' ~ styles.size(data.elementSize|default), data.elementSize|default)
+    .addClass('grid gap-4 ' ~ grid.cols_class(items|default(4)))
+    .addClass(['card', 'card-' ~ styles.size(size)])
+    .addClass('card')
+%}

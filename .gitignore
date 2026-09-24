@@ -1,5 +1,8 @@
 /.idea/
+/.phpunit.cache/
+/build/node_modules/
+/build/package-lock.json
 /composer.lock
-/node_modules/
 /vendor
-/package-lock.json
+/vendor-bin/*/.phpunit.cache/
+/vendor-bin/*/vendor/

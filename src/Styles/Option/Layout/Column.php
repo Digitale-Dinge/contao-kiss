@@ -7,6 +7,10 @@ namespace DigitaleDinge\ContaoKiss\Styles\Option\Layout;
 use Contao\CoreBundle\Translation\TranslatableLabelInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 
+/**
+ * Outputs the `cols_` value in the template, we should however use the grid/_macro to resolve these values
+ * See templates/kiss_component/_content_wrapper.html.twig for the resolution.
+ */
 enum Column: string implements TranslatableLabelInterface
 {
     case one = 'cols_1';

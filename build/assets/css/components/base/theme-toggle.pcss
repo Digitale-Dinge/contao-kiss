@@ -1,0 +1,135 @@
+/**
+ * Animated Sun/Moon Theme Toggle
+ *
+ * Use together with the Twig template: @Contao/kiss_component/theme/_toggle.html.twig
+ *
+ * Features:
+ * - Sun to moon morphing animation
+ * - Spring-like easing curves
+ * - Wiggle hover effect
+ * - Respects light/dark mode
+ */
+.theme-toggle {
+    --theme-toggle-ease-bounce: cubic-bezier(0.175, .885, .32, 1.275);
+    --theme-toggle-ease-smooth: cubic-bezier(0.34, 1.56, .64, 1);
+
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: .5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+
+    &:focus-visible {
+        outline: 2px solid currentcolor;
+        outline-offset: 2px;
+    }
+}
+
+@keyframes wiggle-sun {
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(-5deg); }
+    40% { transform: rotate(5deg); }
+    60% { transform: rotate(-3deg); }
+    80% { transform: rotate(3deg); }
+}
+
+@keyframes wiggle-moon {
+    0%, 100% { transform: rotate(-45deg); }
+    20% { transform: rotate(-57deg); }
+    40% { transform: rotate(-33deg); }
+    60% { transform: rotate(-53deg); }
+    80% { transform: rotate(-37deg); }
+}
+
+.theme-toggle__icon {
+    display: block;
+    transform-origin: center;
+    transition: transform .5s var(--theme-toggle-ease-bounce);
+    overflow: visible;
+
+    .dark & {
+        transform: rotate(-45deg);
+    }
+
+    .theme-toggle:hover & {
+        animation: wiggle-sun .4s ease-out;
+    }
+
+    .dark .theme-toggle:hover & {
+        animation: wiggle-moon .4s ease-out;
+    }
+}
+
+.theme-toggle__rays {
+    transform-origin: center;
+    transition:
+            transform .4s var(--theme-toggle-ease-smooth),
+            opacity .3s ease;
+    transform: scale(1);
+    opacity: 1;
+
+    line {
+        stroke: currentcolor;
+    }
+
+    html.dark & {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.theme-toggle__circle {
+    transform-origin: center;
+    transition: transform .5s var(--theme-toggle-ease-bounce);
+    transform: scale(1);
+
+    html.dark & {
+        transform: scale(1.8);
+    }
+}
+
+.theme-toggle__mask {
+    transition: transform .5s var(--theme-toggle-ease-bounce);
+    transform: translateX(20px);
+
+    html.dark & {
+        transform: translateX(0);
+    }
+}
+
+.theme-toggle--simple {
+    .theme-toggle__sun,
+    .theme-toggle__moon {
+        transition:
+                transform .3s var(--theme-toggle-ease-bounce),
+                opacity .2s ease;
+    }
+
+    .theme-toggle__sun {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+
+    .theme-toggle__moon {
+        position: absolute;
+        transform: scale(0.5) rotate(-90deg);
+        opacity: 0;
+    }
+
+    .dark & {
+        .theme-toggle__sun {
+            transform: scale(0.5) rotate(90deg);
+            opacity: 0;
+        }
+
+        .theme-toggle__moon {
+            transform: scale(1) rotate(0deg);
+            opacity: 1;
+        }
+    }
+}

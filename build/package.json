@@ -1,0 +1,43 @@
+{
+    "name": "@digitaledinge/contao-kiss",
+    "version": "0.0.0",
+    "license": "GPL-3.0-or-later",
+    "type": "module",
+    "exports": {
+        ".": "./assets/js/index.js",
+        "./vite": "./vite.mjs",
+        "./css": {
+            "style": "./assets/css/index.pcss"
+        },
+        "./css/*": {
+            "style": "./assets/css/*.pcss"
+        }
+    },
+    "files": [
+        "assets",
+        "vite.mjs"
+    ],
+    "dependencies": {
+        "@symfony/reprise": "^1.1",
+        "@tailwindcss/vite": "^4.3",
+        "browserslist-to-esbuild": "^2.1",
+        "tailwindcss": "^4.1",
+        "vite": "^8.2"
+    },
+    "peerDependencies": {
+        "@hotwired/stimulus": "^3.2"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^2.3",
+        "@dreamsicle.io/stylelint-config-tailwindcss": "^1.2",
+        "@hotwired/stimulus": "^3.2",
+        "npm-run-all": "^4.1",
+        "stylelint": "^16.23",
+        "stylelint-config-standard": "^39.0"
+    },
+    "scripts": {
+        "lint:js": "biome check --write --unsafe assets/js",
+        "lint:css": "stylelint --fix \"assets/**/*.{css,pcss}\" --allow-empty-input",
+        "lint": "run-s lint:js lint:css"
+    }
+}

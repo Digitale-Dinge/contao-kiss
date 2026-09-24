@@ -1,0 +1,163 @@
+/**
+ * KISS Range Component
+ *
+ * Base: .form-range
+ * Colors: range-{primary|secondary|tertiary|success|warning|error}
+ * Sizes: range-{xs|sm|lg|xl}
+ * States: disabled
+ *
+ * Example:
+ *   <input type="range" class="form-range range-primary" min="0" max="100" value="50">
+ */
+@layer components {
+    .widget-range {
+        --range-thumb-size: 1.25rem;
+        --range-track-height: .5rem;
+        --range-thumb-color: var(--kiss-sys-color-neutral-on-strong);
+        --range-track-color: var(--kiss-sys-color-neutral-surface-2);
+        --range-fill-color: var(--kiss-sys-color-neutral-on-strong);
+    }
+
+    .form-range {
+        @apply w-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+
+        appearance: none;
+        background: transparent;
+        height: var(--range-thumb-size);
+
+        /* Webkit (Chrome, Safari, Edge) */
+        &::-webkit-slider-runnable-track {
+            @apply w-full;
+
+            height: var(--range-track-height);
+            background: var(--range-track-color);
+            border-radius: var(--radius-field, 9999px);
+        }
+
+        &::-webkit-slider-thumb {
+            appearance: none;
+            width: var(--range-thumb-size);
+            height: var(--range-thumb-size);
+            background: var(--range-thumb-color);
+            border: none;
+            border-radius: 50%;
+            margin-top: calc((var(--range-track-height) - var(--range-thumb-size)) / 2);
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+
+        &:hover:not(:disabled)::-webkit-slider-thumb {
+            transform: scale(1.1);
+        }
+
+        &:active:not(:disabled)::-webkit-slider-thumb {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 4px color-mix(in oklab, var(--range-thumb-color) 20%, transparent);
+        }
+
+        /* Gecko (Firefox) */
+        &::-moz-range-track {
+            @apply w-full;
+
+            height: var(--range-track-height);
+            background: var(--range-track-color);
+            border-radius: var(--radius-field, 9999px);
+            border: none;
+        }
+
+        &::-moz-range-thumb {
+            appearance: none;
+            width: var(--range-thumb-size);
+            height: var(--range-thumb-size);
+            background: var(--range-thumb-color);
+            border: none;
+            border-radius: 50%;
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+
+        &:hover:not(:disabled)::-moz-range-thumb {
+            transform: scale(1.1);
+        }
+
+        &:active:not(:disabled)::-moz-range-thumb {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 4px color-mix(in oklab, var(--range-thumb-color) 20%, transparent);
+        }
+    }
+
+    .range-fill {
+        /* WebKit */
+        &::-webkit-slider-runnable-track {
+            background: linear-gradient(
+                    to right,
+                    var(--range-fill-color) var(--range-fill-percent, 0%),
+                    var(--range-track-color) var(--range-fill-percent, 0%)
+            );
+        }
+
+        /* Gecko (Firefox) */
+        &::-moz-range-progress {
+            height: var(--range-track-height);
+            background: var(--range-fill-color);
+            border-radius: var(--radius-field, 9999px);
+        }
+    }
+
+    /* Colors */
+    .range-primary {
+        --range-thumb-color: var(--kiss-sys-color-brand-primary-solid);
+        --range-fill-color: var(--kiss-sys-color-brand-primary-solid);
+    }
+
+    .range-secondary {
+        --range-thumb-color: var(--kiss-sys-color-brand-secondary-solid);
+        --range-fill-color: var(--kiss-sys-color-brand-secondary-solid);
+    }
+
+    .range-tertiary {
+        --range-thumb-color: var(--kiss-sys-color-brand-tertiary-solid);
+        --range-fill-color: var(--kiss-sys-color-brand-tertiary-solid);
+    }
+
+    .range-success {
+        --range-thumb-color: var(--kiss-sys-color-status-success-solid);
+        --range-fill-color: var(--kiss-sys-color-status-success-solid);
+    }
+
+    .range-warning {
+        --range-thumb-color: var(--kiss-sys-color-status-warning-solid);
+        --range-fill-color: var(--kiss-sys-color-status-warning-solid);
+    }
+
+    .range-error {
+        --range-thumb-color: var(--kiss-sys-color-status-error-solid);
+        --range-fill-color: var(--kiss-sys-color-status-error-solid);
+    }
+
+    /* Sizes */
+    .range-xs {
+        --range-thumb-size: .75rem;
+        --range-track-height: .25rem;
+    }
+
+    .range-sm {
+        --range-thumb-size: 1rem;
+        --range-track-height: .375rem;
+    }
+
+    /* Default is already defined in base */
+
+    .range-lg {
+        --range-thumb-size: 1.5rem;
+        --range-track-height: .625rem;
+    }
+
+    .range-xl {
+        --range-thumb-size: 1.75rem;
+        --range-track-height: .75rem;
+    }
+
+    /* Helper class */
+    .range-color {
+        color: var(--range-fill-color);
+    }
+}

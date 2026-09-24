@@ -1,0 +1,47 @@
+/**
+ * KISS Upload Component
+ *
+ * Skins the native file-picker button on <input type="file">.
+ *
+ * Base: input.upload
+ * Colors: upload-{primary|secondary|tertiary|success|warning|error}
+ *
+ * Example: <input type="file" class="upload upload-primary">
+ */
+@layer components {
+    input.upload::file-selector-button {
+        background-color: var(--file-button-color, var(--kiss-sys-color-neutral-on-strong));
+        color: var(--file-text-color, var(--color-white));
+    }
+
+    /* Colors */
+    .upload-primary {
+        --file-button-color: var(--kiss-sys-color-brand-primary-solid);
+        --file-text-color: var(--kiss-sys-color-brand-primary-on-solid);
+    }
+
+    .upload-secondary {
+        --file-button-color: var(--kiss-sys-color-brand-secondary-solid);
+        --file-text-color: var(--kiss-sys-color-brand-secondary-on-solid);
+    }
+
+    .upload-tertiary {
+        --file-button-color: var(--kiss-sys-color-brand-tertiary-solid);
+        --file-text-color: var(--kiss-sys-color-brand-tertiary-on-solid);
+    }
+
+    .upload-success {
+        --file-button-color: var(--kiss-sys-color-status-success-solid);
+        --file-text-color: var(--kiss-sys-color-status-success-on-solid);
+    }
+
+    .upload-warning {
+        --file-button-color: var(--kiss-sys-color-status-warning-solid);
+        --file-text-color: var(--kiss-sys-color-status-warning-on-solid);
+    }
+
+    .upload-error {
+        --file-button-color: var(--kiss-sys-color-status-error-solid);
+        --file-text-color: var(--kiss-sys-color-status-error-on-solid);
+    }
+}

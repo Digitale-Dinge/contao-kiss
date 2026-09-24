@@ -1,0 +1,272 @@
+/**
+ * KISS Select Component
+ *
+ * Base: .form-select
+ * Styles: select-{soft} (outline is default)
+ * Colors: select-{primary|secondary|tertiary|success|warning|error}
+ * Sizes: select-{xs|sm|lg|xl}
+ * States: is-valid, is-invalid, disabled
+ *
+ * Floating Label:
+ *   .select-floating         - Wrapper for floating label
+ *   .select-floating-label   - The floating label
+ *
+ * Select Group (with icons):
+ *   .select-group            - Wrapper for select with leading icon
+ *   .select-icon             - Icon container (leading only)
+ *
+ * Example:
+ *   <select class="form-select select-primary select-lg">
+ *     <option value="">Choose an option</option>
+ *     <option value="1">Option 1</option>
+ *   </select>
+ *
+ * Floating Example:
+ *   <div class="select-floating">
+ *     <select class="form-select">
+ *       <option value="">Pick your favorite</option>
+ *       <option value="1">Option 1</option>
+ *     </select>
+ *     <label class="select-floating-label">Category</label>
+ *   </div>
+ *
+ * Icon Example:
+ *   <div class="select-group has-icon-left">
+ *     <span class="select-icon"><svg>...</svg></span>
+ *     <select class="form-select">...</select>
+ *   </div>
+ */
+@layer components {
+    .form-select {
+        --select-color: var(--kiss-sys-color-neutral-on-strong);
+        --select-border-opacity: 60%;
+        --select-px: .75rem;
+        --select-py: .625rem;
+        --select-pr: 2.5rem;
+        --select-text: var(--text-base, 1rem);
+        --select-arrow-size: 1rem;
+        --select-arrow-right: .75rem;
+        --select-label-color: var(--select-color);
+        --select-label-bg: var(--kiss-sys-color-neutral-surface-1);
+        --tw-ring-color: var(--select-color);
+
+        @apply block w-full cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+
+        box-sizing: border-box;
+        font-size: var(--select-text);
+        padding: var(--select-py) var(--select-pr) var(--select-py) var(--select-px);
+        border: 1px solid color-mix(in oklch, var(--select-color) var(--select-border-opacity), transparent);
+        border-radius: var(--radius-field, .5rem);
+        outline: none;
+        appearance: none;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-position: right var(--select-arrow-right) center;
+        background-size: var(--select-arrow-size);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+
+        &:focus {
+            --select-border-opacity: 100%;
+
+            @apply ring-1 ring-inset;
+        }
+
+        &:invalid {
+            color: var(--kiss-sys-color-neutral-on-light);
+        }
+
+        &:hover:not(:focus, :disabled) {
+            --select-border-opacity: 100%;
+        }
+
+        &.is-valid {
+            --select-color: var(--kiss-sys-color-status-success-solid);
+        }
+
+        &.is-invalid {
+            --select-color: var(--kiss-sys-color-status-error-solid);
+        }
+    }
+
+    /* Variants */
+    .select-soft {
+        background-color: color-mix(in oklch, var(--select-color) 10%, transparent);
+    }
+
+    /* Colors */
+    .select-primary {
+        --select-color: var(--kiss-sys-color-brand-primary-solid);
+    }
+
+    .select-secondary {
+        --select-color: var(--kiss-sys-color-brand-secondary-solid);
+    }
+
+    .select-tertiary {
+        --select-color: var(--kiss-sys-color-brand-tertiary-solid);
+    }
+
+    .select-success {
+        --select-color: var(--kiss-sys-color-status-success-solid);
+    }
+
+    .select-warning {
+        --select-color: var(--kiss-sys-color-status-warning-solid);
+    }
+
+    .select-error {
+        --select-color: var(--kiss-sys-color-status-error-solid);
+    }
+
+    /* Sizes */
+    .select-xs {
+        --select-px: .5rem;
+        --select-py: .375rem;
+        --select-pr: 2rem;
+        --select-text: var(--text-xs, .75rem);
+        --select-arrow-size: .75rem;
+        --select-arrow-right: .5rem;
+    }
+
+    .select-sm {
+        --select-px: .625rem;
+        --select-py: .5rem;
+        --select-pr: 2.25rem;
+        --select-text: var(--text-sm, .875rem);
+        --select-arrow-size: .875rem;
+        --select-arrow-right: .625rem;
+    }
+
+    .select-lg {
+        --select-px: 1rem;
+        --select-py: .75rem;
+        --select-pr: 3rem;
+        --select-text: var(--text-lg, 1.125rem);
+        --select-arrow-size: 1.25rem;
+        --select-arrow-right: 1rem;
+    }
+
+    .select-xl {
+        --select-px: 1.25rem;
+        --select-py: .875rem;
+        --select-pr: 3.5rem;
+        --select-text: var(--text-xl, 1.25rem);
+        --select-arrow-size: 1.5rem;
+        --select-arrow-right: 1.25rem;
+    }
+
+    /* Select group */
+    .select-icon {
+        @apply absolute flex items-center justify-center pointer-events-none size-5;
+
+        color: var(--kiss-sys-color-neutral-on-light);
+    }
+
+    .select-group {
+        --select-icon-space: 2.5rem;
+        --select-icon-inset: .75rem;
+
+        @apply relative flex items-center;
+
+        .form-select {
+            @apply w-full;
+        }
+
+        &:has(.select-xs) {
+            --select-icon-space: 2rem;
+            --select-icon-inset: .5rem;
+        }
+
+        &:has(.select-sm) {
+            --select-icon-space: 2.25rem;
+            --select-icon-inset: .625rem;
+        }
+
+        &:has(.select-lg) {
+            --select-icon-space: 3rem;
+            --select-icon-inset: 1rem;
+        }
+
+        &:has(.select-xl) {
+            --select-icon-space: 3.5rem;
+            --select-icon-inset: 1.25rem;
+        }
+
+        &.has-icon-left {
+            .form-select {
+                padding-left: var(--select-icon-space);
+            }
+
+            .select-icon:first-child {
+                left: var(--select-icon-inset);
+            }
+        }
+    }
+
+
+    /* Floating label */
+    .select-floating-label {
+        @apply absolute pointer-events-auto origin-left font-medium overflow-hidden text-ellipsis whitespace-nowrap;
+
+        left: var(--select-px, .75rem);
+        top: 0;
+        font-size: var(--select-text, var(--text-base, 1rem));
+        color: color-mix(in oklch, var(--kiss-sys-color-neutral-on-strong) 50%, transparent);
+        background: var(--select-label-bg, var(--kiss-sys-color-neutral-surface-1));
+        max-width: calc(100% - 3rem);
+        padding: 0 .25rem;
+        translate: 0 calc(-50% - .0625em);
+        scale: .75;
+        transition: color .15s ease-out;
+    }
+
+    .select-floating {
+        @apply relative;
+
+        &:focus-within {
+            .select-floating-label {
+                color: var(--select-label-color);
+            }
+        }
+
+        &.bg-neutral-surface-1 {
+            --select-label-bg: var(--kiss-sys-color-neutral-surface-1);
+        }
+
+        &.bg-neutral-surface-2 {
+            --select-label-bg: var(--kiss-sys-color-neutral-surface-2);
+        }
+
+        &.bg-neutral-surface-3 {
+            --select-label-bg: var(--kiss-sys-color-neutral-surface-3);
+        }
+
+        &.bg-primary-solid {
+            --select-label-bg: var(--kiss-sys-color-brand-primary-solid);
+        }
+
+        &.bg-secondary-solid {
+            --select-label-bg: var(--kiss-sys-color-brand-secondary-solid);
+        }
+
+        &.bg-tertiary-solid {
+            --select-label-bg: var(--kiss-sys-color-brand-tertiary-solid);
+        }
+
+        &.bg-status-success-solid {
+            --select-label-bg: var(--kiss-sys-color-status-success-solid);
+        }
+
+        &.bg-status-warning-solid {
+            --select-label-bg: var(--kiss-sys-color-status-warning-solid);
+        }
+
+        &.bg-status-error-solid {
+            --select-label-bg: var(--kiss-sys-color-status-error-solid);
+        }
+    }
+
+    .form-select:has(option[value=""]:checked) {
+        color: var(--kiss-sys-color-neutral-on-light);
+    }
+}

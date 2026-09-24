@@ -1,0 +1,147 @@
+/**
+ * KISS Badge Component
+ *
+ * Base: .badge
+ * Styles: badge-{soft|outline|dashed}
+ * Colors: badge-{primary|secondary|tertiary|success|warning|error}
+ * Sizes: badge-{xs|sm|lg|xl}
+ * Shapes: badge-{pill|square}
+ *
+ * Example: <span class="badge badge-success badge-soft badge-lg">Active</span>
+ */
+@layer components {
+    .badge {
+        --badge-bg: var(--kiss-sys-color-neutral-surface-2);
+        --badge-fg: var(--kiss-sys-color-neutral-on-strong);
+        --badge-border: transparent;
+        --badge-ring: var(--kiss-sys-color-neutral-on-strong);
+        --badge-px: .625rem;
+        --badge-py: .25rem;
+        --badge-gap: .25rem;
+        --badge-text: var(--text-sm, .875rem);
+
+        @apply inline-flex items-center justify-center font-medium leading-tight whitespace-nowrap transition-all duration-200;
+
+        padding: var(--badge-py) var(--badge-px);
+        gap: var(--badge-gap);
+        font-size: var(--badge-text);
+        border-width: var(--border-width-thin, 1px);
+        border-style: solid;
+        border-color: var(--badge-border);
+        border-radius: var(--radius-selector, .25rem);
+        box-shadow: var(--shadow, none);
+        background: var(--badge-bg);
+        color: var(--badge-fg);
+
+        svg {
+            @apply shrink-0;
+
+            width: 1em;
+            height: 1em;
+        }
+    }
+
+    /* Colors */
+    .badge-primary {
+        --badge-bg: var(--kiss-sys-color-brand-primary-solid);
+        --badge-fg: var(--kiss-sys-color-brand-primary-on-solid);
+        --badge-border: var(--kiss-sys-color-brand-primary-border);
+        --badge-ring: var(--kiss-sys-color-brand-primary-solid);
+    }
+
+    .badge-secondary {
+        --badge-bg: var(--kiss-sys-color-brand-secondary-solid);
+        --badge-fg: var(--kiss-sys-color-brand-secondary-on-solid);
+        --badge-border: var(--kiss-sys-color-brand-secondary-border);
+        --badge-ring: var(--kiss-sys-color-brand-secondary-solid);
+    }
+
+    .badge-tertiary {
+        --badge-bg: var(--kiss-sys-color-brand-tertiary-solid);
+        --badge-fg: var(--kiss-sys-color-brand-tertiary-on-solid);
+        --badge-border: var(--kiss-sys-color-brand-tertiary-border);
+        --badge-ring: var(--kiss-sys-color-brand-tertiary-solid);
+    }
+
+    .badge-success {
+        --badge-bg: var(--kiss-sys-color-status-success-solid);
+        --badge-fg: var(--kiss-sys-color-status-success-on-solid);
+        --badge-border: var(--kiss-sys-color-status-success-border);
+        --badge-ring: var(--kiss-sys-color-status-success-solid);
+    }
+
+    .badge-warning {
+        --badge-bg: var(--kiss-sys-color-status-warning-solid);
+        --badge-fg: var(--kiss-sys-color-status-warning-on-solid);
+        --badge-border: var(--kiss-sys-color-status-warning-border);
+        --badge-ring: var(--kiss-sys-color-status-warning-solid);
+    }
+
+    .badge-error {
+        --badge-bg: var(--kiss-sys-color-status-error-solid);
+        --badge-fg: var(--kiss-sys-color-status-error-on-solid);
+        --badge-border: var(--kiss-sys-color-status-error-border);
+        --badge-ring: var(--kiss-sys-color-status-error-solid);
+    }
+
+    /* Variants */
+    .badge-soft {
+        --badge-bg: color-mix(in oklch, var(--badge-ring) 10%, transparent);
+        --badge-fg: var(--badge-ring);
+        --badge-border: transparent;
+    }
+
+    .badge-outline {
+        --badge-bg: transparent;
+        --badge-fg: var(--badge-ring);
+        --badge-border: var(--badge-ring);
+    }
+
+    .badge-dashed {
+        --badge-bg: transparent;
+        --badge-fg: var(--badge-ring);
+
+        border-style: dashed;
+        border-color: currentcolor;
+    }
+
+    /* Sizes */
+    .badge-xs {
+        --badge-px: .375rem;
+        --badge-py: .25rem;
+        --badge-gap: .125rem;
+        --badge-text: .625rem;
+    }
+
+    .badge-sm {
+        --badge-px: .5rem;
+        --badge-py: .25rem;
+        --badge-gap: .25rem;
+        --badge-text: var(--text-xs, .75rem);
+    }
+
+    /* Medium is the default */
+
+    .badge-lg {
+        --badge-px: .75rem;
+        --badge-py: .375rem;
+        --badge-gap: .5rem;
+        --badge-text: var(--text-base, 1rem);
+    }
+
+    .badge-xl {
+        --badge-px: 1rem;
+        --badge-py: .5rem;
+        --badge-gap: .625rem;
+        --badge-text: var(--text-lg, 1.125rem);
+    }
+
+    /* Shapes */
+    .badge-pill {
+        @apply rounded-full;
+    }
+
+    .badge-square {
+        @apply rounded-none;
+    }
+}

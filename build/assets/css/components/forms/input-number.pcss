@@ -1,0 +1,184 @@
+/**
+ * KISS Input Number Component (V3.0)
+ *
+ * A number input with increment/decrement buttons.
+ * Buttons automatically inherit size and color from the input using :has().
+ *
+ * STRUCTURE:
+ *   Container = layout (.input-number or .input-number-center)
+ *   Input = standard .form-input with optional size/color classes
+ *   Buttons = .input-number-btn (auto-styled)
+ *
+ * LAYOUTS:
+ *   .input-number         - Buttons on right inside input
+ *   .input-number-center  - Buttons on edges, number centered
+ *
+ * USAGE (Default layout):
+ *   <div class="input-number">
+ *     <input type="number" class="form-input input-primary input-lg" value="5">
+ *     <button class="input-number-btn">−</button>
+ *     <button class="input-number-btn">+</button>
+ *   </div>
+ *
+ * USAGE (Center layout):
+ *   <div class="input-number-center">
+ *     <button class="input-number-btn">−</button>
+ *     <input type="number" class="form-input input-secondary" value="5">
+ *     <button class="input-number-btn">+</button>
+ *   </div>
+ *
+ * SIZES: .input-xs, .input-sm, (default), .input-lg, .input-xl
+ * COLORS: .input-primary, .input-secondary, .input-tertiary, etc.
+ */
+@layer components {
+    .input-number,
+    .input-number-center {
+        --btn-size: 1.5rem;
+        --btn-icon-size: .875rem;
+        --btn-color: var(--kiss-sys-color-neutral-on-strong);
+        --btn-gap: .25rem;
+        --btn-offset-2: .75rem;
+        --btn-offset-1: calc(var(--btn-offset-2) + var(--btn-size) + var(--btn-gap));
+        --input-pr: calc(var(--btn-offset-1) + var(--btn-size));
+
+        @apply relative inline-flex items-stretch;
+
+        .form-input {
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button {
+                appearance: none;
+                margin: 0;
+            }
+
+            appearance: textfield;
+        }
+
+        /* Colors */
+        &:has(.input-primary) {
+            --btn-color: var(--kiss-sys-color-brand-primary-solid);
+        }
+
+        &:has(.input-secondary) {
+            --btn-color: var(--kiss-sys-color-brand-secondary-solid);
+        }
+
+        &:has(.input-tertiary) {
+            --btn-color: var(--kiss-sys-color-brand-tertiary-solid);
+        }
+
+        &:has(.input-success) {
+            --btn-color: var(--kiss-sys-color-status-success-solid);
+        }
+
+        &:has(.input-warning) {
+            --btn-color: var(--kiss-sys-color-status-warning-solid);
+        }
+
+        &:has(.input-error) {
+            --btn-color: var(--kiss-sys-color-status-error-solid);
+        }
+
+        /* Sizes */
+        &:has(.input-xs) {
+            --btn-size: 1rem;
+            --btn-icon-size: .625rem;
+            --btn-offset-2: .5rem;
+        }
+
+        &:has(.input-sm) {
+            --btn-size: 1.25rem;
+            --btn-icon-size: .75rem;
+            --btn-offset-2: .5rem;
+        }
+
+        &:has(.input-lg) {
+            --btn-size: 2rem;
+            --btn-icon-size: 1.25rem;
+            --btn-offset-2: .75rem;
+        }
+
+        &:has(.input-xl) {
+            --btn-size: 2.5rem;
+            --btn-icon-size: 1.5rem;
+            --btn-offset-2: .75rem;
+        }
+    }
+
+
+    .input-number-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--btn-size);
+        height: var(--btn-size);
+        border-radius: var(--radius-field, .25rem);
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        transition: color 150ms, background-color 150ms;
+        color: color-mix(in oklch, var(--btn-color) 50%, transparent);
+
+        svg {
+            width: var(--btn-icon-size);
+            height: var(--btn-icon-size);
+        }
+
+        &:disabled {
+            opacity: .3;
+            cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
+            color: var(--btn-color);
+            background-color: color-mix(in oklch, var(--btn-color) 10%, transparent);
+        }
+
+        &:active:not(:disabled) {
+            scale: .95;
+        }
+
+    }
+
+    /* Layout: buttons on right */
+    .input-number {
+        .form-input {
+            @apply text-left w-full;
+
+            padding-right: var(--input-pr);
+        }
+
+        .input-number-btn {
+            @apply absolute top-1/2 -translate-y-1/2;
+
+            &:first-of-type {
+                right: var(--btn-offset-1);
+            }
+
+            &:last-of-type {
+                right: var(--btn-offset-2);
+            }
+        }
+    }
+
+    /* Layout: buttons on edges */
+    .input-number-center {
+        .form-input {
+            @apply text-center flex-1;
+
+            padding-left: var(--btn-offset-1);
+            padding-right: var(--btn-offset-1);
+        }
+
+        .input-number-btn {
+            @apply absolute top-1/2 -translate-y-1/2;
+
+            &:first-of-type {
+                left: var(--btn-offset-2);
+            }
+
+            &:last-of-type {
+                right: var(--btn-offset-2);
+            }
+        }
+    }
+}

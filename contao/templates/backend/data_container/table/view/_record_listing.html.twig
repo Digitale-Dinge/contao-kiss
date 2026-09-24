@@ -9,10 +9,10 @@
         {% if grid_label %}
             {% set record = record|merge({
                 label: '<span class="tl_blue">(' ~ grid_label ~ ')</span> ' ~ record.label,
-                class: show_grid_classes ? getGridClasses(record.id, table) : null
+                class: show_grid_classes ? getGridClasses(record.id, table) : null,
             }) %}
             {# Slices the elements and merges the modified record into it #}
-            {% set records = records[:i]|merge([record])|merge(records[i+1:]) %}
+            {% set records = records[:i]|merge([record])|merge(records[i + 1:]) %}
         {% endif %}
     {% endfor %}
 

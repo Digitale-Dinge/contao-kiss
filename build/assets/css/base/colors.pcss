@@ -1,0 +1,38 @@
+/* Not used - only for imports */
+@layer base {
+    .headline-neutral {
+        :is(.topline, .headline) {
+            @apply text-neutral-on-strong;
+        }
+    }
+
+    .headline-primary {
+        :is(.topline, .headline) {
+            @apply text-primary-solid;
+        }
+    }
+
+    .headline-secondary {
+        :is(.topline, .headline) {
+            @apply text-secondary-solid;
+        }
+    }
+
+    .headline-tertiary {
+        :is(.topline, .headline) {
+            @apply text-tertiary-solid;
+        }
+    }
+
+    .headline-success {
+        :is(.topline, .headline) {
+            @apply text-status-success-solid;
+        }
+    }
+
+    .headline-warning {
+        :is(.topline, .headline) {
+            @apply text-status-warning-solid;
+        }
+    }
+}

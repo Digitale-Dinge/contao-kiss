@@ -13,14 +13,14 @@
                     title: item.imageTitle|default(''),
                     link: item.imageUrl|default(''),
                     caption: item.caption|default(''),
-                }
+                },
             }) %}
         {% endif %}
 
         {% set figure_object = figure(
             item.singleSRC,
             size|default,
-            configuration|default({})|merge(item.imageUrl|default ? {linkHref: item.imageUrl} : {})
+            configuration|default({})|merge(item.imageUrl|default ? {linkHref: item.imageUrl} : {}),
         ) %}
     {% endif %}
 
@@ -31,7 +31,7 @@
                 figure_attributes: figure_attributes|default,
                 caption_attributes: caption_attributes|default,
                 link_attributes: link_attributes|default,
-                img_attributes: { class: img_class|default }
+                img_attributes: {class: img_class|default},
             }, false) }}
         </div>
     {% endif %}

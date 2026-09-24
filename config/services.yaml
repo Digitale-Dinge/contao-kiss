@@ -23,3 +23,12 @@ services:
             - '@contao.framework'
 
     DigitaleDinge\ContaoKiss\CustomElementsConfigurationBuilder: '@kiss.rsce_config.builder'
+
+    kiss.asset.manifest_version_strategy:
+        class: Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy
+        arguments:
+            - '%kernel.project_dir%/public/layout/manifest.json'
+
+    DigitaleDinge\ContaoKiss\Asset\VersionStrategy\ViteVersionStrategy:
+        arguments:
+            $manifestStrategy: '@kiss.asset.manifest_version_strategy'

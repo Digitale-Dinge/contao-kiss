@@ -1,0 +1,246 @@
+/**
+ * KISS Input Component
+ *
+ * Base: .form-input
+ * Styles: input-{soft} (outline is default)
+ * Colors: input-{primary|secondary|tertiary|success|warning|error}
+ * Sizes: input-{xs|sm|lg|xl}
+ * States: is-valid, is-invalid, disabled, readonly
+ *
+ * Floating Label:
+ *   .input-floating         - Wrapper for floating label
+ *   .input-floating-label   - The floating label
+ *
+ * Input Group (with icons):
+ *   .input-group            - Wrapper for input with icons
+ *   .input-icon             - Icon container
+ *
+ * Example:
+ *   <input class="form-input input-primary input-lg" placeholder="Enter text">
+ *
+ * Floating Example:
+ *   <div class="input-floating">
+ *     <input class="form-input" placeholder=" ">
+ *     <label class="input-floating-label">Full Name</label>
+ *   </div>
+ *
+ * Icon Example:
+ *   <div class="input-group">
+ *     <span class="input-icon"><svg>...</svg></span>
+ *     <input class="form-input">
+ *   </div>
+ */
+@layer components {
+    .form-input {
+        --input-color: var(--kiss-sys-color-neutral-on-strong);
+        --input-border-opacity: 60%;
+        --input-px: .75rem;
+        --input-py: .625rem;
+        --input-text: var(--text-base, 1rem);
+        --input-label-color: var(--input-color);
+        --input-label-bg: var(--kiss-sys-color-neutral-surface-1);
+        --tw-ring-color: var(--input-color);
+
+        @apply block w-full bg-transparent disabled:opacity-50 disabled:cursor-not-allowed read-only:cursor-default leading-tight;
+
+        &::placeholder {
+            color: var(--kiss-sys-color-neutral-on-light);
+        }
+
+        &:read-only {
+            background-color: color-mix(in oklab, var(--kiss-sys-color-neutral-surface-2) 50%, transparent);
+        }
+
+        box-sizing: border-box;
+        font-size: var(--input-text);
+        padding: var(--input-py) var(--input-px);
+        border: 1px solid color-mix(in oklch, var(--input-color) var(--input-border-opacity), transparent);
+        border-radius: var(--radius-field, .5rem);
+        outline: none;
+        color: var(--kiss-sys-color-neutral-on-strong);
+
+        &:focus {
+            --input-border-opacity: 100%;
+
+            @apply ring-1 ring-inset;
+        }
+
+        &:hover:not(:focus, :disabled) {
+            --input-border-opacity: 100%;
+        }
+
+        &.is-valid {
+            --input-color: var(--kiss-sys-color-status-success-solid);
+        }
+
+        &.is-invalid {
+            --input-color: var(--kiss-sys-color-status-error-solid);
+        }
+    }
+
+    /* Variants */
+    .input-soft {
+        background-color: color-mix(in oklch, var(--input-color) 10%, transparent);
+    }
+
+    /* Colors */
+    .input-primary {
+        --input-color: var(--kiss-sys-color-brand-primary-solid);
+    }
+
+    .input-secondary {
+        --input-color: var(--kiss-sys-color-brand-secondary-solid);
+    }
+
+    .input-tertiary {
+        --input-color: var(--kiss-sys-color-brand-tertiary-solid);
+    }
+
+    .input-success {
+        --input-color: var(--kiss-sys-color-status-success-solid);
+    }
+
+    .input-warning {
+        --input-color: var(--kiss-sys-color-status-warning-solid);
+    }
+
+    .input-error {
+        --input-color: var(--kiss-sys-color-status-error-solid);
+    }
+
+    /* Sizes */
+    .input-xs {
+        --input-px: .5rem;
+        --input-py: .375rem;
+        --input-text: var(--text-xs, .75rem);
+    }
+
+    .input-sm {
+        --input-px: .625rem;
+        --input-py: .5rem;
+        --input-text: var(--text-sm, .875rem);
+    }
+
+    .input-lg {
+        --input-px: 1rem;
+        --input-py: .75rem;
+        --input-text: var(--text-lg, 1.125rem);
+    }
+
+    .input-xl {
+        --input-px: 1.25rem;
+        --input-py: .875rem;
+        --input-text: var(--text-xl, 1.25rem);
+    }
+
+    /* Input group */
+    .input-group {
+        @apply relative flex items-center;
+
+        .form-input {
+            @apply w-full;
+        }
+
+        &.has-icon-left {
+            .form-input {
+                @apply pl-10;
+            }
+
+            .input-icon:first-child {
+                @apply left-3;
+            }
+        }
+
+        &.has-icon-right {
+            .form-input {
+                @apply pr-10;
+            }
+
+            .input-icon:last-child {
+                @apply right-3;
+            }
+        }
+    }
+
+    .input-icon {
+        @apply absolute flex items-center justify-center pointer-events-none size-5;
+
+        color: var(--kiss-sys-color-neutral-on-light);
+    }
+
+    /* Floating label */
+    .input-floating-label {
+        @apply absolute pointer-events-none origin-left overflow-hidden text-ellipsis whitespace-nowrap bg-transparent px-0;
+
+        left: var(--input-px, .75rem);
+        top: 50%;
+        font-size: var(--input-text, var(--text-base, 1rem));
+        color: color-mix(in oklch, var(--kiss-sys-color-neutral-on-strong) 50%, transparent);
+        max-width: calc(100% - 1.5rem);
+        translate: 0 -50%;
+        transition: top .15s ease-out, translate .15s ease-out, scale .15s ease-out, background-color .15s ease-out, padding .15s ease-out;
+    }
+
+    .input-floating {
+        @apply relative;
+
+        .form-input {
+            /* Hide placeholder by default so label can sit in center */
+            @apply placeholder-transparent;
+
+            /* Show placeholder when focused (label will be floated up) */
+            &:focus::placeholder {
+                color: var(--kiss-sys-color-neutral-on-light);
+            }
+        }
+
+        &:focus-within,
+        &:has(.form-input:not(:placeholder-shown)) {
+            .input-floating-label {
+                @apply pointer-events-auto font-medium px-1;
+
+                top: 0;
+                color: var(--input-label-color);
+                background: var(--input-label-bg);
+                translate: 0 calc(-50% - .0625em);
+                scale: .75;
+            }
+        }
+
+        &.bg-neutral-surface-1 {
+            --input-label-bg: var(--kiss-sys-color-neutral-surface-1);
+        }
+
+        &.bg-neutral-surface-2 {
+            --input-label-bg: var(--kiss-sys-color-neutral-surface-2);
+        }
+
+        &.bg-neutral-surface-3 {
+            --input-label-bg: var(--kiss-sys-color-neutral-surface-3);
+        }
+
+        &.bg-primary-solid {
+            --input-label-bg: var(--kiss-sys-color-brand-primary-solid);
+        }
+
+        &.bg-secondary-solid {
+            --input-label-bg: var(--kiss-sys-color-brand-secondary-solid);
+        }
+
+        &.bg-tertiary-solid {
+            --input-label-bg: var(--kiss-sys-color-brand-tertiary-solid);
+        }
+
+        &.bg-status-success-solid {
+            --input-label-bg: var(--kiss-sys-color-status-success-solid);
+        }
+
+        &.bg-status-warning-solid {
+            --input-label-bg: var(--kiss-sys-color-status-warning-solid);
+        }
+
+        &.bg-status-error-solid {
+            --input-label-bg: var(--kiss-sys-color-status-error-solid);
+        }
+    }
+}

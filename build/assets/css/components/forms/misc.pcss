@@ -1,0 +1,15 @@
+@layer components {
+    /* Required indicator */
+    .label-required::after {
+        content: " *";
+        color: var(--kiss-sys-color-status-error-solid);
+    }
+
+    span.mandatory {
+        color: var(--kiss-sys-color-status-error-solid);
+    }
+
+    [placeholder] {
+        text-overflow: ellipsis;
+    }
+}

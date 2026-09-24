@@ -1,0 +1,151 @@
+/**
+ * KISS Radio Component
+ *
+ * Inspired by FlyonUI radio with animated dot.
+ *
+ * Base: .form-radio
+ * Colors: radio-{primary|secondary|tertiary|success|warning|error}
+ * Sizes: radio-{xs|sm|lg|xl}
+ * States: disabled
+ *
+ * Example:
+ *   <input type="radio" name="group" class="form-radio radio-primary">
+ *
+ * With Label:
+ *   <label class="flex items-center gap-2 cursor-pointer">
+ *     <input type="radio" name="group" class="form-radio">
+ *     <span>Label text</span>
+ *   </label>
+ */
+@layer components {
+    .form-radio {
+        --input-color: var(--kiss-sys-color-neutral-on-strong);
+        --input-border-opacity: 60%;
+        --size: 1.5rem;
+        --size-padding: .25rem;
+
+        @apply relative shrink-0 cursor-pointer appearance-none rounded-full align-middle;
+
+        width: var(--size);
+        height: var(--size);
+        padding: var(--size-padding);
+        border: 1px solid color-mix(in oklch, var(--input-color) var(--input-border-opacity), transparent);
+        background-color: transparent;
+
+        &::before {
+            @apply block size-full rounded-full;
+
+            content: '';
+            background-color: transparent;
+            transition: background-color .15s, transform .2s;
+            transform: scale(0);
+        }
+
+        &:focus-visible {
+            outline: 2px solid color-mix(in oklab, var(--input-color) 30%, transparent);
+            outline-offset: 0;
+        }
+
+        &:checked,
+        &[aria-checked="true"] {
+            border-color: var(--input-color);
+            animation: radio-pop .2s ease-out;
+
+            &::before {
+                background-color: var(--input-color);
+                transform: scale(1);
+            }
+        }
+
+        &:disabled {
+            @apply cursor-not-allowed opacity-50;
+        }
+    }
+
+    span:has(> .form-radio) {
+        @apply flex items-center gap-2 cursor-pointer text-base;
+
+        label {
+            margin: 0;
+        }
+    }
+
+    /* Colors */
+    .radio-primary {
+        --input-color: var(--kiss-sys-color-brand-primary-solid);
+    }
+
+    .radio-secondary {
+        --input-color: var(--kiss-sys-color-brand-secondary-solid);
+    }
+
+    .radio-tertiary {
+        --input-color: var(--kiss-sys-color-brand-tertiary-solid);
+    }
+
+    .radio-success {
+        --input-color: var(--kiss-sys-color-status-success-solid);
+    }
+
+    .radio-warning {
+        --input-color: var(--kiss-sys-color-status-warning-solid);
+    }
+
+    .radio-error {
+        --input-color: var(--kiss-sys-color-status-error-solid);
+    }
+
+    /* Sizes */
+    .radio-xs {
+        --size: 1rem;
+        --size-padding: .1875rem;
+    }
+
+    .radio-sm {
+        --size: 1.25rem;
+        --size-padding: .1875rem;
+    }
+
+    /* Default is 1.5rem with .25rem padding (defined in base) */
+
+    .radio-lg {
+        --size: 1.75rem;
+        --size-padding: .3125rem;
+    }
+
+    .radio-xl {
+        --size: 2rem;
+        --size-padding: .375rem;
+    }
+
+    span:has(> .radio-xs) {
+        @apply text-xs;
+    }
+
+    span:has(> .radio-sm) {
+        @apply text-sm;
+    }
+
+    span:has(> .radio-lg) {
+        @apply text-lg;
+    }
+
+    span:has(> .radio-xl) {
+        @apply text-xl;
+    }
+
+    /* Pop animation for checked state */
+    @keyframes radio-pop {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(0.9);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+}

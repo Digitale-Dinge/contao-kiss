@@ -4,7 +4,7 @@
     {% if item.icon|default %}
         <div{{ media_attributes|default }}>
             {{ include('@Contao/kiss_component/media/_icon_include.html.twig', {
-                icon: item.icon
+                icon: item.icon,
             }) }}
         </div>
     {% endif %}

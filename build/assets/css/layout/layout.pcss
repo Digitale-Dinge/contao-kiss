@@ -1,0 +1,76 @@
+/**
+ * KISS Layout Utilities
+ *
+ * Container classes for content-width settings in Articles and Content Elements
+ * Matches PHP enum: DigitaleDinge\ContaoKiss\Styles\Option\Layout\Container
+ */
+@layer components {
+    .container-narrower,
+    .container-narrow,
+    .container-base,
+    .container-full-pad {
+        --container-px: --spacing(4);
+
+        padding-inline: var(--container-px);
+        margin-inline: auto;
+
+        @variant md {
+            --container-px: --spacing(7);
+        }
+    }
+
+    .container-narrower {
+        max-width: calc(var(--kiss-sys-sizing-responsive-default-container-narrower, 37.5rem) + 2 * var(--container-px));
+    }
+
+    .container-narrow {
+        max-width: calc(var(--kiss-sys-sizing-responsive-default-container-narrow, 63.5rem) + 2 * var(--container-px));
+    }
+
+    .container-base {
+        max-width: calc(var(--kiss-sys-sizing-responsive-default-container-base, 76.5rem) + 2 * var(--container-px));
+    }
+
+    .container-full-pad,
+    .container-full {
+        max-width: var(--kiss-sys-sizing-responsive-default-container-full, 100%);
+    }
+
+    /* Nested containers */
+    [class*="container-"]:not(.container-full) {
+        [class*="container-"] {
+            --container-px: 0px;
+        }
+    }
+
+    .content-text {
+        .media {
+            @apply overflow-hidden;
+        }
+    }
+
+    /* Contao responsive css */
+    .media--right {
+        > figure {
+            @apply float-right ml-4;
+        }
+    }
+
+    .media--left {
+        > figure {
+            @apply float-left mr-4;
+        }
+    }
+
+    .media--above {
+        > figure {
+            @apply mb-4!;
+        }
+    }
+
+    .media--below {
+        > figure {
+            @apply mt-4!;
+        }
+    }
+}

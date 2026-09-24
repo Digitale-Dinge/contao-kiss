@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block header %}
-    <header{{ attrs(header_attributes|default).set('id', 'header')}}>
+    <header{{ attrs(header_attributes|default).set('id', 'header') }}>
         {{ include('@Contao/partials/page/header/_main.html.twig') }}
     </header>
 {% endblock %}

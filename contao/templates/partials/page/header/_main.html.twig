@@ -1,7 +1,7 @@
 {% use '@Contao/company/logo.html.twig' %}
 
 {% block header_inner %}
-    {% with { logo_class: 'header-logo', company_logo_attributes: attrs().addClass('shrink-0')} %}
+    {% with {logo_class: 'header-logo', company_logo_attributes: attrs().addClass('shrink-0')} %}
         {{ block('company_logo') }}
     {% endwith %}
     {% block header_elements %}
@@ -10,8 +10,8 @@
             showLevel: header_navigation_level|default(0),
             hardLimit: true,
             ariaLabel: 'aria_label.header'|trans([], 'contao_kiss'),
-            cssID: { 1: 'main-navigation' },
-            customTpl: 'mod_navigation_accessible'
+            cssID: {1: 'main-navigation'},
+            customTpl: 'mod_navigation_accessible',
         }) }}
     {% endblock %}
 {% endblock %}
