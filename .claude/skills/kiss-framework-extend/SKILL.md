@@ -149,7 +149,7 @@ The template chain is `Contao core _base` → `KISS _base` → component/element
 - **Root-level `set` instead of block override:** a `{% set attributes = ... %}` at template root runs *before* the inherited blocks render — the base blocks keep working with your enriched attributes. This is the standard way to contribute classes. In `_media_text_wrapper.html.twig` the card classes belong inside the existing `show_as_card` branch — not in a freshly added `{% block attributes %}` in `rsce_media_text.html.twig`.
 - **Override blocks only when the *structure* changes** (different markup, different order) — and then with `{{ parent() }}` wherever the parent logic should survive. Overriding a block just to change a class duplicates the entire parent logic and decouples you from future base changes.
 - **Reuse components instead of building parallel structures:** a "new card component" is almost always an `{% extends %}` on `kiss_component/media/_media_text_wrapper.html.twig` with `show_as_card` (see `news_card.html.twig`) — no new standalone template. Whoever inherits gets media types, CTA, headline and all attribute hooks (`media_attributes`, `text_attributes`, `headline_classes` …) for free. Because of that inheritance, changes to a media sub-template belong in that sub-template: a `poster` for videos goes into `kiss_component/media/_video.html.twig`, not into the card.
-- `{% use %}` imports blocks without inheritance (e.g. `_text.html.twig`, `_headline.html.twig`); `{{ include(...) }}` is for self-contained fragments (`_figure`, `_icon_include`).
+- `{% use %}` imports blocks without inheritance (e.g. `_text.html.twig`, `_headline.html.twig`); `{{ include(...) }}` is for self-contained fragments without blocks or configuration (`_icon_include`). `_figure` is not one of them, see below.
 
 ### Attribute hooks and wrapper variables
 
@@ -195,9 +195,68 @@ Why `{% use %}` + `{{ block('badge') }}` and **not** `{{ include(..., {…}) }}`
 - Callers can set the component's attribute hooks (`badge_attributes`, `badge_outer_attributes` …) via root-level `set` — from anywhere in the inheritance chain, without touching the component.
 - The block stays overridable. `include` freezes the call signature and creates a second, parallel API.
 
+#### When the caller's names are not yours: `{% with %}`
+
+Sometimes the caller is a Contao core element whose context you cannot rename. `hyperlink` provides `data.icon`,
+`data.iconPosition` and `link_text`; `_icon_text` reads `item.iconPosition`, `icon` and `text`. Map exactly those
+names, scoped to the block call:
+
+```twig
+{% use '@Contao/kiss_component/media/_icon_text.html.twig' %}
+{% extends '@Contao/content_element/hyperlink.html.twig' %}
+
+{% block text_link %}
+    <a{{ attrs(link_attributes|default) }}>
+        {% with {item: data, icon: data.icon, text: link_text} %}
+            {{ block('icon_text') }}
+        {% endwith %}
+    </a>
+{% endblock %}
+```
+
+`with` without `only` keeps the surrounding context, so hooks like `icon_text_attributes` still arrive, and the mapping
+ends at `{% endwith %}` instead of leaking into the rest of the block.
+
+**Never `data|merge({…})` or `item|merge({…})` to feed a component.** `data` is the whole `tl_content` row: merging it
+dumps every column into the component's context as top-level variables. Which names land there depends on the element,
+not on the component's API, and any of them can shadow a name the component or its includes read. The one mapping that
+matters (`text: link_text`) disappears inside a merge over an opaque array.
+
+#### Contao core components: the same pattern, one exception
+
+Core calls its own components exactly like this. `image`, `text`, `gallery` and `hyperlink` all `use` `_figure` and
+call its block inside `{% with {figure: …} %}`, for example:
+
+```twig
+{% use '@Contao/component/_figure.html.twig' %}
+{% with {figure: image} %}{{ block('figure_component') }}{% endwith %}
+```
+
+`_figure` is not a closed fragment: it has overridable blocks (`media`, `media_link`, `caption`, `caption_inner`) and
+takes `figure_attributes`, `picture_attributes`, `source_attributes`, `img_attributes`, `link_attributes` and
+`caption_attributes`.
+
+The one exception is a **block-name collision**. `{% use %}` imports every block of the used template, and `_figure`
+brings `media` plus, through `_picture`, `image`. In `kiss_component/media/_image.html.twig` both collide: `image` is
+its own root block, `media` is a block of `_media_text`. There `_figure` is rendered isolated:
+
+```twig
+{{ include('@Contao/component/_figure.html.twig', {
+    figure: figure_object,
+    figure_attributes: figure_attributes|default,
+    caption_attributes: caption_attributes|default,
+    link_attributes: link_attributes|default,
+    img_attributes: {class: img_class|default},
+}, false) }}
+```
+
+That freezes the component. Its blocks cannot be overridden from the KISS chain, and only the listed hooks arrive:
+`picture_attributes` and `source_attributes` never do. Use `include(…, {…}, false)` only for a collision you can name,
+list every hook the caller should keep, and never for a kiss component: the `ComponentInclude` lint rule rejects that.
+
 The component's field names are therefore **identical to the field names in `rsce_<name>_config.php`** (`badgeSize`, `badgeShape`, not `size`/`shape`). Renaming in the RSCE template is a symptom of passing through instead of inheriting.
 
-**Rule of thumb:** if the RSCE template contains a `styles.`, a `badge-`/`alert-` class name or a variable map passed to `include()`, it belongs in the component.
+**Rule of thumb:** if the RSCE template contains a `styles.`, a `badge-`/`alert-` class name, a variable map passed to `include()` or a `|merge` into a component's context, it belongs in the component.
 
 ### Global enums and builder functions first
 
@@ -260,6 +319,7 @@ RSCE-specific self-check: was an existing media/action component reused via `{% 
 - Did a deprecated or docblock-only case (`info`) get resurrected?
 - Are card/media classes added inside the existing `show_as_card` branch of the wrapper, not in a new `attributes` block?
 - Does every new standalone component in `kiss_component/` have a docblock with `@param` + `Usage`, one root block, `item|default(_context)`, `attrs()` instead of string classes and `_icon_include.html.twig` instead of `<i class>`?
+- Any `data|merge(…)` / `item|merge(…)` feeding a component? Wrong: map only the differing names with `{% with {…} %}{{ block('…') }}{% endwith %}`.
 - Does the RSCE include the component via `{% use %}` + `{{ block('…') }}` without passing variables — and are the component fields named exactly like the config fields?
 - Does the config file still contain a plain-text label, a `foreach` over an enum or a `$GLOBALS['TL_LANG']` reference instead of `addStyleOptionsField()` / `addSelectField()` + `rsce.*.yaml`?
 - Return Could and Won't items to the user as proposals at the end instead of implementing them. Every open question that was not answered stays a question, not an assumption.

@@ -394,7 +394,23 @@ Three follow-up errors hide in there: the `|merge` as a workaround for `item` be
 
 **Right:** use the config's field names in the component (`item.badgeSize`), `{% use %}` at the top, only `{{ block('badge') }}` in the loop — see positive example 4.
 
-Detection question: "Am I passing any variables at all when calling a kiss_component?" → If yes, the field names almost always don't match, or it should have been `{% use %}`. `include()` remains correct for self-contained fragments without configuration (`_icon_include`, `_figure`).
+**Same mistake with a core element (really happened, `content_element/hyperlink.html.twig`, flagged by the `ComponentInclude` lint rule):**
+
+```twig
+{{ include('@Contao/kiss_component/media/_icon_text.html.twig', data|merge({text: link_text, add_wrapper: false})) }}
+```
+
+`data|merge` pours the entire `tl_content` row into the component's context, `add_wrapper` was read by nothing, and the one mapping that matters (`text: link_text`) is buried in the merge.
+
+**Right:** `{% use %}` the component and map only the names the core element can't provide under the component's names, scoped with `with`:
+
+```twig
+{% with {item: data, icon: data.icon, text: link_text} %}
+    {{ block('icon_text') }}
+{% endwith %}
+```
+
+Detection question: "Am I passing any variables at all when calling a kiss_component?" → If yes, the field names almost always don't match, or it should have been `{% use %}`. If the caller's names can't match (core elements), `{% with %}` with exactly the differing names — never a `|merge`. `include()` remains correct for self-contained fragments without configuration (`_icon_include`). `_figure` is included only where its block names collide with the KISS chain (`_image`), see "Contao core components" in `SKILL.md`.
 
 ## Negative example 7: options and labels hand-written in the config file
 

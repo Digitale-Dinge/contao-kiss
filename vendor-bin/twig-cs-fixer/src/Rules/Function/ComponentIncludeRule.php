@@ -15,6 +15,11 @@ use TwigCsFixer\Token\Tokens;
  *
  *   {{ include('@Contao/kiss_component/status/_badge.html.twig', {…}) }}
  *   ->  {% use '@Contao/kiss_component/status/_badge.html.twig' %} … {{ block('badge') }}
+ *
+ * If the caller's names differ from the components, map exactly those names with "with",
+ * never with something like "data|merge()"
+ *
+ *   {% with {item: data, text: link_text} %}{{ block('icon_text') }}{% endwith %}
  */
 final class ComponentIncludeRule extends AbstractRule implements ConfigurableRuleInterface
 {

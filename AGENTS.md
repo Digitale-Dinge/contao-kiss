@@ -149,6 +149,17 @@ Standalone components in `kiss_component/` always have a docblock with `@param` 
 named after the component, `{% set item = item|default(_context) %}` as its first line, classes only via `attrs()`, and
 icons only via `_icon_include.html.twig`.
 
+Components are called with `{% use %}` + `{{ block('<n>') }}`, nothing passed. When the caller's names can't match the
+component's (a core element with `data.*`, `link_text`), map exactly the differing names, scoped to the call:
+`{% with {item: data, text: link_text} %}{{ block('<n>') }}{% endwith %}`. **Never `data|merge({…})` or
+`item|merge({…})` into a component**, and never `include()` with variables.
+
+Contao core components work the same way: `{% use '@Contao/component/_figure.html.twig' %}` +
+`{% with {figure: image} %}{{ block('figure_component') }}{% endwith %}`. The only exception is a core component whose
+block names collide with the KISS chain. `_figure` brings `image` and `media`, so `_image` includes it isolated with
+`include(…, {…}, false)` and lists every hook it forwards. Such an include freezes the component: no block overrides,
+only the listed hooks arrive. Use it only for a collision you can name, not as an alternative to `with`.
+
 For content elements there is the RSCE builder: `rsce_<name>_config.php` goes through
 `CustomElementsConfigurationBuilder`, `rsce_<name>.html.twig` extends `content_element/_base.html.twig` and imports
 existing components rather than writing new markup. Check for a builder helper before every `addField()`. Whether a
@@ -203,4 +214,5 @@ composer ci
 - Did a prefix land in an enum that belongs in the template? Did a new Twig global or `Component\<X>\Variant` appear
   although `Modifier\Variant` exists?
 - Do new components have docblock, one root block, `item|default(_context)`, `attrs()`, `_icon_include`?
+- Any `data|merge` / `item|merge` feeding a component, or an `include()` with variables? Wrong, see above.
 - Return Could and Won't items as proposals. Unanswered questions stay questions, not assumptions.
