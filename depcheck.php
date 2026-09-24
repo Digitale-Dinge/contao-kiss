@@ -21,4 +21,8 @@ return new Configuration()
     // The manager plugin is a dev dependency because it is only required in the
     // managed edition.
     ->ignoreErrorsOnPackage('contao/manager-plugin', [ErrorType::DEV_DEPENDENCY_IN_PROD])
+
+    // The Twig CS Fixer rules are autoloaded for projects that lint with them,
+    // twig-cs-fixer itself is installed in vendor-bin/
+    ->ignoreErrorsOnPath(__DIR__.'/vendor-bin/twig-cs-fixer/src', [ErrorType::UNKNOWN_CLASS, ErrorType::SHADOW_DEPENDENCY])
 ;

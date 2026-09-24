@@ -51,7 +51,8 @@
     },
     "autoload": {
         "psr-4": {
-            "DigitaleDinge\\ContaoKiss\\": "src/"
+            "DigitaleDinge\\ContaoKiss\\": "src/",
+            "DigitaleDinge\\ContaoKiss\\Tools\\TwigCsFixer\\": "vendor-bin/twig-cs-fixer/src/"
         }
     },
     "autoload-dev": {
