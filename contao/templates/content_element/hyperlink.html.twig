@@ -1,3 +1,4 @@
+{% use '@Contao/kiss_component/media/_icon_text.html.twig' %}
 {% extends '@Contao/content_element/hyperlink.html.twig' %}
 
 {% if data.ctaAsButton|default %}
@@ -18,7 +19,9 @@
         %}
         {{- text_before -}}
         <a{{ attrs(link_attributes|default) }}>
-            {{ include('@Contao/kiss_component/media/_icon_text.html.twig', data|merge({text: link_text, add_wrapper: false})) }}
+            {% with {item: data, icon: data.icon, text: link_text} %}
+                {{ block('icon_text') }}
+            {% endwith %}
         </a>
         {{- text_after -}}
     {% else %}

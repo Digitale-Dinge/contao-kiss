@@ -18,7 +18,7 @@
 {% set id = 'moon-mask-' ~ random() %}
 
 {# ToDo: Add translations for the aria label #}
-{% set button_attributes = attrs()
+{% set button_attributes = attrs(button_attributes|default)
     .set('data-controller', 'theme')
     .set('data-action', 'theme#toggle')
     .addClass(['theme-toggle', class|default])
