@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules;
+namespace DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\Tag;
 
 use TwigCsFixer\Rules\AbstractFixableRule;
 use TwigCsFixer\Token\Token;
 use TwigCsFixer\Token\Tokens;
 
 /**
- * Ensures that expressions evaluated only for their side effect use the "do"
- * tag instead of being assigned to a throwaway "_" variable.
+ * Ensures that expressions evaluated use the "do" tag instead of being assigned to a throwaway "_" variable.
  *
  * Before and after:
- *   {% set _ = attributes.set('foobar', foobar) %}  →  {% do attributes.set('foobar', foobar) %}
+ *   {% set _ = attributes.set('foobar', foobar) %}
+ *   ->  {% do attributes.set('foobar', foobar) %}
  */
 final class SetUnderscoreRule extends AbstractFixableRule
 {

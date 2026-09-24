@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules;
+namespace DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\Variable;
 
 use TwigCsFixer\Rules\AbstractRule;
 use TwigCsFixer\Rules\ConfigurableRuleInterface;
@@ -14,13 +14,13 @@ use Webmozart\Assert\Assert;
 final class VariableNameRule extends AbstractRule implements ConfigurableRuleInterface
 {
     // Kebab case is not a valid case for variable names.
-    public const SNAKE_CASE = 'snake_case';
-    public const CAMEL_CASE = 'camelCase';
-    public const PASCAL_CASE = 'PascalCase';
+    public const string SNAKE_CASE = 'snake_case';
+    public const string CAMEL_CASE = 'camelCase';
+    public const string PASCAL_CASE = 'PascalCase';
 
     /**
      * @param self::*      $case
-     * @param list<string> $ignore variable names that are never reported
+     * @param list<string> $ignore
      */
     public function __construct(
         private readonly string $case = self::SNAKE_CASE,

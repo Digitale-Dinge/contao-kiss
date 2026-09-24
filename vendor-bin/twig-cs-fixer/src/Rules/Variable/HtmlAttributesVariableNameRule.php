@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules;
+namespace DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\Variable;
 
 use TwigCsFixer\Rules\AbstractRule;
 use TwigCsFixer\Rules\ConfigurableRuleInterface;
@@ -28,7 +28,7 @@ final class HtmlAttributesVariableNameRule extends AbstractRule implements Confi
     private const string EXPECTED_SUFFIX = 'attributes';
 
     /**
-     * @param list<string> $ignore variable names that are never reported
+     * @param list<string> $ignore
      */
     public function __construct(
         private readonly array $ignore = [],

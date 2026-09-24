@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules;
+namespace DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\Tag;
 
 use TwigCsFixer\Rules\AbstractRule;
 use TwigCsFixer\Token\Token;
@@ -13,8 +13,8 @@ use TwigCsFixer\Token\Tokens;
  * importing them with a name is redundant now.
  *
  * Before and after:
- *   {% import _self as foo %}{{ foo.bar() }}  →  {{ _self.bar() }}
- *   {% from _self import bar %}{{ bar() }}    →  {{ _self.bar() }}
+ *   {% import _self as foo %}{{ foo.bar() }}  ->  {{ _self.bar() }}
+ *   {% from _self import bar %}{{ bar() }}  ->  {{ _self.bar() }}
  */
 final class ImportSelfRule extends AbstractRule
 {
