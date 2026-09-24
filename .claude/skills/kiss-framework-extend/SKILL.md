@@ -155,6 +155,8 @@ The template chain is `Contao core _base` → `KISS _base` → component/element
 
 Everything from `_media_text_wrapper` down to the `<img>` is steerable via variables — `attributes`, `media_attributes`, `headline_classes`, `topline_attributes`, `text_attributes`, `text_inner_attrs`, `cta_wrapper_attributes`, `cta_attributes`, `figure_attributes`, `caption_attributes`, `link_attributes`, `img_class`, `video_attributes`, `source_attributes`, plus the behaviour switches `show_as_card`, `tag_name`. The `_content_wrapper` (included by every `_base` descendant) adds `kiss_swiper`, `list_mode`, `list_tag_name` and `list_wrapper_attributes`. The full table with what each hook targets and how `list_mode` auto-activates is in `references/examples.md` — consult it before overriding any block.
 
+A `{% set x_attributes = attrs()… %}` that ignores an incoming `x_attributes` is fixed the way the `AttrsHookMerge` lint rule says: `attrs(x_attributes|default)…` or `.mergeWith(x_attributes|default)`. Keep the variable and its name. Do not inline the chain or rename the variable to get rid of the warning. Also, per-item state does not leak: `{{ block('…') }}` and `include()` each get their own copy of the context, so a `set` inside a block that a loop calls stays inside that one call. A lint suggestion is rejected only when the rendered page shows it breaks something, never on a theory about Twig scoping (negative example 9 in `references/examples.md`).
+
 Concrete positive and negative examples, including the documented real failed attempts: **read `references/examples.md` before writing templates.**
 
 ## Standalone component in `kiss_component/`: the mandatory structure
@@ -321,5 +323,6 @@ RSCE-specific self-check: was an existing media/action component reused via `{% 
 - Does every new standalone component in `kiss_component/` have a docblock with `@param` + `Usage`, one root block, `item|default(_context)`, `attrs()` instead of string classes and `_icon_include.html.twig` instead of `<i class>`?
 - Any `data|merge(…)` / `item|merge(…)` feeding a component? Wrong: map only the differing names with `{% with {…} %}{{ block('…') }}{% endwith %}`.
 - Does the RSCE include the component via `{% use %}` + `{{ block('…') }}` without passing variables — and are the component fields named exactly like the config fields?
+- Did a lint warning get fixed with the rule's own suggestion? Any `x_attributes` variable inlined, renamed or dropped to silence `AttrsHookMerge`? Restore it with `attrs(x_attributes|default)`.
 - Does the config file still contain a plain-text label, a `foreach` over an enum or a `$GLOBALS['TL_LANG']` reference instead of `addStyleOptionsField()` / `addSelectField()` + `rsce.*.yaml`?
 - Return Could and Won't items to the user as proposals at the end instead of implementing them. Every open question that was not answered stays a question, not an assumption.

@@ -9,7 +9,7 @@ Contents:
 3. Positive example 2: `news_card.html.twig` (mapping a foreign template onto a KISS component)
 4. Positive example 3: `rsce_card_group.html.twig` (card settings once per element)
 5. Positive example 4: `_badge.html.twig` + `rsce_badge.html.twig` (standalone component via `use`)
-6. Negative examples 1–8
+6. Negative examples 1–9
 7. Cheat sheet: attribute hooks of the media_text chain and the content wrapper
 
 ---
@@ -491,6 +491,33 @@ Each comment narrates the line under it: the `addClass` says it maps the variant
 The Twig and PHP snippets: comment lines deleted, nothing else changes. A bare section header in SCSS or PHP grouping related lines is fine; Twig gets no comments apart from the component docblock in new components, if needed.
 
 Detection question: "Is this a bare section header in SCSS/PHP, or a one-line *why* the code cannot express (a quirk, a deliberate deviation, an issue link)?" → If neither, delete it. In Twig only the `@param` docblock of a standalone component survives.
+
+## Negative example 9: dropping a hook variable instead of applying the lint fix
+
+**Wrong (really happened, `rsce_counter_list.html.twig`):** `AttrsHookMerge` warned that `counter_item_attributes` replaces the hook. The set sits in a block that `{% for item in list %}` calls once per item. The claim was that `attrs(counter_item_attributes|default)` would carry `data-prefix` from one item into the next, so the variable was removed and the chain inlined:
+
+```twig
+<span{{ attrs()
+    .addClass(['counter-item__value', '!mb-0', text_appearance])
+    .setIfExists('data-prefix', item.prefix|default)
+}}>
+```
+
+The claim was false. `{{ block('counter_item') }}` renders with a copy of the caller's context, so the `set` inside the block never reaches the loop or the next item. The warning disappeared, but so did the hook, and the same mistake was repeated on `script_attributes` in `logo_swiper.html.twig`.
+
+**Right:** the rule's own suggestion, keeping the variable:
+
+```twig
+{% set counter_item_attributes = attrs(counter_item_attributes|default)
+    .addClass(['counter-item__value', '!mb-0', text_appearance])
+    .setIfExists('data-prefix', item.prefix|default)
+%}
+<span{{ counter_item_attributes }}>
+```
+
+The rendered page confirms it: the first counter has `data-suffix="+"`, the second has none.
+
+Detection question: "Am I rewriting code in a way the lint rule did not suggest, because of how I think Twig behaves?" → Apply the suggestion, render the page and compare. Deviate only when the output shows a concrete break.
 
 ---
 
