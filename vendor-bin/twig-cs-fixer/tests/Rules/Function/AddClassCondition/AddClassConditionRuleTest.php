@@ -12,8 +12,8 @@ final class AddClassConditionRuleTest extends AbstractRuleTestCase
     public function testRule(): void
     {
         $this->checkRule(new AddClassConditionRule(), [
-            'AddClassCondition.Error:2:6' => 'A prefixed class built from an optional value needs that value as condition: ".addClass(\'prefix-\' ~ value, value)".',
-            'AddClassCondition.Error:3:6' => 'A prefixed class built from an optional value needs that value as condition: ".addClass(\'prefix-\' ~ value, value)".',
+            'AddClassCondition.Error:2:6' => 'A prefixed class built from an optional value needs the value as a condition: ".addClass(\'prefix-\' ~ value, value)".',
+            'AddClassCondition.Error:3:6' => 'A prefixed class built from an optional value needs the value as a condition: ".addClass(\'prefix-\' ~ value, value)".',
         ]);
     }
 }

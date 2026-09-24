@@ -20,8 +20,8 @@ final class ForbiddenRawFilterRuleTest extends AbstractRuleTestCase
     public function testRule(): void
     {
         $this->checkRule(new ForbiddenRawFilterRule(), [
-            'ForbiddenRawFilter.Warning:1:12' => 'If you are really sure that you need the |raw filter and it is not a core template, reconsider your architecture as this can add security risks. If you are really sure, add the template to the ignore list.',
-            'ForbiddenRawFilter.Warning:3:15' => 'If you are really sure that you need the |raw filter and it is not a core template, reconsider your architecture as this can add security risks. If you are really sure, add the template to the ignore list.',
+            'ForbiddenRawFilter.Warning:1:12' => 'You should not use the |raw filter. Please reconsider your architecture as this can add security risks. If you are really sure that it is fine, add the template to the ignore list.',
+            'ForbiddenRawFilter.Warning:3:15' => 'You should not use the |raw filter. Please reconsider your architecture as this can add security risks. If you are really sure that it is fine, add the template to the ignore list.',
         ]);
     }
 
@@ -34,8 +34,8 @@ final class ForbiddenRawFilterRuleTest extends AbstractRuleTestCase
     public function testIgnoreMatchesWholeFileName(): void
     {
         $this->checkRule(new ForbiddenRawFilterRule(['RuleTest.twig']), [
-            'ForbiddenRawFilter.Warning:1:12' => 'If you are really sure that you need the |raw filter and it is not a core template, reconsider your architecture as this can add security risks. If you are really sure, add the template to the ignore list.',
-            'ForbiddenRawFilter.Warning:3:15' => 'If you are really sure that you need the |raw filter and it is not a core template, reconsider your architecture as this can add security risks. If you are really sure, add the template to the ignore list.',
+            'ForbiddenRawFilter.Warning:1:12' => 'You should not use the |raw filter. Please reconsider your architecture as this can add security risks. If you are really sure that it is fine, add the template to the ignore list.',
+            'ForbiddenRawFilter.Warning:3:15' => 'You should not use the |raw filter. Please reconsider your architecture as this can add security risks. If you are really sure that it is fine, add the template to the ignore list.',
         ]);
     }
 }
