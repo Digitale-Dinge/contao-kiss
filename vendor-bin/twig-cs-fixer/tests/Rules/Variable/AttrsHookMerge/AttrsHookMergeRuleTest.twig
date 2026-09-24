@@ -1,0 +1,14 @@
+{% set foo_attributes = attrs().addClass('foo') %}
+{% set foo_attributes = attrs(foo_attributes|default).addClass('foo') %}
+{% set bar_attributes = attrs().addClass('bar').mergeWith(bar_attributes|default) %}
+{% set baz_attributes = attrs().set('data-x', other.baz_attributes) %}
+{% for file in files %}
+    {% set source_attributes = attrs().set('src', file.path) %}
+{% endfor %}
+{% set attributes = attrs(foo_attributes) %}
+{% set qux = something %}
+{% macro source(file) %}
+    {% set source_attributes = attrs().set('src', file.path) %}
+{% endmacro %}
+{% set after_macro_attributes = attrs() %}
+{% set qux_attributes = attrs().set('data-x', other?.qux_attributes) %}
