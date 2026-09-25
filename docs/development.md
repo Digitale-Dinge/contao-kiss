@@ -108,6 +108,21 @@ stylesheet is an entry of its own, named `<entry>.css`.
 `contao/templates/page/layout.html.twig` renders the tags in a
 `kiss_theme_assets` block. Projects set `kiss_theme_entry`.
 
+## Style options
+
+`tests/Styles/Option/StyleOptionCasesTest.php` pins the case names of every
+enum in `src/Styles/Option/`, because those names are being stored for the appearance.
+
+- **Changing a value** is free.
+- **A new case** is reported as incomplete until it's added to `CASES`.
+- **Removing or renaming a case** fails the test. It's a breaking change: update
+  `CASES`, add a migration mapping the old case in
+  `src/Migration/Version<NNN>/` with a test next to the existing ones, and list
+  it under breaking changes in the PR.
+
+`contao_kiss:find-style-values` finds the records that store a value. How to
+write the migration is in `docs/style-options.md`.
+
 ## CI
 
 See `.github/workflows/ci.yml`.

@@ -261,7 +261,65 @@ case x_large = 'gap-12';
 ```
 
 The select no longer offers `xx_large`. Content that stored it renders no class
-until it's re-saved with another value.
+until it's re-saved or migrated, see below.
+
+## Migrating stored values
+
+Dropping or renaming a case leaves content that stored it without a class.
+Find it first:
+
+```bash
+vendor/bin/contao-console contao_kiss:find-style-values textAppearance x_large xx_large xxx_large
+```
+
+Keys are comma-separated, followed by the values to look for. `--table` limits
+the search to one table, and `--backend-prefix=https://example.org/contao` adds
+an edit link per record. The command reads `kiss_styles`, `headline` and
+`rsce_data`.
+
+Then map the old cases to new ones with a migration. `AbstractJsonColumnMigration`
+walks nested lists, JSON and serialized values, and keeps each value in its
+original format:
+
+```php
+namespace App\Migration;
+
+use DigitaleDinge\ContaoKiss\Migration\AbstractJsonColumnMigration;
+
+class ContentTextAppearanceKissStylesMigration extends AbstractJsonColumnMigration
+{
+    private const array TEXT_APPEARANCE_MAP = [
+        'x_large' => '',
+        'xx_large' => 'headline_two',
+        'xxx_large' => 'headline_one',
+    ];
+
+    protected function getTables(): array
+    {
+        return ['tl_content'];
+    }
+
+    protected function getColumns(): array
+    {
+        return ['kiss_styles', 'rsce_data'];
+    }
+
+    protected function getValueMaps(): array
+    {
+        return [
+            'kiss_styles' => ['textAppearance' => self::TEXT_APPEARANCE_MAP],
+            'rsce_data' => ['textAppearance' => self::TEXT_APPEARANCE_MAP],
+        ];
+    }
+}
+```
+
+Mapping to `''` clears the value. List every column that stores the key; columns
+a table doesn't have are skipped. `getKeyRenames()` renames a key itself. The
+migration runs with `contao:migrate`. Please make sure to check which tables,
+columns and values you want to migrate. Always create a backup first before doing so.
+
+No backup, no sorry (=.
 
 ## Groups
 
