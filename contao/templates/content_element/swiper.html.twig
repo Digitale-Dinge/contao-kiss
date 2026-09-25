@@ -13,7 +13,6 @@
     {% endif %}
 
     {% set slides_per_view = data.slidesPerView|default(1) + 0 %}
-    <h1>{{ slides_per_view }}</h1>
 
     {% if slides_per_view > 1 and slider_settings.slidesPerView is not defined %}
         {% set slider_settings = slider_settings|merge({
