@@ -122,9 +122,9 @@ Consequences: CSS classes can be swapped in the enum at any time (recompile, no 
 If (and only if) the inventory shows something is really missing, an option consists of exactly these parts — omit nothing, invent nothing:
 
 1. **Enum case(s)** added to an existing enum — a new enum only for a genuinely new dimension. Values without context prefix (like `Modifier\Size`: `xs`, not `card-xs`), unless the class is inseparable (like `Background`: `bg-base-100`). `label()` points to `style_options.*`.
-2. **Option class** (`XyzOption extends StyleOption`) only for a new enum; maintain the docblock `@method` lines.
-3. **`StylesVariable` getter** only for a new enum. New Twig globals are the exception, not the reflex — `styles.variant`, `styles.color`, `styles.background`, `styles.size` already cover the card.
-4. **Options callback**: preferably an additional `#[AsCallback('tl_content', 'fields.<field>.options')]` attribute on the **existing** listener method, no new method for the same enum.
+2. **Option class** (`XyzOption extends StyleOption`) only for a new enum, registered with a bare `#[AsKissStyleOption]` (picked up by the `Styles\` resource in `config/services.yaml`); maintain the docblock `@method` lines.
+3. **`StylesVariable` getter** only for a new enum, delegating to `$this->option(XyzOption::class, $key)`. New Twig globals are the exception, not the reflex — `styles.variant`, `styles.color`, `styles.background`, `styles.size` already cover the card.
+4. **Options callback**: preferably an additional `#[AsCallback('tl_content', 'fields.<field>.options')]` attribute on the **existing** listener method, no new method for the same enum. Callbacks resolve the enum through the registry, so replacements apply: `$this->registry->getEnum(Xyz::class)`.
 5. **DCA field** in `tl_content.php`: `inputType: select`, `targetColumn: 'kiss_styles'`, `includeBlankOption: true`. No `blankOptionLabel` — the empty default (`-`) is the convention. Register the field in the matching subpalette (e.g. `showAsCard`).
 6. **Translations** always in pairs DE + EN: option labels in `style_options.*.yaml`, field labels in `contao_tl_content.*.yaml` (two lines: label + description, no third default line).
 7. **Template wiring** with prefix and condition: `.addClass('card-' ~ styles.variant(data.elementVariant|default), data.elementVariant|default)`.
