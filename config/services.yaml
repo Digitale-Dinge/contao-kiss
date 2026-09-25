@@ -11,13 +11,6 @@ services:
     DigitaleDinge\ContaoKiss\Styles\:
         resource: '../src/Styles/{StyleOptionRegistry.php,Option/**/*Option.php}'
 
-    #kiss.twig.global.styles_variable:
-        #class: DigitaleDinge\ContaoKiss\Twig\Global\StylesVariable
-        #public: true
-        #arguments:
-            #- '@event_dispatcher'
-            #- '%contao_kiss.style_definition_override%'
-
     kiss.rsce_config.builder:
         class: DigitaleDinge\ContaoKiss\CustomElementsConfigurationBuilder
         public: true
