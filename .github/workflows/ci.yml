@@ -87,6 +87,32 @@ jobs:
             - name: Run the unit tests
               run: composer unit-tests
 
+    nightly:
+        name: Tests PHP nightly
+        runs-on: ubuntu-latest
+        continue-on-error: true
+        steps:
+            - name: Set up PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: nightly
+                  extensions: dom, fileinfo, filter, hash, intl, json, mbstring, pcre, zlib
+                  coverage: none
+
+            - name: Checkout
+              uses: actions/checkout@v6
+              with:
+                  show-progress: false
+                  persist-credentials: false
+
+            - name: Install the dependencies
+              uses: ramsey/composer-install@v4
+              with:
+                  composer-options: --ignore-platform-req=php+
+
+            - name: Run the unit tests
+              run: composer unit-tests
+
     linter:
         name: Linter
         runs-on: ubuntu-latest
