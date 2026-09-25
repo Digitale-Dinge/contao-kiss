@@ -7,6 +7,7 @@ namespace DigitaleDinge\ContaoKiss\Twig\Runtime;
 use Contao\CoreBundle\String\HtmlAttributes;
 use DigitaleDinge\ContaoKiss\EventListener\TranslatableEnumTrait;
 use DigitaleDinge\ContaoKiss\Styles\Option\Layout\Column;
+use DigitaleDinge\ContaoKiss\Styles\StyleOptionRegistry;
 use DigitaleDinge\ContaoKiss\Twig\Global\StylesVariable;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
@@ -24,8 +25,9 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
         private readonly Connection $connection,
         private readonly StylesVariable $stylesVariable,
         private readonly TranslatorInterface $translator,
+        StyleOptionRegistry $registry,
     ) {
-        $this->gridColumnLabels = $this->getTranslatedOptions(Column::class);
+        $this->gridColumnLabels = $this->getTranslatedOptions($registry->getEnum(Column::class));
     }
 
     /**
