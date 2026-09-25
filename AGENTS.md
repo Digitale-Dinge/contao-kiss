@@ -99,9 +99,14 @@ the same rule: `elementVariant`, not `cardVariant`.
 `Color\Background` (`bg-*`, wired as `data.backgroundColor`) and `Color\Color` (primary, secondary, accent, …) are
 different dimensions — ask which one is meant.
 
-A new option is a complete chain: enum case, option class with `#[AsKissStyleOption]`, and a `StylesVariable` getter only for a genuinely new enum, `#[AsCallback]` on the existing
-listener method resolving the enum via the registry, DCA field with `targetColumn: 'kiss_styles'` in the matching
-subpalette, DE **and** EN translations, template wiring with prefix and condition.
+A new option is a complete chain: enum case, option class with `#[AsKissStyleOption]`, and a `StylesVariable` getter
+only for a genuinely new enum, `#[AsCallback]` on the existing listener method resolving the enum via the registry, DCA
+field with `targetColumn: 'kiss_styles'` in the matching subpalette, DE **and** EN translations, template wiring with
+prefix and condition.
+
+Removing or renaming a case breaks stored content and fails `StyleOptionCasesTest`. Warn first, change the test only as
+part of the confirmed change, and write a migration (`AbstractJsonColumnMigration` in `src/Migration/Version<NNN>/`)
+only when it is explicitly asked for and the mapping is confirmed. The skill has the details.
 
 ## Templates
 
