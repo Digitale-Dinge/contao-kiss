@@ -3,7 +3,7 @@
  *
  * Base: .link
  * Colors: link-{primary|secondary|tertiary|success|warning|error} (neutral-on-strong is default)
- * Sizes: link-{xs|sm|lg|xl} (text-base is default)
+ * Sizes: link-{sm|lg} (text-base is default)
  * Styles: link-{underline-hover|underline-animate|underline-none}
  * Special: link-external
  *
@@ -73,12 +73,6 @@
     }
 
     /* Sizes */
-    .link-xs {
-        --link-gap: var(--kiss-comp-link-xs-spacing-gap, .125rem);
-        --link-font: var(--kiss-comp-link-xs-font-inline, var(--text-xs, .75rem));
-        --link-icon: var(--kiss-comp-link-xs-sizing-icon, .75rem);
-    }
-
     .link-sm {
         --link-gap: var(--kiss-comp-link-sm-spacing-gap, .25rem);
         --link-font: var(--kiss-comp-link-sm-font-inline, var(--text-sm, .875rem));
@@ -91,12 +85,6 @@
         --link-gap: var(--kiss-comp-link-lg-spacing-gap, .375rem);
         --link-font: var(--kiss-comp-link-lg-font-inline, var(--text-lg, 1.125rem));
         --link-icon: var(--kiss-comp-link-lg-sizing-icon, 1.5rem);
-    }
-
-    .link-xl {
-        --link-gap: var(--kiss-comp-link-xl-spacing-gap, .5rem);
-        --link-font: var(--kiss-comp-link-xl-font-inline, var(--text-xl, 1.25rem));
-        --link-icon: var(--kiss-comp-link-xl-sizing-icon, 1.5rem);
     }
 
     /* Variants */

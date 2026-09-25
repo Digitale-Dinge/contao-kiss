@@ -27,7 +27,7 @@
  *     <button class="input-number-btn">+</button>
  *   </div>
  *
- * SIZES: .input-xs, .input-sm, (default), .input-lg, .input-xl
+ * SIZES: .input-sm, (default), .input-lg
  * COLORS: .input-primary, .input-secondary, .input-tertiary, etc.
  */
 @layer components {
@@ -79,12 +79,6 @@
         }
 
         /* Sizes */
-        &:has(.input-xs) {
-            --btn-size: 1rem;
-            --btn-icon-size: .625rem;
-            --btn-offset-2: .5rem;
-        }
-
         &:has(.input-sm) {
             --btn-size: 1.25rem;
             --btn-icon-size: .75rem;
@@ -94,12 +88,6 @@
         &:has(.input-lg) {
             --btn-size: 2rem;
             --btn-icon-size: 1.25rem;
-            --btn-offset-2: .75rem;
-        }
-
-        &:has(.input-xl) {
-            --btn-size: 2.5rem;
-            --btn-icon-size: 1.5rem;
             --btn-offset-2: .75rem;
         }
     }

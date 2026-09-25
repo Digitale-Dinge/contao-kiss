@@ -4,7 +4,7 @@
  * Base: .btn
  * Styles: btn-{soft|outline|text|link}
  * Colors: btn-{primary|secondary|tertiary|success|warning|error}
- * Sizes: btn-{xs|sm|lg|xl}
+ * Sizes: btn-{sm|lg}
  * Shapes: btn-{circle|square|wide|block}
  * Effects: btn-shadow-{none|sm|md|lg}, btn-active
  *
@@ -198,14 +198,6 @@
     }
 
     /* Sizes */
-    .btn-xs {
-        --btn-size: 1.75rem;
-        --btn-px: calc(var(--spacing, .25rem) * 2);
-        --btn-py: calc(var(--spacing, .25rem) * 1.5);
-        --btn-gap: calc(var(--spacing, .25rem) * 1);
-        --btn-text: var(--text-xs, .75rem);
-    }
-
     .btn-sm {
         --btn-size: 2.25rem;
         --btn-px: calc(var(--spacing, .25rem) * 3);
@@ -222,14 +214,6 @@
         --btn-py: calc(var(--spacing, .25rem) * 3);
         --btn-gap: calc(var(--spacing, .25rem) * 2.5);
         --btn-text: var(--text-lg, 1.125rem);
-    }
-
-    .btn-xl {
-        --btn-size: 4rem;
-        --btn-px: calc(var(--spacing, .25rem) * 6);
-        --btn-py: calc(var(--spacing, .25rem) * 4);
-        --btn-gap: calc(var(--spacing, .25rem) * 3);
-        --btn-text: var(--text-xl, 1.25rem);
     }
 
     /* Shapes */

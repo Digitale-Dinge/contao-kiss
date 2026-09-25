@@ -4,7 +4,7 @@
  * Base: .form-select
  * Styles: select-{soft} (outline is default)
  * Colors: select-{primary|secondary|tertiary|success|warning|error}
- * Sizes: select-{xs|sm|lg|xl}
+ * Sizes: select-{sm|lg}
  * States: is-valid, is-invalid, disabled
  *
  * Floating Label:
@@ -119,15 +119,6 @@
     }
 
     /* Sizes */
-    .select-xs {
-        --select-px: .5rem;
-        --select-py: .375rem;
-        --select-pr: 2rem;
-        --select-text: var(--text-xs, .75rem);
-        --select-arrow-size: .75rem;
-        --select-arrow-right: .5rem;
-    }
-
     .select-sm {
         --select-px: .625rem;
         --select-py: .5rem;
@@ -144,15 +135,6 @@
         --select-text: var(--text-lg, 1.125rem);
         --select-arrow-size: 1.25rem;
         --select-arrow-right: 1rem;
-    }
-
-    .select-xl {
-        --select-px: 1.25rem;
-        --select-py: .875rem;
-        --select-pr: 3.5rem;
-        --select-text: var(--text-xl, 1.25rem);
-        --select-arrow-size: 1.5rem;
-        --select-arrow-right: 1.25rem;
     }
 
     /* Select group */
@@ -172,11 +154,6 @@
             @apply w-full;
         }
 
-        &:has(.select-xs) {
-            --select-icon-space: 2rem;
-            --select-icon-inset: .5rem;
-        }
-
         &:has(.select-sm) {
             --select-icon-space: 2.25rem;
             --select-icon-inset: .625rem;
@@ -185,11 +162,6 @@
         &:has(.select-lg) {
             --select-icon-space: 3rem;
             --select-icon-inset: 1rem;
-        }
-
-        &:has(.select-xl) {
-            --select-icon-space: 3.5rem;
-            --select-icon-inset: 1.25rem;
         }
 
         &.has-icon-left {
