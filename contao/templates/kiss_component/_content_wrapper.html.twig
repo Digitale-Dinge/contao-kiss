@@ -5,11 +5,12 @@
 %}
 
 {% block content_wrapper %}
+    {% set kiss_swiper = kiss_swiper|default(data.kissSwiper|default) %}
     {% set grid_ratio_active = data.gridRatioActive|default %}
-    {% set list_mode = not kiss_swiper|default and (list|default is iterable and list|length or data.gridColumns|default or grid_ratio_active) %}
+    {% set list_mode = not kiss_swiper and (list|default is iterable and list|length or data.gridColumns|default or grid_ratio_active) %}
     {% set list_tag_name = list_tag_name|default('div') %}
 
-    {% if kiss_swiper|default %}
+    {% if kiss_swiper %}
         {{ block('swiper') }}
     {% else %}
         {% if list_mode %}
@@ -35,13 +36,13 @@
 {% endblock %}
 
 {% block script %}
-    {% if kiss_swiper|default %}
+    {% if kiss_swiper|default(data.kissSwiper|default) %}
         {{ block('swiper_script') }}
     {% endif %}
 {% endblock %}
 
 {% block style %}
-    {% if kiss_swiper|default %}
+    {% if kiss_swiper|default(data.kissSwiper|default) %}
         {{ block('swiper_style') }}
     {% endif %}
 {% endblock %}

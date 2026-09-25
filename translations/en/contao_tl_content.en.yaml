@@ -1,6 +1,7 @@
 tl_content:
     layout_legend:              Layout settings
     grid_legend:                Grid settings
+    card_legend:                Card settings
     appearance_legend:          Appearance settings
 
     grid:                       Column grid
@@ -83,8 +84,20 @@ tl_content:
         - Defines the vertical Alignment of the elements.
 
     slidesPerView:
-        - Cards per row
-        - Number of cards side by side on desktop (e.g. 3). Tablet and mobile step down automatically. Leave empty for one full-width slide.
+        - Items per row
+        - Number of items side by side on desktop (e.g. 3). Tablet and mobile step down automatically. Leave empty for one full-width slide.
+
+    kissSwiper:
+        - Show as slider
+        - Show the elements as a slider.
+
+    sliderNavigation:
+        - Arrows
+        - Position of the navigation arrows.
+
+    sliderHidePagination:
+        - Hide dots
+        - Hide the dot navigation below the slider.
 
     backgroundColor:
         - Background color

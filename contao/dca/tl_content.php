@@ -136,16 +136,44 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['gridGap'] = [
     ],
 ];
 
-/* Cards per row on the content slider (desktop count; smaller screens are derived in the swiper template) */
+/* Items per row on the content slider (desktop count; smaller screens are derived in the swiper template) */
 $GLOBALS['TL_DCA']['tl_content']['fields']['slidesPerView'] = [
     'exclude' => true,
     'inputType' => 'text',
     'targetColumn' => 'kiss_styles',
     'eval' => [
-        'tl_class' => 'w50',
+        'tl_class' => 'w25',
         'rgxp' => 'natural',
         'maximum' => 6,
         'placeholder' => '1',
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['kissSwiper'] = [
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderNavigation'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'default' => 'overlay',
+    'eval' => [
+        'tl_class' => 'w25',
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderHidePagination'] = [
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
     ],
 ];
 
@@ -187,7 +215,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['ctaAsButton'] = [
     'inputType' => 'checkbox',
     'targetColumn' => 'kiss_styles',
     'eval' => [
-        'tl_class' => 'w25',
+        'tl_class' => 'w25 clr',
         'submitOnChange' => true,
     ],
 ];
@@ -415,9 +443,10 @@ PaletteManipulator::create()
 ;
 
 PaletteManipulator::create()
-    ->addLegend('card_legend:collapsed', 'text_legend', PaletteManipulator::POSITION_AFTER)
+    ->addLegend('card_legend', ['text_legend', 'include_legend'], PaletteManipulator::POSITION_AFTER, true)
     ->addField('showAsCard', 'card_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('text', 'tl_content')
+    ->applyToPalette('form', 'tl_content')
 ;
 
 PaletteManipulator::create()
@@ -430,10 +459,6 @@ PaletteManipulator::create()
     ->addLegend('appearance_legend', 'download_legend')
     ->addField(['textAlignment', 'ctaAsButton'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('download', 'tl_content')
-;
-
-PaletteManipulator::create()
-    ->addField('ctaAsButton', 'download_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('downloads', 'tl_content')
 ;
 
@@ -445,8 +470,9 @@ PaletteManipulator::create()
     ->applyToPalette('element_group', 'tl_content')
 ;
 
-/* Expose the "cards per row" preset on the content slider */
+/* Expose the "items per row" preset on the content slider */
 PaletteManipulator::create()
     ->addField('slidesPerView', 'sliderContinuous', PaletteManipulator::POSITION_AFTER)
+    ->addField(['sliderNavigation', 'sliderHidePagination'], 'slidesPerView', PaletteManipulator::POSITION_AFTER)
     ->applyToPalette('swiper', 'tl_content')
 ;

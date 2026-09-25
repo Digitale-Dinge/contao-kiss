@@ -127,6 +127,11 @@ style_options:
                 wide:               Breit
                 block:              Volle Breite
 
+        swiper:
+            navigation:
+                overlay:            Pfeile auf dem Bild
+                outside:            Pfeile neben dem Bild
+
         media:
             layout:
                 default:            Medium oben, Text unten

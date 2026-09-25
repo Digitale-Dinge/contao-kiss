@@ -127,6 +127,11 @@ style_options:
                 wide:               Wide
                 block:              Full width
 
+        swiper:
+            navigation:
+                overlay:            Arrows on the image
+                outside:            Arrows beside the image
+
         media:
             layout:
                 default:            Media above, text below

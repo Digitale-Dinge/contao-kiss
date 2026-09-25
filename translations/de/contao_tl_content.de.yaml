@@ -1,6 +1,7 @@
 tl_content:
     layout_legend:              Layout-Einstellungen
     grid_legend:                Grid-Einstellungen
+    card_legend:                Karten-Einstellungen
     appearance_legend:          Darstellungs-Einstellungen
 
     grid:                       Spalten-Grid
@@ -83,8 +84,20 @@ tl_content:
         - Legt die vertikale Ausrichtung der Elemente fest.
 
     slidesPerView:
-        - Karten pro Reihe
-        - Anzahl der Karten nebeneinander auf dem Desktop (z. B. 3). Tablet und Smartphone reduzieren automatisch. Leer lassen für eine Karte über die volle Breite.
+        - Elemente pro Reihe
+        - Anzahl der Elemente nebeneinander auf dem Desktop (z. B. 3). Tablet und Smartphone reduzieren automatisch. Leer lassen für ein Element über die volle Breite.
+
+    kissSwiper:
+        - Als Slider anzeigen
+        - Die Elemente als Slider anzeigen.
+
+    sliderNavigation:
+        - Pfeile
+        - Position der Pfeile zum Blättern.
+
+    sliderHidePagination:
+        - Punkte ausblenden
+        - Die Punkt-Navigation unter dem Slider ausblenden.
 
     backgroundColor:
         - Hintergrundfarbe

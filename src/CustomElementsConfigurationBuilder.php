@@ -610,6 +610,23 @@ final class CustomElementsConfigurationBuilder
         return $this->addField('showAsCard', ['inputType' => 'standardField'], $eval);
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function addSwiperSettings(): self
+    {
+        if ($this->isListField()) {
+            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+        }
+
+        $this->addGroup('swiper', [$this->translator->trans('rsce.group.swiper', [], 'rsce')]);
+        $this->addField('kissSwiper', ['inputType' => 'standardField']);
+        $this->addField('sliderNavigation', ['inputType' => 'standardField']);
+        $this->addField('sliderHidePagination', ['inputType' => 'standardField']);
+
+        return $this;
+    }
+
     public function build(): array
     {
         $this->applyPendingFields();

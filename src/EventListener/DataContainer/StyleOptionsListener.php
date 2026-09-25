@@ -158,6 +158,12 @@ final class StyleOptionsListener
         return $this->getTranslatedOptions(Component\Media\Layout::class);
     }
 
+    #[AsCallback('tl_content', 'fields.sliderNavigation.options')]
+    public function addSliderNavigationOptions(): array
+    {
+        return $this->getTranslatedOptions(Component\Swiper\Navigation::class);
+    }
+
     #[AsCallback('tl_content', 'fields.elementVariant.options')]
     #[AsCallback('tl_form_field', 'fields.fieldVariant.options')]
     public function addVariantOptions(DataContainer $dc): array
