@@ -6,4 +6,19 @@
     .invisible {
         @apply sr-only visible;
     }
+
+    /* Tailwind preflight strips list markers, editor content needs them back */
+    .rte {
+        :is(ul, ol) {
+            @apply ps-6;
+        }
+
+        ul {
+            @apply list-disc;
+        }
+
+        ol {
+            @apply list-decimal;
+        }
+    }
 }
