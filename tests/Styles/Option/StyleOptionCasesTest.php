@@ -39,7 +39,7 @@ final class StyleOptionCasesTest extends TestCase
         Layout\Gap::class => ['x_small', 'small', 'medium', 'large', 'x_large', 'xx_large'],
         Margin\Bottom::class => ['half', 'one', 'two', 'three', 'four', 'five', 'six'],
         Margin\Top::class => ['half', 'one', 'two', 'three', 'four', 'five', 'six'],
-        Modifier\Size::class => ['x_small', 'small', 'large', 'x_large'],
+        Modifier\Size::class => ['small', 'large'],
         Modifier\Variant::class => ['soft', 'outline', 'glass'],
         Padding\Bottom::class => ['half', 'one', 'two', 'three', 'four', 'five', 'six'],
         Padding\Top::class => ['half', 'one', 'two', 'three', 'four', 'five', 'six'],

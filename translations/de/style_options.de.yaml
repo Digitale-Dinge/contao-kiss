@@ -81,10 +81,8 @@ style_options:
 
     modifier:
         size:
-            x_small:                Sehr klein
             small:                  Klein
             large:                  Groß
-            x_large:                Sehr groß
 
         variant:
             soft:                   Sanft

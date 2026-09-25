@@ -81,10 +81,8 @@ style_options:
 
     modifier:
         size:
-            x_small:                Tiny
             small:                  Small
             large:                  Large
-            x_large:                Extra large
 
         variant:
             soft:                   Soft
