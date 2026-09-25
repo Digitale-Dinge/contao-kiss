@@ -23,7 +23,7 @@ final class IncludeStylesDataListener implements ResetInterface
     {
         if ($isVisible && $this->isInclude($element)) {
             $this->stack[] = [
-                'id' => $element->id,
+                'id' => (int) $element->id,
                 'data' => $element->row(),
             ];
         }
