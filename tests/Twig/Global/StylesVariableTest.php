@@ -4,89 +4,115 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Tests\Twig\Global;
 
-use DigitaleDinge\ContaoKiss\Event\ContaoKissEvents;
-use DigitaleDinge\ContaoKiss\Event\Styles\StyleOptionEvent;
-use DigitaleDinge\ContaoKiss\Styles\Option\Component\Media\LayoutOption;
-use DigitaleDinge\ContaoKiss\Tests\Fixtures\Styles\NotAStyleOption;
+use DigitaleDinge\ContaoKiss\Styles\Option\Color;
+use DigitaleDinge\ContaoKiss\Styles\Option\Component;
+use DigitaleDinge\ContaoKiss\Styles\Option\Layout;
+use DigitaleDinge\ContaoKiss\Styles\Option\Margin;
+use DigitaleDinge\ContaoKiss\Styles\Option\Modifier;
+use DigitaleDinge\ContaoKiss\Styles\Option\Padding;
+use DigitaleDinge\ContaoKiss\Styles\Option\Typography;
+use DigitaleDinge\ContaoKiss\Tests\Fixtures\Styles\StyleOptionRegistryFactory;
 use DigitaleDinge\ContaoKiss\Tests\Fixtures\Styles\SwappedLayoutOption;
 use DigitaleDinge\ContaoKiss\Twig\Global\StylesVariable;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class StylesVariableTest extends TestCase
 {
-    public function testReturnsTheOptionWithoutDispatchingWhenOverridesAreDisabled(): void
+    #[DataProvider('provideGetters')]
+    public function testEveryGetterResolvesItsOption(string $getter, string $optionClass): void
     {
-        $dispatcher = $this->createMock(EventDispatcherInterface::class);
-        $dispatcher
-            ->expects($this->never())
-            ->method('dispatch')
-        ;
-
-        $option = new StylesVariable($dispatcher, false)->getMedia_layout('side_reverse');
-
-        $this->assertInstanceOf(LayoutOption::class, $option);
-        $this->assertSame('side-reverse', (string) $option);
+        $this->assertInstanceOf($optionClass, $this->createStyles()->{$getter}());
     }
 
-    #[DataProvider('provideEventNames')]
-    public function testDispatchesTheEventOfTheOptionClass(string $getter, string $eventName): void
+    public static function provideGetters(): iterable
     {
-        $dispatcher = new EventDispatcher();
-        $calls = 0;
-
-        $dispatcher->addListener($eventName, static function (StyleOptionEvent $event) use (&$calls): void {
-            ++$calls;
-        });
-
-        new StylesVariable($dispatcher, true)->{$getter}();
-
-        $this->assertSame(1, $calls);
+        yield ['getContainer', Layout\ContainerOption::class];
+        yield ['getColumn', Layout\ColumnOption::class];
+        yield ['getGap', Layout\GapOption::class];
+        yield ['getSpan', Layout\ColumnSpanOption::class];
+        yield ['getCrossAlignment', Layout\CrossAlignmentOption::class];
+        yield ['getHeading', Typography\HeadingOption::class];
+        yield ['getFont_appearance', Typography\ResponsiveOption::class];
+        yield ['getText_alignment', Typography\AlignmentOption::class];
+        yield ['getBackground', Color\BackgroundOption::class];
+        yield ['getColor', Color\ColorOption::class];
+        yield ['getMargin_top', Margin\TopOption::class];
+        yield ['getMargin_bottom', Margin\BottomOption::class];
+        yield ['getPadding_top', Padding\TopOption::class];
+        yield ['getPadding_bottom', Padding\BottomOption::class];
+        yield ['getSize', Modifier\SizeOption::class];
+        yield ['getVariant', Modifier\VariantOption::class];
+        yield ['getCta_shape', Component\CallToAction\ShapeOption::class];
+        yield ['getCta_type', Component\CallToAction\VariantOption::class];
+        yield ['getMedia_layout', Component\Media\LayoutOption::class];
     }
 
-    public static function provideEventNames(): iterable
+    public function testGettersPassTheKeyThrough(): void
     {
-        yield 'container' => ['getContainer', ContaoKissEvents::STYLE_LAYOUT_CONTAINER];
-        yield 'column' => ['getColumn', ContaoKissEvents::STYLE_LAYOUT_COLUMN];
-        yield 'gap' => ['getGap', ContaoKissEvents::STYLE_LAYOUT_GAP];
-        yield 'background' => ['getBackground', ContaoKissEvents::STYLE_COLOR_BACKGROUND];
-        yield 'color' => ['getColor', ContaoKissEvents::STYLE_COLOR];
-        yield 'any other option' => ['getMedia_layout', ContaoKissEvents::STYLE_DEFAULT];
+        $this->assertSame('side-reverse', (string) $this->createStyles()->getMedia_layout('side_reverse'));
     }
 
-    public function testAListenerCanSwapTheOptionClass(): void
+    public function testOptionResolvesTheOptionClass(): void
     {
-        $dispatcher = new EventDispatcher();
+        $option = $this->createStyles()->option(Component\Media\LayoutOption::class, 'media_background');
 
-        $dispatcher->addListener(ContaoKissEvents::STYLE_DEFAULT, static function (StyleOptionEvent $event): void {
-            $event->setOptionClass(SwappedLayoutOption::class);
-        });
-
-        $option = new StylesVariable($dispatcher, true)->getMedia_layout('side');
-
-        $this->assertInstanceOf(SwappedLayoutOption::class, $option);
-        $this->assertSame('swapped-side', (string) $option);
+        $this->assertInstanceOf(Component\Media\LayoutOption::class, $option);
+        $this->assertSame('media-background', (string) $option);
     }
 
-    #[DataProvider('provideUnresolvableOptionClasses')]
-    public function testRejectsASwappedClassThatCannotBeResolved(string $class): void
+    public function testOptionResolvesTheEnumClass(): void
     {
-        $dispatcher = new EventDispatcher();
-
-        $dispatcher->addListener(ContaoKissEvents::STYLE_DEFAULT, static function (StyleOptionEvent $event) use ($class): void {
-            $event->setOptionClass($class);
-        });
-
-        $this->expectException(\LogicException::class);
-
-        new StylesVariable($dispatcher, true)->getMedia_layout('side');
+        $this->assertInstanceOf(Component\Media\LayoutOption::class, $this->createStyles()->option(Component\Media\Layout::class));
     }
 
-    public static function provideUnresolvableOptionClasses(): iterable
+    public function testOptionRejectsAnUnknownName(): void
     {
-        yield 'class does not exist' => ['DigitaleDinge\\ContaoKiss\\Tests\\Fixtures\\Styles\\DoesNotExist'];
-        yield 'class is not a style option' => [NotAStyleOption::class];
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->createStyles()->option('does.not_exist');
+    }
+
+    /**
+     * @param list<string|null> $keys
+     */
+    #[DataProvider('provideKeys')]
+    public function testOptionsJoinsSeveralKeys(array $keys, string $expected): void
+    {
+        $this->assertSame($expected, $this->createStyles()->options(Component\Media\LayoutOption::class, $keys));
+    }
+
+    public static function provideKeys(): iterable
+    {
+        yield 'several keys' => [['side', 'side_reverse'], 'side side-reverse'];
+        yield 'no keys' => [[], ''];
+        yield 'unknown keys are dropped' => [['side', 'does_not_exist'], 'side'];
+        yield 'empty values are dropped' => [['default', 'side'], 'side'];
+    }
+
+    public function testCallResolvesANameWithoutDots(): void
+    {
+        $styles = $this->createStyles(['name' => 'shape_radius']);
+
+        $this->assertSame('swapped-side', (string) $styles->shape_radius('side'));
+    }
+
+    public function testAHigherPriorityRegistrationReplacesAKissOption(): void
+    {
+        $styles = $this->createStyles(['name' => Component\Media\LayoutOption::class, 'priority' => 10]);
+
+        $this->assertInstanceOf(SwappedLayoutOption::class, $styles->getMedia_layout('side'));
+        $this->assertSame('swapped-side', (string) $styles->getMedia_layout('side'));
+        $this->assertSame('swapped-side', (string) $styles->option(Component\Media\Layout::class, 'side'));
+    }
+
+    /**
+     * @param array<string, mixed> $swappedLayout tag attributes to register SwappedLayoutOption with, if any
+     */
+    private function createStyles(array $swappedLayout = []): StylesVariable
+    {
+        $additional = [] === $swappedLayout ? [] : [SwappedLayoutOption::class => $swappedLayout];
+
+        return new StylesVariable(StyleOptionRegistryFactory::fromKissOptions($additional));
     }
 }

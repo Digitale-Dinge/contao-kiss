@@ -9,6 +9,7 @@ use DigitaleDinge\ContaoKiss\EventListener\DataContainer\StyleOptionsListener;
 use DigitaleDinge\ContaoKiss\Styles\Option\Component\CallToAction;
 use DigitaleDinge\ContaoKiss\Styles\Option\Modifier;
 use DigitaleDinge\ContaoKiss\Styles\Option\Typography;
+use DigitaleDinge\ContaoKiss\Tests\Fixtures\Styles\StyleOptionRegistryFactory;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -54,7 +55,7 @@ final class StyleOptionsListenerTest extends TestCase
             ->willReturnArgument(0)
         ;
 
-        return new StyleOptionsListener($translator);
+        return new StyleOptionsListener($translator, StyleOptionRegistryFactory::fromKissOptions());
     }
 
     /**
