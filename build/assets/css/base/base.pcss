@@ -6,4 +6,27 @@
     .invisible {
         @apply sr-only visible;
     }
+
+    /* Tailwind preflight strips list styles, content lists need them back */
+    :is(.rte, .content-list, .content-description-list) {
+        :is(ul, ol) {
+            @apply ps-6;
+        }
+
+        ul {
+            @apply list-disc;
+        }
+
+        ol {
+            @apply list-decimal;
+        }
+
+        dt {
+            @apply font-semibold;
+        }
+
+        dd + dt {
+            @apply mt-4;
+        }
+    }
 }
