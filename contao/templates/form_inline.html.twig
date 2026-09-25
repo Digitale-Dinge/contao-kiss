@@ -5,7 +5,6 @@
 
 {% set attributes = attrs(attributes|default)
     .addClass(styles.background(data.backgroundColor|default))
-    .addClass('card-body')
     .mergeWith(block('card_attributes'), data.showAsCard|default)
     .addClass('card-body', data.showAsCard|default)
 %}
