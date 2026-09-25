@@ -1,0 +1,34 @@
+{% extends '@Contao/content_element/table.html.twig' %}
+
+{% block content %}
+    {% set table_attributes = attrs()
+        .addClass(['w-full', 'border-collapse', 'text-left'])
+        .mergeWith(table_attributes|default)
+    %}
+    {% set table_caption_attributes = attrs()
+        .addClass(['caption-top', 'mb-2', 'text-left', 'text-sm', 'text-neutral-on-medium'])
+        .mergeWith(table_caption_attributes|default)
+    %}
+    {% set table_header_attributes = attrs()
+        .addClass(['border-b-2', 'border-neutral-border-strong'])
+        .mergeWith(table_header_attributes|default)
+    %}
+    {% set default_header_cell_attributes = attrs()
+        .addClass(['px-4', 'py-3', 'font-semibold'])
+        .mergeWith(default_header_cell_attributes|default)
+    %}
+    {% set table_body_attributes = attrs()
+        .addClass(['*:border-b', '*:border-neutral-border-light'])
+        .addClass(['[&_td]:px-4', '[&_td]:py-3', '[&_td]:align-top'])
+        .addClass(['[&_th]:px-4', '[&_th]:py-3', '[&_th]:font-semibold'])
+        .mergeWith(table_body_attributes|default)
+    %}
+    {% set table_footer_attributes = attrs()
+        .addClass(['border-t-2', 'border-neutral-border-strong', 'font-semibold'])
+        .addClass(['[&_td]:px-4', '[&_td]:py-3'])
+        .mergeWith(table_footer_attributes|default)
+    %}
+    <div{{ attrs().addClass('overflow-x-auto') }}>
+        {{ parent() }}
+    </div>
+{% endblock %}
