@@ -1,0 +1,14 @@
+{% use '@Contao/component/_download.html.twig' %}
+
+{% block download_link_attributes -%}
+    {%- if data.ctaAsButton|default -%}
+        {%- set download_link_attributes = attrs(download_link_attributes)
+            .addClass('btn')
+            .addClass('btn-' ~ styles.size(data.ctaSize), data.ctaSize|default)
+            .addClass('btn-' ~ styles.color(data.ctaColor), data.ctaColor|default)
+            .addClass(styles.cta_type(data.ctaType|default))
+            .addClass(styles.cta_shape(data.ctaShape|default))
+        -%}
+    {%- endif -%}
+    {{- download_link_attributes -}}
+{%- endblock %}

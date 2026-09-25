@@ -1,0 +1,33 @@
+{% extends '@Contao/content_element/swiper.html.twig' %}
+
+{% block content %}
+    {% if 'outside' == data.sliderNavigation|default %}
+        {% set slider_attributes = attrs()
+            .addClass('swiper--navigation-outside')
+            .mergeWith(slider_attributes|default)
+        %}
+    {% endif %}
+
+    {% if data.sliderHidePagination|default %}
+        {% set slider_settings = slider_settings|merge({pagination: false}) %}
+    {% endif %}
+
+    {% set slides_per_view = data.slidesPerView|default(1) + 0 %}
+
+    {% if slides_per_view > 1 and slider_settings.slidesPerView is not defined %}
+        {% set slider_settings = slider_settings|merge({
+            slidesPerView: 1,
+            spaceBetween: 32,
+            breakpoints: {
+                768: {
+                    slidesPerView: min(2, slides_per_view),
+                },
+                1024: {
+                    slidesPerView: slides_per_view,
+                },
+            },
+        }) %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

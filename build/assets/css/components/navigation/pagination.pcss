@@ -12,7 +12,7 @@
  *     </ul>
  *   </nav>
  *
- * Sizes: pagination-{xs|sm|lg|xl}
+ * Sizes: pagination-{sm|lg}
  * Shapes: pagination-{circle|square}
  */
 @layer components {
@@ -84,14 +84,6 @@
     }
 
     /* Sizes */
-    .pagination-xs {
-        --pagination-item-size: 1.5rem;
-        --pagination-item-px: .375rem;
-        --pagination-text: var(--text-xs, .75rem);
-
-        @apply gap-0.5;
-    }
-
     .pagination-sm {
         --pagination-item-size: 2rem;
         --pagination-item-px: .5rem;
@@ -108,14 +100,6 @@
         --pagination-text: var(--text-lg, 1.125rem);
 
         @apply gap-1.5;
-    }
-
-    .pagination-xl {
-        --pagination-item-size: 3.5rem;
-        --pagination-item-px: 1.25rem;
-        --pagination-text: var(--text-xl, 1.25rem);
-
-        @apply gap-2;
     }
 
     /* Shapes */

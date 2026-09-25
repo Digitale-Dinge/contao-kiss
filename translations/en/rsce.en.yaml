@@ -5,6 +5,7 @@ rsce:
         grid:                   Grid settings
         appearance:             Appearance settings
         card:                   Card settings
+        swiper:                 Slider settings
 
     list:
         label:                  Elements

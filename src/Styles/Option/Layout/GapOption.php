@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Styles\Option\Layout;
 
+use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
@@ -14,6 +15,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
  * @method string four
  * @method string five
  */
+#[AsKissStyleOption]
 class GapOption extends StyleOption
 {
     protected string $enumClass = Gap::class;

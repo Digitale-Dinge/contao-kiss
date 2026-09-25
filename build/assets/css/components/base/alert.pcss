@@ -3,7 +3,7 @@
  *
  * Base: .alert
  * Sections: alert-{icon|content|title|description}
- * Sizes: alert-{xs|sm|lg|xl}
+ * Sizes: alert-{sm|lg}
  * Styles: alert-{soft|outline|dashed}
  * Colors: alert-{primary|secondary|tertiary|success|warning|error}
  *
@@ -73,14 +73,6 @@
     }
 
     /* Sizes */
-    .alert-xs {
-        --alert-px: .625rem;
-        --alert-py: .5rem;
-        --alert-gap: .5rem;
-        --alert-text: var(--text-xs, .75rem);
-        --alert-description-text: var(--text-xs, .75rem);
-    }
-
     .alert-sm {
         --alert-px: .75rem;
         --alert-py: .75rem;
@@ -97,14 +89,6 @@
         --alert-gap: 1rem;
         --alert-text: var(--text-lg, 1.125rem);
         --alert-description-text: var(--text-base, 1rem);
-    }
-
-    .alert-xl {
-        --alert-px: 1.5rem;
-        --alert-py: 1.5rem;
-        --alert-gap: 1.25rem;
-        --alert-text: var(--text-xl, 1.25rem);
-        --alert-description-text: var(--text-lg, 1.125rem);
     }
 
     /* Colors */

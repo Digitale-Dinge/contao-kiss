@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Twig\Global;
 
-use DigitaleDinge\ContaoKiss\Event\ContaoKissEvents;
-use DigitaleDinge\ContaoKiss\Event\Styles\StyleOptionEvent;
 use DigitaleDinge\ContaoKiss\Styles\Option\Color;
 use DigitaleDinge\ContaoKiss\Styles\Option\Component;
 use DigitaleDinge\ContaoKiss\Styles\Option\Layout;
@@ -14,46 +12,69 @@ use DigitaleDinge\ContaoKiss\Styles\Option\Padding;
 use DigitaleDinge\ContaoKiss\Styles\Option\Modifier;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\Typography;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use DigitaleDinge\ContaoKiss\Styles\StyleOptionRegistry;
 
 /**
  * @experimental
  */
 class StylesVariable
 {
-    public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        #[Autowire('%contao_kiss.style_definition_override%')]
-        private readonly bool $enableStyleOverride,
-    ) {}
+    public function __construct(private readonly StyleOptionRegistry $registry)
+    {}
+
+    /**
+     * Resolve registered style option by the option class, enum class or whatever
+     */
+    public function option(string $option, string|null $key = null): StyleOption
+    {
+        return $this->registry->create($option, $key);
+    }
+
+    /**
+     * Resolves multiple keys of a style option and return them as classes.
+     */
+    public function options(string $option, array $keys): string
+    {
+        return implode(' ', array_filter(array_map(
+            fn (string|null $key): string => (string) $this->option($option, $key),
+            $keys,
+        )));
+    }
+
+    /**
+     * Make registered names without dots callable as e.g. styles.name(key).
+     */
+    public function __call(string $name, array $arguments): StyleOption
+    {
+        return $this->option($name, $arguments[0] ?? null);
+    }
 
     /**
      * Layout
      */
     public function getContainer(string|null $key = null): StyleOption|Layout\ContainerOption
     {
-        return $this->getStyleOption(Layout\ContainerOption::class, $key);
+        return $this->option(Layout\ContainerOption::class, $key);
     }
 
     public function getColumn(string|null $key = null): StyleOption|Layout\ColumnOption
     {
-        return $this->getStyleOption(Layout\ColumnOption::class, $key);
+        return $this->option(Layout\ColumnOption::class, $key);
     }
 
     public function getGap(string|null $key = null): StyleOption|Layout\GapOption
     {
-        return $this->getStyleOption(Layout\GapOption::class, $key);
+        return $this->option(Layout\GapOption::class, $key);
     }
 
     public function getSpan(string|null $key = null): StyleOption|Layout\ColumnSpanOption
     {
-        return $this->getStyleOption(Layout\ColumnSpanOption::class, $key);
+        return $this->option(Layout\ColumnSpanOption::class, $key);
     }
 
     public function getCrossAlignment(string|null $key = null): StyleOption|Layout\CrossAlignmentOption
     {
-        return $this->getStyleOption(Layout\CrossAlignmentOption::class, $key);
+        return $this->option(Layout\CrossAlignmentOption::class, $key);
     }
 
     /**
@@ -61,17 +82,17 @@ class StylesVariable
      */
     public function getHeading(string|null $key = null): StyleOption|Typography\HeadingOption
     {
-        return $this->getStyleOption(Typography\HeadingOption::class, $key);
+        return $this->option(Typography\HeadingOption::class, $key);
     }
 
     public function getFont_appearance(string|null $key = null): StyleOption|Typography\ResponsiveOption
     {
-        return $this->getStyleOption(Typography\ResponsiveOption::class, $key);
+        return $this->option(Typography\ResponsiveOption::class, $key);
     }
 
     public function getText_alignment(string|null $key = null): StyleOption|Typography\AlignmentOption
     {
-        return $this->getStyleOption(Typography\AlignmentOption::class, $key);
+        return $this->option(Typography\AlignmentOption::class, $key);
     }
 
     /**
@@ -79,12 +100,12 @@ class StylesVariable
      */
     public function getBackground(string|null $key = null): StyleOption|Color\BackgroundOption
     {
-        return $this->getStyleOption(Color\BackgroundOption::class, $key);
+        return $this->option(Color\BackgroundOption::class, $key);
     }
 
     public function getColor(string|null $key = null): StyleOption|Color\ColorOption
     {
-        return $this->getStyleOption(Color\ColorOption::class, $key);
+        return $this->option(Color\ColorOption::class, $key);
     }
 
     /**
@@ -92,12 +113,12 @@ class StylesVariable
      */
     public function getMargin_top(string|null $key = null): StyleOption|Margin\TopOption
     {
-        return $this->getStyleOption(Margin\TopOption::class, $key);
+        return $this->option(Margin\TopOption::class, $key);
     }
 
     public function getMargin_bottom(string|null $key = null): StyleOption|Margin\BottomOption
     {
-        return $this->getStyleOption(Margin\BottomOption::class, $key);
+        return $this->option(Margin\BottomOption::class, $key);
     }
 
     /**
@@ -105,12 +126,12 @@ class StylesVariable
      */
     public function getPadding_top(string|null $key = null): StyleOption|Padding\TopOption
     {
-        return $this->getStyleOption(Padding\TopOption::class, $key);
+        return $this->option(Padding\TopOption::class, $key);
     }
 
     public function getPadding_bottom(string|null $key = null): StyleOption|Padding\BottomOption
     {
-        return $this->getStyleOption(Padding\BottomOption::class, $key);
+        return $this->option(Padding\BottomOption::class, $key);
     }
 
     /**
@@ -119,12 +140,12 @@ class StylesVariable
 
     public function getSize(string|null $key = null): StyleOption|Modifier\SizeOption
     {
-        return $this->getStyleOption(Modifier\SizeOption::class, $key);
+        return $this->option(Modifier\SizeOption::class, $key);
     }
 
     public function getVariant(string|null $key = null): StyleOption|Modifier\VariantOption
     {
-        return $this->getStyleOption(Modifier\VariantOption::class, $key);
+        return $this->option(Modifier\VariantOption::class, $key);
     }
 
     /**
@@ -132,7 +153,7 @@ class StylesVariable
      */
     public function getCta_shape(string|null $key = null): StyleOption|Component\CallToAction\ShapeOption
     {
-        return $this->getStyleOption(Component\CallToAction\ShapeOption::class, $key);
+        return $this->option(Component\CallToAction\ShapeOption::class, $key);
     }
 
     /**
@@ -140,43 +161,11 @@ class StylesVariable
      */
     public function getCta_type(string|null $key = null): StyleOption|Component\CallToAction\VariantOption
     {
-        return $this->getStyleOption(Component\CallToAction\VariantOption::class, $key);
+        return $this->option(Component\CallToAction\VariantOption::class, $key);
     }
 
     public function getMedia_layout(string|null $key = null): StyleOption|Component\Media\LayoutOption
     {
-        return $this->getStyleOption(Component\Media\LayoutOption::class, $key);
-    }
-
-    protected function getStyleOption(string $styleOption, string|null $key): StyleOption
-    {
-        if (!is_subclass_of($styleOption, StyleOption::class)) {
-            throw new \LogicException(\sprintf('Invalid usage. Class "%s" must extend StyleOption.', $styleOption));
-        }
-
-        if (!$this->enableStyleOverride) {
-            return new $styleOption($key);
-        }
-
-        $event = new StyleOptionEvent($styleOption, $key);
-
-        $this->eventDispatcher->dispatch(
-            $event,
-            $this->getStyleEventForClass($styleOption)
-        );
-
-        return $event->getOption();
-    }
-
-    private function getStyleEventForClass(string $type): string
-    {
-        return match ($type) {
-            Layout\ContainerOption::class => ContaoKissEvents::STYLE_LAYOUT_CONTAINER,
-            Layout\ColumnOption::class    => ContaoKissEvents::STYLE_LAYOUT_COLUMN,
-            Layout\GapOption::class       => ContaoKissEvents::STYLE_LAYOUT_GAP,
-            Color\BackgroundOption::class => ContaoKissEvents::STYLE_COLOR_BACKGROUND,
-            Color\ColorOption::class      => ContaoKissEvents::STYLE_COLOR,
-            default                       => ContaoKissEvents::STYLE_DEFAULT,
-        };
+        return $this->option(Component\Media\LayoutOption::class, $key);
     }
 }

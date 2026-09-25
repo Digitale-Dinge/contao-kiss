@@ -3,6 +3,7 @@
 {% block swiper %}
     {% set slider_attributes = attrs()
         .addClass('swiper')
+        .addClass('swiper--navigation-outside', 'outside' == data.sliderNavigation|default)
         .set('data-settings', slider_settings|json_encode)
         .mergeWith(slider_attributes|default)
     %}
@@ -29,18 +30,30 @@
         </div>
         {% block controls %}
             {% if not as_editor_view %}
-                <div class="flex justify-end gap-6 h-11 mt-6">
+                {% set in_row = not data.sliderNavigation|default %}
+
+                {% if in_row %}<div class="flex justify-end gap-6 h-11 mt-6">{% endif %}
                     {% set button_prev_attributes = attrs()
-                        .addClass(['swiper-button-prev', 'btn', 'btn-primary', 'btn-outline', 'relative!'])
+                        .addClass('swiper-button-prev')
+                        .addClass(['btn', 'btn-primary', 'btn-outline', 'relative!'], in_row)
                         .mergeWith(button_prev_attributes|default)
                     %}
                     <div{{ button_prev_attributes }}></div>
                     {% set button_next_attributes = attrs()
-                        .addClass(['swiper-button-next', 'btn', 'btn-primary', 'btn-outline', 'relative!'])
+                        .addClass('swiper-button-next')
+                        .addClass(['btn', 'btn-primary', 'btn-outline', 'relative!'], in_row)
                         .mergeWith(button_next_attributes|default)
                     %}
                     <div{{ button_next_attributes }}></div>
-                </div>
+                {% if in_row %}</div>{% endif %}
+
+                {% if not data.sliderHidePagination|default %}
+                    {% set pagination_attributes = attrs()
+                        .addClass('swiper-pagination')
+                        .mergeWith(pagination_attributes|default)
+                    %}
+                    <div{{ pagination_attributes }}></div>
+                {% endif %}
             {% endif %}
         {% endblock %}
     </div>
