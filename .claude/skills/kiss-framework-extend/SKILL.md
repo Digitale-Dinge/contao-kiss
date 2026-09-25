@@ -82,6 +82,7 @@ The question is never "how do I build this?" but "where does this already exist?
 | --- | --- |
 | All style options (enums + option classes) | `src/Styles/Option/` — `Modifier/` (Size, Variant), `Color/` (Color, Background), `Layout/`, `Typography/`, `Padding/`, `Margin/`, `Component/` |
 | The `styles` Twig global | `src/Twig/Global/StylesVariable.php` |
+| Style option registry + attribute | `src/Styles/StyleOptionRegistry.php`, `src/DependencyInjection/` (`AsKissStyleOption`, `AddStyleOptionsPass`) — usage in `docs/style-options.md` |
 | Backend options callbacks | `src/EventListener/DataContainer/StyleOptionsListener.php` |
 | DCA fields (`targetColumn: kiss_styles`) + subpalettes | `contao/dca/tl_content.php` |
 | Translations | `translations/{de,en}/style_options.*.yaml`, `contao_tl_content.*.yaml`, `rsce.*.yaml` (locate with `find . -name 'rsce*.yaml'` — the folder may sit under `src/` or the bundle root) |
@@ -89,6 +90,8 @@ The question is never "how do I build this?" but "where does this already exist?
 | List / grid / swiper wrapper | `contao/templates/kiss_component/_content_wrapper.html.twig` |
 | Media components (media_text, wrapper, image, video, icon, text) | `contao/templates/kiss_component/media/` |
 | Call-to-action | `contao/templates/kiss_component/action/` |
+| Core component overrides | `contao/templates/component/` — `{% use %}` the core component, redefine one block (e.g. `_download.html.twig`) |
+| Include elements (form, module, article) | `kiss_include_data()` returns the include element's row, like `data`. Legacy templates without blocks (e.g. `form_inline.html.twig`): extend them and `set` the merged variable at top level |
 | rsce element configs + builder | `contao/templates/rsce_*_config.php`, `src/CustomElementsConfigurationBuilder.php` |
 
 Rule of thumb: before you propose a new enum, a new field or a new Twig global, you must be able to say why **none** of the existing options fits. "I didn't find it" does not count — grep first. The `SIZE` modifier is the canary: if `'card-' ~ styles.size(...)` already exists in a template, every other card option follows the same pattern.
@@ -107,9 +110,9 @@ See the full worked example in `references/examples.md` ("Worked example: card s
 
 The core of the framework is the separation between the stored value and the emitted class:
 
-1. The database (`kiss_styles` column) stores only the **enum case name** (e.g. `x_small`, `soft`, `accent`).
-2. The `styles` Twig global resolves the key to the CSS class: `styles.size(data.elementSize)` → `xs`. Getters live in `StylesVariable.php` (`styles.size`, `styles.variant`, `styles.color`, `styles.background`, `styles.container`, `styles.padding_top` …).
-3. The **context prefix belongs in the template**, not in the enum: `'card-' ~ styles.size(...)` → `card-xs`, `'btn-' ~ styles.color(...)` → `btn-primary`. One enum therefore serves any number of components.
+1. The database (`kiss_styles` column) stores only the **enum case name** (e.g. `small`, `soft`, `accent`).
+2. The `styles` Twig global resolves the key to the CSS class: `styles.size(data.elementSize)` → `sm`. Getters live in `StylesVariable.php` (`styles.size`, `styles.variant`, `styles.color`, `styles.background`, `styles.container`, `styles.padding_top` …).
+3. The **context prefix belongs in the template**, not in the enum: `'card-' ~ styles.size(...)` → `card-sm`, `'btn-' ~ styles.color(...)` → `btn-primary`. One enum therefore serves any number of components.
 
 Consequences: CSS classes can be swapped in the enum at any time (recompile, no DB migration), translations can be changed at any time, only changing case *names* requires a migration.
 
@@ -121,7 +124,7 @@ Consequences: CSS classes can be swapped in the enum at any time (recompile, no 
 
 If (and only if) the inventory shows something is really missing, an option consists of exactly these parts — omit nothing, invent nothing:
 
-1. **Enum case(s)** added to an existing enum — a new enum only for a genuinely new dimension. Values without context prefix (like `Modifier\Size`: `xs`, not `card-xs`), unless the class is inseparable (like `Background`: `bg-base-100`). `label()` points to `style_options.*`.
+1. **Enum case(s)** added to an existing enum — a new enum only for a genuinely new dimension. Values without context prefix (like `Modifier\Size`: `sm`, not `card-sm`), unless the class is inseparable (like `Background`: `bg-base-100`). `label()` points to `style_options.*`.
 2. **Option class** (`XyzOption extends StyleOption`) only for a new enum, registered with a bare `#[AsKissStyleOption]` (picked up by the `Styles\` resource in `config/services.yaml`); maintain the docblock `@method` lines.
 3. **`StylesVariable` getter** only for a new enum, delegating to `$this->option(XyzOption::class, $key)`. New Twig globals are the exception, not the reflex — `styles.variant`, `styles.color`, `styles.background`, `styles.size` already cover the card.
 4. **Options callback**: preferably an additional `#[AsCallback('tl_content', 'fields.<field>.options')]` attribute on the **existing** listener method, no new method for the same enum. Callbacks resolve the enum through the registry, so replacements apply: `$this->registry->getEnum(Xyz::class)`.
@@ -296,7 +299,7 @@ svg {
 }
 ```
 
-Per size variant (`badge-xs`, `badge-xl` …) only the font size is then set — no separate icon rule. Likewise: what Tailwind already solves is not rebuilt as a custom token (`@apply rounded-full` instead of `border-radius: var(--radius-full)`).
+Per size variant (`badge-sm`, `badge-lg`) only the font size is then set — no separate icon rule. Likewise: what Tailwind already solves is not rebuilt as a custom token (`@apply rounded-full` instead of `border-radius: var(--radius-full)`).
 
 ## New content element: always as RSCE, the complete chain
 

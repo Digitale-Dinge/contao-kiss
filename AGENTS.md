@@ -30,7 +30,9 @@ src/
 ├── Styles/Option/                          Modifier/, Color/, Layout/, Typography/,
 │                                           Padding/, Margin/, Component/
 ├── Twig/Global/StylesVariable.php          the `styles` Twig global
-├── EventListener/DataContainer/            backend options callbacks
+├── EventListener/
+│   ├── DataContainer/                      backend options callbacks
+│   └── IncludeStylesDataListener.php       include element row for kiss_include_data()
 ├── CustomElementsConfigurationBuilder.php  rsce element builder
 ├── Asset/VersionStrategy/                  asset() resolution
 ├── DependencyInjection/                    AsKissStyleOption, AddStyleOptionsPass
@@ -43,6 +45,8 @@ contao/
 └── templates/
     ├── content_element/_base.html.twig     KISS base template
     ├── page/layout.html.twig               page layout, theme asset tags
+    ├── component/                          core component overrides: {% use %} the parent, redefine a block
+    ├── form_inline.html.twig               form card, via kiss_include_data()
     ├── kiss_component/
     │   ├── _content_wrapper.html.twig      list / grid / swiper wrapper
     │   ├── media/                          media_text, image, video, icon, text
@@ -64,6 +68,7 @@ PHP is PSR-4 under `src/`, tests under `tests/`. `.editorconfig` is authoritativ
 | `.claude/skills/*/SKILL.md` | the full rules for extending the framework |
 | `.claude/skills/*/references/examples.md` | attribute hooks, worked examples, failed attempts |
 | `docs/` | the asset pipeline and how projects consume it |
+| `docs/style-options.md` | adding, replacing and grouping style options |
 
 `references/examples.md` is mandatory before the first Twig edit.
 
@@ -83,8 +88,8 @@ Ask for files you cannot read by path instead of guessing their contents.
 
 The stored value and the emitted class are separate:
 
-1. `kiss_styles` stores the enum case name (`x_small`, `soft`, `accent`).
-2. `styles.size(data.elementSize)` resolves it to `xs`. Getters live in `StylesVariable.php`.
+1. `kiss_styles` stores the enum case name (`small`, `soft`, `accent`).
+2. `styles.size(data.elementSize)` resolves it to `sm`. Getters live in `StylesVariable.php`.
 3. The context prefix belongs in the template: `'card-' ~ styles.size(…)`, never in the enum.
 
 Options that can occur anywhere — sizes, variants, colors — belong in `Modifier/` or `Color/`, even when the current
@@ -139,7 +144,7 @@ almost never necessary:
 
 | Variable | Behaviour |
 | --- | --- |
-| `kiss_swiper` | activates the Swiper wrapper; list mode is skipped |
+| `kiss_swiper` | activates the Swiper wrapper; list mode is skipped. Defaults to `data.kissSwiper` |
 | `list_mode` | activates the list wrapper; auto-activates for a non-empty `list`, for configured `data.gridColumns` and for `grid_ratio_active` |
 | `list_tag_name` | list wrapper tag, default `div`; `ul` / `ol` for real lists, then `tag_name: 'li'` on the items |
 | `list_wrapper_attributes` | the list-mode wrapper, carries `.grid` and the grid-ratio settings |
