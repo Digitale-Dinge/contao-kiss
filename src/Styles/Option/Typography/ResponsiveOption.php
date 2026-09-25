@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Styles\Option\Typography;
 
+use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
@@ -17,6 +18,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
  * @method string body_two
  * @method string body_three
  */
+#[AsKissStyleOption(groups: ['appearance'])]
 class ResponsiveOption extends StyleOption
 {
     public string $enumClass = Responsive::class;

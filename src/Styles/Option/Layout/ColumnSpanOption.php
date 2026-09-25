@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Styles\Option\Layout;
 
+use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
@@ -19,6 +20,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
  * @method string ten
  * @method string eleven
  */
+#[AsKissStyleOption]
 class ColumnSpanOption extends StyleOption
 {
     protected string $enumClass = ColumnSpan::class;
