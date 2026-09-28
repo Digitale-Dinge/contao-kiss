@@ -10,7 +10,6 @@ use Contao\CoreBundle\Filesystem\VirtualFilesystemInterface;
 use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\FilesModel;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\Filesystem\Path;
 use Symfony\Component\Uid\Uuid;
 use Twig\Extension\RuntimeExtensionInterface;
 
@@ -72,7 +71,7 @@ final readonly class FilesRuntime implements RuntimeExtensionInterface
     {
         $icon = self::ICON_DIRECTORY.'/'.(self::FILE_ICONS[strtolower($extension)] ?? 'file').'.svg';
 
-        return is_file(Path::join($this->projectDir, $icon)) ? $icon : self::ICON_DIRECTORY.'/file.svg';
+        return is_file($this->projectDir.'/'.$icon) ? $icon : self::ICON_DIRECTORY.'/file.svg';
     }
 
     public function getFile(string $uuid): array|null
