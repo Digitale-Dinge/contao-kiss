@@ -463,6 +463,11 @@ PaletteManipulator::create()
 ;
 
 PaletteManipulator::create()
+    ->addField('playerAspect', 'playerSize', PaletteManipulator::POSITION_AFTER)
+    ->applyToPalette('player', 'tl_content')
+;
+
+PaletteManipulator::create()
     ->addLegend('grid_legend', ['layout_legend', 'template_legend', 'protected_legend'], PaletteManipulator::POSITION_BEFORE)
     ->addField(['gridColumns', 'gridGap', 'gridCrossAlignment'], 'grid_legend', PaletteManipulator::POSITION_APPEND)
     ->addLegend('appearance_legend', ['layout_legend', 'template_legend', 'protected_legend'], PaletteManipulator::POSITION_BEFORE)
