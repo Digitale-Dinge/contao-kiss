@@ -21,7 +21,7 @@ The request arrived as a spec for a "Card component". Here is how the inventory 
 | Spec item | Type / values | Where it already exists in KISS | What is genuinely missing |
 | --- | --- | --- | --- |
 | `layout` | `card-reverse` \| `card-side` \| `card-side-reverse` \| `card-media-full` | — (truly card-bound) | `Component\Card\Layout` enum + `data.cardLayout` wired in the `show_as_card` branch of `_media_text_wrapper.html.twig`, prefix `card-` in the template |
-| `size` | `card-xs` \| `card-sm` \| `card-md` (default) \| `card-lg` \| `card-xl` | `Modifier\Size`, `data.elementSize`, already `'card-' ~ styles.size(...)` in the wrapper | nothing |
+| `size` | `card-sm` \| `card-md` (default) \| `card-lg` | `Modifier\Size`, `data.elementSize`, already `'card-' ~ styles.size(...)` in the wrapper | nothing |
 | `style` | `card-soft` \| `card-outline` \| `card-glass` (default solid = no class) | `Modifier\Variant` already has `soft`; `data.elementVariant` | add `outline`, `glass` cases to `Modifier\Variant` (generic — buttons/alerts/badges will use them too); wire `'card-' ~ styles.variant(...)` in the wrapper |
 | `color` | `card-primary` … `card-error` | `Color\Color` (semantic) **and** `Color\Background` (`data.backgroundColor`, already wired on the card) | **ask**: background or text/semantic color? Then wire the existing enum with `card-` prefix; no new enum, no new Twig global |
 | `mediaType` | `image` \| `video` \| `icon` | called `type` in `media_text.html.twig` | nothing (do not rename) |
@@ -182,7 +182,7 @@ The reference structure for components that do **not** inherit from the media_te
   @param {string} icon - icon name for svg_icon()
   @param {string} color - key from Color (primary, secondary, success …)
   @param {string} variant - badge style: soft|outline|dashed
-  @param {string} badgeSize - key from Modifier\Size (x_small, small, large …)
+  @param {string} badgeSize - key from Modifier\Size (small, large)
   @param {string} badgeShape - badge shape: pill|square
   @param {HtmlAttributes} badge_attributes - additional attributes
 
@@ -281,7 +281,7 @@ In CSS (`assets/css/components/_badge.css`) icons grow with the badge size becau
 }
 ```
 
-The size variants (`.badge-xs` … `.badge-xl`) only set `--badge-text` — not a single icon rule of their own. And `rounded-full` comes from Tailwind instead of being rebuilt as a custom token.
+The size variants (`.badge-sm`, `.badge-lg`) only set `--badge-text` — not a single icon rule of their own. And `rounded-full` comes from Tailwind instead of being rebuilt as a custom token.
 
 ---
 
@@ -554,7 +554,7 @@ Every KISS base template of a content element includes the content wrapper; it c
 
 | Variable | Type | Behaviour |
 | --- | --- | --- |
-| `kiss_swiper` | bool | activates the Swiper wrapper; when `true`, list mode is skipped and Swiper is included directly |
+| `kiss_swiper` | bool | activates the Swiper wrapper; when `true`, list mode is skipped and Swiper is included directly. Defaults to `data.kissSwiper` |
 | `list_mode` | bool | activates the list wrapper. Also **auto-activates** when `list` exists and has items, when `data.gridColumns` exist (a grid is configured), or when `grid_ratio_active` is set (grid-ratio widget) — but not when `kiss_swiper` is `true` |
 | `list_tag_name` | string | outer list wrapper tag, default `div`; set `ul` / `ol` for real lists (then `tag_name: 'li'` on the items) |
 | `list_wrapper_attributes` | HtmlAttributes | outer wrapper in list mode — carries `.grid` and the grid-ratio settings |

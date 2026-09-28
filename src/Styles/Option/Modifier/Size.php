@@ -9,10 +9,8 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 enum Size: string implements TranslatableLabelInterface
 {
-    case x_small = 'xs';
     case small = 'sm';
     case large = 'lg';
-    case x_large = 'xl';
 
     public function label(): TranslatableMessage
     {

@@ -6,21 +6,14 @@ services:
 
     DigitaleDinge\ContaoKiss\:
         resource: '../src/'
-        exclude: '../src/{Event,Model,Util,Styles,DigitaleDingeKissBundle.php}'
+        exclude: '../src/{DependencyInjection,Event,Model,Util,Styles,DigitaleDingeKissBundle.php}'
 
-    #kiss.twig.global.styles_variable:
-        #class: DigitaleDinge\ContaoKiss\Twig\Global\StylesVariable
-        #public: true
-        #arguments:
-            #- '@event_dispatcher'
-            #- '%contao_kiss.style_definition_override%'
+    DigitaleDinge\ContaoKiss\Styles\:
+        resource: '../src/Styles/{StyleOptionRegistry.php,Option/**/*Option.php}'
 
     kiss.rsce_config.builder:
         class: DigitaleDinge\ContaoKiss\CustomElementsConfigurationBuilder
         public: true
-        arguments:
-            - '@translator'
-            - '@contao.framework'
 
     DigitaleDinge\ContaoKiss\CustomElementsConfigurationBuilder: '@kiss.rsce_config.builder'
 

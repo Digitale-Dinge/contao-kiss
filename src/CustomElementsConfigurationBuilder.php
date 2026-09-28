@@ -6,6 +6,7 @@ namespace DigitaleDinge\ContaoKiss;
 
 use Contao\Controller;
 use DigitaleDinge\ContaoKiss\EventListener\TranslatableEnumTrait;
+use DigitaleDinge\ContaoKiss\Styles\StyleOptionRegistry;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -25,8 +26,10 @@ final class CustomElementsConfigurationBuilder
 
     private array $pendingFields = [];
 
-    public function __construct(private readonly TranslatorInterface $translator)
-    {
+    public function __construct(
+        private readonly TranslatorInterface $translator,
+        private readonly StyleOptionRegistry $registry,
+    ) {
         // ToDo: Think about a better solution in the future
         Controller::loadDataContainer('tl_content');
         Controller::loadDataContainer('tl_module');
@@ -144,12 +147,12 @@ final class CustomElementsConfigurationBuilder
     }
 
     /**
-     * Select field whose options are taken from a translatable enum, so option labels
-     * never have to be spelled out in a config file.
+     * Select field whose options are taken from a registered style option, so option
+     * labels never have to be spelled out in a config file.
      *
-     * @param class-string<\BackedEnum> $enum
+     * @param string $styleOption the enum class, option class or custom name of a registered style option
      */
-    public function addStyleOptionsField(string $key, string $enum, array $eval = []): self
+    public function addStyleOptionsField(string $key, string $styleOption, array $eval = []): self
     {
         return $this->addField($key, [
             'label' => [
@@ -157,7 +160,7 @@ final class CustomElementsConfigurationBuilder
                 $this->translator->trans("rsce.field.$key.description", [], 'rsce'),
             ],
             'inputType' => 'select',
-            'options' => $this->getTranslatedOptions($enum),
+            'options' => $this->getTranslatedOptions($this->registry->getEnum($styleOption)),
         ], array_merge(['tl_class' => 'w25', 'includeBlankOption' => true], $eval));
     }
 
@@ -608,6 +611,23 @@ final class CustomElementsConfigurationBuilder
         $this->addGroup('card', [$this->translator->trans('rsce.group.card', [], 'rsce')]);
 
         return $this->addField('showAsCard', ['inputType' => 'standardField'], $eval);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function addSwiperSettings(): self
+    {
+        if ($this->isListField()) {
+            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+        }
+
+        $this->addGroup('swiper', [$this->translator->trans('rsce.group.swiper', [], 'rsce')]);
+        $this->addField('kissSwiper', ['inputType' => 'standardField']);
+        $this->addField('sliderNavigation', ['inputType' => 'standardField']);
+        $this->addField('sliderHidePagination', ['inputType' => 'standardField']);
+
+        return $this;
     }
 
     public function build(): array

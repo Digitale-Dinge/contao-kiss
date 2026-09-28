@@ -1,0 +1,10 @@
+{% extends '@Contao/form_inline.html.twig' %}
+{% use '@Contao/kiss_component/card/_card_attributes.html.twig' %}
+
+{% set data = data|default(kiss_include_data()) %}
+
+{% set attributes = attrs(attributes|default)
+    .addClass(styles.background(data.backgroundColor|default))
+    .mergeWith(block('card_attributes'), data.showAsCard|default)
+    .addClass('card-body', data.showAsCard|default)
+%}

@@ -6,6 +6,7 @@
         bootstrap="vendor/autoload.php"
         cacheDirectory=".phpunit.cache"
         beStrictAboutChangesToGlobalState="true"
+        displayDetailsOnIncompleteTests="true"
         displayDetailsOnTestsThatTriggerDeprecations="true"
         displayDetailsOnTestsThatTriggerErrors="true"
         displayDetailsOnTestsThatTriggerNotices="true"

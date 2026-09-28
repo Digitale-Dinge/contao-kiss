@@ -6,7 +6,7 @@
  * Base: .form-textarea
  * Styles: textarea-{soft} (outline is default)
  * Colors: textarea-{primary|secondary|tertiary|success|warning|error}
- * Sizes: textarea-{xs|sm|lg|xl}
+ * Sizes: textarea-{sm|lg}
  * States: is-valid, is-invalid, disabled, readonly
  *
  * Floating Label:
@@ -102,13 +102,6 @@
     }
 
     /* Sizes */
-    .textarea-xs {
-        --textarea-px: .5rem;
-        --textarea-py: .375rem;
-        --textarea-text: var(--text-xs, .75rem);
-        --textarea-min-h: 4rem;
-    }
-
     .textarea-sm {
         --textarea-px: .625rem;
         --textarea-py: .5rem;
@@ -121,13 +114,6 @@
         --textarea-py: .75rem;
         --textarea-text: var(--text-lg, 1.125rem);
         --textarea-min-h: 8rem;
-    }
-
-    .textarea-xl {
-        --textarea-px: 1.25rem;
-        --textarea-py: .875rem;
-        --textarea-text: var(--text-xl, 1.25rem);
-        --textarea-min-h: 10rem;
     }
 
     /* Resize options */

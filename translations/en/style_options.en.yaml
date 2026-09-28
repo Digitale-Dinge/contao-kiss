@@ -81,10 +81,8 @@ style_options:
 
     modifier:
         size:
-            x_small:                Tiny
             small:                  Small
             large:                  Large
-            x_large:                Extra large
 
         variant:
             soft:                   Soft
@@ -126,6 +124,11 @@ style_options:
             shape:
                 wide:               Wide
                 block:              Full width
+
+        swiper:
+            navigation:
+                overlay:            Arrows on the image
+                outside:            Arrows beside the image
 
         media:
             layout:

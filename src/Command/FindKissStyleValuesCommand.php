@@ -28,7 +28,7 @@ class FindKissStyleValuesCommand
 {
     private const array TABLES = [
         'tl_article' => ['do' => 'article', 'columns' => ['kiss_styles']],
-        'tl_content' => ['do' => 'article', 'columns' => ['kiss_styles', 'headline', 'rsce_data']],
+        'tl_content' => ['do' => 'article', 'columns' => ['kiss_styles', 'headline', 'rsce_data', 'callToAction']],
         'tl_module' => ['do' => 'themes', 'columns' => ['kiss_styles', 'headline']],
         'tl_form_field' => ['do' => 'form', 'columns' => ['kiss_styles']],
     ];

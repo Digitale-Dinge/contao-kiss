@@ -82,6 +82,7 @@ The question is never "how do I build this?" but "where does this already exist?
 | --- | --- |
 | All style options (enums + option classes) | `src/Styles/Option/` — `Modifier/` (Size, Variant), `Color/` (Color, Background), `Layout/`, `Typography/`, `Padding/`, `Margin/`, `Component/` |
 | The `styles` Twig global | `src/Twig/Global/StylesVariable.php` |
+| Style option registry + attribute | `src/Styles/StyleOptionRegistry.php`, `src/DependencyInjection/` (`AsKissStyleOption`, `AddStyleOptionsPass`) — usage in `docs/style-options.md` |
 | Backend options callbacks | `src/EventListener/DataContainer/StyleOptionsListener.php` |
 | DCA fields (`targetColumn: kiss_styles`) + subpalettes | `contao/dca/tl_content.php` |
 | Translations | `translations/{de,en}/style_options.*.yaml`, `contao_tl_content.*.yaml`, `rsce.*.yaml` (locate with `find . -name 'rsce*.yaml'` — the folder may sit under `src/` or the bundle root) |
@@ -89,6 +90,8 @@ The question is never "how do I build this?" but "where does this already exist?
 | List / grid / swiper wrapper | `contao/templates/kiss_component/_content_wrapper.html.twig` |
 | Media components (media_text, wrapper, image, video, icon, text) | `contao/templates/kiss_component/media/` |
 | Call-to-action | `contao/templates/kiss_component/action/` |
+| Core component overrides | `contao/templates/component/` — `{% use %}` the core component, redefine one block (e.g. `_download.html.twig`) |
+| Include elements (form, module, article) | `kiss_include_data()` returns the include element's row, like `data`. Legacy templates without blocks (e.g. `form_inline.html.twig`): extend them and `set` the merged variable at top level |
 | rsce element configs + builder | `contao/templates/rsce_*_config.php`, `src/CustomElementsConfigurationBuilder.php` |
 
 Rule of thumb: before you propose a new enum, a new field or a new Twig global, you must be able to say why **none** of the existing options fits. "I didn't find it" does not count — grep first. The `SIZE` modifier is the canary: if `'card-' ~ styles.size(...)` already exists in a template, every other card option follows the same pattern.
@@ -107,9 +110,9 @@ See the full worked example in `references/examples.md` ("Worked example: card s
 
 The core of the framework is the separation between the stored value and the emitted class:
 
-1. The database (`kiss_styles` column) stores only the **enum case name** (e.g. `x_small`, `soft`, `accent`).
-2. The `styles` Twig global resolves the key to the CSS class: `styles.size(data.elementSize)` → `xs`. Getters live in `StylesVariable.php` (`styles.size`, `styles.variant`, `styles.color`, `styles.background`, `styles.container`, `styles.padding_top` …).
-3. The **context prefix belongs in the template**, not in the enum: `'card-' ~ styles.size(...)` → `card-xs`, `'btn-' ~ styles.color(...)` → `btn-primary`. One enum therefore serves any number of components.
+1. The database (`kiss_styles` column) stores only the **enum case name** (e.g. `small`, `soft`, `accent`).
+2. The `styles` Twig global resolves the key to the CSS class: `styles.size(data.elementSize)` → `sm`. Getters live in `StylesVariable.php` (`styles.size`, `styles.variant`, `styles.color`, `styles.background`, `styles.container`, `styles.padding_top` …).
+3. The **context prefix belongs in the template**, not in the enum: `'card-' ~ styles.size(...)` → `card-sm`, `'btn-' ~ styles.color(...)` → `btn-primary`. One enum therefore serves any number of components.
 
 Consequences: CSS classes can be swapped in the enum at any time (recompile, no DB migration), translations can be changed at any time, only changing case *names* requires a migration.
 
@@ -121,13 +124,67 @@ Consequences: CSS classes can be swapped in the enum at any time (recompile, no 
 
 If (and only if) the inventory shows something is really missing, an option consists of exactly these parts — omit nothing, invent nothing:
 
-1. **Enum case(s)** added to an existing enum — a new enum only for a genuinely new dimension. Values without context prefix (like `Modifier\Size`: `xs`, not `card-xs`), unless the class is inseparable (like `Background`: `bg-base-100`). `label()` points to `style_options.*`.
-2. **Option class** (`XyzOption extends StyleOption`) only for a new enum; maintain the docblock `@method` lines.
-3. **`StylesVariable` getter** only for a new enum. New Twig globals are the exception, not the reflex — `styles.variant`, `styles.color`, `styles.background`, `styles.size` already cover the card.
-4. **Options callback**: preferably an additional `#[AsCallback('tl_content', 'fields.<field>.options')]` attribute on the **existing** listener method, no new method for the same enum.
+1. **Enum case(s)** added to an existing enum — a new enum only for a genuinely new dimension. Values without context prefix (like `Modifier\Size`: `sm`, not `card-sm`), unless the class is inseparable (like `Background`: `bg-base-100`). `label()` points to `style_options.*`.
+2. **Option class** (`XyzOption extends StyleOption`) only for a new enum, registered with a bare `#[AsKissStyleOption]` (picked up by the `Styles\` resource in `config/services.yaml`); maintain the docblock `@method` lines.
+3. **`StylesVariable` getter** only for a new enum, delegating to `$this->option(XyzOption::class, $key)`. New Twig globals are the exception, not the reflex — `styles.variant`, `styles.color`, `styles.background`, `styles.size` already cover the card.
+4. **Options callback**: preferably an additional `#[AsCallback('tl_content', 'fields.<field>.options')]` attribute on the **existing** listener method, no new method for the same enum. Callbacks resolve the enum through the registry, so replacements apply: `$this->registry->getEnum(Xyz::class)`.
 5. **DCA field** in `tl_content.php`: `inputType: select`, `targetColumn: 'kiss_styles'`, `includeBlankOption: true`. No `blankOptionLabel` — the empty default (`-`) is the convention. Register the field in the matching subpalette (e.g. `showAsCard`).
 6. **Translations** always in pairs DE + EN: option labels in `style_options.*.yaml`, field labels in `contao_tl_content.*.yaml` (two lines: label + description, no third default line).
 7. **Template wiring** with prefix and condition: `.addClass('card-' ~ styles.variant(data.elementVariant|default), data.elementVariant|default)`.
+
+## Changing an existing style option
+
+Content stores the **case name**, never the value. What a change costs follows from that:
+
+| Change | Effect | What to do |
+| --- | --- | --- |
+| A case's value | only the emitted class changes | edit freely, no test change |
+| New case | `StyleOptionCasesTest` reports it as incomplete | add it to `CASES` in the same change |
+| Case removed or renamed | stored content loses its class, `StyleOptionCasesTest` fails | **stop and warn** |
+
+**Removing or renaming a case is a breaking change.** Before touching the enum:
+
+1. **Warn the user.** Name the enum and the case, every field that offers it (options callbacks, RSCE `addStyleOptionsField()`), and every template that emits it.
+2. **Show how to find affected content:** `contao_kiss:find-style-values <keys> <cases>` — e.g. `ctaSize,elementSize x_small x_large`. It reads `kiss_styles`, `headline` and `rsce_data`. Group fields with their own column, like `callToAction`, are not covered.
+3. **Update the `StyleOptionCasesTest` snapshot only as part of the confirmed change** — never to get CI green.
+4. **Write a migration only when the user explicitly asks for one and confirms the mapping.** Never on your own initiative, never with a guessed mapping.
+
+### Writing the migration
+
+- **Check `src/Migration/Version*/` first.** If a migration for the same key already exists, ask before extending it instead of adding a second one.
+- **Extend `AbstractJsonColumnMigration`** with `getTables()`, `getColumns()` and `getValueMaps()` (`column => [key => [old => new]]`), plus `getKeyRenames()` when a key itself is renamed. Maps apply at every depth — nested lists, JSON and serialized strings — and each value is re-encoded in its original format. Map to `''` to clear a value.
+- **List every column that stores the key:** `kiss_styles`, `rsce_data`, `headline`, and group fields with their own column. Columns a table doesn't have are skipped, so one migration can cover several tables.
+- **Place it in `src/Migration/Version<NNN>/`** of the upcoming release. `MigrationInterface` is autoconfigured, so no service definition is needed.
+- **Add a test** under `tests/Migration/Version<NNN>/`, following `ContentMediaTypeRsceDataMigrationTest`.
+
+```php
+final class ContentSizeKissStylesMigration extends AbstractJsonColumnMigration
+{
+    private const array SIZE_MAP = [
+        'x_small' => 'small',
+        'x_large' => 'large',
+    ];
+
+    protected function getTables(): array
+    {
+        return ['tl_content', 'tl_form_field'];
+    }
+
+    protected function getColumns(): array
+    {
+        return ['kiss_styles', 'rsce_data', 'callToAction'];
+    }
+
+    protected function getValueMaps(): array
+    {
+        return [
+            'kiss_styles' => ['ctaSize' => self::SIZE_MAP, 'elementSize' => self::SIZE_MAP, 'fieldSize' => self::SIZE_MAP],
+            'rsce_data' => ['alertSize' => self::SIZE_MAP, 'badgeSize' => self::SIZE_MAP],
+            'callToAction' => ['ctaSize' => self::SIZE_MAP],
+        ];
+    }
+}
+```
 
 ## Twig: inheritance over overriding
 
@@ -296,7 +353,7 @@ svg {
 }
 ```
 
-Per size variant (`badge-xs`, `badge-xl` …) only the font size is then set — no separate icon rule. Likewise: what Tailwind already solves is not rebuilt as a custom token (`@apply rounded-full` instead of `border-radius: var(--radius-full)`).
+Per size variant (`badge-sm`, `badge-lg`) only the font size is then set — no separate icon rule. Likewise: what Tailwind already solves is not rebuilt as a custom token (`@apply rounded-full` instead of `border-radius: var(--radius-full)`).
 
 ## New content element: always as RSCE, the complete chain
 
@@ -319,6 +376,7 @@ RSCE-specific self-check: was an existing media/action component reused via `{% 
 - Any comment in the diff that restates the code below it ("maps 1:1", "styles per _x.scss", a section header with a sentence appended)? Any `{# #}` in Twig outside the component docblock? Delete it. Any non-English word in code, comments, identifiers or the reply? Translate it.
 - Did a prefix land in an enum that belongs in the template? Did a new Twig global or a new `Component\<X>\Variant`/`Color` enum appear although `Modifier\Variant` / `Color\Color` exist?
 - Did a deprecated or docblock-only case (`info`) get resurrected?
+- Did a style option case get removed or renamed? Then the user was warned first, `StyleOptionCasesTest` changed only as part of the confirmed change, and a migration exists only if it was explicitly asked for.
 - Are card/media classes added inside the existing `show_as_card` branch of the wrapper, not in a new `attributes` block?
 - Does every new standalone component in `kiss_component/` have a docblock with `@param` + `Usage`, one root block, `item|default(_context)`, `attrs()` instead of string classes and `_icon_include.html.twig` instead of `<i class>`?
 - Any `data|merge(…)` / `item|merge(…)` feeding a component? Wrong: map only the differing names with `{% with {…} %}{{ block('…') }}{% endwith %}`.

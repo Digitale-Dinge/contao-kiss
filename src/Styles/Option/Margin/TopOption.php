@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Styles\Option\Margin;
 
+use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
@@ -15,6 +16,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
  * @method string five
  * @method string six
  */
+#[AsKissStyleOption]
 class TopOption extends StyleOption
 {
     protected string $enumClass = Top::class;

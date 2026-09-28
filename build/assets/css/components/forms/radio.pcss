@@ -5,7 +5,7 @@
  *
  * Base: .form-radio
  * Colors: radio-{primary|secondary|tertiary|success|warning|error}
- * Sizes: radio-{xs|sm|lg|xl}
+ * Sizes: radio-{sm|lg}
  * States: disabled
  *
  * Example:
@@ -96,11 +96,6 @@
     }
 
     /* Sizes */
-    .radio-xs {
-        --size: 1rem;
-        --size-padding: .1875rem;
-    }
-
     .radio-sm {
         --size: 1.25rem;
         --size-padding: .1875rem;
@@ -113,25 +108,12 @@
         --size-padding: .3125rem;
     }
 
-    .radio-xl {
-        --size: 2rem;
-        --size-padding: .375rem;
-    }
-
-    span:has(> .radio-xs) {
-        @apply text-xs;
-    }
-
     span:has(> .radio-sm) {
         @apply text-sm;
     }
 
     span:has(> .radio-lg) {
         @apply text-lg;
-    }
-
-    span:has(> .radio-xl) {
-        @apply text-xl;
     }
 
     /* Pop animation for checked state */

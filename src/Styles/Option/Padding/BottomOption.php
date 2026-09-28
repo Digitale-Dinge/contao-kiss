@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Styles\Option\Padding;
 
+use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
@@ -15,6 +16,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
  * @method string five
  * @method string six
  */
+#[AsKissStyleOption]
 class BottomOption extends StyleOption
 {
     protected string $enumClass = Bottom::class;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Styles\Option\Color;
 
+use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
@@ -18,6 +19,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
  * @method string warning
  * @method string error
  */
+#[AsKissStyleOption]
 class BackgroundOption extends StyleOption
 {
     public string $enumClass = Background::class;

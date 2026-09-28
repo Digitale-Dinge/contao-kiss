@@ -6,7 +6,7 @@
  * Works with the popover Stimulus controller.
  *
  * Base: .popover-content
- * Sizes: popover-{xs|sm|lg|xl} (text-base is default)
+ * Sizes: popover-{sm|lg} (text-base is default)
  * Presets: popover-dropdown, popover-tooltip
  *
  * Example:
@@ -84,13 +84,6 @@
     }
 
     /* Sizes */
-    .popover-xs {
-        --popover-px: .5rem;
-        --popover-py: .5rem;
-        --popover-min-w: 6rem;
-        --popover-text: var(--text-xs, .75rem);
-    }
-
     .popover-sm {
         --popover-px: .75rem;
         --popover-py: .75rem;
@@ -105,13 +98,6 @@
         --popover-py: 1.25rem;
         --popover-min-w: 10rem;
         --popover-text: var(--text-base, 1rem);
-    }
-
-    .popover-xl {
-        --popover-px: 1.5rem;
-        --popover-py: 1.5rem;
-        --popover-min-w: 12rem;
-        --popover-text: var(--text-lg, 1.125rem);
     }
 
     /* Arrow */
@@ -150,12 +136,6 @@
         --popover-text: var(--text-xs, .75rem);
     }
 
-    .popover-tooltip.popover-xs {
-        --popover-px: .5rem;
-        --popover-py: .375rem;
-        --popover-text: var(--text-xs, .75rem);
-    }
-
     .popover-tooltip.popover-sm {
         --popover-px: .75rem;
         --popover-py: .5rem;
@@ -166,12 +146,6 @@
         --popover-px: 1rem;
         --popover-py: .75rem;
         --popover-text: var(--text-sm, .875rem);
-    }
-
-    .popover-tooltip.popover-xl {
-        --popover-px: 1.25rem;
-        --popover-py: 1rem;
-        --popover-text: var(--text-base, 1rem);
     }
 
     /* Dropdown menu items */

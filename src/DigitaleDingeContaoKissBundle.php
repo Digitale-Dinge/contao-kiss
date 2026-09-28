@@ -5,22 +5,21 @@ declare(strict_types=1);
 namespace DigitaleDinge\ContaoKiss;
 
 use DigitaleDinge\ContaoKiss\Asset\VersionStrategy\ViteVersionStrategy;
-use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
+use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
+use DigitaleDinge\ContaoKiss\DependencyInjection\Compiler\AddStyleOptionsPass;
+use DigitaleDinge\ContaoKiss\Styles\StyleOptionRegistry;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
 class DigitaleDingeContaoKissBundle extends AbstractBundle
 {
-    public function configure(DefinitionConfigurator $definition): void
+    public function build(ContainerBuilder $container): void
     {
-        $definition->rootNode()
-            ->children()
-                ->booleanNode('style_definition_override')
-                    ->defaultFalse()
-                ->end()
-            ->end()
-        ;
+        parent::build($container);
+
+        $container->addCompilerPass(new AddStyleOptionsPass());
     }
 
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
@@ -28,7 +27,12 @@ class DigitaleDingeContaoKissBundle extends AbstractBundle
         $container->import('../config/services.yaml');
         $container->import('../config/migrations.yaml');
 
-        $builder->setParameter('contao_kiss.style_definition_override', $config['style_definition_override']);
+        $builder->registerAttributeForAutoconfiguration(
+            AsKissStyleOption::class,
+            static function (ChildDefinition $definition, AsKissStyleOption $attribute): void {
+                $definition->addTag(StyleOptionRegistry::TAG_NAME, $attribute->attributes);
+            },
+        );
     }
 
     public function prependExtension(ContainerConfigurator $container, ContainerBuilder $builder): void

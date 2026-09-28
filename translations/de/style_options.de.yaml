@@ -81,10 +81,8 @@ style_options:
 
     modifier:
         size:
-            x_small:                Sehr klein
             small:                  Klein
             large:                  Groß
-            x_large:                Sehr groß
 
         variant:
             soft:                   Sanft
@@ -126,6 +124,11 @@ style_options:
             shape:
                 wide:               Breit
                 block:              Volle Breite
+
+        swiper:
+            navigation:
+                overlay:            Pfeile auf dem Bild
+                outside:            Pfeile neben dem Bild
 
         media:
             layout:
