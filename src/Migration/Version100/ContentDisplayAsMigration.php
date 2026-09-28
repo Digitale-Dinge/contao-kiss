@@ -28,7 +28,7 @@ class ContentDisplayAsMigration extends AbstractJsonColumnMigration
 
     protected function getValueMaps(): array
     {
-        return ['kiss_styles' => ['displayAs' => ['1' => 'text', '' => 'text']]];
+        return ['kiss_styles' => ['displayAs' => ['1' => 'button', '' => 'text']]];
     }
 
     protected function getWhere(string $table): string
