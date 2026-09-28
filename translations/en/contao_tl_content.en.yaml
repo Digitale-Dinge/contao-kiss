@@ -27,8 +27,21 @@ tl_content:
         - Here you can enter one or more call-to-actions which will be displayed on the website.
 
     ctaAsButton:
-        - Als Button darstellen
-        - Verändert die Darstellung von einem Textlink in einen Button
+        - Show as button
+        - Changes the display from a text link to a button.
+
+    displayAs:
+        - Display as
+        - Defines whether the link appears as text, a button or a styled link.
+
+    displayAsOptions:
+        text:                   Text
+        button:                 Button
+        link:                   Link
+
+    hideFileSize:
+        - Hide file size
+        - Hides the file size after the link text.
 
     ctaText:
         - Text
@@ -49,6 +62,23 @@ tl_content:
     ctaShape:
         - Shape
         - Here you can define the shape of the action.
+
+    linkColor:
+        - Color
+        - Define the color of the link.
+
+    linkSize:
+        - Size
+        - Define the size of the link.
+
+    linkUnderline:
+        - Underline
+        - Define how the link is underlined.
+
+    linkUnderlineOptions:
+        underline-hover:        On hover
+        underline-animate:      Animated
+        underline-none:         None
 
     contentWidth:
         - Content width

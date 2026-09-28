@@ -136,6 +136,7 @@ final class StyleOptionsListener
     }
 
     #[AsCallback('tl_content', 'fields.ctaColor.options')]
+    #[AsCallback('tl_content', 'fields.linkColor.options')]
     #[AsCallback('tl_content', 'fields.callToAction.fields.color.options')]
     #[AsCallback('tl_form_field', 'fields.fieldColor.options')]
     public function addColorOptions(): array
@@ -144,6 +145,7 @@ final class StyleOptionsListener
     }
 
     #[AsCallback('tl_content', 'fields.ctaSize.options')]
+    #[AsCallback('tl_content', 'fields.linkSize.options')]
     #[AsCallback('tl_content', 'fields.elementSize.options')]
     #[AsCallback('tl_content', 'fields.callToAction.fields.size.options')]
     #[AsCallback('tl_form_field', 'fields.fieldSize.options')]
