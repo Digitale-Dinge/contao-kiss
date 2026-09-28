@@ -9,10 +9,6 @@ use Doctrine\DBAL\Platforms\MySQLPlatform;
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'ctaAsButton';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['ctaAsButton'] = 'ctaType,ctaColor,ctaSize,ctaShape';
 
-$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'displayAs';
-$GLOBALS['TL_DCA']['tl_content']['subpalettes']['displayAs_button'] = 'ctaType,ctaColor,ctaSize,ctaShape';
-$GLOBALS['TL_DCA']['tl_content']['subpalettes']['displayAs_link'] = 'linkColor,linkSize,linkUnderline';
-
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'showAsCard';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['showAsCard'] = 'backgroundColor,elementSize,elementVariant';
 
@@ -224,18 +220,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['ctaAsButton'] = [
     ],
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['displayAs'] = [
-    'exclude' => true,
-    'inputType' => 'select',
-    'options' => ['text', 'button', 'link'],
-    'reference' => &$GLOBALS['TL_LANG']['tl_content']['displayAsOptions'],
-    'targetColumn' => 'kiss_styles',
-    'eval' => [
-        'tl_class' => 'w25',
-        'submitOnChange' => true,
-    ],
-];
-
 $GLOBALS['TL_DCA']['tl_content']['fields']['hideFileSize'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
@@ -278,38 +262,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['ctaSize'] = [
 $GLOBALS['TL_DCA']['tl_content']['fields']['ctaShape'] = [
     'exclude' => true,
     'inputType' => 'select',
-    'targetColumn' => 'kiss_styles',
-    'eval' => [
-        'tl_class' => 'w25',
-        'includeBlankOption' => true,
-    ],
-];
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['linkColor'] = [
-    'exclude' => true,
-    'inputType' => 'select',
-    'targetColumn' => 'kiss_styles',
-    'eval' => [
-        'tl_class' => 'w25',
-        'includeBlankOption' => true,
-    ],
-];
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['linkSize'] = [
-    'exclude' => true,
-    'inputType' => 'select',
-    'targetColumn' => 'kiss_styles',
-    'eval' => [
-        'tl_class' => 'w25',
-        'includeBlankOption' => true,
-    ],
-];
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['linkUnderline'] = [
-    'exclude' => true,
-    'inputType' => 'select',
-    'options' => ['underline-hover', 'underline-animate', 'underline-none'],
-    'reference' => &$GLOBALS['TL_LANG']['tl_content']['linkUnderlineOptions'],
     'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25',
@@ -514,7 +466,7 @@ PaletteManipulator::create()
 
 PaletteManipulator::create()
     ->addLegend('appearance_legend', 'download_legend')
-    ->addField(['iconPosition', 'textAlignment', 'hideFileSize', 'displayAs'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField(['iconPosition', 'textAlignment', 'hideFileSize', 'ctaAsButton'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('download', 'tl_content')
     ->applyToPalette('downloads', 'tl_content')
 ;

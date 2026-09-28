@@ -31,15 +31,6 @@ tl_content:
         - Als Button darstellen
         - Verändert die Darstellung von einem Textlink in einen Button
 
-    displayAs:
-        - Darstellen als
-        - Legt fest, ob der Link als Text, Button oder gestalteter Link erscheint.
-
-    displayAsOptions:
-        text:                   Text
-        button:                 Button
-        link:                   Link
-
     hideFileSize:
         - Dateigröße ausblenden
         - Blendet die Dateigröße hinter dem Linktext aus.
@@ -63,23 +54,6 @@ tl_content:
     ctaShape:
         - Form
         - Bestimmen Sie die Form der Aktion.
-
-    linkColor:
-        - Farbe
-        - Bestimmen Sie die Farbe des Links.
-
-    linkSize:
-        - Größe
-        - Bestimmen Sie die Größe des Links.
-
-    linkUnderline:
-        - Unterstreichung
-        - Bestimmen Sie, wie der Link unterstrichen wird.
-
-    linkUnderlineOptions:
-        underline-hover:        Beim Überfahren
-        underline-animate:      Animiert
-        underline-none:         Keine
 
     contentWidth:
         - Inhaltsbreite
