@@ -43,7 +43,7 @@ class ContaoKissExtension extends AbstractExtension implements GlobalsInterface
             new TwigFunction('getGridLabel',
                 [BackendStylesRuntime::class, 'getGridLabel'],
             ),
-            new TwigFunction('getFileIcon',
+            new TwigFunction('kiss_file_icon',
                 [FilesRuntime::class, 'getFileIcon'],
             ),
             new TwigFunction('kiss_include_data',

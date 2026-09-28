@@ -20,7 +20,7 @@
 {% block download_link_inner %}
     {% with {
         item: data|default,
-        icon: getFileIcon(download.file.extension),
+        icon: kiss_file_icon(download.file.extension),
         text: data.hideFileSize|default ? text : text ~ ' (' ~ download.file.fileSize|format_bytes ~ ')',
     } %}
         {{ block('icon_text') }}
