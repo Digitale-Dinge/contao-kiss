@@ -18,9 +18,10 @@
 {%- endblock %}
 
 {% block download_link_inner %}
+    {% from '@Contao/kiss_component/download/_macro.html.twig' import file_icon_name %}
     {% with {
         item: data|default,
-        icon: kiss_file_icon(download.file.extension),
+        icon: kiss_file_icon(file_icon_name(download.file.extension)),
         text: data.hideFileSize|default ? text : text ~ ' (' ~ download.file.fileSize|format_bytes ~ ')',
     } %}
         {{ block('icon_text') }}
