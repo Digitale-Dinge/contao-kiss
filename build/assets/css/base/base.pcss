@@ -6,4 +6,14 @@
     .invisible {
         @apply sr-only visible;
     }
+
+    /* Undo Tailwind preflight for lists, components reset them where needed */
+    ol,
+    ul,
+    dl,
+    dd {
+        list-style: revert;
+        margin: revert;
+        padding: revert;
+    }
 }

@@ -1,0 +1,5 @@
+{% extends '@Contao/content_element/player.html.twig' %}
+
+{% set media_attributes = attrs(media_attributes|default)
+    .addClass(['aspect--' ~ data.playerAspect, 'w-full', 'h-auto', 'object-cover'], data.playerAspect and figure.media.type|default == 'video')
+%}
