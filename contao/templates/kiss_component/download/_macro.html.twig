@@ -1,3 +1,12 @@
+{#
+  Maps a lowercase file extension to an icon name in kiss_icons/svg, unknown extensions return "file".
+  Override this template in the project to change the icons. A missing icon falls back to file.svg.
+
+  Usage:
+  {% from '@Contao/kiss_component/download/_macro.html.twig' import file_icon_name %}
+  {{ file_icon_name('pdf') }}
+#}
+
 {% macro file_icon_name(extension) %}
     {% set map = {
         pdf: 'file-pdf',
@@ -37,5 +46,5 @@
         webm: 'file-mp4',
         exe: 'file-exe',
     } %}
-    {{- map[extension|lower]|default('file') -}}
+    {{- map[extension]|default('file') -}}
 {% endmacro %}

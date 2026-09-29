@@ -19,9 +19,12 @@
 
 {% block download_link_inner %}
     {% from '@Contao/kiss_component/download/_macro.html.twig' import file_icon_name %}
+    {% set icon_directory = 'public/kiss_icons/svg/' %}
+    {% set icon_path = icon_directory ~ file_icon_name(download.file.extension(true))|trim ~ '.svg' %}
+    {% set icon_exists = inline_svg(icon_path) is not empty %}
     {% with {
         item: data|default,
-        icon: kiss_file_icon(file_icon_name(download.file.extension)),
+        icon: icon_exists ? icon_path : icon_directory ~ 'file.svg',
         text: data.hideFileSize|default ? text : text ~ ' (' ~ download.file.fileSize|format_bytes ~ ')',
     } %}
         {{ block('icon_text') }}
