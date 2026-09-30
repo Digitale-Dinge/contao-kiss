@@ -11,8 +11,8 @@ return $configBuilder
         'types' => ['content'],
         'standardFields' => ['cssID'],
     ])
+    ->addIconStyleField()
     ->addIconField()
-    ->addIconPositionField()
     ->addRichTextField()
     ->build()
 ;

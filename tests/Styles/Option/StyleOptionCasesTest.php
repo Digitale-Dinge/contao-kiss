@@ -7,6 +7,7 @@ namespace DigitaleDinge\ContaoKiss\Tests\Styles\Option;
 use DigitaleDinge\ContaoKiss\Styles\Option\Color;
 use DigitaleDinge\ContaoKiss\Styles\Option\Component;
 use DigitaleDinge\ContaoKiss\Styles\Option\IconPosition;
+use DigitaleDinge\ContaoKiss\Styles\Option\IconStyle;
 use DigitaleDinge\ContaoKiss\Styles\Option\Layout;
 use DigitaleDinge\ContaoKiss\Styles\Option\Margin;
 use DigitaleDinge\ContaoKiss\Styles\Option\Modifier;
@@ -32,6 +33,7 @@ final class StyleOptionCasesTest extends TestCase
         Component\Media\Layout::class => ['default', 'reverse', 'side', 'side_reverse', 'media_background'],
         Component\Swiper\Navigation::class => ['overlay', 'outside'],
         IconPosition::class => ['left', 'right'],
+        IconStyle::class => ['default', 'badge'],
         Layout\Column::class => ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'],
         Layout\ColumnSpan::class => ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'],
         Layout\Container::class => ['base', 'narrower', 'narrow', 'full_pad', 'full', 'reset'],

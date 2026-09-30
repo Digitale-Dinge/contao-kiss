@@ -123,6 +123,10 @@ tl_content:
         - Position
         - Here you can choose the position of the icon.
 
+    iconStyle:
+        - Style
+        - Here you can choose whether the icon is shown on its own or in a badge.
+
     elementSize:
         - Size
         - Define the size of the element.

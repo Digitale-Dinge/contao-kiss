@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use DigitaleDinge\ContaoKiss\Styles\Option\IconPosition;
+use DigitaleDinge\ContaoKiss\Styles\Option\IconStyle;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'ctaAsButton';
@@ -420,6 +421,17 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['iconPosition'] = [
     'eval' => [
         'cols' => count(IconPosition::cases()),
         'tl_class' => 'w50',
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['iconStyle'] = [
+    'exclude' => true,
+    'inputType' => 'radioImage',
+    'enum' => IconStyle::class,
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'imagePath' => 'bundles/digitaledingecontaokiss/icons/icon/style/',
+        'tl_class' => 'clr',
     ],
 ];
 
