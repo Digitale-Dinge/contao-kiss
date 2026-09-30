@@ -90,7 +90,7 @@ The question is never "how do I build this?" but "where does this already exist?
 | List / grid / swiper wrapper | `contao/templates/kiss_component/_content_wrapper.html.twig` |
 | Media components (media_text, wrapper, image, video, icon, text) | `contao/templates/kiss_component/media/` |
 | Call-to-action | `contao/templates/kiss_component/action/` |
-| Core component overrides | `contao/templates/component/` — `{% use %}` the core component, redefine one block (e.g. `_download.html.twig`) |
+| Core component overrides | `contao/templates/component/` — `{% use %}` the core component, redefine only the blocks that change (e.g. `_download.html.twig`: `download_link_attributes` and `download_link_inner`) |
 | Include elements (form, module, article) | `kiss_include_data()` returns the include element's row, like `data`. Legacy templates without blocks (e.g. `form_inline.html.twig`): extend them and `set` the merged variable at top level |
 | rsce element configs + builder | `contao/templates/rsce_*_config.php`, `src/CustomElementsConfigurationBuilder.php` |
 

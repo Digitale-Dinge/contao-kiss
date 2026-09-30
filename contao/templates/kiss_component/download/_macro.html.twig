@@ -1,0 +1,54 @@
+{#
+  Returns the kiss_icons/svg path of the icon for a lowercase file extension.
+  Unknown extensions and missing icon files fall back to file.svg.
+  To change the icons, copy this template into the project and adjust the map.
+
+  Usage:
+  {% from '@Contao/kiss_component/download/_macro.html.twig' import file_icon_path %}
+  {{ file_icon_path('pdf')|trim }}
+#}
+
+{% macro file_icon_path(extension) %}
+    {% set map = {
+        pdf: 'file-pdf',
+        doc: 'file-doc',
+        docx: 'file-doc',
+        odt: 'file-doc',
+        rtf: 'file-doc',
+        txt: 'file-doc',
+        xls: 'file-xls',
+        xlsx: 'file-xls',
+        csv: 'file-xls',
+        ods: 'file-xls',
+        ppt: 'file-ppt',
+        pptx: 'file-ppt',
+        odp: 'file-ppt',
+        zip: 'file-zip',
+        rar: 'file-zip',
+        '7z': 'file-zip',
+        tar: 'file-zip',
+        gz: 'file-zip',
+        jpg: 'file-jpg',
+        jpeg: 'file-jpg',
+        webp: 'file-jpg',
+        svg: 'file-jpg',
+        png: 'file-png',
+        gif: 'file-gif',
+        mp3: 'file-mp3',
+        wav: 'file-mp3',
+        m4a: 'file-mp3',
+        aac: 'file-mp3',
+        ogg: 'file-mp3',
+        flac: 'file-mp3',
+        mp4: 'file-mp4',
+        mov: 'file-mp4',
+        avi: 'file-mp4',
+        mkv: 'file-mp4',
+        webm: 'file-mp4',
+        exe: 'file-exe',
+    } %}
+    {% set icon_directory = 'public/kiss_icons/svg/' %}
+    {% set icon_path = icon_directory ~ map[extension]|default('file') ~ '.svg' %}
+    {% set icon_exists = inline_svg(icon_path) is not empty %}
+    {{- icon_exists ? icon_path : icon_directory ~ 'file.svg' -}}
+{% endmacro %}

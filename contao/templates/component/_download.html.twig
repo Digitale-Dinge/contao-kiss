@@ -1,14 +1,29 @@
 {% use '@Contao/component/_download.html.twig' %}
+{% use '@Contao/kiss_component/media/_icon_text.html.twig' %}
 
 {% block download_link_attributes -%}
+    {%- set download_link_attributes = attrs(download_link_attributes)
+        .addClass(['inline-flex', 'items-center', '[&_svg]:h-[1em]', '[&_svg]:w-[1em]', '[&_svg]:shrink-0'])
+    -%}
     {%- if data.ctaAsButton|default -%}
         {%- set download_link_attributes = attrs(download_link_attributes)
             .addClass('btn')
-            .addClass('btn-' ~ styles.size(data.ctaSize), data.ctaSize|default)
-            .addClass('btn-' ~ styles.color(data.ctaColor), data.ctaColor|default)
+            .addClass('btn-' ~ styles.size(data.ctaSize|default), data.ctaSize|default)
+            .addClass('btn-' ~ styles.color(data.ctaColor|default), data.ctaColor|default)
             .addClass(styles.cta_type(data.ctaType|default))
             .addClass(styles.cta_shape(data.ctaShape|default))
         -%}
     {%- endif -%}
     {{- download_link_attributes -}}
 {%- endblock %}
+
+{% block download_link_inner %}
+    {% from '@Contao/kiss_component/download/_macro.html.twig' import file_icon_path %}
+    {% with {
+        item: data|default,
+        icon: file_icon_path(download.file.extension(true))|trim,
+        text: data.hideFileSize|default ? text : text ~ ' (' ~ download.file.fileSize|format_bytes ~ ')',
+    } %}
+        {{ block('icon_text') }}
+    {% endwith %}
+{% endblock %}
