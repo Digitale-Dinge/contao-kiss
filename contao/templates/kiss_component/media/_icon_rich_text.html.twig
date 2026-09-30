@@ -1,0 +1,34 @@
+{#
+  KISS Icon Rich Text Component
+
+  @param {string} icon - icon path for svg_icon()
+  @param {string} text - rich text next to the icon
+  @param {string} iconPosition - IconPosition value (left, right), falls back to data.iconPosition
+  @param {HtmlAttributes} icon_rich_text_attributes - additional attributes
+
+  All values are read from `item`, falling back to the context.
+
+  Usage:
+  {% use '@Contao/kiss_component/media/_icon_rich_text.html.twig' %}
+  {{ block('icon_rich_text') }}
+#}
+
+{% use '@Contao/kiss_component/media/_text.html.twig' %}
+
+{% block icon_rich_text %}
+    {% set item = item|default(_context) %}
+    {% set direction = enum('DigitaleDinge\\ContaoKiss\\Styles\\Option\\IconPosition').tryFrom(item.iconPosition|default(data.iconPosition|default))?.name %}
+
+    <div{{ attrs(icon_rich_text_attributes|default)
+        .addClass(['icon_rich_text', 'flex', 'items-start', 'gap-2'])
+        .addClass(['[&>svg]:w-[1em]', '[&>svg]:h-[1lh]', '[&>svg]:shrink-0'])
+        .addClass(['flex-row-reverse', 'justify-end'], direction == 'right')
+    }}>
+        {% if item.icon|default %}
+            {{ include('@Contao/kiss_component/media/_icon_include.html.twig', {icon: item.icon}) }}
+        {% endif %}
+        {% with {text: item.text|default} %}
+            {{ block('text') }}
+        {% endwith %}
+    </div>
+{% endblock %}
