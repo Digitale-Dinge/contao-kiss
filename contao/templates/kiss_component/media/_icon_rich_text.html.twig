@@ -3,8 +3,9 @@
 
   @param {string} icon - icon path for svg_icon()
   @param {string} text - rich text next to the icon
-  @param {string} iconPosition - IconPosition value (left, right), falls back to data.iconPosition
+  @param {string} iconPosition - IconPosition value (left, right)
   @param {HtmlAttributes} icon_rich_text_attributes - additional attributes
+  @param {HtmlAttributes} text_inner_attrs - attributes of the rich text element (.rte)
 
   All values are read from `item`, falling back to the context.
 
@@ -17,11 +18,10 @@
 
 {% block icon_rich_text %}
     {% set item = item|default(_context) %}
-    {% set direction = enum('DigitaleDinge\\ContaoKiss\\Styles\\Option\\IconPosition').tryFrom(item.iconPosition|default(data.iconPosition|default))?.name %}
+    {% set direction = enum('DigitaleDinge\\ContaoKiss\\Styles\\Option\\IconPosition').tryFrom(item.iconPosition|default)?.name %}
 
     <div{{ attrs(icon_rich_text_attributes|default)
         .addClass(['icon_rich_text', 'flex', 'items-start', 'gap-2'])
-        .addClass(['[&>svg]:w-[1em]', '[&>svg]:h-[1lh]', '[&>svg]:shrink-0'])
         .addClass(['flex-row-reverse', 'justify-end'], direction == 'right')
     }}>
         {% if item.icon|default %}
