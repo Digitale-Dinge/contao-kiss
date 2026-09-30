@@ -120,7 +120,6 @@ style_options:
                 soft:               Soft
                 outline:            Outlined
                 text:               Text
-                link:               Link
             shape:
                 wide:               Wide
                 block:              Full width

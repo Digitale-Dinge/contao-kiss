@@ -5,7 +5,7 @@
             .set('target', '_blank', target|default)
             .set('rel', 'noreferrer noopener')
             .setIfExists('data-lightbox', rel|default)
-            .addClass('btn', ctaType|default !== 'link')
+            .addClass('btn')
             .addClass(styles.cta_type(ctaType|default))
             .addClass('btn-' ~ styles.size(ctaSize), ctaSize|default)
             .addClass('btn-' ~ styles.color(ctaColor), ctaColor|default)

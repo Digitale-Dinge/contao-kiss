@@ -120,7 +120,6 @@ style_options:
                 soft:               Weich
                 outline:            Umrandet
                 text:               Text
-                link:               Link
             shape:
                 wide:               Breit
                 block:              Volle Breite
