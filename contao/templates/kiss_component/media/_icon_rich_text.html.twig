@@ -23,12 +23,9 @@
     {% set item = item|default(_context) %}
     {% set icon_style = enum('DigitaleDinge\\ContaoKiss\\Styles\\Option\\IconStyle').tryFrom(item.iconStyle|default(data.iconStyle|default))?.name %}
 
-    <div{{ attrs(icon_rich_text_attributes|default)
-        .addClass('icon_rich_text')
-        .addClass('icon_rich_text-' ~ icon_style, icon_style)
-    }}>
+    <div{{ attrs(icon_rich_text_attributes|default).addClass('icon_rich_text') }}>
         {% if item.icon|default and icon_style == 'badge' %}
-            {% with {item: {icon: item.icon}} %}
+            {% with {item: {icon: item.icon, badgeSize: 'large'}} %}
                 {{ block('badge') }}
             {% endwith %}
         {% elseif item.icon|default %}
