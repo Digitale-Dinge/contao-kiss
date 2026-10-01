@@ -221,6 +221,15 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['ctaAsButton'] = [
     ],
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['hideFileSize'] = [
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+    ],
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['ctaType'] = [
     'exclude' => true,
     'inputType' => 'select',
@@ -469,7 +478,7 @@ PaletteManipulator::create()
 
 PaletteManipulator::create()
     ->addLegend('appearance_legend', 'download_legend')
-    ->addField(['textAlignment', 'ctaAsButton'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField(['iconPosition', 'textAlignment', 'hideFileSize', 'ctaAsButton'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('download', 'tl_content')
     ->applyToPalette('downloads', 'tl_content')
 ;

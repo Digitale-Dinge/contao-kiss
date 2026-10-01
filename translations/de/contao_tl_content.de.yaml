@@ -31,6 +31,10 @@ tl_content:
         - Als Button darstellen
         - Verändert die Darstellung von einem Textlink in einen Button
 
+    hideFileSize:
+        - Dateigröße ausblenden
+        - Blendet die Dateigröße hinter dem Linktext aus.
+
     ctaText:
         - Text
         - Hier können Sie einen Text eingeben.
