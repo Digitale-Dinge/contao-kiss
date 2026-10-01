@@ -141,6 +141,10 @@ style_options:
     responsive:                     Responsiv
     heading:                        Überschrift
 
+    icon_style:
+        default:                    Standard
+        badge:                      Badge
+
     position:
         left:                       Links
         center:                     Mittig

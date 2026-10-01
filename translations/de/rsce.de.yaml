@@ -97,11 +97,11 @@ rsce:
 
     icon:
         label:                  Icon
-        description:            Ein einzelnes Icon mit optionalem Beschreibungstext
-        field:
-            text:
-                label:          Beschreibung
-                description:    Ein beschreibender Text für das Icon
+        description:            Ein einzelnes Icon mit Text daneben
+
+    icon_list:
+        label:                  Icon-Liste
+        description:            Beliebig viele Icons mit Text daneben
 
     logo:
         label:                  Logo

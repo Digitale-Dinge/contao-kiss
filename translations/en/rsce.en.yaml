@@ -101,11 +101,11 @@ rsce:
 
     icon:
         label:                  Icon
-        description:            A single icon with optional description
-        field:
-            text:
-                label:          Description
-                description:    A describing text for the icon
+        description:            A single icon with text next to it
+
+    icon_list:
+        label:                  Icon list
+        description:            Any number of icons with text next to them
 
     logo:
         label:                  Logo

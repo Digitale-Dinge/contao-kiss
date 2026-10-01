@@ -127,6 +127,10 @@ tl_content:
         - Position
         - Hier können Sie die Position des Icons auswählen.
 
+    iconStyle:
+        - Stil
+        - Hier können Sie wählen, ob das Icon allein oder in einem Badge angezeigt wird.
+
     elementSize:
         - Größe
         - Bestimmen Sie die Größe des Elements.

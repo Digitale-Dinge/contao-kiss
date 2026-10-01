@@ -485,6 +485,15 @@ final class CustomElementsConfigurationBuilder
         return $this->addField('iconPosition', $options, $eval);
     }
 
+    public function addIconStyleField(array $eval = []): self
+    {
+        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['iconStyle'] : [
+            'inputType' => 'standardField',
+        ];
+
+        return $this->addField('iconStyle', $options, $eval);
+    }
+
     public function addPhoneField(array $eval = []): self
     {
         $options = $GLOBALS['TL_DCA']['tl_member']['fields']['phone'];

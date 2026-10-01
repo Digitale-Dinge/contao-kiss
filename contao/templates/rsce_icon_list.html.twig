@@ -1,0 +1,11 @@
+{% use '@Contao/kiss_component/media/_icon_rich_text.html.twig' %}
+{% extends '@Contao/content_element/_base.html.twig' %}
+
+{% set list_tag_name = 'ul' %}
+{% set list_wrapper_attributes = attrs(list_wrapper_attributes|default).addClass(['gap-4', 'm-0', 'p-0', 'list-none']) %}
+
+{% block content %}
+    {% for item in list %}
+        <li>{{ block('icon_rich_text') }}</li>
+    {% endfor %}
+{% endblock %}
