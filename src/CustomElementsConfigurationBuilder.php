@@ -494,6 +494,19 @@ final class CustomElementsConfigurationBuilder
         return $this->addField('iconStyle', $options, $eval);
     }
 
+    public function addLinkFields(): self
+    {
+        foreach (['url', 'target', 'linkTitle'] as $key) {
+            $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields'][$key] : [
+                'inputType' => 'standardField',
+            ];
+
+            $this->addField($key, $options);
+        }
+
+        return $this;
+    }
+
     public function addPhoneField(array $eval = []): self
     {
         $options = $GLOBALS['TL_DCA']['tl_member']['fields']['phone'];
@@ -602,6 +615,18 @@ final class CustomElementsConfigurationBuilder
         }
 
         return $this->addField('showAsCard', ['inputType' => 'standardField'], $eval);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function addCtaAsButtonField(array $eval = []): self
+    {
+        if ($this->isListField()) {
+            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+        }
+
+        return $this->addField('ctaAsButton', ['inputType' => 'standardField'], $eval);
     }
 
     /**

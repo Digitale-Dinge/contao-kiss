@@ -1,0 +1,36 @@
+{% use '@Contao/kiss_component/media/_icon_text.html.twig' %}
+{% extends '@Contao/content_element/_base.html.twig' %}
+
+{% set list_tag_name = 'ul' %}
+{% set list_wrapper_attributes = attrs(list_wrapper_attributes|default).addClass(['gap-4', 'm-0', 'p-0', 'list-none']) %}
+
+{% if data.ctaAsButton|default %}
+    {% set link_attributes = attrs(link_attributes|default)
+        .addClass('btn')
+        .addClass('btn-' ~ styles.size(data.ctaSize|default), data.ctaSize|default)
+        .addClass('btn-' ~ styles.color(data.ctaColor|default), data.ctaColor|default)
+        .addClass(styles.cta_type(data.ctaType|default))
+        .addClass(styles.cta_shape(data.ctaShape|default))
+    %}
+{% endif %}
+
+{% block content %}
+    {% for item in list %}
+        <li>
+            <a{{ attrs(link_attributes|default)
+                .addClass(['inline-flex', 'items-center', '[&_svg]:h-[1em]', '[&_svg]:w-[1em]', '[&_svg]:shrink-0'])
+                .set('href', item.url|default|insert_tag|encode_email)
+                .set('target', '_blank', item.target|default)
+                .set('rel', 'noreferrer noopener', item.target|default)
+            }}>
+                {% if item.icon|default %}
+                    {% with {item: data, icon: item.icon, text: item.linkTitle} %}
+                        {{ block('icon_text') }}
+                    {% endwith %}
+                {% else %}
+                    {{ item.linkTitle|default|insert_tag }}
+                {% endif %}
+            </a>
+        </li>
+    {% endfor %}
+{% endblock %}
