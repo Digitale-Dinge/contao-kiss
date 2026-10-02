@@ -2,13 +2,13 @@
  * KISS Button Component
  *
  * Base: .btn
- * Styles: btn-{soft|outline|text|link}
+ * Styles: btn-{soft|outline|text}
  * Colors: btn-{primary|secondary|tertiary|success|warning|error}
  * Sizes: btn-{sm|lg}
  * Shapes: btn-{circle|square|wide|block}
- * Effects: btn-shadow-{none|sm|md|lg}, btn-active
+ * Effects: btn-active
  *
- * Example: <button class="btn btn-primary btn-lg btn-shadow-md">Save Document</button>
+ * Example: <button class="btn btn-primary btn-lg">Save Document</button>
  */
 @layer components {
     .btn {
@@ -147,56 +147,6 @@
         }
     }
 
-    .btn-link {
-        color: var(--btn-bg);
-        font-size: var(--btn-text);
-
-        &:hover {
-            color: var(--btn-bg-hover);
-        }
-    }
-
-    /* Shadows */
-    .btn-shadow-none {
-        @apply shadow-none;
-    }
-
-    .btn-shadow-sm {
-        @apply shadow-sm;
-
-        &:hover {
-            @apply shadow-md;
-        }
-
-        &:active {
-            @apply shadow-none;
-        }
-    }
-
-    .btn-shadow-md {
-        @apply shadow-md;
-
-        &:hover {
-            @apply shadow-lg;
-        }
-
-        &:active {
-            @apply shadow-sm;
-        }
-    }
-
-    .btn-shadow-lg {
-        @apply shadow-lg;
-
-        &:hover {
-            @apply shadow-xl;
-        }
-
-        &:active {
-            @apply shadow-md;
-        }
-    }
-
     /* Sizes */
     .btn-sm {
         --btn-size: 2.25rem;
@@ -242,10 +192,10 @@
     }
 
     .btn-circle {
-        border-radius: 50%;
+        @apply rounded-full;
     }
 
     .btn-square {
-        border-radius: var(--radius-field);
+        @apply rounded-none;
     }
 }
