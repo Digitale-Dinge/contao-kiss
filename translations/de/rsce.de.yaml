@@ -103,6 +103,10 @@ rsce:
         label:                  Icon-Liste
         description:            Beliebig viele Icons mit Text daneben
 
+    hyperlink_list:
+        label:                  Hyperlink-Liste
+        description:            Beliebig viele Hyperlinks mit Icon und Text
+
     logo:
         label:                  Logo
         description:            Hier können Sie ein Logo auswählen.
