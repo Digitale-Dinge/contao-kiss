@@ -384,6 +384,8 @@ final class CustomElementsConfigurationBuilder
             'inputType' => 'standardField',
         ];
 
+        unset($options['label']);
+
         $options['label'] = [
             $this->translator->trans('rsce.field.imageUrl.label', [], 'rsce'),
             &$GLOBALS['TL_LANG']['MSC']['url'][1]
