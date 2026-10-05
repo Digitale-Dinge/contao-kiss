@@ -12,6 +12,19 @@
     {% set text_attributes = attrs().addClass('responsive-body-sm').mergeWith(text_attributes|default) %}
 {% endif %}
 
+{% block text %}
+    {% with {
+        text,
+        attributes: text_attributes|default,
+        item: {
+            textAppearance: data.textAppearance|default,
+            callToAction: data.callToAction|default,
+        },
+    } %}
+        {{ block('rich_text_component') }}
+    {% endwith %}
+{% endblock %}
+
 {% block inner %}
     {% if show_as_card %}
         <div{{ attrs(card_body_attributes|default).addClass('card-body') }}>{{ parent() }}</div>

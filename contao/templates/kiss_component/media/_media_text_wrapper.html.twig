@@ -20,6 +20,19 @@
 
 {% block media_text %}
     <{{ tag_name|default('div') }}{% block attributes %}{{ attrs(attributes|default).addClass(['media_text', 'responsive-body-sm']) }}{% endblock %}>
-        {{ parent() }}
+        {% with {item: {
+            text: text|default,
+            callToAction: callToAction|default,
+            textAppearance: textAppearance|default,
+            icon: icon|default,
+            singleSRC: singleSRC|default,
+            overwriteMeta: overwriteMeta|default,
+            alt: alt|default,
+            imageTitle: imageTitle|default,
+            imageUrl: imageUrl|default,
+            caption: caption|default,
+        }} %}
+            {{ parent() }}
+        {% endwith %}
     </{{ tag_name|default('div') }}>
 {% endblock %}

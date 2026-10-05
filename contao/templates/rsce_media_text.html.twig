@@ -23,6 +23,19 @@
 
 {%- block inner %}
     {% block content %}
-        {{ block('media_text') }}
+        {% with {item: {
+            text: text|default,
+            callToAction: callToAction|default,
+            textAppearance: textAppearance|default,
+            icon: icon|default,
+            singleSRC: singleSRC|default,
+            overwriteMeta: overwriteMeta|default,
+            alt: alt|default,
+            imageTitle: imageTitle|default,
+            imageUrl: imageUrl|default,
+            caption: caption|default,
+        }} %}
+            {{ block('media_text') }}
+        {% endwith %}
     {% endblock %}
 {% endblock -%}

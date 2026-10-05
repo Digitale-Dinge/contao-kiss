@@ -3,25 +3,25 @@
 
   @param {string} icon - icon path for svg_icon()
   @param {string} text - rich text next to the icon
-  @param {string} iconStyle - IconStyle value (default, badge: icon in a badge), falls back to data.iconStyle
+  @param {string} iconStyle - IconStyle value (default, badge: icon in a badge)
   @param {HtmlAttributes} icon_rich_text_attributes - additional attributes
   @param {HtmlAttributes} badge_attributes - attributes of the badge (iconStyle badge)
   @param {HtmlAttributes} text_inner_attrs - attributes of the rich text element (.rte)
 
-  All values are read from `item`, falling back to the context. iconStyle falls back to the element, so a list
-  sets it once for all items.
+  All values are read from `item`; the caller passes it with `with`.
 
   Usage:
   {% use '@Contao/kiss_component/media/_icon_rich_text.html.twig' %}
-  {{ block('icon_rich_text') }}
+  {% with {item: {icon: …, text: …, iconStyle: …}} %}
+      {{ block('icon_rich_text') }}
+  {% endwith %}
 #}
 
 {% use '@Contao/kiss_component/media/_text.html.twig' %}
 {% use '@Contao/kiss_component/status/_badge.html.twig' %}
 
 {% block icon_rich_text %}
-    {% set item = item|default(_context) %}
-    {% set icon_style = enum('DigitaleDinge\\ContaoKiss\\Styles\\Option\\IconStyle').tryFrom(item.iconStyle|default(data.iconStyle|default))?.name %}
+    {% set icon_style = enum('DigitaleDinge\\ContaoKiss\\Styles\\Option\\IconStyle').tryFrom(item.iconStyle|default)?.name %}
 
     <div{{ attrs(icon_rich_text_attributes|default).addClass('icon_rich_text') }}>
         {% if item.icon|default and icon_style == 'badge' %}
@@ -31,7 +31,11 @@
         {% elseif item.icon|default %}
             {{ include('@Contao/kiss_component/media/_icon_include.html.twig', {icon: item.icon}) }}
         {% endif %}
-        {% with {text: item.text|default} %}
+        {% with {item: {
+            text: item.text|default,
+            callToAction: item.callToAction|default,
+            textAppearance: item.textAppearance|default,
+        }} %}
             {{ block('text') }}
         {% endwith %}
     </div>

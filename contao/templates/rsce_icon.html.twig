@@ -2,5 +2,13 @@
 {% extends '@Contao/content_element/_base.html.twig' %}
 
 {% block content %}
-    {{ block('icon_rich_text') }}
+    {% with {item: {
+        icon: icon|default,
+        text: text|default,
+        iconStyle: iconStyle|default(data.iconStyle|default),
+        callToAction: callToAction|default,
+        textAppearance: textAppearance|default,
+    }} %}
+        {{ block('icon_rich_text') }}
+    {% endwith %}
 {% endblock %}

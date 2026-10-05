@@ -41,7 +41,9 @@
 {% endblock %}
 
 {% block content %}
-    {% for item in list %}
-        {{ block('media_text') }}
+    {% for entry in list %}
+        {% with {item: entry} %}
+            {{ block('media_text') }}
+        {% endwith %}
     {% endfor %}
 {% endblock %}

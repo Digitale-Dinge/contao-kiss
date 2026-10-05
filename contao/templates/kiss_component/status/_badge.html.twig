@@ -9,16 +9,16 @@
   @param {string} badgeShape - Badge-Form: pill|square
   @param {HtmlAttributes} badge_attributes - zusätzliche Attribute
 
-  Alle Werte werden aus `item` gelesen, ersatzweise aus dem Kontext.
+  All values are read from `item`; the caller passes it with `with`.
 
   Usage:
   {% use '@Contao/kiss_component/status/_badge.html.twig' %}
-  {{ block('badge') }}
+  {% with {item: {color: …, variant: …, badgeSize: …, badgeShape: …, icon: …, text: …}} %}
+      {{ block('badge') }}
+  {% endwith %}
 #}
 
 {% block badge %}
-    {% set item = item|default(_context) %}
-
     <span{{ attrs(badge_attributes|default)
         .addClass('badge')
         .addClass('badge-' ~ styles.color(item.color|default), item.color|default)

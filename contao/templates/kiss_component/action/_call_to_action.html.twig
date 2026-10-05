@@ -1,11 +1,7 @@
 {% use '@Contao/kiss_component/action/_action.html.twig' %}
 
 {% block call_to_action %}
-    {% set call_to_action = item is defined
-        ? (item.callToAction|default)
-        : (data.callToAction|default)
-    %}
-    {% set actions = call_to_action|deserialize %}
+    {% set actions = item.callToAction|default|deserialize %}
     {% if actions|length and actions|first.text|default %}
         {% set cta_wrapper_attributes = attrs()
             .addClass(['cta-outer', 'inline-flex', 'flex-wrap', 'gap-2', 'md:gap-4', 'mt-3'])

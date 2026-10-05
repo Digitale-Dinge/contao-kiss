@@ -1,8 +1,7 @@
 {% block image %}
     {% if figure|default %}
         {% set figure_object = figure %}
-    {% elseif item.singleSRC|default or singleSRC|default %}
-        {% set item = item|default(_context) %}
+    {% elseif item.singleSRC|default %}
         {% set configuration = configuration|default({}) %}
 
         {# overwrite Meta support #}

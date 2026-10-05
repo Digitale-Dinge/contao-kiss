@@ -13,16 +13,16 @@
   @param {HtmlAttributes} alert_title_attributes - additional attributes on the title
   @param {HtmlAttributes} alert_description_attributes - additional attributes on the description
 
-  All values are read from `item`, falling back to the context.
+  All values are read from `item`; the caller passes it with `with`.
 
   Usage:
   {% use '@Contao/kiss_component/status/_alert.html.twig' %}
-  {{ block('alert') }}
+  {% with {item: {color: …, variant: …, alertSize: …, icon: …, title: …, text: …}} %}
+      {{ block('alert') }}
+  {% endwith %}
 #}
 
 {% block alert %}
-    {% set item = item|default(_context) %}
-
     <div{{ attrs(alert_attributes|default)
         .addClass('alert')
         .addClass('alert-' ~ styles.color(item.color|default), item.color|default)

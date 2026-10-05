@@ -2,10 +2,7 @@
 {% use '@Contao/kiss_component/action/_call_to_action.html.twig' %}
 
 {% block rich_text_component %}
-    {% set text_appearance = item is defined
-        ? (item.textAppearance|default)
-        : (data.textAppearance|default)
-    %}
+    {% set text_appearance = item.textAppearance|default %}
 
     {% if text_appearance %}
         {% set rich_text_attributes = attrs(rich_text_attributes|default)

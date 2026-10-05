@@ -1,7 +1,6 @@
 {% use '@Contao/kiss_component/media/_text.html.twig' %}
 
 {% block media_text %}
-    {% set item = item|default(_context) %}
     {% set show_as_card = show_as_card|default(data.showAsCard|default) %}
 
     {% block media %}
@@ -27,7 +26,11 @@
             %}
                 {% block headline %}{% endblock %}
             {% endwith %}
-            {% with {text: item.text|default} %}
+            {% with {item: {
+                text: item.text|default,
+                callToAction: item.callToAction|default,
+                textAppearance: item.textAppearance|default,
+            }} %}
                 {{ block('text') }}
             {% endwith %}
         </div>

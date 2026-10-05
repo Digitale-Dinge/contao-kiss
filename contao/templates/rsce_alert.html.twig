@@ -2,5 +2,14 @@
 {% extends '@Contao/content_element/_base.html.twig' %}
 
 {% block content %}
-    {{ block('alert') }}
+    {% with {item: {
+        color: color|default,
+        variant: variant|default,
+        alertSize: alertSize|default,
+        icon: icon|default,
+        title: title|default,
+        text: text|default,
+    }} %}
+        {{ block('alert') }}
+    {% endwith %}
 {% endblock %}

@@ -19,11 +19,11 @@
 
 {% block download_link_inner %}
     {% from '@Contao/kiss_component/download/_macro.html.twig' import file_icon_path %}
-    {% with {
-        item: data|default,
+    {% with {item: {
+        iconPosition: data.iconPosition|default,
         icon: file_icon_path(download.file.extension(true))|trim,
         text: data.hideFileSize|default ? text : text ~ ' (' ~ download.file.fileSize|format_bytes ~ ')',
-    } %}
+    }} %}
         {{ block('icon_text') }}
     {% endwith %}
 {% endblock %}
