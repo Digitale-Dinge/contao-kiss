@@ -15,6 +15,8 @@
 {% endif %}
 
 {% block hyperlink_list_item %}
+    {% set link_title = item.linkTitle|default(item.url) %}
+
     <a{{ attrs(link_attributes|default)
         .addClass(['inline-flex', 'items-center', '[&_svg]:h-[1em]', '[&_svg]:w-[1em]', '[&_svg]:shrink-0'])
         .set('href', item.url|default|insert_tag|encode_email)
@@ -22,11 +24,11 @@
         .set('rel', 'noreferrer noopener', item.target|default)
     }}>
         {% if item.icon|default %}
-            {% with {item: data, icon: item.icon, text: item.linkTitle} %}
+            {% with {item: data, icon: item.icon, text: link_title} %}
                 {{ block('icon_text') }}
             {% endwith %}
         {% else %}
-            {{ item.linkTitle|default|insert_tag }}
+            {{ link_title|insert_tag }}
         {% endif %}
     </a>
 {% endblock %}
