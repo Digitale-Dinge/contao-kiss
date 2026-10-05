@@ -427,6 +427,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['iconPosition'] = [
     'inputType' => 'radioTable',
     'enum' => IconPosition::class,
     'targetColumn' => 'kiss_styles',
+    'default' => IconPosition::left->value,
     'eval' => [
         'cols' => count(IconPosition::cases()),
         'tl_class' => 'w50',

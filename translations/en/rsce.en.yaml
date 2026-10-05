@@ -107,6 +107,10 @@ rsce:
         label:                  Icon list
         description:            Any number of icons with text next to them
 
+    hyperlink_list:
+        label:                  Hyperlink list
+        description:            Any number of hyperlinks with icon and text
+
     logo:
         label:                  Logo
         description:            Here you can choose a logo.
