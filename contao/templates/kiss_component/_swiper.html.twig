@@ -1,6 +1,10 @@
 {% use '@Contao/component/_stylesheet.html.twig' %}
 
 {% block swiper %}
+    {% if 'none' == data.sliderNavigation|default %}
+        {% set slider_settings = slider_settings|default({})|merge({navigation: {enabled: false}}) %}
+    {% endif %}
+
     {% set slider_attributes = attrs()
         .addClass('swiper')
         .addClass('swiper--navigation-outside', 'outside' == data.sliderNavigation|default)
@@ -35,13 +39,15 @@
                 {% if in_row %}<div class="flex justify-end gap-6 h-11 mt-6">{% endif %}
                     {% set button_prev_attributes = attrs()
                         .addClass('swiper-button-prev')
-                        .addClass(['btn', 'btn-primary', 'btn-outline', 'relative!'], in_row)
+                        .addClass(['btn', 'btn-primary'])
+                        .addClass('relative!', in_row)
                         .mergeWith(button_prev_attributes|default)
                     %}
                     <div{{ button_prev_attributes }}></div>
                     {% set button_next_attributes = attrs()
                         .addClass('swiper-button-next')
-                        .addClass(['btn', 'btn-primary', 'btn-outline', 'relative!'], in_row)
+                        .addClass(['btn', 'btn-primary'])
+                        .addClass('relative!', in_row)
                         .mergeWith(button_next_attributes|default)
                     %}
                     <div{{ button_next_attributes }}></div>

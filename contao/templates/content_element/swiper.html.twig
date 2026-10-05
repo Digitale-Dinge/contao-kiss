@@ -8,9 +8,22 @@
         %}
     {% endif %}
 
+    {% if 'none' == data.sliderNavigation|default %}
+        {% set slider_settings = slider_settings|merge({navigation: {enabled: false}}) %}
+    {% endif %}
+
     {% if data.sliderHidePagination|default %}
         {% set slider_settings = slider_settings|merge({pagination: false}) %}
     {% endif %}
+
+    {% set button_prev_attributes = attrs()
+        .addClass(['btn', 'btn-primary'])
+        .mergeWith(button_prev_attributes|default)
+    %}
+    {% set button_next_attributes = attrs()
+        .addClass(['btn', 'btn-primary'])
+        .mergeWith(button_next_attributes|default)
+    %}
 
     {% set slides_per_view = data.slidesPerView|default(1) + 0 %}
 

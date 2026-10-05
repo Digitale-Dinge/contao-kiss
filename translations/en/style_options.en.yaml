@@ -128,6 +128,7 @@ style_options:
             navigation:
                 overlay:            Arrows on the image
                 outside:            Arrows beside the image
+                none:               No arrows
 
         media:
             layout:

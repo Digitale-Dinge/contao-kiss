@@ -1,4 +1,18 @@
 @layer components {
+    .swiper {
+        --swiper-theme-color: var(--kiss-sys-color-brand-primary-solid);
+    }
+
+    /* Swiper's unlayered color rule wins over the layered .btn color */
+    .swiper-button-prev.btn,
+    .swiper-button-next.btn {
+        --swiper-navigation-color: var(--btn-color);
+
+        &:hover {
+            --swiper-navigation-color: var(--btn-color-hover);
+        }
+    }
+
     .swiper--navigation-outside {
         --swiper-navigation-sides-offset: 0;
 
