@@ -27,9 +27,7 @@
             %}
                 {% block headline %}{% endblock %}
             {% endwith %}
-            {% with {text: item.text|default} %}
-                {{ block('text') }}
-            {% endwith %}
+            {{ block('text') }}
         </div>
     {% endif %}
 {% endblock %}

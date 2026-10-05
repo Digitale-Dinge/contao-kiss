@@ -166,6 +166,14 @@ component's (a core element with `data.*`, `link_text`), map exactly the differi
 `{% with {item: data, text: link_text} %}{{ block('<n>') }}{% endwith %}`. **Never `data|merge({…})` or
 `item|merge({…})` into a component**, and never `include()` with variables.
 
+Nested KISS components inherit `item`: inside a component, `item` is already set, so a nested `{{ block('text') }}`
+gets nothing passed. A `with` there is only right to hand the nested component a different `item` on purpose (a badge
+that must not render the parent's `item.text`). Contao core components don't read `item`, they read top-level names
+(`_rich_text` reads `text`). The KISS component that hands over to a core component maps them explicitly at that one
+place (`_text`: `include('@Contao/component/_rich_text.html.twig', {text: item.text, …})`), never its callers. Before
+adding or removing a `with`, open the component and everything it includes and check where each name is read; test
+the list variant, not only the single element.
+
 Contao core components work the same way: `{% use '@Contao/component/_figure.html.twig' %}` +
 `{% with {figure: image} %}{{ block('figure_component') }}{% endwith %}`. The only exception is a core component whose
 block names collide with the KISS chain. `_figure` brings `image` and `media`, so `_image` includes it isolated with
@@ -227,4 +235,6 @@ composer ci
   although `Modifier\Variant` exists?
 - Do new components have docblock, one root block, `item|default(_context)`, `attrs()`, `_icon_include`?
 - Any `data|merge` / `item|merge` feeding a component, or an `include()` with variables? Wrong, see above.
+- Every `{% with %}` around a block call: does it map a name the component can't already read? Checked in the list
+  variant too, including the core components it includes?
 - Return Could and Won't items as proposals. Unanswered questions stay questions, not assumptions.
