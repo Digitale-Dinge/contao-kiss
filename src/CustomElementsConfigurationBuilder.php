@@ -286,7 +286,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addHeadlineField(array $eval = []): self
     {
-        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['headline'] : [
+        $options = $this->isListField() ? $this->copyDcaField('headline') : [
             'inputType' => 'standardField',
         ];
 
@@ -295,7 +295,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addToplineField(array $eval = []): self
     {
-        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['topline'] : [
+        $options = $this->isListField() ? $this->copyDcaField('topline') : [
             'inputType' => 'standardField',
         ];
 
@@ -304,7 +304,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addRichTextField(array $eval = []): self
     {
-        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['text'] : [
+        $options = $this->isListField() ? $this->copyDcaField('text') : [
             'inputType' => 'standardField',
         ];
 
@@ -313,7 +313,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addTextAlignmentField(array $eval = []): self
     {
-        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['textAlignment'] : [
+        $options = $this->isListField() ? $this->copyDcaField('textAlignment') : [
             'inputType' => 'standardField',
         ];
 
@@ -322,7 +322,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addTextAppearanceField(array $eval = []): self
     {
-        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['textAppearance'] : [
+        $options = $this->isListField() ? $this->copyDcaField('textAppearance') : [
             'inputType' => 'standardField',
         ];
 
@@ -336,7 +336,7 @@ final class CustomElementsConfigurationBuilder
         bool $includeImageSizeField = false, /* @deprecated  has been deprecated, use includeSizeField instead !*/
     ): self
     {
-        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['singleSRC'] : [
+        $options = $this->isListField() ? $this->copyDcaField('singleSRC') : [
             'inputType' => 'standardField',
         ];
 
@@ -360,7 +360,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addImageSizeField(array $eval = [], string|null $dependsOn = null): self
     {
-        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['size'] : [
+        $options = $this->isListField() ? $this->copyDcaField('size') : [
             'inputType' => 'standardField',
         ];
 
@@ -380,11 +380,9 @@ final class CustomElementsConfigurationBuilder
 
     public function addImageUrlField(array $eval = [], string|null $dependsOn = null): self
     {
-        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['url'] : [
+        $options = $this->isListField() ? $this->copyDcaField('url') : [
             'inputType' => 'standardField',
         ];
-
-        unset($options['label']);
 
         $options['label'] = [
             $this->translator->trans('rsce.field.imageUrl.label', [], 'rsce'),
@@ -439,7 +437,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addLogoSizeField(array $eval = [], string|null $dependsOn = null): self
     {
-        $options = $GLOBALS['TL_DCA']['tl_content']['fields']['size'];
+        $options = $this->copyDcaField('size');
 
         if (null !== $dependsOn) {
             $options['dependsOn'] = [
@@ -455,7 +453,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addIconField(array $eval = [], string|null $dependsOn = null): self
     {
-        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] : [
+        $options = $this->isListField() ? $this->copyDcaField('icon') : [
             'inputType' => 'standardField',
         ];
 
@@ -473,7 +471,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addIconPositionField(array $eval = [], string|null $dependsOn = null): self
     {
-        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['iconPosition'] : [
+        $options = $this->isListField() ? $this->copyDcaField('iconPosition') : [
             'inputType' => 'standardField',
         ];
 
@@ -489,7 +487,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addIconStyleField(array $eval = []): self
     {
-        $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields']['iconStyle'] : [
+        $options = $this->isListField() ? $this->copyDcaField('iconStyle') : [
             'inputType' => 'standardField',
         ];
 
@@ -499,7 +497,7 @@ final class CustomElementsConfigurationBuilder
     public function addLinkFields(): self
     {
         foreach (['url', 'target', 'linkTitle'] as $key) {
-            $options = $this->isListField() ? $GLOBALS['TL_DCA']['tl_content']['fields'][$key] : [
+            $options = $this->isListField() ? $this->copyDcaField($key) : [
                 'inputType' => 'standardField',
             ];
 
@@ -511,7 +509,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addPhoneField(array $eval = []): self
     {
-        $options = $GLOBALS['TL_DCA']['tl_member']['fields']['phone'];
+        $options = $this->copyDcaField('phone', 'tl_member');
         $options['eval']['mandatory'] = false;
 
         $this->addField('phone', $options, $eval);
@@ -521,7 +519,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addEmailField(array $eval = []): self
     {
-        $options = $GLOBALS['TL_DCA']['tl_member']['fields']['email'];
+        $options = $this->copyDcaField('email', 'tl_member');
         $options['eval']['mandatory'] = false;
 
         $this->addField('email', $options, $eval);
@@ -531,7 +529,7 @@ final class CustomElementsConfigurationBuilder
 
     public function addSocialsField(array $eval = []): self
     {
-        $options = $GLOBALS['TL_DCA']['tl_company']['fields']['socials'];
+        $options = $this->copyDcaField('socials', 'tl_company');
 
         $this->addField('socials', $options, $eval);
 
@@ -728,17 +726,32 @@ final class CustomElementsConfigurationBuilder
                     'inputType' => 'text',
                     'eval' => ['tl_class' => 'w25'],
                 ],
-                'ctaType'  => $GLOBALS['TL_DCA']['tl_content']['fields']['ctaType'],
-                'ctaColor' => $GLOBALS['TL_DCA']['tl_content']['fields']['ctaColor'],
-                'ctaSize'  => $GLOBALS['TL_DCA']['tl_content']['fields']['ctaSize'],
-                'url'      => $GLOBALS['TL_DCA']['tl_content']['fields']['url'],
-                'target'   => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['target'], ['eval' => ['tl_class' => 'w25']]),
-                'rel'      => array_replace_recursive($GLOBALS['TL_DCA']['tl_content']['fields']['rel'], ['eval' => ['tl_class' => 'w25']]),
+                'ctaType'  => $this->copyDcaField('ctaType'),
+                'ctaColor' => $this->copyDcaField('ctaColor'),
+                'ctaSize'  => $this->copyDcaField('ctaSize'),
+                'url'      => $this->copyDcaField('url'),
+                'target'   => array_replace_recursive($this->copyDcaField('target'), ['eval' => ['tl_class' => 'w25']]),
+                'rel'      => array_replace_recursive($this->copyDcaField('rel'), ['eval' => ['tl_class' => 'w25']]),
             ],
             'eval' => [
                 'tl_class' => 'w100 clr call_to_action_widget',
                 'hide' => true
             ],
         ], $options);
+    }
+
+    private function copyDcaField(string $key, string $table = 'tl_content'): array
+    {
+        $field = $GLOBALS['TL_DCA'][$table]['fields'][$key];
+        $label = $field['label'] ?? null;
+
+        // Remove the label reference (see #35)
+        unset($field['label']);
+
+        if (null !== $label) {
+            $field['label'] = $label;
+        }
+
+        return $field;
     }
 }
