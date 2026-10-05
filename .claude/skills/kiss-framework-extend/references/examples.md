@@ -410,7 +410,7 @@ Three follow-up errors hide in there: the `|merge` as a workaround for `item` be
 {% endwith %}
 ```
 
-Detection question: "Am I passing any variables at all when calling a kiss_component?" → If yes, it should almost always have been a bare `{% use %}` + `{{ block() }}`. Check where the component reads each name; if the caller already has it there (always the case inside another component, which set `item`), pass nothing. Only if the caller's names can't match (core elements), `{% with %}` with exactly the differing names — never a `|merge`. `include()` remains correct for self-contained fragments without configuration (`_icon_include`). `_figure` is included only where its block names collide with the KISS chain (`_image`), see "Contao core components" in `SKILL.md`.
+Detection question: "Am I passing any variables at all when calling a kiss_component?" → If yes, it should almost always have been a bare `{% use %}` + `{{ block() }}`. Check where the component and every template it includes read each name. Inside another KISS component, `item` is already set, so pass nothing; a core component reading top-level names gets them mapped inside the KISS component that includes it (`_text` → `_rich_text`), not by its callers. Only if the caller's names can't match (core elements), `{% with %}` with exactly the differing names — never a `|merge`. `include()` remains correct for self-contained fragments without configuration (`_icon_include`). `_figure` is included only where its block names collide with the KISS chain (`_image`), see "Contao core components" in `SKILL.md`.
 
 ## Negative example 7: options and labels hand-written in the config file
 

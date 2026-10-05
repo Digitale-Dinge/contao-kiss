@@ -254,20 +254,32 @@ Why `{% use %}` + `{{ block('badge') }}` and **not** `{{ include(..., {…}) }}`
 - Callers can set the component's attribute hooks (`badge_attributes`, `badge_outer_attributes` …) via root-level `set` — from anywhere in the inheritance chain, without touching the component.
 - The block stays overridable. `include` freezes the call signature and creates a second, parallel API.
 
-#### Nested components: no `{% with %}`
+#### Nested components: no `{% with %}`, map at the core boundary
 
-A component that calls another component already has `item` set (`item|default(_context)`), and `block()` passes the
-context on. The nested component reads the same `item.<field>`, so call the block bare:
+A component that calls another KISS component already has `item` set (`item|default(_context)`), and `block()` passes
+the context on. The nested component reads the same `item.<field>`, so call the block bare: `{{ block('text') }}`.
+
+Contao core components don't know `item` and read top-level names (`_rich_text` reads `text`). In a list, `item.text`
+is the entry's text, but top-level `text` is not set. So the KISS component that includes the core component maps the
+names right there, once:
 
 ```twig
-{% use '@Contao/kiss_component/media/_text.html.twig' %}
-…
-{{ block('text') }}  {# not {% with {text: item.text} %}{{ block('text') }}{% endwith %} #}
+{{ include('@Contao/component/_rich_text.html.twig', {
+    text: item.text,
+    attributes: text_inner_attrs|default,
+}) }}
 ```
 
-Wrapping it in `with` mapping a name onto itself is bloat and was rejected in review (PR #30, `_icon_rich_text`). The
-only `with` a nested call may have is a deliberately different `item`, e.g. `{item: {icon: item.icon, badgeSize: 'large'}}`
-so the badge does not also render the parent's `item.text`.
+What really happened (PR #30): `_text` relied on its callers for that mapping, so `_icon_rich_text` and `_media_text`
+each carried `{% with {text: item.text|default} %}`. Review called it bloat, it was removed from `_icon_rich_text`, and
+`rsce_icon_list` rendered every item without text while the single `rsce_icon` still worked. The fix was the mapping in
+`_text`; after that the callers' `with` really was unnecessary.
+
+The only `with` a nested KISS call may have is a deliberately different `item`, e.g.
+`{item: {icon: item.icon, badgeSize: 'large'}}` so the badge does not also render the parent's `item.text`.
+
+Before adding or removing a `with`, open the component and every template it includes and check where each name is
+read. Verify the list variant, not only the single element.
 
 #### When the caller's names are not yours: `{% with %}`
 
