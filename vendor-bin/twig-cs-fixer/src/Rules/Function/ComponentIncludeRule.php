@@ -16,8 +16,9 @@ use TwigCsFixer\Token\Tokens;
  *   {{ include('@Contao/kiss_component/status/_badge.html.twig', {…}) }}
  *   ->  {% use '@Contao/kiss_component/status/_badge.html.twig' %} … {{ block('badge') }}
  *
- * If the caller's names differ from the components, map exactly those names with "with",
- * never with something like "data|merge()"
+ * Pass nothing if the caller already has the names the component reads (always inside
+ * another component, which set "item"). Only if the caller's names differ from the
+ * component's, map exactly those names with "with", never with something like "data|merge()"
  *
  *   {% with {item: data, text: link_text} %}{{ block('icon_text') }}{% endwith %}
  */

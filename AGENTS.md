@@ -166,6 +166,12 @@ component's (a core element with `data.*`, `link_text`), map exactly the differi
 `{% with {item: data, text: link_text} %}{{ block('<n>') }}{% endwith %}`. **Never `data|merge({…})` or
 `item|merge({…})` into a component**, and never `include()` with variables.
 
+Before every `with`, check where the component reads each name (`item.text` after `item|default(_context)`) and
+whether the caller already has it there. Inside another component, `item` is already set and passed on, so a nested
+`{{ block('text') }}` needs nothing: `{% with {text: item.text} %}` maps a name onto itself and is bloat. `with` is
+only right for a name that differs, or to hand a nested component a different `item` on purpose (e.g. a badge that
+must not render the parent's `item.text`). Say which of the two it is in the PR.
+
 Contao core components work the same way: `{% use '@Contao/component/_figure.html.twig' %}` +
 `{% with {figure: image} %}{{ block('figure_component') }}{% endwith %}`. The only exception is a core component whose
 block names collide with the KISS chain. `_figure` brings `image` and `media`, so `_image` includes it isolated with
@@ -227,4 +233,5 @@ composer ci
   although `Modifier\Variant` exists?
 - Do new components have docblock, one root block, `item|default(_context)`, `attrs()`, `_icon_include`?
 - Any `data|merge` / `item|merge` feeding a component, or an `include()` with variables? Wrong, see above.
+- Every `{% with %}` around a block call: does it map a name the component can't already read? If not, remove it.
 - Return Could and Won't items as proposals. Unanswered questions stay questions, not assumptions.

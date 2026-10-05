@@ -254,6 +254,21 @@ Why `{% use %}` + `{{ block('badge') }}` and **not** `{{ include(..., {…}) }}`
 - Callers can set the component's attribute hooks (`badge_attributes`, `badge_outer_attributes` …) via root-level `set` — from anywhere in the inheritance chain, without touching the component.
 - The block stays overridable. `include` freezes the call signature and creates a second, parallel API.
 
+#### Nested components: no `{% with %}`
+
+A component that calls another component already has `item` set (`item|default(_context)`), and `block()` passes the
+context on. The nested component reads the same `item.<field>`, so call the block bare:
+
+```twig
+{% use '@Contao/kiss_component/media/_text.html.twig' %}
+…
+{{ block('text') }}  {# not {% with {text: item.text} %}{{ block('text') }}{% endwith %} #}
+```
+
+Wrapping it in `with` mapping a name onto itself is bloat and was rejected in review (PR #30, `_icon_rich_text`). The
+only `with` a nested call may have is a deliberately different `item`, e.g. `{item: {icon: item.icon, badgeSize: 'large'}}`
+so the badge does not also render the parent's `item.text`.
+
 #### When the caller's names are not yours: `{% with %}`
 
 Sometimes the caller is a Contao core element whose context you cannot rename. `hyperlink` provides `data.icon`,

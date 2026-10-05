@@ -31,8 +31,6 @@
         {% elseif item.icon|default %}
             {{ include('@Contao/kiss_component/media/_icon_include.html.twig', {icon: item.icon}) }}
         {% endif %}
-        {% with {text: item.text|default} %}
-            {{ block('text') }}
-        {% endwith %}
+        {{ block('text') }}
     </div>
 {% endblock %}
