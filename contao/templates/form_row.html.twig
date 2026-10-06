@@ -48,16 +48,21 @@
 
 {% set type_prefix = type_prefix_map[this.type]|default %}
 
+{% set form_data = kiss_include_data() %}
+{% set field_color = this.fieldColor|default(form_data.fieldColor|default) %}
+{% set field_size = this.fieldSize|default(form_data.fieldSize|default) %}
+{% set field_variant = this.fieldVariant|default(form_data.fieldVariant|default) %}
+
 {% set wrapperAttributes = attrs(wrapperAttributes|default)
     .addClass([styles.span(this.gridSpan|default)])
-    .addClass('range-' ~ styles.color(this.fieldColor|default), this.type == 'range' and this.fieldColor|default)
+    .addClass('range-' ~ styles.color(field_color), this.type == 'range' and field_color)
 %}
 
 {% set form_inner_attributes = attrs()
     .addClass(type_class_map[this.type]|default)
-    .addClass(type_prefix ~ '-' ~ styles.color(this.fieldColor|default), this.type != 'range' and type_prefix and this.fieldColor|default)
-    .addClass(type_prefix ~ '-' ~ styles.size(this.fieldSize|default), type_prefix and this.fieldSize|default)
-    .addClass(type_prefix ~ '-' ~ styles.variant(this.fieldVariant|default), type_prefix and this.fieldVariant|default)
+    .addClass(type_prefix ~ '-' ~ styles.color(field_color), this.type != 'range' and type_prefix and field_color)
+    .addClass(type_prefix ~ '-' ~ styles.size(field_size), type_prefix and field_size)
+    .addClass(type_prefix ~ '-' ~ styles.variant(field_variant), type_prefix and field_variant)
     .mergeWith(form_inner_attributes|default)
 %}
 

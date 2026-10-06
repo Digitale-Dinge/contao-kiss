@@ -120,6 +120,7 @@ final class StyleOptionsListener
 
     #[AsCallback('tl_content', 'fields.ctaType.options')]
     #[AsCallback('tl_content', 'fields.callToAction.fields.type.options')]
+    #[AsCallback('tl_content', 'fields.buttonVariant.options')]
     public function addCtaTypeOptions(): array
     {
         return $this->getTranslatedOptions($this->registry->getEnum(Component\CallToAction\Variant::class));
@@ -134,6 +135,7 @@ final class StyleOptionsListener
 
     #[AsCallback('tl_content', 'fields.ctaColor.options')]
     #[AsCallback('tl_content', 'fields.callToAction.fields.color.options')]
+    #[AsCallback('tl_content', 'fields.fieldColor.options')]
     #[AsCallback('tl_form_field', 'fields.fieldColor.options')]
     public function addColorOptions(): array
     {
@@ -143,6 +145,7 @@ final class StyleOptionsListener
     #[AsCallback('tl_content', 'fields.ctaSize.options')]
     #[AsCallback('tl_content', 'fields.elementSize.options')]
     #[AsCallback('tl_content', 'fields.callToAction.fields.size.options')]
+    #[AsCallback('tl_content', 'fields.fieldSize.options')]
     #[AsCallback('tl_form_field', 'fields.fieldSize.options')]
     public function addSizeOptions(DataContainer $dc): array
     {
@@ -162,6 +165,7 @@ final class StyleOptionsListener
     }
 
     #[AsCallback('tl_content', 'fields.elementVariant.options')]
+    #[AsCallback('tl_content', 'fields.fieldVariant.options')]
     #[AsCallback('tl_form_field', 'fields.fieldVariant.options')]
     public function addVariantOptions(DataContainer $dc): array
     {
