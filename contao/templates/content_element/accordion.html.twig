@@ -1,0 +1,10 @@
+{% extends '@Contao/content_element/accordion.html.twig' %}
+
+{% block element_header %}
+    {# Adds the section headline appearance #}
+    {% set section_headline_appearance = kiss_content_model(element.reference.contentModel).sectionHeadline|deserialize.appearance|default %}
+    {% set accordion_header_attributes = attrs(accordion_header_attributes|default)
+        .addClass(styles.heading(section_headline_appearance)|default(styles.font_appearance(section_headline_appearance)), section_headline_appearance)
+    %}
+    {{ parent() }}
+{% endblock %}
