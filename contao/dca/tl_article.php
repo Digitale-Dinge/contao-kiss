@@ -55,6 +55,8 @@ $GLOBALS['TL_DCA']['tl_article']['fields']['textAlignment'] = [
     'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25',
+        'class' => 'widget-icon icon-text-alignment',
         'includeBlankOption' => true,
+        'chosen' => true,
     ],
 ];
