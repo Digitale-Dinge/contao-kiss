@@ -52,7 +52,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['gridColumns'] = [
     'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25 clr',
-        //'class' => 'widget-icon icon-width',
+        'class' => 'widget-icon icon-columns',
         'chosen' => true,
         'includeBlankOption' => true,
     ],
@@ -64,7 +64,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['gridGap'] = [
     'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25',
-        //'class' => 'widget-icon icon-width',
+        'class' => 'widget-icon icon-gap',
         'chosen' => true,
         'includeBlankOption' => true,
     ],

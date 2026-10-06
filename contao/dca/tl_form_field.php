@@ -91,6 +91,8 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['fieldColor'] = [
     'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25',
+        'class' => 'widget-icon icon-color',
+        'chosen' => true,
         'includeBlankOption' => true,
     ],
 ];
@@ -101,6 +103,8 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['fieldSize'] = [
     'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25',
+        'class' => 'widget-icon icon-size',
+        'chosen' => true,
         'includeBlankOption' => true,
     ],
 ];
@@ -111,6 +115,8 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['fieldVariant'] = [
     'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25',
+        'class' => 'widget-icon icon-field-variant',
+        'chosen' => true,
         'includeBlankOption' => true,
     ],
 ];
@@ -121,6 +127,8 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['fieldShape'] = [
     'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25',
+        'class' => 'widget-icon icon-shape',
+        'chosen' => true,
         'includeBlankOption' => true,
     ],
 ];
@@ -131,6 +139,8 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['textAlignment'] = [
     'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25 clr',
+        'class' => 'widget-icon icon-text-alignment',
+        'chosen' => true,
         'includeBlankOption' => true,
     ],
 ];
@@ -141,6 +151,8 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['textAppearance'] = [
     'targetColumn' => 'kiss_styles',
     'eval' => [
         'tl_class' => 'w25',
+        'class' => 'widget-icon icon-text-appearance',
+        'chosen' => true,
         'includeBlankOption' => true,
     ],
 ];
