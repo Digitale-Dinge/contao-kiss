@@ -6,6 +6,7 @@ namespace DigitaleDinge\ContaoKiss\Twig\Extension;
 
 use DigitaleDinge\ContaoKiss\Twig\Global\StylesVariable;
 use DigitaleDinge\ContaoKiss\Twig\Runtime\BackendStylesRuntime;
+use DigitaleDinge\ContaoKiss\Twig\Runtime\ContentRuntime;
 use DigitaleDinge\ContaoKiss\Twig\Runtime\FilesRuntime;
 use DigitaleDinge\ContaoKiss\Twig\Runtime\IncludeStylesDataRuntime;
 use Twig\Extension\AbstractExtension;
@@ -45,6 +46,9 @@ class ContaoKissExtension extends AbstractExtension implements GlobalsInterface
             ),
             new TwigFunction('kiss_include_data',
                 [IncludeStylesDataRuntime::class, 'getData'],
+            ),
+            new TwigFunction('kiss_content_model',
+                [ContentRuntime::class, 'getContentModel'],
             ),
         ];
     }
