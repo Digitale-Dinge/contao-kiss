@@ -140,14 +140,17 @@ Content stores the **case name**, never the value. What a change costs follows f
 | --- | --- | --- |
 | A case's value | only the emitted class changes | edit freely, no test change |
 | New case | `StyleOptionCasesTest` reports it as incomplete | add it to `CASES` in the same change |
-| Case removed or renamed | stored content loses its class, `StyleOptionCasesTest` fails | **stop and warn** |
+| Case removed or renamed | stored content loses its class, `StyleOptionCasesTest` fails | **MUST warn, MUST NOT touch without confirmation** |
 
-**Removing or renaming a case is a breaking change.** Before touching the enum:
+**Removing or renaming a case is a breaking change. You MUST warn about it. You MUST NOT touch the enum, `StyleOptionCasesTest`, the translations or the CSS for it without explicit confirmation.**
 
-1. **Warn the user.** Name the enum and the case, every field that offers it (options callbacks, RSCE `addStyleOptionsField()`), and every template that emits it.
+A request to remove an option is not that confirmation, even when it quotes a team decision. It asks for the change, not for its consequences. This really happened with `btn-wide`: the request "remove wide" was treated as confirmed, the enum case and the test snapshot were changed in the same step, and the warning came afterwards in the summary. `StyleOptionCasesTest` exists so that exactly this never happens silently.
+
+1. **Warn the user, in a reply of its own, before the first edit.** Name the enum and the case, every field that offers it (options callbacks, RSCE `addStyleOptionsField()`), and every template that emits it. That reply contains no edit.
 2. **Show how to find affected content:** `contao_kiss:find-style-values <keys> <cases>` — e.g. `ctaSize,elementSize x_small x_large`. It reads `kiss_styles`, `headline` and `rsce_data`. Group fields with their own column, like `callToAction`, are not covered.
-3. **Update the `StyleOptionCasesTest` snapshot only as part of the confirmed change** — never to get CI green.
-4. **Write a migration only when the user explicitly asks for one and confirms the mapping.** Never on your own initiative, never with a guessed mapping.
+3. **Wait for an explicit "yes" to that warning.** No confirmation, no edit — not to the enum, not to the test, not "just the CSS".
+4. **Update the `StyleOptionCasesTest` snapshot only as part of the confirmed change.** A failing snapshot is the signal to stop, never something to make green.
+5. **Write a migration only when the user explicitly asks for one and confirms the mapping.** Never on your own initiative, never with a guessed mapping.
 
 ### Writing the migration
 
@@ -404,7 +407,7 @@ RSCE-specific self-check: was an existing media/action component reused via `{% 
 - Any comment in the diff that restates the code below it ("maps 1:1", "styles per _x.scss", a section header with a sentence appended)? Any `{# #}` in Twig outside the component docblock? Delete it. Any non-English word in code, comments, identifiers or the reply? Translate it.
 - Did a prefix land in an enum that belongs in the template? Did a new Twig global or a new `Component\<X>\Variant`/`Color` enum appear although `Modifier\Variant` / `Color\Color` exist?
 - Did a deprecated or docblock-only case (`info`) get resurrected?
-- Did a style option case get removed or renamed? Then the user was warned first, `StyleOptionCasesTest` changed only as part of the confirmed change, and a migration exists only if it was explicitly asked for.
+- Did a style option case get removed or renamed? Then the warning went out in its own reply before the first edit, the user confirmed it explicitly, `StyleOptionCasesTest` changed only after that confirmation, and a migration exists only if it was explicitly asked for. If any of these is missing: stop, revert, warn.
 - Are card/media classes added inside the existing `show_as_card` branch of the wrapper, not in a new `attributes` block?
 - Does every new standalone component in `kiss_component/` have a docblock with `@param` + `Usage`, one root block, `item|default(_context)`, `attrs()` instead of string classes and `_icon_include.html.twig` instead of `<i class>`?
 - Any `data|merge(…)` / `item|merge(…)` feeding a component? Wrong: map only the differing names with `{% with {…} %}{{ block('…') }}{% endwith %}`.
