@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\EventListener\DataContainer;
 
-use Contao\CoreBundle\DataContainer\Palette;
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 use Contao\DataContainer;
@@ -44,17 +43,5 @@ class AddKissFieldsToPaletteListener
                 ->applyToPalette($key, $dc->table)
             ;
         }
-    }
-
-    #[AsCallback('tl_content', 'config.onpalette')]
-    public function addTextAppearanceField(string $palette, DataContainer $dc): string
-    {
-        $palette = new Palette($palette);
-
-        if ($palette->hasField('text') && !$palette->hasField('textAppearance')) {
-            $palette->addField('textAppearance', 'text', PaletteManipulator::POSITION_BEFORE);
-        }
-
-        return $palette->toString();
     }
 }

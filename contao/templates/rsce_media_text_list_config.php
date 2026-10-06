@@ -26,7 +26,6 @@ return $configBuilder
         ->addHeadlineField()
         ->addToplineField()
         ->addRichTextField()
-        ->addTextAppearanceField()
         ->addCallToActionField()
     ->endList()
 
