@@ -69,6 +69,7 @@ PHP is PSR-4 under `src/`, tests under `tests/`. `.editorconfig` is authoritativ
 | `.claude/skills/*/references/examples.md` | attribute hooks, worked examples, failed attempts |
 | `docs/` | the asset pipeline and how projects consume it |
 | `docs/style-options.md` | adding, replacing and grouping style options |
+| `docs/legacy.md` | using the legacy `fe_page.html.twig` layout, no `.html5` support. DO NOT USE LEGACY. |
 
 `references/examples.md` is mandatory before the first Twig edit.
 
