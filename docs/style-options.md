@@ -269,10 +269,12 @@ Dropping or renaming a case leaves content that stored it without a class.
 Find it first:
 
 ```bash
-vendor/bin/contao-console contao_kiss:find-style-values textAppearance x_large xx_large xxx_large
+bin/console contao_kiss:find-style-values appearance display_one display_two
 ```
 
-Keys are comma-separated, followed by the values to look for. `--table` limits
+Keys are comma-separated, followed by the values to look for. Without values,
+the command lists every value that differs from the field's DCA default (`''`
+if it has none). `--table` limits
 the search to one table, and `--backend-prefix=https://example.org/contao` adds
 an edit link per record. The command reads `kiss_styles`, `headline` and
 `rsce_data`.
@@ -286,31 +288,56 @@ namespace App\Migration;
 
 use DigitaleDinge\ContaoKiss\Migration\AbstractJsonColumnMigration;
 
-class ContentTextAppearanceKissStylesMigration extends AbstractJsonColumnMigration
+class HeadlineAppearanceMigration extends AbstractJsonColumnMigration
 {
-    private const array TEXT_APPEARANCE_MAP = [
-        'x_large' => '',
-        'xx_large' => 'headline_two',
-        'xxx_large' => 'headline_one',
+    private const array APPEARANCE_MAP = [
+        'display_one' => 'headline_one',
+        'display_two' => '',
     ];
 
     protected function getTables(): array
     {
-        return ['tl_content'];
+        return ['tl_content', 'tl_module'];
     }
 
     protected function getColumns(): array
     {
-        return ['kiss_styles', 'rsce_data'];
+        return ['headline', 'rsce_data'];
     }
 
     protected function getValueMaps(): array
     {
         return [
-            'kiss_styles' => ['textAppearance' => self::TEXT_APPEARANCE_MAP],
-            'rsce_data' => ['textAppearance' => self::TEXT_APPEARANCE_MAP],
+            'headline' => ['appearance' => self::APPEARANCE_MAP],
+            'rsce_data' => ['appearance' => self::APPEARANCE_MAP],
         ];
     }
+}
+```
+
+Before 0.9, rich text elements stored `textAppearance` in `kiss_styles` and
+`rsce_media_text_list` items in `rsce_data`. Those values are no longer rendered.
+To clean them up, use the same migration on `tl_content` only, with
+`textAppearance` as the key. Form fields keep `textAppearance`, so leave
+`tl_form_field` out:
+
+```php
+protected function getTables(): array
+{
+    return ['tl_content'];
+}
+
+protected function getColumns(): array
+{
+    return ['kiss_styles', 'rsce_data'];
+}
+
+protected function getValueMaps(): array
+{
+    return [
+        'kiss_styles' => ['textAppearance' => self::TEXT_APPEARANCE_MAP],
+        'rsce_data' => ['textAppearance' => self::TEXT_APPEARANCE_MAP],
+    ];
 }
 ```
 
@@ -326,6 +353,22 @@ No backup, no sorry (=.
 Options in a group appear as optgroups in the same select. Kiss groups
 `Typography\HeadingOption` and `Typography\ResponsiveOption` as `appearance`,
 used by the headline and text appearance fields.
+
+Since 0.9, rich text fields no longer get `textAppearance`: neither the palette
+callback nor the PaletteManipulator adds it, `rsce_media_text_list` items drop
+it, and `component/_rich_text.html.twig` no longer renders it. A custom TinyMCE
+configuration adds the classes inline instead. They are saved with the text and
+can't be changed through a style option later.
+
+The field stays for plain text and textarea fields, on form fields and as
+`CustomElementsConfigurationBuilder::addTextAppearanceField()`. To render it,
+`{% use %}` the attributes block and merge it:
+
+```twig
+{% use '@Contao/kiss_component/text/_text_appearance_attributes.html.twig' %}
+
+{% set text_attributes = attrs(text_attributes|default).mergeWith(block('text_appearance_attributes')) %}
+```
 
 ```php
 #[AsKissStyleOption(groups: ['appearance'])]

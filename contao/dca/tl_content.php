@@ -460,11 +460,6 @@ PaletteManipulator::create()
 ;
 
 PaletteManipulator::create()
-    ->addField('textAppearance', 'text', PaletteManipulator::POSITION_BEFORE)
-    ->applyToPalette('text', 'tl_content')
-;
-
-PaletteManipulator::create()
     ->addLegend('card_legend', ['text_legend', 'include_legend'], PaletteManipulator::POSITION_AFTER, true)
     ->addField('showAsCard', 'card_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('text', 'tl_content')

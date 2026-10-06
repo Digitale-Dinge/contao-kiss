@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Command;
 
+use Contao\Controller;
+use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\StringUtil;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Console\Attribute\Argument;
@@ -18,8 +20,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
     help: <<<'HELP'
         The <info>%command.name%</info> command decodes the kiss_styles, headline and rsce_data
         columns and reports where a value is stored, including nested lists and serialized blobs.
+        Without values, every value that differs from the field's DCA default ('' if none) is reported.
 
           <info>php %command.full_name% textAppearance x_small small medium</info>
+          <info>php %command.full_name% textAppearance</info>
           <info>php %command.full_name% textAppearance,appearance x_small --table=tl_content</info>
           <info>php %command.full_name% elementSize xs sm --backend-prefix=https://example.org/contao</info>
         HELP,
@@ -37,6 +41,7 @@ class FindKissStyleValuesCommand
 
     public function __construct(
         private readonly Connection $connection,
+        private readonly ContaoFramework $framework,
     ) {
     }
 
@@ -44,8 +49,8 @@ class FindKissStyleValuesCommand
         SymfonyStyle $io,
         #[Argument(description: 'The key, or a comma separated list of keys')]
         string $keys,
-        #[Argument(description: 'The values to look for')]
-        array $values,
+        #[Argument(description: 'The values to look for. Omit to list every value that is not the default')]
+        array $values = [],
         #[Option(description: 'Limit the report to a single table', shortcut: 't')]
         string|null $table = null,
         #[Option(name: 'backend-prefix', description: 'Backend URL to build an edit link from, e.g. https://example.org/contao')]
@@ -63,6 +68,8 @@ class FindKissStyleValuesCommand
 
             $tables = [$table => $tables[$table]];
         }
+
+        $this->framework->initialize();
 
         $rows = [];
 
@@ -114,11 +121,21 @@ class FindKissStyleValuesCommand
             $table,
         );
 
+        $defaults = [];
+
+        if ([] === $values) {
+            $this->framework->getAdapter(Controller::class)->loadDataContainer($table);
+
+            foreach ($keys as $key) {
+                $defaults[$key] = (string) ($GLOBALS['TL_DCA'][$table]['fields'][$key]['default'] ?? '');
+            }
+        }
+
         $rows = [];
 
         foreach ($this->connection->fetchAllAssociative($query) as $row) {
             foreach ($columns as $column) {
-                foreach ($this->findInValue($row[$column] ?? null, $keys, $values) as $path => $value) {
+                foreach ($this->findInValue($row[$column] ?? null, $keys, $values, $defaults) as $path => $value) {
                     $result = [
                         $table,
                         $row['id'],
@@ -150,25 +167,30 @@ class FindKissStyleValuesCommand
         );
     }
 
-    private function findInValue(mixed $value, array $keys, array $values, string $path = ''): array
+    private function findInValue(mixed $value, array $keys, array $values, array $defaults, string $path = ''): array
     {
         $found = [];
 
         foreach ($this->decode($value) as $key => $item) {
             $current = '' === $path ? (string) $key : $path.'.'.$key;
 
-            if (\in_array($key, $keys, true) && \is_string($item) && \in_array($item, $values, true)) {
+            if (\in_array($key, $keys, true) && \is_string($item) && $this->matches($item, $values, $defaults[$key] ?? '')) {
                 $found[$current] = $item;
 
                 continue;
             }
 
             if (\is_array($item) || $this->isEncoded($item)) {
-                $found = [...$found, ...$this->findInValue($item, $keys, $values, $current)];
+                $found = [...$found, ...$this->findInValue($item, $keys, $values, $defaults, $current)];
             }
         }
 
         return $found;
+    }
+
+    private function matches(string $item, array $values, string $default): bool
+    {
+        return [] === $values ? $item !== $default : \in_array($item, $values, true);
     }
 
     private function isEncoded(mixed $value): bool
