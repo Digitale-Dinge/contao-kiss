@@ -9,7 +9,6 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 enum Shape: string implements TranslatableLabelInterface
 {
-    case wide = 'btn-wide';
     case block = 'btn-block';
 
     public function label(): TranslatableMessage

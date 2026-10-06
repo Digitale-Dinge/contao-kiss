@@ -121,7 +121,6 @@ style_options:
                 outline:            Outlined
                 text:               Text
             shape:
-                wide:               Wide
                 block:              Full width
 
         swiper:

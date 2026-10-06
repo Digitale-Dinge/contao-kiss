@@ -8,7 +8,6 @@ use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
- * @method string wide
  * @method string block
  */
 #[AsKissStyleOption]

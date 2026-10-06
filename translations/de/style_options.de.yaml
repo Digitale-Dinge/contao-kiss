@@ -121,7 +121,6 @@ style_options:
                 outline:            Umrandet
                 text:               Text
             shape:
-                wide:               Breit
                 block:              Volle Breite
 
         swiper:
