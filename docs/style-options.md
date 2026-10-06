@@ -354,9 +354,21 @@ Options in a group appear as optgroups in the same select. Kiss groups
 `Typography\HeadingOption` and `Typography\ResponsiveOption` as `appearance`,
 used by the headline and text appearance fields.
 
-Since 0.9, `textAppearance` is only offered on form fields (`tl_form_field`).
-Content elements with a rich text field and `rsce_media_text_list` items no
-longer offer or render it; text sizes there are set in TinyMCE.
+Since 0.9, rich text fields no longer get `textAppearance`: neither the palette
+callback nor the PaletteManipulator adds it, `rsce_media_text_list` items drop
+it, and `component/_rich_text.html.twig` no longer renders it. A custom TinyMCE
+configuration adds the classes inline instead. They are saved with the text and
+can't be changed through a style option later.
+
+The field stays for plain text and textarea fields, on form fields and as
+`CustomElementsConfigurationBuilder::addTextAppearanceField()`. To render it,
+`{% use %}` the attributes block and merge it:
+
+```twig
+{% use '@Contao/kiss_component/text/_text_appearance_attributes.html.twig' %}
+
+{% set text_attributes = attrs(text_attributes|default).mergeWith(block('text_appearance_attributes')) %}
+```
 
 ```php
 #[AsKissStyleOption(groups: ['appearance'])]
