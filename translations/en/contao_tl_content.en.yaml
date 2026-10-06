@@ -144,6 +144,22 @@ tl_content:
         - Style
         - Define the style of the element.
 
+    formFieldColor:
+        - Field color
+        - Default color for all fields and buttons of the form. A color set on the field itself takes precedence.
+
+    formFieldSize:
+        - Field size
+        - Default size for all fields and buttons of the form. A size set on the field itself takes precedence.
+
+    formFieldVariant:
+        - Field style
+        - Default style for all fields of the form. A style set on the field itself takes precedence.
+
+    formFieldButtonVariant:
+        - Button style
+        - Default style for all buttons of the form. A style set on the button itself takes precedence.
+
     responsiveVideo:
         - Videos
         - Here you can select videos to be loaded in responsive views.

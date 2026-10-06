@@ -144,6 +144,22 @@ tl_content:
         - Stil
         - Bestimmen Sie den Stil des Elements.
 
+    formFieldColor:
+        - Feldfarbe
+        - Standardfarbe für alle Felder und Buttons des Formulars. Eine am Feld gesetzte Farbe hat Vorrang.
+
+    formFieldSize:
+        - Feldgröße
+        - Standardgröße für alle Felder und Buttons des Formulars. Eine am Feld gesetzte Größe hat Vorrang.
+
+    formFieldVariant:
+        - Feldstil
+        - Standardstil für alle Felder des Formulars. Ein am Feld gesetzter Stil hat Vorrang.
+
+    formFieldButtonVariant:
+        - Button-Stil
+        - Standardstil für alle Buttons des Formulars. Ein am Button gesetzter Stil hat Vorrang.
+
     responsiveVideo:
         - Videos
         - Hier können Sie Videos auswählen, welche in responsiven Ansichten geladen werden sollen.

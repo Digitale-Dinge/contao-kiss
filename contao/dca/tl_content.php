@@ -405,6 +405,46 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['elementVariant'] = [
     ],
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['formFieldColor'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+        'includeBlankOption' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['formFieldSize'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+        'includeBlankOption' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['formFieldVariant'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+        'includeBlankOption' => true,
+    ],
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['formFieldButtonVariant'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+        'includeBlankOption' => true,
+    ],
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['icon'] = [
     'inputType' => 'svgIconPicker',
     'targetColumn' => 'kiss_styles',
@@ -489,6 +529,12 @@ PaletteManipulator::create()
     ->addLegend('card_legend', ['text_legend', 'include_legend'], PaletteManipulator::POSITION_AFTER, true)
     ->addField('showAsCard', 'card_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('text', 'tl_content')
+    ->applyToPalette('form', 'tl_content')
+;
+
+PaletteManipulator::create()
+    ->addLegend('appearance_legend', 'include_legend')
+    ->addField(['formFieldColor', 'formFieldSize', 'formFieldVariant', 'formFieldButtonVariant'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('form', 'tl_content')
 ;
 

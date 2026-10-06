@@ -8,15 +8,15 @@ tl_form_field:
 
     fieldColor:
         - Color
-        - Here you can choose the color of the field.
+        - Here you can choose the color of the field. Overrides the default of the form element.
 
     fieldSize:
         - Size
-        - Here you can choose the size for the field.
+        - Here you can choose the size for the field. Overrides the default of the form element.
 
     fieldVariant:
         - Variante
-        - Here you can choose a variant for the field.
+        - Here you can choose a variant for the field. Overrides the default of the form element.
 
     fieldShape:
         - Shape
