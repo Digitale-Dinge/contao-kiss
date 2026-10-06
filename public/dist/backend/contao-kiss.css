@@ -104,27 +104,75 @@
 	}
 
 	&.icon-background {
-		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/bg-color.svg');
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/bg-color.svg');
 	}
 
 	&.icon-width {
-		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/content-width.svg');
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/content-width.svg');
 	}
 
 	&.icon-mt {
-		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/margin-top.svg');
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/margin-top.svg');
 	}
 
 	&.icon-mb {
-		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/margin-bottom.svg');
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/margin-bottom.svg');
 	}
 
 	&.icon-pt {
-		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/padding-top.svg');
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/padding-top.svg');
 	}
 
 	&.icon-pb {
-		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/padding-bottom.svg');
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/padding-bottom.svg');
+	}
+
+	&.icon-columns {
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/grid-columns.svg');
+	}
+
+	&.icon-gap {
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/grid-gap.svg');
+	}
+
+	&.icon-cross-alignment {
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/cross-alignment.svg');
+	}
+
+	&.icon-text-alignment {
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/text-alignment.svg');
+	}
+
+	&.icon-color {
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/color.svg');
+	}
+
+	&.icon-cta-type {
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/cta-type.svg');
+	}
+
+	&.icon-shape {
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/shape.svg');
+	}
+
+	&.icon-size {
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/size.svg');
+	}
+
+	&.icon-variant {
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/variant.svg');
+	}
+
+	&.icon-field-variant {
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/field-variant.svg');
+	}
+
+	&.icon-text-appearance {
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/text-appearance.svg');
+	}
+
+	&.icon-slider-navigation {
+		--widget-icon: url('/bundles/digitaledingecontaokiss/icons/field/slider-navigation.svg');
 	}
 }
 
