@@ -1,6 +1,9 @@
 @layer components {
     .swiper {
         --swiper-theme-color: var(--kiss-sys-color-brand-primary-solid);
+        --swiper-pagination-bullet-size: calc(var(--spacing, .25rem) * 3);
+        --swiper-pagination-bullet-inactive-color: var(--swiper-theme-color);
+        --swiper-pagination-bullet-inactive-opacity: .25;
     }
 
     /* Swiper's unlayered color rule wins over the layered .btn color */
