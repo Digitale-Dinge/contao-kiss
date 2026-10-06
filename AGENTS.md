@@ -7,6 +7,7 @@ was asked, reuse what exists, and follow the conventions of the area being edite
 
 - Preserve backwards compatibility: enum case names, field names, service IDs, template names and blocks, style option
   keys stored in `kiss_styles`.
+- Removing or renaming a style option case: **MUST warn, MUST NOT touch without confirmation.** See "The style system".
 - Change exclusively what was requested. No enum case, field or translation because it logically belongs.
 - Fix what the task requires. In code you are only passing through, report instead of fixing.
 - Never remove existing wiring while adding your own.
@@ -105,9 +106,18 @@ only for a genuinely new enum, `#[AsCallback]` on the existing listener method r
 field with `targetColumn: 'kiss_styles'` in the matching subpalette, DE **and** EN translations, template wiring with
 prefix and condition.
 
-Removing or renaming a case breaks stored content and fails `StyleOptionCasesTest`. Warn first, change the test only as
-part of the confirmed change, and write a migration (`AbstractJsonColumnMigration` in `src/Migration/Version<NNN>/`)
-only when it is explicitly asked for and the mapping is confirmed. The skill has the details.
+**Removing or renaming a case is a breaking change: MUST warn, MUST NOT touch without confirmation.** Stored content
+loses its class and `StyleOptionCasesTest` fails, which is exactly what the test is there for.
+
+- Warn before the first edit, in a reply of its own: the enum and case, every field that offers it, every template that
+  emits it, and `contao_kiss:find-style-values` to find affected content.
+- A request to remove an option is not the confirmation, even when it quotes a team decision. Wait for an explicit "yes"
+  to the warning.
+- Until then, do not touch the enum, the test, the translations or the CSS.
+- Write a migration (`AbstractJsonColumnMigration` in `src/Migration/Version<NNN>/`) only when it is explicitly asked
+  for and the mapping is confirmed.
+
+The skill has the details.
 
 ## Templates
 
@@ -237,6 +247,7 @@ composer ci
 - `php -l` on changed PHP files, parse changed YAML.
 - DE **and** EN translations present?
 - Read the diff and ask which line nobody ordered — and which existing line got removed unasked.
+- A style option case removed or renamed? Only after a warning in its own reply and an explicit "yes" to it.
 - Any comment restating the code below it? Any `{# #}` outside a component docblock? Any non-English word?
 - Did a prefix land in an enum that belongs in the template? Did a new Twig global or `Component\<X>\Variant` appear
   although `Modifier\Variant` exists?
