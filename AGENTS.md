@@ -158,8 +158,8 @@ Inherit, do not override what a hook already exposes. `references/examples.md` h
 overriding was tried and reverted.
 
 Class sets that several templates need come from a shared attributes block, never a copy:
-`kiss_component/card/_card_attributes.html.twig` (`card_attributes`, the card classes) and
-`kiss_component/action/_button_attributes.html.twig` (`button_attributes`, the `ctaAsButton` button classes). `{% use %}`
+`kiss_attributes/_card_attributes.html.twig` (`card_attributes`, the card classes) and
+`kiss_attributes/_button_attributes.html.twig` (`button_attributes`, the `ctaAsButton` button classes). `{% use %}`
 the block and merge it with its condition:
 `{% set link_attributes = attrs(link_attributes|default).mergeWith(block('button_attributes'), data.ctaAsButton|default) %}`.
 

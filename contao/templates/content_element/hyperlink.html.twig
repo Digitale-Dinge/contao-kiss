@@ -1,5 +1,5 @@
 {% use '@Contao/kiss_component/media/_icon_text.html.twig' %}
-{% use '@Contao/kiss_component/action/_button_attributes.html.twig' %}
+{% use '@Contao/kiss_attributes/_button_attributes.html.twig' %}
 {% extends '@Contao/content_element/hyperlink.html.twig' %}
 
 {% set link_attributes = attrs(link_attributes|default).mergeWith(block('button_attributes'), data.ctaAsButton|default) %}

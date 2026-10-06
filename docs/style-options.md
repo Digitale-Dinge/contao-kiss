@@ -365,7 +365,7 @@ The field stays for plain text and textarea fields, on form fields and as
 `{% use %}` the attributes block and merge it:
 
 ```twig
-{% use '@Contao/kiss_component/text/_text_appearance_attributes.html.twig' %}
+{% use '@Contao/kiss_attributes/_text_appearance_attributes.html.twig' %}
 
 {% set text_attributes = attrs(text_attributes|default).mergeWith(block('text_appearance_attributes')) %}
 ```
