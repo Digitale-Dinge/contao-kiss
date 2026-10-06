@@ -44,6 +44,37 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['headline']['fields'] = [
     ],
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['sectionHeadline']['inputType'] = 'collection';
+$GLOBALS['TL_DCA']['tl_content']['fields']['sectionHeadline']['eval']['tl_class'] = 'w50 clr hl_collection';
+$GLOBALS['TL_DCA']['tl_content']['fields']['sectionHeadline']['fields'] = [
+    'value' => [
+        'label' => [
+            &$GLOBALS['TL_LANG']['tl_content']['sectionHeadline'][0], null,
+        ],
+        'inputType' => 'text',
+        'eval' => [
+            'maxlength' => 255,
+            'basicEntities' => true,
+        ],
+    ],
+    'unit' => [
+        'label' => [
+            &$GLOBALS['TL_LANG']['tl_content']['headline']['unit'], null,
+        ],
+        'inputType' => 'select',
+        'options' => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+    ],
+    'appearance' => [
+        'label' => [
+            &$GLOBALS['TL_LANG']['tl_content']['headline']['appearance'], null,
+        ],
+        'inputType' => 'select',
+        'eval' => [
+            'includeBlankOption' => true,
+        ],
+    ],
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['topline'] = [
     'exclude' => true,
     'inputType' => 'text',
@@ -137,7 +168,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['gridGap'] = [
     ],
 ];
 
-/* Items per row on the content slider (desktop count; smaller screens are derived in the swiper template) */
+// Items per row on the content slider (desktop - smaller screens are derived in the Swiper template)
 $GLOBALS['TL_DCA']['tl_content']['fields']['slidesPerView'] = [
     'exclude' => true,
     'inputType' => 'text',
@@ -270,7 +301,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['ctaShape'] = [
     ],
 ];
 
-// Call to actions that can be appended to text or custom elements
 $GLOBALS['TL_DCA']['tl_content']['fields']['callToAction'] = [
     'exclude' => true,
     'inputType' => 'group',
@@ -445,11 +475,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['iconStyle'] = [
     ],
 ];
 
-/*
- * Customize existing fields
- */
-
-// text fields clearfix
+// Text fields clearfix
 $GLOBALS['TL_DCA']['tl_content']['fields']['text']['eval']['tl_class'] = 'long clr';
 $GLOBALS['TL_DCA']['tl_content']['fields']['optionalText']['eval']['tl_class'] = 'long clr';
 $GLOBALS['TL_DCA']['tl_content']['fields']['useImage']['eval']['tl_class'] = 'long clr';
@@ -492,7 +518,6 @@ PaletteManipulator::create()
     ->applyToPalette('element_group', 'tl_content')
 ;
 
-/* Expose the "items per row" preset on the content slider */
 PaletteManipulator::create()
     ->addField('slidesPerView', 'sliderContinuous', PaletteManipulator::POSITION_AFTER)
     ->addField(['sliderNavigation', 'sliderHidePagination'], 'slidesPerView', PaletteManipulator::POSITION_AFTER)
