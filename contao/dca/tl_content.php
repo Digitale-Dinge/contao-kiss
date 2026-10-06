@@ -375,7 +375,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['elementVariant'] = [
     ],
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['fieldColor'] = [
+$GLOBALS['TL_DCA']['tl_content']['fields']['formFieldColor'] = [
     'exclude' => true,
     'inputType' => 'select',
     'targetColumn' => 'kiss_styles',
@@ -385,7 +385,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['fieldColor'] = [
     ],
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['fieldSize'] = [
+$GLOBALS['TL_DCA']['tl_content']['fields']['formFieldSize'] = [
     'exclude' => true,
     'inputType' => 'select',
     'targetColumn' => 'kiss_styles',
@@ -395,7 +395,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['fieldSize'] = [
     ],
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['fieldVariant'] = [
+$GLOBALS['TL_DCA']['tl_content']['fields']['formFieldVariant'] = [
     'exclude' => true,
     'inputType' => 'select',
     'targetColumn' => 'kiss_styles',
@@ -405,7 +405,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['fieldVariant'] = [
     ],
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['buttonVariant'] = [
+$GLOBALS['TL_DCA']['tl_content']['fields']['formFieldButtonVariant'] = [
     'exclude' => true,
     'inputType' => 'select',
     'targetColumn' => 'kiss_styles',
@@ -508,7 +508,7 @@ PaletteManipulator::create()
 
 PaletteManipulator::create()
     ->addLegend('appearance_legend', 'include_legend')
-    ->addField(['fieldColor', 'fieldSize', 'fieldVariant', 'buttonVariant'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField(['formFieldColor', 'formFieldSize', 'formFieldVariant', 'formFieldButtonVariant'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('form', 'tl_content')
 ;
 

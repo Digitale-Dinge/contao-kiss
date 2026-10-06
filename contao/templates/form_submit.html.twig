@@ -1,9 +1,9 @@
 {% extends '@Contao/form_submit.html.twig' %}
 
 {% set form_data = kiss_include_data() %}
-{% set button_color = this.fieldColor|default(form_data.fieldColor|default) %}
-{% set button_size = this.fieldSize|default(form_data.fieldSize|default) %}
-{% set button_variant = this.fieldVariant|default(form_data.buttonVariant|default) %}
+{% set button_color = this.fieldColor|default(form_data.formFieldColor|default) %}
+{% set button_size = this.fieldSize|default(form_data.formFieldSize|default) %}
+{% set button_variant = this.fieldVariant|default(form_data.formFieldButtonVariant|default) %}
 
 {% set wrapperAttributes = attrs(wrapperAttributes|default)
     .addClass(styles.font_appearance(this.textAppearance|default), this.textAppearance|default)
