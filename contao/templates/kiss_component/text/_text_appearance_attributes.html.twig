@@ -1,0 +1,5 @@
+{% block text_appearance_attributes %}
+    {{- attrs(text_appearance_attributes|default)
+        .addClass(styles.heading(data.textAppearance|default)|default(styles.font_appearance(data.textAppearance|default)), data.textAppearance|default)
+    -}}
+{% endblock %}
