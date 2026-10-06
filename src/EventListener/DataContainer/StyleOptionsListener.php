@@ -32,6 +32,7 @@ final class StyleOptionsListener
 
     #[AsCallback('tl_content', 'fields.headline.fields.appearance.options')]
     #[AsCallback('tl_module', 'fields.headline.fields.appearance.options')]
+    #[AsCallback('tl_content', 'fields.sectionHeadline.fields.appearance.options')]
     public function addHeadlineAppearanceOptions(): array
     {
         return $this->getGroupedOptions('appearance');
