@@ -3,6 +3,7 @@
 {% block media_text %}
     {% set item = item|default(_context) %}
     {% set show_as_card = show_as_card|default(data.showAsCard|default) %}
+    {% set hide_figcaption = hide_figcaption|default(show_as_card) %}
 
     {% block media %}
         {% if mediaType|default in ['image', 'icon', 'video'] %}

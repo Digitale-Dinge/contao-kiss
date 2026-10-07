@@ -26,13 +26,25 @@
 
     {% if figure_object|default %}
         <div{{ media_attributes|default }}>
-            {{ include('@Contao/component/_figure.html.twig', {
+            {% embed '@Contao/component/_figure.html.twig' with {
                 figure: figure_object,
                 figure_attributes: figure_attributes|default,
                 caption_attributes: caption_attributes|default,
                 link_attributes: link_attributes|default,
                 img_attributes: {class: img_class|default},
-            }, false) }}
+                hide_figcaption: hide_figcaption|default(false),
+                figure_extra: block('figure_extra'),
+            } only %}
+                {% block caption %}
+                    {% if not hide_figcaption %}
+                        {{ parent() }}
+                    {% endif %}
+                    {{- figure_extra|default|sanitize_html('contao')|insert_tag_raw -}}
+                {% endblock %}
+            {% endembed %}
         </div>
     {% endif %}
 {% endblock %}
+
+{# Extra wrapper that needs to exist for the embed #}
+{% block figure_extra %}{% endblock %}
