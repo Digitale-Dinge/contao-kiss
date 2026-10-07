@@ -1,5 +1,7 @@
 {% extends '@Contao/content_element/text.html.twig' %}
 
+{% set attributes = attrs().addClass('flow-root', data.clearFloat|default).mergeWith(attributes|default) %}
+
 {% set show_as_card = data.showAsCard|default %}
 
 {% if show_as_card %}

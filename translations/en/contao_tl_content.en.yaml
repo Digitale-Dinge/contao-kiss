@@ -176,3 +176,7 @@ tl_content:
         mobile:                 Default
         tablet:                 From tablet (>= 768px)
         desktop:                From desktop (>= 1024px)
+
+    clearFloat:
+        - Clear float
+        - Stops the text wrap for the next element (only relevant when image alignment is set to left or right).
