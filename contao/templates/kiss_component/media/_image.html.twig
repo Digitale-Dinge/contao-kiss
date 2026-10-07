@@ -33,18 +33,18 @@
                 link_attributes: link_attributes|default,
                 img_attributes: {class: img_class|default},
                 hideFigcaption: hideFigcaption|default(false),
+                figure_extra: block('figure_extra'),
             } only %}
                 {% block caption %}
                     {% if not hideFigcaption %}
                         {{ parent() }}
                     {% endif %}
-                {% endblock %}
-
-                {% block figure_component %}
-                    {{ parent() }}
-                    {%- block figure_extra %}{% endblock -%}
+                    {{- figure_extra|default|sanitize_html('contao')|insert_tag_raw -}}
                 {% endblock %}
             {% endembed %}
         </div>
     {% endif %}
 {% endblock %}
+
+{# Extra wrapper that needs to exist for the embed #}
+{% block figure_extra %}{% endblock %}
