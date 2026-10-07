@@ -12,7 +12,7 @@ final class ComponentIncludeRuleTest extends AbstractRuleTestCase
     public function testConfiguration(): void
     {
         ComponentIncludeRuleTest::assertSame(
-            ['ignore' => ['@Contao/kiss_component/media/_icon_include.html.twig']],
+            ['ignore' => ['@Contao/kiss_component/media/_icon_include.html.twig', '@Contao/kiss_component/media/_image.html.twig']],
             new ComponentIncludeRule()->getConfiguration(),
         );
     }

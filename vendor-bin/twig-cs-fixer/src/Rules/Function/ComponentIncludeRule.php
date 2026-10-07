@@ -31,7 +31,10 @@ final class ComponentIncludeRule extends AbstractRule implements ConfigurableRul
      * @param list<string> $ignore
      */
     public function __construct(
-        private readonly array $ignore = ['@Contao/kiss_component/media/_icon_include.html.twig'],
+        private readonly array $ignore = [
+            '@Contao/kiss_component/media/_icon_include.html.twig',
+            '@Contao/kiss_component/media/_image.html.twig',
+        ],
     ) {
     }
 
