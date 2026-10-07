@@ -8,6 +8,11 @@
         %}
     {% endif %}
 
+    {% set slider_attributes = attrs()
+        .addClass('overflow-visible!', data.sliderOverflowVisible|default)
+        .mergeWith(slider_attributes|default)
+    %}
+
     {% if 'none' == data.sliderNavigation|default %}
         {% set slider_settings = slider_settings|merge({navigation: {enabled: false}}) %}
     {% endif %}

@@ -103,6 +103,10 @@ tl_content:
         - Punkte ausblenden
         - Die Punkt-Navigation unter dem Slider ausblenden.
 
+    sliderOverflowVisible:
+        - Überlauf sichtbar
+        - Slides, die über den Slider hinausragen, anzeigen statt abschneiden.
+
     backgroundColor:
         - Hintergrundfarbe
         - Wählen Sie die Hintergrundfarbe für das Inhaltselement.

@@ -660,6 +660,7 @@ final class CustomElementsConfigurationBuilder
         $this->addField('kissSwiper', ['inputType' => 'standardField']);
         $this->addField('sliderNavigation', ['inputType' => 'standardField']);
         $this->addField('sliderHidePagination', ['inputType' => 'standardField']);
+        $this->addField('sliderOverflowVisible', ['inputType' => 'standardField']);
 
         return $this;
     }
