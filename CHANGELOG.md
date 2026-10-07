@@ -462,8 +462,8 @@ A complete rewrite. There is no upgrade path from 0.3.
 > branch next to `main` and was deleted later. This tag marks its last commit so the state stays installable and the
 > version history is complete. See [#18].
 
-The move to Contao 5 (`^5.3`), Twig and FlyonUI. Contao 4.13 is no longer supported. The bundle was rebuilt on the
-"Peppermint" Contao 5 base and most of the old custom elements were dropped.
+The move to Contao 5 (`^5.3`), Twig and FlyonUI. Contao 4.13 is no longer supported. The bundle was rebuilt on a new
+Contao 5 base and most of the old custom elements were dropped.
 
 ### Added
 
@@ -506,7 +506,7 @@ The move to Contao 5 (`^5.3`), Twig and FlyonUI. Contao 4.13 is no longer suppor
   `be_tinyMCE`
 - The old SCSS (normalize, spacing and column utilities, nav, teaser, form, pushy and the variables)
 - The `AddTextStyleToPalette` and `ParseTemplate` hooks
-- The English `tl_content` translations and the `tl_anystores` translations
+- The English `tl_content` translations and unused bundle translations
 
 ## [0.1.0] (2024-11-29)
 
