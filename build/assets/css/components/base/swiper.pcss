@@ -1,4 +1,21 @@
 @layer components {
+    .swiper {
+        --swiper-theme-color: var(--kiss-sys-color-brand-primary-solid);
+        --swiper-pagination-bullet-size: calc(var(--spacing, .25rem) * 3);
+        --swiper-pagination-bullet-inactive-color: var(--swiper-theme-color);
+        --swiper-pagination-bullet-inactive-opacity: .25;
+    }
+
+    /* Swiper's unlayered color rule wins over the layered .btn color */
+    .swiper-button-prev.btn,
+    .swiper-button-next.btn {
+        --swiper-navigation-color: var(--btn-color);
+
+        &:hover {
+            --swiper-navigation-color: var(--btn-color-hover);
+        }
+    }
+
     .swiper--navigation-outside {
         --swiper-navigation-sides-offset: 0;
 

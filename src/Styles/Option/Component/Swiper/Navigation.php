@@ -11,6 +11,7 @@ enum Navigation: string implements TranslatableLabelInterface
 {
     case overlay = 'overlay';
     case outside = 'outside';
+    case none = 'none';
 
     public function label(): TranslatableMessage
     {

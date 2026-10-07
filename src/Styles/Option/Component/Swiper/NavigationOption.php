@@ -10,6 +10,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 /**
  * @method string overlay
  * @method string outside
+ * @method string none
  */
 #[AsKissStyleOption]
 class NavigationOption extends StyleOption

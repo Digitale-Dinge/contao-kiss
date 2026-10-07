@@ -31,7 +31,7 @@ final class StyleOptionCasesTest extends TestCase
         Component\CallToAction\Shape::class => ['block'],
         Component\CallToAction\Variant::class => ['soft', 'outline', 'text'],
         Component\Media\Layout::class => ['default', 'reverse', 'side', 'side_reverse', 'media_background'],
-        Component\Swiper\Navigation::class => ['overlay', 'outside'],
+        Component\Swiper\Navigation::class => ['overlay', 'outside', 'none'],
         IconPosition::class => ['left', 'right'],
         IconStyle::class => ['default', 'badge'],
         Layout\Column::class => ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'],

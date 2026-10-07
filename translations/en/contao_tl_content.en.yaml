@@ -103,6 +103,10 @@ tl_content:
         - Hide dots
         - Hide the dot navigation below the slider.
 
+    sliderOverflowVisible:
+        - Overflow visible
+        - Show slides that extend beyond the slider instead of cutting them off.
+
     backgroundColor:
         - Background color
         - Choose the background color for the content element.

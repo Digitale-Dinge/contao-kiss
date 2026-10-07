@@ -213,6 +213,15 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderHidePagination'] = [
     ],
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderOverflowVisible'] = [
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w25',
+    ],
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['gridCrossAlignment'] = [
     'exclude' => true,
     'inputType' => 'select',
@@ -595,6 +604,6 @@ PaletteManipulator::create()
 
 PaletteManipulator::create()
     ->addField('slidesPerView', 'sliderContinuous', PaletteManipulator::POSITION_AFTER)
-    ->addField(['sliderNavigation', 'sliderHidePagination'], 'slidesPerView', PaletteManipulator::POSITION_AFTER)
+    ->addField(['sliderNavigation', 'sliderHidePagination', 'sliderOverflowVisible'], 'slidesPerView', PaletteManipulator::POSITION_AFTER)
     ->applyToPalette('swiper', 'tl_content')
 ;
