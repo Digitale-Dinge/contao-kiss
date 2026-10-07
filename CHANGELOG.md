@@ -15,7 +15,7 @@
 
 ### Added
 
-- [#47] Images can hide their `<git figcaption>` with `hide_figcaption`, and the new `figure_extra` block adds content
+- [#47] Images can hide their `<figcaption>` with `hide_figcaption`, and the new `figure_extra` block adds content
   after the caption. Images inside a card no longer show a caption ([zoglo])
 - [#46] Add a possibility to clear the text image alignment floats for next elements ([zoglo])
 - [#43] The Swiper can hide its navigation and let its items overflow the container ([cristiangavriliu])
