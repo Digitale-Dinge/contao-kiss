@@ -11,9 +11,11 @@
 
 **Branch:** `main`
 
+**Commit:** [`6bf6bd4`][6bf6bd4]
+
 ### Added
 
-- [#47] Images can hide their `<figcaption>` with `hide_figcaption`, and the new `figure_extra` block adds content
+- [#47] Images can hide their `<git figcaption>` with `hide_figcaption`, and the new `figure_extra` block adds content
   after the caption. Images inside a card no longer show a caption ([zoglo])
 - [#46] Add a possibility to clear the text image alignment floats for next elements ([zoglo])
 - [#43] The Swiper can hide its navigation and let its items overflow the container ([cristiangavriliu])
@@ -550,6 +552,7 @@ The move to Contao 5 (`^5.3`), Twig and FlyonUI. Contao 4.13 is no longer suppor
 [tag-0.2.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.2.0
 [tag-0.1.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.1.0
 
+[6bf6bd4]: https://github.com/Digitale-Dinge/contao-kiss/commit/6bf6bd4e77da7d4915fea46b9afdf55221a00665
 [6b18257]: https://github.com/Digitale-Dinge/contao-kiss/commit/6b18257bed8f5629ec902f005a5766aaa6e54b8f
 [5afcd41]: https://github.com/Digitale-Dinge/contao-kiss/commit/5afcd41778a3367db1961fb8d04c399951ede127
 [22bac3b]: https://github.com/Digitale-Dinge/contao-kiss/commit/22bac3b8b91d7df92a9c1f901f32375f07807273
