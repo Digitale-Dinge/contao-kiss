@@ -553,6 +553,15 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['iconStyle'] = [
     ],
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['clearFloat'] = [
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'targetColumn' => 'kiss_styles',
+    'eval' => [
+        'tl_class' => 'w50',
+    ],
+];
+
 // Text fields clearfix
 $GLOBALS['TL_DCA']['tl_content']['fields']['text']['eval']['tl_class'] = 'long clr';
 $GLOBALS['TL_DCA']['tl_content']['fields']['optionalText']['eval']['tl_class'] = 'long clr';
@@ -606,4 +615,9 @@ PaletteManipulator::create()
     ->addField('slidesPerView', 'sliderContinuous', PaletteManipulator::POSITION_AFTER)
     ->addField(['sliderNavigation', 'sliderHidePagination', 'sliderOverflowVisible'], 'slidesPerView', PaletteManipulator::POSITION_AFTER)
     ->applyToPalette('swiper', 'tl_content')
+;
+
+PaletteManipulator::create()
+    ->addField('clearFloat', 'floating', PaletteManipulator::POSITION_AFTER)
+    ->applyToSubpalette('addImage', 'tl_content')
 ;

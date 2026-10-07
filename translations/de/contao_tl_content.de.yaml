@@ -176,3 +176,7 @@ tl_content:
         mobile:                 Default
         tablet:                 Ab Tablet (>= 768px)
         desktop:                Ab Desktop (>= 1024px)
+
+    clearFloat:
+        - Textumlauf aufheben
+        - Beendet den Textumlauf für das nachfolgende Element (nur relevant bei Bildausrichtung links oder rechts).
