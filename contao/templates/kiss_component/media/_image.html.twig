@@ -32,11 +32,11 @@
                 caption_attributes: caption_attributes|default,
                 link_attributes: link_attributes|default,
                 img_attributes: {class: img_class|default},
-                hideFigcaption: hideFigcaption|default(false),
+                hide_figcaption: hide_figcaption|default(false),
                 figure_extra: block('figure_extra'),
             } only %}
                 {% block caption %}
-                    {% if not hideFigcaption %}
+                    {% if not hide_figcaption %}
                         {{ parent() }}
                     {% endif %}
                     {{- figure_extra|default|sanitize_html('contao')|insert_tag_raw -}}

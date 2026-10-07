@@ -8,6 +8,7 @@ use Contao\CoreBundle\Twig\Slots\SlotTokenParser;
 use DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\Function\AddClassConditionRule;
 use DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\Variable\AttrsHookMergeRule;
 use DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\Function\ComponentIncludeRule;
+use DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\Node\ForbiddenBlockRule;
 use DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\Node\ForbiddenRawFilterRule;
 use DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\Variable\HtmlAttributesVariableNameRule;
 use DigitaleDinge\ContaoKiss\Tools\TwigCsFixer\Rules\Tag\ImportSelfRule;
@@ -19,7 +20,6 @@ use TwigCsFixer\Rules\File\DirectoryNameRule;
 use TwigCsFixer\Rules\File\FileExtensionRule;
 use TwigCsFixer\Rules\File\FileNameRule;
 use TwigCsFixer\Rules\Literal\CompactHashRule;
-use TwigCsFixer\Rules\Node\ForbiddenBlockRule;
 use TwigCsFixer\Rules\Node\ForbiddenFunctionRule;
 use TwigCsFixer\Rules\Node\ValidConstantFunctionRule;
 use TwigCsFixer\Rules\Variable\VariableNameRule as UpstreamVariableNameRule;
@@ -51,7 +51,7 @@ $ruleset->addRule(new ForbiddenRawFilterRule(ignore: array_merge(
 )));
 
 // Discourage use of embed in contao-kiss for inheritance
-$ruleset->addRule(new ForbiddenBlockRule(['embed']));
+$ruleset->addRule(new ForbiddenBlockRule(['embed'], ignore: ['kiss_component/media/_image.html.twig']));
 
 $ruleset->addRule(new DirectoryNameRule(baseDirectory: $templatePath));
 $ruleset->addRule(new FileNameRule(baseDirectory: $templatePath, optionalPrefix: '_'));
