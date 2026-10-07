@@ -39,6 +39,11 @@
                         {{ parent() }}
                     {% endif %}
                 {% endblock %}
+
+                {% block figure_component %}
+                    {{ parent() }}
+                    {%- block figure_extra %}{% endblock -%}
+                {% endblock %}
             {% endembed %}
         </div>
     {% endif %}
