@@ -28,7 +28,7 @@
         border-style: solid;
         border-color: color-mix(in oklch, var(--card-border) var(--card-border-opacity), transparent);
         border-radius: var(--kiss-comp-card-border-radius-default, var(--radius-box, .5rem));
-        box-shadow: var(--shadow-card);
+        box-shadow: var(--shadow-card, none);
     }
 
     .card-body {
@@ -229,7 +229,7 @@
 
         &:hover,
         &:focus-visible {
-            box-shadow: var(--shadow-card-hover);
+            box-shadow: var(--shadow-card-hover, none);
         }
     }
 
