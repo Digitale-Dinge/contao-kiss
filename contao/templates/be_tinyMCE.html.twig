@@ -1,0 +1,23 @@
+{# twig-cs-fixer-disable FileName #}
+{% extends '@Contao/be_tinyMCE.html.twig' %}
+
+{% block toolbar %}
+    {{ parent()|replace({' blocks ': ' blocks styles '})|raw }}
+{% endblock %}
+
+{% block custom %}
+    {{ parent() }}
+    content_style: '@import url("{{ asset('dist/backend/tinymce.css', 'digitale_dinge_contao_kiss')|e('js') }}");',
+    style_formats: [
+    {% for group, enum in {
+        heading: 'DigitaleDinge\\ContaoKiss\\Styles\\Option\\Typography\\Heading',
+        responsive: 'DigitaleDinge\\ContaoKiss\\Styles\\Option\\Typography\\Responsive',
+    } %}
+        { title: '{{ ('style_options.' ~ group)|trans({}, 'style_options')|e('js') }}', items: [
+        {% for case in enum_cases(enum) %}
+            { title: '{{ case.label|trans|e('js') }}', selector: 'h1,h2,h3,h4,h5,h6,p,li', classes: '{{ case.value|e('js') }}' },
+        {% endfor %}
+        ]},
+    {% endfor %}
+    ],
+{% endblock %}

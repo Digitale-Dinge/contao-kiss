@@ -1,0 +1,25 @@
+/** Preview sizes for the KISS style formats in TinyMCE */
+.h1, .h2, .h3, .h4, .h5, .h6,
+[class*="responsive-display-"],
+[class*="responsive-headline-"] {
+    font-weight: 500;
+}
+
+.h1 { font-size: 28px; }
+.h2 { font-size: 21px; }
+.h3 { font-size: 16.375px; }
+.h4 { font-size: 14px; }
+.h5 { font-size: 11.625px; }
+.h6 { font-size: 9.375px; }
+
+.responsive-display-lg { font-size: 34px; }
+.responsive-display-md { font-size: 32px; }
+.responsive-display-sm { font-size: 30px; }
+
+.responsive-headline-lg { font-size: 28px; }
+.responsive-headline-md { font-size: 21px; }
+.responsive-headline-sm { font-size: 16.375px; }
+
+.responsive-body-lg { font-size: 15px; }
+.responsive-body-md { font-size: 13px; }
+.responsive-body-sm { font-size: 11px; }

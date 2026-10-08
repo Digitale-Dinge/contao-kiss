@@ -46,7 +46,7 @@ $ruleset->addRule(new ComponentIncludeRule());
 $ruleset->addRule(new AddClassConditionRule());
 $ruleset->addRule(new AttrsHookMergeRule());
 $ruleset->addRule(new ForbiddenRawFilterRule(ignore: array_merge(
-    ['mod_breadcrumb.html.twig', 'mod_newslist.html.twig'],
+    ['mod_breadcrumb.html.twig', 'mod_newslist.html.twig', 'be_tinyMCE.html.twig'],
     SHAME_ON_YOU,
 )));
 
