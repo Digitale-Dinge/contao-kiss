@@ -1,0 +1,22 @@
+[
+  {"query": "build me a card component for the team page, image, name, role and a link", "should_trigger": true},
+  {"query": "add a size option to the badge, xs to xl", "should_trigger": true},
+  {"query": "why doesn't card-xl apply? I picked XL in the backend but the card stays the same", "should_trigger": true},
+  {"query": "new rsce element for a teaser with background image and cta", "should_trigger": true},
+  {"query": "the hyperlink element needs an icon position option", "should_trigger": true},
+  {"query": "add an outline variant, buttons and alerts should both get it", "should_trigger": true},
+  {"query": "the media_text card needs a side layout where the image sits left", "should_trigger": true},
+  {"query": "override the download template in my kiss project so the file size is shown in brackets", "should_trigger": true},
+  {"query": "where do I add a new kiss_styles field for the element group?", "should_trigger": true},
+  {"query": "rename the enum case x_small to xs in Modifier\\Size", "should_trigger": true},
+  {"query": "prepare the changelog for contao-kiss 0.10.0", "should_trigger": false},
+  {"query": "write upgrade notes for the removed soft variant", "should_trigger": false},
+  {"query": "run make tokens for autoservice-rogge, the colors changed in the design system", "should_trigger": false},
+  {"query": "rewrite the README intro of contao-kiss, it should sell more", "should_trigger": false},
+  {"query": "phpstan complains about a missing return type in FindKissStyleValuesCommand", "should_trigger": false},
+  {"query": "the vite dev server fails with a certificate error on my mac", "should_trigger": false},
+  {"query": "the Makefile restore target in the quickstart drops the wrong database", "should_trigger": false},
+  {"query": "add opening times for sunday to the company of the quickstart site", "should_trigger": false},
+  {"query": "write an e2e test for the contao back end login", "should_trigger": false},
+  {"query": "how do I install contao-kiss in a fresh contao 5.7 project?", "should_trigger": false}
+]
