@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/Digitale-Dinge/contao-kiss"><img src="https://img.shields.io/github/v/release/Digitale-Dinge/contao-kiss" alt="github version"/></a>
+    <a href="https://packagist.org/packages/digitaledinge/contao-kiss"><img src="https://img.shields.io/packagist/v/digitaledinge/contao-kiss" alt="packagist version"/></a>
     <a href="https://packagist.org/packages/digitaledinge/contao-kiss"><img src="https://img.shields.io/packagist/dt/digitaledinge/contao-kiss?color=f47c00" alt="amount of downloads"/></a>
     <a href="https://packagist.org/packages/digitaledinge/contao-kiss"><img src="https://img.shields.io/packagist/dependency-v/digitaledinge/contao-kiss/php?color=474A8A" alt="minimum php version"></a>
 </p>

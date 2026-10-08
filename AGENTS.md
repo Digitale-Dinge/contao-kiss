@@ -89,6 +89,8 @@ after changing a skill, and add a case to `evals.json` for every rule that got b
 
 When a Twig rule in `kiss-framework-extend` changes, update [Twig templates](docs/twig-templates.md) as well.
 
+`README.md` and `README.de.md` are kept in sync: a change to one goes into the other as well.
+
 ## Workflow
 
 1. **Clarify scope.** A spec (a list of options, sizes, colors) is answered with questions and a mapping, not with code.
