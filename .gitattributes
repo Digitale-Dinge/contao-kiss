@@ -6,6 +6,7 @@
 /.githooks export-ignore
 /.gitignore export-ignore
 /.twig-cs-fixer.php export-ignore
+/assets/* export-ignore
 /build/biome.json export-ignore
 /build/stylelint.config.js export-ignore
 /depcheck.php export-ignore

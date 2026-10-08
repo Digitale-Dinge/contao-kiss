@@ -93,6 +93,8 @@ The question is never "how do I build this?" but "where does this already exist?
 | Core component overrides | `contao/templates/component/` — `{% use %}` the core component, redefine only the blocks that change (e.g. `_download.html.twig`: `download_link_attributes` and `download_link_inner`) |
 | Include elements (form, module, article) | `kiss_include_data()` returns the include element's row, like `data`. Legacy templates without blocks (e.g. `form_inline.html.twig`): extend them and `set` the merged variable at top level |
 | rsce element configs + builder | `contao/templates/rsce_*_config.php`, `src/CustomElementsConfigurationBuilder.php` |
+| Framework stylesheets | `build/assets/css/` — the minimal project theme they need is in `docs/build-tools.md` ("Theme variables") |
+| User-facing docs of these Twig rules | `docs/twig-templates.md` — keep it in sync when a rule here changes |
 
 Rule of thumb: before you propose a new enum, a new field or a new Twig global, you must be able to say why **none** of the existing options fits. "I didn't find it" does not count — grep first. The `SIZE` modifier is the canary: if `'card-' ~ styles.size(...)` already exists in a template, every other card option follows the same pattern.
 
@@ -328,21 +330,31 @@ takes `figure_attributes`, `picture_attributes`, `source_attributes`, `img_attri
 
 The one exception is a **block-name collision**. `{% use %}` imports every block of the used template, and `_figure`
 brings `media` plus, through `_picture`, `image`. In `kiss_component/media/_image.html.twig` both collide: `image` is
-its own root block, `media` is a block of `_media_text`. There `_figure` is rendered isolated:
+its own root block, `media` is a block of `_media_text`. There, and only there, `_figure` is rendered with `{% embed %}`:
 
 ```twig
-{{ include('@Contao/component/_figure.html.twig', {
+{% embed '@Contao/component/_figure.html.twig' with {
     figure: figure_object,
     figure_attributes: figure_attributes|default,
     caption_attributes: caption_attributes|default,
     link_attributes: link_attributes|default,
     img_attributes: {class: img_class|default},
-}, false) }}
+    hide_figcaption: hide_figcaption|default(false),
+    figure_extra: block('figure_extra'),
+} only %}
+    {% block caption %}
+        {% if not hide_figcaption %}
+            {{ parent() }}
+        {% endif %}
+        {{- figure_extra|default|sanitize_html('contao')|insert_tag_raw -}}
+    {% endblock %}
+{% endembed %}
 ```
 
-That freezes the component. Its blocks cannot be overridden from the KISS chain, and only the listed hooks arrive:
-`picture_attributes` and `source_attributes` never do. Use `include(…, {…}, false)` only for a collision you can name,
-list every hook the caller should keep, and never for a kiss component: the `ComponentInclude` lint rule rejects that.
+`embed` keeps `_figure`'s blocks overridable inside the call (`caption` here) without importing them into the KISS
+chain. Because of `only`, only the listed hooks arrive: `picture_attributes` and `source_attributes` never do, and
+callers extend the caption through the `figure_extra` block. This is the only `embed` in KISS. `{% embed %}` is allowed
+exclusively in `kiss_component/media/_image.html.twig`, nowhere else.
 
 The component's field names are therefore **identical to the field names in `rsce_<name>_config.php`** (`badgeSize`, `badgeShape`, not `size`/`shape`). Renaming in the RSCE template is a symptom of passing through instead of inheriting.
 
@@ -386,6 +398,11 @@ svg {
 
 Per size variant (`badge-sm`, `badge-lg`) only the font size is then set — no separate icon rule. Likewise: what Tailwind already solves is not rebuilt as a custom token (`@apply rounded-full` instead of `border-radius: var(--radius-full)`).
 
+**Every `var()` in `build/assets/css/` gets a fallback**, except the `--kiss-sys-color-*` tokens:
+`var(--radius-box, .5rem)`, `var(--shadow-card, none)`, `var(--kiss-comp-alert-spacing-padding-inline, 1rem)`. Reuse the
+fallback the framework already uses for that variable. A project then only has to define the sys colors, which is
+what the minimal theme in `docs/build-tools.md` promises.
+
 ## New content element: always as RSCE, the complete chain
 
 New content elements are always built as RSCE (`madeyourday/contao-rocksolid-custom-elements`), not as a custom DCA/model class. An element consists of exactly two same-named files in `contao/templates/` plus translations:
@@ -413,5 +430,6 @@ RSCE-specific self-check: was an existing media/action component reused via `{% 
 - Any `data|merge(…)` / `item|merge(…)` feeding a component? Wrong: map only the differing names with `{% with {…} %}{{ block('…') }}{% endwith %}`.
 - Does the RSCE include the component via `{% use %}` + `{{ block('…') }}` without passing variables — and are the component fields named exactly like the config fields?
 - Did a lint warning get fixed with the rule's own suggestion? Any `x_attributes` variable inlined, renamed or dropped to silence `AttrsHookMerge`? Restore it with `attrs(x_attributes|default)`.
+- Any new `var(--…)` in `build/assets/css/` without a fallback, other than `--kiss-sys-color-*`? Add one.
 - Does the config file still contain a plain-text label, a `foreach` over an enum or a `$GLOBALS['TL_LANG']` reference instead of `addStyleOptionsField()` / `addSelectField()` + `rsce.*.yaml`?
 - Return Could and Won't items to the user as proposals at the end instead of implementing them. Every open question that was not answered stays a question, not an assumption.

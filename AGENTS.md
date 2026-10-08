@@ -74,6 +74,21 @@ PHP is PSR-4 under `src/`, tests under `tests/`. `.editorconfig` is authoritativ
 
 `references/examples.md` is mandatory before the first Twig edit.
 
+## Agent skills
+
+`.claude/skills/` holds the agent skills for this repository. Each skill is a `SKILL.md` plus optional `references/`
+and `scripts/`, and keeps its tests in `evals/`:
+
+| File | Content |
+| --- | --- |
+| `evals/evals.json` | tasks with a `prompt` and the `expected_output`, to check what the skill builds |
+| `evals/eval_set.json` | queries with `should_trigger`, to check when the skill loads |
+
+`SKILL.md` never mentions its evals, it is loaded on every use. Run the evals with Anthropic's `skill-creator` skill
+after changing a skill, and add a case to `evals.json` for every rule that got broken in review.
+
+When a Twig rule in `kiss-framework-extend` changes, update [Twig templates](docs/twig-templates.md) as well.
+
 ## Workflow
 
 1. **Clarify scope.** A spec (a list of options, sizes, colors) is answered with questions and a mapping, not with code.

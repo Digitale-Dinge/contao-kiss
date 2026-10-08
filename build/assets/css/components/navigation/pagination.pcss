@@ -20,7 +20,7 @@
         --pagination-item-size: 2.5rem;
         --pagination-item-px: .75rem;
         --pagination-text: var(--text-base, 1rem);
-        --pagination-radius: var(--radius-field);
+        --pagination-radius: var(--radius-field, .5rem);
 
         @apply flex! flex-wrap gap-6 items-center justify-between;
 
@@ -43,10 +43,10 @@
             min-width: var(--pagination-item-size);
             padding-inline: var(--pagination-item-px);
             font-size: var(--pagination-text);
-            border-width: var(--border-width-thin);
+            border-width: var(--border-width-thin, 1px);
             border-style: solid;
             border-radius: var(--pagination-radius);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow, none);
         }
 
         li > :is(a, button, span:not(.sr-only)) {
@@ -104,7 +104,7 @@
 
     /* Shapes */
     .pagination-circle {
-        --pagination-radius: var(--radius-full);
+        --pagination-radius: var(--radius-full, 9999px);
     }
 
     .pagination-square {

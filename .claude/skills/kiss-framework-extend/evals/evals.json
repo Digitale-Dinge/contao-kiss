@@ -1,0 +1,29 @@
+{
+  "skill_name": "kiss-framework-extend",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "the gallery should render the image caption below the picture as a small grey line, and I want to add a copyright line after it. do it in _contao-kiss",
+      "expected_output": "Extends content_element/gallery.html.twig and changes the caption through _figure's blocks or caption_attributes, used via {% use %} + {% with {figure: …} %} like Contao core. No new {% embed %}: embed is allowed exclusively in kiss_component/media/_image.html.twig. No copied _figure markup, no include(…, false).",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "alerts need a hover shadow, cards have one too. add it",
+      "expected_output": "A box-shadow in build/assets/css/components/base/alert.pcss that reads a theme variable with a fallback, e.g. var(--shadow-card-hover, none), reusing the fallback the framework already uses for that variable. No new required project variable, docs/build-tools.md 'Theme variables' stays valid. No other component touched.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "the rsce hyperlink list items should look like buttons when ctaAsButton is set, like the normal hyperlink element",
+      "expected_output": "Uses {% use '@Contao/kiss_attributes/_button_attributes.html.twig' %} and merges it with its condition: attrs(link_attributes|default).mergeWith(block('button_attributes'), …). No copied btn classes, no new style option, no new Twig global. Reports anything else it noticed instead of fixing it.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "the alert needs a glass variant. only the alert, nothing else needs it",
+      "expected_output": "Adds 'glass' as a local value to addSelectField('variant', …) in contao/templates/rsce_alert_config.php with labels in translations/{de,en}/rsce.*.yaml, the class passed through 1:1 in the component ('alert-' ~ item.variant) and the CSS in alert.pcss. Modifier\\Variant is not extended. No plain-text label in PHP, no comments restating the code.",
+      "files": []
+    }
+  ]
+}
