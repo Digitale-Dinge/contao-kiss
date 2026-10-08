@@ -2,39 +2,47 @@
     <picture>
         <source media="(prefers-color-scheme: dark)" srcset="./assets/markdown/logo_dark.svg">
         <source media="(prefers-color-scheme: light)" srcset="./assets/markdown/logo_light.svg">
-        <img src="./assets/markdown/logo_light.svg" width="500" alt="contao kiss">
+        <img src="./assets/markdown/logo_light.svg" width="600" alt="contao kiss">
     </picture>
 </p>
+
+<h1 align="center">Contao-KISS</h1>
+
+<p align="center">
+    <i>The super simple starter kit for Contao. Built to last.</i><br>
+    KISS (<i>Keep It Simple, Stupid</i>) brings flexible components, a clean design system approach and an intuitive
+    back end together in one package.
+</p>
+
+<p align="center">
+    <b>English</b> · <a href="README.de.md">Deutsch</a>
+</p>
+
 <p align="center">
     <a href="https://github.com/Digitale-Dinge/contao-kiss"><img src="https://img.shields.io/github/v/release/Digitale-Dinge/contao-kiss" alt="github version"/></a>
     <a href="https://packagist.org/packages/digitaledinge/contao-kiss"><img src="https://img.shields.io/packagist/dt/digitaledinge/contao-kiss?color=f47c00" alt="amount of downloads"/></a>
     <a href="https://packagist.org/packages/digitaledinge/contao-kiss"><img src="https://img.shields.io/packagist/dependency-v/digitaledinge/contao-kiss/php?color=474A8A" alt="minimum php version"></a>
 </p>
 
-<p align="center"><i>The super simple starter kit for Contao. Built to last.</i></p>
-
 ---
 
 ## Description
-
-KISS (*Keep It Simple, Stupid*) is Digitale Dinge's starter kit for Contao that brings flexible components, a clean
-design system approach and an intuitive back end together in one package.
 
 - **Keep it simple**: built on years of Contao experience, simple to use for editors, simple to maintain for
   agencies and simple to extend for developers
 
 - **Seamless updates**
-  - Contao `^5.7` and `6.*`, extends the core through Twig inheritance and enhacement, for updates without
+  - Contao `^5.7` and `6.*`, extends the core through Twig inheritance and enhancement, for updates without
     headaches
 
-- **Editor experience**
+- **User experience**
     - The Contao feeling you know, nothing new to learn
     - Keeping it simple: every option an editor needs, nothing that gets in the way
     - Visual widgets and grids you can see while you build
 
 - **Performance first**
   - Only the CSS you use, nothing else (see [build tools](docs/build-tools.md))
-  - Hashed, versioned assets, CSS cascade layers and a `browserslist` driven build without legacy bloat
+  - Hashed, versioned assets, CSS cascade layers and a `browserslist`-driven build without legacy bloat
 
 - **Enhancing Contao**
     - Pre-styled Twig components and new content elements on top of Contao's own
@@ -76,7 +84,7 @@ design system approach and an intuitive back end together in one package.
     + [Back end](#back-end)
 + [Getting started](#getting-started)
 + [Documentation](#documentation)
-+ [Custom projects](#custom-projects)
++ [Individual projects and applications](#individual-projects-and-applications)
 
 ---
 
@@ -96,7 +104,7 @@ containers. Your projects stay update-safe today and with the next Contao versio
 - Seamless integration into Contao: components extend and enhance the core instead of overwriting it
 - Upgrade compatibility by design, so Contao and KISS updates stay simple
 - Your design systems and tokens, one framework for many brands and websites
-- A back end set up the way you want it, with exactly the options your editors need
+- A back end kept simple, with exactly the options editors need
 
 ### Content editors
 
@@ -108,7 +116,7 @@ containers. Your projects stay update-safe today and with the next Contao versio
 ### Developers
 
 - Modern build stack with Vite, Reprise and Tailwind 4
-- Hot module replacement: see your changes while you type them, no reload needed
+- Hot module replacement: see your changes while you code, no reload needed
 - Ready-to-use Stimulus controllers for interactive components, Hotwired Turbo compatible
 - Pre-styled Twig components and CSS enhancements: cards, media & text, call-to-action, swiper, accordion and more
 - Twig inheritance all the way: override a single block, keep the rest
@@ -140,12 +148,12 @@ KISS extends Contao's own content elements and modules through the Twig inherita
 | Accordion             | Section headline with independent tag and appearance                                |
 | Player                | Aspect ratio for videos                                                             |
 | Gallery               | Responsive grid based on the items per row                                          |
-| Table                 | Prestyled table, caption, header and rows                                           |
+| Table                 | Pre-styled table, caption, header and rows                                           |
 | Form (include)        | Form field color, size and variant, inherited by every unstyled input; show as card |
 | Article               | Width, padding, background color, text alignment                                    |
 | List modules          | Grid with columns and gap for news, event, FAQ and newsletter lists                 |
 | News                  | News teasers rendered as cards                                                      |
-| And more              |                                                                                     | 
+| And more              |                                                                                     |
 
 ### New content elements
 
@@ -265,9 +273,9 @@ The full project structure, aliases, the dev server with HMR and more are descri
 
 ---
 
-## Custom projects
+## Individual projects and applications
 
-Need a custom project, or want KISS integrated with your design system and tokens? Contact us at
+Need an individual project or application, or want KISS integrated with your design system and tokens? Contact us at
 [hallo@digitaledin.ge](mailto:hallo@digitaledin.ge).
 
 [php]: https://www.php.net
