@@ -64,7 +64,7 @@
 
 > [!IMPORTANT]
 > KISS funktioniert nicht out of the box. Es muss zusammen mit dem Asset-Build deines Projekts installiert werden.
-> Siehe [Loslegen](#loslegen).
+> Siehe [Erste Schritte](#erste-schritte).
 >
 > Brauchst du Hilfe? Schreib uns an [hallo@digitaledin.ge](mailto:hallo@digitaledin.ge).
 
@@ -81,7 +81,7 @@
     + [Eigene Komponenten](#eigene-komponenten)
     + [Style-Optionen](#style-optionen)
     + [Backend](#backend)
-+ [Loslegen](#loslegen)
++ [Erste Schritte](#erste-schritte)
 + [Dokumentation](#dokumentation)
 + [Individuelle Projekte und Anwendungen](#individuelle-projekte-und-anwendungen)
 
@@ -193,7 +193,7 @@ Twig-Global `styles` zu CSS-Klassen aufgelöst:
 
 ---
 
-## Loslegen
+## Erste Schritte
 
 1. **Bundle installieren**
 
