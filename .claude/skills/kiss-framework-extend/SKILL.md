@@ -32,6 +32,41 @@ Change exclusively what was requested:
 - If a requirement is ambiguous ("use X" — but how exactly? "colors" — background or text?): **ask**, do not silently implement the most plausible interpretation. A question costs a minute; a wrong interpretation costs a review cycle.
 - If you cannot read a file you need (repo not mounted, branch not checked out): **ask for it by path** instead of guessing its contents. Colleagues may have already solved part of the task on another branch — ask whether that is the case before rebuilding it.
 
+## 🚨🚨🚨 Rule CI: DO NOT TOUCH THE CI OR THE TESTS. EVER. 🚨🚨🚨
+
+**STOP. Some Reviewers approve LLM diffs without reading them. A changed CI config or test WILL get merged unnoticed and silently weakens every future check. This is about ALL of CI, not just twig-cs-fixer.**
+
+"CI" means every file that decides what passes:
+
+- **`tests/**`: every test, fixture, snapshot, `CASES` list, data provider, `markTestSkipped`/`markTestIncomplete`, deleted or weakened assertion**
+- `.twig-cs-fixer.php`, `ecs.php`, `rector.php`, `phpstan.neon*`, `depcheck.php`, `phpunit.xml*`
+- `vendor-bin/**` (custom rules and their tests)
+- `.github/**`, the `scripts` in `composer.json` and `build/package.json`
+- `build/biome.json`, `build/stylelint.config.js`
+- any ignore list, baseline, `@phpstan-ignore`, `@codeCoverageIgnore`, `SHAME_ON_YOU`, `notName()`/`exclude()` on a Finder, `*-disable` comment
+
+**ABSOLUTELY NO EDIT to any of these without explicit written permission IN THE CURRENT TASK.** A failing lint or a failing test is NOT permission. "Make the lint pass", "make the tests green" or "fix CI" is NOT permission. Fix the code, never the check. "Exclude X" in a reply is NOT permission to edit the CI config on your own.
+
+When a check fails and the only way out is a CI change:
+
+1. **Do not edit.** Leave the check failing.
+2. Reply with this block, on its own, before anything else:
+
+   ```
+   ██████████████████████████████████████████████████████████████
+   🚨 CI CHANGE REQUESTED — NOTHING HAS BEEN CHANGED 🚨
+   File:   <path>
+   Change: <exact diff>
+   Effect: <which files/rules stop being checked>
+   Reply exactly "YES, HERE IS PERMISSION TO DO SO" to apply it.
+   ██████████████████████████████████████████████████████████████
+   ```
+
+3. Apply it **only** after the user replies with exactly `YES, HERE IS PERMISSION TO DO SO`. Anything else — "ok", "👍", "exclude it", "do it" — is a NO. Ask again.
+4. After applying, end the final reply with a second 🚨 block naming the CI file and the change, so it cannot be overlooked in review.
+
+This happened: `be_tinyMCE.html.twig` was excluded from twig-cs-fixer via `notName()` in `.twig-cs-fixer.php` after a 👍. That exclusion turned off **all** rules for the file, not just the one that failed.
+
 ## Rule One: no comments that restate the code, everything in English
 
 Code comments are the second most common review complaint after scope creep. Lines like these got flagged and had to be deleted:
@@ -141,7 +176,7 @@ Content stores the **case name**, never the value. What a change costs follows f
 | Change | Effect | What to do |
 | --- | --- | --- |
 | A case's value | only the emitted class changes | edit freely, no test change |
-| New case | `StyleOptionCasesTest` reports it as incomplete | add it to `CASES` in the same change |
+| New case | `StyleOptionCasesTest` reports it as incomplete | propose the `CASES` addition in a 🚨 block (Rule CI), add it only after the exact permission phrase |
 | Case removed or renamed | stored content loses its class, `StyleOptionCasesTest` fails | **MUST warn, MUST NOT touch without confirmation** |
 
 **Removing or renaming a case is a breaking change. You MUST warn about it. You MUST NOT touch the enum, `StyleOptionCasesTest`, the translations or the CSS for it without explicit confirmation.**
@@ -151,7 +186,7 @@ A request to remove an option is not that confirmation, even when it quotes a te
 1. **Warn the user, in a reply of its own, before the first edit.** Name the enum and the case, every field that offers it (options callbacks, RSCE `addStyleOptionsField()`), and every template that emits it. That reply contains no edit.
 2. **Show how to find affected content:** `contao_kiss:find-style-values <keys> <cases>` — e.g. `ctaSize,elementSize x_small x_large`. It reads `kiss_styles`, `headline` and `rsce_data`. Group fields with their own column, like `callToAction`, are not covered.
 3. **Wait for an explicit "yes" to that warning.** No confirmation, no edit — not to the enum, not to the test, not "just the CSS".
-4. **Update the `StyleOptionCasesTest` snapshot only as part of the confirmed change.** A failing snapshot is the signal to stop, never something to make green.
+4. **Update the `StyleOptionCasesTest` snapshot only as part of the confirmed change, and only after the exact `YES, HERE IS PERMISSION TO DO SO` (Rule CI).** A failing snapshot is the signal to stop, never something to make green.
 5. **Write a migration only when the user explicitly asks for one and confirms the mapping.** Never on your own initiative, never with a guessed mapping.
 
 ### Writing the migration
@@ -417,6 +452,7 @@ RSCE-specific self-check: was an existing media/action component reused via `{% 
 
 ## Self-check before handing over
 
+- 🚨 **Did ANY CI file or test change (see Rule CI)?** Without the exact reply `YES, HERE IS PERMISSION TO DO SO` in this task: revert it NOW and send the 🚨 block instead.
 - `grep` for all new identifiers: no orphaned references (listener, DCA, templates, translations consistent)?
 - `php -l` on every changed PHP file; parse the YAML files.
 - Read the diff again asking "which line did nobody order?" — revert every such line or report it as a proposal. Same question for deletions: "which existing line did I remove without being asked?"
