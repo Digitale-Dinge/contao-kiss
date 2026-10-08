@@ -35,7 +35,7 @@ final class CustomElementsConfigurationBuilderTest extends TestCase
         ];
 
         new \ReflectionProperty(DcaLoader::class, 'arrLoaded')->setValue(null, [
-            'dcaFiles' => array_fill_keys(['tl_content', 'tl_module', 'tl_company', 'tl_member'], true),
+            'dcaFiles' => array_fill_keys(['tl_content', 'tl_company', 'tl_member'], true),
         ]);
 
         System::setContainer($this->createContainer());
