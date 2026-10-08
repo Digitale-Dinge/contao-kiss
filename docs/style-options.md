@@ -23,28 +23,28 @@ string and drops empty and unknown keys.
 
 ## Kiss options
 
-| Option class | Getter |
-| --- | --- |
-| `Color\BackgroundOption` | `styles.background` |
-| `Color\ColorOption` | `styles.color` |
-| `Component\CallToAction\ShapeOption` | `styles.cta_shape` |
-| `Component\CallToAction\VariantOption` | `styles.cta_type` |
-| `Component\Media\LayoutOption` | `styles.media_layout` |
-| `Component\Swiper\NavigationOption` | |
-| `Layout\ColumnOption` | `styles.column` |
-| `Layout\ColumnSpanOption` | `styles.span` |
-| `Layout\ContainerOption` | `styles.container` |
-| `Layout\CrossAlignmentOption` | `styles.crossAlignment` |
-| `Layout\GapOption` | `styles.gap` |
-| `Margin\BottomOption` | `styles.margin_bottom` |
-| `Margin\TopOption` | `styles.margin_top` |
-| `Modifier\SizeOption` | `styles.size` |
-| `Modifier\VariantOption` | `styles.variant` |
-| `Padding\BottomOption` | `styles.padding_bottom` |
-| `Padding\TopOption` | `styles.padding_top` |
-| `Typography\AlignmentOption` | `styles.text_alignment` |
-| `Typography\HeadingOption` | `styles.heading` |
-| `Typography\ResponsiveOption` | `styles.font_appearance` |
+| Option class                           | Getter                   |
+|----------------------------------------|--------------------------|
+| `Color\BackgroundOption`               | `styles.background`      |
+| `Color\ColorOption`                    | `styles.color`           |
+| `Component\CallToAction\ShapeOption`   | `styles.cta_shape`       |
+| `Component\CallToAction\VariantOption` | `styles.cta_type`        |
+| `Component\Media\LayoutOption`         | `styles.media_layout`    |
+| `Component\Swiper\NavigationOption`    |                          |
+| `Layout\ColumnOption`                  | `styles.column`          |
+| `Layout\ColumnSpanOption`              | `styles.span`            |
+| `Layout\ContainerOption`               | `styles.container`       |
+| `Layout\CrossAlignmentOption`          | `styles.crossAlignment`  |
+| `Layout\GapOption`                     | `styles.gap`             |
+| `Margin\BottomOption`                  | `styles.margin_bottom`   |
+| `Margin\TopOption`                     | `styles.margin_top`      |
+| `Modifier\SizeOption`                  | `styles.size`            |
+| `Modifier\VariantOption`               | `styles.variant`         |
+| `Padding\BottomOption`                 | `styles.padding_bottom`  |
+| `Padding\TopOption`                    | `styles.padding_top`     |
+| `Typography\AlignmentOption`           | `styles.text_alignment`  |
+| `Typography\HeadingOption`             | `styles.heading`         |
+| `Typography\ResponsiveOption`          | `styles.font_appearance` |
 
 All live below `DigitaleDinge\ContaoKiss\Styles\Option`.
 

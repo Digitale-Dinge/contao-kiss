@@ -1,8 +1,7 @@
 # KISS Build Tools
 
-contao-kiss ships the framework stylesheets, the Stimulus controllers and a Vite
-config factory. The stack is [Vite](https://vite.dev) +
-[Reprise](https://github.com/symfony/reprise) + [Tailwind 4](https://tailwindcss.com).
+contao-kiss ships the framework stylesheets, the Stimulus controllers and a Vite config factory. The stack is
+[Vite](https://vite.dev) + [Reprise](https://github.com/symfony/reprise) + [Tailwind 4](https://tailwindcss.com).
 For linting and CI, see [best-practices.md](best-practices.md).
 
 The controllers and their names are exported in
@@ -10,7 +9,7 @@ The controllers and their names are exported in
 
 ## Setup
 
-contao-kiss must be installed. Your own package.json within your project needs to look like this:
+`contao-kiss` must be installed. Your own `package.json` within your project needs to look like this:
 
 ```json
 {
@@ -45,7 +44,7 @@ export default buildVite();
 | `npm run watch`      | development build, rebuilt on change                 |
 | `npm run dev-server` | dev server on port 8080, with hot module replacement |
 
-The dev server needs a certificate, see [Dev server](#dev-server) for more information.
+The dev server needs a certificate, see [Dev server](#dev-server-with-hmr) for more information.
 
 ## Project structure
 
@@ -76,9 +75,9 @@ import { ThemeController, PopoverController } from '@digitaledinge/contao-kiss';
 import GlightboxController from './scripts/controllers/glightbox-controller';
 
 const application = Application.start();
-application.register('theme', ThemeController);
-application.register('popover', PopoverController);
-application.register('glightbox', GlightboxController);
+application.register('theme', ThemeController); // Only if you use dark/light (with init-script and _toggle)
+application.register('popover', PopoverController); // Popover component - not yet in use
+application.register('glightbox', GlightboxController); // Glightbox stimulus controller
 ```
 
 `layout/css/index.css`:
@@ -102,7 +101,95 @@ application.register('glightbox', GlightboxController);
 /* Tailwind scans these for class names */
 @source "../../vendor/digitaledinge/*/contao/templates";
 @source "../css/";
+
+/* Never scan the build output */
+@source not "../../public";
 ```
+
+### Theme variables
+
+The KISS stylesheets read a set of variables your project defines. This minimal `layout/css/tailwind.theme.css` covers
+all of them, replace the values with your own or with your design system:
+
+```css
+@theme {
+    --color-primary-solid: var(--kiss-sys-color-brand-primary-solid);
+    --color-secondary-solid: var(--kiss-sys-color-brand-secondary-solid);
+    --color-tertiary-solid: var(--kiss-sys-color-brand-tertiary-solid);
+    --color-neutral-surface-1: var(--kiss-sys-color-neutral-surface-1);
+    --color-neutral-surface-2: var(--kiss-sys-color-neutral-surface-2);
+    --color-neutral-surface-3: var(--kiss-sys-color-neutral-surface-3);
+    --color-neutral-on-strong: var(--kiss-sys-color-neutral-on-strong);
+    --color-neutral-on-medium: var(--kiss-sys-color-neutral-on-medium);
+    --color-neutral-border-light: var(--kiss-sys-color-neutral-border-light);
+    --color-neutral-border-strong: var(--kiss-sys-color-neutral-border-strong);
+    --color-status-success-solid: var(--kiss-sys-color-status-success-solid);
+    --color-status-warning-solid: var(--kiss-sys-color-status-warning-solid);
+    --color-status-error-solid: var(--kiss-sys-color-status-error-solid);
+}
+
+:root {
+    --kiss-sys-color-neutral-surface-1: #ffffff;
+    --kiss-sys-color-neutral-surface-2: #f5f5f5;
+    --kiss-sys-color-neutral-surface-3: #e5e5e5;
+    --kiss-sys-color-neutral-on-strong: #171717;
+    --kiss-sys-color-neutral-on-medium: #525252;
+    --kiss-sys-color-neutral-on-light: #737373;
+    --kiss-sys-color-neutral-border-light: #e5e5e5;
+    --kiss-sys-color-neutral-border-strong: #a3a3a3;
+
+    --kiss-sys-color-brand-primary-solid: #1d4ed8;
+    --kiss-sys-color-brand-primary-on-solid: #ffffff;
+    --kiss-sys-color-brand-primary-border: #1d4ed8;
+    --kiss-sys-color-brand-primary-hover-medium: #1e40af;
+    --kiss-sys-color-brand-secondary-solid: #0f766e;
+    --kiss-sys-color-brand-secondary-on-solid: #ffffff;
+    --kiss-sys-color-brand-secondary-border: #0f766e;
+    --kiss-sys-color-brand-secondary-hover-medium: #115e59;
+    --kiss-sys-color-brand-tertiary-solid: #7c3aed;
+    --kiss-sys-color-brand-tertiary-on-solid: #ffffff;
+    --kiss-sys-color-brand-tertiary-border: #7c3aed;
+    --kiss-sys-color-brand-tertiary-hover-medium: #6d28d9;
+
+    --kiss-sys-color-status-success-solid: #15803d;
+    --kiss-sys-color-status-success-on-solid: #ffffff;
+    --kiss-sys-color-status-success-border: #15803d;
+    --kiss-sys-color-status-success-hover: #166534;
+    --kiss-sys-color-status-warning-solid: #b45309;
+    --kiss-sys-color-status-warning-on-solid: #ffffff;
+    --kiss-sys-color-status-warning-border: #b45309;
+    --kiss-sys-color-status-warning-hover: #92400e;
+    --kiss-sys-color-status-error-solid: #b91c1c;
+    --kiss-sys-color-status-error-on-solid: #ffffff;
+    --kiss-sys-color-status-error-border: #b91c1c;
+    --kiss-sys-color-status-error-hover: #991b1b;
+}
+```
+
+### Safelisting style option classes
+
+Style options store their CSS classes in PHP enums and are picked in the back end, so Tailwind never finds them while
+scanning templates. Safelist every class your style options can emit:
+
+```css
+/* Spacings */
+@source inline("pt-2 pt-4 pt-8 pt-12 pt-16 pt-20 pt-24");
+@source inline("pb-2 pb-4 pb-8 pb-12 pb-16 pb-20 pb-24");
+@source inline("mt-2 mt-4 mt-8 mt-12 mt-16 mt-20 mt-24");
+@source inline("mb-2 mb-4 mb-8 mb-12 mb-16 mb-20 mb-24");
+
+/* Backgrounds */
+@source inline("bg-transparent bg-neutral-surface-1 bg-neutral-surface-2 bg-neutral-surface-3");
+@source inline("bg-primary-solid bg-secondary-solid bg-tertiary-solid");
+@source inline("bg-status-success-solid bg-status-warning-solid bg-status-error-solid");
+
+/* Typography */
+@source inline("responsive-display-lg responsive-display-md responsive-display-sm");
+@source inline("responsive-headline-lg responsive-headline-md responsive-headline-sm");
+@source inline("responsive-body-lg responsive-body-md responsive-body-sm responsive-body-xs");
+```
+
+Adding or replacing a style option means adding its classes here as well.
 
 There are two aliases, `@font` for `layout/fonts` and `@asset` for
 `layout/css/assets`:
@@ -122,6 +209,9 @@ Files referenced through them are hashed and land in `public/layout/fonts/` and
 `public/layout/images/`.
 
 ## Loading the assets
+
+The page layout in the Contao back end has to use the modern Twig layout (`page/layout`). KISS then loads the assets
+automatically, see [legacy page layout](legacy.md) otherwise.
 
 The `app` entry is loaded by default. A page template `page/layout.html.twig` or `page/layout/foobar.html.twig` template
 can set another one, as long as a matching `layout/<name>.js` exists:
@@ -177,18 +267,18 @@ It serves over HTTPS and needs the same certificate as the site. With the
 Symfony CLI, run `symfony server:ca:install` once, then point `PFX_PATH` at
 `certs/default.p12` in its configuration directory:
 
-| Setup | Variable | Example |
-| --- | --- | --- |
-| Symfony CLI, macOS | `PFX_PATH` | `Library/Application Support/symfony-cli/certs/default.p12` |
-| Symfony CLI, Linux | `PFX_PATH` | `.config/symfony-cli/certs/default.p12` |
-| Symfony CLI before 5.17.0 | `PFX_PATH` | `.symfony5/certs/default.p12` |
-| MAMP | `CERT_FILE` | `/Applications/MAMP/Library/OpenSSL/certs/foobar.crt` |
-| | `CERT_KEY` | `/Applications/MAMP/Library/OpenSSL/certs/foobar.key` |
+| Setup                     | Variable    | Example                                                     |
+|---------------------------|-------------|-------------------------------------------------------------|
+| Symfony CLI, macOS        | `PFX_PATH`  | `Library/Application Support/symfony-cli/certs/default.p12` |
+| Symfony CLI, Linux        | `PFX_PATH`  | `.config/symfony-cli/certs/default.p12`                     |
+| Symfony CLI before 5.17.0 | `PFX_PATH`  | `.symfony5/certs/default.p12`                               |
+| MAMP                      | `CERT_FILE` | `/Applications/MAMP/Library/OpenSSL/certs/foobar.crt`       |
+|                           | `CERT_KEY`  | `/Applications/MAMP/Library/OpenSSL/certs/foobar.key`       |
 
 `PFX_PATH` resolves against `$HOME`, `CERT_KEY` and `CERT_FILE` against the
 project root. Absolute paths are used as given.
 
-Moving a pre-5.17.0 installation:
+Moving a pre-5.17.0 Symfony CLI installation:
 
 ```bash
 symfony server:stop --all
@@ -202,6 +292,7 @@ mv ~/.symfony5 ~/.config/symfony-cli                        # Linux
 ```dotenv
 PFX_PATH="Library/Application Support/symfony-cli/certs/default.p12"
 
+#MAMP
 #CERT_FILE=/Applications/MAMP/Library/OpenSSL/certs/foobar.crt
 #CERT_KEY=/Applications/MAMP/Library/OpenSSL/certs/foobar.key
 
@@ -222,13 +313,13 @@ Run `npm run build` after stopping the dev server.
 
 Tailwind 4 breaks with preprocessors, see the
 [Tailwind 4 compatibility docs](https://tailwindcss.com/docs/compatibility#sass-less-and-stylus).
-Nesting is native, and the whole `@import` graph is watched, including files
-inside `vendor/`.
+Nesting is native, and the whole `@import` graph is watched, including files inside `vendor/`.
 
 - The entry must be `index.css`.
 - Partials are `.css` or `.pcss`, and imports spell out the extension.
 - Import vendor CSS in `index.css`, never in JavaScript, with a layer:
   `@import "x.css" layer(components)`.
+- Tailwind scans the templates and files listed in `@source` and only generates the classes it finds there.
 - Keep `@source` globs narrow for faster compilation time.
 
 ## Browser support
