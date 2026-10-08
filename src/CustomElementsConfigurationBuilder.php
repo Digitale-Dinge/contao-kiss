@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DigitaleDinge\ContaoKiss;
 
 use Contao\Controller;
+use Contao\CoreBundle\Framework\ContaoFramework;
 use DigitaleDinge\ContaoKiss\EventListener\TranslatableEnumTrait;
 use DigitaleDinge\ContaoKiss\Styles\StyleOptionRegistry;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -29,16 +30,18 @@ final class CustomElementsConfigurationBuilder
     public function __construct(
         private readonly TranslatorInterface $translator,
         private readonly StyleOptionRegistry $registry,
+        private readonly ContaoFramework $framework,
     ) {
-        // ToDo: Think about a better solution in the future
-        Controller::loadDataContainer('tl_content');
-        Controller::loadDataContainer('tl_module');
-        Controller::loadDataContainer('tl_company');
-        Controller::loadDataContainer('tl_member');
     }
 
     public function create(array|string $translation, string $contentCategory = 'texts', array|null $extra = []): self
     {
+        $controller = $this->framework->getAdapter(Controller::class);
+
+        foreach (['tl_content', 'tl_company', 'tl_member'] as $table) {
+            $controller->loadDataContainer($table);
+        }
+
         if (is_string($translation)) {
             $this->type = $translation;
             $translation = $this->getTranslations(["$translation.label", "$translation.description"]);
