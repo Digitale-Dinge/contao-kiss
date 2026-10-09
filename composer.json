@@ -90,6 +90,9 @@
             "bin-links": false,
             "forward-command": false
         },
+        "branch-alias": {
+            "dev-main": "1.0.x-dev"
+        },
         "contao-manager-plugin": "DigitaleDinge\\ContaoKiss\\ContaoManager\\Plugin"
     },
     "config": {
