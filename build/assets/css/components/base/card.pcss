@@ -16,8 +16,10 @@
         --card-border: var(--kiss-comp-card-color-border, var(--kiss-sys-color-neutral-border-light));
         --card-border-opacity: 100%;
         --card-ring: var(--kiss-sys-color-neutral-on-strong);
-        --card-px: var(--kiss-comp-card-spacing-padding, 1.5rem);
-        --card-py: var(--kiss-comp-card-spacing-padding, 1.25rem);
+        --card-pt: var(--kiss-comp-card-spacing-padding, 1.25rem);
+        --card-pr: var(--kiss-comp-card-spacing-padding, 1.5rem);
+        --card-pb: var(--kiss-comp-card-spacing-padding, 1.25rem);
+        --card-pl: var(--kiss-comp-card-spacing-padding, 1.5rem);
         --card-gap: .5rem;
 
         @apply relative flex flex-col w-full overflow-hidden;
@@ -34,7 +36,7 @@
     .card-body {
         @apply flex flex-col flex-1;
 
-        padding: var(--card-py) var(--card-px);
+        padding: var(--card-pt) var(--card-pr) var(--card-pb) var(--card-pl);
         gap: var(--card-gap);
 
         hgroup {
@@ -52,6 +54,10 @@
     .card-media {
         @apply w-full;
 
+        &:has(> .svg-icon) {
+            padding: var(--card-pt) var(--card-pr) var(--card-pb) var(--card-pl);
+        }
+
         picture {
             @apply block;
         }
@@ -62,16 +68,20 @@
     }
 
     .card-sm {
-        --card-px: 1rem;
-        --card-py: .75rem;
+        --card-pt: .75rem;
+        --card-pr: 1rem;
+        --card-pb: .75rem;
+        --card-pl: 1rem;
         --card-gap: .375rem;
     }
 
     /* Medium is the default */
 
     .card-lg {
-        --card-px: 2rem;
-        --card-py: 1.5rem;
+        --card-pt: 1.5rem;
+        --card-pr: 2rem;
+        --card-pb: 1.5rem;
+        --card-pl: 2rem;
         --card-gap: .75rem;
     }
 
@@ -146,6 +156,14 @@
     }
 
     /* Layouts */
+    .card-reverse > .card-media:has(> .svg-icon) {
+        --card-pt: 0;
+    }
+
+    .card:not(.card-reverse) > .card-media:has(> .svg-icon) {
+        --card-pb: 0;
+    }
+
     .card-reverse,
     .layout-reverse {
         @apply flex flex-col-reverse;
@@ -178,6 +196,12 @@
     .card-side-reverse,
     .layout-side-reverse {
         @apply sm:flex sm:flex-row-reverse;
+    }
+
+    @variant sm {
+        .card:is(.card-side, .card-side-reverse) > .card-media:has(> .svg-icon) {
+            --card-pb: inherit;
+        }
     }
 
     .card-media-background,
