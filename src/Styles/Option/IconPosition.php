@@ -9,12 +9,10 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 enum IconPosition: string implements TranslatableLabelInterface
 {
-    private const string BUNDLE_PATH = 'bundles/digitaledingecontaokiss/icons/';
+    case left = self::BUNDLE_PATH.'left';
+    case right = self::BUNDLE_PATH.'right';
 
-    case left = self::BUNDLE_PATH . 'left';
-    //case center = self::BUNDLE_PATH . 'center';
-    case right = self::BUNDLE_PATH . 'right';
-    //case justify = self::BUNDLE_PATH . 'justify';
+    private const string BUNDLE_PATH = 'bundles/digitaledingecontaokiss/icons/';
 
     public function label(): TranslatableMessage
     {

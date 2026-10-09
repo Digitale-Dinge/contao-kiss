@@ -8,8 +8,8 @@ use DigitaleDinge\ContaoKiss\Styles\Option\Color;
 use DigitaleDinge\ContaoKiss\Styles\Option\Component;
 use DigitaleDinge\ContaoKiss\Styles\Option\Layout;
 use DigitaleDinge\ContaoKiss\Styles\Option\Margin;
-use DigitaleDinge\ContaoKiss\Styles\Option\Padding;
 use DigitaleDinge\ContaoKiss\Styles\Option\Modifier;
+use DigitaleDinge\ContaoKiss\Styles\Option\Padding;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\Typography;
 use DigitaleDinge\ContaoKiss\Styles\StyleOptionRegistry;
@@ -20,10 +20,19 @@ use DigitaleDinge\ContaoKiss\Styles\StyleOptionRegistry;
 class StylesVariable
 {
     public function __construct(private readonly StyleOptionRegistry $registry)
-    {}
+    {
+    }
 
     /**
-     * Resolve registered style option by the option class, enum class or whatever
+     * Make registered names without dots callable as e.g. styles.name(key).
+     */
+    public function __call(string $name, array $arguments): StyleOption
+    {
+        return $this->option($name, $arguments[0] ?? null);
+    }
+
+    /**
+     * Resolve registered style option by the option class, enum class or whatever.
      */
     public function option(string $option, string|null $key = null): StyleOption
     {
@@ -42,43 +51,35 @@ class StylesVariable
     }
 
     /**
-     * Make registered names without dots callable as e.g. styles.name(key).
+     * Layout.
      */
-    public function __call(string $name, array $arguments): StyleOption
-    {
-        return $this->option($name, $arguments[0] ?? null);
-    }
-
-    /**
-     * Layout
-     */
-    public function getContainer(string|null $key = null): StyleOption|Layout\ContainerOption
+    public function getContainer(string|null $key = null): Layout\ContainerOption|StyleOption
     {
         return $this->option(Layout\ContainerOption::class, $key);
     }
 
-    public function getColumn(string|null $key = null): StyleOption|Layout\ColumnOption
+    public function getColumn(string|null $key = null): Layout\ColumnOption|StyleOption
     {
         return $this->option(Layout\ColumnOption::class, $key);
     }
 
-    public function getGap(string|null $key = null): StyleOption|Layout\GapOption
+    public function getGap(string|null $key = null): Layout\GapOption|StyleOption
     {
         return $this->option(Layout\GapOption::class, $key);
     }
 
-    public function getSpan(string|null $key = null): StyleOption|Layout\ColumnSpanOption
+    public function getSpan(string|null $key = null): Layout\ColumnSpanOption|StyleOption
     {
         return $this->option(Layout\ColumnSpanOption::class, $key);
     }
 
-    public function getCrossAlignment(string|null $key = null): StyleOption|Layout\CrossAlignmentOption
+    public function getCrossAlignment(string|null $key = null): Layout\CrossAlignmentOption|StyleOption
     {
         return $this->option(Layout\CrossAlignmentOption::class, $key);
     }
 
     /**
-     * Typography
+     * Typography.
      */
     public function getHeading(string|null $key = null): StyleOption|Typography\HeadingOption
     {
@@ -96,75 +97,74 @@ class StylesVariable
     }
 
     /**
-     * Color
+     * Color.
      */
-    public function getBackground(string|null $key = null): StyleOption|Color\BackgroundOption
+    public function getBackground(string|null $key = null): Color\BackgroundOption|StyleOption
     {
         return $this->option(Color\BackgroundOption::class, $key);
     }
 
-    public function getColor(string|null $key = null): StyleOption|Color\ColorOption
+    public function getColor(string|null $key = null): Color\ColorOption|StyleOption
     {
         return $this->option(Color\ColorOption::class, $key);
     }
 
     /**
-     * Margin
+     * Margin.
      */
-    public function getMargin_top(string|null $key = null): StyleOption|Margin\TopOption
+    public function getMargin_top(string|null $key = null): Margin\TopOption|StyleOption
     {
         return $this->option(Margin\TopOption::class, $key);
     }
 
-    public function getMargin_bottom(string|null $key = null): StyleOption|Margin\BottomOption
+    public function getMargin_bottom(string|null $key = null): Margin\BottomOption|StyleOption
     {
         return $this->option(Margin\BottomOption::class, $key);
     }
 
     /**
-     * Padding
+     * Padding.
      */
-    public function getPadding_top(string|null $key = null): StyleOption|Padding\TopOption
+    public function getPadding_top(string|null $key = null): Padding\TopOption|StyleOption
     {
         return $this->option(Padding\TopOption::class, $key);
     }
 
-    public function getPadding_bottom(string|null $key = null): StyleOption|Padding\BottomOption
+    public function getPadding_bottom(string|null $key = null): Padding\BottomOption|StyleOption
     {
         return $this->option(Padding\BottomOption::class, $key);
     }
 
     /**
-     * Modifiers
+     * Modifiers.
      */
-
-    public function getSize(string|null $key = null): StyleOption|Modifier\SizeOption
+    public function getSize(string|null $key = null): Modifier\SizeOption|StyleOption
     {
         return $this->option(Modifier\SizeOption::class, $key);
     }
 
-    public function getVariant(string|null $key = null): StyleOption|Modifier\VariantOption
+    public function getVariant(string|null $key = null): Modifier\VariantOption|StyleOption
     {
         return $this->option(Modifier\VariantOption::class, $key);
     }
 
     /**
-     * Call to action design
+     * Call to action design.
      */
-    public function getCta_shape(string|null $key = null): StyleOption|Component\CallToAction\ShapeOption
+    public function getCta_shape(string|null $key = null): Component\CallToAction\ShapeOption|StyleOption
     {
         return $this->option(Component\CallToAction\ShapeOption::class, $key);
     }
 
     /**
-     * ToDo: Might use getVariant instead
+     * ToDo: Might use getVariant instead.
      */
-    public function getCta_type(string|null $key = null): StyleOption|Component\CallToAction\VariantOption
+    public function getCta_type(string|null $key = null): Component\CallToAction\VariantOption|StyleOption
     {
         return $this->option(Component\CallToAction\VariantOption::class, $key);
     }
 
-    public function getMedia_layout(string|null $key = null): StyleOption|Component\Media\LayoutOption
+    public function getMedia_layout(string|null $key = null): Component\Media\LayoutOption|StyleOption
     {
         return $this->option(Component\Media\LayoutOption::class, $key);
     }

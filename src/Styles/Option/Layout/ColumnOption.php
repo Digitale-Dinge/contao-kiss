@@ -8,18 +8,18 @@ use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
- * @method string one
- * @method string two
- * @method string three
- * @method string four
- * @method string five
- * @method string six
- * @method string seven
- * @method string eight
- * @method string nine
- * @method string ten
- * @method string eleven
- * @method string twelve
+ * @method string one()
+ * @method string two()
+ * @method string three()
+ * @method string four()
+ * @method string five()
+ * @method string six()
+ * @method string seven()
+ * @method string eight()
+ * @method string nine()
+ * @method string ten()
+ * @method string eleven()
+ * @method string twelve()
  */
 #[AsKissStyleOption]
 class ColumnOption extends StyleOption

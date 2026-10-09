@@ -20,13 +20,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @internal
  */
-final class StyleOptionsListener
+final readonly class StyleOptionsListener
 {
     use TranslatableEnumTrait;
 
     public function __construct(
-        private readonly TranslatorInterface $translator,
-        private readonly StyleOptionRegistry $registry,
+        private TranslatorInterface $translator,
+        private StyleOptionRegistry $registry,
     ) {
     }
 
@@ -148,7 +148,7 @@ final class StyleOptionsListener
     #[AsCallback('tl_content', 'fields.callToAction.fields.size.options')]
     #[AsCallback('tl_content', 'fields.formFieldSize.options')]
     #[AsCallback('tl_form_field', 'fields.fieldSize.options')]
-    public function addSizeOptions(DataContainer $dc): array
+    public function addSizeOptions(): array
     {
         return $this->getTranslatedOptions($this->registry->getEnum(Modifier\Size::class));
     }

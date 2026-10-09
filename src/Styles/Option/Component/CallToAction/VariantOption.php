@@ -8,9 +8,9 @@ use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
- * @method string soft
- * @method string outline
- * @method string text
+ * @method string soft()
+ * @method string outline()
+ * @method string text()
  */
 #[AsKissStyleOption]
 class VariantOption extends StyleOption

@@ -8,9 +8,9 @@ use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
- * @method string start
- * @method string center
- * @method string end
+ * @method string start()
+ * @method string center()
+ * @method string end()
  */
 #[AsKissStyleOption]
 class AlignmentOption extends StyleOption

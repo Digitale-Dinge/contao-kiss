@@ -9,6 +9,63 @@ on:
 permissions: read-all
 
 jobs:
+    rector:
+        name: Rector
+        runs-on: ubuntu-latest
+        continue-on-error: true
+        steps:
+            - name: Set up PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.4'
+                  extensions: dom, fileinfo, filter, hash, intl, json, mbstring, pcre, zlib
+                  coverage: none
+
+            - name: Checkout
+              uses: actions/checkout@v6
+              with:
+                  show-progress: false
+                  persist-credentials: false
+
+            - name: Install the dependencies
+              uses: ramsey/composer-install@v4
+
+            - name: Install Rector
+              uses: ramsey/composer-install@v4
+              with:
+                  working-directory: vendor-bin/rector
+
+            - name: Run Rector
+              run: vendor-bin/rector/vendor/bin/rector process --dry-run --no-progress-bar
+
+    ecs:
+        name: ECS
+        runs-on: ubuntu-latest
+        steps:
+            - name: Set up PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.4'
+                  extensions: dom, fileinfo, filter, hash, intl, json, mbstring, pcre, zlib
+                  coverage: none
+
+            - name: Checkout
+              uses: actions/checkout@v6
+              with:
+                  show-progress: false
+                  persist-credentials: false
+
+            - name: Install the dependencies
+              uses: ramsey/composer-install@v4
+
+            - name: Install ECS
+              uses: ramsey/composer-install@v4
+              with:
+                  working-directory: vendor-bin/ecs
+
+            - name: Run ECS
+              run: vendor-bin/ecs/vendor/bin/ecs check --no-progress-bar
+
     twig-cs-fixer:
         name: Twig CS Fixer
         runs-on: ubuntu-latest
@@ -36,6 +93,34 @@ jobs:
 
             - name: Run Twig CS Fixer
               run: vendor-bin/twig-cs-fixer/vendor/bin/twig-cs-fixer lint
+
+    phpstan:
+        name: PHPStan
+        runs-on: ubuntu-latest
+        steps:
+            - name: Set up PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.4'
+                  extensions: dom, fileinfo, filter, hash, intl, json, mbstring, pcre, zlib
+                  coverage: none
+
+            - name: Checkout
+              uses: actions/checkout@v6
+              with:
+                  show-progress: false
+                  persist-credentials: false
+
+            - name: Install the dependencies
+              uses: ramsey/composer-install@v4
+
+            - name: Install PHPStan
+              uses: ramsey/composer-install@v4
+              with:
+                  working-directory: vendor-bin/phpstan
+
+            - name: Run PHPStan
+              run: vendor-bin/phpstan/vendor/bin/phpstan analyse --no-progress
 
     depcheck:
         name: Dependency analyser

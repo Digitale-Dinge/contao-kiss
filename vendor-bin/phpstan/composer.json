@@ -1,0 +1,18 @@
+{
+    "require": {
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-symfony": "^2.0",
+        "slam/phpstan-extensions": "^6.6"
+    },
+    "config": {
+        "platform": {
+            "php": "8.4.15"
+        },
+        "allow-plugins": {
+            "contao-components/installer": false,
+            "contao/manager-plugin": false,
+            "php-http/discovery": false
+        }
+    }
+}

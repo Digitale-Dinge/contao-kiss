@@ -1,0 +1,45 @@
+includes:
+    - vendor-bin/phpstan/vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    - vendor-bin/phpstan/vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor-bin/phpstan/vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor-bin/phpstan/vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor-bin/phpstan/vendor/phpstan/phpstan-symfony/rules.neon
+    - vendor-bin/phpstan/vendor/slam/phpstan-extensions/conf/symfony-rules.neon
+
+parameters:
+    level: 6
+
+    paths:
+        - contao
+        - src
+        - tests
+
+    excludePaths:
+        - contao/templates
+        - src/Migration/Version100/ArticleContentKissStylesMigration.php
+
+    bootstrapFiles:
+        - vendor/autoload.php
+
+    universalObjectCratesClasses:
+        - Contao\BackendUser
+        - Contao\ContentElement
+        - Contao\Database\Result
+        - Contao\Model
+        - Contao\Module
+        - Contao\Template
+        - Contao\User
+
+    treatPhpDocTypesAsCertain: false
+    rememberPossiblyImpureFunctionValues: false
+
+    ignoreErrors:
+        - identifier: missingType.iterableValue
+        -
+            identifiers: [staticMethod.internal, method.internal]
+            path: tests/CustomElementsConfigurationBuilderTest.php
+        -
+            identifier: method.notFound
+            paths:
+                - tests/Styles/Option/StyleOptionTest.php
+                - tests/Twig/Global/StylesVariableTest.php

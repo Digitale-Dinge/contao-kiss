@@ -17,7 +17,7 @@ final class CustomElementsConfigurationBuilder
 {
     use TranslatableEnumTrait;
 
-    private string|null $type;
+    private string|null $type = null;
 
     private array $config = [];
 
@@ -42,9 +42,9 @@ final class CustomElementsConfigurationBuilder
             $controller->loadDataContainer($table);
         }
 
-        if (is_string($translation)) {
+        if (\is_string($translation)) {
             $this->type = $translation;
-            $translation = $this->getTranslations(["$translation.label", "$translation.description"]);
+            $translation = $this->getTranslations(["{$translation}.label", "{$translation}.description"]);
         }
 
         $this->config['label'] = $translation;
@@ -61,8 +61,8 @@ final class CustomElementsConfigurationBuilder
 
         $listConfig = [
             'label' => $translations ?? [
-                    $this->translator->trans('rsce.list.label', [], 'rsce'),
-                    $this->translator->trans('rsce.list.description', [], 'rsce')
+                $this->translator->trans('rsce.list.label', [], 'rsce'),
+                $this->translator->trans('rsce.list.description', [], 'rsce'),
             ],
             'inputType' => 'list',
             'elementLabel' => $elementLabel ?? $this->translator->trans('rsce.list.element', [], 'rsce'),
@@ -94,7 +94,8 @@ final class CustomElementsConfigurationBuilder
 
         if ([] === $this->listStack) {
             $this->fields[$current['key']] = $current['config'];
-        } else {
+        }
+        else {
             $index = array_key_last($this->listStack);
             $this->listStack[$index]['config']['fields'][$current['key']] = $current['config'];
         }
@@ -113,7 +114,8 @@ final class CustomElementsConfigurationBuilder
                 ...$this->fields,
                 ...$this->pendingFields,
             ];
-        } else {
+        }
+        else {
             $index = array_key_last($this->listStack);
 
             $this->listStack[$index]['config']['fields'] = [
@@ -133,10 +135,10 @@ final class CustomElementsConfigurationBuilder
             return $this;
         }
 
-        if (is_bool($options['label'] ?? null) && null !== $this->type) {
+        if (\is_bool($options['label'] ?? null) && null !== $this->type) {
             $options['label'] = $this->getTranslations([
-                "$this->type.field.$key.label",
-                "$this->type.field.$key.description",
+                "{$this->type}.field.{$key}.label",
+                "{$this->type}.field.{$key}.description",
             ]);
         }
 
@@ -157,21 +159,31 @@ final class CustomElementsConfigurationBuilder
      */
     public function addStyleOptionsField(string $key, string $styleOption, array $eval = []): self
     {
-        return $this->addField($key, [
-            'label' => [
-                $this->translator->trans("rsce.field.$key.label", [], 'rsce'),
-                $this->translator->trans("rsce.field.$key.description", [], 'rsce'),
+        return $this->addField(
+            $key,
+            [
+                'label' => [
+                    $this->translator->trans("rsce.field.{$key}.label", [], 'rsce'),
+                    $this->translator->trans("rsce.field.{$key}.description", [], 'rsce'),
+                ],
+                'inputType' => 'select',
+                'options' => $this->getTranslatedOptions($this->registry->getEnum($styleOption)),
             ],
-            'inputType' => 'select',
-            'options' => $this->getTranslatedOptions($this->registry->getEnum($styleOption)),
-        ], array_merge(['tl_class' => 'w25', 'includeBlankOption' => true], $eval));
+            array_merge(
+                [
+                    'tl_class' => 'w25',
+                    'includeBlankOption' => true,
+                ],
+                $eval,
+            ),
+        );
     }
 
     public function addGroup(string $key, array|null $translations = null): self
     {
         return $this->addField($key, [
             'inputType' => 'group',
-            'label' => $translations ?? $this->getTranslations(["group.$key"])
+            'label' => $translations ?? $this->getTranslations(["group.{$key}"]),
         ]);
     }
 
@@ -181,12 +193,16 @@ final class CustomElementsConfigurationBuilder
     public function addGridGroup(): self
     {
         if ($this->isListField()) {
-            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+            throw new \Exception(\sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
         }
 
         $this->addGroup('grid', [$this->translator->trans('rsce.group.grid', [], 'rsce')]);
-        $this->addField('gridColumns', ['inputType' => 'standardField']);
-        $this->addField('gridGap', ['inputType' => 'standardField']);
+        $this->addField('gridColumns', [
+            'inputType' => 'standardField',
+        ]);
+        $this->addField('gridGap', [
+            'inputType' => 'standardField',
+        ]);
 
         return $this;
     }
@@ -197,25 +213,25 @@ final class CustomElementsConfigurationBuilder
     public function addSelectField(string $key, array $options, array $eval = [], array|null $dependsOn = null): self
     {
         if ([] === $options) {
-            throw new \Exception(sprintf('%s() requires at least one option.', __FUNCTION__));
+            throw new \Exception(\sprintf('%s() requires at least one option.', __FUNCTION__));
         }
 
         $field = [
             'label' => [
-                $this->translator->trans("rsce.field.$key.label", [], 'rsce'),
-                $this->translator->trans("rsce.field.$key.description", [], 'rsce'),
+                $this->translator->trans("rsce.field.{$key}.label", [], 'rsce'),
+                $this->translator->trans("rsce.field.{$key}.description", [], 'rsce'),
             ],
         ];
 
         $blankOption = false;
 
         // Blank option
-        if ($options[array_key_first($options)] === '') {
+        if ('' === $options[array_key_first($options)]) {
             $blankOption = true;
             array_shift($options);
 
             if (($eval['blankOptionLabel'] ?? false) === true) {
-                $eval['blankOptionLabel'] = $this->translator->trans("rsce.$this->type.field.$key.blankOption", [], 'rsce');
+                $eval['blankOptionLabel'] = $this->translator->trans("rsce.{$this->type}.field.{$key}.blankOption", [], 'rsce');
             }
         }
 
@@ -224,9 +240,9 @@ final class CustomElementsConfigurationBuilder
 
             foreach ($options as $option) {
                 $translated[$option] = $this->translator->trans(
-                    "rsce.field.$key.options.$option",
+                    "rsce.field.{$key}.options.{$option}",
                     [],
-                    'rsce'
+                    'rsce',
                 );
             }
 
@@ -257,8 +273,8 @@ final class CustomElementsConfigurationBuilder
     {
         $field = [
             'label' => [
-                $this->translator->trans("rsce.field.$key.label", [], 'rsce'),
-                $this->translator->trans("rsce.field.$key.description", [], 'rsce'),
+                $this->translator->trans("rsce.field.{$key}.label", [], 'rsce'),
+                $this->translator->trans("rsce.field.{$key}.description", [], 'rsce'),
             ],
             'inputType' => 'checkbox',
         ];
@@ -283,8 +299,7 @@ final class CustomElementsConfigurationBuilder
 
         return [] === $options
             ? $this->addCheckboxField($key, $eval, $dependsOn)
-            : $this->addSelectField($key, $options, $eval, $dependsOn)
-        ;
+            : $this->addSelectField($key, $options, $eval, $dependsOn);
     }
 
     public function addHeadlineField(array $eval = []): self
@@ -332,12 +347,7 @@ final class CustomElementsConfigurationBuilder
         return $this->addField('textAppearance', $options, $eval);
     }
 
-    public function addImageField(
-        array $eval = [],
-        string|null $dependsOn = null,
-        bool $includeSizeField = false,
-        bool $includeImageSizeField = false, /* @deprecated  has been deprecated, use includeSizeField instead !*/
-    ): self
+    public function addImageField(array $eval = [], string|null $dependsOn = null, bool $includeSizeField = false, bool $includeImageSizeField = false /** @deprecated  has been deprecated, use includeSizeField instead !*/): self
     {
         $options = $this->isListField() ? $this->copyDcaField('singleSRC') : [
             'inputType' => 'standardField',
@@ -389,7 +399,7 @@ final class CustomElementsConfigurationBuilder
 
         $options['label'] = [
             $this->translator->trans('rsce.field.imageUrl.label', [], 'rsce'),
-            &$GLOBALS['TL_LANG']['MSC']['url'][1]
+            &$GLOBALS['TL_LANG']['MSC']['url'][1],
         ];
 
         $options['eval']['mandatory'] = false;
@@ -405,20 +415,16 @@ final class CustomElementsConfigurationBuilder
         return $this->addField('imageUrl', $options, $eval);
     }
 
-    public function addLogoField(
-        array $eval = [],
-        string|null $dependsOn = null,
-        bool $includeSizeField = false,
-    ): self
+    public function addLogoField(array $eval = [], string|null $dependsOn = null, bool $includeSizeField = false): self
     {
         $options = [
-            'label' => $this->getTranslations(["logo.label", "logo.description"]),
+            'label' => $this->getTranslations(['logo.label', 'logo.description']),
             'inputType' => 'fileTree',
             'eval' => [
                 'filesOnly' => true,
                 'fieldType' => 'radio',
                 'mandatory' => true,
-                'tl_class' => 'clr'
+                'tl_class' => 'clr',
             ],
         ];
 
@@ -544,7 +550,7 @@ final class CustomElementsConfigurationBuilder
      */
     public function addCallToActionField(array $eval = [], array $options = []): self
     {
-        $options = $this->isListField() ? $this->generateListCtaField($eval, $options) : [
+        $options = $this->isListField() ? $this->generateListCtaField($options) : [
             'inputType' => 'standardField',
         ];
 
@@ -557,19 +563,27 @@ final class CustomElementsConfigurationBuilder
     public function addBackgroundField(array $eval = []): self
     {
         if ($this->isListField()) {
-            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+            throw new \Exception(\sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
         }
 
-        return $this->addField('backgroundColor', ['inputType' => 'standardField'], $eval);
+        return $this->addField(
+            'backgroundColor',
+            [
+                'inputType' => 'standardField',
+            ],
+            $eval,
+        );
     }
 
     public function addElementLayoutField(array $eval = [], string|null $dependsOn = null): self
     {
         if ($this->isListField()) {
-            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+            throw new \Exception(\sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
         }
 
-        $options = ['inputType' => 'standardField'];
+        $options = [
+            'inputType' => 'standardField',
+        ];
 
         $options = $this->inheritEvalClass('elementLayout', $options);
 
@@ -589,10 +603,12 @@ final class CustomElementsConfigurationBuilder
     public function addResponsiveVideoField(array $eval = [], string|null $dependsOn = null): self
     {
         if ($this->isListField()) {
-            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+            throw new \Exception(\sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
         }
 
-        $options = ['inputType' => 'standardField'];
+        $options = [
+            'inputType' => 'standardField',
+        ];
 
         if (null !== $dependsOn) {
             $options['dependsOn'] = [
@@ -610,14 +626,22 @@ final class CustomElementsConfigurationBuilder
     public function addShowAsCardField(array $eval = []): self
     {
         if ($this->isListField()) {
-            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+            throw new \Exception(\sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
         }
 
         if ([] !== $eval) {
-            $eval = ['submitOnChange' => false];
+            $eval = [
+                'submitOnChange' => false,
+            ];
         }
 
-        return $this->addField('showAsCard', ['inputType' => 'standardField'], $eval);
+        return $this->addField(
+            'showAsCard',
+            [
+                'inputType' => 'standardField',
+            ],
+            $eval,
+        );
     }
 
     /**
@@ -626,10 +650,16 @@ final class CustomElementsConfigurationBuilder
     public function addCtaAsButtonField(array $eval = []): self
     {
         if ($this->isListField()) {
-            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+            throw new \Exception(\sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
         }
 
-        return $this->addField('ctaAsButton', ['inputType' => 'standardField'], $eval);
+        return $this->addField(
+            'ctaAsButton',
+            [
+                'inputType' => 'standardField',
+            ],
+            $eval,
+        );
     }
 
     /**
@@ -638,7 +668,7 @@ final class CustomElementsConfigurationBuilder
     public function addCardSettings(): self
     {
         if ($this->isListField()) {
-            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+            throw new \Exception(\sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
         }
 
         $eval = [
@@ -647,7 +677,13 @@ final class CustomElementsConfigurationBuilder
 
         $this->addGroup('card', [$this->translator->trans('rsce.group.card', [], 'rsce')]);
 
-        return $this->addField('showAsCard', ['inputType' => 'standardField'], $eval);
+        return $this->addField(
+            'showAsCard',
+            [
+                'inputType' => 'standardField',
+            ],
+            $eval,
+        );
     }
 
     /**
@@ -656,14 +692,22 @@ final class CustomElementsConfigurationBuilder
     public function addSwiperSettings(): self
     {
         if ($this->isListField()) {
-            throw new \Exception(sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
+            throw new \Exception(\sprintf('Using %s() is not allowed inside lists.', __FUNCTION__));
         }
 
         $this->addGroup('swiper', [$this->translator->trans('rsce.group.swiper', [], 'rsce')]);
-        $this->addField('kissSwiper', ['inputType' => 'standardField']);
-        $this->addField('sliderNavigation', ['inputType' => 'standardField']);
-        $this->addField('sliderHidePagination', ['inputType' => 'standardField']);
-        $this->addField('sliderOverflowVisible', ['inputType' => 'standardField']);
+        $this->addField('kissSwiper', [
+            'inputType' => 'standardField',
+        ]);
+        $this->addField('sliderNavigation', [
+            'inputType' => 'standardField',
+        ]);
+        $this->addField('sliderHidePagination', [
+            'inputType' => 'standardField',
+        ]);
+        $this->addField('sliderOverflowVisible', [
+            'inputType' => 'standardField',
+        ]);
 
         return $this;
     }
@@ -713,35 +757,48 @@ final class CustomElementsConfigurationBuilder
         ];
     }
 
-    private function generateListCtaField(array $eval = [], array $options = []): array
+    private function generateListCtaField(array $options = []): array
     {
-        return array_merge([
-            'inputType' => 'list',
-            'label' => [
-                $this->translator->trans('rsce.field.callToAction.label', [], 'rsce'),
-                $this->translator->trans('rsce.field.callToAction.description', [], 'rsce'),
-            ],
-            'elementLabel' => $this->translator->trans('rsce.field.callToAction.element', [], 'rsce'),
-            'minItems' => 0,
-            'maxItems' => 2,
-            'fields' => [
-                'text' => [
-                    'label' => &$GLOBALS['TL_LANG']['tl_content']['ctaText'],
-                    'inputType' => 'text',
-                    'eval' => ['tl_class' => 'w25'],
+        return array_merge(
+            [
+                'inputType' => 'list',
+                'label' => [
+                    $this->translator->trans('rsce.field.callToAction.label', [], 'rsce'),
+                    $this->translator->trans('rsce.field.callToAction.description', [], 'rsce'),
                 ],
-                'ctaType'  => $this->copyDcaField('ctaType'),
-                'ctaColor' => $this->copyDcaField('ctaColor'),
-                'ctaSize'  => $this->copyDcaField('ctaSize'),
-                'url'      => $this->copyDcaField('url'),
-                'target'   => array_replace_recursive($this->copyDcaField('target'), ['eval' => ['tl_class' => 'w25']]),
-                'rel'      => array_replace_recursive($this->copyDcaField('rel'), ['eval' => ['tl_class' => 'w25']]),
+                'elementLabel' => $this->translator->trans('rsce.field.callToAction.element', [], 'rsce'),
+                'minItems' => 0,
+                'maxItems' => 2,
+                'fields' => [
+                    'text' => [
+                        'label' => &$GLOBALS['TL_LANG']['tl_content']['ctaText'],
+                        'inputType' => 'text',
+                        'eval' => [
+                            'tl_class' => 'w25',
+                        ],
+                    ],
+                    'ctaType' => $this->copyDcaField('ctaType'),
+                    'ctaColor' => $this->copyDcaField('ctaColor'),
+                    'ctaSize' => $this->copyDcaField('ctaSize'),
+                    'url' => $this->copyDcaField('url'),
+                    'target' => array_replace_recursive($this->copyDcaField('target'), [
+                        'eval' => [
+                            'tl_class' => 'w25',
+                        ],
+                    ]),
+                    'rel' => array_replace_recursive($this->copyDcaField('rel'), [
+                        'eval' => [
+                            'tl_class' => 'w25',
+                        ],
+                    ]),
+                ],
+                'eval' => [
+                    'tl_class' => 'w100 clr call_to_action_widget',
+                    'hide' => true,
+                ],
             ],
-            'eval' => [
-                'tl_class' => 'w100 clr call_to_action_widget',
-                'hide' => true
-            ],
-        ], $options);
+            $options,
+        );
     }
 
     private function copyDcaField(string $key, string $table = 'tl_content'): array

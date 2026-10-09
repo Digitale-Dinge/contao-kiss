@@ -8,7 +8,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
  * Option by default or custom name
- * Enum that was registered with an option resolves to the same name
+ * Enum that was registered with an option resolves to the same name.
  */
 final class StyleOptionRegistry
 {

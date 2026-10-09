@@ -8,15 +8,15 @@ use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
- * @method string primary
- * @method string secondary
- * @method string tertiary
- * @method string success
- * @method string warning
- * @method string error
- * @method string base_100
- * @method string base_200
- * @method string base_300
+ * @method string primary()
+ * @method string secondary()
+ * @method string tertiary()
+ * @method string success()
+ * @method string warning()
+ * @method string error()
+ * @method string base_100()
+ * @method string base_200()
+ * @method string base_300()
  */
 #[AsKissStyleOption]
 class ColorOption extends StyleOption

@@ -25,6 +25,10 @@ class ArticleContentWidthKissStylesMigration extends AbstractJsonColumnMigration
 
     protected function getValueMaps(): array
     {
-        return ['kiss_styles' => ['contentWidth' => self::CONTENT_WIDTH_MAP]];
+        return [
+            'kiss_styles' => [
+                'contentWidth' => self::CONTENT_WIDTH_MAP,
+            ],
+        ];
     }
 }

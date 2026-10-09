@@ -29,7 +29,10 @@ class ContentMediaTypeRsceDataMigrationTest extends TestCase
             ->expects($this->once())
             ->method('listTableColumns')
             ->with('tl_content')
-            ->willReturn(['id' => true, 'type' => true])
+            ->willReturn([
+                'id' => true,
+                'type' => true,
+            ])
         ;
 
         $db = $this->createMock(Connection::class);
@@ -49,7 +52,10 @@ class ContentMediaTypeRsceDataMigrationTest extends TestCase
     #[DataProvider('getStoredData')]
     public function testShouldRun(string $data, string|null $expected): void
     {
-        $db = $this->stubConnection([['id' => 1, 'rsce_data' => $data]]);
+        $db = $this->stubConnection([[
+            'id' => 1,
+            'rsce_data' => $data,
+        ]]);
 
         $this->assertSame(null !== $expected, new ContentMediaTypeRsceDataMigration($db)->shouldRun());
     }
@@ -60,18 +66,30 @@ class ContentMediaTypeRsceDataMigrationTest extends TestCase
     #[DataProvider('getStoredData')]
     public function testRun(string $data, string|null $expected): void
     {
-        $db = $this->mockConnection([['id' => 1, 'rsce_data' => $data]]);
+        $db = $this->mockConnection([[
+            'id' => 1,
+            'rsce_data' => $data,
+        ]]);
 
         if (null === $expected) {
             $db
                 ->expects($this->never())
                 ->method('update')
             ;
-        } else {
+        }
+        else {
             $db
                 ->expects($this->once())
                 ->method('update')
-                ->with('tl_content', ['rsce_data' => $expected], ['id' => 1])
+                ->with(
+                    'tl_content',
+                    [
+                        'rsce_data' => $expected,
+                    ],
+                    [
+                        'id' => 1,
+                    ],
+                )
             ;
         }
 
@@ -121,12 +139,17 @@ class ContentMediaTypeRsceDataMigrationTest extends TestCase
         new ContentMediaTypeRsceDataMigration($db)->run();
 
         $this->assertSame(['SELECT `id`, `rsce_data` FROM tl_content WHERE `type` IN (:types)'], $queries);
-        $this->assertSame([['types' => ['rsce_media_text', 'rsce_media_text_list']]], $parameters);
+        $this->assertSame([[
+            'types' => ['rsce_media_text', 'rsce_media_text_list'],
+        ]], $parameters);
     }
 
     public function testReportsTheMigratedKeys(): void
     {
-        $db = $this->stubConnection([['id' => 1, 'rsce_data' => '{"type":"image"}']]);
+        $db = $this->stubConnection([[
+            'id' => 1,
+            'rsce_data' => '{"type":"image"}',
+        ]]);
 
         $result = new ContentMediaTypeRsceDataMigration($db)->run();
 
@@ -147,6 +170,13 @@ class ContentMediaTypeRsceDataMigrationTest extends TestCase
         return $this->configureConnection($this->createStub(Connection::class), $rows, $queries, $parameters);
     }
 
+    /**
+     * @template T of Connection&Stub
+     *
+     * @param T $db
+     *
+     * @return T
+     */
     private function configureConnection(Connection&Stub $db, array $rows, array &$queries, array &$parameters): Connection&Stub
     {
         $schemaManager = $this->createStub(AbstractSchemaManager::class);
@@ -157,7 +187,11 @@ class ContentMediaTypeRsceDataMigrationTest extends TestCase
 
         $schemaManager
             ->method('listTableColumns')
-            ->willReturn(['id' => true, 'type' => true, 'rsce_data' => true])
+            ->willReturn([
+                'id' => true,
+                'type' => true,
+                'rsce_data' => true,
+            ])
         ;
 
         $db
@@ -168,7 +202,7 @@ class ContentMediaTypeRsceDataMigrationTest extends TestCase
         $db
             ->method('fetchAllAssociative')
             ->willReturnCallback(
-                static function (string $query, array $params = []) use ($rows, &$queries, &$parameters) {
+                static function (string $query, array $params = []) use ($rows, &$queries, &$parameters): array {
                     $queries[] = $query;
                     $parameters[] = $params;
 

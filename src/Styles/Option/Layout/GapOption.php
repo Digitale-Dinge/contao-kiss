@@ -8,12 +8,12 @@ use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
- * @method string half
- * @method string one
- * @method string two
- * @method string three
- * @method string four
- * @method string five
+ * @method string half()
+ * @method string one()
+ * @method string two()
+ * @method string three()
+ * @method string four()
+ * @method string five()
  */
 #[AsKissStyleOption]
 class GapOption extends StyleOption

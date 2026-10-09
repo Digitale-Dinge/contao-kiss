@@ -29,7 +29,10 @@ final class TranslatableEnumTraitTest extends TestCase
     public function testFallsBackToTheValueWhenTheEnumHasNoLabel(): void
     {
         $this->assertSame(
-            ['first' => 'first-value', 'second' => 'second-value'],
+            [
+                'first' => 'first-value',
+                'second' => 'second-value',
+            ],
             $this->createSubject()->getTranslatedOptions(PlainEnum::class),
         );
     }

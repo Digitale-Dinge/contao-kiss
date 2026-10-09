@@ -15,9 +15,6 @@ use Doctrine\DBAL\Connection;
  */
 class ArticleContentKissStylesMigration extends AbstractMigration
 {
-    private static array $kissContentColumns = [];
-    private static array $kissArticleColumns = [];
-
     private const array SPACING_MAP = [
         'half' => 'half',
         '1x' => 'one',
@@ -37,25 +34,50 @@ class ArticleContentKissStylesMigration extends AbstractMigration
 
     private const array TABLE_MAP = [
         'tl_content' => [
-            ['topline' => []],
-            ['marginTop' => self::SPACING_MAP],
-            ['marginBottom' => self::SPACING_MAP],
-            ['paddingTop' => self::SPACING_MAP],
-            ['paddingBottom' => self::SPACING_MAP],
-            ['contentWidth' => self::LAYOUT_COLUMN_MAP],
-            ['icon' => []],
-            ['iconPosition' => []],
+            [
+                'topline' => [],
+            ],
+            [
+                'marginTop' => self::SPACING_MAP,
+            ],
+            [
+                'marginBottom' => self::SPACING_MAP,
+            ],
+            [
+                'paddingTop' => self::SPACING_MAP,
+            ],
+            [
+                'paddingBottom' => self::SPACING_MAP,
+            ],
+            [
+                'contentWidth' => self::LAYOUT_COLUMN_MAP,
+            ],
+            [
+                'icon' => [],
+            ],
+            [
+                'iconPosition' => [],
+            ],
         ],
         'tl_article' => [
-            ['paddingTop'=> self::SPACING_MAP],
-            ['paddingBottom' => self::SPACING_MAP],
-            ['contentWidth' => self::LAYOUT_COLUMN_MAP],
+            [
+                'paddingTop' => self::SPACING_MAP,
+            ],
+            [
+                'paddingBottom' => self::SPACING_MAP,
+            ],
+            [
+                'contentWidth' => self::LAYOUT_COLUMN_MAP,
+            ],
         ],
     ];
 
-    public function __construct(
-        private readonly Connection $connection,
-    ) {
+    private static array $kissContentColumns = [];
+
+    private static array $kissArticleColumns = [];
+
+    public function __construct(private readonly Connection $connection)
+    {
     }
 
     public function shouldRun(): bool
@@ -75,8 +97,8 @@ class ArticleContentKissStylesMigration extends AbstractMigration
             return false;
         }
 
-        self::$kissContentColumns = array_filter($this->getDefaultKissStyles('tl_content'), fn($col) => isset($contentColumns[strtolower($col)]));
-        self::$kissArticleColumns = array_filter($this->getDefaultKissStyles('tl_article'), fn($col) => isset($articleColumns[strtolower($col)]));
+        self::$kissContentColumns = array_filter($this->getDefaultKissStyles('tl_content'), static fn ($col) => isset($contentColumns[strtolower($col)]));
+        self::$kissArticleColumns = array_filter($this->getDefaultKissStyles('tl_article'), static fn ($col) => isset($articleColumns[strtolower($col)]));
 
         return
             $this->tableHasRemainingStyleMigrations('tl_content', self::$kissContentColumns)
@@ -93,19 +115,21 @@ class ArticleContentKissStylesMigration extends AbstractMigration
 
     private function tableHasRemainingStyleMigrations(string $table, array $cols): bool
     {
-        if ($cols === []) {
+        if ([] === $cols) {
             return false;
         }
 
-        $condition = array_map(static fn (string $col) => sprintf('`%s` <> :empty', $col), $cols);
+        $condition = array_map(static fn (string $col) => \sprintf('`%s` <> :empty', $col), $cols);
 
-        $query = sprintf(
+        $query = \sprintf(
             'SELECT TRUE FROM %s WHERE %s LIMIT 1',
             $table,
-            implode(' OR ', $condition)
+            implode(' OR ', $condition),
         );
 
-        return $this->connection->fetchOne($query, ['empty' => '']) !== false;
+        return false !== $this->connection->fetchOne($query, [
+            'empty' => '',
+        ]);
     }
 
     private function getDefaultKissStyles(string $table): array
@@ -113,12 +137,12 @@ class ArticleContentKissStylesMigration extends AbstractMigration
         $extractor = DcaExtractor::getInstance($table);
         $fields = $extractor->getVirtualFields();
 
-        return array_keys($fields, 'kiss_styles');
+        return array_keys($fields, 'kiss_styles', true);
     }
 
     private function getOldColumnsForTable(string $table): array
     {
-        return match($table) {
+        return match ($table) {
             'tl_article' => self::$kissArticleColumns,
             'tl_content' => self::$kissContentColumns,
             default => [],
@@ -135,7 +159,7 @@ class ArticleContentKissStylesMigration extends AbstractMigration
 
         $columns = array_merge(['id', 'kiss_styles'], $styleCols);
 
-        $query = sprintf('SELECT %s FROM %s', implode(', ', array_map(static fn ($c) => "`$c`", $columns)), $table);
+        $query = \sprintf('SELECT %s FROM %s', implode(', ', array_map(static fn ($c) => "`{$c}`", $columns)), $table);
 
         return $this->connection->fetchAllAssociative($query);
     }
@@ -149,7 +173,8 @@ class ArticleContentKissStylesMigration extends AbstractMigration
 
         if (isset($map[$value])) {
             $styles[$key] = $map[$value];
-        } else {
+        }
+        else {
             $styles[$key] = $value;
         }
     }
@@ -170,7 +195,7 @@ class ArticleContentKissStylesMigration extends AbstractMigration
 
             // Migrate the backgroundColor
             if (
-                $table === 'tl_article'
+                'tl_article' === $table
                 && !empty($row['bgColor'])
                 && !isset($styles['backgroundColor'])
             ) {
@@ -188,7 +213,10 @@ class ArticleContentKissStylesMigration extends AbstractMigration
                 continue;
             }
 
-            $updates[(int) $row['id']] = [...$resetCols, ...['kiss_styles' => json_encode($styles)]];
+            $updates[(int) $row['id']] = [
+                ...$resetCols, ...[
+                    'kiss_styles' => json_encode($styles),
+                ]];
         }
 
         if ([] === $updates) {
@@ -202,12 +230,15 @@ class ArticleContentKissStylesMigration extends AbstractMigration
                 $this->connection->update(
                     $table,
                     $columns,
-                    ['id' => $id]
+                    [
+                        'id' => $id,
+                    ],
                 );
             }
 
             $this->connection->commit();
-        } catch (\Throwable) {
+        }
+        catch (\Throwable) {
             $this->connection->rollback();
         }
     }

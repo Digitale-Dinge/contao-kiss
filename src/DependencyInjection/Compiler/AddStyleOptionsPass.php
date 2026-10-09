@@ -75,7 +75,10 @@ class AddStyleOptionsPass implements CompilerPassInterface
             ];
 
             foreach ($winner['groups'] as $group) {
-                $groups[$group][] = ['name' => $name, 'priority' => $winner['priority']];
+                $groups[$group][] = [
+                    'name' => $name,
+                    'priority' => $winner['priority'],
+                ];
             }
         }
 
@@ -108,7 +111,7 @@ class AddStyleOptionsPass implements CompilerPassInterface
     }
 
     /**
-     * Resolve default label -> Typography\HeadingOption -> style_options.heading + custom name = last segment
+     * Resolve default label -> Typography\HeadingOption -> style_options.heading + custom name = last segment.
      */
     private function getDefaultLabel(string $name): string
     {
@@ -130,7 +133,7 @@ class AddStyleOptionsPass implements CompilerPassInterface
      */
     private function getEnumClass(string $class): string
     {
-        $enum = (new \ReflectionProperty($class, 'enumClass'))->getDefaultValue();
+        $enum = new \ReflectionProperty($class, 'enumClass')->getDefaultValue();
 
         if (!\is_string($enum) || !is_subclass_of($enum, \BackedEnum::class)) {
             throw new InvalidDefinitionException(\sprintf('The style option "%s" must set $enumClass to a backed enum.', $class));

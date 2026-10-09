@@ -92,14 +92,19 @@ final class StylesVariableTest extends TestCase
 
     public function testCallResolvesANameWithoutDots(): void
     {
-        $styles = $this->createStyles(['name' => 'shape_radius']);
+        $styles = $this->createStyles([
+            'name' => 'shape_radius',
+        ]);
 
         $this->assertSame('swapped-side', (string) $styles->shape_radius('side'));
     }
 
     public function testAHigherPriorityRegistrationReplacesAKissOption(): void
     {
-        $styles = $this->createStyles(['name' => Component\Media\LayoutOption::class, 'priority' => 10]);
+        $styles = $this->createStyles([
+            'name' => Component\Media\LayoutOption::class,
+            'priority' => 10,
+        ]);
 
         $this->assertInstanceOf(SwappedLayoutOption::class, $styles->getMedia_layout('side'));
         $this->assertSame('swapped-side', (string) $styles->getMedia_layout('side'));
@@ -111,7 +116,9 @@ final class StylesVariableTest extends TestCase
      */
     private function createStyles(array $swappedLayout = []): StylesVariable
     {
-        $additional = [] === $swappedLayout ? [] : [SwappedLayoutOption::class => $swappedLayout];
+        $additional = [] === $swappedLayout ? [] : [
+            SwappedLayoutOption::class => $swappedLayout,
+        ];
 
         return new StylesVariable(StyleOptionRegistryFactory::fromKissOptions($additional));
     }

@@ -13,9 +13,8 @@ abstract class StyleOption implements \Stringable
      */
     protected string $enumClass;
 
-    public function __construct(
-        private readonly string|null $key = null,
-    ) {
+    public function __construct(private readonly string|null $key = null)
+    {
     }
 
     public function __toString(): string

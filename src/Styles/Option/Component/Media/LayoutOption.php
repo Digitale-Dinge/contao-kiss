@@ -8,10 +8,10 @@ use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
- * @method string reverse
- * @method string side
- * @method string side_reverse
- * @method string media_background
+ * @method string reverse()
+ * @method string side()
+ * @method string side_reverse()
+ * @method string media_background()
  */
 #[AsKissStyleOption]
 class LayoutOption extends StyleOption

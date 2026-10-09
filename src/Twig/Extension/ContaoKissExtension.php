@@ -16,9 +16,8 @@ use Twig\TwigFunction;
 
 class ContaoKissExtension extends AbstractExtension implements GlobalsInterface
 {
-    public function __construct(
-        private readonly StylesVariable $stylesVariable,
-    ) {
+    public function __construct(private readonly StylesVariable $stylesVariable)
+    {
     }
 
     #[\Override]

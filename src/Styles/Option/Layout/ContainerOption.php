@@ -8,12 +8,12 @@ use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
- * @method string base
- * @method string narrower
- * @method string narrow
- * @method string full_pad
- * @method string full
- * @method string reset
+ * @method string base()
+ * @method string narrower()
+ * @method string narrow()
+ * @method string full_pad()
+ * @method string full()
+ * @method string reset()
  */
 #[AsKissStyleOption]
 class ContainerOption extends StyleOption

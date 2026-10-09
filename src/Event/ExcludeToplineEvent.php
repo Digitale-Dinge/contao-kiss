@@ -15,9 +15,8 @@ class ExcludeToplineEvent extends Event
         'form',
     ];
 
-    public function __construct(
-        public array $types = [],
-    ) {
+    public function __construct(public array $types = [])
+    {
     }
 
     public function setTypes(array $types): void

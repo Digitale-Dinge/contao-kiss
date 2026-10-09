@@ -16,7 +16,8 @@ use Twig\Environment;
 final readonly class SubBlockInsertTag implements BlockInsertTagResolverNestedResolvedInterface
 {
     public function __construct(private Environment $twig)
-    {}
+    {
+    }
 
     public function __invoke(ResolvedInsertTag $insertTag, ParsedSequence $wrappedContent): ParsedSequence
     {

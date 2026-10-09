@@ -9,9 +9,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 final readonly class IncludeStylesDataRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(
-        private IncludeStylesDataListener $listener,
-    ) {
+    public function __construct(private IncludeStylesDataListener $listener)
+    {
     }
 
     /**

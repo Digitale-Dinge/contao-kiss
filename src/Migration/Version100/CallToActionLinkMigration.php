@@ -8,7 +8,9 @@ use DigitaleDinge\ContaoKiss\Migration\AbstractJsonColumnMigration;
 
 class CallToActionLinkMigration extends AbstractJsonColumnMigration
 {
-    private const array VARIANT_MAP = ['link' => 'text'];
+    private const array VARIANT_MAP = [
+        'link' => 'text',
+    ];
 
     protected function getTables(): array
     {
@@ -23,9 +25,16 @@ class CallToActionLinkMigration extends AbstractJsonColumnMigration
     protected function getValueMaps(): array
     {
         return [
-            'kiss_styles' => ['ctaType' => self::VARIANT_MAP, 'fieldVariant' => self::VARIANT_MAP],
-            'rsce_data' => ['ctaType' => self::VARIANT_MAP],
-            'callToAction' => ['ctaType' => self::VARIANT_MAP],
+            'kiss_styles' => [
+                'ctaType' => self::VARIANT_MAP,
+                'fieldVariant' => self::VARIANT_MAP,
+            ],
+            'rsce_data' => [
+                'ctaType' => self::VARIANT_MAP,
+            ],
+            'callToAction' => [
+                'ctaType' => self::VARIANT_MAP,
+            ],
         ];
     }
 }

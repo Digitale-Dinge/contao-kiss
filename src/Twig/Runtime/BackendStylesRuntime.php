@@ -19,6 +19,7 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
     use TranslatableEnumTrait;
 
     private array $gridColumnLabels;
+
     private array $cache = [];
 
     public function __construct(
@@ -44,7 +45,7 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
         return [
             'kiss_grid',
             $this->getBackendClass($styles, 'columns'),
-            //$this->getBackendClass($styles, 'gap'),
+            // $this->getBackendClass($styles, 'gap'),
         ];
     }
 
@@ -71,7 +72,7 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
             ->addClass('kiss_grid')
             ->addClass($this->getBackendClass($styles, 'columns'), !$hasGridRatio)
             ->addClass('kiss_grid-ratio', $hasGridRatio)
-            ->addStyle('--grid-cols: ' . $styles['gridRatio'], $hasGridRatio)
+            ->addStyle('--grid-cols: '.$styles['gridRatio'], $hasGridRatio)
         ;
     }
 
@@ -123,12 +124,18 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
         }
 
         if ($fromParent) {
-            $statement = 'SELECT kiss_styles, jsonData FROM ' . $table
-                . ' WHERE id = (SELECT pid FROM ' . $table . ' WHERE id = :id AND ptable = :table)';
-            $parameters = ['id' => $id, 'table' => $table];
-        } else {
-            $statement = 'SELECT kiss_styles, jsonData FROM ' . $table . ' WHERE id = :id';
-            $parameters = ['id' => $id];
+            $statement = 'SELECT kiss_styles, jsonData FROM '.$table
+                .' WHERE id = (SELECT pid FROM '.$table.' WHERE id = :id AND ptable = :table)';
+            $parameters = [
+                'id' => $id,
+                'table' => $table,
+            ];
+        }
+        else {
+            $statement = 'SELECT kiss_styles, jsonData FROM '.$table.' WHERE id = :id';
+            $parameters = [
+                'id' => $id,
+            ];
         }
 
         $data = $this->connection->fetchAssociative($statement, $parameters);
@@ -148,13 +155,16 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
         return [...$styles, ...$gridRatioData];
     }
 
-    private function getBackendClass(array $styles, string $type): string|null
+    /**
+     * @param 'columns'|'gap' $type
+     */
+    private function getBackendClass(array $styles, string $type): string
     {
         $prefix = 'kiss_';
 
         return match ($type) {
-            'columns' => $prefix . $this->stylesVariable->getColumn($styles['gridColumns'] ?? ''),
-            'gap' => $prefix . $this->stylesVariable->getGap($styles['gridGap'] ?? ''),
+            'columns' => $prefix.$this->stylesVariable->getColumn($styles['gridColumns'] ?? ''),
+            'gap' => $prefix.$this->stylesVariable->getGap($styles['gridGap'] ?? ''),
         };
     }
 }

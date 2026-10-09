@@ -70,7 +70,7 @@ final class AddKissStyleFieldsToPaletteListener
             ->addField(['contentWidth', 'marginTop', 'paddingTop', 'marginBottom', 'paddingBottom'], 'layout_legend', PaletteManipulator::POSITION_APPEND)
         ;
 
-        if ($dc->table === 'tl_article') {
+        if ('tl_article' === $dc->table) {
             $paletteManipulator
                 ->addLegend('appearance_legend', ['layout_legend'])
                 ->addField(['backgroundColor', 'textAlignment'], 'appearance_legend', PaletteManipulator::POSITION_APPEND)
