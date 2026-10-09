@@ -193,7 +193,7 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
     protected function encode(mixed $original, array $data): string
     {
         return $this->isJson($original) || !$this->isEncoded($original)
-            ? json_encode($data)
+            ? json_encode($data, JSON_THROW_ON_ERROR)
             : serialize($data);
     }
 

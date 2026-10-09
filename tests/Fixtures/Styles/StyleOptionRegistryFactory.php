@@ -61,7 +61,13 @@ final class StyleOptionRegistryFactory
             }
 
             $relative = substr($file->getPathname(), \strlen($root) + 1, -4);
-            $classes[] = 'DigitaleDinge\\ContaoKiss\\Styles\\Option\\'.str_replace('/', '\\', $relative);
+            $class = 'DigitaleDinge\\ContaoKiss\\Styles\\Option\\'.str_replace('/', '\\', $relative);
+
+            if (!class_exists($class)) {
+                throw new \LogicException(\sprintf('The file "%s" does not declare the class "%s".', $file->getPathname(), $class));
+            }
+
+            $classes[] = $class;
         }
 
         sort($classes);

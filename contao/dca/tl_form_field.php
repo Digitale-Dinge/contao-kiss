@@ -78,7 +78,7 @@ foreach (array_keys($GLOBALS['TL_FFL'] ?? []) as $field) {
     }
 
     try {
-        $pm->applyToPalette($field, 'tl_form_field');
+        $pm->applyToPalette((string) $field, 'tl_form_field');
     }
     catch (PaletteNotFoundException) {
         // Noop
