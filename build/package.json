@@ -1,7 +1,7 @@
 {
     "name": "@digitaledinge/contao-kiss",
     "version": "1.0.0",
-    "author": "Sebastian Zoglowek <sebastian@digitaledin.ge>",
+    "author": "Sebastian Zoglowek <https://github.com/zoglo>",
     "license": "LGPL-3.0-or-later",
     "type": "module",
     "exports": {
