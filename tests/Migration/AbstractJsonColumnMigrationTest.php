@@ -7,6 +7,7 @@ namespace DigitaleDinge\ContaoKiss\Tests\Migration;
 use DigitaleDinge\ContaoKiss\Migration\AbstractJsonColumnMigration;
 use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -176,6 +177,13 @@ class AbstractJsonColumnMigrationTest extends TestCase
         ];
     }
 
+    /**
+     * @param  list<string>                                        $columns
+     * @param  array<string, array<string, string>>                $renames
+     * @param  array<string, array<string, array<string, string>>> $maps
+     * @param  array<string, mixed>                                $row
+     * @throws Exception
+     */
     #[DataProvider('getStoredData')]
     public function testRun(array $columns, array $renames, array $maps, array $row, array|null $expected): void
     {
@@ -594,11 +602,17 @@ class AbstractJsonColumnMigrationTest extends TestCase
         $this->assertSame('Boom', $result->getMessage());
     }
 
+    /**
+     * @param array<string, list<string>> $schema
+     */
     private function mockConnection(array $schema, array $rows, array &$queries = []): Connection&MockObject
     {
         return $this->configureConnection($this->createMock(Connection::class), $schema, $rows, $queries);
     }
 
+    /**
+     * @param array<string, list<string>> $schema
+     */
     private function stubConnection(array $schema, array $rows, array &$queries = []): Connection&Stub
     {
         return $this->configureConnection($this->createStub(Connection::class), $schema, $rows, $queries);
@@ -607,7 +621,8 @@ class AbstractJsonColumnMigrationTest extends TestCase
     /**
      * @template T of Connection&Stub
      *
-     * @param T $db
+     * @param T                           $db
+     * @param array<string, list<string>> $schema
      *
      * @return T
      */
@@ -616,7 +631,7 @@ class AbstractJsonColumnMigrationTest extends TestCase
         $schemaManager = $this->createStub(AbstractSchemaManager::class);
         $schemaManager
             ->method('tablesExist')
-            ->willReturnCallback(static fn (array $tables): bool => [] === array_diff($tables, array_keys($schema)))
+            ->willReturnCallback(static fn (array $tables): bool => array_all($tables, static fn (mixed $table): bool => \is_string($table) && isset($schema[$table])))
         ;
 
         $schemaManager
@@ -643,9 +658,21 @@ class AbstractJsonColumnMigrationTest extends TestCase
         return $db;
     }
 
+    /**
+     * @param list<string>                                        $columns
+     * @param array<string, array<string, string>>                $renames
+     * @param array<string, array<string, array<string, string>>> $maps
+     * @param list<string>                                        $tables
+     */
     private function getMigration(Connection $db, array $columns, array $renames = [], array $maps = [], array $tables = ['tl_content'], string $where = ''): AbstractJsonColumnMigration
     {
         return new class($db, $tables, $columns, $renames, $maps, $where) extends AbstractJsonColumnMigration {
+            /**
+             * @param list<string>                                        $tables
+             * @param list<string>                                        $columns
+             * @param array<string, array<string, string>>                $renames
+             * @param array<string, array<string, array<string, string>>> $maps
+             */
             public function __construct(
                 Connection $connection,
                 private readonly array $tables,

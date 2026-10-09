@@ -19,12 +19,24 @@ final class CustomElementsConfigurationBuilder
 
     private string|null $type = null;
 
+    /**
+     * @var array<string, mixed>
+     */
     private array $config = [];
 
+    /**
+     * @var list<array{key: string, config: array{fields: array<string, array<mixed>>, ...}}>
+     */
     private array $listStack = [];
 
+    /**
+     * @var array<string, array<mixed>>
+     */
     private array $fields = [];
 
+    /**
+     * @var array<string, array<mixed>>
+     */
     private array $pendingFields = [];
 
     public function __construct(
@@ -34,6 +46,10 @@ final class CustomElementsConfigurationBuilder
     ) {
     }
 
+    /**
+     * @param array<mixed>|string       $translation
+     * @param array<string, mixed>|null $extra
+     */
     public function create(array|string $translation, string $contentCategory = 'texts', array|null $extra = []): self
     {
         $controller = $this->framework->getAdapter(Controller::class);
@@ -129,6 +145,10 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
+    /**
+     * @param array<mixed>|null $options
+     * @param array<mixed>|null $eval
+     */
     public function addField(string $key, array|null $options = [], array|null $eval = []): self
     {
         if (null === $options) {
@@ -143,7 +163,7 @@ final class CustomElementsConfigurationBuilder
         }
 
         if (null !== $eval && [] !== $eval) {
-            $options['eval'] = array_merge($options['eval'] ?? [], $eval);
+            $options['eval'] = array_merge(\is_array($options['eval'] ?? null) ? $options['eval'] : [], $eval);
         }
 
         $this->pendingFields[$key] = $options;
@@ -208,6 +228,8 @@ final class CustomElementsConfigurationBuilder
     }
 
     /**
+     * @param array<string> $options
+     *
      * @throws \Exception
      */
     public function addSelectField(string $key, array $options, array $eval = [], array|null $dependsOn = null): self
@@ -289,6 +311,8 @@ final class CustomElementsConfigurationBuilder
     }
 
     /**
+     * @param array<string> $options
+     *
      * @deprecated use addSelectField() or addCheckboxField() instead
      *
      * @throws \Exception
@@ -399,6 +423,7 @@ final class CustomElementsConfigurationBuilder
 
         $options['label'] = [
             $this->translator->trans('rsce.field.imageUrl.label', [], 'rsce'),
+            // @phpstan-ignore offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
             &$GLOBALS['TL_LANG']['MSC']['url'][1],
         ];
 
@@ -712,6 +737,9 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function build(): array
     {
         $this->applyPendingFields();
@@ -722,9 +750,17 @@ final class CustomElementsConfigurationBuilder
         return $this->config;
     }
 
+    /**
+     * @param array<mixed> $options
+     *
+     * @return array<mixed>
+     */
     private function inheritEvalClass(string $key, array $options): array
     {
-        $options['eval']['tl_class'] ??= $GLOBALS['TL_DCA']['tl_content']['fields'][$key]['eval']['tl_class'] ?? '';
+        $eval = \is_array($options['eval'] ?? null) ? $options['eval'] : [];
+        // @phpstan-ignore offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
+        $eval['tl_class'] ??= $GLOBALS['TL_DCA']['tl_content']['fields'][$key]['eval']['tl_class'] ?? '';
+        $options['eval'] = $eval;
 
         return $options;
     }
@@ -734,6 +770,11 @@ final class CustomElementsConfigurationBuilder
         return [] !== $this->listStack;
     }
 
+    /**
+     * @param list<string> $labels
+     *
+     * @return list<string>
+     */
     private function getTranslations(array $labels, string $translationTrail = 'rsce.', string $translationDomain = 'rsce'): array
     {
         $translated = [];
@@ -757,6 +798,11 @@ final class CustomElementsConfigurationBuilder
         ];
     }
 
+    /**
+     * @param array<mixed> $options
+     *
+     * @return array<mixed>
+     */
     private function generateListCtaField(array $options = []): array
     {
         return array_merge(
@@ -771,6 +817,7 @@ final class CustomElementsConfigurationBuilder
                 'maxItems' => 2,
                 'fields' => [
                     'text' => [
+                        // @phpstan-ignore offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
                         'label' => &$GLOBALS['TL_LANG']['tl_content']['ctaText'],
                         'inputType' => 'text',
                         'eval' => [
@@ -801,9 +848,20 @@ final class CustomElementsConfigurationBuilder
         );
     }
 
+    /**
+     * @return array{eval: array<mixed>, ...}
+     */
     private function copyDcaField(string $key, string $table = 'tl_content'): array
     {
+        // @phpstan-ignore offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
         $field = $GLOBALS['TL_DCA'][$table]['fields'][$key];
+
+        if (!\is_array($field)) {
+            throw new \LogicException(\sprintf('The DCA field "%s.%s" does not exist.', $table, $key));
+        }
+
+        $field['eval'] = \is_array($field['eval'] ?? null) ? $field['eval'] : [];
+
         $label = $field['label'] ?? null;
 
         // Remove the label reference (see #35)

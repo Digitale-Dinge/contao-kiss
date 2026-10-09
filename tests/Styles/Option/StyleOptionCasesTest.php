@@ -98,7 +98,7 @@ final class StyleOptionCasesTest extends TestCase
         $enums = [];
 
         foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($root, \FilesystemIterator::SKIP_DOTS)) as $file) {
-            if ('php' !== $file->getExtension()) {
+            if (!$file instanceof \SplFileInfo || 'php' !== $file->getExtension()) {
                 continue;
             }
 

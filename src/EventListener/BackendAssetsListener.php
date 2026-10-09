@@ -21,7 +21,9 @@ readonly class BackendAssetsListener
     public function __invoke(RequestEvent $event): void
     {
         if ($this->scopeMatcher->isBackendMainRequest($event)) {
+            // @phpstan-ignore offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
             $GLOBALS['TL_CSS'][] = $this->package->getUrl('dist/backend/contao-kiss.css', 'digitale_dinge_contao_kiss');
+            // @phpstan-ignore offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
             $GLOBALS['TL_JAVASCRIPT'][] = $this->package->getUrl('dist/backend/contao-kiss.js', 'digitale_dinge_contao_kiss');
         }
     }

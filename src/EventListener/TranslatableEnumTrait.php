@@ -13,6 +13,9 @@ trait TranslatableEnumTrait
     {
     }
 
+    /**
+     * @return array<string, int|string>
+     */
     public function getTranslatedOptions(string $enum): array
     {
         if (!is_subclass_of($enum, \BackedEnum::class)) {

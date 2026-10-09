@@ -26,6 +26,9 @@ class StylesVariable
     /**
      * Make registered names without dots callable as e.g. styles.name(key).
      */
+    /**
+     * @param array<string|null> $arguments
+     */
     public function __call(string $name, array $arguments): StyleOption
     {
         return $this->option($name, $arguments[0] ?? null);
@@ -41,6 +44,8 @@ class StylesVariable
 
     /**
      * Resolves multiple keys of a style option and return them as classes.
+     *
+     * @param array<string|null> $keys
      */
     public function options(string $option, array $keys): string
     {
