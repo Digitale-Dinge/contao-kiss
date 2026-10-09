@@ -50,7 +50,7 @@ final class CustomElementsConfigurationBuilder
         $this->config['label'] = $translation;
         $this->config['contentCategory'] = $contentCategory;
 
-        $this->config = [...$this->config, ...$extra];
+        $this->config = [...$this->config, ...$extra ?? []];
 
         return $this;
     }
@@ -142,7 +142,7 @@ final class CustomElementsConfigurationBuilder
             ]);
         }
 
-        if ([] !== $eval) {
+        if (null !== $eval && [] !== $eval) {
             $options['eval'] = array_merge($options['eval'] ?? [], $eval);
         }
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace DigitaleDinge\ContaoKiss\Tests\EventListener;
 
-use DigitaleDinge\ContaoKiss\EventListener\TranslatableEnumTrait;
 use DigitaleDinge\ContaoKiss\Styles\Option\Component\Media\Layout;
+use DigitaleDinge\ContaoKiss\Tests\Fixtures\EventListener\TranslatableEnumSubject;
 use DigitaleDinge\ContaoKiss\Tests\Fixtures\Styles\PlainEnum;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -44,7 +44,7 @@ final class TranslatableEnumTraitTest extends TestCase
         $this->createSubject()->getTranslatedOptions(\stdClass::class);
     }
 
-    private function createSubject(): object
+    private function createSubject(): TranslatableEnumSubject
     {
         $translator = $this->createStub(TranslatorInterface::class);
         $translator
@@ -52,8 +52,6 @@ final class TranslatableEnumTraitTest extends TestCase
             ->willReturnArgument(0)
         ;
 
-        return new class($translator) {
-            use TranslatableEnumTrait;
-        };
+        return new TranslatableEnumSubject($translator);
     }
 }

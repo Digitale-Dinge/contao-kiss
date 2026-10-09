@@ -19,6 +19,9 @@ use PHPUnit\Framework\TestCase;
 
 final class StylesVariableTest extends TestCase
 {
+    /**
+     * @param class-string $optionClass
+     */
     #[DataProvider('provideGetters')]
     public function testEveryGetterResolvesItsOption(string $getter, string $optionClass): void
     {

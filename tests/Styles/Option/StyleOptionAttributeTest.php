@@ -12,6 +12,8 @@ use PHPUnit\Framework\TestCase;
 final class StyleOptionAttributeTest extends TestCase
 {
     /**
+     * @param class-string $class
+     *
      * @throws \ReflectionException
      */
     #[DataProvider('provideOptionClasses')]
