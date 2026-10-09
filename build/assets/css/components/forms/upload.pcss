@@ -6,12 +6,23 @@
  * Base: input.upload
  * Colors: upload-{primary|secondary|tertiary|success|warning|error}
  *
- * Example: <input type="file" class="upload upload-primary">
+ * Example: <input type="file" class="form-input upload upload-primary">
  */
 @layer components {
-    input.upload::file-selector-button {
-        background-color: var(--file-button-color, var(--kiss-sys-color-neutral-on-strong));
-        color: var(--file-text-color, var(--color-white));
+    input.upload {
+        padding-block: 0;
+        padding-inline-start: 0;
+
+        &::file-selector-button {
+            @apply cursor-pointer font-medium border-0;
+
+            background-color: var(--file-button-color, var(--kiss-sys-color-neutral-on-strong));
+            color: var(--file-text-color, var(--color-white));
+            padding: var(--input-py, .625rem) var(--input-px, .75rem);
+            margin-inline-end: var(--input-px, .75rem);
+            border-start-start-radius: calc(var(--radius-field, .5rem) - 1px);
+            border-end-start-radius: calc(var(--radius-field, .5rem) - 1px);
+        }
     }
 
     /* Colors */
