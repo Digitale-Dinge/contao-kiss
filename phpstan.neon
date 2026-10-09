@@ -16,7 +16,7 @@ parameters:
 
     excludePaths:
         - contao/templates
-        - src/Migration/Version100/ArticleContentKissStylesMigration.php
+        - src/Migration/Version004/ArticleContentKissStylesMigration.php
 
     bootstrapFiles:
         - vendor/autoload.php

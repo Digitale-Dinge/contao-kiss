@@ -1,9 +1,46 @@
 # Changelog
 
 > [!IMPORTANT]
-> contao-kiss is in initial development (`0.y.z`). Every minor version may contain breaking changes and no automatic
-> migration between minor versions is provided. See [#18] for
-> the tag and branch history.
+> Since 1.0.0, contao-kiss follows [semantic versioning][semver]. Breaking changes only happen in major versions.
+> Before 1.0.0, every minor version could contain breaking changes. See [#18] for the tag and branch history.
+
+## [1.0.0] (2026-10-09)
+
+**Tag:** [`1.0.0`][tag-1.0.0]
+
+**Branch:** `main`
+
+### Added
+
+- [#50] The rich text editor has a styles dropdown for the heading and text appearances ([zoglo])
+- [#54] The native file input of upload form fields is styled now ([zoglo])
+
+### Changed
+
+- [#53] contao-kiss is licensed under LGPL-3.0-or-later instead of GPL-3.0-or-later ([zoglo])
+- `digitaledinge/contao-company` is required in `^1.0` instead of `0.2.*` ([zoglo])
+- [#52] SVG icons in media text cards line up with the card padding in every card layout ([cristiangavriliu])
+- [#51] Swiper items no longer overflow the page on the horizontal axis ([cristiangavriliu])
+- [#48] RSCE elements inside an element group no longer log an `Undefined array key "tl_content"` warning in the back
+  end ([zoglo])
+- The CustomElementsConfigurationBuilder is no longer experimental and is covered by semantic versioning. The
+  `StylesVariable` class behind the `styles` Twig global is internal now
+- `AbstractJsonColumnMigration` is no longer internal, so your migrations can extend it
+- The migrations moved from `Migration/Version100/` to the folder of the version they belong to
+
+### Breaking
+
+> [!CAUTION]
+> These changes require manual updates in your project. See [UPGRADE.md][upgrade-1.0].
+>
+> - [#52] `--card-px` and `--card-py` are gone. Use `--card-pt`, `--card-pr`, `--card-pb` and `--card-pl` instead
+>   ([cristiangavriliu])
+> - [#53] `TranslatableEnumTrait::getTranslatedOptions()` requires the enum class name as a `string` ([zoglo])
+> - `addDependsOnField()` is gone from the CustomElementsConfigurationBuilder. Use `addSelectField()` or
+>   `addCheckboxField()` instead
+> - The `includeImageSizeField` argument of `addImageField()` is gone. Use `includeSizeField` instead
+> - `styles.cta_type` is now `styles.cta_variant` and returns the variant without the `btn-` prefix. Stored values stay
+>   the same
 
 ## [0.9.0] (2026-10-07)
 
@@ -524,6 +561,7 @@ Contao 5 base and most of the old custom elements were dropped.
 
 - Initial release for Contao `^4.13 || ^5.3`
 
+[1.0.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.9.0...1.0.0
 [0.9.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.8.0...0.9.0
 [0.8.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.7.2...0.8.0
 [0.7.2]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.7.1...0.7.2
@@ -538,6 +576,7 @@ Contao 5 base and most of the old custom elements were dropped.
 [0.2.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.1.0
 
+[tag-1.0.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.0
 [tag-0.9.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.9.0
 [tag-0.8.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.8.0
 [tag-0.7.2]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.7.2
@@ -600,10 +639,18 @@ Contao 5 base and most of the old custom elements were dropped.
 [#45]: https://github.com/Digitale-Dinge/contao-kiss/pull/45
 [#46]: https://github.com/Digitale-Dinge/contao-kiss/pull/46
 [#47]: https://github.com/Digitale-Dinge/contao-kiss/pull/47
+[#48]: https://github.com/Digitale-Dinge/contao-kiss/pull/48
+[#50]: https://github.com/Digitale-Dinge/contao-kiss/pull/50
+[#51]: https://github.com/Digitale-Dinge/contao-kiss/pull/51
+[#52]: https://github.com/Digitale-Dinge/contao-kiss/pull/52
+[#53]: https://github.com/Digitale-Dinge/contao-kiss/pull/53
+[#54]: https://github.com/Digitale-Dinge/contao-kiss/pull/54
 
+[semver]: https://semver.org
 [tailwind-compat]: https://tailwindcss.com/docs/compatibility#sass-less-and-stylus
 
 [upgrade]: UPGRADE.md
+[upgrade-1.0]: UPGRADE.md#from-09-to-10
 [upgrade-0.8]: UPGRADE.md#from-07-to-08
 [upgrade-0.7]: UPGRADE.md#from-06-to-07
 
