@@ -21,4 +21,9 @@
 
         @apply px-12!;
     }
+
+    /* As discussed we wnt to use clip for now and not hidden due to stacking context */ 
+    main:has(.swiper.overflow-visible\!) {
+        overflow-x: clip;
+    }
 }
