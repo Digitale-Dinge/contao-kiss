@@ -4,21 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e79e7c0561dbd4a5f87e8984ed92bc17",
+    "content-hash": "9995f2243710e66c7df82da1098cc80b",
     "packages": [
         {
             "name": "contao/contao-rector",
             "version": "dev-fix/set_lists",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zoglo/contao-rector.git",
+                "url": "https://github.com/zoglo/contao-rector",
                 "reference": "720286b8b703411c99ff9e3064c9908fae3e3fc6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zoglo/contao-rector/zipball/720286b8b703411c99ff9e3064c9908fae3e3fc6",
-                "reference": "720286b8b703411c99ff9e3064c9908fae3e3fc6",
-                "shasum": ""
             },
             "require": {
                 "php": "^8.1",
