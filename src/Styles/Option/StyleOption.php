@@ -20,20 +20,32 @@ abstract class StyleOption implements \Stringable
     public function __toString(): string
     {
         try {
-            return (string) $this->enumClass::{$this->key ?? $this->default}?->value;
+            return (string) $this->getCase($this->key ?? $this->default)?->value;
         }
         catch (\Throwable) {
             return '';
         }
     }
 
+    /**
+     * @param array<mixed> $arguments
+     */
     public function __call(string $name, array $arguments): string|null
     {
         try {
-            return $this->enumClass::{$name}?->value;
+            $value = $this->getCase($name)?->value;
+
+            return null === $value ? null : (string) $value;
         }
         catch (\Throwable) {
             return null;
         }
+    }
+
+    private function getCase(string $name): \BackedEnum|null
+    {
+        $case = \constant($this->enumClass.'::'.$name);
+
+        return $case instanceof \BackedEnum ? $case : null;
     }
 }

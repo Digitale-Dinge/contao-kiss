@@ -66,7 +66,7 @@ final class CustomElementsConfigurationBuilderTest extends TestCase
 
         // @phpstan-ignore offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
         $this->assertSame(['URL', 'Enter a web address.'], $GLOBALS['TL_LANG']['MSC']['url']);
-        $this->assertSame('rsce.field.imageUrl.label', $config['fields']['list']['fields']['imageUrl']['label'][0]);
+        $this->assertSame('rsce.field.imageUrl.label', $this->getPath($config, 'fields', 'list', 'fields', 'imageUrl', 'label', 0));
     }
 
     public function testBuildingInASubRequestLoadsTheDcaOfThatRequest(): void
@@ -92,10 +92,23 @@ final class CustomElementsConfigurationBuilderTest extends TestCase
         $requestStack->push(new Request());
         DcaLoader::switchToCurrentRequest();
 
-        $fields = $buildCallToActionList()['fields']['list']['fields']['callToAction']['fields'];
+        $fields = $this->getPath($buildCallToActionList(), 'fields', 'list', 'fields', 'callToAction', 'fields');
 
-        $this->assertSame('text', $fields['url']['inputType']);
-        $this->assertSame('w25', $fields['target']['eval']['tl_class']);
+        $this->assertSame('text', $this->getPath($fields, 'url', 'inputType'));
+        $this->assertSame('w25', $this->getPath($fields, 'target', 'eval', 'tl_class'));
+    }
+
+    private function getPath(mixed $value, int|string ...$keys): mixed
+    {
+        foreach ($keys as $key) {
+            if (!\is_array($value) || !\array_key_exists($key, $value)) {
+                $this->fail(\sprintf('Missing key "%s".', $key));
+            }
+
+            $value = $value[$key];
+        }
+
+        return $value;
     }
 
     private function createBuilder(): CustomElementsConfigurationBuilder

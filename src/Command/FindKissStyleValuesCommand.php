@@ -58,6 +58,9 @@ class FindKissStyleValuesCommand
     ) {
     }
 
+    /**
+     * @param list<string> $values
+     */
     public function __invoke(SymfonyStyle $io, #[Argument(description: 'The key, or a comma separated list of keys')] string $keys, #[Argument(description: 'The values to look for. Omit to list every value that is not the default')] array $values = [], #[Option(description: 'Limit the report to a single table', shortcut: 't')] string|null $table = null, #[Option(description: 'Backend URL to build an edit link from, e.g. https://example.org/contao', name: 'backend-prefix')] string|null $backendPrefix = null): int
     {
         $keys = array_values(array_filter(array_map(trim(...), explode(',', $keys))));
@@ -104,6 +107,13 @@ class FindKissStyleValuesCommand
         return Command::SUCCESS;
     }
 
+    /**
+     * @param array{do: string, columns: list<string>} $config
+     * @param list<string>                             $keys
+     * @param list<string>                             $values
+     *
+     * @return list<array{0: string, 1: float|int|string, ...}>
+     */
     private function findInTable(string $table, array $config, array $keys, array $values, string|null $backendPrefix): array
     {
         $schema = $this->connection->createSchemaManager();
@@ -141,6 +151,10 @@ class FindKissStyleValuesCommand
         $rows = [];
 
         foreach ($this->connection->fetchAllAssociative($query) as $row) {
+            if (!is_numeric($row['id'])) {
+                continue;
+            }
+
             foreach ($columns as $column) {
                 foreach ($this->findInValue($row[$column] ?? null, $keys, $values, $defaults) as $path => $value) {
                     $result = [
@@ -153,7 +167,7 @@ class FindKissStyleValuesCommand
                         $value,
                     ];
 
-                    if (null !== $backendPrefix && is_numeric($row['id'])) {
+                    if (null !== $backendPrefix) {
                         $result[] = $this->getEditUrl($backendPrefix, $config['do'], $table, (int) $row['id']);
                     }
 
@@ -179,6 +193,13 @@ class FindKissStyleValuesCommand
         );
     }
 
+    /**
+     * @param list<string>          $keys
+     * @param list<string>          $values
+     * @param array<string, string> $defaults
+     *
+     * @return array<string, string>
+     */
     private function findInValue(mixed $value, array $keys, array $values, array $defaults, string $path = ''): array
     {
         $found = [];
@@ -200,6 +221,9 @@ class FindKissStyleValuesCommand
         return $found;
     }
 
+    /**
+     * @param list<string> $values
+     */
     private function matches(string $item, array $values, string $default): bool
     {
         return [] === $values ? $item !== $default : \in_array($item, $values, true);
@@ -219,6 +243,9 @@ class FindKissStyleValuesCommand
         return \is_string($value) && \in_array(substr(ltrim($value), 0, 1), ['{', '['], true);
     }
 
+    /**
+     * @return array<mixed>
+     */
     private function decode(mixed $value): array
     {
         if (\is_array($value)) {

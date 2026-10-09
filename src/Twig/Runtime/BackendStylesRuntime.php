@@ -18,8 +18,14 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
 {
     use TranslatableEnumTrait;
 
+    /**
+     * @var array<string, int|string>
+     */
     private array $gridColumnLabels;
 
+    /**
+     * @var array<string, array<string, array<int, array<mixed>>>>
+     */
     private array $cache = [];
 
     public function __construct(
@@ -32,6 +38,8 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
     }
 
     /**
+     * @return list<string>
+     *
      * @throws Exception
      */
     public function getGridClasses(int $id, string $table): array
@@ -62,7 +70,8 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
 
         $styles = $this->getParentKissStyles($id, $table);
 
-        $hasGridRatio = !empty($styles['gridRatioActive']) && !empty($styles['gridRatio']);
+        $gridRatio = $styles['gridRatio'] ?? null;
+        $hasGridRatio = !empty($styles['gridRatioActive']) && !empty($gridRatio) && \is_scalar($gridRatio);
 
         if (empty($styles['gridColumns']) && !$hasGridRatio) {
             return $attributes;
@@ -72,7 +81,7 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
             ->addClass('kiss_grid')
             ->addClass($this->getBackendClass($styles, 'columns'), !$hasGridRatio)
             ->addClass('kiss_grid-ratio', $hasGridRatio)
-            ->addStyle('--grid-cols: '.$styles['gridRatio'], $hasGridRatio)
+            ->addStyle('--grid-cols: '.($hasGridRatio ? $gridRatio : ''), $hasGridRatio)
         ;
     }
 
@@ -81,16 +90,18 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
      */
     public function getGridLabel(int $id, string $table): string|null
     {
-        $styles = $this->getKissStyles($id, $table);
+        $columns = $this->getKissStyles($id, $table)['gridColumns'] ?? null;
 
-        if (empty($styles['gridColumns'])) {
+        if (empty($columns) || !\is_string($columns) || !isset($this->gridColumnLabels[$columns])) {
             return null;
         }
 
-        return $this->gridColumnLabels[$styles['gridColumns']] ?? null;
+        return (string) $this->gridColumnLabels[$columns];
     }
 
     /**
+     * @return array<mixed>
+     *
      * @throws Exception
      */
     private function getKissStyles(int $id, string $table): array
@@ -99,6 +110,8 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
     }
 
     /**
+     * @return array<mixed>
+     *
      * @throws Exception
      */
     private function getParentKissStyles(int $id, string $table): array
@@ -107,6 +120,8 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
     }
 
     /**
+     * @return array<mixed>
+     *
      * @throws Exception
      */
     private function loadKissStyles(int $id, string $table, bool $fromParent = false): array
@@ -159,15 +174,18 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
     }
 
     /**
+     * @param array<mixed>    $styles
      * @param 'columns'|'gap' $type
      */
     private function getBackendClass(array $styles, string $type): string
     {
         $prefix = 'kiss_';
+        $key = $styles['columns' === $type ? 'gridColumns' : 'gridGap'] ?? '';
+        $key = \is_string($key) ? $key : '';
 
         return match ($type) {
-            'columns' => $prefix.$this->stylesVariable->getColumn($styles['gridColumns'] ?? ''),
-            'gap' => $prefix.$this->stylesVariable->getGap($styles['gridGap'] ?? ''),
+            'columns' => $prefix.$this->stylesVariable->getColumn($key),
+            'gap' => $prefix.$this->stylesVariable->getGap($key),
         };
     }
 }

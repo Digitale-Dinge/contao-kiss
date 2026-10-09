@@ -10,6 +10,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\Layout;
 use DigitaleDinge\ContaoKiss\Styles\Option\Margin;
 use DigitaleDinge\ContaoKiss\Styles\Option\Modifier;
 use DigitaleDinge\ContaoKiss\Styles\Option\Padding;
+use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\Typography;
 use DigitaleDinge\ContaoKiss\Tests\Fixtures\Styles\StyleOptionRegistryFactory;
 use DigitaleDinge\ContaoKiss\Tests\Fixtures\Styles\SwappedLayoutOption;
@@ -99,7 +100,10 @@ final class StylesVariableTest extends TestCase
             'name' => 'shape_radius',
         ]);
 
-        $this->assertSame('swapped-side', (string) $styles->shape_radius('side'));
+        $option = $styles->shape_radius('side');
+
+        $this->assertInstanceOf(StyleOption::class, $option);
+        $this->assertSame('swapped-side', (string) $option);
     }
 
     public function testAHigherPriorityRegistrationReplacesAKissOption(): void

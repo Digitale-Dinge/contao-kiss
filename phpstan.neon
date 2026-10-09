@@ -7,7 +7,7 @@ includes:
     - vendor-bin/phpstan/vendor/slam/phpstan-extensions/conf/symfony-rules.neon
 
 parameters:
-    level: 9
+    level: 10
 
     paths:
         - contao

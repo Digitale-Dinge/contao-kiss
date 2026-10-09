@@ -33,17 +33,24 @@ class AddStyleOptionsPass implements CompilerPassInterface
             }
 
             foreach ($tags as $attributes) {
+                if (!\is_array($attributes)) {
+                    continue;
+                }
+
                 $name = $attributes['name'] ?? $class;
 
-                if ('' === $name) {
+                if (!\is_string($name) || '' === $name) {
                     throw new InvalidDefinitionException(\sprintf('The style option "%s" has an empty name.', $class));
                 }
 
+                $groups = $attributes['groups'] ?? [];
+                $priority = $attributes['priority'] ?? 0;
+
                 $candidates[$name][] = [
                     'class' => $class,
-                    'groups' => $attributes['groups'] ?? [],
+                    'groups' => \is_array($groups) ? array_filter($groups, \is_string(...)) : [],
                     'label' => $attributes['label'] ?? null,
-                    'priority' => (int) ($attributes['priority'] ?? 0),
+                    'priority' => is_numeric($priority) ? (int) $priority : 0,
                 ];
             }
 

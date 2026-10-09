@@ -40,8 +40,12 @@ final class StyleOptionRegistryFactory
     {
         $registry = new StyleOptionRegistry();
 
-        foreach ($container->getDefinition(StyleOptionRegistry::class)->getMethodCalls() as [$method, $arguments]) {
-            $registry->{$method}(...$arguments);
+        foreach ($container->getDefinition(StyleOptionRegistry::class)->getMethodCalls() as $call) {
+            if (!\is_array($call) || !\is_string($call[0] ?? null) || !\is_array($call[1] ?? null)) {
+                throw new \LogicException('Invalid method call on the style option registry definition.');
+            }
+
+            $registry->{$call[0]}(...$call[1]);
         }
 
         return $registry;
