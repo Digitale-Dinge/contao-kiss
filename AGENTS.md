@@ -113,8 +113,8 @@ and `scripts/`, and keeps its tests in `evals/`:
 | `evals/evals.json` | tasks with a `prompt` and the `expected_output`, to check what the skill builds |
 | `evals/eval_set.json` | queries with `should_trigger`, to check when the skill loads |
 
-`SKILL.md` never mentions its evals, it is loaded on every use. Run the evals with Anthropic's `skill-creator` skill
-after changing a skill, and add a case to `evals.json` for every rule that got broken in review.
+`SKILL.md` never mentions its evals, it is loaded on every use. Add a case to `evals.json` for every rule that got
+broken in review.
 
 When a Twig rule in `kiss-framework-extend` changes, update [Twig templates](docs/twig-templates.md) as well.
 
