@@ -156,9 +156,7 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
     }
 
     /**
-     * @param array $styles
      * @param 'columns'|'gap' $type
-     * @return string
      */
     private function getBackendClass(array $styles, string $type): string
     {
