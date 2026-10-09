@@ -74,9 +74,9 @@ final class CustomElementsConfigurationBuilder
 
         $listConfig = [
             'label' => $translations ?? [
-                    $this->translator->trans('rsce.list.label', [], 'rsce'),
-                    $this->translator->trans('rsce.list.description', [], 'rsce'),
-                ],
+                $this->translator->trans('rsce.list.label', [], 'rsce'),
+                $this->translator->trans('rsce.list.description', [], 'rsce'),
+            ],
             'inputType' => 'list',
             'elementLabel' => $elementLabel ?? $this->translator->trans('rsce.list.element', [], 'rsce'),
             'fields' => [],
