@@ -12,35 +12,35 @@
 
 ### Added
 
-- [#50] The rich text editor has a styles dropdown for the heading and text appearances ([zoglo])
 - [#54] The native file input of upload form fields is styled now ([zoglo])
+- [#50] The rich text editor has a styles dropdown for the heading and text appearances ([zoglo])
 
 ### Changed
 
+- [#57] The CustomElementsConfigurationBuilder is no longer experimental and is covered by semantic versioning. The
+  `StylesVariable` class behind the `styles` Twig global is internal now ([zoglo])
+- [#57] `AbstractJsonColumnMigration` is no longer internal, so your migrations can extend it ([zoglo])
+- [#57] The migrations moved from `Migration/Version100/` to the folder of the version they belong to ([zoglo])
 - [#53] contao-kiss is licensed under LGPL-3.0-or-later instead of GPL-3.0-or-later ([zoglo])
-- `digitaledinge/contao-company` is required in `^1.0` instead of `0.2.*` ([zoglo])
 - [#52] SVG icons in media text cards line up with the card padding in every card layout ([cristiangavriliu])
 - [#51] Swiper items no longer overflow the page on the horizontal axis ([cristiangavriliu])
 - [#48] RSCE elements inside an element group no longer log an `Undefined array key "tl_content"` warning in the back
   end ([zoglo])
-- The CustomElementsConfigurationBuilder is no longer experimental and is covered by semantic versioning. The
-  `StylesVariable` class behind the `styles` Twig global is internal now
-- `AbstractJsonColumnMigration` is no longer internal, so your migrations can extend it
-- The migrations moved from `Migration/Version100/` to the folder of the version they belong to
+- `digitaledinge/contao-company` is required in `^1.0` instead of `0.2.*`
 
 ### Breaking
 
 > [!CAUTION]
 > These changes require manual updates in your project. See [UPGRADE.md][upgrade-1.0].
 >
+> - [#57] `addDependsOnField()` is gone from the CustomElementsConfigurationBuilder. Use `addSelectField()` or
+>   `addCheckboxField()` instead ([zoglo])
+> - [#57] The `includeImageSizeField` argument of `addImageField()` is gone. Use `includeSizeField` instead ([zoglo])
+> - [#57] `styles.cta_type` is now `styles.cta_variant` and returns the variant without the `btn-` prefix. Stored values
+>   stay the same ([zoglo])
+> - [#53] `TranslatableEnumTrait::getTranslatedOptions()` requires the enum class name as a `string` ([zoglo])
 > - [#52] `--card-px` and `--card-py` are gone. Use `--card-pt`, `--card-pr`, `--card-pb` and `--card-pl` instead
 >   ([cristiangavriliu])
-> - [#53] `TranslatableEnumTrait::getTranslatedOptions()` requires the enum class name as a `string` ([zoglo])
-> - `addDependsOnField()` is gone from the CustomElementsConfigurationBuilder. Use `addSelectField()` or
->   `addCheckboxField()` instead
-> - The `includeImageSizeField` argument of `addImageField()` is gone. Use `includeSizeField` instead
-> - `styles.cta_type` is now `styles.cta_variant` and returns the variant without the `btn-` prefix. Stored values stay
->   the same
 
 ## [0.9.0] (2026-10-07)
 
@@ -645,6 +645,7 @@ Contao 5 base and most of the old custom elements were dropped.
 [#52]: https://github.com/Digitale-Dinge/contao-kiss/pull/52
 [#53]: https://github.com/Digitale-Dinge/contao-kiss/pull/53
 [#54]: https://github.com/Digitale-Dinge/contao-kiss/pull/54
+[#57]: https://github.com/Digitale-Dinge/contao-kiss/pull/57
 
 [semver]: https://semver.org
 [tailwind-compat]: https://tailwindcss.com/docs/compatibility#sass-less-and-stylus
