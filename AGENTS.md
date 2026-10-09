@@ -253,7 +253,7 @@ composer depcheck
 
 cd build && npm run lint
 
-# everything CI runs
+# fixes (Rector, ECS, Twig CS Fixer, Biome, Stylelint), then runs every check; GitHub CI only reports
 composer ci
 ```
 

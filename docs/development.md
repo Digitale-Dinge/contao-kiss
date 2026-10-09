@@ -29,7 +29,7 @@ Skip it once with `git commit --no-verify`, disable it with `git config --unset 
 | `composer twig-cs-fixer-tests` | runs the tests of the custom Twig rules   |
 | `composer depcheck`            | checks the Composer dependencies          |
 | `composer unit-tests`          | runs PHPUnit                              |
-| `composer ci`                  | all of the above                          |
+| `composer ci`                  | fixes first, then runs every check        |
 | `npm run lint` (in `build/`)   | Biome and Stylelint over `build/assets`   |
 
 Twig CS Fixer is configured in `.twig-cs-fixer.php`, the linters in
@@ -125,5 +125,5 @@ write the migration is in `docs/style-options.md`.
 
 ## CI
 
-See `.github/workflows/ci.yml`.
-Locally: `composer ci` and `npm run lint`.
+See `.github/workflows/ci.yml`. It only reports and changes nothing.
+Locally: `composer ci` fixes what Rector, ECS, Twig CS Fixer, Biome and Stylelint can fix, then runs every check.

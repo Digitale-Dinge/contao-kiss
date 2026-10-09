@@ -65,10 +65,11 @@
     },
     "scripts": {
         "ci": [
-            "@depcheck",
-            "@ecs-check",
-            "@rector-check",
+            "@rector",
+            "@ecs",
+            "@twig-cs-fixer",
             "@phpstan",
+            "@depcheck",
             "@unit-tests",
             "@twig-cs-fixer-tests",
             "@twig-cs-fixer-lint",
