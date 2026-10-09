@@ -5,8 +5,7 @@ was asked, reuse what exists, and follow the conventions of the area being edite
 
 ## Core constraints (strict)
 
-- Preserve backwards compatibility: enum case names, field names, service IDs, template names and blocks, style option
-  keys stored in `kiss_styles`.
+- **Never break backwards compatibility.** See "Backwards compatibility". No exceptions, no "it's cleaner this way".
 - Removing or renaming a style option case: **MUST warn, MUST NOT touch without confirmation.** See "The style system".
 - Change exclusively what was requested. No enum case, field or translation because it logically belongs.
 - Fix what the task requires. In code you are only passing through, report instead of fixing.
@@ -16,6 +15,36 @@ was asked, reuse what exists, and follow the conventions of the area being edite
 - English everywhere: code, comments, docblocks, identifiers, commit messages, replies. The only German is the content
   of `translations/de/*.yaml`.
 - Comments only for intent the code cannot express. In Twig the only allowed `{# #}` is a component docblock.
+
+## Backwards compatibility (strict)
+
+contao-kiss follows semantic versioning. Websites update it with `composer update` and expect nothing to break. A
+breaking change is **forbidden** unless the maintainer explicitly asks for that exact change. "Clean up", "refactor",
+"simplify", "fix the naming" or "remove what's unused" is **never** permission to break something.
+
+`UPGRADE.md` tells projects what they may rely on. **This list is stricter and is the one you follow.** Do not rename,
+remove, move or change the behaviour of:
+
+- Enum case names, enum values, style option keys stored in `kiss_styles`, DCA field names and palettes
+- Class names, namespaces, public and protected method names, signatures, argument names and return types, constants
+- Service IDs, config keys, console command names and options
+- Template names and paths, block names, template variables and hooks (`attributes`, `media_attributes`, …)
+- Twig globals, functions, filters and the `styles.*` getters
+- CSS classes, CSS custom properties, Stimulus controller names and exports
+- Translation keys
+- Migrations: never edit, rename or delete one
+
+Something is "unused" only if it is unused in every project out there, which you cannot check. Treat it as used.
+
+Allowed without asking: adding. A new method, a new optional argument at the end, a new enum case, a new template,
+block, class or custom property.
+
+When the task can't be done without a break:
+
+1. **Stop before the first edit.** Reply with a warning of its own: what breaks, who is affected, how a project adapts.
+2. Offer the non-breaking way: keep the old thing working next to the new one and mark it `@deprecated`.
+3. **Wait for an explicit "yes" to that warning.** The original request is not the confirmation.
+4. Only then edit, and add the break to `CHANGELOG.md` and `UPGRADE.md`.
 
 ## Repository context
 
@@ -266,6 +295,7 @@ composer ci
 - DE **and** EN translations present?
 - Read the diff and ask which line nobody ordered — and which existing line got removed unasked.
 - A style option case removed or renamed? Only after a warning in its own reply and an explicit "yes" to it.
+- Anything from "Backwards compatibility" renamed, removed, moved or changed? Revert it, or warn and wait for "yes".
 - Any comment restating the code below it? Any `{# #}` outside a component docblock? Any non-English word?
 - Did a prefix land in an enum that belongs in the template? Did a new Twig global or `Component\<X>\Variant` appear
   although `Modifier\Variant` exists?
