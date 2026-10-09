@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Migration\Version100;
+namespace DigitaleDinge\ContaoKiss\Migration\Version009;
 
 use DigitaleDinge\ContaoKiss\Migration\AbstractJsonColumnMigration;
 

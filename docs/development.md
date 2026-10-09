@@ -113,12 +113,16 @@ stylesheet is an entry of its own, named `<entry>.css`.
 `tests/Styles/Option/StyleOptionCasesTest.php` pins the case names of every
 enum in `src/Styles/Option/`, because those names are being stored for the appearance.
 
-- **Changing a value** is free.
 - **A new case** is reported as incomplete until it's added to `CASES`.
-- **Removing or renaming a case** fails the test. It's a breaking change: update
-  `CASES`, add a migration mapping the old case in
+- **Changing a value** changes the emitted class that projects may style against.
+  It's the maintainer's call, and it goes into `UPGRADE.md`.
+- **Removing or renaming a case** fails the test. It's a breaking change and the
+  maintainer's call: update `CASES`, add a migration mapping the old case in
   `src/Migration/Version<NNN>/` with a test next to the existing ones, and list
-  it under breaking changes in the PR.
+  it in `CHANGELOG.md` and `UPGRADE.md`.
+
+A project replacing an option in its own app is free to change values, see
+`docs/style-options.md`.
 
 `contao_kiss:find-style-values` finds the records that store a value. How to
 write the migration is in `docs/style-options.md`.

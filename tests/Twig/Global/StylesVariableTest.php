@@ -48,7 +48,7 @@ final class StylesVariableTest extends TestCase
         yield ['getSize', Modifier\SizeOption::class];
         yield ['getVariant', Modifier\VariantOption::class];
         yield ['getCta_shape', Component\CallToAction\ShapeOption::class];
-        yield ['getCta_type', Component\CallToAction\VariantOption::class];
+        yield ['getCta_variant', Component\CallToAction\VariantOption::class];
         yield ['getMedia_layout', Component\Media\LayoutOption::class];
     }
 

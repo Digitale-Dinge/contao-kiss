@@ -30,7 +30,6 @@
         "symfony/config": "^7.4 || ^8.0",
         "symfony/console": "^7.4 || ^8.0",
         "symfony/dependency-injection": "^7.4 || ^8.0",
-        "symfony/deprecation-contracts": "^3.0",
         "symfony/event-dispatcher": "^7.4 || ^8.0",
         "symfony/event-dispatcher-contracts": "^3.0",
         "symfony/http-kernel": "^7.4.11 || ^8.0",
@@ -90,6 +89,9 @@
         "bamarni-bin": {
             "bin-links": false,
             "forward-command": false
+        },
+        "branch-alias": {
+            "dev-main": "1.0.x-dev"
         },
         "contao-manager-plugin": "DigitaleDinge\\ContaoKiss\\ContaoManager\\Plugin"
     },

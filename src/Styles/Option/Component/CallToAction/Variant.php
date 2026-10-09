@@ -9,9 +9,9 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 enum Variant: string implements TranslatableLabelInterface
 {
-    case soft = 'btn-soft';
-    case outline = 'btn-outline';
-    case text = 'btn-text';
+    case soft = 'soft';
+    case outline = 'outline';
+    case text = 'text';
 
     public function label(): TranslatableMessage
     {

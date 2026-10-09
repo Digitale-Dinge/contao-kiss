@@ -151,7 +151,7 @@ The core of the framework is the separation between the stored value and the emi
 2. The `styles` Twig global resolves the key to the CSS class: `styles.size(data.elementSize)` → `sm`. Getters live in `StylesVariable.php` (`styles.size`, `styles.variant`, `styles.color`, `styles.background`, `styles.container`, `styles.padding_top` …).
 3. The **context prefix belongs in the template**, not in the enum: `'card-' ~ styles.size(...)` → `card-sm`, `'btn-' ~ styles.color(...)` → `btn-primary`. One enum therefore serves any number of components.
 
-Consequences: CSS classes can be swapped in the enum at any time (recompile, no DB migration), translations can be changed at any time, only changing case *names* requires a migration.
+Consequences: content only stores case names, so a project that replaces an option in its own app can change values and translations freely. Inside KISS, changing a value changes the class projects style against, and removing or renaming a case needs a migration. Both are the maintainer's decision, never yours: warn and wait for an explicit "yes" (see `AGENTS.md`, "Backwards compatibility").
 
 **Generic vs. component-specific:** options that can conceptually occur anywhere (sizes; variants like soft/outline/glass; colors) belong in `Modifier/` or `Color/` — even if the current occasion is only one component. Soft, glass, outline and friends will show up on buttons, alerts and badges next; that is why they live in `Modifier\Variant`, not in `Component\Card\Variant`. Only what is truly bound to one component (a card layout `side` / `media-full`) lives under `Component/<Name>/`. Same logic for field names: `elementVariant`, not `cardVariant`, when the option is reusable.
 

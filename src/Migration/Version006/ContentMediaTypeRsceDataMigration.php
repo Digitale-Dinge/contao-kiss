@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Migration\Version100;
+namespace DigitaleDinge\ContaoKiss\Migration\Version006;
 
 use DigitaleDinge\ContaoKiss\Migration\AbstractJsonColumnMigration;
 use Doctrine\DBAL\ArrayParameterType;

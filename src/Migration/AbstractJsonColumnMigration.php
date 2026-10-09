@@ -12,9 +12,6 @@ use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Types\Type;
 
-/**
- * @internal
- */
 abstract class AbstractJsonColumnMigration extends AbstractMigration
 {
     public function __construct(protected readonly Connection $connection)

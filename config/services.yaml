@@ -6,7 +6,7 @@ services:
 
     DigitaleDinge\ContaoKiss\:
         resource: '../src/'
-        exclude: '../src/{DependencyInjection,Event,Model,Util,Styles,DigitaleDingeKissBundle.php}'
+        exclude: '../src/{DependencyInjection,Event,Model,Util,Styles,DigitaleDingeContaoKissBundle.php}'
 
     DigitaleDinge\ContaoKiss\Styles\:
         resource: '../src/Styles/{StyleOptionRegistry.php,Option/**/*Option.php}'

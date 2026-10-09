@@ -3,7 +3,7 @@
         .addClass('btn')
         .addClass('btn-' ~ styles.size(data.ctaSize|default), data.ctaSize|default)
         .addClass('btn-' ~ styles.color(data.ctaColor|default), data.ctaColor|default)
-        .addClass(styles.cta_type(data.ctaType|default))
+        .addClass('btn-' ~ styles.cta_variant(data.ctaType|default), data.ctaType|default)
         .addClass(styles.cta_shape(data.ctaShape|default))
     -}}
 {% endblock %}

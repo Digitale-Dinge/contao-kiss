@@ -1,7 +1,8 @@
 {
     "name": "@digitaledinge/contao-kiss",
-    "version": "0.0.0",
-    "license": "GPL-3.0-or-later",
+    "version": "1.0.0",
+    "author": "Sebastian Zoglowek <https://github.com/zoglo>",
+    "license": "LGPL-3.0-or-later",
     "type": "module",
     "exports": {
         ".": "./assets/js/index.js",

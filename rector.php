@@ -30,10 +30,10 @@ return RectorConfig::configure()
     ->withSkip([
         CreateStubOverCreateMockArgRector::class => [
             __DIR__.'/tests/Migration/AbstractJsonColumnMigrationTest.php',
-            __DIR__.'/tests/Migration/Version100/CallToActionLinkMigrationTest.php',
-            __DIR__.'/tests/Migration/Version100/ContentMediaTypeRsceDataMigrationTest.php',
+            __DIR__.'/tests/Migration/Version009/CallToActionLinkMigrationTest.php',
+            __DIR__.'/tests/Migration/Version006/ContentMediaTypeRsceDataMigrationTest.php',
         ],
-        __DIR__.'/src/Migration/Version100/ArticleContentKissStylesMigration.php',
+        __DIR__.'/src/Migration/Version004/ArticleContentKissStylesMigration.php',
     ])
     ->withParallel()
 ;

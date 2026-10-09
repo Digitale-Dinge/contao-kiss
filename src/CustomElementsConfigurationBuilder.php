@@ -10,9 +10,6 @@ use DigitaleDinge\ContaoKiss\EventListener\TranslatableEnumTrait;
 use DigitaleDinge\ContaoKiss\Styles\StyleOptionRegistry;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * @experimental
- */
 final class CustomElementsConfigurationBuilder
 {
     use TranslatableEnumTrait;
@@ -310,22 +307,6 @@ final class CustomElementsConfigurationBuilder
         return $this->addField($key, $field, $eval);
     }
 
-    /**
-     * @param array<string> $options
-     *
-     * @deprecated use addSelectField() or addCheckboxField() instead
-     *
-     * @throws \Exception
-     */
-    public function addDependsOnField(string $key, array $options = [], array $eval = [], array|null $dependsOn = null): self
-    {
-        trigger_deprecation('digitaledinge/contao-kiss', '0.6', 'Using "%s()" is deprecated and will no longer work. Use addSelectField() or addCheckboxField() instead.', __METHOD__);
-
-        return [] === $options
-            ? $this->addCheckboxField($key, $eval, $dependsOn)
-            : $this->addSelectField($key, $options, $eval, $dependsOn);
-    }
-
     public function addHeadlineField(array $eval = []): self
     {
         $options = $this->isListField() ? $this->copyDcaField('headline') : [
@@ -371,7 +352,7 @@ final class CustomElementsConfigurationBuilder
         return $this->addField('textAppearance', $options, $eval);
     }
 
-    public function addImageField(array $eval = [], string|null $dependsOn = null, bool $includeSizeField = false, bool $includeImageSizeField = false /** @deprecated  has been deprecated, use includeSizeField instead !*/): self
+    public function addImageField(array $eval = [], string|null $dependsOn = null, bool $includeSizeField = false): self
     {
         $options = $this->isListField() ? $this->copyDcaField('singleSRC') : [
             'inputType' => 'standardField',
@@ -388,7 +369,7 @@ final class CustomElementsConfigurationBuilder
 
         $this->addField('singleSRC', $options, $eval);
 
-        if ($includeSizeField || $includeImageSizeField) {
+        if ($includeSizeField) {
             $this->addImageSizeField([], $dependsOn);
         }
 
