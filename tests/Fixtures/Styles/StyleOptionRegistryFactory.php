@@ -40,8 +40,12 @@ final class StyleOptionRegistryFactory
     {
         $registry = new StyleOptionRegistry();
 
-        foreach ($container->getDefinition(StyleOptionRegistry::class)->getMethodCalls() as [$method, $arguments]) {
-            $registry->{$method}(...$arguments);
+        foreach ($container->getDefinition(StyleOptionRegistry::class)->getMethodCalls() as $call) {
+            if (!\is_array($call) || !\is_string($call[0] ?? null) || !\is_array($call[1] ?? null)) {
+                throw new \LogicException('Invalid method call on the style option registry definition.');
+            }
+
+            $registry->{$call[0]}(...$call[1]);
         }
 
         return $registry;
@@ -56,7 +60,7 @@ final class StyleOptionRegistryFactory
         $classes = [];
 
         foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($root, \FilesystemIterator::SKIP_DOTS)) as $file) {
-            if (!str_ends_with($file->getFilename(), 'Option.php') || 'StyleOption.php' === $file->getFilename()) {
+            if (!$file instanceof \SplFileInfo || !str_ends_with($file->getFilename(), 'Option.php') || 'StyleOption.php' === $file->getFilename()) {
                 continue;
             }
 

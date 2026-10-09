@@ -24,22 +24,33 @@ class AddStyleOptionsPass implements CompilerPassInterface
         foreach ($container->findTaggedServiceIds(StyleOptionRegistry::TAG_NAME) as $serviceId => $tags) {
             $class = $container->getParameterBag()->resolveValue($container->findDefinition($serviceId)->getClass() ?? $serviceId);
 
-            if (!\is_string($class) || !is_subclass_of($class, StyleOption::class)) {
+            if (!\is_string($class)) {
+                throw new InvalidDefinitionException(\sprintf('The style option service "%s" does not resolve to a class name.', $serviceId));
+            }
+
+            if (!is_subclass_of($class, StyleOption::class)) {
                 throw new InvalidDefinitionException(\sprintf('The style option "%s" must extend "%s".', $class, StyleOption::class));
             }
 
             foreach ($tags as $attributes) {
+                if (!\is_array($attributes)) {
+                    continue;
+                }
+
                 $name = $attributes['name'] ?? $class;
 
-                if ('' === $name) {
+                if (!\is_string($name) || '' === $name) {
                     throw new InvalidDefinitionException(\sprintf('The style option "%s" has an empty name.', $class));
                 }
 
+                $groups = $attributes['groups'] ?? [];
+                $priority = $attributes['priority'] ?? 0;
+
                 $candidates[$name][] = [
                     'class' => $class,
-                    'groups' => $attributes['groups'] ?? [],
+                    'groups' => \is_array($groups) ? array_filter($groups, \is_string(...)) : [],
                     'label' => $attributes['label'] ?? null,
-                    'priority' => (int) ($attributes['priority'] ?? 0),
+                    'priority' => is_numeric($priority) ? (int) $priority : 0,
                 ];
             }
 

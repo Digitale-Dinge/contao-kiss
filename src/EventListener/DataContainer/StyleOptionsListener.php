@@ -30,6 +30,9 @@ final readonly class StyleOptionsListener
     ) {
     }
 
+    /**
+     * @return array<string, array<string, int|string>>
+     */
     #[AsCallback('tl_content', 'fields.headline.fields.appearance.options')]
     #[AsCallback('tl_module', 'fields.headline.fields.appearance.options')]
     #[AsCallback('tl_content', 'fields.sectionHeadline.fields.appearance.options')]
@@ -38,6 +41,9 @@ final readonly class StyleOptionsListener
         return $this->getGroupedOptions('appearance');
     }
 
+    /**
+     * @return array<string, array<string, int|string>>
+     */
     #[AsCallback('tl_content', 'fields.textAppearance.options')]
     #[AsCallback('tl_form_field', 'fields.textAppearance.options')]
     public function addTextAppearanceOptions(): array
@@ -180,7 +186,7 @@ final readonly class StyleOptionsListener
     }
 
     /**
-     * @return array<string, array<string, string>>
+     * @return array<string, array<string, int|string>>
      */
     private function getGroupedOptions(string $group): array
     {

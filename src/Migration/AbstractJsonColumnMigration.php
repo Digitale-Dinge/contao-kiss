@@ -6,8 +6,11 @@ namespace DigitaleDinge\ContaoKiss\Migration;
 
 use Contao\CoreBundle\Migration\AbstractMigration;
 use Contao\CoreBundle\Migration\MigrationResult;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAL\Types\Type;
 
 abstract class AbstractJsonColumnMigration extends AbstractMigration
 {
@@ -19,7 +22,7 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
     {
         return array_any(
             $this->getMigratableTables(),
-            fn ($table): bool => array_any($this->getRows($table), fn (array $row): bool => [] !== $this->getUpdatedColumns($row)),
+            fn (string $table): bool => array_any($this->getRows($table), fn (array $row): bool => [] !== $this->getUpdatedColumns($row)),
         );
     }
 
@@ -32,7 +35,7 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
 
         foreach ($this->getMigratableTables() as $table) {
             foreach ($this->getRows($table) as $row) {
-                if ([] === $columns = $this->getUpdatedColumns($row)) {
+                if (!is_numeric($row['id']) || [] === $columns = $this->getUpdatedColumns($row)) {
                     continue;
                 }
 
@@ -66,20 +69,37 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
         return $this->createResult(true, $this->getSuccessMessage(array_sum(array_map(count(...), $updates))));
     }
 
+    /**
+     * @return list<string>
+     */
     abstract protected function getTables(): array;
 
+    /**
+     * @return list<string>
+     */
     abstract protected function getColumns(): array;
 
+    /**
+     * @return array<string, array<string, string>>
+     */
     protected function getKeyRenames(): array
     {
         return [];
     }
 
+    /**
+     * @return array<string, array<string, array<string, string>>>
+     */
     protected function getValueMaps(): array
     {
         return [];
     }
 
+    /**
+     * @param array<string, mixed> $row
+     *
+     * @return array<string, string>
+     */
     protected function getUpdatedColumns(array $row): array
     {
         $columns = [];
@@ -106,6 +126,11 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
         return $this->encode($value, $data);
     }
 
+    /**
+     * @param array<mixed> $data
+     *
+     * @return array<mixed>|null
+     */
     protected function migrateData(string $column, array $data, bool $topLevel = false): array|null
     {
         $changed = false;
@@ -125,7 +150,13 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
                 continue;
             }
 
-            $current = (string) ($data[$key] ?? '');
+            $current = $data[$key] ?? '';
+
+            if (!\is_scalar($current)) {
+                continue;
+            }
+
+            $current = (string) $current;
 
             if ($current === ($new = $map[$current] ?? $current)) {
                 continue;
@@ -170,6 +201,9 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
         return \is_string($value) && \in_array(substr(ltrim($value), 0, 1), ['{', '['], true);
     }
 
+    /**
+     * @return array<mixed>
+     */
     protected function decode(mixed $value): array
     {
         if (!\is_string($value) || '' === $value) {
@@ -177,7 +211,9 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
         }
 
         if ($this->isJson($value)) {
-            return json_decode($value, true) ?: [];
+            $data = json_decode($value, true);
+
+            return \is_array($data) ? $data : [];
         }
 
         $data = @unserialize($value, [
@@ -187,6 +223,9 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
         return \is_array($data) ? $data : [];
     }
 
+    /**
+     * @param array<mixed> $data
+     */
     protected function encode(mixed $original, array $data): string
     {
         return $this->isJson($original) || !$this->isEncoded($original)
@@ -194,6 +233,9 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
             : serialize($data);
     }
 
+    /**
+     * @return list<string>
+     */
     protected function getMigratableTables(): array
     {
         $tables = [];
@@ -208,6 +250,8 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
     }
 
     /**
+     * @return list<string>
+     *
      * @throws Exception
      */
     protected function getMigratableColumns(string $table): array
@@ -231,17 +275,25 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
         return '';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function getParameters(string $table): array
     {
         return [];
     }
 
+    /**
+     * @return array<string, ArrayParameterType|ParameterType|Type|string>
+     */
     protected function getParameterTypes(string $table): array
     {
         return [];
     }
 
     /**
+     * @return list<array<string, mixed>>
+     *
      * @throws Exception
      */
     protected function getRows(string $table): array
@@ -259,6 +311,9 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
         return $this->connection->fetchAllAssociative($query, $this->getParameters($table), $this->getParameterTypes($table));
     }
 
+    /**
+     * @return list<string>
+     */
     protected function getMigratedKeys(): array
     {
         $keys = [];

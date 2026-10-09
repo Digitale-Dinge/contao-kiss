@@ -27,8 +27,9 @@ class AddKissFieldsToPaletteListener
         $this->eventDispatcher->dispatch($event);
         $skip = $event->getTypes();
 
+        // @phpstan-ignore foreach.nonIterable, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
         foreach ($GLOBALS['TL_DCA'][$dc->table]['palettes'] as $key => $palette) {
-            if (\is_array($palette)) {
+            if (!\is_string($key) || \is_array($palette)) {
                 continue;
             }
 
