@@ -6,8 +6,7 @@ namespace DigitaleDinge\ContaoKiss\Tests\Fixtures\Styles;
 
 final readonly class NotAStyleOption
 {
-    public function __construct(
-        public string|null $key = null,
-    ) {
+    public function __construct(public string|null $key = null)
+    {
     }
 }

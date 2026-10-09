@@ -335,7 +335,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['callToAction'] = [
             'inputType' => 'text',
             'eval' => [
                 'tl_class' => 'w25',
-            ]
+            ],
         ],
         '&ctaType' => [
             'eval' => [
@@ -367,14 +367,18 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['callToAction'] = [
             'eval' => [
                 'tl_class' => 'w25',
             ],
-        ]
+        ],
     ],
     'max' => 2,
     'eval' => [
         'tl_class' => 'w100 clr call_to_action_widget',
         'sortable' => false,
     ],
-    'sql' => ['type' => 'blob', 'length' => MySQLPlatform::LENGTH_LIMIT_BLOB, 'notnull' => false]
+    'sql' => [
+        'type' => 'blob',
+        'length' => MySQLPlatform::LENGTH_LIMIT_BLOB,
+        'notnull' => false,
+    ],
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['textAppearance'] = [
@@ -503,7 +507,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['responsiveVideo'] = [
             'reference' => &$GLOBALS['TL_LANG']['tl_content']['responsiveVideoOptions'],
             'eval' => [
                 'cell_style' => 'width: 150px',
-            ]
+            ],
         ],
         'video' => [
             'label' => &$GLOBALS['TL_LANG']['tl_content']['responsiveVideoFieldVideo'],
@@ -526,8 +530,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['responsiveVideo'] = [
     'sql' => [
         'type' => 'blob',
         'length' => MySQLPlatform::LENGTH_LIMIT_BLOB,
-        'notnull' => false
-    ]
+        'notnull' => false,
+    ],
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['iconPosition'] = [

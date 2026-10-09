@@ -26,15 +26,28 @@ use Symfony\Component\Console\Style\SymfonyStyle;
           <info>php %command.full_name% textAppearance</info>
           <info>php %command.full_name% textAppearance,appearance x_small --table=tl_content</info>
           <info>php %command.full_name% elementSize xs sm --backend-prefix=https://example.org/contao</info>
-        HELP,
+        HELP
+    ,
 )]
 class FindKissStyleValuesCommand
 {
     private const array TABLES = [
-        'tl_article' => ['do' => 'article', 'columns' => ['kiss_styles']],
-        'tl_content' => ['do' => 'article', 'columns' => ['kiss_styles', 'headline', 'rsce_data', 'callToAction']],
-        'tl_module' => ['do' => 'themes', 'columns' => ['kiss_styles', 'headline']],
-        'tl_form_field' => ['do' => 'form', 'columns' => ['kiss_styles']],
+        'tl_article' => [
+            'do' => 'article',
+            'columns' => ['kiss_styles'],
+        ],
+        'tl_content' => [
+            'do' => 'article',
+            'columns' => ['kiss_styles', 'headline', 'rsce_data', 'callToAction'],
+        ],
+        'tl_module' => [
+            'do' => 'themes',
+            'columns' => ['kiss_styles', 'headline'],
+        ],
+        'tl_form_field' => [
+            'do' => 'form',
+            'columns' => ['kiss_styles'],
+        ],
     ];
 
     private const array CONTEXT_COLUMNS = ['pid', 'type'];
@@ -45,28 +58,21 @@ class FindKissStyleValuesCommand
     ) {
     }
 
-    public function __invoke(
-        SymfonyStyle $io,
-        #[Argument(description: 'The key, or a comma separated list of keys')]
-        string $keys,
-        #[Argument(description: 'The values to look for. Omit to list every value that is not the default')]
-        array $values = [],
-        #[Option(description: 'Limit the report to a single table', shortcut: 't')]
-        string|null $table = null,
-        #[Option(name: 'backend-prefix', description: 'Backend URL to build an edit link from, e.g. https://example.org/contao')]
-        string|null $backendPrefix = null,
-    ): int {
-        $keys = array_values(array_filter(array_map('trim', explode(',', $keys))));
+    public function __invoke(SymfonyStyle $io, #[Argument(description: 'The key, or a comma separated list of keys')] string $keys, #[Argument(description: 'The values to look for. Omit to list every value that is not the default')] array $values = [], #[Option(description: 'Limit the report to a single table', shortcut: 't')] string|null $table = null, #[Option(description: 'Backend URL to build an edit link from, e.g. https://example.org/contao', name: 'backend-prefix')] string|null $backendPrefix = null): int
+    {
+        $keys = array_values(array_filter(array_map(trim(...), explode(',', $keys))));
         $tables = self::TABLES;
 
         if (null !== $table) {
             if (!isset($tables[$table])) {
-                $io->error(sprintf('Unknown table "%s". Known tables: %s.', $table, implode(', ', array_keys($tables))));
+                $io->error(\sprintf('Unknown table "%s". Known tables: %s.', $table, implode(', ', array_keys($tables))));
 
                 return Command::INVALID;
             }
 
-            $tables = [$table => $tables[$table]];
+            $tables = [
+                $table => $tables[$table],
+            ];
         }
 
         $this->framework->initialize();
@@ -91,9 +97,9 @@ class FindKissStyleValuesCommand
 
         $io->table($headers, $rows);
 
-        $records = array_unique(array_map(static fn (array $row) => $row[0].':'.$row[1], $rows));
+        $records = array_unique(array_map(static fn (array $row): string => $row[0].':'.$row[1], $rows));
 
-        $io->writeln(sprintf('%d occurrence(s) in %d record(s).', \count($rows), \count($records)));
+        $io->writeln(\sprintf('%d occurrence(s) in %d record(s).', \count($rows), \count($records)));
 
         return Command::SUCCESS;
     }
@@ -107,17 +113,17 @@ class FindKissStyleValuesCommand
         }
 
         $existing = $schema->listTableColumns($table);
-        $columns = array_values(array_filter($config['columns'], static fn (string $column) => isset($existing[strtolower($column)])));
+        $columns = array_values(array_filter($config['columns'], static fn (string $column): bool => isset($existing[strtolower($column)])));
 
         if ([] === $columns) {
             return [];
         }
 
-        $context = array_values(array_filter(self::CONTEXT_COLUMNS, static fn (string $column) => isset($existing[strtolower($column)])));
+        $context = array_values(array_filter(self::CONTEXT_COLUMNS, static fn (string $column): bool => isset($existing[strtolower($column)])));
 
-        $query = sprintf(
+        $query = \sprintf(
             'SELECT %s FROM %s ORDER BY id',
-            implode(', ', array_map(static fn (string $column) => "`$column`", ['id', ...$context, ...$columns])),
+            implode(', ', array_map(static fn (string $column): string => "`{$column}`", ['id', ...$context, ...$columns])),
             $table,
         );
 
@@ -160,10 +166,15 @@ class FindKissStyleValuesCommand
 
     private function getEditUrl(string $prefix, string $do, string $table, int $id): string
     {
-        return sprintf(
+        return \sprintf(
             '%s?%s',
             rtrim($prefix, '/'),
-            http_build_query(['do' => $do, 'table' => $table, 'act' => 'edit', 'id' => $id]),
+            http_build_query([
+                'do' => $do,
+                'table' => $table,
+                'act' => 'edit',
+                'id' => $id,
+            ]),
         );
     }
 

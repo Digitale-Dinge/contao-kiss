@@ -32,7 +32,9 @@ final class AddStyleOptionsPassTest extends TestCase
 
     public function testRegistersTheOptionUnderItsClassAndRemovesItsDefinition(): void
     {
-        $container = $this->createContainer(['option' => [LayoutOption::class, []]]);
+        $container = $this->createContainer([
+            'option' => [LayoutOption::class, []],
+        ]);
 
         new AddStyleOptionsPass()->process($container);
 
@@ -46,7 +48,12 @@ final class AddStyleOptionsPassTest extends TestCase
 
     public function testRegistersACustomName(): void
     {
-        $container = $this->createContainer(['option' => [LayoutOption::class, ['name' => 'shape_radius']]]);
+        $container = $this->createContainer([
+            'option' => [
+                LayoutOption::class, [
+                    'name' => 'shape_radius',
+                ]],
+        ]);
 
         new AddStyleOptionsPass()->process($container);
 
@@ -59,7 +66,9 @@ final class AddStyleOptionsPassTest extends TestCase
     #[DataProvider('provideLabels')]
     public function testDerivesTheLabel(string $class, array $attributes, string $name, string $expected): void
     {
-        $container = $this->createContainer(['option' => [$class, $attributes]]);
+        $container = $this->createContainer([
+            'option' => [$class, $attributes],
+        ]);
 
         new AddStyleOptionsPass()->process($container);
 
@@ -70,16 +79,26 @@ final class AddStyleOptionsPassTest extends TestCase
     {
         yield 'option class' => [LayoutOption::class, [], LayoutOption::class, 'style_options.layout'];
         yield 'option class, several words' => [CrossAlignmentOption::class, [], CrossAlignmentOption::class, 'style_options.cross_alignment'];
-        yield 'dotted name' => [LayoutOption::class, ['name' => 'typography.heading'], 'typography.heading', 'style_options.heading'];
-        yield 'name without dots' => [LayoutOption::class, ['name' => 'shape_radius'], 'shape_radius', 'style_options.shape_radius'];
-        yield 'explicit label' => [LayoutOption::class, ['label' => 'app.layouts'], LayoutOption::class, 'app.layouts'];
+        yield 'dotted name' => [LayoutOption::class, [
+            'name' => 'typography.heading',
+        ], 'typography.heading', 'style_options.heading'];
+        yield 'name without dots' => [LayoutOption::class, [
+            'name' => 'shape_radius',
+        ], 'shape_radius', 'style_options.shape_radius'];
+        yield 'explicit label' => [LayoutOption::class, [
+            'label' => 'app.layouts',
+        ], LayoutOption::class, 'app.layouts'];
     }
 
     public function testTheHigherPriorityWinsAndKeepsAnsweringToTheReplacedEnum(): void
     {
         $container = $this->createContainer([
             'kiss' => [LayoutOption::class, []],
-            'app' => [SwappedLayoutOption::class, ['name' => LayoutOption::class, 'priority' => 10]],
+            'app' => [
+                SwappedLayoutOption::class, [
+                    'name' => LayoutOption::class,
+                    'priority' => 10,
+                ]],
         ]);
 
         new AddStyleOptionsPass()->process($container);
@@ -96,7 +115,10 @@ final class AddStyleOptionsPassTest extends TestCase
     {
         $container = $this->createContainer([
             'a' => [LayoutOption::class, []],
-            'b' => [LayoutOption::class, ['name' => 'shape_radius']],
+            'b' => [
+                LayoutOption::class, [
+                    'name' => 'shape_radius',
+                ]],
         ]);
 
         new AddStyleOptionsPass()->process($container);
@@ -112,7 +134,10 @@ final class AddStyleOptionsPassTest extends TestCase
     {
         $container = $this->createContainer([
             'kiss' => [LayoutOption::class, []],
-            'app' => [SwappedLayoutOption::class, ['name' => LayoutOption::class]],
+            'app' => [
+                SwappedLayoutOption::class, [
+                    'name' => LayoutOption::class,
+                ]],
         ]);
 
         $this->expectException(InvalidDefinitionException::class);
@@ -124,7 +149,9 @@ final class AddStyleOptionsPassTest extends TestCase
     #[DataProvider('provideInvalidClasses')]
     public function testRejectsAClassThatIsNotAStyleOption(string $class): void
     {
-        $container = $this->createContainer(['option' => [$class, []]]);
+        $container = $this->createContainer([
+            'option' => [$class, []],
+        ]);
 
         $this->expectException(InvalidDefinitionException::class);
         $this->expectExceptionMessageIsOrContains('must extend');
@@ -140,7 +167,12 @@ final class AddStyleOptionsPassTest extends TestCase
 
     public function testRejectsAnEmptyName(): void
     {
-        $container = $this->createContainer(['option' => [LayoutOption::class, ['name' => '']]]);
+        $container = $this->createContainer([
+            'option' => [
+                LayoutOption::class, [
+                    'name' => '',
+                ]],
+        ]);
 
         $this->expectException(InvalidDefinitionException::class);
         $this->expectExceptionMessageIsOrContains('empty name');
@@ -151,7 +183,12 @@ final class AddStyleOptionsPassTest extends TestCase
     #[DataProvider('provideReservedNames')]
     public function testRejectsANameReservedByStylesVariable(string $name): void
     {
-        $container = $this->createContainer(['option' => [LayoutOption::class, ['name' => $name]]]);
+        $container = $this->createContainer([
+            'option' => [
+                LayoutOption::class, [
+                    'name' => $name,
+                ]],
+        ]);
 
         $this->expectException(InvalidDefinitionException::class);
         $this->expectExceptionMessageIsOrContains('is reserved');
@@ -170,9 +207,22 @@ final class AddStyleOptionsPassTest extends TestCase
     public function testOrdersGroupsByPriorityThenName(): void
     {
         $container = $this->createContainer([
-            'b' => [LayoutOption::class, ['name' => 'group.b', 'groups' => ['appearance']]],
-            'a' => [LayoutOption::class, ['name' => 'group.a', 'groups' => ['appearance']]],
-            'top' => [LayoutOption::class, ['name' => 'group.z', 'groups' => ['appearance'], 'priority' => 5]],
+            'b' => [
+                LayoutOption::class, [
+                    'name' => 'group.b',
+                    'groups' => ['appearance'],
+                ]],
+            'a' => [
+                LayoutOption::class, [
+                    'name' => 'group.a',
+                    'groups' => ['appearance'],
+                ]],
+            'top' => [
+                LayoutOption::class, [
+                    'name' => 'group.z',
+                    'groups' => ['appearance'],
+                    'priority' => 5,
+                ]],
         ]);
 
         new AddStyleOptionsPass()->process($container);
@@ -183,8 +233,16 @@ final class AddStyleOptionsPassTest extends TestCase
     public function testAnOverrideWithoutGroupsLeavesTheGroup(): void
     {
         $container = $this->createContainer([
-            'kiss' => [LayoutOption::class, ['groups' => ['appearance']]],
-            'app' => [SwappedLayoutOption::class, ['name' => LayoutOption::class, 'groups' => [], 'priority' => 10]],
+            'kiss' => [
+                LayoutOption::class, [
+                    'groups' => ['appearance'],
+                ]],
+            'app' => [
+                SwappedLayoutOption::class, [
+                    'name' => LayoutOption::class,
+                    'groups' => [],
+                    'priority' => 10,
+                ]],
         ]);
 
         new AddStyleOptionsPass()->process($container);

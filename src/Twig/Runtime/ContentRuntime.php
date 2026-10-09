@@ -9,7 +9,7 @@ use Contao\CoreBundle\Framework\ContaoFramework;
 use Twig\Extension\RuntimeExtensionInterface;
 
 /**
- * ADR: Keeping it simple stupid to allow update compatibility (see #40)
+ * ADR: Keeping it simple stupid to allow update compatibility (see #40).
  *
  * Contao fragment controllers and their elements render inside a protected getResponse() so can't really decorate here
  * without a compiler pass copying setFragmentOptions() from the inner service, or overriding the controller completely.
@@ -19,9 +19,8 @@ use Twig\Extension\RuntimeExtensionInterface;
  */
 final readonly class ContentRuntime implements RuntimeExtensionInterface
 {
-    public function __construct(
-        private ContaoFramework $framework,
-    ) {
+    public function __construct(private ContaoFramework $framework)
+    {
     }
 
     public function getContentModel(ContentModel|int $model): ContentModel|null

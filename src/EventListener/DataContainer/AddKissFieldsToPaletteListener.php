@@ -12,9 +12,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class AddKissFieldsToPaletteListener
 {
-    public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-    ) {
+    public function __construct(private readonly EventDispatcherInterface $eventDispatcher)
+    {
     }
 
     #[AsCallback('tl_content', 'config.onload', priority: -1000)]

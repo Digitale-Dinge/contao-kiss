@@ -157,7 +157,6 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['textAppearance'] = [
     ],
 ];
 
-
 $pmFieldColor = PaletteManipulator::create()
     ->addLegend('appearance_legend', 'layout_legend', PaletteManipulator::POSITION_AFTER)
     ->addField('fieldColor', 'appearance_legend', PaletteManipulator::POSITION_APPEND)
@@ -173,17 +172,19 @@ $pmFieldVariant = PaletteManipulator::create()
     ->addField('fieldVariant', 'appearance_legend', PaletteManipulator::POSITION_APPEND)
 ;
 
-$applyPalette = static function(PaletteManipulator $pm, array $fields): void {
+$applyPalette = static function (PaletteManipulator $pm, array $fields): void {
     foreach ($fields as $field) {
-        try { $pm->applyToPalette($field, 'tl_form_field'); }
-        catch (PaletteNotFoundException) {}
+        try {
+            $pm->applyToPalette($field, 'tl_form_field');
+        }
+        catch (PaletteNotFoundException) {
+        }
     }
 };
 
 $applyPalette($pmFieldColor, FIELDS_APPLY_COLOR);
 $applyPalette($pmFieldSize, FIELDS_APPLY_SIZE);
 $applyPalette($pmFieldVariant, FIELDS_APPLY_VARIANT);
-
 
 PaletteManipulator::create()
     ->addLegend('appearance_legend', 'layout_legend', PaletteManipulator::POSITION_AFTER)

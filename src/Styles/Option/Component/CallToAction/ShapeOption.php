@@ -8,7 +8,7 @@ use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
- * @method string block
+ * @method string block()
  */
 #[AsKissStyleOption]
 class ShapeOption extends StyleOption

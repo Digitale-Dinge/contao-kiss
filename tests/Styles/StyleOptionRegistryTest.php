@@ -52,9 +52,19 @@ final class StyleOptionRegistryTest extends TestCase
     {
         $registry = new StyleOptionRegistry();
         $registry->setStyleOptions(
-            [LayoutOption::class => ['class' => LayoutOption::class, 'enum' => Layout::class, 'label' => 'style_options.layout']],
-            [Layout::class => LayoutOption::class],
-            ['media' => [LayoutOption::class]],
+            [
+                LayoutOption::class => [
+                    'class' => LayoutOption::class,
+                    'enum' => Layout::class,
+                    'label' => 'style_options.layout',
+                ],
+            ],
+            [
+                Layout::class => LayoutOption::class,
+            ],
+            [
+                'media' => [LayoutOption::class],
+            ],
         );
 
         return $registry;

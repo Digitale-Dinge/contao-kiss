@@ -8,8 +8,8 @@ use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
- * @method string small
- * @method string large
+ * @method string small()
+ * @method string large()
  */
 #[AsKissStyleOption]
 class SizeOption extends StyleOption

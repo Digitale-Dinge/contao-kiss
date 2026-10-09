@@ -23,7 +23,11 @@ class ContentMediaTypeRsceDataMigration extends AbstractJsonColumnMigration
 
     protected function getKeyRenames(): array
     {
-        return ['rsce_data' => ['type' => 'mediaType']];
+        return [
+            'rsce_data' => [
+                'type' => 'mediaType',
+            ],
+        ];
     }
 
     protected function getWhere(string $table): string
@@ -33,12 +37,16 @@ class ContentMediaTypeRsceDataMigration extends AbstractJsonColumnMigration
 
     protected function getParameters(string $table): array
     {
-        return ['types' => self::TYPES];
+        return [
+            'types' => self::TYPES,
+        ];
     }
 
     protected function getParameterTypes(string $table): array
     {
-        return ['types' => ArrayParameterType::STRING];
+        return [
+            'types' => ArrayParameterType::STRING,
+        ];
     }
 
     protected function migrateData(string $column, array $data, bool $topLevel = false): array|null

@@ -59,7 +59,8 @@ final readonly class ViteVersionStrategy implements VersionStrategyInterface
     {
         try {
             return $this->manifestStrategy->applyVersion($path);
-        } catch (\RuntimeException) {
+        }
+        catch (\RuntimeException) {
             return $path;
         }
     }

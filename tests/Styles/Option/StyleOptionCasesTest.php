@@ -22,9 +22,6 @@ use PHPUnit\Framework\TestCase;
  */
 final class StyleOptionCasesTest extends TestCase
 {
-    /**
-     * @var array<class-string<\BackedEnum>, list<string>>
-     */
     private const array CASES = [
         Color\Background::class => ['transparent', 'neutral_one', 'neutral_two', 'neutral_three', 'primary', 'secondary', 'tertiary', 'success', 'warning', 'error', 'neutral_inverse'],
         Color\Color::class => ['primary', 'secondary', 'tertiary', 'success', 'warning', 'error'],
@@ -81,19 +78,21 @@ final class StyleOptionCasesTest extends TestCase
 
     public function testEveryStyleOptionEnumIsRegistered(): void
     {
-        $unregistered = array_values(array_diff(self::discoverEnums(), array_keys(self::CASES)));
+        $enums = $this->discoverEnums();
+
+        $this->assertNotEmpty($enums);
+
+        $unregistered = array_values(array_diff($enums, array_keys(self::CASES)));
 
         if ([] !== $unregistered) {
             $this->markTestIncomplete(\sprintf('New style option enums, register them in StyleOptionCasesTest::CASES: %s', implode(', ', $unregistered)));
         }
-
-        $this->assertSame([], $unregistered);
     }
 
     /**
      * @return list<class-string<\BackedEnum>>
      */
-    private static function discoverEnums(): array
+    private function discoverEnums(): array
     {
         $root = \dirname(__DIR__, 3).'/src/Styles/Option';
         $enums = [];
@@ -106,7 +105,7 @@ final class StyleOptionCasesTest extends TestCase
             $relative = substr($file->getPathname(), \strlen($root) + 1, -4);
             $class = 'DigitaleDinge\\ContaoKiss\\Styles\\Option\\'.str_replace('/', '\\', $relative);
 
-            if (enum_exists($class)) {
+            if (is_subclass_of($class, \BackedEnum::class)) {
                 $enums[] = $class;
             }
         }

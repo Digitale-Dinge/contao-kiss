@@ -18,7 +18,10 @@ class CallToActionLinkMigrationTest extends TestCase
     #[DataProvider('getStoredData')]
     public function testShouldRun(string $table, string $column, string $data, string|null $expected): void
     {
-        $db = $this->stubConnection($table, $column, [['id' => 1, $column => $data]]);
+        $db = $this->stubConnection($table, $column, [[
+            'id' => 1,
+            $column => $data,
+        ]]);
 
         $this->assertSame(null !== $expected, new CallToActionLinkMigration($db)->shouldRun());
     }
@@ -29,18 +32,30 @@ class CallToActionLinkMigrationTest extends TestCase
     #[DataProvider('getStoredData')]
     public function testRun(string $table, string $column, string $data, string|null $expected): void
     {
-        $db = $this->mockConnection($table, $column, [['id' => 1, $column => $data]]);
+        $db = $this->mockConnection($table, $column, [[
+            'id' => 1,
+            $column => $data,
+        ]]);
 
         if (null === $expected) {
             $db
                 ->expects($this->never())
                 ->method('update')
             ;
-        } else {
+        }
+        else {
             $db
                 ->expects($this->once())
                 ->method('update')
-                ->with($table, [$column => $expected], ['id' => 1])
+                ->with(
+                    $table,
+                    [
+                        $column => $expected,
+                    ],
+                    [
+                        'id' => 1,
+                    ],
+                )
             ;
         }
 
@@ -59,8 +74,16 @@ class CallToActionLinkMigrationTest extends TestCase
         yield 'call to action group column' => [
             'tl_content',
             'callToAction',
-            serialize([['text' => 'More', 'ctaType' => 'link', 'ctaColor' => 'primary']]),
-            serialize([['text' => 'More', 'ctaType' => 'text', 'ctaColor' => 'primary']]),
+            serialize([[
+                'text' => 'More',
+                'ctaType' => 'link',
+                'ctaColor' => 'primary',
+            ]]),
+            serialize([[
+                'text' => 'More',
+                'ctaType' => 'text',
+                'ctaColor' => 'primary',
+            ]]),
         ];
 
         yield 'call to action nested in a list in rsce_data' => [
@@ -102,6 +125,13 @@ class CallToActionLinkMigrationTest extends TestCase
         return $this->configureConnection($this->createStub(Connection::class), $table, $column, $rows);
     }
 
+    /**
+     * @template T of Connection&Stub
+     *
+     * @param T $db
+     *
+     * @return T
+     */
     private function configureConnection(Connection&Stub $db, string $table, string $column, array $rows): Connection&Stub
     {
         $schemaManager = $this->createStub(AbstractSchemaManager::class);
@@ -112,7 +142,10 @@ class CallToActionLinkMigrationTest extends TestCase
 
         $schemaManager
             ->method('listTableColumns')
-            ->willReturn(['id' => true, strtolower($column) => true])
+            ->willReturn([
+                'id' => true,
+                strtolower($column) => true,
+            ])
         ;
 
         $db

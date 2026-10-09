@@ -15,17 +15,14 @@ use Doctrine\DBAL\Exception;
 abstract class AbstractJsonColumnMigration extends AbstractMigration
 {
     public function __construct(protected readonly Connection $connection)
-    {}
-
-    abstract protected function getTables(): array;
-
-    abstract protected function getColumns(): array;
+    {
+    }
 
     public function shouldRun(): bool
     {
         return array_any(
             $this->getMigratableTables(),
-            fn($table) => array_any($this->getRows($table), fn(array $row) => [] !== $this->getUpdatedColumns($row))
+            fn ($table): bool => array_any($this->getRows($table), fn (array $row): bool => [] !== $this->getUpdatedColumns($row)),
         );
     }
 
@@ -51,19 +48,30 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
         try {
             foreach ($updates as $table => $rows) {
                 foreach ($rows as $id => $columns) {
-                    $this->connection->update($table, $columns, ['id' => $id]);
+                    $this->connection->update(
+                        $table,
+                        $columns,
+                        [
+                            'id' => $id,
+                        ],
+                    );
                 }
             }
 
             $this->connection->commit();
-        } catch (\Throwable $e) {
+        }
+        catch (\Throwable $e) {
             $this->connection->rollback();
 
             return $this->createResult(false, $e->getMessage());
         }
 
-        return $this->createResult(true, $this->getSuccessMessage(array_sum(array_map('count', $updates))));
+        return $this->createResult(true, $this->getSuccessMessage(array_sum(array_map(count(...), $updates))));
     }
+
+    abstract protected function getTables(): array;
+
+    abstract protected function getColumns(): array;
 
     protected function getKeyRenames(): array
     {
@@ -116,7 +124,7 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
         }
 
         foreach ($this->getValueMaps()[$column] ?? [] as $key => $map) {
-            if (!array_key_exists($key, $data) && !($topLevel && isset($map['']))) {
+            if (!\array_key_exists($key, $data) && (!$topLevel || !isset($map['']))) {
                 continue;
             }
 
@@ -131,14 +139,14 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
         }
 
         foreach ($data as $key => $value) {
-            if (is_array($value) && null !== $nested = $this->migrateData($column, $value)) {
+            if (\is_array($value) && null !== $nested = $this->migrateData($column, $value)) {
                 $data[$key] = $nested;
                 $changed = true;
 
                 continue;
             }
 
-            if (!is_string($value) || !$this->isEncoded($value)) {
+            if (!\is_string($value) || !$this->isEncoded($value)) {
                 continue;
             }
 
@@ -153,7 +161,7 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
 
     protected function isEncoded(mixed $value): bool
     {
-        if (!is_string($value) || '' === $value) {
+        if (!\is_string($value) || '' === $value) {
             return false;
         }
 
@@ -162,12 +170,12 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
 
     protected function isJson(mixed $value): bool
     {
-        return is_string($value) && in_array(substr(ltrim($value), 0, 1), ['{', '['], true);
+        return \is_string($value) && \in_array(substr(ltrim($value), 0, 1), ['{', '['], true);
     }
 
     protected function decode(mixed $value): array
     {
-        if (!is_string($value) || '' === $value) {
+        if (!\is_string($value) || '' === $value) {
             return [];
         }
 
@@ -175,9 +183,11 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
             return json_decode($value, true) ?: [];
         }
 
-        $data = @unserialize($value, ['allowed_classes' => false]);
+        $data = @unserialize($value, [
+            'allowed_classes' => false,
+        ]);
 
-        return is_array($data) ? $data : [];
+        return \is_array($data) ? $data : [];
     }
 
     protected function encode(mixed $original, array $data): string
@@ -215,7 +225,7 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
 
         return array_values(array_filter(
             $this->getColumns(),
-            static fn (string $column) => isset($existing[strtolower($column)]),
+            static fn (string $column): bool => isset($existing[strtolower($column)]),
         ));
     }
 
@@ -242,9 +252,9 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
         $columns = ['id', ...$this->getMigratableColumns($table)];
         $where = $this->getWhere($table);
 
-        $query = sprintf(
+        $query = \sprintf(
             'SELECT %s FROM %s%s',
-            implode(', ', array_map(static fn (string $column) => "`$column`", $columns)),
+            implode(', ', array_map(static fn (string $column): string => "`{$column}`", $columns)),
             $table,
             '' === $where ? '' : ' WHERE '.$where,
         );
@@ -274,6 +284,6 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
 
     protected function getSuccessMessage(int $count): string
     {
-        return sprintf('Migrated %s for %d records.', $this->getKeyLabel(), $count);
+        return \sprintf('Migrated %s for %d records.', $this->getKeyLabel(), $count);
     }
 }

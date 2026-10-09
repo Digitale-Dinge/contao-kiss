@@ -8,9 +8,9 @@ use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
- * @method string overlay
- * @method string outside
- * @method string none
+ * @method string overlay()
+ * @method string outside()
+ * @method string none()
  */
 #[AsKissStyleOption]
 class NavigationOption extends StyleOption

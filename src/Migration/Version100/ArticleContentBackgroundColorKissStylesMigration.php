@@ -27,6 +27,10 @@ class ArticleContentBackgroundColorKissStylesMigration extends AbstractJsonColum
 
     protected function getValueMaps(): array
     {
-        return ['kiss_styles' => ['backgroundColor' => self::BACKGROUND_COLOR_MAP]];
+        return [
+            'kiss_styles' => [
+                'backgroundColor' => self::BACKGROUND_COLOR_MAP,
+            ],
+        ];
     }
 }

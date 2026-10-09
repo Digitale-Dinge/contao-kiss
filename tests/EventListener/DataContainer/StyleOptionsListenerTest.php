@@ -34,7 +34,9 @@ final class StyleOptionsListenerTest extends TestCase
         $dc = $this->createStub(DataContainer::class);
         $dc
             ->method('getCurrentRecord')
-            ->willReturn(null === $type ? null : ['type' => $type])
+            ->willReturn(null === $type ? null : [
+                'type' => $type,
+            ])
         ;
 
         $this->assertSame($this->caseNames($enum), array_keys($this->createListener()->addVariantOptions($dc)));

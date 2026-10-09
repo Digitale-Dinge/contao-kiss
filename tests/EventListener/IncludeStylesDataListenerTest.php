@@ -24,15 +24,19 @@ final class IncludeStylesDataListenerTest extends TestCase
     public function testExposesTheRowOfAVisibleInclude(): void
     {
         $listener = new IncludeStylesDataListener();
-        $row = ['id' => 1, 'type' => 'form', 'showAsCard' => '1'];
+        $row = [
+            'id' => 1,
+            'type' => 'form',
+            'showAsCard' => '1',
+        ];
 
         $this->assertTrue($listener->push($this->createModel(ContentModel::class, $row), true));
         $this->assertSame($row, $listener->getCurrentData());
     }
 
     /**
-     * @param class-string<Model> $class
-     * @param array<string, mixed> $row
+     * @param  class-string<Model>  $class
+     * @param  array<string, mixed> $row
      * @throws \ReflectionException
      */
     #[DataProvider('provideIgnoredElements')]
@@ -46,9 +50,18 @@ final class IncludeStylesDataListenerTest extends TestCase
 
     public static function provideIgnoredElements(): iterable
     {
-        yield 'invisible include' => [ContentModel::class, ['id' => 1, 'type' => 'form'], false];
-        yield 'element that is no include' => [ContentModel::class, ['id' => 1, 'type' => 'text'], true];
-        yield 'model that is no content element' => [ArticleModel::class, ['id' => 1, 'type' => 'form'], true];
+        yield 'invisible include' => [ContentModel::class, [
+            'id' => 1,
+            'type' => 'form',
+        ], false];
+        yield 'element that is no include' => [ContentModel::class, [
+            'id' => 1,
+            'type' => 'text',
+        ], true];
+        yield 'model that is no content element' => [ArticleModel::class, [
+            'id' => 1,
+            'type' => 'form',
+        ], true];
     }
 
     /**
@@ -57,12 +70,21 @@ final class IncludeStylesDataListenerTest extends TestCase
     public function testPopsOnlyTheMatchingInclude(): void
     {
         $listener = new IncludeStylesDataListener();
-        $listener->push($this->createModel(ContentModel::class, ['id' => 1, 'type' => 'form']), true);
+        $listener->push($this->createModel(ContentModel::class, [
+            'id' => 1,
+            'type' => 'form',
+        ]), true);
 
-        $listener->pop($this->createModel(ContentModel::class, ['id' => 2, 'type' => 'form']), '');
+        $listener->pop($this->createModel(ContentModel::class, [
+            'id' => 2,
+            'type' => 'form',
+        ]), '');
         $this->assertSame(1, $listener->getCurrentData()['id']);
 
-        $listener->pop($this->createModel(ContentModel::class, ['id' => 1, 'type' => 'form']), '');
+        $listener->pop($this->createModel(ContentModel::class, [
+            'id' => 1,
+            'type' => 'form',
+        ]), '');
         $this->assertSame([], $listener->getCurrentData());
     }
 
@@ -72,12 +94,21 @@ final class IncludeStylesDataListenerTest extends TestCase
     public function testRestoresTheOuterIncludeAfterANestedOne(): void
     {
         $listener = new IncludeStylesDataListener();
-        $listener->push($this->createModel(ContentModel::class, ['id' => 1, 'type' => 'article']), true);
-        $listener->push($this->createModel(ContentModel::class, ['id' => 2, 'type' => 'form']), true);
+        $listener->push($this->createModel(ContentModel::class, [
+            'id' => 1,
+            'type' => 'article',
+        ]), true);
+        $listener->push($this->createModel(ContentModel::class, [
+            'id' => 2,
+            'type' => 'form',
+        ]), true);
 
         $this->assertSame('form', $listener->getCurrentData()['type']);
 
-        $listener->pop($this->createModel(ContentModel::class, ['id' => 2, 'type' => 'form']), '');
+        $listener->pop($this->createModel(ContentModel::class, [
+            'id' => 2,
+            'type' => 'form',
+        ]), '');
 
         $this->assertSame('article', $listener->getCurrentData()['type']);
     }
@@ -88,16 +119,25 @@ final class IncludeStylesDataListenerTest extends TestCase
     public function testMatchesTheIdWhetherItIsStoredAsStringOrInteger(): void
     {
         $listener = new IncludeStylesDataListener();
-        $listener->push($this->createModel(ContentModel::class, ['id' => '5', 'type' => 'form']), true);
+        $listener->push($this->createModel(ContentModel::class, [
+            'id' => '5',
+            'type' => 'form',
+        ]), true);
 
-        $listener->pop($this->createModel(ContentModel::class, ['id' => 5, 'type' => 'form']), '');
+        $listener->pop($this->createModel(ContentModel::class, [
+            'id' => 5,
+            'type' => 'form',
+        ]), '');
 
         $this->assertSame([], $listener->getCurrentData());
     }
 
     public function testPopReturnsTheBufferUnchanged(): void
     {
-        $this->assertSame('<form></form>', new IncludeStylesDataListener()->pop($this->createModel(ContentModel::class, ['id' => 1, 'type' => 'form']), '<form></form>'));
+        $this->assertSame('<form></form>', new IncludeStylesDataListener()->pop($this->createModel(ContentModel::class, [
+            'id' => 1,
+            'type' => 'form',
+        ]), '<form></form>'));
     }
 
     /**
@@ -106,7 +146,10 @@ final class IncludeStylesDataListenerTest extends TestCase
     public function testResetClearsTheStack(): void
     {
         $listener = new IncludeStylesDataListener();
-        $listener->push($this->createModel(ContentModel::class, ['id' => 1, 'type' => 'form']), true);
+        $listener->push($this->createModel(ContentModel::class, [
+            'id' => 1,
+            'type' => 'form',
+        ]), true);
 
         $listener->reset();
 

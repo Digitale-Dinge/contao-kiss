@@ -16,7 +16,6 @@ enum Background: string implements TranslatableLabelInterface
     case primary = 'bg-primary-solid';
     case secondary = 'bg-secondary-solid';
     case tertiary = 'bg-tertiary-solid';
-    //case quaternary = 'bg-quaternary-solid';
     case success = 'bg-status-success-solid';
     case warning = 'bg-status-warning-solid';
     case error = 'bg-status-error-solid';
