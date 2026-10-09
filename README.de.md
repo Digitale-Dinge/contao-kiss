@@ -22,7 +22,7 @@
     <a href="https://packagist.org/packages/digitaledinge/contao-kiss"><img src="https://img.shields.io/packagist/v/digitaledinge/contao-kiss" alt="packagist version"/></a>
     <a href="https://packagist.org/packages/digitaledinge/contao-kiss"><img src="https://img.shields.io/packagist/dt/digitaledinge/contao-kiss?color=f47c00" alt="amount of downloads"/></a>
     <a href="https://packagist.org/packages/digitaledinge/contao-kiss"><img src="https://img.shields.io/packagist/dependency-v/digitaledinge/contao-kiss/php?color=474A8A" alt="minimum php version"></a>
-    <a href="https://phpstan.org/user-guide/rule-levels"><img src="https://img.shields.io/badge/PHPStan-level%2010-brightgreen" alt="phpstan level 10"></a>
+    <a href="https://phpstan.org/user-guide/rule-levels"><img src="https://img.shields.io/badge/PHPStan-level%2010-516CB3" alt="phpstan level 10"></a>
 </p>
 
 ---
