@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Tests\Migration\Version100;
+namespace DigitaleDinge\ContaoKiss\Tests\Migration\Version009;
 
-use DigitaleDinge\ContaoKiss\Migration\Version100\CallToActionLinkMigration;
+use DigitaleDinge\ContaoKiss\Migration\Version009\CallToActionLinkMigration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;

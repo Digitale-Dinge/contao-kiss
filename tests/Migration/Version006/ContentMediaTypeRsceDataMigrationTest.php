@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DigitaleDinge\ContaoKiss\Tests\Migration\Version100;
+namespace DigitaleDinge\ContaoKiss\Tests\Migration\Version006;
 
-use DigitaleDinge\ContaoKiss\Migration\Version100\ContentMediaTypeRsceDataMigration;
+use DigitaleDinge\ContaoKiss\Migration\Version006\ContentMediaTypeRsceDataMigration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
