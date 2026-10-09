@@ -6,7 +6,7 @@
             .set('rel', 'noreferrer noopener')
             .setIfExists('data-lightbox', rel|default)
             .addClass('btn')
-            .addClass(styles.cta_type(ctaType|default))
+            .addClass('btn-' ~ styles.cta_variant(ctaType|default), ctaType|default)
             .addClass('btn-' ~ styles.size(ctaSize), ctaSize|default)
             .addClass('btn-' ~ styles.color(ctaColor), ctaColor|default)
             .addClass(styles.cta_shape(ctaShape|default))

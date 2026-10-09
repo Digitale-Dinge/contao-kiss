@@ -15,5 +15,5 @@
     .addClass('btn-' ~ styles.color(button_color), button_color)
     .addClass('btn-' ~ styles.size(button_size), button_size)
     .addClass(styles.cta_shape(this.fieldShape|default), this.fieldShape|default)
-    .addClass(styles.cta_type(button_variant), button_variant)
+    .addClass('btn-' ~ styles.cta_variant(button_variant), button_variant)
 %}

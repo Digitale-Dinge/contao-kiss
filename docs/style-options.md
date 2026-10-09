@@ -28,7 +28,7 @@ string and drops empty and unknown keys.
 | `Color\BackgroundOption`               | `styles.background`      |
 | `Color\ColorOption`                    | `styles.color`           |
 | `Component\CallToAction\ShapeOption`   | `styles.cta_shape`       |
-| `Component\CallToAction\VariantOption` | `styles.cta_type`        |
+| `Component\CallToAction\VariantOption` | `styles.cta_variant`     |
 | `Component\Media\LayoutOption`         | `styles.media_layout`    |
 | `Component\Swiper\NavigationOption`    |                          |
 | `Layout\ColumnOption`                  | `styles.column`          |

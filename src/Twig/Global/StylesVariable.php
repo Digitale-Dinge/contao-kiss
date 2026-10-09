@@ -15,11 +15,11 @@ use DigitaleDinge\ContaoKiss\Styles\Option\Typography;
 use DigitaleDinge\ContaoKiss\Styles\StyleOptionRegistry;
 
 /**
- * @experimental
+ * @internal
  */
-class StylesVariable
+readonly class StylesVariable
 {
-    public function __construct(private readonly StyleOptionRegistry $registry)
+    public function __construct(private StyleOptionRegistry $registry)
     {
     }
 
@@ -156,10 +156,7 @@ class StylesVariable
         return $this->option(Component\CallToAction\ShapeOption::class, $key);
     }
 
-    /**
-     * ToDo: Might use getVariant instead.
-     */
-    public function getCta_type(string|null $key = null): Component\CallToAction\VariantOption|StyleOption
+    public function getCta_variant(string|null $key = null): Component\CallToAction\VariantOption|StyleOption
     {
         return $this->option(Component\CallToAction\VariantOption::class, $key);
     }
