@@ -24,7 +24,11 @@ class AddStyleOptionsPass implements CompilerPassInterface
         foreach ($container->findTaggedServiceIds(StyleOptionRegistry::TAG_NAME) as $serviceId => $tags) {
             $class = $container->getParameterBag()->resolveValue($container->findDefinition($serviceId)->getClass() ?? $serviceId);
 
-            if (!\is_string($class) || !is_subclass_of($class, StyleOption::class)) {
+            if (!\is_string($class)) {
+                throw new InvalidDefinitionException(\sprintf('The style option service "%s" does not resolve to a class name.', $serviceId));
+            }
+
+            if (!is_subclass_of($class, StyleOption::class)) {
                 throw new InvalidDefinitionException(\sprintf('The style option "%s" must extend "%s".', $class, StyleOption::class));
             }
 

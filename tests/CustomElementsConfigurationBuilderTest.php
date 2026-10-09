@@ -28,7 +28,9 @@ final class CustomElementsConfigurationBuilderTest extends TestCase
     {
         parent::setUp();
 
+        // @phpstan-ignore offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
         $GLOBALS['TL_LANG']['MSC']['url'] = ['URL', 'Enter a web address.'];
+        // @phpstan-ignore offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
         $GLOBALS['TL_DCA']['tl_content']['fields']['url'] = [
             'label' => &$GLOBALS['TL_LANG']['MSC']['url'],
             'inputType' => 'text',
@@ -62,6 +64,7 @@ final class CustomElementsConfigurationBuilderTest extends TestCase
             ->build()
         ;
 
+        // @phpstan-ignore offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
         $this->assertSame(['URL', 'Enter a web address.'], $GLOBALS['TL_LANG']['MSC']['url']);
         $this->assertSame('rsce.field.imageUrl.label', $config['fields']['list']['fields']['imageUrl']['label'][0]);
     }

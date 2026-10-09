@@ -140,12 +140,15 @@ final class BackendStylesRuntime implements RuntimeExtensionInterface
 
         $data = $this->connection->fetchAssociative($statement, $parameters);
 
-        if (false === $data || null === $data['kiss_styles']) {
+        if (false === $data || !\is_string($data['kiss_styles'])) {
             return [];
         }
 
-        $styles = json_decode($data['kiss_styles'], true) ?? [];
-        $jsonData = json_decode($data['jsonData'] ?? '', true) ?? [];
+        // json_decode() returns mixed, narrow to array
+        $styles = json_decode($data['kiss_styles'], true);
+        $styles = \is_array($styles) ? $styles : [];
+        $jsonData = \is_string($data['jsonData'] ?? null) ? json_decode($data['jsonData'], true) : null;
+        $jsonData = \is_array($jsonData) ? $jsonData : [];
 
         $gridRatioData = [
             'gridRatio' => $jsonData['gridRatio'] ?? null,

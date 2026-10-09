@@ -180,7 +180,9 @@ abstract class AbstractJsonColumnMigration extends AbstractMigration
         }
 
         if ($this->isJson($value)) {
-            return json_decode($value, true) ?: [];
+            $data = json_decode($value, true);
+
+            return \is_array($data) ? $data : [];
         }
 
         $data = @unserialize($value, [

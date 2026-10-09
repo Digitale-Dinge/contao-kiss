@@ -20,14 +20,21 @@ final class AddKissStyleFieldsToPaletteListener
             return;
         }
 
+        // @phpstan-ignore offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
         $GLOBALS['TL_DCA'][$table]['fields']['kiss_dontShowFieldsOnContentElement'] = [
             'inputType' => 'select',
             'options_callback' => static function (): array {
                 $options = [];
 
                 // remove the categories from the content element list
+                // @phpstan-ignore foreach.nonIterable ($GLOBALS is untyped)
                 foreach ($GLOBALS['TL_CTE'] as $cte) {
+                    if (!\is_array($cte)) {
+                        continue;
+                    }
+
                     foreach ($cte as $key => $class) {
+                        // @phpstan-ignore binaryOp.invalid, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
                         $options[$key] = ($GLOBALS['TL_LANG']['CTE'][$key][0] ?? $key).' <span style="color:var(--gray)">['.$key.']</span>';
                     }
                 }

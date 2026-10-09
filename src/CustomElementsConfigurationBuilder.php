@@ -399,6 +399,7 @@ final class CustomElementsConfigurationBuilder
 
         $options['label'] = [
             $this->translator->trans('rsce.field.imageUrl.label', [], 'rsce'),
+            // @phpstan-ignore offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
             &$GLOBALS['TL_LANG']['MSC']['url'][1],
         ];
 
@@ -724,6 +725,7 @@ final class CustomElementsConfigurationBuilder
 
     private function inheritEvalClass(string $key, array $options): array
     {
+        // @phpstan-ignore offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
         $options['eval']['tl_class'] ??= $GLOBALS['TL_DCA']['tl_content']['fields'][$key]['eval']['tl_class'] ?? '';
 
         return $options;
@@ -771,6 +773,7 @@ final class CustomElementsConfigurationBuilder
                 'maxItems' => 2,
                 'fields' => [
                     'text' => [
+                        // @phpstan-ignore offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
                         'label' => &$GLOBALS['TL_LANG']['tl_content']['ctaText'],
                         'inputType' => 'text',
                         'eval' => [
@@ -803,7 +806,12 @@ final class CustomElementsConfigurationBuilder
 
     private function copyDcaField(string $key, string $table = 'tl_content'): array
     {
+        // @phpstan-ignore offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
         $field = $GLOBALS['TL_DCA'][$table]['fields'][$key];
+
+        if (!\is_array($field)) {
+            throw new \LogicException(\sprintf('The DCA field "%s.%s" does not exist.', $table, $key));
+        }
         $label = $field['label'] ?? null;
 
         // Remove the label reference (see #35)

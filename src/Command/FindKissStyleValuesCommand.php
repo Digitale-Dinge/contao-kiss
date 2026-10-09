@@ -133,6 +133,7 @@ class FindKissStyleValuesCommand
             $this->framework->getAdapter(Controller::class)->loadDataContainer($table);
 
             foreach ($keys as $key) {
+                // @phpstan-ignore cast.string, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible, offsetAccess.nonOffsetAccessible ($GLOBALS is untyped)
                 $defaults[$key] = (string) ($GLOBALS['TL_DCA'][$table]['fields'][$key]['default'] ?? '');
             }
         }
@@ -152,7 +153,7 @@ class FindKissStyleValuesCommand
                         $value,
                     ];
 
-                    if (null !== $backendPrefix) {
+                    if (null !== $backendPrefix && is_numeric($row['id'])) {
                         $result[] = $this->getEditUrl($backendPrefix, $config['do'], $table, (int) $row['id']);
                     }
 
@@ -229,7 +230,9 @@ class FindKissStyleValuesCommand
         }
 
         if ($this->isJson($value)) {
-            return json_decode($value, true) ?: [];
+            $data = json_decode($value, true);
+
+            return \is_array($data) ? $data : [];
         }
 
         $data = StringUtil::deserialize($value);

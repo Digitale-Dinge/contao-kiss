@@ -72,7 +72,7 @@ $pm = PaletteManipulator::create()
     ->addField('gridSpan', 'layout_legend', PaletteManipulator::POSITION_APPEND)
 ;
 
-foreach (array_keys($GLOBALS['TL_FFL'] ?? []) as $field) {
+foreach (is_array($GLOBALS['TL_FFL'] ?? null) ? array_keys($GLOBALS['TL_FFL']) : [] as $field) {
     if ('fieldsetStop' === $field) {
         continue;
     }

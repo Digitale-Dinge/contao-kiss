@@ -56,7 +56,7 @@ final class StyleOptionRegistryFactory
         $classes = [];
 
         foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($root, \FilesystemIterator::SKIP_DOTS)) as $file) {
-            if (!str_ends_with($file->getFilename(), 'Option.php') || 'StyleOption.php' === $file->getFilename()) {
+            if (!$file instanceof \SplFileInfo || !str_ends_with($file->getFilename(), 'Option.php') || 'StyleOption.php' === $file->getFilename()) {
                 continue;
             }
 
