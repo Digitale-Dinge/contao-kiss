@@ -5,7 +5,7 @@
  * Sections: card-{body|header|footer|title|actions|alert}
  * Sizes: card-{sm|lg}
  * Styles: card-{soft|outline|glass}
- * Colors: card-{primary|secondary|tertiary|success|warning|error}
+ * Colors: card-{primary|secondary|tertiary|success|warning|error|neutral-inverse}
  * Layouts: {card|layout}-{reverse|side|side-reverse|media-background}
  * Interactive: card-{hover|grow|link}
  */
@@ -134,6 +134,13 @@
         --card-fg: var(--kiss-sys-color-status-error-on-solid);
         --card-border: var(--kiss-sys-color-status-error-border);
         --card-ring: var(--kiss-sys-color-status-error-solid);
+    }
+
+    .card-neutral-inverse {
+        --card-bg: var(--kiss-sys-color-neutral-inverse);
+        --card-fg: var(--kiss-sys-color-neutral-on-inverse-strong);
+        --card-border: var(--kiss-sys-color-neutral-inverse);
+        --card-ring: var(--kiss-sys-color-neutral-inverse);
     }
 
     /* Variants */
