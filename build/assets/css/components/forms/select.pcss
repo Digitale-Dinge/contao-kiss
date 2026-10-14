@@ -94,27 +94,33 @@
     }
 
     /* Colors */
-    .select-primary {
+    .select-primary,
+    .select-floating:has(.select-primary) {
         --select-color: var(--kiss-sys-color-brand-primary-solid);
     }
 
-    .select-secondary {
+    .select-secondary,
+    .select-floating:has(.select-secondary) {
         --select-color: var(--kiss-sys-color-brand-secondary-solid);
     }
 
-    .select-tertiary {
+    .select-tertiary,
+    .select-floating:has(.select-tertiary) {
         --select-color: var(--kiss-sys-color-brand-tertiary-solid);
     }
 
-    .select-success {
+    .select-success,
+    .select-floating:has(.select-success) {
         --select-color: var(--kiss-sys-color-status-success-solid);
     }
 
-    .select-warning {
+    .select-warning,
+    .select-floating:has(.select-warning) {
         --select-color: var(--kiss-sys-color-status-warning-solid);
     }
 
-    .select-error {
+    .select-error,
+    .select-floating:has(.select-error) {
         --select-color: var(--kiss-sys-color-status-error-solid);
     }
 
@@ -197,7 +203,7 @@
 
         &:focus-within {
             .select-floating-label {
-                color: var(--select-label-color);
+                color: var(--select-label-color, var(--select-color));
             }
         }
 

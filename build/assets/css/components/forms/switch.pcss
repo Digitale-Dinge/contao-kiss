@@ -23,7 +23,7 @@
         --switch-width: 2.75rem;
         --switch-height: 1.5rem;
         --thumb-size: 1.25rem;
-        --thumb-offset: .125rem;
+        --thumb-offset: calc((var(--switch-height) - var(--thumb-size)) / 2 - 1px);
         --input-color: color-mix(in oklab, var(--kiss-sys-color-neutral-on-strong) 40%, transparent);
 
         @apply relative shrink-0 cursor-pointer appearance-none;
@@ -122,7 +122,6 @@
         --switch-width: 2.25rem;
         --switch-height: 1.25rem;
         --thumb-size: 1rem;
-        --thumb-offset: .125rem;
     }
 
     /* Default is defined in base */
@@ -131,6 +130,5 @@
         --switch-width: 3.25rem;
         --switch-height: 1.75rem;
         --thumb-size: 1.5rem;
-        --thumb-offset: .125rem;
     }
 }

@@ -3,7 +3,7 @@
     {% set direction = enum('DigitaleDinge\\ContaoKiss\\Styles\\Option\\IconPosition').tryFrom(item.iconPosition|default)?.name %}
 
     {% set icon_block %}
-        <span{{ attrs().addClass(direction == 'right' ? 'ml-1' : 'mr-1') }}>
+        <span{{ attrs().addClass(direction == 'right' ? 'ml-2' : 'mr-2') }}>
             {{ include('@Contao/kiss_component/media/_icon_include.html.twig') }}
         </span>
     {% endset %}

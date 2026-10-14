@@ -18,7 +18,8 @@
  *   </label>
  */
 @layer components {
-    .form-checkbox {
+    .form-checkbox,
+    .content-login input:is(.checkbox, .tl_checkbox) {
         --input-color: var(--kiss-sys-color-neutral-on-strong);
         --input-border-opacity: 60%;
         --size: 1.5rem;
@@ -78,7 +79,8 @@
         }
     }
 
-    span:has(> .form-checkbox) {
+    span:has(> .form-checkbox),
+    .content-login span:has(> input:is(.checkbox, .tl_checkbox)) {
         @apply flex items-center gap-2 cursor-pointer text-base;
 
         label {

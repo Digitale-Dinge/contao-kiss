@@ -11,7 +11,7 @@
     {% set link_title = item.linkTitle|default(item.url) %}
 
     <a{{ attrs(link_attributes|default)
-        .addClass(['inline-flex', 'items-center', '[&_svg]:h-[1em]', '[&_svg]:w-[1em]', '[&_svg]:shrink-0'])
+        .addClass(['inline-flex', 'items-center', '[&_svg]:h-[.875em]', '[&_svg]:w-[.875em]', '[&_svg]:shrink-0', '[&_svg]:overflow-visible'])
         .set('href', item.url|default|insert_tag|encode_email)
         .set('target', '_blank', item.target|default)
         .set('rel', 'noreferrer noopener', item.target|default)

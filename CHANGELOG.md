@@ -4,6 +4,26 @@
 > Since 1.0.0, contao-kiss follows [semantic versioning][semver]. Breaking changes only happen in major versions.
 > Before 1.0.0, every minor version could contain breaking changes. See [#18] for the tag and branch history.
 
+## [1.0.1] (2026-10-14)
+
+**Tag:** [`1.0.1`][tag-1.0.1]
+
+**Branch:** `main`
+
+### Added
+
+- `.card-neutral-inverse` is available as a card color in the CSS
+
+### Changed
+
+- The call to action inside a card follows the `text-center` and `text-end` alignment
+- SVG icons in the download, hyperlink and hyperlink list components are smaller and no longer get clipped
+- The icon in the `icon_text` component has more space to the text
+- The login module uses the KISS styles for its inputs, checkboxes, buttons and error messages
+- The floating label of inputs, textareas and selects uses the field color, and falls back to the surface color as
+  background if no `bg-*` class is set
+- The switch thumb is centered vertically
+
 ## [1.0.0] (2026-10-09)
 
 **Tag:** [`1.0.0`][tag-1.0.0]
@@ -561,6 +581,7 @@ Contao 5 base and most of the old custom elements were dropped.
 
 - Initial release for Contao `^4.13 || ^5.3`
 
+[1.0.1]: https://github.com/Digitale-Dinge/contao-kiss/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.9.0...1.0.0
 [0.9.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.8.0...0.9.0
 [0.8.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.7.2...0.8.0
@@ -576,6 +597,7 @@ Contao 5 base and most of the old custom elements were dropped.
 [0.2.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.1.0
 
+[tag-1.0.1]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.1
 [tag-1.0.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.0
 [tag-0.9.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.9.0
 [tag-0.8.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.8.0
