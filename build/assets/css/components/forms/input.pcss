@@ -85,27 +85,33 @@
     }
 
     /* Colors */
-    .input-primary {
+    .input-primary,
+    .input-floating:has(.input-primary) {
         --input-color: var(--kiss-sys-color-brand-primary-solid);
     }
 
-    .input-secondary {
+    .input-secondary,
+    .input-floating:has(.input-secondary) {
         --input-color: var(--kiss-sys-color-brand-secondary-solid);
     }
 
-    .input-tertiary {
+    .input-tertiary,
+    .input-floating:has(.input-tertiary) {
         --input-color: var(--kiss-sys-color-brand-tertiary-solid);
     }
 
-    .input-success {
+    .input-success,
+    .input-floating:has(.input-success) {
         --input-color: var(--kiss-sys-color-status-success-solid);
     }
 
-    .input-warning {
+    .input-warning,
+    .input-floating:has(.input-warning) {
         --input-color: var(--kiss-sys-color-status-warning-solid);
     }
 
-    .input-error {
+    .input-error,
+    .input-floating:has(.input-error) {
         --input-color: var(--kiss-sys-color-status-error-solid);
     }
 
@@ -189,7 +195,7 @@
                 @apply pointer-events-auto font-medium px-1;
 
                 top: 0;
-                color: var(--input-label-color);
+                color: var(--input-label-color, var(--input-color));
                 background: var(--input-label-bg, var(--kiss-sys-color-neutral-surface-1));
                 translate: 0 calc(-50% - .0625em);
                 scale: .75;
