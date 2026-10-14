@@ -4,7 +4,7 @@
 
 {% block download_link_attributes -%}
     {%- set download_link_attributes = attrs(download_link_attributes)
-        .addClass(['inline-flex', 'items-center', '[&_svg]:h-[1em]', '[&_svg]:w-[1em]', '[&_svg]:shrink-0'])
+        .addClass(['inline-flex', 'items-center', '[&_svg]:h-[.875em]', '[&_svg]:w-[.875em]', '[&_svg]:shrink-0', '[&_svg]:overflow-visible'])
         .mergeWith(block('button_attributes'), data.ctaAsButton|default)
     -%}
     {{- download_link_attributes -}}

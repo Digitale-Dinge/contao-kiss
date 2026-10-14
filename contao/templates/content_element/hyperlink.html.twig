@@ -8,7 +8,7 @@
     {% if data.icon|default %}
         {% set link_attributes = attrs(link_attributes|default)
             .addClass('inline-flex items-center')
-            .addClass('[&_svg]:h-[1em] [&_svg]:w-[1em] [&_svg]:shrink-0')
+            .addClass('[&_svg]:h-[.875em] [&_svg]:w-[.875em] [&_svg]:shrink-0 [&_svg]:overflow-visible')
         %}
         {{- text_before -}}
         <a{{ attrs(link_attributes|default) }}>
