@@ -45,6 +45,14 @@
             }
         }
 
+        :where(.text-center) & > .cta-outer {
+            @apply justify-center;
+        }
+
+        :where(.text-end) & > .cta-outer {
+            @apply justify-end;
+        }
+
         /* ToDo: Heading Margin reset hgroup */
         :is(> h1, > h2, > h3, > h4, > h5, > h6, > .topline, > hgroup) {
             @apply m-0;
