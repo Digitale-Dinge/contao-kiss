@@ -31,7 +31,8 @@
  *   </div>
  */
 @layer components {
-    .form-input {
+    .form-input,
+    .content-login input.text {
         --input-color: var(--kiss-sys-color-neutral-on-strong);
         --input-border-opacity: 60%;
         --input-px: .75rem;
@@ -189,7 +190,7 @@
 
                 top: 0;
                 color: var(--input-label-color);
-                background: var(--input-label-bg);
+                background: var(--input-label-bg, var(--kiss-sys-color-neutral-surface-1));
                 translate: 0 calc(-50% - .0625em);
                 scale: .75;
             }

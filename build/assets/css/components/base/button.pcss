@@ -11,7 +11,8 @@
  * Example: <button class="btn btn-primary btn-lg">Save Document</button>
  */
 @layer components {
-    .btn {
+    .btn,
+    .content-login :is(button.submit, button.passkey-login) {
         --btn-bg: var(--kiss-sys-color-neutral-on-strong);
         --btn-border: var(--kiss-sys-color-neutral-on-strong);
         --btn-color: var(--kiss-sys-color-neutral-surface-1);
@@ -125,7 +126,8 @@
         --btn-bg-hover: color-mix(in oklch, var(--btn-ring) 20%, transparent);
     }
 
-    .btn-outline {
+    .btn-outline,
+    .content-login button.passkey-login {
         --btn-bg: transparent;
         --btn-bg-hover: var(--btn-ring);
         --btn-border: var(--btn-ring);
