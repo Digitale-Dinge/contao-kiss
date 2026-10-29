@@ -14,6 +14,11 @@
 @layer components {
     .cta {
         color: var(--btn-bg);
+        font-size: var(--btn-text);
+
+        &:hover {
+            color: revert-layer;
+        }
     }
 
     .btn,

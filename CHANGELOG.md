@@ -13,7 +13,7 @@
 ### Added
 
 - [#59] Buttons of the call to action, hyperlink, download and submit have a new type "Link only" (`none`). It
-  renders a link with the `cta` class instead of `btn`, colored by the chosen color like `link` before 0.9. Stored
+  renders a link with the `cta` class instead of `btn`, with the chosen color and size like `link` before 0.9. Stored
   `link` types, including the submit button of the form include, are now migrated to `none` instead of `text`
   ([zoglo])
 
