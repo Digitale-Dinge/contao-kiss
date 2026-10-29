@@ -11,9 +11,10 @@
 %}
 
 {% set form_inner_attributes = attrs(form_inner_attributes|default)
-    .addClass('btn')
+    .addClass('cta', 'none' == button_variant)
+    .addClass('btn', 'none' != button_variant)
     .addClass('btn-' ~ styles.color(button_color), button_color)
     .addClass('btn-' ~ styles.size(button_size), button_size)
     .addClass(styles.cta_shape(this.fieldShape|default), this.fieldShape|default)
-    .addClass('btn-' ~ styles.cta_variant(button_variant), button_variant)
+    .addClass('btn-' ~ styles.cta_variant(button_variant), button_variant not in ['', 'none'])
 %}

@@ -26,7 +26,7 @@ final class StyleOptionCasesTest extends TestCase
         Color\Background::class => ['transparent', 'neutral_one', 'neutral_two', 'neutral_three', 'primary', 'secondary', 'tertiary', 'success', 'warning', 'error', 'neutral_inverse'],
         Color\Color::class => ['primary', 'secondary', 'tertiary', 'success', 'warning', 'error'],
         Component\CallToAction\Shape::class => ['block'],
-        Component\CallToAction\Variant::class => ['soft', 'outline', 'text'],
+        Component\CallToAction\Variant::class => ['soft', 'outline', 'text', 'none'],
         Component\Media\Layout::class => ['default', 'reverse', 'side', 'side_reverse', 'media_background'],
         Component\Swiper\Navigation::class => ['overlay', 'outside', 'none'],
         IconPosition::class => ['left', 'right'],

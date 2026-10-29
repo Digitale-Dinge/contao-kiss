@@ -1,9 +1,10 @@
 {% block button_attributes %}
     {{- attrs(button_attributes|default)
-        .addClass('btn')
+        .addClass('cta', 'none' == data.ctaType|default)
+        .addClass('btn', 'none' != data.ctaType|default)
         .addClass('btn-' ~ styles.size(data.ctaSize|default), data.ctaSize|default)
         .addClass('btn-' ~ styles.color(data.ctaColor|default), data.ctaColor|default)
-        .addClass('btn-' ~ styles.cta_variant(data.ctaType|default), data.ctaType|default)
+        .addClass('btn-' ~ styles.cta_variant(data.ctaType|default), data.ctaType|default not in ['', 'none'])
         .addClass(styles.cta_shape(data.ctaShape|default))
     -}}
 {% endblock %}

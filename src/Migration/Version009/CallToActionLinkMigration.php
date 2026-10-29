@@ -9,7 +9,7 @@ use DigitaleDinge\ContaoKiss\Migration\AbstractJsonColumnMigration;
 class CallToActionLinkMigration extends AbstractJsonColumnMigration
 {
     private const array VARIANT_MAP = [
-        'link' => 'text',
+        'link' => 'none',
     ];
 
     protected function getTables(): array
@@ -27,6 +27,7 @@ class CallToActionLinkMigration extends AbstractJsonColumnMigration
         return [
             'kiss_styles' => [
                 'ctaType' => self::VARIANT_MAP,
+                'formFieldButtonVariant' => self::VARIANT_MAP,
                 'fieldVariant' => self::VARIANT_MAP,
             ],
             'rsce_data' => [

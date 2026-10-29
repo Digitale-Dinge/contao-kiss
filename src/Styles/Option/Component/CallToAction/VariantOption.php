@@ -11,6 +11,7 @@ use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
  * @method string soft()
  * @method string outline()
  * @method string text()
+ * @method string none()
  */
 #[AsKissStyleOption]
 class VariantOption extends StyleOption
