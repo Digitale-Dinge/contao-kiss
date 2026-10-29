@@ -4,7 +4,8 @@
  * Extends input patterns for multi-line text.
  *
  * Base: .form-textarea
- * Styles: textarea-{soft} (outline is default)
+ * Styles: textarea-{muted} (outline is default)
+ * Deprecated: textarea-soft, use textarea-muted
  * Colors: textarea-{primary|secondary|tertiary|success|warning|error}
  * Sizes: textarea-{sm|lg}
  * States: is-valid, is-invalid, disabled, readonly
@@ -72,6 +73,7 @@
     }
 
     /* Variants */
+    .textarea-muted,
     .textarea-soft {
         background-color: color-mix(in oklch, var(--textarea-color) 10%, transparent);
     }

@@ -56,7 +56,7 @@ rsce:
             label:              Stil
             description:        Hier können Sie einen Stil auswählen.
             options:
-                soft:           Soft
+                muted:          Soft
                 outline:        Outline
                 dashed:         Gestrichelt
 

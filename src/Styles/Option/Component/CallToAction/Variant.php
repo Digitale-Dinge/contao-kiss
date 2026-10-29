@@ -9,7 +9,7 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 enum Variant: string implements TranslatableLabelInterface
 {
-    case soft = 'soft';
+    case muted = 'muted';
     case outline = 'outline';
     case text = 'text';
     case none = 'none';

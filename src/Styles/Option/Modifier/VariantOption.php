@@ -8,7 +8,7 @@ use DigitaleDinge\ContaoKiss\DependencyInjection\Attribute\AsKissStyleOption;
 use DigitaleDinge\ContaoKiss\Styles\Option\StyleOption;
 
 /**
- * @method string soft()
+ * @method string muted()
  * @method string outline()
  * @method string glass()
  */

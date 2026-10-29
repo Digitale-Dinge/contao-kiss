@@ -136,7 +136,7 @@ Ask for files you cannot read by path instead of guessing their contents.
 
 The stored value and the emitted class are separate:
 
-1. `kiss_styles` stores the enum case name (`small`, `soft`, `accent`).
+1. `kiss_styles` stores the enum case name (`small`, `muted`, `accent`).
 2. `styles.size(data.elementSize)` resolves it to `sm`. Getters live in `StylesVariable.php`.
 3. The context prefix belongs in the template: `'card-' ~ styles.size(…)`, never in the enum.
 

@@ -4,7 +4,8 @@
  * Base: .card
  * Sections: card-{body|header|footer|title|actions|alert}
  * Sizes: card-{sm|lg}
- * Styles: card-{soft|outline|glass}
+ * Styles: card-{muted|outline|glass}
+ * Deprecated: card-soft, use card-muted
  * Colors: card-{primary|secondary|tertiary|success|warning|error|neutral-inverse}
  * Layouts: {card|layout}-{reverse|side|side-reverse|media-background}
  * Interactive: card-{hover|grow|link}
@@ -144,6 +145,7 @@
     }
 
     /* Variants */
+    .card-muted,
     .card-soft {
         --card-bg: color-mix(in oklch, var(--card-ring) 10%, transparent);
         --card-fg: var(--card-ring);

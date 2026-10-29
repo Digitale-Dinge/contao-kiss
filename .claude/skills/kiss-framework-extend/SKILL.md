@@ -84,8 +84,8 @@ Code comments are the second most common review complaint after scope creep. Lin
 ```
 
 ```php
-// Alert styles per _alert.scss: the shared soft/outline, extended with an alert-only dashed
-->addSelectField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
+// Alert styles per _alert.scss: the shared muted/outline, extended with an alert-only dashed
+->addSelectField('variant', ['', 'muted', 'outline', 'dashed'], ['tl_class' => 'w25'])
 ```
 
 Every one of them says what the next line already says. A programmer reads `addSelectField('variant', [...])` faster than the sentence describing it. Rules:
@@ -139,7 +139,7 @@ If the repo is not available locally, the reference branch is `main` on `github.
 
 When the request arrives as a spec ("the card should support layout, size, style, color, mediaType, poster …"), the first deliverable is a **table: spec item → where it already exists / what is genuinely missing**, followed by the open questions. Only after the user confirms do you edit. The expected shape of that answer:
 
-> I checked the existing style options. Sizes already run through `Modifier\Size` (`card-` prefix is added in the template). For `style` there is `Modifier\Variant`, which already has `soft` — I'd add `outline` and `glass` there rather than creating a card-specific enum, since those variants are generic. For colors: do you mean background (`Color\Background`, `data.backgroundColor` is already wired) or text/semantic color (`Color\Color`)? `poster` belongs in `kiss_component/media/_video.html.twig` — is that already on a colleague's branch? Layout is the only truly card-bound option; `Component\Card\Layout` is fine for that. How are the options set — via `tl_content.php` directly or via `StyleOptionsListener`? If I can't read those, please paste them.
+> I checked the existing style options. Sizes already run through `Modifier\Size` (`card-` prefix is added in the template). For `style` there is `Modifier\Variant`, which already has `muted` — I'd add `outline` and `glass` there rather than creating a card-specific enum, since those variants are generic. For colors: do you mean background (`Color\Background`, `data.backgroundColor` is already wired) or text/semantic color (`Color\Color`)? `poster` belongs in `kiss_component/media/_video.html.twig` — is that already on a colleague's branch? Layout is the only truly card-bound option; `Component\Card\Layout` is fine for that. How are the options set — via `tl_content.php` directly or via `StyleOptionsListener`? If I can't read those, please paste them.
 
 See the full worked example in `references/examples.md` ("Worked example: card spec onto media_text").
 
@@ -147,13 +147,13 @@ See the full worked example in `references/examples.md` ("Worked example: card s
 
 The core of the framework is the separation between the stored value and the emitted class:
 
-1. The database (`kiss_styles` column) stores only the **enum case name** (e.g. `small`, `soft`, `accent`).
+1. The database (`kiss_styles` column) stores only the **enum case name** (e.g. `small`, `muted`, `accent`).
 2. The `styles` Twig global resolves the key to the CSS class: `styles.size(data.elementSize)` → `sm`. Getters live in `StylesVariable.php` (`styles.size`, `styles.variant`, `styles.color`, `styles.background`, `styles.container`, `styles.padding_top` …).
 3. The **context prefix belongs in the template**, not in the enum: `'card-' ~ styles.size(...)` → `card-sm`, `'btn-' ~ styles.color(...)` → `btn-primary`. One enum therefore serves any number of components.
 
 Consequences: content only stores case names, so a project that replaces an option in its own app can change values and translations freely. Inside KISS, changing a value changes the class projects style against, and removing or renaming a case needs a migration. Both are the maintainer's decision, never yours: warn and wait for an explicit "yes" (see `AGENTS.md`, "Backwards compatibility").
 
-**Generic vs. component-specific:** options that can conceptually occur anywhere (sizes; variants like soft/outline/glass; colors) belong in `Modifier/` or `Color/` — even if the current occasion is only one component. Soft, glass, outline and friends will show up on buttons, alerts and badges next; that is why they live in `Modifier\Variant`, not in `Component\Card\Variant`. Only what is truly bound to one component (a card layout `side` / `media-full`) lives under `Component/<Name>/`. Same logic for field names: `elementVariant`, not `cardVariant`, when the option is reusable.
+**Generic vs. component-specific:** options that can conceptually occur anywhere (sizes; variants like muted/outline/glass; colors) belong in `Modifier/` or `Color/` — even if the current occasion is only one component. Muted, glass, outline and friends will show up on buttons, alerts and badges next; that is why they live in `Modifier\Variant`, not in `Component\Card\Variant`. Only what is truly bound to one component (a card layout `side` / `media-full`) lives under `Component/<Name>/`. Same logic for field names: `elementVariant`, not `cardVariant`, when the option is reusable.
 
 **Two color dimensions exist — ask which one is meant.** `Color\Background` (`bg-*`, wired as `data.backgroundColor`) and `Color\Color` (semantic colors: primary, secondary, accent, success, warning, error) are different questions. "Add colors to the card" is ambiguous until the user says which.
 
@@ -406,10 +406,10 @@ Before every hand-written options array, every translation line in PHP and every
 
 ### Local special values belong in `_config.php`, not in the enum
 
-If a component needs its own values besides the global ones (e.g. badge knows `soft`/`outline` from `Modifier\Variant`, plus a badge-only `dashed`), that is assembled **only in `rsce_<name>_config.php`** — with `addSelectField()` and the labels in `rsce.*.yaml`:
+If a component needs its own values besides the global ones (e.g. badge knows `muted`/`outline` from `Modifier\Variant`, plus a badge-only `dashed`), that is assembled **only in `rsce_<name>_config.php`** — with `addSelectField()` and the labels in `rsce.*.yaml`:
 
 ```php
-->addSelectField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
+->addSelectField('variant', ['', 'muted', 'outline', 'dashed'], ['tl_class' => 'w25'])
 ```
 
 The global enum is **not** extended for this: a case that only one component can render becomes a dead option in every other select. Conversely: if the value is conceptually usable everywhere, it belongs in the global enum and not in the config file. The deciding question is not "where is it more convenient" but "could a second component render this value?"
