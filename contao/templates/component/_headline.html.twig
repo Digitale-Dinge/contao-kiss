@@ -20,7 +20,7 @@
     {% endif %}
 
     {% set headline_source = is_from_iterable ? item.headline|default : data.headline|default|deserialize %}
-    {% set appearance = headline_source.appearance|default %}
+    {% set appearance = headline_source.appearance|default(headline_appearance|default) %}
     {% set attributes = headline_source.attributes|default %}
 
     {% set headline = {

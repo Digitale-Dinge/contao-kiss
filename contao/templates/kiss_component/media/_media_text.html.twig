@@ -24,9 +24,10 @@
             .addClass('text')
             .mergeWith(text_attributes|default)
         }}>
-            {% with {headline_classes: attrs(headline_classes|default)
-                .addClass(['card-title', 'responsive-headline-sm'], show_as_card)}
-            %}
+            {% with {
+                headline_classes: attrs(headline_classes|default).addClass('card-title', show_as_card),
+                headline_appearance: headline_appearance|default(show_as_card ? 'headline_three'),
+            } %}
                 {% block headline %}{% endblock %}
             {% endwith %}
             {{ block('text') }}

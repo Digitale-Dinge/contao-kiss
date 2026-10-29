@@ -10,7 +10,8 @@
         .addClass('card-' ~ styles.size(data.elementSize|default), data.elementSize|default)
         .mergeWith(attributes|default)
     %}
-    {% set headline_classes = attrs().addClass(['card-title', 'responsive-headline-sm']).mergeWith(headline_classes|default) %}
+    {% set headline_classes = attrs().addClass('card-title').mergeWith(headline_classes|default) %}
+    {% set headline_appearance = headline_appearance|default('headline_three') %}
     {% set text_attributes = attrs().addClass('responsive-body-sm').mergeWith(text_attributes|default) %}
 {% endif %}
 
