@@ -4,16 +4,17 @@
     {% set item = item|default(_context) %}
     {% set show_as_card = show_as_card|default(data.showAsCard|default) %}
     {% set hide_figcaption = hide_figcaption|default(show_as_card) %}
+    {% set media_type = media_type|default(mediaType|default) %}
 
     {% block media %}
-        {% if mediaType|default in ['image', 'icon', 'video'] %}
+        {% if media_type in ['image', 'icon', 'video'] %}
             {% set media_attributes = attrs()
                 .addClass('card-media', show_as_card)
-                .addClass(['media-' ~ mediaType, 'media'])
+                .addClass(['media-' ~ media_type, 'media'])
                 .mergeWith(media_attributes|default)
             %}
             {# ToDo: Add image size fallback if not set -> 800px if as card -> 800 or 600 if as gridlist #}
-            {{ include("@Contao/kiss_component/media/_#{mediaType}.html.twig") }}
+            {{ include("@Contao/kiss_component/media/_#{media_type}.html.twig") }}
         {% endif %}
     {% endblock %}
 
