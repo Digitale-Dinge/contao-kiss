@@ -172,6 +172,31 @@ jobs:
             - name: Run the unit tests
               run: composer unit-tests
 
+    lowest:
+        name: Tests lowest dependencies
+        runs-on: ubuntu-latest
+        steps:
+            - name: Set up PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.4'
+                  extensions: dom, fileinfo, filter, hash, intl, json, mbstring, pcre, zlib
+                  coverage: none
+
+            - name: Checkout
+              uses: actions/checkout@v6
+              with:
+                  show-progress: false
+                  persist-credentials: false
+
+            - name: Install the dependencies
+              uses: ramsey/composer-install@v4
+              with:
+                  dependency-versions: lowest
+
+            - name: Run the unit tests
+              run: composer unit-tests
+
     nightly:
         name: Tests PHP nightly
         runs-on: ubuntu-latest
