@@ -2,7 +2,8 @@
  * KISS Select Component
  *
  * Base: .form-select
- * Styles: select-{soft} (outline is default)
+ * Styles: select-{muted} (outline is default)
+ * Deprecated: select-soft, use select-muted
  * Colors: select-{primary|secondary|tertiary|success|warning|error}
  * Sizes: select-{sm|lg}
  * States: is-valid, is-invalid, disabled
@@ -89,6 +90,7 @@
     }
 
     /* Variants */
+    .select-muted,
     .select-soft {
         background-color: color-mix(in oklch, var(--select-color) 10%, transparent);
     }

@@ -2,7 +2,8 @@
  * KISS Button Component
  *
  * Base: .btn
- * Styles: btn-{soft|outline|text}
+ * Styles: btn-{muted|outline|text}
+ * Deprecated: btn-soft, use btn-muted
  * Colors: btn-{primary|secondary|tertiary|success|warning|error}
  * Sizes: btn-{sm|lg}
  * Shapes: btn-{circle|square|block}
@@ -11,6 +12,15 @@
  * Example: <button class="btn btn-primary btn-lg">Save Document</button>
  */
 @layer components {
+    .cta {
+        color: var(--btn-bg);
+        font-size: var(--btn-text);
+
+        &:hover {
+            color: revert-layer;
+        }
+    }
+
     .btn,
     .content-login :is(button.submit, button.passkey-login) {
         --btn-bg: var(--kiss-sys-color-neutral-on-strong);
@@ -117,6 +127,7 @@
     }
 
     /* Variants */
+    .btn-muted,
     .btn-soft {
         --btn-border: transparent;
         --btn-border-hover: transparent;

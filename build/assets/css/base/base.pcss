@@ -3,10 +3,6 @@
         @apply box-border;
     }
 
-    .invisible {
-        @apply sr-only visible;
-    }
-
     /* Undo Tailwind preflight for lists, components reset them where needed */
     ol,
     ul,
@@ -16,4 +12,8 @@
         margin: revert;
         padding: revert;
     }
+}
+
+.invisible {
+    @apply sr-only visible;
 }

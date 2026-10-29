@@ -22,7 +22,7 @@ The request arrived as a spec for a "Card component". Here is how the inventory 
 | --- | --- | --- | --- |
 | `layout` | `card-reverse` \| `card-side` \| `card-side-reverse` \| `card-media-full` | — (truly card-bound) | `Component\Card\Layout` enum + `data.cardLayout` wired in the `show_as_card` branch of `_media_text_wrapper.html.twig`, prefix `card-` in the template |
 | `size` | `card-sm` \| `card-md` (default) \| `card-lg` | `Modifier\Size`, `data.elementSize`, already `'card-' ~ styles.size(...)` in the wrapper | nothing |
-| `style` | `card-soft` \| `card-outline` \| `card-glass` (default solid = no class) | `Modifier\Variant` already has `soft`; `data.elementVariant` | add `outline`, `glass` cases to `Modifier\Variant` (generic — buttons/alerts/badges will use them too); wire `'card-' ~ styles.variant(...)` in the wrapper |
+| `style` | `card-muted` \| `card-outline` \| `card-glass` (default solid = no class) | `Modifier\Variant` already has `muted`; `data.elementVariant` | add `outline`, `glass` cases to `Modifier\Variant` (generic — buttons/alerts/badges will use them too); wire `'card-' ~ styles.variant(...)` in the wrapper |
 | `color` | `card-primary` … `card-error` | `Color\Color` (semantic) **and** `Color\Background` (`data.backgroundColor`, already wired on the card) | **ask**: background or text/semantic color? Then wire the existing enum with `card-` prefix; no new enum, no new Twig global |
 | `mediaType` | `image` \| `video` \| `icon` | called `type` in `media_text.html.twig` | nothing (do not rename) |
 | `image` | Figure from `figure(...)` | `media_text.html.twig` → `kiss_component/media/_image.html.twig` | nothing |
@@ -53,7 +53,7 @@ The resulting template change is a handful of `addClass` lines inside the existi
 
 Instead of code, the first answer to the spec should have looked like this:
 
-> I've checked the existing StyleOptions. You already have `Modifier\Size` for sizes and `Modifier\Variant` with a `soft` case — I'd extend `Variant` with `outline` and `glass` rather than creating a card-specific variant enum, because those variants are generic. Colors: you already have `Color\Background` (wired as `data.backgroundColor`) and `Color\Color` — do you mean background colors or text/semantic colors here? For `poster` the change belongs in `_video.html.twig`, not in the card — is that already on a branch? `layout` is the only option that is really card-specific, so a `Component\Card\Layout` enum is appropriate. How are the options set — directly in `tl_content.php` or via `StyleOptionsListener`? If I can't read those files, please paste `contao/dca/tl_content.php` and `src/EventListener/DataContainer/StyleOptionsListener.php`.
+> I've checked the existing StyleOptions. You already have `Modifier\Size` for sizes and `Modifier\Variant` with a `muted` case — I'd extend `Variant` with `outline` and `glass` rather than creating a card-specific variant enum, because those variants are generic. Colors: you already have `Color\Background` (wired as `data.backgroundColor`) and `Color\Color` — do you mean background colors or text/semantic colors here? For `poster` the change belongs in `_video.html.twig`, not in the card — is that already on a branch? `layout` is the only option that is really card-specific, so a `Component\Card\Layout` enum is appropriate. How are the options set — directly in `tl_content.php` or via `StyleOptionsListener`? If I can't read those files, please paste `contao/dca/tl_content.php` and `src/EventListener/DataContainer/StyleOptionsListener.php`.
 
 What actually happened instead: parallel enums (`Component\Card\Variant`, `Component\Card\Color`), new Twig globals (`styles.card_variant`, `styles.card_color`), an `info` case added to `Background`, `data.backgroundColor` deleted, a new `attributes` block in `rsce_media_text.html.twig`, and a "bugfix" in `content_element/_base.html.twig`. The review instructions were, verbatim in spirit:
 
@@ -181,7 +181,7 @@ The reference structure for components that do **not** inherit from the media_te
   @param {string} text - badge text (insert tags allowed)
   @param {string} icon - icon name for svg_icon()
   @param {string} color - key from Color (primary, secondary, success …)
-  @param {string} variant - badge style: soft|outline|dashed
+  @param {string} variant - badge style: muted|outline|dashed
   @param {string} badgeSize - key from Modifier\Size (small, large)
   @param {string} badgeShape - badge shape: pill|square
   @param {HtmlAttributes} badge_attributes - additional attributes
@@ -247,7 +247,7 @@ The reference structure for components that do **not** inherit from the media_te
 
 ->startList()
     ->addStyleOptionsField('color', Color::class)
-    ->addSelectField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
+    ->addSelectField('variant', ['', 'muted', 'outline', 'dashed'], ['tl_class' => 'w25'])
     ->addIconField()
 ->endList()
 ```
@@ -260,7 +260,7 @@ Why this is good:
 - **Global enums via the builder:** `addStyleOptionsField()` pulls options and labels from `Modifier\Size` and `Color\Color`. No `foreach (Size::cases())` in the config file, no plain-text labels in PHP.
 - **Local special value `dashed` only in the config:** `Modifier\Variant` stays untouched because no other element can render `badge-dashed`. Label lives in `rsce.field.variant.options.dashed`.
 - **Docblock as contract**, icons via `_icon_include.html.twig`, text via `|insert_tag` — no `<i class="…">`, no `|raw`.
-- **Not a single comment in component, RSCE template, config or CSS.** `addSelectField('variant', ['', 'soft', 'outline', 'dashed'])` does not need a line above it saying which of those are shared and which is badge-only; `svg { width: 1em }` does not need to be told it scales with the font size. The docblock is the only comment the component carries.
+- **Not a single comment in component, RSCE template, config or CSS.** `addSelectField('variant', ['', 'muted', 'outline', 'dashed'])` does not need a line above it saying which of those are shared and which is badge-only; `svg { width: 1em }` does not need to be told it scales with the font size. The docblock is the only comment the component carries.
 
 In CSS (`assets/css/components/_badge.css`) icons grow with the badge size because they take their size from the font size:
 
@@ -470,8 +470,8 @@ Detection question: "Does my config file contain a human-readable sentence, a `f
 ```
 
 ```php
-// Alert styles per _alert.scss: the shared soft/outline, extended with an alert-only dashed
-->addSelectField('variant', ['', 'soft', 'outline', 'dashed'], ['tl_class' => 'w25'])
+// Alert styles per _alert.scss: the shared muted/outline, extended with an alert-only dashed
+->addSelectField('variant', ['', 'muted', 'outline', 'dashed'], ['tl_class' => 'w25'])
 ```
 
 Each comment narrates the line under it: the `addClass` says it maps the variant, the method name and array say which values exist, and the SCSS header stops being a header the moment ": the size modifiers below redefine these and nothing else" is appended to it. The Twig one was additionally written in German. Comments like these cost the reviewer a read, rot the moment the line changes and mark the diff as generated.

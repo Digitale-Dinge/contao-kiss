@@ -85,7 +85,7 @@ style_options:
             large:                  Large
 
         variant:
-            soft:                   Soft
+            muted:                  Soft
             outline:                Outlined
             glass:                  Glass
 
@@ -117,9 +117,10 @@ style_options:
     component:
         button:
             variant:
-                soft:               Soft
+                muted:              Soft
                 outline:            Outlined
                 text:               Text
+                none:               Link only
             shape:
                 block:              Full width
 

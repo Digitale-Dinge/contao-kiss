@@ -4,6 +4,31 @@
 > Since 1.0.0, contao-kiss follows [semantic versioning][semver]. Breaking changes only happen in major versions.
 > Before 1.0.0, every minor version could contain breaking changes. See [#18] for the tag and branch history.
 
+## [1.0.2] (2026-10-29)
+
+**Tag:** [`1.0.2`][tag-1.0.2]
+
+**Branch:** `main`
+
+### Added
+
+- [#59] Buttons of the call to action, hyperlink, download and submit have a new type "Link only" (`none`). It
+  renders a link with the `cta` class instead of `btn`, with the chosen color and size like `link` before 0.9. Stored
+  `link` types, including the submit button of the form include, are now migrated to `none` instead of `text`
+  ([zoglo])
+
+### Changed
+
+- [#59] The `soft` variant is now called `muted` in the code and renders `btn-muted`, `card-muted`, `alert-muted`,
+  `badge-muted`, `input-muted`, `select-muted` and `textarea-muted`. The back end label stays "Soft". Stored `soft`
+  variants are migrated to `muted` automatically. The `-soft` classes still work, but are deprecated ([zoglo])
+- [#59] Cards keep the appearance chosen for their headline. Without one, they pass `headline_appearance` to the
+  headline component, which falls back to `responsive-headline-sm` ([zoglo])
+- [#59] Templates using the media text wrapper with `addImage`, such as news teasers, show their image again.
+  `_media_text.html.twig` reads `media_type` and falls back to `mediaType` ([zoglo])
+- [#59] `.invisible` is no longer inside the base layer, so the `invisible` utility of Tailwind no longer hides the
+  screen reader text of Contao ([zoglo])
+
 ## [1.0.1] (2026-10-14)
 
 **Tag:** [`1.0.1`][tag-1.0.1]
@@ -581,6 +606,7 @@ Contao 5 base and most of the old custom elements were dropped.
 
 - Initial release for Contao `^4.13 || ^5.3`
 
+[1.0.2]: https://github.com/Digitale-Dinge/contao-kiss/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/Digitale-Dinge/contao-kiss/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.9.0...1.0.0
 [0.9.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.8.0...0.9.0
@@ -597,6 +623,7 @@ Contao 5 base and most of the old custom elements were dropped.
 [0.2.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.1.0
 
+[tag-1.0.2]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.2
 [tag-1.0.1]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.1
 [tag-1.0.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.0
 [tag-0.9.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.9.0
@@ -668,6 +695,7 @@ Contao 5 base and most of the old custom elements were dropped.
 [#53]: https://github.com/Digitale-Dinge/contao-kiss/pull/53
 [#54]: https://github.com/Digitale-Dinge/contao-kiss/pull/54
 [#57]: https://github.com/Digitale-Dinge/contao-kiss/pull/57
+[#59]: https://github.com/Digitale-Dinge/contao-kiss/pull/59
 
 [semver]: https://semver.org
 [tailwind-compat]: https://tailwindcss.com/docs/compatibility#sass-less-and-stylus

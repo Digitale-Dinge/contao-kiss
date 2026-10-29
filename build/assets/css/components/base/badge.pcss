@@ -2,12 +2,13 @@
  * KISS Badge Component
  *
  * Base: .badge
- * Styles: badge-{soft|outline|dashed}
+ * Styles: badge-{muted|outline|dashed}
+ * Deprecated: badge-soft, use badge-muted
  * Colors: badge-{primary|secondary|tertiary|success|warning|error}
  * Sizes: badge-{sm|lg}
  * Shapes: badge-{pill|square}
  *
- * Example: <span class="badge badge-success badge-soft badge-lg">Active</span>
+ * Example: <span class="badge badge-success badge-muted badge-lg">Active</span>
  */
 @layer components {
     .badge {
@@ -85,6 +86,7 @@
     }
 
     /* Variants */
+    .badge-muted,
     .badge-soft {
         --badge-bg: color-mix(in oklch, var(--badge-ring) 10%, transparent);
         --badge-fg: var(--badge-ring);

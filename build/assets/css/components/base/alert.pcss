@@ -4,14 +4,15 @@
  * Base: .alert
  * Sections: alert-{icon|content|title|description}
  * Sizes: alert-{sm|lg}
- * Styles: alert-{soft|outline|dashed}
+ * Styles: alert-{muted|outline|dashed}
+ * Deprecated: alert-soft, use alert-muted
  * Colors: alert-{primary|secondary|tertiary|success|warning|error}
  *
  * Every modifier only swaps custom properties, so a consumer can restyle the
  * component by redefining --alert-* (or the --kiss-comp-alert-* tokens) instead
  * of overriding rules.
  *
- * Example: <div class="alert alert-success alert-soft alert-lg">Success message</div>
+ * Example: <div class="alert alert-success alert-muted alert-lg">Success message</div>
  */
 @layer components {
     .alert {
@@ -135,6 +136,7 @@
     }
 
     /* Variants */
+    .alert-muted,
     .alert-soft {
         --alert-bg: color-mix(in oklch, var(--alert-ring) 10%, transparent);
         --alert-fg: var(--alert-ring);

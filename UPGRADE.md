@@ -43,6 +43,44 @@ nothing. More on writing migrations is in [`docs/style-options.md`](docs/style-o
 
 ## From 0.9 to 1.0
 
+### Migrated automatically
+
+- Buttons and form fields that stored the `link` type become `none` (`CallToActionLinkMigration`). It renders a link
+  with the `cta` class instead of `btn`. Sites that already ran 1.0.0 or 1.0.1 got `text` instead, and editors switch
+  those back by hand
+- Buttons, cards, form fields, badges and alerts that stored the `soft` variant become `muted`
+  (`VariantMutedMigration`)
+
+### Soft is now muted
+
+Since 1.0.2 the `soft` variant renders `-muted` classes. The `-soft` classes still work, but are deprecated. Replace
+them in your own templates and CSS:
+
+```bash
+grep -rn -E '(btn|card|alert|badge|input|select|textarea)-soft' contao templates layout
+```
+
+Code that uses the enum case `Modifier\Variant::soft` or `CallToAction\Variant::soft` uses `::muted` now.
+
+### Media type in templates
+
+Since 1.0.2 `_media_text.html.twig` reads `media_type` and falls back to `mediaType`, the field name stored by RSCE
+elements. Template overrides that set the type themselves use `media_type`:
+
+```twig
+{% set media_type = 'image' %}
+```
+
+### Card headline appearance
+
+Since 1.0.2 cards no longer add `responsive-headline-sm` to the headline classes. They pass `headline_appearance`
+to the headline component instead, which uses it when the headline has no appearance of its own. Template overrides
+that want another default set it before the headline is rendered:
+
+```twig
+{% set headline_appearance = 'headline_two' %}
+```
+
 ### Removed deprecations
 
 `addDependsOnField()` is gone from the CustomElementsConfigurationBuilder. Use `addSelectField()` with the options, or
@@ -88,10 +126,6 @@ warning. Set the four sides instead:
 `$this->registry->getEnum(…)` or `<Enum>::class` as documented, nothing changes.
 
 ## From 0.8 to 0.9
-
-### Migrated automatically
-
-- Buttons and form fields that stored the `link` variant become `text` (`CallToActionLinkMigration`)
 
 ### Wide buttons and form fields
 

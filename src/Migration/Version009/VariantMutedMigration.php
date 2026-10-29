@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DigitaleDinge\ContaoKiss\Migration\Version009;
+
+use DigitaleDinge\ContaoKiss\Migration\AbstractJsonColumnMigration;
+
+class VariantMutedMigration extends AbstractJsonColumnMigration
+{
+    private const array VARIANT_MAP = [
+        'soft' => 'muted',
+    ];
+
+    protected function getTables(): array
+    {
+        return ['tl_content', 'tl_form_field'];
+    }
+
+    protected function getColumns(): array
+    {
+        return ['kiss_styles', 'rsce_data', 'callToAction'];
+    }
+
+    protected function getValueMaps(): array
+    {
+        return [
+            'kiss_styles' => [
+                'ctaType' => self::VARIANT_MAP,
+                'elementVariant' => self::VARIANT_MAP,
+                'formFieldVariant' => self::VARIANT_MAP,
+                'formFieldButtonVariant' => self::VARIANT_MAP,
+                'fieldVariant' => self::VARIANT_MAP,
+            ],
+            'rsce_data' => [
+                'ctaType' => self::VARIANT_MAP,
+                'variant' => self::VARIANT_MAP,
+            ],
+            'callToAction' => [
+                'ctaType' => self::VARIANT_MAP,
+            ],
+        ];
+    }
+}

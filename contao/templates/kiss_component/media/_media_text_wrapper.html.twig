@@ -3,6 +3,7 @@
 
 {% if addImage|default %}
     {% set type = addImage ? 'image' : null %}
+    {% set media_type = type %}
     {% set img_class = 'w-full' %}
 {% endif %}
 

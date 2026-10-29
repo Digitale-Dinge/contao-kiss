@@ -68,7 +68,7 @@ class CallToActionLinkMigrationTest extends TestCase
             'tl_content',
             'kiss_styles',
             '{"ctaAsButton":"1","ctaType":"link","ctaColor":"primary"}',
-            '{"ctaAsButton":"1","ctaType":"text","ctaColor":"primary"}',
+            '{"ctaAsButton":"1","ctaType":"none","ctaColor":"primary"}',
         ];
 
         yield 'call to action group column' => [
@@ -81,7 +81,7 @@ class CallToActionLinkMigrationTest extends TestCase
             ]]),
             serialize([[
                 'text' => 'More',
-                'ctaType' => 'text',
+                'ctaType' => 'none',
                 'ctaColor' => 'primary',
             ]]),
         ];
@@ -90,14 +90,21 @@ class CallToActionLinkMigrationTest extends TestCase
             'tl_content',
             'rsce_data',
             '{"list":[{"callToAction":[{"ctaType":"link"}]},{"callToAction":[{"ctaType":"outline"}]}]}',
-            '{"list":[{"callToAction":[{"ctaType":"text"}]},{"callToAction":[{"ctaType":"outline"}]}]}',
+            '{"list":[{"callToAction":[{"ctaType":"none"}]},{"callToAction":[{"ctaType":"outline"}]}]}',
+        ];
+
+        yield 'form include button variant' => [
+            'tl_content',
+            'kiss_styles',
+            '{"formFieldButtonVariant":"link"}',
+            '{"formFieldButtonVariant":"none"}',
         ];
 
         yield 'submit field variant' => [
             'tl_form_field',
             'kiss_styles',
             '{"fieldVariant":"link"}',
-            '{"fieldVariant":"text"}',
+            '{"fieldVariant":"none"}',
         ];
 
         yield 'other variants untouched' => [

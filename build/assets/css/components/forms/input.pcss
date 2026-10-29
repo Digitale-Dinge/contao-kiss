@@ -2,7 +2,8 @@
  * KISS Input Component
  *
  * Base: .form-input
- * Styles: input-{soft} (outline is default)
+ * Styles: input-{muted} (outline is default)
+ * Deprecated: input-soft, use input-muted
  * Colors: input-{primary|secondary|tertiary|success|warning|error}
  * Sizes: input-{sm|lg}
  * States: is-valid, is-invalid, disabled, readonly
@@ -80,6 +81,7 @@
     }
 
     /* Variants */
+    .input-muted,
     .input-soft {
         background-color: color-mix(in oklch, var(--input-color) 10%, transparent);
     }
