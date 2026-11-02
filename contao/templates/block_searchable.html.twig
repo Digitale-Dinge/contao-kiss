@@ -1,6 +1,8 @@
 {% extends '@Contao/block_searchable' %}
 {% use '@Contao/kiss_component/_content_wrapper.html.twig' %}
 
+{# KISS styles of the include element (module, form or article) that renders this template #}
+{% set include_data = kiss_include_data() %}
 {% set list_mode = list|default is iterable and list|length %}
 {% set list_tag_name = list_tag_name|default('div') %}
 
@@ -9,11 +11,11 @@
 
 {% set wrapperAttributes = attrs(cssID)
     .addClass([
-        styles.container(data.contentWidth|default),
-        styles.padding_top(data.paddingTop|default),
-        styles.padding_bottom(data.paddingBottom|default),
-        styles.margin_top(data.marginTop|default),
-        styles.margin_bottom(data.marginBottom|default),
+        styles.container(data.contentWidth|default(include_data.contentWidth|default)),
+        styles.padding_top(data.paddingTop|default(include_data.paddingTop|default)),
+        styles.padding_bottom(data.paddingBottom|default(include_data.paddingBottom|default)),
+        styles.margin_top(data.marginTop|default(include_data.marginTop|default)),
+        styles.margin_bottom(data.marginBottom|default(include_data.marginBottom|default)),
     ])
     .mergeWith(wrapperAttributes|default)
 %}

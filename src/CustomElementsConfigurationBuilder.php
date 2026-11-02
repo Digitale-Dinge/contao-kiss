@@ -68,7 +68,7 @@ final class CustomElementsConfigurationBuilder
         return $this;
     }
 
-    public function startList(string $key = 'list', array|null $translations = null, array|null $elementLabel = null, int $min = 1, int|null $max = null): self
+    public function startList(string $key = 'list', array|null $translations = null, array|string|null $elementLabel = null, int $min = 1, int|null $max = null): self
     {
         $this->applyPendingFields();
 
