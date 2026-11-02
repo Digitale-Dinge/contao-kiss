@@ -4,6 +4,24 @@
 > Since 1.0.0, contao-kiss follows [semantic versioning][semver]. Breaking changes only happen in major versions.
 > Before 1.0.0, every minor version could contain breaking changes. See [#18] for the tag and branch history.
 
+## [1.0.3] (2026-11-02)
+
+**Tag:** [`1.0.3`][tag-1.0.3]
+
+**Branch:** `main`
+
+### Added
+
+- [#60] The media text list has the Swiper settings and can be shown as a slider ([zoglo])
+- [#60] `startList()` of the custom elements configuration builder accepts a string as `$elementLabel` ([zoglo])
+
+### Changed
+
+- [#60] The `sub`, `sup` and `color` block insert tags no longer add a space after their content ([zoglo])
+- [#60] Modules included with a module element use the element's content width, padding and margin. `block_searchable`
+  reads them from `kiss_include_data()` when the module's own `data` has no value ([zoglo])
+- [#60] The Swiper component no longer fails when `slider_settings` is not set ([zoglo])
+
 ## [1.0.2] (2026-10-29)
 
 **Tag:** [`1.0.2`][tag-1.0.2]
@@ -606,6 +624,7 @@ Contao 5 base and most of the old custom elements were dropped.
 
 - Initial release for Contao `^4.13 || ^5.3`
 
+[1.0.3]: https://github.com/Digitale-Dinge/contao-kiss/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/Digitale-Dinge/contao-kiss/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/Digitale-Dinge/contao-kiss/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.9.0...1.0.0
@@ -623,6 +642,7 @@ Contao 5 base and most of the old custom elements were dropped.
 [0.2.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.1.0
 
+[tag-1.0.3]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.3
 [tag-1.0.2]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.2
 [tag-1.0.1]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.1
 [tag-1.0.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.0
@@ -696,6 +716,7 @@ Contao 5 base and most of the old custom elements were dropped.
 [#54]: https://github.com/Digitale-Dinge/contao-kiss/pull/54
 [#57]: https://github.com/Digitale-Dinge/contao-kiss/pull/57
 [#59]: https://github.com/Digitale-Dinge/contao-kiss/pull/59
+[#60]: https://github.com/Digitale-Dinge/contao-kiss/pull/60
 
 [semver]: https://semver.org
 [tailwind-compat]: https://tailwindcss.com/docs/compatibility#sass-less-and-stylus
