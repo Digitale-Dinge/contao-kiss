@@ -9,7 +9,7 @@
         .addClass('swiper')
         .addClass('swiper--navigation-outside', 'outside' == data.sliderNavigation|default)
         .addClass('overflow-visible!', data.sliderOverflowVisible|default)
-        .set('data-settings', slider_settings|json_encode)
+        .set('data-settings', slider_settings|default({})|json_encode)
         .mergeWith(slider_attributes|default)
     %}
 
