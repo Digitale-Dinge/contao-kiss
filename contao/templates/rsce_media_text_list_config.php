@@ -31,6 +31,7 @@ return $configBuilder
 
     ->addCardSettings()
     ->addGridGroup()
+    ->addSwiperSettings()
 
     ->build()
 ;
