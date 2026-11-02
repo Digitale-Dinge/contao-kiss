@@ -30,11 +30,11 @@ final readonly class ColorBlockInsertTag implements BlockInsertTagResolverNested
         $prefix = $insertTag->getParameters()->get(1);
         $prefix = $prefix ? $prefix.'-' : null;
 
-        $html = $this->twig->render('@Contao/kiss_component/_color_insert_tag.html.twig', [
+        $html = trim($this->twig->render('@Contao/kiss_component/_color_insert_tag.html.twig', [
             'value' => $value,
             'prefix' => $prefix,
             'content' => $wrappedContent->serialize(),
-        ]);
+        ]));
 
         return new ParsedSequence([new InsertTagResult($html, OutputType::html)]);
     }

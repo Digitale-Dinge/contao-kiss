@@ -21,9 +21,9 @@ final readonly class SubBlockInsertTag implements BlockInsertTagResolverNestedRe
 
     public function __invoke(ResolvedInsertTag $insertTag, ParsedSequence $wrappedContent): ParsedSequence
     {
-        $html = $this->twig->render('@Contao/kiss_component/_sub_insert_tag.html.twig', [
+        $html = trim($this->twig->render('@Contao/kiss_component/_sub_insert_tag.html.twig', [
             'content' => $wrappedContent->serialize(),
-        ]);
+        ]));
 
         return new ParsedSequence([new InsertTagResult($html, OutputType::html)]);
     }
