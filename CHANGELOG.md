@@ -10,10 +10,12 @@
 
 **Branch:** `main`
 
+**Commit:** [`57439c7`][57439c7]
+
 ### Changed
 
-- [#61] Add missing `icon_wrapper_attributes` ([zoglo])
-- [#61] Add missing translations ([zoglo])
+- [989354f] Add missing `icon_wrapper_attributes`
+- [99cecc6] Add missing translations
 
 ## [1.0.3] (2026-11-02)
 
@@ -673,6 +675,9 @@ Contao 5 base and most of the old custom elements were dropped.
 [tag-0.2.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.2.0
 [tag-0.1.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.1.0
 
+[57439c7]: https://github.com/Digitale-Dinge/contao-kiss/commit/57439c7354b39291c07c5207b75f5cb46117327d
+[989354f]: https://github.com/Digitale-Dinge/contao-kiss/commit/989354ffecf5c0f22df7ba56ba1407bf58ecec46
+[99cecc6]: https://github.com/Digitale-Dinge/contao-kiss/commit/99cecc6d8e4bd3fd779a4fc13856172e0d4e2138
 [6bf6bd4]: https://github.com/Digitale-Dinge/contao-kiss/commit/6bf6bd4e77da7d4915fea46b9afdf55221a00665
 [6b18257]: https://github.com/Digitale-Dinge/contao-kiss/commit/6b18257bed8f5629ec902f005a5766aaa6e54b8f
 [5afcd41]: https://github.com/Digitale-Dinge/contao-kiss/commit/5afcd41778a3367db1961fb8d04c399951ede127
@@ -730,7 +735,6 @@ Contao 5 base and most of the old custom elements were dropped.
 [#57]: https://github.com/Digitale-Dinge/contao-kiss/pull/57
 [#59]: https://github.com/Digitale-Dinge/contao-kiss/pull/59
 [#60]: https://github.com/Digitale-Dinge/contao-kiss/pull/60
-[#61]: https://github.com/Digitale-Dinge/contao-kiss/pull/61
 
 [semver]: https://semver.org
 [tailwind-compat]: https://tailwindcss.com/docs/compatibility#sass-less-and-stylus
