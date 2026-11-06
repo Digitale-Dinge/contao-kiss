@@ -4,6 +4,17 @@
 > Since 1.0.0, contao-kiss follows [semantic versioning][semver]. Breaking changes only happen in major versions.
 > Before 1.0.0, every minor version could contain breaking changes. See [#18] for the tag and branch history.
 
+## [1.0.4] (2026-11-06)
+
+**Tag:** [`1.0.4`][tag-1.0.4]
+
+**Branch:** `main`
+
+### Changed
+
+- [#61] Add missing `icon_wrapper_attributes` ([zoglo])
+- [#61] Add missing translations ([zoglo])
+
 ## [1.0.3] (2026-11-02)
 
 **Tag:** [`1.0.3`][tag-1.0.3]
@@ -624,6 +635,7 @@ Contao 5 base and most of the old custom elements were dropped.
 
 - Initial release for Contao `^4.13 || ^5.3`
 
+[1.0.4]: https://github.com/Digitale-Dinge/contao-kiss/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/Digitale-Dinge/contao-kiss/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/Digitale-Dinge/contao-kiss/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/Digitale-Dinge/contao-kiss/compare/1.0.0...1.0.1
@@ -642,6 +654,7 @@ Contao 5 base and most of the old custom elements were dropped.
 [0.2.0]: https://github.com/Digitale-Dinge/contao-kiss/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/0.1.0
 
+[tag-1.0.4]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.4
 [tag-1.0.3]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.3
 [tag-1.0.2]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.2
 [tag-1.0.1]: https://github.com/Digitale-Dinge/contao-kiss/releases/tag/1.0.1
@@ -717,6 +730,7 @@ Contao 5 base and most of the old custom elements were dropped.
 [#57]: https://github.com/Digitale-Dinge/contao-kiss/pull/57
 [#59]: https://github.com/Digitale-Dinge/contao-kiss/pull/59
 [#60]: https://github.com/Digitale-Dinge/contao-kiss/pull/60
+[#61]: https://github.com/Digitale-Dinge/contao-kiss/pull/61
 
 [semver]: https://semver.org
 [tailwind-compat]: https://tailwindcss.com/docs/compatibility#sass-less-and-stylus
