@@ -5,52 +5,75 @@ description: Extends the contao-kiss framework (Digitale Dinge, Contao 5 bundle)
 
 # Extending the KISS framework
 
-contao-kiss is a Contao >= 5.7 bundle with its own style system. Almost everything you are asked to build already exists in parts. The expensive mistakes in this framework do not come from lack of skill — they come from **building before reading**, from **inventing parallel structures** where the chain already provides a hook, and from **unrequested side changes**. This skill prevents all three.
+contao-kiss is a Contao >= 5.7 bundle with its own style system. Most of what a task asks for already exists in
+parts. The reviews that cost the most came from three mistakes: building before reading, inventing a parallel
+structure where the chain already has a hook, and changing things nobody asked for. Every "happened" note below is a
+real review finding that had to be reverted; treat it as a boundary.
 
-Every negative example referenced here really happened and had to be reverted in review. Treat them as boundaries, not anecdotes.
+## Contents
+
+1. [Workflow](#workflow)
+2. [Scope](#scope)
+3. [CI and tests](#ci-and-tests)
+4. [Comments and language](#comments-and-language)
+5. [Inventory](#inventory)
+6. [The style system](#the-style-system)
+7. [New style option](#new-style-option)
+8. [Changing a style option](#changing-a-style-option)
+9. [Twig](#twig)
+10. [Standalone components](#standalone-components)
+11. [RSCE config and builder](#rsce-config-and-builder)
+12. [New content element](#new-content-element)
+13. [Self-check](#self-check)
 
 ## Workflow
 
-Keep this order — every step saves the next one:
+1. **Clarify scope.** Resolve every ambiguity before the first edit. A spec (a list of options, sizes, colors) is
+   answered with a mapping table and questions, not with code (see [Inventory](#inventory)).
+2. **MoSCoW.** Must: exactly the requested feature. Should: the wiring without which the Must does not work (options
+   callback, DCA field, DE and EN translations, subpalette); part of the Must. Could: obvious extensions and missing
+   neighbour options; propose, never implement. Won't: renames (even ones the team discussed, like `text_inner_attrs`
+   → `text_inner_attributes`), refactorings, "missing" enum cases, deprecated cleanup; name them and leave them alone.
+3. **Inventory.** Grep and read what exists. Map every item of the request onto an existing enum, template hook or
+   builder helper.
+4. **Build.** The complete chain for a style option; inheritance instead of overriding in Twig.
+5. **Self-check** the diff against the [list at the end](#self-check).
 
-1. **Clarify scope** (Rule Zero) — resolve ambiguities *before* the first edit. If the request is a spec (a list of options, sizes, colors), answer with questions and a mapping, not with code.
-2. **MoSCoW plan** — name Must / Should / Could / Won't.
-3. **Inventory** — grep and read what already exists. Map every item of the request onto an existing enum, template hook or builder helper.
-4. **Build** — full chain for style options; inheritance instead of overriding in Twig.
-5. **Self-check** — read the diff against the checklist at the end.
+Before the first Twig edit read `references/examples.md`: positive references, the real failed attempts, a worked
+example of mapping a card spec onto `media_text`, and the table of every attribute hook.
 
-Before the first Twig edit, additionally read `references/examples.md`. It contains the positive references, seven real failed attempts, a worked example of mapping a card spec onto `media_text`, and the cheat sheet of all attribute hooks.
+## Scope
 
-## Rule Zero: scope discipline
+Change exclusively what was requested.
 
-Change exclusively what was requested:
+- No enum case, field or translation "because it logically belongs", even when a docblock mentions it. A case that
+  looks missing may be deprecated on purpose (happened: `info` in `Color\Background` was resurrected).
+- No fixes along the way in code you only pass through. Report what looks broken; it may be intent.
+- Never remove existing wiring while adding your own (happened: `data.backgroundColor` was deleted from the card
+  during an "improvement").
+- No new Twig global, enum or `attributes` block without one sentence that says why no existing option fits.
+- An ambiguous requirement ("use X", "colors": background or text?) is a question, not a guess.
+- A file you cannot read (repo not mounted, branch not checked out) is asked for by path. Ask whether a colleague's
+  branch already has part of the task before rebuilding it.
+- Could and Won't items go back to the user as proposals at the end. An unanswered question stays a question.
 
-- No enum case, no field, no translation "because it logically belongs" — even if a docblock already mentions it. A case that *looks* missing may be deliberately deprecated (this happened with `info` in `Color\Background`).
-- No "bugfixes along the way" in code you are only passing through. If something looks broken: **report** it, do not fix it. The framework has conventions you may not fully know — what looks like a bug can be intent.
-- Never **remove** existing wiring while adding your own. `data.backgroundColor` was already used on the card and got deleted during an "improvement" — that is a regression, not a cleanup.
-- No new Twig globals, no new enums, no new `attributes` blocks as a reflex. Each of these needs a sentence explaining why *no* existing option fits.
-- If a requirement is ambiguous ("use X" — but how exactly? "colors" — background or text?): **ask**, do not silently implement the most plausible interpretation. A question costs a minute; a wrong interpretation costs a review cycle.
-- If you cannot read a file you need (repo not mounted, branch not checked out): **ask for it by path** instead of guessing its contents. Colleagues may have already solved part of the task on another branch — ask whether that is the case before rebuilding it.
+## CI and tests
 
-## 🚨🚨🚨 Rule CI: DO NOT TOUCH THE CI OR THE TESTS. EVER. 🚨🚨🚨
+Never edit what decides whether a check passes, without written permission in the current task:
 
-**STOP. Some Reviewers approve LLM diffs without reading them. A changed CI config or test WILL get merged unnoticed and silently weakens every future check. This is about ALL of CI, not just twig-cs-fixer.**
-
-"CI" means every file that decides what passes:
-
-- **`tests/**`: every test, fixture, snapshot, `CASES` list, data provider, `markTestSkipped`/`markTestIncomplete`, deleted or weakened assertion**
+- `tests/**`: tests, fixtures, snapshots, `CASES` lists, data providers, `markTestSkipped`/`markTestIncomplete`,
+  deleted or weakened assertions
 - `.twig-cs-fixer.php`, `ecs.php`, `rector.php`, `phpstan.neon*`, `depcheck.php`, `phpunit.xml*`
-- `vendor-bin/**` (custom rules and their tests)
-- `.github/**`, the `scripts` in `composer.json` and `build/package.json`
-- `build/biome.json`, `build/stylelint.config.js`
-- any ignore list, baseline, `@phpstan-ignore`, `@codeCoverageIgnore`, `SHAME_ON_YOU`, `notName()`/`exclude()` on a Finder, `*-disable` comment
+- `vendor-bin/**`, `.github/**`, the `scripts` in `composer.json` and `build/package.json`, `build/biome.json`,
+  `build/stylelint.config.js`
+- every ignore list, baseline, `@phpstan-ignore`, `@codeCoverageIgnore`, `SHAME_ON_YOU`, `notName()`/`exclude()` on a
+  Finder, `*-disable` comment
 
-**ABSOLUTELY NO EDIT to any of these without explicit written permission IN THE CURRENT TASK.** A failing lint or a failing test is NOT permission. "Make the lint pass", "make the tests green" or "fix CI" is NOT permission. Fix the code, never the check. "Exclude X" in a reply is NOT permission to edit the CI config on your own.
+A failing lint or test is not permission. "Make the lint pass", "make the tests green", "fix CI", "exclude X", "ok"
+and 👍 are not permission. Fix the code, never the check. When the only way out is a CI change:
 
-When a check fails and the only way out is a CI change:
-
-1. **Do not edit.** Leave the check failing.
-2. Reply with this block, on its own, before anything else:
+1. Do not edit. Leave the check failing.
+2. Reply with this block on its own, before anything else:
 
    ```
    ██████████████████████████████████████████████████████████████
@@ -62,148 +85,141 @@ When a check fails and the only way out is a CI change:
    ██████████████████████████████████████████████████████████████
    ```
 
-3. Apply it **only** after the user replies with exactly `YES, HERE IS PERMISSION TO DO SO`. Anything else — "ok", "👍", "exclude it", "do it" — is a NO. Ask again.
-4. After applying, end the final reply with a second 🚨 block naming the CI file and the change, so it cannot be overlooked in review.
+3. Apply it only after the user replies exactly `YES, HERE IS PERMISSION TO DO SO`. Anything else is a no; ask again.
+4. After applying, end the final reply with a second 🚨 block naming the file and the change.
 
-This happened: `be_tinyMCE.html.twig` was excluded from twig-cs-fixer via `notName()` in `.twig-cs-fixer.php` after a 👍. That exclusion turned off **all** rules for the file, not just the one that failed.
+Happened: `be_tinyMCE.html.twig` was excluded from twig-cs-fixer with `notName()` after a 👍. The exclusion turned off
+every rule for that file, not only the failing one. Reviewers do approve diffs without reading them.
 
-## Rule One: no comments that restate the code, everything in English
+## Comments and language
 
-Code comments are the second most common review complaint after scope creep. Lines like these got flagged and had to be deleted:
+- Default is no comment. A comment that says what the next line says is deleted: not what a call does, not which
+  file a class belongs to, not "maps 1:1", not "the size modifiers below redefine these and nothing else".
+- SCSS and PHP may have bare section headers that group lines: `// Sizing`, `// Colors`. A header with a sentence
+  appended (`// Sizing: the size modifiers below …`) is narration, not a header.
+- Twig has no comments except the docblock of a standalone component (its API contract).
+- A why is allowed only when the code cannot show it: a workaround for a Contao or Twig quirk, a deliberate deviation
+  from the neighbouring pattern, the issue that forced it. One line.
+- English everywhere: code, comments, docblocks, identifiers, commit messages, YAML keys, replies. German only as the
+  content of `translations/de/*.yaml` and in existing strings you are told to keep.
 
-```scss
-// Sizing: the size modifiers below redefine these and nothing else
---alert-px: var(--kiss-comp-alert-spacing-padding-inline, 1rem);
-```
+## Inventory
 
-(The `// Sizing` header itself is fine — the half-sentence after it is the problem, see below.)
+The question is never "how do I build this?" but "where does this exist?":
 
-```twig
-{# The variant is alert-local and maps 1:1 onto the alert-* classes #}
-.addClass('alert-' ~ item.variant|default, item.variant|default)
-```
-
-```php
-// Alert styles per _alert.scss: the shared muted/outline, extended with an alert-only dashed
-->addSelectField('variant', ['', 'muted', 'outline', 'dashed'], ['tl_class' => 'w25'])
-```
-
-Every one of them says what the next line already says. A programmer reads `addSelectField('variant', [...])` faster than the sentence describing it. Rules:
-
-- **Default is no comment.** The framework's naming conventions carry the meaning; a comment that explains a well-named line is noise.
-- **Never comment the what**: not what a call does, not which file a class name belongs to, not that a value "maps 1:1", not how the size modifiers "redefine these and nothing else".
-- **Section headers in SCSS and PHP are fine** when they group a block of related lines: `// Sizing`, `// Colors`, `// Typography` — a bare label, nothing appended. `// Sizing: the size modifiers below redefine these and nothing else` is not a header, it is a narration.
-- **Twig gets no comments at all** apart from the component docblock. No section headers, no `{# … #}` above an `addClass`, no `{# NOT LIKE THIS #}` markers.
-- **A why is allowed only when it is invisible in the code**: a workaround for a Contao or Twig quirk, a deliberate deviation from a neighbouring pattern, a link to the issue that forced it. One line, states the reason, nothing else. If you cannot name such a reason, delete the comment.
-- **The docblock of a standalone component is the one Twig exception** (see the mandatory structure below) — it is the API contract, not commentary.
-- **English only, everywhere you write**: code, comments, docblocks, identifiers, commit messages, YAML keys, replies to the user. No German, no mixed German/English. The only German that may appear is the *content* of `translations/de/*.yaml` and existing German strings you are told to keep.
-
-Self-check line for this rule: for every comment in the diff ask "is this a bare section header in SCSS/PHP, or a why the code cannot express?" Anything else goes.
-
-## Step 1: MoSCoW before the first edit
-
-Break the task down and stick to the categories:
-
-- **Must** — exactly the requested feature, nothing more. The only category implemented without being asked.
-- **Should** — wiring without which the Must does not work (options callback, DCA field, translations DE **and** EN, subpalette). Belongs to the Must.
-- **Could** — obvious extensions, missing neighbour options, improvements. **Propose**, never implement.
-- **Won't** — everything else: renames (even ones the team has discussed, like `text_inner_attrs` → `text_inner_attributes`), refactorings, "missing" enum cases, deprecated cleanup. Name explicitly and leave alone.
-
-## Step 2: Inventory — read first, then build
-
-The question is never "how do I build this?" but "where does this already exist?":
-
-| What you are looking for | Where it lives (contao-kiss repo) |
+| Looking for | Where (contao-kiss repo) |
 | --- | --- |
-| All style options (enums + option classes) | `src/Styles/Option/` — `Modifier/` (Size, Variant), `Color/` (Color, Background), `Layout/`, `Typography/`, `Padding/`, `Margin/`, `Component/` |
-| The `styles` Twig global | `src/Twig/Global/StylesVariable.php` |
-| Style option registry + attribute | `src/Styles/StyleOptionRegistry.php`, `src/DependencyInjection/` (`AsKissStyleOption`, `AddStyleOptionsPass`) — usage in `docs/style-options.md` |
-| Backend options callbacks | `src/EventListener/DataContainer/StyleOptionsListener.php` |
-| DCA fields (`targetColumn: kiss_styles`) + subpalettes | `contao/dca/tl_content.php` |
-| Translations | `translations/{de,en}/style_options.*.yaml`, `contao_tl_content.*.yaml`, `rsce.*.yaml` (locate with `find . -name 'rsce*.yaml'` — the folder may sit under `src/` or the bundle root) |
+| Style options (enums + option classes) | `src/Styles/Option/`: `Modifier/` (Size, Variant), `Color/` (Color, Background), `Layout/`, `Typography/`, `Padding/`, `Margin/`, `Component/` (CallToAction, Media, Swiper) |
+| The `styles` Twig global | `src/Twig/Global/StylesVariable.php` (`styles.size`, `styles.variant`, `styles.color`, `styles.background`, `styles.container`, `styles.padding_top`, `styles.media_layout`, `styles.cta_variant` …) |
+| Registry and attribute | `src/Styles/StyleOptionRegistry.php`, `src/DependencyInjection/` (`AsKissStyleOption`, `AddStyleOptionsPass`); usage in `docs/style-options.md` |
+| Back end options callbacks | `src/EventListener/DataContainer/StyleOptionsListener.php` |
+| DCA fields (`targetColumn: kiss_styles`) and subpalettes | `contao/dca/tl_content.php` |
+| Translations | `translations/{de,en}/style_options.*.yaml`, `contao_tl_content.*.yaml`, `rsce.*.yaml` |
 | KISS base template (extends Contao core) | `contao/templates/content_element/_base.html.twig` |
-| List / grid / swiper wrapper | `contao/templates/kiss_component/_content_wrapper.html.twig` |
+| List, grid, swiper wrapper | `contao/templates/kiss_component/_content_wrapper.html.twig` |
+| Shared class sets | `contao/templates/kiss_attributes/` (`_card_attributes`, `_button_attributes`, `_text_appearance_attributes`) |
 | Media components (media_text, wrapper, image, video, icon, text) | `contao/templates/kiss_component/media/` |
-| Call-to-action | `contao/templates/kiss_component/action/` |
-| Core component overrides | `contao/templates/component/` — `{% use %}` the core component, redefine only the blocks that change (e.g. `_download.html.twig`: `download_link_attributes` and `download_link_inner`) |
-| Include elements (form, module, article) | `kiss_include_data()` returns the include element's row, like `data`. Legacy templates without blocks (e.g. `form_inline.html.twig`): extend them and `set` the merged variable at top level |
-| rsce element configs + builder | `contao/templates/rsce_*_config.php`, `src/CustomElementsConfigurationBuilder.php` |
-| Framework stylesheets | `build/assets/css/` — the minimal project theme they need is in `docs/build-tools.md` ("Theme variables") |
-| User-facing docs of these Twig rules | `docs/twig-templates.md` — keep it in sync when a rule here changes |
+| Call to action | `contao/templates/kiss_component/action/` |
+| Standalone components (badge, alert, switch …) | `contao/templates/kiss_component/<group>/_<name>.html.twig` |
+| Core component overrides | `contao/templates/component/`: `{% use %}` the core component, redefine only the blocks that change (`_download.html.twig`: `download_link_attributes`, `download_link_inner`) |
+| Include elements (form, module, article) | `kiss_include_data()` returns the include element's row, like `data`. Legacy templates without blocks (`form_inline.html.twig`): extend them and `set` the merged variable at top level |
+| RSCE configs and the builder | `contao/templates/rsce_*_config.php`, `src/CustomElementsConfigurationBuilder.php` |
+| Framework stylesheets | `build/assets/css/`; the minimal project theme is in `docs/build-tools.md` ("Theme variables") |
+| User docs of the Twig rules | `docs/twig-templates.md`; keep it in sync when a rule here changes |
 
-Rule of thumb: before you propose a new enum, a new field or a new Twig global, you must be able to say why **none** of the existing options fits. "I didn't find it" does not count — grep first. The `SIZE` modifier is the canary: if `'card-' ~ styles.size(...)` already exists in a template, every other card option follows the same pattern.
+Before proposing a new enum, field or Twig global you must be able to say why none of the existing options fits. "I
+didn't find it" does not count. `'card-' ~ styles.size(...)` in a template is the canary: every other card option
+follows that pattern. Without the repo, the reference is `main` on `github.com/Digitale-Dinge/contao-kiss`; ask for
+the files by path instead of reconstructing them.
 
-If the repo is not available locally, the reference branch is `main` on `github.com/Digitale-Dinge/contao-kiss` — ask the user for the concrete files (`contao/dca/tl_content.php`, `src/EventListener/DataContainer/StyleOptionsListener.php`, `src/Styles/Option/Modifier/*.php`, the relevant templates and translation files) rather than reconstructing them from memory.
+**A spec becomes a mapping, not code.** When the request is a list ("the card should support layout, size, style,
+color, mediaType, poster …"), the first deliverable is a table "spec item → where it exists / what is missing", then
+the open questions. Edit only after the user confirms. The expected shape:
 
-### Turning a spec into a mapping, not into code
+> Sizes already run through `Modifier\Size` (the `card-` prefix is added in the template). For `style` there is
+> `Modifier\Variant` with `muted`; I'd add `outline` and `glass` there, not in a card-specific enum, because they are
+> generic. Colors: background (`Color\Background`, wired as `data.backgroundColor`) or semantic (`Color\Color`)?
+> `poster` belongs in `kiss_component/media/_video.html.twig`, not in the card; is that on a colleague's branch?
+> Layout is the only card-bound option. Are the options set in `tl_content.php` or in `StyleOptionsListener`?
 
-When the request arrives as a spec ("the card should support layout, size, style, color, mediaType, poster …"), the first deliverable is a **table: spec item → where it already exists / what is genuinely missing**, followed by the open questions. Only after the user confirms do you edit. The expected shape of that answer:
+The full worked example is in `references/examples.md`.
 
-> I checked the existing style options. Sizes already run through `Modifier\Size` (`card-` prefix is added in the template). For `style` there is `Modifier\Variant`, which already has `muted` — I'd add `outline` and `glass` there rather than creating a card-specific enum, since those variants are generic. For colors: do you mean background (`Color\Background`, `data.backgroundColor` is already wired) or text/semantic color (`Color\Color`)? `poster` belongs in `kiss_component/media/_video.html.twig` — is that already on a colleague's branch? Layout is the only truly card-bound option; `Component\Card\Layout` is fine for that. How are the options set — via `tl_content.php` directly or via `StyleOptionsListener`? If I can't read those, please paste them.
+## The style system
 
-See the full worked example in `references/examples.md` ("Worked example: card spec onto media_text").
+1. The `kiss_styles` column stores only the **enum case name** (`small`, `muted`, `accent`).
+2. The `styles` global resolves the case to the class: `styles.size(data.elementSize)` → `sm`.
+3. The **context prefix belongs in the template**: `'card-' ~ styles.size(...)` → `card-sm`, `'btn-' ~
+   styles.color(...)` → `btn-primary`. One enum serves any number of components.
 
-## Understanding the style system
+Because content stores case names, a project that replaces an option in its own app can change values and
+translations freely. Inside KISS a changed value changes the class projects style against, and a removed or renamed
+case needs a migration. Both are the maintainer's decision: warn and wait for an explicit yes (`AGENTS.md`,
+"Backwards compatibility").
 
-The core of the framework is the separation between the stored value and the emitted class:
+**Generic or component-bound.** Options that can occur anywhere (sizes, variants like muted/outline/glass, colors) go
+into `Modifier/` or `Color/`, even when only one component needs them today; they will show up on buttons, alerts and
+badges next. Only what is bound to one component lives under `Component/<Name>/` (`Component\Media\Layout`,
+`Component\CallToAction\Shape`). Field names follow: `elementVariant`, not `cardVariant`, when the option is reusable.
 
-1. The database (`kiss_styles` column) stores only the **enum case name** (e.g. `small`, `muted`, `accent`).
-2. The `styles` Twig global resolves the key to the CSS class: `styles.size(data.elementSize)` → `sm`. Getters live in `StylesVariable.php` (`styles.size`, `styles.variant`, `styles.color`, `styles.background`, `styles.container`, `styles.padding_top` …).
-3. The **context prefix belongs in the template**, not in the enum: `'card-' ~ styles.size(...)` → `card-sm`, `'btn-' ~ styles.color(...)` → `btn-primary`. One enum therefore serves any number of components.
+**Two color dimensions.** `Color\Background` (`bg-*`, `data.backgroundColor`) and `Color\Color` (primary, secondary,
+accent, success, warning, error) answer different questions. "Add colors to the card" is ambiguous until the user
+says which.
 
-Consequences: content only stores case names, so a project that replaces an option in its own app can change values and translations freely. Inside KISS, changing a value changes the class projects style against, and removing or renaming a case needs a migration. Both are the maintainer's decision, never yours: warn and wait for an explicit "yes" (see `AGENTS.md`, "Backwards compatibility").
+## New style option
 
-**Generic vs. component-specific:** options that can conceptually occur anywhere (sizes; variants like muted/outline/glass; colors) belong in `Modifier/` or `Color/` — even if the current occasion is only one component. Muted, glass, outline and friends will show up on buttons, alerts and badges next; that is why they live in `Modifier\Variant`, not in `Component\Card\Variant`. Only what is truly bound to one component (a card layout `side` / `media-full`) lives under `Component/<Name>/`. Same logic for field names: `elementVariant`, not `cardVariant`, when the option is reusable.
+Only when the inventory shows something is missing. An option is exactly these parts:
 
-**Two color dimensions exist — ask which one is meant.** `Color\Background` (`bg-*`, wired as `data.backgroundColor`) and `Color\Color` (semantic colors: primary, secondary, accent, success, warning, error) are different questions. "Add colors to the card" is ambiguous until the user says which.
+1. **Enum case(s)** in an existing enum; a new enum only for a new dimension. Values without context prefix (`sm`,
+   not `card-sm`) unless the class is inseparable (`Background`: `bg-base-100`). `label()` points to `style_options.*`.
+2. **Option class** (`XyzOption extends StyleOption`) only for a new enum, registered with a bare
+   `#[AsKissStyleOption]` (picked up by the `Styles\` resource in `config/services.yaml`); maintain the `@method`
+   docblock lines.
+3. **`StylesVariable` getter** only for a new enum, delegating to `$this->option(XyzOption::class, $key)`.
+4. **Options callback**: one more `#[AsCallback('tl_content', 'fields.<field>.options')]` on the existing listener
+   method for that enum, no new method. Callbacks resolve the enum through the registry
+   (`$this->registry->getEnum(Xyz::class)`) so replacements apply.
+5. **DCA field** in `tl_content.php`: `inputType: select`, `targetColumn: 'kiss_styles'`, `includeBlankOption:
+   true`, no `blankOptionLabel` (the empty default `-` is the convention; existing labels such as `elementSize`'s
+   "Normal" stay). Register it in the matching subpalette.
+6. **Translations** DE and EN: option labels in `style_options.*.yaml`, field labels in `contao_tl_content.*.yaml`
+   (label and description, no third line).
+7. **Template wiring** with prefix and condition:
+   `.addClass('card-' ~ styles.variant(data.elementVariant|default), data.elementVariant|default)`.
 
-## New style option: the complete chain
+## Changing a style option
 
-If (and only if) the inventory shows something is really missing, an option consists of exactly these parts — omit nothing, invent nothing:
-
-1. **Enum case(s)** added to an existing enum — a new enum only for a genuinely new dimension. Values without context prefix (like `Modifier\Size`: `sm`, not `card-sm`), unless the class is inseparable (like `Background`: `bg-base-100`). `label()` points to `style_options.*`.
-2. **Option class** (`XyzOption extends StyleOption`) only for a new enum, registered with a bare `#[AsKissStyleOption]` (picked up by the `Styles\` resource in `config/services.yaml`); maintain the docblock `@method` lines.
-3. **`StylesVariable` getter** only for a new enum, delegating to `$this->option(XyzOption::class, $key)`. New Twig globals are the exception, not the reflex — `styles.variant`, `styles.color`, `styles.background`, `styles.size` already cover the card.
-4. **Options callback**: preferably an additional `#[AsCallback('tl_content', 'fields.<field>.options')]` attribute on the **existing** listener method, no new method for the same enum. Callbacks resolve the enum through the registry, so replacements apply: `$this->registry->getEnum(Xyz::class)`.
-5. **DCA field** in `tl_content.php`: `inputType: select`, `targetColumn: 'kiss_styles'`, `includeBlankOption: true`. No `blankOptionLabel` — the empty default (`-`) is the convention. Register the field in the matching subpalette (e.g. `showAsCard`).
-6. **Translations** always in pairs DE + EN: option labels in `style_options.*.yaml`, field labels in `contao_tl_content.*.yaml` (two lines: label + description, no third default line).
-7. **Template wiring** with prefix and condition: `.addClass('card-' ~ styles.variant(data.elementVariant|default), data.elementVariant|default)`.
-
-## Changing an existing style option
-
-Content stores the **case name**, never the value. What a change costs follows from that:
-
-| Change | Effect | What to do |
+| Change | Effect | Do |
 | --- | --- | --- |
 | A case's value | only the emitted class changes | edit freely, no test change |
-| New case | `StyleOptionCasesTest` reports it as incomplete | propose the `CASES` addition in a 🚨 block (Rule CI), add it only after the exact permission phrase |
-| Case removed or renamed | stored content loses its class, `StyleOptionCasesTest` fails | **MUST warn, MUST NOT touch without confirmation** |
+| New case | `StyleOptionCasesTest` reports it as incomplete | propose the `CASES` addition in a 🚨 block, add it after the exact permission phrase |
+| Case removed or renamed | stored content loses its class, the test fails | warn first, touch nothing without confirmation |
 
-**Removing or renaming a case is a breaking change. You MUST warn about it. You MUST NOT touch the enum, `StyleOptionCasesTest`, the translations or the CSS for it without explicit confirmation.**
+Removing or renaming a case is a breaking change. A request to remove it is not the confirmation, even when it quotes
+a team decision (happened with `btn-wide`: enum and test snapshot changed in one step, the warning came in the
+summary). The steps:
 
-A request to remove an option is not that confirmation, even when it quotes a team decision. It asks for the change, not for its consequences. This really happened with `btn-wide`: the request "remove wide" was treated as confirmed, the enum case and the test snapshot were changed in the same step, and the warning came afterwards in the summary. `StyleOptionCasesTest` exists so that exactly this never happens silently.
+1. Warn in a reply of its own before the first edit: the enum and case, every field that offers it (options callbacks,
+   RSCE `addStyleOptionsField()`), every template that emits it. No edit in that reply.
+2. Show how to find affected content: `contao_kiss:find-style-values <keys> <cases>` (for example `ctaSize,elementSize
+   x_small x_large`). It reads `kiss_styles`, `headline` and `rsce_data`; group fields with their own column
+   (`callToAction`) are not covered.
+3. Wait for an explicit yes. Until then no edit: not the enum, not the test, not "just the CSS".
+4. Update the `StyleOptionCasesTest` snapshot only as part of the confirmed change and only after the exact
+   `YES, HERE IS PERMISSION TO DO SO`.
+5. Write a migration only when the user asks for one and confirms the mapping.
 
-1. **Warn the user, in a reply of its own, before the first edit.** Name the enum and the case, every field that offers it (options callbacks, RSCE `addStyleOptionsField()`), and every template that emits it. That reply contains no edit.
-2. **Show how to find affected content:** `contao_kiss:find-style-values <keys> <cases>` — e.g. `ctaSize,elementSize x_small x_large`. It reads `kiss_styles`, `headline` and `rsce_data`. Group fields with their own column, like `callToAction`, are not covered.
-3. **Wait for an explicit "yes" to that warning.** No confirmation, no edit — not to the enum, not to the test, not "just the CSS".
-4. **Update the `StyleOptionCasesTest` snapshot only as part of the confirmed change, and only after the exact `YES, HERE IS PERMISSION TO DO SO` (Rule CI).** A failing snapshot is the signal to stop, never something to make green.
-5. **Write a migration only when the user explicitly asks for one and confirms the mapping.** Never on your own initiative, never with a guessed mapping.
-
-### Writing the migration
-
-- **Check `src/Migration/Version*/` first.** If a migration for the same key already exists, ask before extending it instead of adding a second one.
-- **Extend `AbstractJsonColumnMigration`** with `getTables()`, `getColumns()` and `getValueMaps()` (`column => [key => [old => new]]`), plus `getKeyRenames()` when a key itself is renamed. Maps apply at every depth — nested lists, JSON and serialized strings — and each value is re-encoded in its original format. Map to `''` to clear a value.
-- **List every column that stores the key:** `kiss_styles`, `rsce_data`, `headline`, and group fields with their own column. Columns a table doesn't have are skipped, so one migration can cover several tables.
-- **Place it in `src/Migration/Version<NNN>/`** of the upcoming release. `MigrationInterface` is autoconfigured, so no service definition is needed.
-- **Add a test** under `tests/Migration/Version<NNN>/`, following `ContentMediaTypeRsceDataMigrationTest`.
+**Migration.** Check `src/Migration/Version*/` first; if one exists for the same key, ask before adding a second.
+Extend `AbstractJsonColumnMigration` with `getTables()`, `getColumns()` and `getValueMaps()` (`column => [key => [old
+=> new]]`), plus `getKeyRenames()` for a renamed key. Maps apply at every depth (nested lists, JSON, serialized
+strings), values are re-encoded in their original format, `''` clears a value. List every column that stores the key
+(`kiss_styles`, `rsce_data`, `headline`, group columns); tables without a column are skipped. Place it in
+`src/Migration/Version<NNN>/` of the upcoming release (`MigrationInterface` is autoconfigured) and add a test under
+`tests/Migration/Version<NNN>/` like `ContentMediaTypeRsceDataMigrationTest`.
 
 ```php
 final class ContentSizeKissStylesMigration extends AbstractJsonColumnMigration
 {
-    private const array SIZE_MAP = [
-        'x_small' => 'small',
-        'x_large' => 'large',
-    ];
+    private const array SIZE_MAP = ['x_small' => 'small', 'x_large' => 'large'];
 
     protected function getTables(): array
     {
@@ -226,83 +242,65 @@ final class ContentSizeKissStylesMigration extends AbstractJsonColumnMigration
 }
 ```
 
-## Twig: inheritance over overriding
+## Twig
 
-The template chain is `Contao core _base` → `KISS _base` → component/element. Each level enriches `attributes`; the core block emits at the end. Respect that chain:
+The chain is Contao core `_base` → KISS `_base` → component or element. Each level enriches `attributes`; the core
+block emits at the end.
 
-- **Enrich HtmlAttributes, never replace them:** `attrs(attributes|default).addClass(...)` or `attrs()...mergeWith(attributes|default)`. `addClass` takes a condition as second argument — use it instead of `{% if %}` wrappers. `HtmlAttributes` deduplicates and handles empty values, so a chain like this is the whole card:
+- **Enrich `HtmlAttributes`, never replace them**: `attrs(attributes|default).addClass(...)` or
+  `attrs()….mergeWith(attributes|default)`. `addClass` takes a condition as second argument; use it instead of
+  `{% if %}`. `HtmlAttributes` deduplicates and drops empty values. The card wrapper is one chain:
 
   ```twig
   {% set attributes = attrs()
-      .addClass(['card', 'card-hover'])
-      .addClass('card-' ~ styles.card_layout(data.cardLayout|default), data.cardLayout|default)
-      .addClass('card-' ~ styles.size(data.elementSize|default), data.elementSize|default)
-      .addClass('card-' ~ styles.variant(data.elementVariant|default), data.elementVariant|default)
-      .addClass(styles.background(data.backgroundColor|default), data.backgroundColor|default)
+      .mergeWith(block('card_attributes'), show_as_card|default)
+      .addClass('media-' ~ styles.media_layout(data.elementLayout|default), data.elementLayout|default)
       .mergeWith(attributes|default)
   %}
   ```
 
-- **Root-level `set` instead of block override:** a `{% set attributes = ... %}` at template root runs *before* the inherited blocks render — the base blocks keep working with your enriched attributes. This is the standard way to contribute classes. In `_media_text_wrapper.html.twig` the card classes belong inside the existing `show_as_card` branch — not in a freshly added `{% block attributes %}` in `rsce_media_text.html.twig`.
-- **Override blocks only when the *structure* changes** (different markup, different order) — and then with `{{ parent() }}` wherever the parent logic should survive. Overriding a block just to change a class duplicates the entire parent logic and decouples you from future base changes.
-- **Shared class sets come from an attributes block, never a copy:** the card classes from `kiss_attributes/_card_attributes.html.twig` (`card_attributes`), the `ctaAsButton` button classes from `kiss_attributes/_button_attributes.html.twig` (`button_attributes`). `{% use %}` the block and merge it with its condition: `attrs(link_attributes|default).mergeWith(block('button_attributes'), data.ctaAsButton|default)`. `hyperlink`, `_download` and `rsce_hyperlink_list` each had their own copy of the button classes before.
-- **Reuse components instead of building parallel structures:** a "new card component" is almost always an `{% extends %}` on `kiss_component/media/_media_text_wrapper.html.twig` with `show_as_card` (see `news_card.html.twig`) — no new standalone template. Whoever inherits gets media types, CTA, headline and all attribute hooks (`media_attributes`, `text_attributes`, `headline_classes` …) for free. Because of that inheritance, changes to a media sub-template belong in that sub-template: a `poster` for videos goes into `kiss_component/media/_video.html.twig`, not into the card.
-- `{% use %}` imports blocks without inheritance (e.g. `_text.html.twig`, `_headline.html.twig`); `{{ include(...) }}` is for self-contained fragments without blocks or configuration (`_icon_include`). `_figure` is not one of them, see below.
+- **Root-level `set`, not a block override, to add classes.** A `{% set attributes = … %}` at template root runs
+  before the inherited blocks render, so the base blocks keep working. Card classes belong in the wrapper's existing
+  chain (`_media_text_wrapper.html.twig`), not in a new `{% block attributes %}` in `rsce_media_text.html.twig`.
+- **Override a block only when the structure changes** (other markup or order), with `{{ parent() }}` where the
+  parent logic should survive. Overriding to change a class duplicates the parent and decouples you from base changes.
+- **Shared class sets come from an attributes block, never a copy**: card classes from
+  `kiss_attributes/_card_attributes.html.twig` (`card_attributes`), `ctaAsButton` button classes from
+  `kiss_attributes/_button_attributes.html.twig` (`button_attributes`). `{% use %}` the file and merge the block with
+  its condition: `attrs(link_attributes|default).mergeWith(block('button_attributes'), data.ctaAsButton|default)`
+  (`hyperlink`, `_download` and `rsce_hyperlink_list` each had their own copy before).
+- **Reuse components, no parallel structures.** A "new card component" is an `{% extends %}` of
+  `kiss_component/media/_media_text_wrapper.html.twig` with `show_as_card` (see `news_card.html.twig`). The heir gets
+  media types, CTA, headline and every attribute hook. A change to a media sub-template goes into that sub-template:
+  a video `poster` belongs in `_video.html.twig`, not in the card.
+- `{% use %}` imports blocks without inheritance (`_text.html.twig`, `_headline.html.twig`). `{{ include() }}` is
+  for self-contained fragments without blocks or configuration (`_icon_include`). `_figure` is neither, see
+  [Core components](#core-components).
 
-### Attribute hooks and wrapper variables
+**Attribute hooks.** Everything from `_media_text_wrapper` down to the `<img>` is steered by variables:
+`attributes`, `media_attributes`, `headline_classes`, `topline_attributes`, `text_attributes`, `text_inner_attrs`,
+`cta_wrapper_attributes`, `cta_attributes`, `figure_attributes`, `caption_attributes`, `link_attributes`,
+`img_class`, `video_attributes`, `source_attributes`, plus the switches `show_as_card` and `tag_name`. The
+`_content_wrapper` (included by every `_base` descendant) adds `kiss_swiper`, `list_mode`, `list_tag_name` and
+`list_wrapper_attributes`. The full table, with what each hook targets and how `list_mode` activates, is in
+`references/examples.md`; read it before overriding a block.
 
-Everything from `_media_text_wrapper` down to the `<img>` is steerable via variables — `attributes`, `media_attributes`, `headline_classes`, `topline_attributes`, `text_attributes`, `text_inner_attrs`, `cta_wrapper_attributes`, `cta_attributes`, `figure_attributes`, `caption_attributes`, `link_attributes`, `img_class`, `video_attributes`, `source_attributes`, plus the behaviour switches `show_as_card`, `tag_name`. The `_content_wrapper` (included by every `_base` descendant) adds `kiss_swiper`, `list_mode`, `list_tag_name` and `list_wrapper_attributes`. The full table with what each hook targets and how `list_mode` auto-activates is in `references/examples.md` — consult it before overriding any block.
+A `{% set x_attributes = attrs()… %}` that ignores an incoming `x_attributes` is fixed the way the `AttrsHookMerge`
+lint rule says: `attrs(x_attributes|default)…` or `.mergeWith(x_attributes|default)`. Keep the variable and its
+name; do not inline the chain or rename it to silence the rule. Per-item state does not leak: `{{ block('…') }}` and
+`include()` each get their own copy of the context, so a `set` inside a block called from a loop stays in that
+call. A lint suggestion is rejected only when the rendered page shows it breaks something, never on a theory about
+Twig scoping (negative example 9).
 
-A `{% set x_attributes = attrs()… %}` that ignores an incoming `x_attributes` is fixed the way the `AttrsHookMerge` lint rule says: `attrs(x_attributes|default)…` or `.mergeWith(x_attributes|default)`. Keep the variable and its name. Do not inline the chain or rename the variable to get rid of the warning. Also, per-item state does not leak: `{{ block('…') }}` and `include()` each get their own copy of the context, so a `set` inside a block that a loop calls stays inside that one call. A lint suggestion is rejected only when the rendered page shows it breaks something, never on a theory about Twig scoping (negative example 9 in `references/examples.md`).
+### Nested components
 
-Concrete positive and negative examples, including the documented real failed attempts: **read `references/examples.md` before writing templates.**
+A KISS component that calls another already has `item` (`item|default(_context)`), and `block()` passes the context
+on, so the nested block is called bare: `{{ block('text') }}`. The only `with` a nested KISS call may have is a
+deliberately different `item`, for example `{item: {icon: item.icon, badgeSize: 'large'}}` so the badge does not
+render the parent's `item.text`.
 
-## Standalone component in `kiss_component/`: the mandatory structure
-
-Some components are not descendants of the media_text chain but a self-contained piece of markup (badge, alert, icon, switch …). They live under `contao/templates/kiss_component/<group>/_<name>.html.twig` and **always** follow the same structure — the reference is `kiss_component/status/_badge.html.twig` (positive example 4 in `references/examples.md`):
-
-1. **Docblock as API contract**: leading `{# … #}` comment with `@param {type} name - description` for **every** value read, plus a `Usage:` example. Whoever adds a parameter adds it in both places.
-2. **Exactly one root block** named after the component (`{% block badge %}`, `{% block alert %}`, `{% block icon_text %}`). It is the public interface — without it callers are left with copy-paste.
-3. **`{% set item = item|default(_context) %}`** as the first line of the block. Afterwards **all** values are read consistently as `item.<field>|default` — without exception, including element-wide options. This way the component works in a loop (`item` is the loop variable) exactly as in a single call (`_context` kicks in).
-4. **Classes only via `attrs()`**, never via concatenated strings or `|join(' ')`: `attrs(<name>_attributes|default)` as the base (attribute hook for callers), then `.addClass('<prefix>-' ~ styles.<getter>(item.x|default), item.x|default)` — prefix in the template, condition as second argument.
-5. **Icons exclusively via `{{ include('@Contao/kiss_component/media/_icon_include.html.twig', {icon: item.icon}) }}`** — never `<i class="…">`. Editor text through `|insert_tag`, HTML-capable fields (`allowHtml`) through `|insert_tag_raw`.
-
-### The logic lives in the component, the RSCE only calls the block
-
-The RSCE template contains **no** component logic: no `styles.*()` resolution, no class names of the component, no value passing. It imports the component via `{% use %}` and calls its block:
-
-```twig
-{% use '@Contao/kiss_component/status/_badge.html.twig' %}
-{% extends '@Contao/content_element/_base.html.twig' %}
-
-{% set badge_outer_attributes = attrs()
-    .addClass(['badges', 'inline-flex', 'flex-wrap', 'gap-2'])
-    .mergeWith(badge_outer_attributes|default)
-%}
-
-{% block content %}
-    <div{{ badge_outer_attributes }}>
-        {% for item in list %}
-            {{ block('badge') }}
-        {% endfor %}
-    </div>
-{% endblock %}
-```
-
-Why `{% use %}` + `{{ block('badge') }}` and **not** `{{ include(..., {…}) }}`:
-
-- The block inherits the context of the calling template. Nothing has to be passed through, nothing lifted into the item via `|merge`, nothing renamed.
-- Callers can set the component's attribute hooks (`badge_attributes`, `badge_outer_attributes` …) via root-level `set` — from anywhere in the inheritance chain, without touching the component.
-- The block stays overridable. `include` freezes the call signature and creates a second, parallel API.
-
-#### Nested components: no `{% with %}`, map at the core boundary
-
-A component that calls another KISS component already has `item` set (`item|default(_context)`), and `block()` passes
-the context on. The nested component reads the same `item.<field>`, so call the block bare: `{{ block('text') }}`.
-
-Contao core components don't know `item` and read top-level names (`_rich_text` reads `text`). In a list, `item.text`
-is the entry's text, but top-level `text` is not set. So the KISS component that includes the core component maps the
-names right there, once:
+Contao core components do not know `item`; they read top-level names (`_rich_text` reads `text`). The KISS component
+that includes the core component maps the names there, once:
 
 ```twig
 {{ include('@Contao/component/_rich_text.html.twig', {
@@ -311,22 +309,13 @@ names right there, once:
 }) }}
 ```
 
-What really happened (PR #30): `_text` relied on its callers for that mapping, so `_icon_rich_text` and `_media_text`
-each carried `{% with {text: item.text|default} %}`. Review called it bloat, it was removed from `_icon_rich_text`, and
-`rsce_icon_list` rendered every item without text while the single `rsce_icon` still worked. The fix was the mapping in
-`_text`; after that the callers' `with` really was unnecessary.
+Happened (PR #30): `_text` left that mapping to its callers, `_icon_rich_text` and `_media_text` each carried
+`{% with {text: item.text|default} %}`, review removed it as bloat, and `rsce_icon_list` rendered every item without
+text while the single `rsce_icon` still worked. Before adding or removing a `with`, open the component and every
+template it includes and check where each name is read. Verify the list variant, not only the single element.
 
-The only `with` a nested KISS call may have is a deliberately different `item`, e.g.
-`{item: {icon: item.icon, badgeSize: 'large'}}` so the badge does not also render the parent's `item.text`.
-
-Before adding or removing a `with`, open the component and every template it includes and check where each name is
-read. Verify the list variant, not only the single element.
-
-#### When the caller's names are not yours: `{% with %}`
-
-Sometimes the caller is a Contao core element whose context you cannot rename. `hyperlink` provides `data.icon`,
-`data.iconPosition` and `link_text`; `_icon_text` reads `item.iconPosition`, `icon` and `text`. Map exactly those
-names, scoped to the block call:
+**When the caller's names are not yours**, map exactly those names with `with`, scoped to the block call. `hyperlink`
+provides `data.icon`, `data.iconPosition` and `link_text`; `_icon_text` reads `item.iconPosition`, `icon` and `text`:
 
 ```twig
 {% use '@Contao/kiss_component/media/_icon_text.html.twig' %}
@@ -341,31 +330,31 @@ names, scoped to the block call:
 {% endblock %}
 ```
 
-`with` without `only` keeps the surrounding context, so hooks like `icon_text_attributes` still arrive, and the mapping
-ends at `{% endwith %}` instead of leaking into the rest of the block.
+`with` without `only` keeps the surrounding context, so hooks like `icon_text_attributes` still arrive, and the
+mapping ends at `{% endwith %}`.
 
-**Never `data|merge({…})` or `item|merge({…})` to feed a component.** `data` is the whole `tl_content` row: merging it
-dumps every column into the component's context as top-level variables. Which names land there depends on the element,
-not on the component's API, and any of them can shadow a name the component or its includes read. The one mapping that
-matters (`text: link_text`) disappears inside a merge over an opaque array.
+**Never `data|merge({…})` or `item|merge({…})` to feed a component.** `data` is the whole `tl_content` row: merging
+it dumps every column into the context as top-level variables, any of which can shadow a name the component or its
+includes read, and the one mapping that matters disappears inside it.
 
-#### Contao core components: the same pattern, one exception
+### Core components
 
-Core calls its own components exactly like this. `image`, `text`, `gallery` and `hyperlink` all `use` `_figure` and
-call its block inside `{% with {figure: …} %}`, for example:
+Core calls its own components the same way: `image`, `text`, `gallery` and `hyperlink` all `use` `_figure` and call
+its block inside `{% with {figure: …} %}`:
 
 ```twig
 {% use '@Contao/component/_figure.html.twig' %}
 {% with {figure: image} %}{{ block('figure_component') }}{% endwith %}
 ```
 
-`_figure` is not a closed fragment: it has overridable blocks (`media`, `media_link`, `caption`, `caption_inner`) and
-takes `figure_attributes`, `picture_attributes`, `source_attributes`, `img_attributes`, `link_attributes` and
-`caption_attributes`.
+`_figure` is not a closed fragment: it has the blocks `media`, `media_link`, `caption`, `caption_inner` and takes
+`figure_attributes`, `picture_attributes`, `source_attributes`, `img_attributes`, `link_attributes` and
+`caption_attributes`. Extend a caption through those blocks or attributes, never by copying `_figure`'s markup or by
+`include(…, false)`.
 
-The one exception is a **block-name collision**. `{% use %}` imports every block of the used template, and `_figure`
-brings `media` plus, through `_picture`, `image`. In `kiss_component/media/_image.html.twig` both collide: `image` is
-its own root block, `media` is a block of `_media_text`. There, and only there, `_figure` is rendered with `{% embed %}`:
+The one exception is a block-name collision. `{% use %}` imports every block, and `_figure` brings `media` plus,
+through `_picture`, `image`. In `kiss_component/media/_image.html.twig` both collide (`image` is its root block,
+`media` belongs to `_media_text`), so there, and only there, `_figure` is rendered with `{% embed %}`:
 
 ```twig
 {% embed '@Contao/component/_figure.html.twig' with {
@@ -386,41 +375,84 @@ its own root block, `media` is a block of `_media_text`. There, and only there, 
 {% endembed %}
 ```
 
-`embed` keeps `_figure`'s blocks overridable inside the call (`caption` here) without importing them into the KISS
-chain. Because of `only`, only the listed hooks arrive: `picture_attributes` and `source_attributes` never do, and
-callers extend the caption through the `figure_extra` block. This is the only `embed` in KISS. `{% embed %}` is allowed
-exclusively in `kiss_component/media/_image.html.twig`, nowhere else.
+Because of `only`, only the listed hooks arrive (`picture_attributes` and `source_attributes` never do), and callers
+extend the caption through the `figure_extra` block. `{% embed %}` is allowed exclusively in
+`kiss_component/media/_image.html.twig`.
 
-The component's field names are therefore **identical to the field names in `rsce_<name>_config.php`** (`badgeSize`, `badgeShape`, not `size`/`shape`). Renaming in the RSCE template is a symptom of passing through instead of inheriting.
+## Standalone components
 
-**Rule of thumb:** if the RSCE template contains a `styles.`, a `badge-`/`alert-` class name, a variable map passed to `include()` or a `|merge` into a component's context, it belongs in the component.
+Components that are not heirs of the media_text chain (badge, alert, icon, switch …) live under
+`contao/templates/kiss_component/<group>/_<name>.html.twig` and always have the same structure; the reference is
+`kiss_component/status/_badge.html.twig` (positive example 4):
 
-### Global enums and builder functions first
+1. A **docblock as API contract**: `@param {type} name - description` for every value read, plus a `Usage:`
+   example. A new parameter is added in both places.
+2. **One root block** named after the component (`{% block badge %}`, `{% block alert %}`). It is the public
+   interface.
+3. **`{% set item = item|default(_context) %}`** as the first line of the block; afterwards every value, including
+   element-wide options, is read as `item.<field>|default`. So the component works in a loop (`item` is the loop
+   variable) and in a single call (`_context` kicks in).
+4. **Classes only through `attrs()`**, never concatenated strings or `|join(' ')`: `attrs(<name>_attributes|default)`
+   as the base (the hook for callers), then `.addClass('<prefix>-' ~ styles.<getter>(item.x|default),
+   item.x|default)`.
+5. **Icons only through** `{{ include('@Contao/kiss_component/media/_icon_include.html.twig', {icon: item.icon}) }}`,
+   never `<i class="…">`. Editor text through `|insert_tag`, HTML fields (`allowHtml`) through `|insert_tag_raw`.
 
-Before every hand-written options array, every translation line in PHP and every new Twig variable: **something global probably exists already.**
+**The logic lives in the component, the RSCE only calls the block.** No `styles.*()`, no component class names, no
+value passing in the RSCE template:
 
-- **Style values come from the global enums** under `src/Styles/Option/` (`Modifier\Size`, `Modifier\Variant`, `Color\Color` …) — never from a component-specific parallel enum, never from a list of strings in the config file.
-- **Option lists are built by the builder**, not by the config file. `->addStyleOptionsField('<field>', <Enum>::class)` generates select, options and labels from the enum (internally `TranslatableEnumTrait::getTranslatedOptions()`). For options without an enum: `->addSelectField('<field>', ['', 'a', 'b'])` — the leading `''` creates the blank option; labels come from `rsce.field.<field>.options.*`.
-- **Never plain-text labels in the config file.** `'dashed' => 'Dashed'` belongs in `translations/{de,en}/rsce.*.yaml`, not in PHP. Same for element label and description: `->create('<name>', …)` in string form, texts under `rsce.<name>.label`/`.description`.
-- If a builder method is missing for a recurring case, **add it to the builder** instead of spelling it out in the config file — that is the place where it reaches all elements.
+```twig
+{% use '@Contao/kiss_component/status/_badge.html.twig' %}
+{% extends '@Contao/content_element/_base.html.twig' %}
 
-### Local special values belong in `_config.php`, not in the enum
+{% set badge_outer_attributes = attrs()
+    .addClass(['badges', 'inline-flex', 'flex-wrap', 'gap-2'])
+    .mergeWith(badge_outer_attributes|default)
+%}
 
-If a component needs its own values besides the global ones (e.g. badge knows `muted`/`outline` from `Modifier\Variant`, plus a badge-only `dashed`), that is assembled **only in `rsce_<name>_config.php`** — with `addSelectField()` and the labels in `rsce.*.yaml`:
+{% block content %}
+    <div{{ badge_outer_attributes }}>
+        {% for item in list %}
+            {{ block('badge') }}
+        {% endfor %}
+    </div>
+{% endblock %}
+```
+
+`{% use %}` + `{{ block() }}` and not `{{ include(..., {…}) }}` because the block inherits the caller's context
+(nothing passed through, lifted into the item with `|merge` or renamed), callers set the hooks
+(`badge_attributes`, `badge_outer_attributes`) by root-level `set` from anywhere in the chain, and the block stays
+overridable; `include` freezes the signature and creates a second API. The component's field names are therefore
+identical to the field names in `rsce_<name>_config.php` (`badgeSize`, `badgeShape`, not `size`, `shape`). A
+`styles.`, a `badge-` class, a variable map for `include()` or a `|merge` in an RSCE template belongs in the
+component.
+
+## RSCE config and builder
+
+Before every hand-written options array, translation line in PHP or new Twig variable: something global exists.
+
+- Style values come from the enums under `src/Styles/Option/`, never from a component-specific parallel enum or a
+  string list in the config.
+- Option lists are built by the builder: `->addStyleOptionsField('<field>', <Enum>::class)` generates select,
+  options and labels from the enum. Without an enum: `->addSelectField('<field>', ['', 'a', 'b'])`; the leading `''`
+  is the blank option, labels come from `rsce.field.<field>.options.*`.
+- No plain-text label in PHP. `'dashed' => 'Dashed'` belongs in `translations/{de,en}/rsce.*.yaml`; element label
+  and description go under `rsce.<name>.label` / `.description` with `->create('<name>', …)` in string form.
+- A recurring case without a builder method gets a new builder method, not an inline copy in the config.
+
+**Local values go into `_config.php`, not into the enum.** When a component needs its own values next to the global
+ones (badge and alert know `muted`/`outline` from `Modifier\Variant` plus their own `dashed`), the list is assembled
+only in `rsce_<name>_config.php` with `addSelectField()` and labels in `rsce.*.yaml`:
 
 ```php
 ->addSelectField('variant', ['', 'muted', 'outline', 'dashed'], ['tl_class' => 'w25'])
 ```
 
-The global enum is **not** extended for this: a case that only one component can render becomes a dead option in every other select. Conversely: if the value is conceptually usable everywhere, it belongs in the global enum and not in the config file. The deciding question is not "where is it more convenient" but "could a second component render this value?"
+A case only one component can render would be a dead option in every other select. The deciding question is "could
+a second component render this value?", not "where is it convenient". In the component such values pass through 1:1
+without `styles.*()`: `.addClass('badge-' ~ item.variant|default, item.variant|default)`.
 
-In the component such local values pass through 1:1, without `styles.*()`:
-
-```twig
-.addClass('badge-' ~ item.variant|default, item.variant|default)
-```
-
-**CSS to go with it:** icons inside a component get their size from the font size, not from fixed values, so they grow with all size variants:
+**CSS.** Icons inside a component take their size from the font size, so they grow with every size variant:
 
 ```css
 svg {
@@ -431,41 +463,71 @@ svg {
 }
 ```
 
-Per size variant (`badge-sm`, `badge-lg`) only the font size is then set — no separate icon rule. Likewise: what Tailwind already solves is not rebuilt as a custom token (`@apply rounded-full` instead of `border-radius: var(--radius-full)`).
+A size variant (`badge-sm`, `badge-lg`) sets only the font size. What Tailwind solves is not rebuilt as a token
+(`@apply rounded-full`, not `border-radius: var(--radius-full)`). Every `var()` in `build/assets/css/` gets a
+fallback except the `--kiss-sys-color-*` tokens: `var(--radius-box, .5rem)`, `var(--shadow-card, none)`,
+`var(--kiss-comp-alert-spacing-padding-inline, 1rem)`; reuse the fallback the framework already uses for that
+variable. A project then only defines the sys colors, which is what the minimal theme in `docs/build-tools.md`
+promises.
 
-**Every `var()` in `build/assets/css/` gets a fallback**, except the `--kiss-sys-color-*` tokens:
-`var(--radius-box, .5rem)`, `var(--shadow-card, none)`, `var(--kiss-comp-alert-spacing-padding-inline, 1rem)`. Reuse the
-fallback the framework already uses for that variable. A project then only has to define the sys colors, which is
-what the minimal theme in `docs/build-tools.md` promises.
+## New content element
 
-## New content element: always as RSCE, the complete chain
+Always an RSCE (`madeyourday/contao-rocksolid-custom-elements`), never a DCA/model class. Two same-named files in
+`contao/templates/` plus translations:
 
-New content elements are always built as RSCE (`madeyourday/contao-rocksolid-custom-elements`), not as a custom DCA/model class. An element consists of exactly two same-named files in `contao/templates/` plus translations:
+1. **Inventory**: the existing `rsce_*_config.php` with the most similar need (list or single element, media types)
+   is the template. Check `CustomElementsConfigurationBuilder` for a helper before every field (`addGroup`,
+   `addImageField`, `addImageSizeField`, `addRichTextField`, `addBackgroundField`, `addHeadlineField`,
+   `addIconField`, `addCallToActionField`, `addStyleOptionsField`, `addSelectField`, `addCardStyleFields`, …).
+   `addField()` only for element-specific fields; anything reusable becomes a builder helper. `addField()` always
+   has `'label' => true` (resolved from `rsce.<name>.field.<field>.*` / `rsce.field.<field>.*`) plus `inputType` and
+   `eval` (`tl_class`, `maxlength`, `mandatory` …), never a label string.
+2. **Config** `rsce_<name>_config.php`: `kiss.rsce_config.builder` from the container, then `->create('<name>',
+   '<category>', ['types' => ['content'], 'standardFields' => [...]])`. `<name>` sets the element type by RockSolid's
+   naming convention and may be hyphenated (`hero-detail` → `rsce_hero-detail_config.php` +
+   `rsce_hero-detail.html.twig`). `<category>` follows existing elements (`media`, `texts`, …); no new category
+   without asking. List elements wrap item fields in `->startList()/->endList()`; `->addGridGroup()` only for a grid.
+3. **Template** `rsce_<name>.html.twig` extends `@Contao/content_element/_base.html.twig`. No new standalone markup:
+   import components from `kiss_component/` with `{% use %}` or `{{ include() }}` (see `rsce_icon.html.twig`,
+   `rsce_media_text.html.twig`). Style classes through `styles.*()` with the prefix in the template, like everywhere.
+4. **`data.<field>` or top-level**: what decides is where the builder stores the value, not whether a `tl_content`
+   column of that name exists. Real columns arrive as `data.<field>`: `standardFields` (`cssID`, …), the style
+   options in `kiss_styles` (`data.elementVariant`, `data.backgroundColor`, `data.paddingTop` …) and helpers that
+   reuse a standard column (`addBackgroundField()` → `data.backgroundColor`). RSCE fields are stored in `rsce_data`
+   and arrive top-level, even when a same-named column exists: `addImageField()` gives `singleSRC` / `addImage`,
+   `addRichTextField()` and `addField('text', …)` give `text`. `headline` comes top-level from the core context as
+   `{text, tagName}`. When in doubt, open the builder helper and check whether it declares a standard field or its
+   own.
+5. **Translations** DE and EN in `rsce.*.yaml`: `rsce.<name>.label` / `.description`, element-specific fields under
+   `rsce.<name>.field.<field>.*`, reusable fields (`type`, `callToAction`) under `rsce.field.<field>.*`.
 
-1. **Inventory first**: read the existing `rsce_*_config.php` with the most similar need (list vs. single element, media types) as the template. Check whether `CustomElementsConfigurationBuilder` (`src/CustomElementsConfigurationBuilder.php`) already has a helper for the required field (`addGroup`, `addImageField`, `addImageSizeField`, `addRichTextField`, `addBackgroundField`, `addHeadlineField`, `addIconField`, `addCallToActionField`, `addStyleOptionsField`, `addSelectField`, `addCardStyleFields`, …). New `addField()` calls only for truly element-specific fields — for anything reusable add a new helper to the builder instead of an inline duplicate. An `addField()` always uses `'label' => true` (the label resolves from `rsce.<name>.field.<field>.*` / `rsce.field.<field>.*`) plus `inputType` and `eval` (`tl_class`, `maxlength`, `mandatory` …) — never a label string in PHP.
-2. **Config file** `rsce_<name>_config.php`: fetches `kiss.rsce_config.builder` from the container and starts with `->create('<name>', '<category>', ['types' => ['content'], 'standardFields' => [...]])`. `<name>` determines the content element type in the backend via RockSolid naming convention and may be hyphenated (`hero-detail` → `rsce_hero-detail_config.php` + `rsce_hero-detail.html.twig`). `<category>` (second parameter) follows existing elements (`media`, `texts`, …); no new category without asking. For list elements wrap item fields in `->startList()/->endList()`; append `->addGridGroup()` only when a grid layout is needed.
-3. **Twig template** `rsce_<name>.html.twig`: always extends `@Contao/content_element/_base.html.twig`. For markup **do not write a new standalone structure** — import existing components from `kiss_component/media/` or `kiss_component/action/` via `{% use %}` or embed them via `{{ include() }}` (see `rsce_icon.html.twig`, `rsce_media_text.html.twig`). Set style classes as everywhere else via `styles.*()` with the context prefix in the template — RSCE templates are not a special case of the style system.
-4. **`data.<field>` vs. top-level variable — check before writing the template:** what decides is *where the builder stores the value*, not whether a column of that name exists in `tl_content.php`. Values stored in a real column arrive as `data.<field>`: the `standardFields` (`cssID`, …), the style options in `kiss_styles` (`data.elementVariant`, `data.backgroundColor`, `data.cardLayout`, `data.paddingTop` …) and helpers that reuse a standard column (`addBackgroundField()` → `data.backgroundColor`). Values the config declares as RSCE fields are stored in `rsce_data` and arrive as top-level variables without `data.` — **even when a same-named `tl_content` column exists**: `addImageField()` yields `singleSRC` / `addImage`, `addRichTextField()` yields `text`, a custom `addField('text', …)` yields `text`. `headline` is special: the core content-element context provides it top-level as `{text, tagName}` (`headline.text`). Compare `rsce_hero-detail.html.twig` (`singleSRC`, `addImage`, `headline.text` top-level; `data.backgroundColor`, `data.paddingTop` for columns) with `rsce_media_text.html.twig` (`data.elementVariant`). This cannot be guessed — when in doubt, open the builder helper and check whether it declares a standard field or its own field.
-5. **Translations** always in pairs DE + EN in `translations/{de,en}/rsce.*.yaml`: element label/description under `rsce.<name>.label`/`.description`, element-specific field labels under `rsce.<name>.field.<field>.label`/`.description`, reusable/generic field labels (e.g. `type`, `callToAction`) under `rsce.field.<field>.*`.
+## Self-check
 
-RSCE-specific self-check: was an existing media/action component reused via `{% use %}`/`include()` instead of duplicated? Does every new field have an entry in **both** `rsce.*.yaml` files? Was a builder helper checked for before every new `addField()`? Was every field read in the template checked for being stored in a column (`data.<field>`) or in `rsce_data` (`<field>` without prefix)? Does every `addField()` use `'label' => true`?
-
-## Self-check before handing over
-
-- 🚨 **Did ANY CI file or test change (see Rule CI)?** Without the exact reply `YES, HERE IS PERMISSION TO DO SO` in this task: revert it NOW and send the 🚨 block instead.
-- `grep` for all new identifiers: no orphaned references (listener, DCA, templates, translations consistent)?
+- Did any CI file or test change? Without the exact `YES, HERE IS PERMISSION TO DO SO` in this task: revert it and
+  send the 🚨 block.
+- `grep` every new identifier: listener, DCA, templates and translations consistent, no orphan.
 - `php -l` on every changed PHP file; parse the YAML files.
-- Read the diff again asking "which line did nobody order?" — revert every such line or report it as a proposal. Same question for deletions: "which existing line did I remove without being asked?"
+- Read the diff asking "which line did nobody order?", and "which existing line did I remove?". Revert or report.
 - DE and EN translations both present?
-- Any comment in the diff that restates the code below it ("maps 1:1", "styles per _x.scss", a section header with a sentence appended)? Any `{# #}` in Twig outside the component docblock? Delete it. Any non-English word in code, comments, identifiers or the reply? Translate it.
-- Did a prefix land in an enum that belongs in the template? Did a new Twig global or a new `Component\<X>\Variant`/`Color` enum appear although `Modifier\Variant` / `Color\Color` exist?
-- Did a deprecated or docblock-only case (`info`) get resurrected?
-- Did a style option case get removed or renamed? Then the warning went out in its own reply before the first edit, the user confirmed it explicitly, `StyleOptionCasesTest` changed only after that confirmation, and a migration exists only if it was explicitly asked for. If any of these is missing: stop, revert, warn.
-- Are card/media classes added inside the existing `show_as_card` branch of the wrapper, not in a new `attributes` block?
-- Does every new standalone component in `kiss_component/` have a docblock with `@param` + `Usage`, one root block, `item|default(_context)`, `attrs()` instead of string classes and `_icon_include.html.twig` instead of `<i class>`?
-- Any `data|merge(…)` / `item|merge(…)` feeding a component? Wrong: map only the differing names with `{% with {…} %}{{ block('…') }}{% endwith %}`.
-- Does the RSCE include the component via `{% use %}` + `{{ block('…') }}` without passing variables — and are the component fields named exactly like the config fields?
-- Did a lint warning get fixed with the rule's own suggestion? Any `x_attributes` variable inlined, renamed or dropped to silence `AttrsHookMerge`? Restore it with `attrs(x_attributes|default)`.
-- Any new `var(--…)` in `build/assets/css/` without a fallback, other than `--kiss-sys-color-*`? Add one.
-- Does the config file still contain a plain-text label, a `foreach` over an enum or a `$GLOBALS['TL_LANG']` reference instead of `addStyleOptionsField()` / `addSelectField()` + `rsce.*.yaml`?
-- Return Could and Won't items to the user as proposals at the end instead of implementing them. Every open question that was not answered stays a question, not an assumption.
+- Any comment that restates the code, a section header with a sentence appended, a `{# #}` in Twig outside the
+  component docblock, a non-English word anywhere? Fix it.
+- A prefix in an enum that belongs in the template? A new Twig global or a `Component\<X>\Variant` / `Color` enum
+  although `Modifier\Variant` / `Color\Color` exist? A deprecated or docblock-only case (`info`) resurrected?
+- A case removed or renamed? Then the warning went out in its own reply before the first edit, the user confirmed,
+  `StyleOptionCasesTest` changed only after that, and a migration exists only because it was asked for. Otherwise
+  stop, revert, warn.
+- Card and media classes added in the wrapper's existing chain, not in a new `attributes` block?
+- Every new standalone component has the docblock with `@param` and `Usage`, one root block,
+  `item|default(_context)`, `attrs()` instead of string classes, `_icon_include.html.twig` instead of `<i class>`?
+- Any `data|merge(…)` / `item|merge(…)` feeding a component? Map only the differing names with
+  `{% with {…} %}{{ block('…') }}{% endwith %}`.
+- Does the RSCE call the component with `{% use %}` + `{{ block('…') }}` without passing variables, and are the
+  component's fields named like the config fields?
+- A lint warning fixed with the rule's own suggestion? An `x_attributes` variable inlined, renamed or dropped to
+  silence `AttrsHookMerge`? Restore `attrs(x_attributes|default)`.
+- A new `var(--…)` in `build/assets/css/` without a fallback (other than `--kiss-sys-color-*`)?
+- A plain-text label, a `foreach` over an enum or a `$GLOBALS['TL_LANG']` reference in a config file instead of
+  `addStyleOptionsField()` / `addSelectField()` + `rsce.*.yaml`?
+- RSCE: every field checked for `data.<field>` versus top-level, every new field in both `rsce.*.yaml` files, a
+  builder helper checked before every `addField()`, `'label' => true` on every `addField()`?
+- Could and Won't items returned as proposals; open questions still questions.

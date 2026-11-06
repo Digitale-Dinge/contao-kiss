@@ -2,17 +2,23 @@
 
 All negative examples here really happened (documented chat history from building the card manipulators and the badge element). They are not hypothetical — these are exactly the mistakes you make when you do not read the framework first.
 
-Contents:
+## Contents
 
-1. Worked example: mapping a card spec onto `media_text`
-2. Positive example 1: `rsce_media_text_list.html.twig` (reference extending)
-3. Positive example 2: `news_card.html.twig` (mapping a foreign template onto a KISS component)
-4. Positive example 3: `rsce_card_group.html.twig` (card settings once per element)
-5. Positive example 4: `_badge.html.twig` + `rsce_badge.html.twig` (standalone component via `use`)
-6. Negative examples 1–9
-7. Cheat sheet: attribute hooks of the media_text chain and the content wrapper
-
----
+1. [Worked example: mapping a card spec onto media_text](#worked-example-mapping-a-card-spec-onto-media_text)
+2. [Positive example 1: rsce_media_text_list.html.twig (reference extending)](#positive-example-1-rsce_media_text_listhtmltwig-reference-extending)
+3. [Positive example 2: news_card.html.twig (mapping a foreign template onto a KISS component)](#positive-example-2-news_cardhtmltwig-mapping-a-foreign-template-onto-a-kiss-component)
+4. [Positive example 3: rsce_card_group.html.twig (card settings once for the whole element)](#positive-example-3-rsce_card_grouphtmltwig-card-settings-once-for-the-whole-element)
+5. [Positive example 4: _badge.html.twig + rsce_badge.html.twig (standalone component via use)](#positive-example-4-_badgehtmltwig--rsce_badgehtmltwig-standalone-component-via-use)
+6. [Negative example 1: standalone component instead of extending](#negative-example-1-standalone-component-instead-of-extending)
+7. [Negative example 2: parallel enums instead of existing options](#negative-example-2-parallel-enums-instead-of-existing-options)
+8. [Negative example 3: block override instead of inheritance](#negative-example-3-block-override-instead-of-inheritance)
+9. [Negative example 4: scope creep](#negative-example-4-scope-creep)
+10. [Negative example 5: {% embed %} to "reuse" a component per list item](#negative-example-5--embed--to-reuse-a-component-per-list-item)
+11. [Negative example 6: passing values into a component via include](#negative-example-6-passing-values-into-a-component-via-include)
+12. [Negative example 7: options and labels hand-written in the config file](#negative-example-7-options-and-labels-hand-written-in-the-config-file)
+13. [Negative example 8: comments that narrate the code](#negative-example-8-comments-that-narrate-the-code)
+14. [Negative example 9: dropping a hook variable instead of applying the lint fix](#negative-example-9-dropping-a-hook-variable-instead-of-applying-the-lint-fix)
+15. [Cheat sheet: attribute hooks of the media_text chain and the content wrapper](#cheat-sheet-attribute-hooks-of-the-media_text-chain-and-the-content-wrapper)
 
 ## Worked example: mapping a card spec onto `media_text`
 

@@ -119,16 +119,8 @@ PHP is PSR-4 under `src/`, tests under `tests/`. `.editorconfig` is authoritativ
 
 ## Agent skills
 
-`.claude/skills/` holds the agent skills for this repository. Each skill is a `SKILL.md` plus optional `references/`
-and `scripts/`, and keeps its tests in `evals/`:
-
-| File | Content |
-| --- | --- |
-| `evals/evals.json` | tasks with a `prompt` and the `expected_output`, to check what the skill builds |
-| `evals/eval_set.json` | queries with `should_trigger`, to check when the skill loads |
-
-`SKILL.md` never mentions its evals, it is loaded on every use. Add a case to `evals.json` for every rule that got
-broken in review.
+`.claude/skills/` holds the agent skills for this repository. Each skill is a `SKILL.md` plus optional `references/` and
+`scripts/`.
 
 When a Twig rule in `kiss-framework-extend` changes, update [Twig templates](docs/twig-templates.md) as well.
 
