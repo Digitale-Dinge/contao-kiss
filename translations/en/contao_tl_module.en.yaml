@@ -3,7 +3,7 @@ tl_module:
 
     headline:
         unit:                   Unit
-        size:                   Appearance
+        appearance:             Appearance
 
     topline:
         - Topline

@@ -72,6 +72,9 @@ rsce:
         label:                  Text-Liste (mit Medium)
         description:            Eine Medien-Text Liste
         field:
+            add_media:
+                label:          Medium hinzufügen
+                description:    Fügt den Elementen ein Medium hinzu
             show_as_card:
                 label:          Als Karten anzeigen
                 description:    Elemente als Karten anzeigen
