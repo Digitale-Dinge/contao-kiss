@@ -27,6 +27,16 @@
 
 ---
 
+## Contents
+
+1. [Beschreibung](#beschreibung)
+2. [Noch ein Contao-Framework?](#noch-ein-contao-framework)
+3. [Wer ist die Zielgruppe? All of them!](#wer-ist-die-zielgruppe-all-of-them)
+4. [Features](#features)
+5. [Erste Schritte](#erste-schritte)
+6. [Dokumentation](#dokumentation)
+7. [Individuelle Projekte und Anwendungen](#individuelle-projekte-und-anwendungen)
+
 ## Beschreibung
 
 - **Keep it simple**: entstanden aus jahrelanger Erfahrung mit Contao, einfach zu bedienen für Redakteure, einfach zu

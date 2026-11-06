@@ -3,6 +3,17 @@
 Working on contao-kiss itself. For using it in a project, see
 [build-tools.md](build-tools.md).
 
+## Contents
+
+1. [Setup](#setup)
+2. [Pre-commit hook](#pre-commit-hook)
+3. [Tools](#tools)
+4. [Twig CS Fixer rules](#twig-cs-fixer-rules)
+5. [Repository layout](#repository-layout)
+6. [Assets](#assets)
+7. [Style options](#style-options)
+8. [CI](#ci)
+
 ## Setup
 
 ```bash

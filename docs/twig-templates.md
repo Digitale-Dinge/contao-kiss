@@ -3,6 +3,20 @@
 KISS extends Contao's templates instead of replacing them. Every element, component and hook below can be changed in
 your project through the Twig inheritance chain, without copying a whole template.
 
+## Contents
+
+1. [The inheritance chain](#the-inheritance-chain)
+2. [Adding classes](#adding-classes)
+3. [Overriding blocks](#overriding-blocks)
+4. [extends, use and include](#extends-use-and-include)
+5. [Core components](#core-components)
+6. [Include elements](#include-elements)
+7. [Reusing the media & text component](#reusing-the-media--text-component)
+8. [Attribute hooks](#attribute-hooks)
+9. [Images](#images)
+10. [Accordion headlines](#accordion-headlines)
+11. [Standalone components](#standalone-components)
+
 ## The inheritance chain
 
 ```

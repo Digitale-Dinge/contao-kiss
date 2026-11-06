@@ -3,6 +3,20 @@
 Guidance for coding agents working in contao-kiss, Digitale Dinge's starter kit bundle for Contao. Change exactly what
 was asked, reuse what exists, and follow the conventions of the area being edited. **Do not over-engineer!**
 
+## Contents
+
+1. [Core constraints (strict)](#core-constraints-strict)
+2. [Backwards compatibility (strict)](#backwards-compatibility-strict)
+3. [Repository context](#repository-context)
+4. [Further reading](#further-reading)
+5. [Agent skills](#agent-skills)
+6. [Workflow](#workflow)
+7. [The style system](#the-style-system)
+8. [Templates](#templates)
+9. [Assets](#assets)
+10. [Verification](#verification)
+11. [Self-check before handing over](#self-check-before-handing-over)
+
 ## Core constraints (strict)
 
 - **Never break backwards compatibility.** See "Backwards compatibility". No exceptions, no "it's cleaner this way".

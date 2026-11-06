@@ -27,6 +27,16 @@
 
 ---
 
+## Contents
+
+1. [Description](#description)
+2. [Yet another Contao framework?](#yet-another-contao-framework)
+3. [Target group? All of them](#target-group-all-of-them)
+4. [Features](#features)
+5. [Getting started](#getting-started)
+6. [Documentation](#documentation)
+7. [Individual projects and applications](#individual-projects-and-applications)
+
 ## Description
 
 - **Keep it simple**: built on years of Contao experience, simple to use for editors, simple to maintain for

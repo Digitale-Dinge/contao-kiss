@@ -7,6 +7,17 @@ For linting and CI, see [best-practices.md](best-practices.md).
 The controllers and their names are exported in
 `vendor/digitaledinge/contao-kiss/build/assets/js/index.js`.
 
+## Contents
+
+1. [Setup](#setup)
+2. [Project structure](#project-structure)
+3. [Loading the assets](#loading-the-assets)
+4. [Extending and overriding Vite options](#extending-and-overriding-vite-options)
+5. [Dev server with HMR](#dev-server-with-hmr)
+6. [Stylesheets](#stylesheets)
+7. [Browser support](#browser-support)
+8. [Troubleshooting](#troubleshooting)
+
 ## Setup
 
 `contao-kiss` must be installed. Your own `package.json` within your project needs to look like this:

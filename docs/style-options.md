@@ -3,6 +3,16 @@
 Style options map a stored key to a CSS class. Each option is an enum of cases
 plus an option class, registered with `#[AsKissStyleOption]`.
 
+## Contents
+
+1. [Using them](#using-them)
+2. [Kiss options](#kiss-options)
+3. [Adding an option](#adding-an-option)
+4. [Replacing an option](#replacing-an-option)
+5. [Migrating stored values](#migrating-stored-values)
+6. [Groups](#groups)
+7. [Rules](#rules)
+
 ## Using them
 
 ```twig
