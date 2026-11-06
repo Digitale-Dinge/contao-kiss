@@ -1,3 +1,15 @@
+{#
+  KISS Call To Action Component (all rows of a callToAction field)
+
+  @param {string} callToAction - Serialized rows, read from `item.callToAction`, else from `data.callToAction`
+  @param {HtmlAttributes} cta_wrapper_attributes - Attributes on the wrapper
+  @param {HtmlAttributes} cta_attributes - Attributes on every link
+
+  Usage:
+  {% use '@Contao/kiss_component/action/_call_to_action.html.twig' %}
+  {{ block('call_to_action') }}
+#}
+
 {% use '@Contao/kiss_component/action/_action.html.twig' %}
 
 {% block call_to_action %}

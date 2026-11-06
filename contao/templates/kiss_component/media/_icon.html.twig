@@ -1,3 +1,16 @@
+{#
+  KISS Icon Component
+
+  @param {string} icon - Icon name for svg_icon()
+  @param {HtmlAttributes} media_attributes - Attributes on the wrapper
+
+  Every value is read from `item`, falling back to the context.
+
+  Usage:
+  {% use '@Contao/kiss_component/media/_icon.html.twig' %}
+  {{ block('icon') }}
+#}
+
 {% block icon %}
     {% set item = item|default(_context) %}
 

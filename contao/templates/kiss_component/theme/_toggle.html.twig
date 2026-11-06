@@ -1,18 +1,15 @@
 {#
- # Animated Sun/Moon Theme Toggle
- #
- # Usage:
- #   {{ include('@Contao/kiss_component/theme/_toggle.html.twig') }}
- #
- # With custom size:
- #   {{ include('@Contao/kiss_component/theme/_toggle.html.twig', {size: 32}) }}
- #
- # With custom classes:
- #   {{ include('@Contao/kiss_component/theme/_toggle.html.twig', {class: 'my-custom-class'}) }}
- #
- # With custom attributes:
- #   {{ include('@Contao/kiss_component/theme/_toggle.html.twig', {attributes: {'data-tooltip': 'Toggle theme'}}) }}
- #}
+  KISS Theme Toggle Component (animated sun and moon)
+
+  @param {int} size - Icon size in px (default 24)
+  @param {string} class - Additional classes on the button
+  @param {HtmlAttributes|array} attributes - Additional attributes on the button
+  @param {HtmlAttributes} button_attributes - Attribute hook for the button
+
+  Usage:
+  {{ include('@Contao/kiss_component/theme/_toggle.html.twig') }}
+  {{ include('@Contao/kiss_component/theme/_toggle.html.twig', {size: 32, class: 'my-class', attributes: {'data-tooltip': 'Toggle theme'}}) }}
+#}
 
 {% set size = size|default(24) %}
 {% set id = 'moon-mask-' ~ random() %}

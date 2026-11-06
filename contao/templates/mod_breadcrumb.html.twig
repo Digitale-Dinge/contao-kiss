@@ -26,7 +26,6 @@
 
 {% trans_default_domain 'contao_default' %}
 
-{# Config #}
 {% set breadcrumb_size = breadcrumb_size|default %}
 {% set breadcrumb_color = breadcrumb_color|default %}
 {% set separator_type = separator_type|default('chevron') %}
@@ -55,12 +54,10 @@
 
 {% set component_classes = [] %}
 
-{# Size variant #}
 {% if breadcrumb_size in ['xs', 'sm', 'lg', 'xl'] %}
     {% set component_classes = component_classes|merge(['breadcrumb-' ~ breadcrumb_size]) %}
 {% endif %}
 
-{# Color variant #}
 {% if breadcrumb_color in ['primary', 'secondary', 'tertiary', 'success', 'warning', 'error'] %}
     {% set component_classes = component_classes|merge(['breadcrumb-' ~ breadcrumb_color]) %}
 {% endif %}
@@ -72,7 +69,6 @@
     .mergeWith(wrapperAttributes|default)
 %}
 
-{# Add Stimulus controller attributes #}
 {% if collapsible %}
     {% set wrapperAttributes = wrapperAttributes.set('data-controller', 'breadcrumb') %}
 

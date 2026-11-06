@@ -1,3 +1,17 @@
+{#
+  KISS Text Component (rich text, or the call to action when there is no text)
+
+  @param {string} text - Rich text (insert tags allowed)
+  @param {string} callToAction - Serialized call to action rows, rendered when `text` is empty
+  @param {HtmlAttributes} text_inner_attrs - Attributes on the rich text wrapper
+
+  Every value is read from `item`, falling back to the context. The `text_additional` block renders after the text.
+
+  Usage:
+  {% use '@Contao/kiss_component/media/_text.html.twig' %}
+  {{ block('text') }}
+#}
+
 {% block text %}
     {% set item = item|default(_context) %}
 

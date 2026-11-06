@@ -1,9 +1,23 @@
+{#
+  KISS Icon Text Component (icon next to a text, left or right)
+
+  @param {string} iconPosition - Key from IconPosition (left, right), read from `item`
+  @param {string} icon - Icon name for svg_icon()
+  @param {string} text - Text (insert tags allowed)
+  @param {HtmlAttributes} icon_wrapper_attributes - Attributes on the icon wrapper
+  @param {HtmlAttributes} icon_text_attributes - Attributes on the text wrapper
+
+  Usage:
+  {% use '@Contao/kiss_component/media/_icon_text.html.twig' %}
+  {% with {item: data, icon: data.icon, text: link_text} %}{{ block('icon_text') }}{% endwith %}
+#}
+
 {% block icon_text %}
     {% set item = item|default(_context) %}
     {% set direction = enum('DigitaleDinge\\ContaoKiss\\Styles\\Option\\IconPosition').tryFrom(item.iconPosition|default)?.name %}
 
     {% set icon_block %}
-        <span{{ attrs().addClass(direction == 'right' ? 'ml-2' : 'mr-2') }}>
+        <span{{ attrs(icon_wrapper_attributes|default).addClass(direction == 'right' ? 'ml-2' : 'mr-2') }}>
             {{ include('@Contao/kiss_component/media/_icon_include.html.twig') }}
         </span>
     {% endset %}

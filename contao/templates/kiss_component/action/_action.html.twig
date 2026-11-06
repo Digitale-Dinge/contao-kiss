@@ -1,3 +1,23 @@
+{#
+  KISS Action Component (one link or button)
+
+  @param {string} text - Link text (insert tags allowed)
+  @param {string} url - Link target (insert tags allowed)
+  @param {bool} target - Open in a new window
+  @param {string} rel - Lightbox group, emitted as data-lightbox
+  @param {string} ctaType - Key from Component\CallToAction\Variant, or `none` for a plain link
+  @param {string} ctaColor - Key from Color
+  @param {string} ctaSize - Key from Modifier\Size
+  @param {string} ctaShape - Key from Component\CallToAction\Shape
+  @param {HtmlAttributes} cta_attributes - Attributes on the link
+
+  Values are read top-level; `_call_to_action` maps one row per call with `with`.
+
+  Usage:
+  {% use '@Contao/kiss_component/action/_action.html.twig' %}
+  {% with {text: row.text, url: row.url} %}{{ block('action') }}{% endwith %}
+#}
+
 {% block action %}
     {% if text|default %}
         {% set cta_attributes = attrs(cta_attributes|default)
